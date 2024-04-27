@@ -178,9 +178,8 @@ class Component {
      * Updates the component by re-rendering its virtual DOM and applying any changes.
      */
     update() {
-        const oldVNode = this.currentVNode;
         const newVNode = this.render();
-        updateDomElement(this.parent, newVNode, oldVNode);
+        updateDomElement(this.parent, newVNode, this.currentVNode);
         this.currentVNode = newVNode;
     }
 
