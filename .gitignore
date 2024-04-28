@@ -1,0 +1,8 @@
+# Ignore temp files
+*~
+
+# Ignore coverage files
+coverage/
+
+# Ignore node modules
+node_modules/

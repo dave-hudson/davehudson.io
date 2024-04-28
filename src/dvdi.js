@@ -37,7 +37,7 @@ function isEventProp(propName) {
  * @param {Array} children The child elements or strings.
  * @returns {Object} A virtual DOM element.
  */
-function h(type, props, ...children) {
+export function h(type, props, ...children) {
     return { type, props, children };
 }
 
@@ -134,7 +134,7 @@ let nextFrame = null;
  * Enqueues a component for batch updates.
  * @param {Component} component The component to update.
  */
-function enqueueUpdate(component) {
+export function enqueueUpdate(component) {
     if (!updateQueue.includes(component)) {
         updateQueue.push(component);
     }
@@ -156,7 +156,7 @@ function performUpdates() {
 /**
  * Represents a UI component with state and props.
  */
-class Component {
+export class Component {
     constructor(props) {
         this.props = props;
         this.state = {};
@@ -188,7 +188,7 @@ class Component {
     }
 }
 
-class ButtonComponent extends Component {
+export class ButtonComponent extends Component {
     constructor(props) {
         super(props);
         this.state = { count: 0 };  // Initialize state with count
@@ -205,11 +205,3 @@ class ButtonComponent extends Component {
         this.setState({ count: this.state.count + 1 });
     }
 }
-
-// Example usage
-document.addEventListener('DOMContentLoaded', () => {
-    const app = document.querySelector('#app');
-    const button = new ButtonComponent({});
-    button.parent = app;
-    enqueueUpdate(button);
-});
