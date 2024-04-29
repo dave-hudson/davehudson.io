@@ -50,16 +50,23 @@ export function h(type, props, ...children) {
 function setProp(element, propName, value) {
     if (propName === 'className') {
         element.setAttribute('class', value);
-    } else if (propName === 'style' && typeof value === 'object') {
+        return;
+    }
+
+    if (propName === 'style' && typeof value === 'object') {
         Object.keys(value).forEach(styleName => {
             element.style[styleName] = value[styleName];
         });
-    } else if (isEventProp(propName)) {
+        return;
+    }
+
+    if (isEventProp(propName)) {
         const eventType = propName.toLowerCase().substring(2);
         element.addEventListener(eventType, value);
-    } else {
-        element.setAttribute(propName, value);
+        return;
     }
+
+    element.setAttribute(propName, value);
 }
 
 /**
