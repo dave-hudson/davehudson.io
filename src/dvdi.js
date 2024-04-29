@@ -146,6 +146,15 @@ let updateQueue = [];
 let nextFrame = null;
 
 /**
+ * Performs all enqueued component updates.
+ */
+function performUpdates() {
+    updateQueue.forEach(component => component.updateVDom());
+    updateQueue = [];
+    nextFrame = null;
+}
+
+/**
  * Enqueues a component for batch updates.
  * @param {Component} component The component to update.
  */
@@ -157,15 +166,6 @@ export function enqueueUpdate(component) {
     if (!nextFrame) {
         nextFrame = requestAnimationFrame(performUpdates);
     }
-}
-
-/**
- * Performs all enqueued component updates.
- */
-function performUpdates() {
-    updateQueue.forEach(component => component.update());
-    updateQueue = [];
-    nextFrame = null;
 }
 
 /**
@@ -192,13 +192,13 @@ export class Component {
     /**
      * Updates the component by re-rendering its virtual DOM and applying any changes.
      */
-    update() {
-        const newVNode = this.render();
+    updateVDom() {
+        const newVNode = this.renderVDom();
         updateDomElement(this.parent, newVNode, this.currentVNode);
         this.currentVNode = newVNode;
     }
 
-    render() {
+    renderVDom() {
         // Overridden by subclass
     }
 }
@@ -209,7 +209,7 @@ export class ButtonComponent extends Component {
         this.state = { count: 0 };  // Initialize state with count
     }
 
-    render() {
+    renderVDom() {
         return h('button', {
             onClick: () => this.handleClick(),
             style: { fontSize: '16px', padding: '10px 20px', cursor: 'pointer' }

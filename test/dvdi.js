@@ -35,12 +35,12 @@ describe('h', () => {
   
     it('renders correctly based on the count', () => {
       // Call render and check the resulting virtual DOM
-      const renderedOutput = buttonComponent.render();
+      const renderedOutput = buttonComponent.renderVDom();
       expect(renderedOutput.children.includes('Click me: 0 times')).toBeTruthy();
   
       // Simulate a click and check rendering again
       buttonComponent.handleClick();
-      const updatedOutput = buttonComponent.render();
+      const updatedOutput = buttonComponent.renderVDom();
       expect(updatedOutput.children.includes('Click me: 1 times')).toBeTruthy();
     });
   });
