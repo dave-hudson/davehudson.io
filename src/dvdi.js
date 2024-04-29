@@ -31,17 +31,6 @@ function isEventProp(propName) {
 }
 
 /**
- * Creates a virtual DOM element.
- * @param {string} type The element type.
- * @param {Object} props The properties and attributes of the element.
- * @param {Array} children The child elements or strings.
- * @returns {Object} A virtual DOM element.
- */
-export function h(type, props, ...children) {
-    return { type, props, children };
-}
-
-/**
  * Sets a property or attribute on a real DOM element.
  * @param {Element} element The DOM element.
  * @param {string} propName The property or attribute name.
@@ -166,6 +155,17 @@ export function enqueueUpdate(component) {
     if (!nextFrame) {
         nextFrame = requestAnimationFrame(performUpdates);
     }
+}
+
+/**
+ * Creates a virtual DOM element.
+ * @param {string} type The element type.
+ * @param {Object} props The properties and attributes of the element.
+ * @param {Array} children The child elements or strings.
+ * @returns {Object} A virtual DOM element.
+ */
+export function h(type, props, ...children) {
+    return { type, props, children };
 }
 
 /**
