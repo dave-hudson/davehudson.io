@@ -106,16 +106,19 @@ function changed(node1, node2) {
  * @param {number} index The child index.
  */
 function updateDomElement(parent, newNode, oldNode, index = 0) {
+    // If there's no old node then we add the new one.
     if (!oldNode) {
         parent.appendChild(renderDom(null, newNode));
         return;
     }
 
+    // If there's no new node then we remove the old one.
     if (!newNode) {
         parent.removeChild(parent.childNodes[index]);
         return;
     }
 
+    // If the new and old nodes are different then replace them.
     if (changed(newNode, oldNode)) {
         parent.replaceChild(renderDom(null, newNode), parent.childNodes[index]);
         return;
