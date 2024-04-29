@@ -64,10 +64,10 @@ function setProp(element, propName, value) {
 
 /**
  * Renders a virtual DOM node to the real DOM.
- * @param {Object|string} vnode The virtual DOM node or string to render.
  * @param {Element} container The DOM container to render into.
+ * @param {Object|string} vnode The virtual DOM node or string to render.
  */
-function renderDom(vnode, container) {
+function renderDom(container, vnode) {
     if (typeof vnode === 'string') {
         const textNode = document.createTextNode(vnode);
         if (container) {
@@ -82,36 +82,12 @@ function renderDom(vnode, container) {
         setProp(element, propName, vnode.props[propName]);
     });
 
-    vnode.children.forEach(child => renderDom(child, element));
+    vnode.children.forEach(child => renderDom(element, child));
     if (container) {
         container.appendChild(element);
     }
 
     return element;
-}
-
-/**
- * Updates a DOM element based on changes in the virtual DOM.
- * @param {Element} parent The parent DOM element.
- * @param {Object} newNode The new virtual DOM node.
- * @param {Object} oldNode The old virtual DOM node.
- * @param {number} index The child index.
- */
-function updateDomElement(parent, newNode, oldNode, index = 0) {
-    if (!oldNode) {
-        const r = renderDom(newNode);
-        parent.appendChild(r);
-    } else if (!newNode) {
-        parent.removeChild(parent.childNodes[index]);
-    } else if (changed(newNode, oldNode)) {
-        parent.replaceChild(renderDom(newNode), parent.childNodes[index]);
-    } else if (newNode.type) {
-        const newLength = newNode.children.length;
-        const oldLength = oldNode.children.length;
-        for (let i = 0; i < newLength || i < oldLength; i++) {
-            updateDomElement(parent.childNodes[index], newNode.children[i], oldNode.children[i], i);
-        }
-    }
 }
 
 /**
@@ -124,6 +100,38 @@ function changed(node1, node2) {
     return typeof node1 !== typeof node2 ||
            (typeof node1 === 'string' && node1 !== node2) ||
            node1.type !== node2.type;
+}
+
+/**
+ * Updates a DOM element based on changes in the virtual DOM.
+ * @param {Element} parent The parent DOM element.
+ * @param {Object} newNode The new virtual DOM node.
+ * @param {Object} oldNode The old virtual DOM node.
+ * @param {number} index The child index.
+ */
+function updateDomElement(parent, newNode, oldNode, index = 0) {
+    if (!oldNode) {
+        parent.appendChild(renderDom(null, newNode));
+        return;
+    }
+
+    if (!newNode) {
+        parent.removeChild(parent.childNodes[index]);
+        return;
+    }
+
+    if (changed(newNode, oldNode)) {
+        parent.replaceChild(renderDom(null, newNode), parent.childNodes[index]);
+        return;
+    }
+
+    if (newNode.type) {
+        const newLength = newNode.children.length;
+        const oldLength = oldNode.children.length;
+        for (let i = 0; i < newLength || i < oldLength; i++) {
+            updateDomElement(parent.childNodes[index], newNode.children[i], oldNode.children[i], i);
+        }
+    }
 }
 
 // Batch updates and state management
