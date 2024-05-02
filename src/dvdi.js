@@ -26,7 +26,7 @@ function shallowEqual(obj1, obj2) {
  * @param {string} propName The property name to check.
  * @returns {boolean} True if the property name is an event handler, false otherwise.
  */
-function isEventProp(propName) {
+function isEventProperty(propName) {
     return /^on/.test(propName);
 }
 
@@ -36,7 +36,7 @@ function isEventProp(propName) {
  * @param {string} propName The property or attribute name.
  * @param {*} value The value to set.
  */
-function setProp(element, propName, value) {
+function setProperty(element, propName, value) {
     if (propName === 'className') {
         element.setAttribute('class', value);
         return;
@@ -49,7 +49,7 @@ function setProp(element, propName, value) {
         return;
     }
 
-    if (isEventProp(propName)) {
+    if (isEventProperty(propName)) {
         const eventType = propName.toLowerCase().substring(2);
         element.addEventListener(eventType, value);
         return;
@@ -63,7 +63,7 @@ function setProp(element, propName, value) {
  * @param {Element} container The DOM container to render into.
  * @param {Object|string} vnode The virtual DOM node or string to render.
  */
-function renderDom(container, vnode) {
+function renderDomFromVNode(container, vnode) {
     if (typeof vnode === 'string') {
         const textNode = document.createTextNode(vnode);
         if (container) {
@@ -75,10 +75,10 @@ function renderDom(container, vnode) {
 
     const element = document.createElement(vnode.type);
     Object.keys(vnode.props || {}).forEach(propName => {
-        setProp(element, propName, vnode.props[propName]);
+        setProperty(element, propName, vnode.props[propName]);
     });
 
-    vnode.children.forEach(child => renderDom(element, child));
+    vnode.children.forEach(child => renderDomFromVNode(element, child));
     if (container) {
         container.appendChild(element);
     }
@@ -92,7 +92,7 @@ function renderDom(container, vnode) {
  * @param {Object} node2 The second virtual DOM node.
  * @returns {boolean} True if nodes are different, false otherwise.
  */
-function changed(node1, node2) {
+function vNodeChanged(node1, node2) {
     return typeof node1 !== typeof node2 ||
            (typeof node1 === 'string' && node1 !== node2) ||
            node1.type !== node2.type;
@@ -108,7 +108,7 @@ function changed(node1, node2) {
 function updateDomElement(parent, newNode, oldNode, index = 0) {
     // If there's no old node then we add the new one.
     if (!oldNode) {
-        parent.appendChild(renderDom(null, newNode));
+        parent.appendChild(renderDomFromVNode(null, newNode));
         return;
     }
 
@@ -119,8 +119,8 @@ function updateDomElement(parent, newNode, oldNode, index = 0) {
     }
 
     // If the new and old nodes are different then replace them.
-    if (changed(newNode, oldNode)) {
-        parent.replaceChild(renderDom(null, newNode), parent.childNodes[index]);
+    if (vNodeChanged(newNode, oldNode)) {
+        parent.replaceChild(renderDomFromVNode(null, newNode), parent.childNodes[index]);
         return;
     }
 
