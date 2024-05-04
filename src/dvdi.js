@@ -36,7 +36,7 @@ function isEventProperty(propName) {
  * @param {string} propName The property or attribute name.
  * @param {*} value The value to set.
  */
-function setProperty(element, propName, value) {
+function setDomElementProperty(element, propName, value) {
     if (propName === 'className') {
         element.setAttribute('class', value);
         return;
@@ -75,7 +75,7 @@ function renderDomFromVNode(container, vnode) {
 
     const element = document.createElement(vnode.type);
     Object.keys(vnode.props || {}).forEach(propName => {
-        setProperty(element, propName, vnode.props[propName]);
+        setDomElementProperty(element, propName, vnode.props[propName]);
     });
 
     vnode.children.forEach(child => renderDomFromVNode(element, child));
@@ -140,7 +140,7 @@ let nextFrame = null;
 /**
  * Performs all enqueued component updates.
  */
-function performUpdates() {
+function performVNodeUpdates() {
     updateQueue.forEach(component => component.updateVDom());
     updateQueue = [];
     nextFrame = null;
@@ -150,13 +150,13 @@ function performUpdates() {
  * Enqueues a component for batch updates.
  * @param {Component} component The component to update.
  */
-export function enqueueUpdate(component) {
+export function enqueueVNodeUpdate(component) {
     if (!updateQueue.includes(component)) {
         updateQueue.push(component);
     }
 
     if (!nextFrame) {
-        nextFrame = requestAnimationFrame(performUpdates);
+        nextFrame = requestAnimationFrame(performVNodeUpdates);
     }
 }
 
@@ -188,7 +188,7 @@ export class Component {
     setState(newState) {
         if (!shallowEqual(this.state, newState)) {
             this.state = { ...this.state, ...newState };
-            enqueueUpdate(this);
+            enqueueVNodeUpdate(this);
         }
     }
 
