@@ -1,4 +1,5 @@
 import {ButtonComponent, enqueueVNodeUpdate} from './dvdi.js';
+import './obsi.js';
 
 // Example usage
 document.addEventListener('DOMContentLoaded', () => {
