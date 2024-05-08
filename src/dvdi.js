@@ -108,7 +108,9 @@ function vNodeChanged(node1, node2) {
 function updateDomElement(parent, newNode, oldNode, index = 0) {
     // If there's no old node then we add the new one.
     if (!oldNode) {
-        parent.appendChild(renderDomFromVNode(null, newNode));
+        let x = renderDomFromVNode(null, newNode);
+        console.log(x);
+        parent.appendChild(x);
         return;
     }
 
@@ -168,7 +170,11 @@ export function enqueueVNodeUpdate(component) {
  * @returns {Object} A virtual DOM element.
  */
 export function h(type, props, ...children) {
-    return { type, props, children };
+    return {
+        type,
+        props: props || {},
+        children
+    };
 }
 
 /**
@@ -179,6 +185,7 @@ export class Component {
         this.props = props;
         this.state = {};
         this.currentVNode = null;
+        this.parent = undefined;
     }
 
     /**
