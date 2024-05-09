@@ -105,7 +105,7 @@ function vNodeChanged(node1, node2) {
  * @param {Object} oldNode The old virtual DOM node.
  * @param {number} index The child index.
  */
-function updateDomElement(parent, newNode, oldNode, index = 0) {
+export function updateDomElement(parent, newNode, oldNode, index = 0) {
     // If there's no old node then we add the new one.
     if (!oldNode) {
         let x = renderDomFromVNode(null, newNode);
@@ -175,58 +175,4 @@ export function h(type, props, ...children) {
         props: props || {},
         children
     };
-}
-
-/**
- * Represents a UI component with state and props.
- */
-export class Component {
-    constructor(props) {
-        this.props = props;
-        this.state = {};
-        this.currentVNode = null;
-        this.parent = undefined;
-    }
-
-    /**
-     * Sets the state of the component, triggering a re-render if necessary.
-     * @param {Object} newState The new state object.
-     */
-    setState(newState) {
-        if (!shallowEqual(this.state, newState)) {
-            this.state = { ...this.state, ...newState };
-            enqueueVNodeUpdate(this);
-        }
-    }
-
-    /**
-     * Updates the component by re-rendering its virtual DOM and applying any changes.
-     */
-    updateVDom() {
-        const newVNode = this.renderVDom();
-        updateDomElement(this.parent, newVNode, this.currentVNode);
-        this.currentVNode = newVNode;
-    }
-
-    renderVDom() {
-        // Overridden by subclass
-    }
-}
-
-export class ButtonComponent extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { count: 0 };  // Initialize state with count
-    }
-
-    renderVDom() {
-        return h('button', {
-            onClick: () => this.handleClick(),
-            style: { fontSize: '16px', padding: '10px 20px', cursor: 'pointer' }
-        }, `Click me: ${this.state.count} times`);
-    }
-
-    handleClick() {
-        this.setState({ count: this.state.count + 1 });
-    }
 }

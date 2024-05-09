@@ -1,4 +1,4 @@
-import {ButtonComponent, Component, enqueueVNodeUpdate, h} from './dvdi.js';
+import {enqueueVNodeUpdate, updateDomElement, h} from './dvdi.js';
 import './obsi.js';
 
 // Example usage
@@ -9,6 +9,60 @@ import './obsi.js';
 //    enqueueVNodeUpdate(button);
 //});
 
+
+/**
+ * Represents a UI component with state and props.
+ */
+export class Component {
+    constructor(props) {
+        this.props = props;
+        this.state = {};
+        this.currentVNode = null;
+        this.parent = undefined;
+    }
+
+    /**
+     * Sets the state of the component, triggering a re-render if necessary.
+     * @param {Object} newState The new state object.
+     */
+    setState(newState) {
+        if (!shallowEqual(this.state, newState)) {
+            this.state = { ...this.state, ...newState };
+            enqueueVNodeUpdate(this);
+        }
+    }
+
+    /**
+     * Updates the component by re-rendering its virtual DOM and applying any changes.
+     */
+    updateVDom() {
+        const newVNode = this.renderVDom();
+        updateDomElement(this.parent, newVNode, this.currentVNode);
+        this.currentVNode = newVNode;
+    }
+
+    renderVDom() {
+        // Overridden by subclass
+    }
+}
+
+export class ButtonComponent extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { count: 0 };  // Initialize state with count
+    }
+
+    renderVDom() {
+        return h('button', {
+            onClick: () => this.handleClick(),
+            style: { fontSize: '16px', padding: '10px 20px', cursor: 'pointer' }
+        }, `Click me: ${this.state.count} times`);
+    }
+
+    handleClick() {
+        this.setState({ count: this.state.count + 1 });
+    }
+}
 export class HomePageComponent extends Component {
     constructor(props) {
         super(props);
@@ -18,7 +72,7 @@ export class HomePageComponent extends Component {
     renderVDom() {
         return h('div', null,
             h('h1', null, 'Home Page'),
-            this.button.renderVDom(),
+//            this.button.renderVDom(),
             h('a', { href: '/about', onClick: () => navigate('/about') }, 'About')
         );
     }
