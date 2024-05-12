@@ -63,7 +63,7 @@ function setDomElementProperty(element, propName, value) {
  * @param {Element} container The DOM container to render into.
  * @param {Object|string} vnode The virtual DOM node or string to render.
  */
-function renderDomFromVNode(container, vnode) {
+export function renderDomFromVNode(container, vnode) {
     if (typeof vnode === 'string') {
         const textNode = document.createTextNode(vnode);
         if (container) {

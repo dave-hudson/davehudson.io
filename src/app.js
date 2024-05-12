@@ -1,4 +1,4 @@
-import {enqueueVNodeUpdate, updateDomElement, h} from './dvdi.js';
+import {enqueueVNodeUpdate, updateDomElement, renderDomFromVNode, h} from './dvdi.js';
 import './obsi.js';
 
 // Example usage
@@ -104,6 +104,27 @@ export class NotFoundComponent extends Component {
     }
 }
 
+function homePage() {
+    return h('div', null,
+        h('h1', null, 'Home Page'),
+        h('a', { href: '/about', onClick: () => navigate('/about') }, 'About')
+    );
+}
+
+function aboutPage() {
+    return h('div', null,
+        h('h1', null, 'About Page'),
+        h('a', { href: '/', onClick: () => navigate('/') }, 'Home')
+    );
+}
+
+function notFoundPage() {
+    return h('div', null,
+        h('h1', null, '404: Page Not Found'),
+        h('a', { href: '/', onClick: () => navigate('/') }, 'Home')
+    );
+}
+
 function clearPageContent(container) {
     while (container.firstChild) {
         container.removeChild(container.firstChild);
@@ -111,18 +132,17 @@ function clearPageContent(container) {
 }
 
 const routes = {
-    '/': HomePageComponent,
-    '/about': AboutPageComponent
+    '/': homePage,
+    '/about': aboutPage
 };
 
 function handleLocation() {
     const app = document.querySelector('#app');
     clearPageContent(app);
     const path = window.location.pathname;
-    const Component = routes[path] || NotFoundComponent;
-    const componentInstance = new Component();
-    componentInstance.parent = app;
-    enqueueVNodeUpdate(componentInstance);
+    const pageFunction = routes[path] || notFoundPage;
+    let pageVDom = pageFunction()
+    renderDomFromVNode(app, pageVDom)
 }
 
 function navigate(path) {
