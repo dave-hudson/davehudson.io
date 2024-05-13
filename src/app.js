@@ -1,8 +1,5 @@
 import './obsi.js';
 
-let rootElement = null; // This will hold the root element of our app
-let currentApp = null; // This will hold the current virtual DOM
-
 /**
  * Creates a virtual DOM element.
  * @param {string} type The element type.
@@ -189,9 +186,8 @@ function handleLocation() {
     const pageFunction = routes[path] || notFoundPage;
 
     const newApp = pageFunction(); // Generate new VDOM
-    rootElement = render(newApp);
+    let rootElement = render(newApp);
     app.appendChild(rootElement);
-    currentApp = newApp; // Update current VDOM
 }
 
 function navigate(path) {
