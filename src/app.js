@@ -1,5 +1,14 @@
 import './obsi.js';
 
+class VDom {
+    constructor(type, props, childNodes) {
+        this.type = type;
+        this.props = props;
+        this.childNodes = childNodes;
+        this.domElement = null;
+    }
+}
+
 /**
  * Creates a virtual DOM element.
  * @param {string} type The element type.
@@ -8,11 +17,8 @@ import './obsi.js';
  * @returns {Object} A virtual DOM element.
  */
 export function h(type, props, ...childNodes) {
-    return {
-        type,
-        props: props || {},
-        childNodes
-    };
+    let v = new VDom(type, props || {}, childNodes)
+    return v;
 }
 
 function changed(vnode1, vnode2) {
@@ -126,10 +132,13 @@ function Counter(identifier) {
     );
 
     subscribe(() => {
-        const elem = document.getElementById(counterId);
-        const parentElem = elem.parentNode;
-        const index = Array.from(parentElem.childNodes).indexOf(elem);
         const newVDom = component();
+        if (vDom.domElement === null) {
+            vDom.domElement = document.getElementById(counterId);
+        }
+
+        const parentElem = vDom.domElement.parentNode;
+        const index = Array.from(parentElem.childNodes).indexOf(vDom.domElement);
         updateElement(parentElem, vDom, newVDom, index);
         vDom = newVDom;
     });
