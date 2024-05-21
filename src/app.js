@@ -74,6 +74,19 @@ function updateElement(parent, oldVNode, newVNode, index = 0) {
     }
 }
 
+function mapVDomToDom(vNode, domNode) {
+    if (typeof vNode === 'string') {
+        return;
+    }
+
+    console.log(vNode, domNode);
+    vNode.domElement = domNode;
+
+    for (let i = 0; i < vNode.childNodes.length; i++) {
+        mapVDomToDom(vNode.childNodes[i], domNode.childNodes[i]);
+    }
+}
+
 // Enhanced render function to attach events
 function render(vnode) {
     if (typeof vnode === 'string') {
@@ -117,28 +130,24 @@ function createState(initialState) {
     return [getState, setState, subscribe];
 }
 
-function Counter(identifier) {
+function Counter() {
     const [count, setCount, subscribe] = createState(0);
-    let counterId = identifier;
     let vDom = null;
 
     const incCount = () => setCount(count() + 1);
     const decCount = () => setCount(count() - 1);
 
-    const component = () => h('div', {id: identifier},
+    const component = () => h('div', {},
         h('h2', {}, `Count: ${count()}`),
         h('button', { onClick: () => incCount() }, 'Increment'),
         h('button', { onClick: () => decCount() }, 'Decrement')
     );
 
     subscribe(() => {
-        const newVDom = component();
-        if (vDom.domElement === null) {
-            vDom.domElement = document.getElementById(counterId);
-        }
-
         const parentElem = vDom.domElement.parentNode;
         const index = Array.from(parentElem.childNodes).indexOf(vDom.domElement);
+        const newVDom = component();
+        newVDom.domElement = vDom.domElement;
         updateElement(parentElem, vDom, newVDom, index);
         vDom = newVDom;
     });
@@ -153,8 +162,8 @@ function homePage() {
         h('main', { className: 'main-content' },
             h('section', { className: 'description' },
                 'Explore the counters below to interact with the virtual DOM:',
-                Counter('counter-1'),
-                Counter('counter-2')
+                Counter(),
+                Counter()
             ),
             h('article', {}, 'More content can follow here.')
         ),
@@ -194,9 +203,11 @@ function handleLocation() {
     const path = window.location.pathname;
     const pageFunction = routes[path] || notFoundPage;
 
-    const newApp = pageFunction(); // Generate new VDOM
+    let newApp = pageFunction(); // Generate new VDOM
     let rootElement = render(newApp);
     app.appendChild(rootElement);
+    console.log(app);
+    mapVDomToDom(newApp, app.childNodes[0]);
 }
 
 function navigate(path) {
