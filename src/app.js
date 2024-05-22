@@ -1,4 +1,4 @@
-import './obsi.js';
+//import './obsi.js';
 
 class VDom {
     constructor(type, props, childNodes) {
@@ -6,6 +6,7 @@ class VDom {
         this.props = props;
         this.childNodes = childNodes;
         this.domElement = null;
+        this.mountCallback = null;
     }
 }
 
@@ -79,22 +80,38 @@ function mapVDomToDom(vNode, domNode) {
         return;
     }
 
-    console.log(vNode, domNode);
     vNode.domElement = domNode;
+    if (vNode.mountCallback) {
+        vNode.mountCallback();
+    }
 
     for (let i = 0; i < vNode.childNodes.length; i++) {
         mapVDomToDom(vNode.childNodes[i], domNode.childNodes[i]);
     }
 }
 
+function unmapVDomFromDom(vNode) {
+    if (typeof vNode === 'string') {
+        return;
+    }
+
+    if (vNode.mountCallback) {
+        console.log('remove', vNode);
+    }
+
+    for (let i of vNode.childNodes) {
+        unmapVDomFromDom(i);
+    }
+}
+
 // Enhanced render function to attach events
-function render(vnode) {
-    if (typeof vnode === 'string') {
-        const element = document.createTextNode(vnode);
+function render(vNode) {
+    if (typeof vNode === 'string') {
+        const element = document.createTextNode(vNode);
         return element;
     }
 
-    const { type, props, childNodes } = vnode;
+    const { type, props, childNodes } = vNode;
     const element = document.createElement(type);
 
     for (const key in props) {
@@ -143,16 +160,19 @@ function Counter() {
         h('button', { onClick: () => decCount() }, 'Decrement')
     );
 
-    subscribe(() => {
-        const parentElem = vDom.domElement.parentNode;
-        const index = Array.from(parentElem.childNodes).indexOf(vDom.domElement);
-        const newVDom = component();
-        newVDom.domElement = vDom.domElement;
-        updateElement(parentElem, vDom, newVDom, index);
-        vDom = newVDom;
-    });
-
     vDom = component()
+
+    vDom.mountCallback = () => {
+        subscribe(() => {
+            const parentElem = vDom.domElement.parentNode;
+            const index = Array.from(parentElem.childNodes).indexOf(vDom.domElement);
+            const newVDom = component();
+            newVDom.domElement = vDom.domElement;
+            updateElement(parentElem, vDom, newVDom, index);
+            vDom = newVDom;
+        });
+    };
+
     return vDom;
 }
 
@@ -186,28 +206,31 @@ function notFoundPage() {
     );
 }
 
-function clearPageContent(container) {
-    while (container.firstChild) {
-        container.removeChild(container.firstChild);
-    }
-}
-
 const routes = {
     '/': homePage,
     '/about': aboutPage
 };
 
+let rootVNode = null;
+
 function handleLocation() {
     const app = document.querySelector('#app');
-    clearPageContent(app);
+
+    // If we already rendered a page then remove it from the DOM and unmap its VDOM.
+    if (rootVNode) {
+        app.removeChild(rootVNode.domElement);
+        unmapVDomFromDom(rootVNode);
+    }
+
     const path = window.location.pathname;
     const pageFunction = routes[path] || notFoundPage;
 
-    let newApp = pageFunction(); // Generate new VDOM
-    let rootElement = render(newApp);
+    rootVNode = pageFunction();
+    let rootElement = render(rootVNode);
+
+    // Add our new page to the DOM and map its VDOM.
     app.appendChild(rootElement);
-    console.log(app);
-    mapVDomToDom(newApp, app.childNodes[0]);
+    mapVDomToDom(rootVNode, app.childNodes[0]);
 }
 
 function navigate(path) {
