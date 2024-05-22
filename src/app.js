@@ -7,6 +7,7 @@ class VDom {
         this.childNodes = childNodes;
         this.domElement = null;
         this.mountCallback = null;
+        this.unmountCallback = null;
     }
 }
 
@@ -96,7 +97,7 @@ function unmapVDomFromDom(vNode) {
     }
 
     if (vNode.mountCallback) {
-        console.log('remove', vNode);
+        vNode.unmountCallback();
     }
 
     for (let i of vNode.childNodes) {
@@ -129,7 +130,7 @@ function render(vNode) {
 
 function createState(initialState) {
     let state = initialState;
-    const subscribers = [];
+    let subscribers = [];
 
     const getState = () => state;
 
@@ -141,15 +142,18 @@ function createState(initialState) {
     };
 
     const subscribe = (callback) => {
-        subscribers.push(callback);
+        return subscribers.push(callback) - 1;
     };
 
-    return [getState, setState, subscribe];
+    const unsubscribe = (index) => {
+        subscribers = subscribers.slice(0, index).concat(subscribers.slice(index + 1));
+    }
+
+    return [getState, setState, subscribe, unsubscribe];
 }
 
 function Counter() {
-    const [count, setCount, subscribe] = createState(0);
-    let vDom = null;
+    const [count, setCount, subscribe, unsubscribe] = createState(0);
 
     const incCount = () => setCount(count() + 1);
     const decCount = () => setCount(count() - 1);
@@ -160,20 +164,26 @@ function Counter() {
         h('button', { onClick: () => decCount() }, 'Decrement')
     );
 
-    vDom = component()
+    let vNode = component()
+    let subIndex = -1;
 
-    vDom.mountCallback = () => {
-        subscribe(() => {
-            const parentElem = vDom.domElement.parentNode;
-            const index = Array.from(parentElem.childNodes).indexOf(vDom.domElement);
-            const newVDom = component();
-            newVDom.domElement = vDom.domElement;
-            updateElement(parentElem, vDom, newVDom, index);
-            vDom = newVDom;
+    vNode.mountCallback = () => {
+        subIndex = subscribe(() => {
+            const parentElem = vNode.domElement.parentNode;
+            const index = Array.from(parentElem.childNodes).indexOf(vNode.domElement);
+            const newVNode = component();
+            newVNode.domElement = vNode.domElement;
+            updateElement(parentElem, vNode, newVNode, index);
+            vNode = newVNode;
         });
     };
 
-    return vDom;
+    vNode.unmountCallback = () => {
+        console.log('remove', vNode);
+        unsubscribe(subIndex);
+    }
+
+    return vNode;
 }
 
 function homePage() {
