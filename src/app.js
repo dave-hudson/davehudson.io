@@ -53,16 +53,7 @@ function updateProps(element, oldProps, newProps) {
 
 function updateElement(parent, oldVNode, newVNode, index = 0) {
     if (!oldVNode && newVNode) {
-        console.log('should never get here!');
         parent.appendChild(render(newVNode)); // Node added
-        for (const prop in newVNode.props) {
-            if (prop.startsWith('on')) { // Add event listeners
-                element.addEventListener(prop.substring(2).toLowerCase(), newVNode.props[prop]);
-            } else { // Update attributes
-                element[prop] = newVNode.props[prop];
-            }
-        }
-
         return;
     }
 
@@ -280,10 +271,7 @@ function handleLocation() {
     const pageFunction = routes[path] || notFoundPage;
 
     rootVNode = pageFunction();
-    let rootElement = render(rootVNode);
-
-    // Add our new page to the DOM and map its VDOM.
-    app.appendChild(rootElement);
+    updateElement(app, null, rootVNode);
     mountVNode(rootVNode);
 }
 
