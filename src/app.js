@@ -53,12 +53,29 @@ function updateProps(element, oldProps, newProps) {
 
 function updateElement(parent, oldVNode, newVNode, index = 0) {
     if (!oldVNode && newVNode) {
+        console.log('should never get here!');
         parent.appendChild(render(newVNode)); // Node added
+        for (const prop in newVNode.props) {
+            if (prop.startsWith('on')) { // Add event listeners
+                element.addEventListener(prop.substring(2).toLowerCase(), newVNode.props[prop]);
+            } else { // Update attributes
+                element[prop] = newVNode.props[prop];
+            }
+        }
+
         return;
     }
 
     if (oldVNode && !newVNode) {
         parent.removeChild(parent.childNodes[index]); // Node removed
+        for (const prop in oldVNode.props) {
+            if (prop.startsWith('on')) { // Remove event listeners
+                element.removeEventListener(prop.substring(2).toLowerCase(), oldVNode.props[prop]);
+            } else { // Remove attributes
+                element[prop] = '';
+            }
+        }
+
         return;
     }
 
@@ -76,32 +93,31 @@ function updateElement(parent, oldVNode, newVNode, index = 0) {
     }
 }
 
-function mapVDomToDom(vNode, domNode) {
+function mountVNode(vNode) {
     if (typeof vNode === 'string') {
         return;
     }
 
-    vNode.domElement = domNode;
     if (vNode.mountCallback) {
         vNode.mountCallback();
     }
 
-    for (let i = 0; i < vNode.childNodes.length; i++) {
-        mapVDomToDom(vNode.childNodes[i], domNode.childNodes[i]);
+    for (let i of vNode.childNodes) {
+        mountVNode(i);
     }
 }
 
-function unmapVDomFromDom(vNode) {
+function unmountVNode(vNode) {
     if (typeof vNode === 'string') {
         return;
     }
 
-    if (vNode.mountCallback) {
+    if (vNode.unmountCallback) {
         vNode.unmountCallback();
     }
 
     for (let i of vNode.childNodes) {
-        unmapVDomFromDom(i);
+        unmountVNode(i);
     }
 }
 
@@ -114,6 +130,7 @@ function render(vNode) {
 
     const { type, props, childNodes } = vNode;
     const element = document.createElement(type);
+    vNode.domElement = element;
 
     for (const key in props) {
         if (key.startsWith('on')) {
@@ -123,10 +140,34 @@ function render(vNode) {
         }
     }
 
-    childNodes.map(render).forEach(child => element.appendChild(child));
+    for (let i of childNodes) {
+        element.appendChild(render(i));
+    }
 
     return element;
 }
+
+const updateQueue = new Set();
+
+/**
+ * Enqueues updates and executes them in a batch using requestAnimationFrame.
+ * @param {Function} update The update function to enqueue.
+ */
+function enqueueUpdate(update) {
+    updateQueue.add(update);
+    if (updateQueue.size === 1) {
+        requestAnimationFrame(runUpdates);
+    }
+}
+
+/**
+ * Runs all updates that have been enqueued.
+ */
+function runUpdates() {
+    updateQueue.forEach(update => update());
+    updateQueue.clear();
+}
+
 
 function createState(initialState) {
     let state = initialState;
@@ -137,7 +178,7 @@ function createState(initialState) {
     const setState = (newState) => {
         if (state !== newState) {
             state = newState;
-            subscribers.forEach((subscriber) => subscriber()); // Notify all subscribers
+            subscribers.forEach((subscriber) => enqueueUpdate(subscriber));
         }
     };
 
@@ -179,8 +220,11 @@ function Counter() {
     };
 
     vNode.unmountCallback = () => {
-        console.log('remove', vNode);
         unsubscribe(subIndex);
+
+        const parentElem = vNode.domElement.parentNode;
+        const index = Array.from(parentElem.childNodes).indexOf(vNode.domElement);
+        updateElement(parentElem, vNode, null, index);
     }
 
     return vNode;
@@ -229,7 +273,7 @@ function handleLocation() {
     // If we already rendered a page then remove it from the DOM and unmap its VDOM.
     if (rootVNode) {
         app.removeChild(rootVNode.domElement);
-        unmapVDomFromDom(rootVNode);
+        unmountVNode(rootVNode);
     }
 
     const path = window.location.pathname;
@@ -240,7 +284,7 @@ function handleLocation() {
 
     // Add our new page to the DOM and map its VDOM.
     app.appendChild(rootElement);
-    mapVDomToDom(rootVNode, app.childNodes[0]);
+    mountVNode(rootVNode);
 }
 
 function navigate(path) {
