@@ -80,7 +80,7 @@ function updateProps(element, oldProps, newProps) {
     }
 }
 
-function updateElement(parent, parentVNode, oldVNode, newVNode, index = 0) {
+function updateElement(parent, parentVNode, oldVNode, newVNode, index) {
     if (!oldVNode && !newVNode) {
         console.log('WTAF?');
         debugger;
@@ -283,7 +283,6 @@ function Counter() {
             const index = Array.from(parentElem.childNodes).indexOf(vNode.domElement);
             const newVNode = component();
             newVNode.parentVNode = vNode.parentVNode;
-            newVNode.domElement = vNode.domElement;
             updateElement(parentElem, vNode.parentVNode, vNode, newVNode, index);
             vNode = newVNode;
         });
@@ -350,7 +349,7 @@ function handleLocation() {
     const pageFunction = routes[path] || notFoundPage;
 
     rootVNode = pageFunction();
-    updateElement(app, null, null, rootVNode);
+    updateElement(app, null, null, rootVNode, 0);
     mountVNode(rootVNode);
 }
 
