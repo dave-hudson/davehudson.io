@@ -22,7 +22,6 @@ class VDom {
         const index = this.childNodes.indexOf(vNode);
         this.childNodes = this.childNodes.slice(0, index).concat(this.childNodes.slice(index + 1));
         if (typeof vNode !== 'string') {
-            console.log('removeChild', vNode);
             vNode.parentVNode = null;
         }
     }
@@ -32,6 +31,7 @@ class VDom {
         this.childNodes[index] = newVNode;
         if (typeof newVNode !== 'string') {
             newVNode.parentNode = this;
+            oldVNode.parentNode = null;
         }
     }
 }
@@ -44,7 +44,11 @@ class VDom {
  * @returns {Object} A virtual DOM element.
  */
 export function h(type, props, ...childNodes) {
-    let v = new VDom(type, props || {}, childNodes)
+    let v = new VDom(type, props || {}, [])
+    for (let i of childNodes) {
+        v.appendChild(i);
+    }
+
     return v;
 }
 
@@ -76,62 +80,52 @@ function updateProps(element, oldProps, newProps) {
     }
 }
 
-function preRender(parentVNode, vNode) {
-    if (typeof vNode == 'string') {
-        return;
-    }
-
-    const len = vNode.childNodes.length;
-    for (let i = 0; i < len; i++) {
-        preRender(vNode, vNode.childNodes[i]);
-    }
-
-    vNode.parentVNode = parentVNode;
-}
-
 function updateElement(parent, parentVNode, oldVNode, newVNode, index = 0) {
-    if (!oldVNode && newVNode) {
-        preRender(parentVNode, newVNode);
-        parent.appendChild(render(newVNode)); // Node added
+    if (!oldVNode && !newVNode) {
+        console.log('WTAF?');
+        debugger;
+    }
 
+    // Did we add a new node?
+    if (!oldVNode && newVNode) {
         if (parentVNode) {
             parentVNode.appendChild(newVNode);
         }
 
+        parent.appendChild(render(newVNode));
         return;
     }
 
+    // Did we remove an old node?
     if (oldVNode && !newVNode) {
-        console.log('remove element', oldVNode);
-        if (parentVNode) {
-            parentVNode.removeChild(oldVNode);
-        }
-
+        parentVNode.removeChild(oldVNode);
+        parent.removeChild(parent.childNodes[index]);
         unrender(oldVNode);
-        parent.removeChild(parent.childNodes[index]); // Node removed
         return;
     }
 
-    if (oldVNode && newVNode && changed(oldVNode, newVNode)) {
-        console.log('replace child', newVNode);
-        unrender(oldVNode);
-
-        preRender(parentVNode, newVNode);
+    // Did our node change?
+    if (changed(oldVNode, newVNode)) {
         const r = render(newVNode);
-        console.log(r);
         parentVNode.replaceChild(newVNode, oldVNode);
-
         parent.replaceChild(r, parent.childNodes[index]); // Node changed
+        unrender(oldVNode);
         return;
     }
 
-    if (oldVNode && newVNode && typeof oldVNode !== 'string' && oldVNode.type === newVNode.type) {
-        console.log('recurse', oldVNode);
-        updateProps(parent.childNodes[index], oldVNode.props, newVNode.props); // Update props
-        const maxLength = Math.max(oldVNode.childNodes.length, newVNode.childNodes.length);
-        for (let i = 0; i < maxLength; i++) {
-            updateElement(parent.childNodes[index], oldVNode, oldVNode.childNodes[i], newVNode.childNodes[i], i);
-        }
+    // If this is a string VNode we can't have anything else to do.
+    if (typeof oldVNode === 'string') {
+        return;
+    }
+
+    // Our new VDOM node is the same as our old VDOM node we need to scan the children
+    // and update them.  To keep things sane, don't forget we need to record DOM element
+    // in the new VDOM node.
+    newVNode.domElement = oldVNode.domElement;
+    updateProps(parent.childNodes[index], oldVNode.props, newVNode.props); // Update props
+    const maxLength = Math.max(oldVNode.childNodes.length, newVNode.childNodes.length);
+    for (let i = 0; i < maxLength; i++) {
+        updateElement(parent.childNodes[index], oldVNode, oldVNode.childNodes[i], newVNode.childNodes[i], i);
     }
 }
 
@@ -193,7 +187,6 @@ function render(vNode) {
 
 // Enhanced unrender function to detach events
 function unrender(vNode) {
-    console.log('unrender', vNode);
     if (typeof vNode === 'string') {
         return;
     }
@@ -207,9 +200,9 @@ function unrender(vNode) {
         }
 
         const de = vn.domElement;
-        unrender(vn);
         vNode.removeChild(vn);
         domElement.removeChild(de);
+        unrender(vn);
     }
 
     for (const key in props) {
@@ -220,7 +213,6 @@ function unrender(vNode) {
         }
     }
 
-    console.log(vNode);
     vNode.domElement = null;
 }
 
@@ -292,7 +284,6 @@ function Counter() {
             const newVNode = component();
             newVNode.parentVNode = vNode.parentVNode;
             newVNode.domElement = vNode.domElement;
-            console.log('mountCallback', newVNode);
             updateElement(parentElem, vNode.parentVNode, vNode, newVNode, index);
             vNode = newVNode;
         });
