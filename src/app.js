@@ -4,10 +4,35 @@ class VDom {
     constructor(type, props, childNodes) {
         this.type = type;
         this.props = props;
+        this.parentVNode = null;
         this.childNodes = childNodes;
         this.domElement = null;
         this.mountCallback = null;
         this.unmountCallback = null;
+    }
+
+    appendChild(vNode) {
+        this.childNodes.push(vNode);
+        if (typeof vNode !== 'string') {
+            vNode.parentVNode = this;
+        }
+    }
+
+    removeChild(vNode) {
+        const index = this.childNodes.indexOf(vNode);
+        this.childNodes = this.childNodes.slice(0, index).concat(this.childNodes.slice(index + 1));
+        if (typeof vNode !== 'string') {
+            console.log('removeChild', vNode);
+            vNode.parentVNode = null;
+        }
+    }
+
+    replaceChild(newVNode, oldVNode) {
+        const index = this.childNodes.indexOf(oldVNode);
+        this.childNodes[index] = newVNode;
+        if (typeof newVNode !== 'string') {
+            newVNode.parentNode = this;
+        }
     }
 }
 
@@ -51,35 +76,61 @@ function updateProps(element, oldProps, newProps) {
     }
 }
 
-function updateElement(parent, oldVNode, newVNode, index = 0) {
-    if (!oldVNode && newVNode) {
-        parent.appendChild(render(newVNode)); // Node added
+function preRender(parentVNode, vNode) {
+    if (typeof vNode == 'string') {
         return;
     }
 
-    if (oldVNode && !newVNode) {
-        parent.removeChild(parent.childNodes[index]); // Node removed
-        for (const prop in oldVNode.props) {
-            if (prop.startsWith('on')) { // Remove event listeners
-                element.removeEventListener(prop.substring(2).toLowerCase(), oldVNode.props[prop]);
-            } else { // Remove attributes
-                element[prop] = '';
-            }
+    const len = vNode.childNodes.length;
+    for (let i = 0; i < len; i++) {
+        preRender(vNode, vNode.childNodes[i]);
+    }
+
+    vNode.parentVNode = parentVNode;
+}
+
+function updateElement(parent, parentVNode, oldVNode, newVNode, index = 0) {
+    if (!oldVNode && newVNode) {
+        preRender(parentVNode, newVNode);
+        parent.appendChild(render(newVNode)); // Node added
+
+        if (parentVNode) {
+            parentVNode.appendChild(newVNode);
         }
 
         return;
     }
 
+    if (oldVNode && !newVNode) {
+        console.log('remove element', oldVNode);
+        if (parentVNode) {
+            parentVNode.removeChild(oldVNode);
+        }
+
+        unrender(oldVNode);
+        parent.removeChild(parent.childNodes[index]); // Node removed
+        return;
+    }
+
     if (oldVNode && newVNode && changed(oldVNode, newVNode)) {
-        parent.replaceChild(render(newVNode), parent.childNodes[index]); // Node changed
+        console.log('replace child', newVNode);
+        unrender(oldVNode);
+
+        preRender(parentVNode, newVNode);
+        const r = render(newVNode);
+        console.log(r);
+        parentVNode.replaceChild(newVNode, oldVNode);
+
+        parent.replaceChild(r, parent.childNodes[index]); // Node changed
         return;
     }
 
     if (oldVNode && newVNode && typeof oldVNode !== 'string' && oldVNode.type === newVNode.type) {
+        console.log('recurse', oldVNode);
         updateProps(parent.childNodes[index], oldVNode.props, newVNode.props); // Update props
         const maxLength = Math.max(oldVNode.childNodes.length, newVNode.childNodes.length);
         for (let i = 0; i < maxLength; i++) {
-            updateElement(parent.childNodes[index], oldVNode.childNodes[i], newVNode.childNodes[i], i);
+            updateElement(parent.childNodes[index], oldVNode, oldVNode.childNodes[i], newVNode.childNodes[i], i);
         }
     }
 }
@@ -131,11 +182,46 @@ function render(vNode) {
         }
     }
 
-    for (let i of childNodes) {
-        element.appendChild(render(i));
+    const len = childNodes.length;
+    for (let i = 0; i < len; i++) {
+        const vn = childNodes[i];
+        element.appendChild(render(vn));
     }
 
     return element;
+}
+
+// Enhanced unrender function to detach events
+function unrender(vNode) {
+    console.log('unrender', vNode);
+    if (typeof vNode === 'string') {
+        return;
+    }
+
+    const { type, props, childNodes, domElement } = vNode;
+    const len = childNodes.length;
+    for (let i = len - 1; i >= 0; i--) {
+        const vn = childNodes[i];
+        if (typeof vn === 'string') {
+            continue;
+        }
+
+        const de = vn.domElement;
+        unrender(vn);
+        vNode.removeChild(vn);
+        domElement.removeChild(de);
+    }
+
+    for (const key in props) {
+        if (key.startsWith('on')) {
+            domElement.removeEventListener(key.substring(2).toLowerCase(), props[key]);
+        } else {
+            domElement[key] = '';
+        }
+    }
+
+    console.log(vNode);
+    vNode.domElement = null;
 }
 
 const updateQueue = new Set();
@@ -201,11 +287,13 @@ function Counter() {
 
     vNode.mountCallback = () => {
         subIndex = subscribe(() => {
-            const parentElem = vNode.domElement.parentNode;
+            const parentElem = vNode.parentVNode.domElement;
             const index = Array.from(parentElem.childNodes).indexOf(vNode.domElement);
             const newVNode = component();
+            newVNode.parentVNode = vNode.parentVNode;
             newVNode.domElement = vNode.domElement;
-            updateElement(parentElem, vNode, newVNode, index);
+            console.log('mountCallback', newVNode);
+            updateElement(parentElem, vNode.parentVNode, vNode, newVNode, index);
             vNode = newVNode;
         });
     };
@@ -213,9 +301,9 @@ function Counter() {
     vNode.unmountCallback = () => {
         unsubscribe(subIndex);
 
-        const parentElem = vNode.domElement.parentNode;
+        const parentElem = vNode.parentVNode.domElement;
         const index = Array.from(parentElem.childNodes).indexOf(vNode.domElement);
-        updateElement(parentElem, vNode, null, index);
+        updateElement(parentElem, vNode.parentVNode, vNode, null, index);
     }
 
     return vNode;
@@ -271,7 +359,7 @@ function handleLocation() {
     const pageFunction = routes[path] || notFoundPage;
 
     rootVNode = pageFunction();
-    updateElement(app, null, rootVNode);
+    updateElement(app, null, null, rootVNode);
     mountVNode(rootVNode);
 }
 
