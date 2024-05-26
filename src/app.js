@@ -1,5 +1,7 @@
 //import './obsi.js';
 
+console.log('SCRIPT RELOADED!')
+
 class VDom {
     constructor(type, props, childNodes) {
         this.type = type;
@@ -7,6 +9,7 @@ class VDom {
         this.parentVNode = null;
         this.childNodes = childNodes;
         this.domElement = null;
+        this.isMounted = false;
         this.mountCallback = null;
         this.unmountCallback = null;
     }
@@ -33,6 +36,36 @@ class VDom {
             newVNode.parentNode = this;
             oldVNode.parentNode = null;
         }
+    }
+}
+
+function mountVNode(vNode) {
+    if (typeof vNode === 'string') {
+        return;
+    }
+
+    if (vNode.mountCallback && !vNode.isMounted) {
+        vNode.mountCallback();
+        vNode.isMounted = true;
+    }
+
+    for (let i of vNode.childNodes) {
+        mountVNode(i);
+    }
+}
+
+function unmountVNode(vNode) {
+    if (typeof vNode === 'string') {
+        return;
+    }
+
+    if (vNode.unmountCallback && vNode.isMounted) {
+        vNode.unmountCallback();
+        vNode.isMounted = false;
+    }
+
+    for (let i of vNode.childNodes) {
+        unmountVNode(i);
     }
 }
 
@@ -93,11 +126,13 @@ function updateElement(parent, parentVNode, oldVNode, newVNode, index) {
         }
 
         parent.appendChild(render(newVNode));
+        mountVNode(newVNode);
         return;
     }
 
     // Did we remove an old node?
     if (oldVNode && !newVNode) {
+        unmountVNode(oldVNode);
         parentVNode.removeChild(oldVNode);
         parent.removeChild(parent.childNodes[index]);
         unrender(oldVNode);
@@ -106,10 +141,11 @@ function updateElement(parent, parentVNode, oldVNode, newVNode, index) {
 
     // Did our node change?
     if (changed(oldVNode, newVNode)) {
-        const r = render(newVNode);
+        unmountVNode(oldVNode);
         parentVNode.replaceChild(newVNode, oldVNode);
-        parent.replaceChild(r, parent.childNodes[index]); // Node changed
+        parent.replaceChild(render(newVNode), parent.childNodes[index]);
         unrender(oldVNode);
+        mountVNode(newVNode);
         return;
     }
 
@@ -122,38 +158,17 @@ function updateElement(parent, parentVNode, oldVNode, newVNode, index) {
     // and update them.  To keep things sane, don't forget we need to record DOM element
     // in the new VDOM node.
     newVNode.domElement = oldVNode.domElement;
-    updateProps(parent.childNodes[index], oldVNode.props, newVNode.props); // Update props
+    updateProps(parent.childNodes[index], oldVNode.props, newVNode.props);
+
+    // We iterate backwards to remove any nodes to keep the child lists correct.
+    for (let i = oldVNode.childNodes.length - 1; i > (newVNode.childNodes.length - 1); i--) {
+        updateElement(parent.childNodes[index], oldVNode, oldVNode.childNodes[i], null, i);
+    }
+
+    // We iterate forwards to update and add nodes.
     const maxLength = Math.max(oldVNode.childNodes.length, newVNode.childNodes.length);
     for (let i = 0; i < maxLength; i++) {
         updateElement(parent.childNodes[index], oldVNode, oldVNode.childNodes[i], newVNode.childNodes[i], i);
-    }
-}
-
-function mountVNode(vNode) {
-    if (typeof vNode === 'string') {
-        return;
-    }
-
-    if (vNode.mountCallback) {
-        vNode.mountCallback();
-    }
-
-    for (let i of vNode.childNodes) {
-        mountVNode(i);
-    }
-}
-
-function unmountVNode(vNode) {
-    if (typeof vNode === 'string') {
-        return;
-    }
-
-    if (vNode.unmountCallback) {
-        vNode.unmountCallback();
-    }
-
-    for (let i of vNode.childNodes) {
-        unmountVNode(i);
     }
 }
 
@@ -237,7 +252,6 @@ function runUpdates() {
     updateQueue.clear();
 }
 
-
 function createState(initialState) {
     let state = initialState;
     let subscribers = [];
@@ -290,10 +304,6 @@ function Counter() {
 
     vNode.unmountCallback = () => {
         unsubscribe(subIndex);
-
-        const parentElem = vNode.parentVNode.domElement;
-        const index = Array.from(parentElem.childNodes).indexOf(vNode.domElement);
-        updateElement(parentElem, vNode.parentVNode, vNode, null, index);
     }
 
     return vNode;
@@ -310,7 +320,7 @@ function homePage() {
             ),
             h('article', {}, 'More content can follow here.')
         ),
-        h('a', { href: '/about', onClick: () => navigate('/about') }, 'About'),
+        h('a', { href: '/about', onClick: (e) => navigateEvent(e, '/about') }, 'About'),
         h('footer', { className: 'footer' }, 'Footer content goes here. © 2024.')
     );
 }
@@ -318,14 +328,14 @@ function homePage() {
 function aboutPage() {
     return h('div', null,
         h('h1', null, 'About Page'),
-        h('a', { href: '/', onClick: () => navigate('/') }, 'Home')
+        h('a', { href: '/', onClick: (e) => navigateEvent(e, '/') }, 'Home')
     );
 }
 
 function notFoundPage() {
     return h('div', null,
         h('h1', null, '404: Page Not Found'),
-        h('a', { href: '/', onClick: () => navigate('/') }, 'Home')
+        h('a', { href: '/', onClick: (e) => navigateEvent(e, '/') }, 'Home')
     );
 }
 
@@ -337,23 +347,18 @@ const routes = {
 let rootVNode = null;
 
 function handleLocation() {
-    const app = document.querySelector('#app');
-
-    // If we already rendered a page then remove it from the DOM and unmap its VDOM.
-    if (rootVNode) {
-        app.removeChild(rootVNode.domElement);
-        unmountVNode(rootVNode);
-    }
-
     const path = window.location.pathname;
     const pageFunction = routes[path] || notFoundPage;
+    const newVNode = pageFunction();
+    const app = document.querySelector('#app');
 
-    rootVNode = pageFunction();
-    updateElement(app, null, null, rootVNode, 0);
-    mountVNode(rootVNode);
+    updateElement(app, null, rootVNode, newVNode, 0);
+    rootVNode = newVNode;
+    console.log(`navigated to ${path}`)
 }
 
-function navigate(path) {
+function navigateEvent(e, path) {
+    e.preventDefault();
     window.history.pushState({}, '', path);
     handleLocation();
 }
