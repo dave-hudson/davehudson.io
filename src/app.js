@@ -16,26 +16,32 @@ class VDom {
 
     appendChild(vNode) {
         this.childNodes.push(vNode);
-        if (typeof vNode !== 'string') {
-            vNode.parentVNode = this;
+        if (typeof vNode === 'string') {
+            return;
         }
+
+        vNode.parentVNode = this;
     }
 
     removeChild(vNode) {
         const index = this.childNodes.indexOf(vNode);
         this.childNodes = this.childNodes.slice(0, index).concat(this.childNodes.slice(index + 1));
-        if (typeof vNode !== 'string') {
-            vNode.parentVNode = null;
+        if (typeof vNode === 'string') {
+            return;
         }
+
+        vNode.parentVNode = null;
     }
 
     replaceChild(newVNode, oldVNode) {
         const index = this.childNodes.indexOf(oldVNode);
         this.childNodes[index] = newVNode;
-        if (typeof newVNode !== 'string') {
-            newVNode.parentNode = this;
-            oldVNode.parentNode = null;
+        if (typeof newVNode === 'string') {
+            return;
         }
+
+        newVNode.parentNode = this;
+        oldVNode.parentNode = null;
     }
 }
 
@@ -92,21 +98,23 @@ function changed(vnode1, vnode2) {
 }
 
 function updateProps(element, oldProps, newProps) {
+    // Iterate over all the old properties and remove any that are not in the new properties.
     for (const prop in oldProps) {
         if (!(prop in newProps)) {
-            if (prop.startsWith('on')) { // Remove event listeners
+            if (prop.startsWith('on')) {
                 element.removeEventListener(prop.substring(2).toLowerCase(), oldProps[prop]);
-            } else { // Remove attributes
+            } else {
                 element[prop] = '';
             }
         }
     }
 
+    // Iterate over all the new properties and add any that are not in the old properties.
     for (const prop in newProps) {
         if (!(prop in oldProps)) {
-            if (prop.startsWith('on')) { // Add event listeners
+            if (prop.startsWith('on')) {
                 element.addEventListener(prop.substring(2).toLowerCase(), newProps[prop]);
-            } else { // Update attributes
+            } else {
                 element[prop] = newProps[prop];
             }
         }
