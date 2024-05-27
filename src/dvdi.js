@@ -42,30 +42,32 @@ export class VDom {
     }
 }
 
-export function mountVNode(vNode) {
+function mountVNode(vNode) {
     if (typeof vNode === 'string') {
         return;
     }
 
     if (vNode.mountCallback && !vNode.isMounted) {
         vNode.mountCallback();
-        vNode.isMounted = true;
     }
+
+    vNode.isMounted = true;
 
     for (let i of vNode.childNodes) {
         mountVNode(i);
     }
 }
 
-export function unmountVNode(vNode) {
+function unmountVNode(vNode) {
     if (typeof vNode === 'string') {
         return;
     }
 
     if (vNode.unmountCallback && vNode.isMounted) {
         vNode.unmountCallback();
-        vNode.isMounted = false;
     }
+
+    vNode.isMounted = false;
 
     for (let i of vNode.childNodes) {
         unmountVNode(i);

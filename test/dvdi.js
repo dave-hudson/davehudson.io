@@ -1,6 +1,6 @@
 import { jest } from '@jest/globals';
 
-import { VDom, mountVNode, unmountVNode, runUpdates, updateElement, enqueueUpdate, h } from '../src/dvdi.js';
+import { VDom, runUpdates, updateElement, enqueueUpdate, h } from '../src/dvdi.js';
 
 // Mocking the requestAnimationFrame for enqueueUpdate tests
 global.requestAnimationFrame = (callback) => callback();
@@ -80,27 +80,6 @@ describe('VDom Class', () => {
     });
 });
 
-describe('mountVNode and unmountVNode functions', () => {
-    test('mountVNode calls mountCallback if present', () => {
-        const vDom = new VDom('div', {}, []);
-        const mountCallback = jest.fn();
-        vDom.mountCallback = mountCallback;
-        mountVNode(vDom);
-        expect(mountCallback).toHaveBeenCalled();
-        expect(vDom.isMounted).toBe(true);
-    });
-
-    test('unmountVNode calls unmountCallback if present', () => {
-        const vDom = new VDom('div', {}, []);
-        const unmountCallback = jest.fn();
-        vDom.unmountCallback = unmountCallback;
-        vDom.isMounted = true;
-        unmountVNode(vDom);
-        expect(unmountCallback).toHaveBeenCalled();
-        expect(vDom.isMounted).toBe(false);
-    });
-});
-
 describe('updateElement function', () => {
     test('updateElement adds a new node', () => {
         const parent = document.createElement('div');
@@ -125,6 +104,49 @@ describe('updateElement function', () => {
         updateElement(parent, null, oldVNode, newVNode, 0);
         expect(parent.childNodes).not.toContain(oldVNode.domElement);
         expect(parent.childNodes).toContain(newVNode.domElement);
+    });
+
+    test('updateElement mounts a component', () => {
+        function TestComponent() {
+            const component = () => h('div', {},
+                h('h2', {}, `Count: 0`),
+                h('button', {}, 'Increment'),
+                h('button', {}, 'Decrement')
+            );
+
+            let vNode = component();
+            vNode.mountCallback = jest.fn();
+
+            return vNode;
+        }
+
+        const parent = document.createElement('div');
+        const newVNode = TestComponent();
+        updateElement(parent, null, null, newVNode, 0);
+        expect(newVNode.mountCallback).toHaveBeenCalled();
+        expect(parent.childNodes).toContain(newVNode.domElement);
+    });
+
+    test('updateElement unmounts a component', () => {
+        function TestComponent() {
+            const component = () => h('div', {},
+                h('h2', {}, `Count: 0`),
+                h('button', {}, 'Increment'),
+                h('button', {}, 'Decrement')
+            );
+
+            let vNode = component();
+            vNode.unmountCallback = jest.fn();
+
+            return vNode;
+        }
+
+        const parent = document.createElement('div');
+        const newVNode = TestComponent();
+        updateElement(parent, null, null, newVNode, 0);
+        updateElement(parent, null, newVNode, null, 0);
+        expect(newVNode.unmountCallback).toHaveBeenCalled();
+        expect(parent.childNodes.length).toBe(0);
     });
 });
 
@@ -152,5 +174,11 @@ describe('h function', () => {
         expect(vDom.type).toBe('div');
         expect(vDom.props).toEqual({ id: 'test' });
         expect(vDom.childNodes).toContain('child');
+    });
+
+    test('h created with no params', () => {
+        const vDom = h('div');
+        expect(vDom.type).toBe('div');
+        expect(vDom.props).toEqual({});
     });
 });
