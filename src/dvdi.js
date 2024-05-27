@@ -1,5 +1,5 @@
 export class VDom {
-    constructor(type, props, childNodes) {
+    constructor(type, props = {}, childNodes = []) {
         this.type = type;
         this.props = props;
         this.parentVNode = null;
