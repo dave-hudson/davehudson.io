@@ -57,7 +57,7 @@ describe('VDom Class', () => {
         expect(oldChild.parentVNode).toBeNull();
     });
 
-    test('replaceChild replaces an old child VNode with a new one', () => {
+    test('replaceChild replaces an old string child VNode with a new one', () => {
         const vDom = new VDom('div', {}, []);
         const oldChild = 'fred';
         const newChild = new VDom('p', {}, []);
@@ -66,6 +66,17 @@ describe('VDom Class', () => {
         expect(vDom.childNodes).not.toContain(oldChild);
         expect(vDom.childNodes).toContain(newChild);
         expect(newChild.parentVNode).toBe(vDom);
+    });
+
+    test('replaceChild replaces an old child VNode with a new string one', () => {
+        const vDom = new VDom('div', {}, []);
+        const oldChild = new VDom('span', {}, []);
+        const newChild = 'fred';
+        vDom.appendChild(oldChild);
+        vDom.replaceChild(newChild, oldChild);
+        expect(vDom.childNodes).not.toContain(oldChild);
+        expect(vDom.childNodes).toContain(newChild);
+        expect(oldChild.parentVNode).toBe(null);
     });
 });
 
