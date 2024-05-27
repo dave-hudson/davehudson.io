@@ -135,23 +135,23 @@ function changed(vnode1, vnode2) {
 
 function updateProps(element, oldProps, newProps) {
     // Iterate over all the old properties and remove any that are not in the new properties.
-    for (const prop in oldProps) {
-        if (!(prop in newProps)) {
-            if (prop.startsWith('on')) {
-                element.removeEventListener(prop.substring(2).toLowerCase(), oldProps[prop]);
+    for (const key in oldProps) {
+        if (!(key in newProps)) {
+            if (key.startsWith('on')) {
+                element.removeEventListener(key.substring(2).toLowerCase(), oldProps[key]);
             } else {
-                element[prop] = '';
+                element.removeAttribute(key);
             }
         }
     }
 
     // Iterate over all the new properties and add any that are not in the old properties.
-    for (const prop in newProps) {
-        if (!(prop in oldProps)) {
-            if (prop.startsWith('on')) {
-                element.addEventListener(prop.substring(2).toLowerCase(), newProps[prop]);
+    for (const key in newProps) {
+        if (!(key in oldProps)) {
+            if (key.startsWith('on')) {
+                element.addEventListener(key.substring(2).toLowerCase(), newProps[key]);
             } else {
-                element[prop] = newProps[prop];
+                element.setAttribute(key, newProps[key]);
             }
         }
     }
