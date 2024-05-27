@@ -1,6 +1,6 @@
 import { jest } from '@jest/globals';
 
-import { VDom, runUpdates, updateElement, enqueueUpdate, h } from '../src/dvdi.js';
+import { VDom, updateElement, h } from '../src/dvdi.js';
 
 // Mocking the requestAnimationFrame for enqueueUpdate tests
 global.requestAnimationFrame = (callback) => callback();
@@ -260,24 +260,6 @@ describe('updateElement function', () => {
         updateElement(parent, null, newVNode, null, 0);
         expect(newVNode.unmountCallback).toHaveBeenCalled();
         expect(parent.childNodes.length).toBe(0);
-    });
-});
-
-describe('enqueueUpdate and runUpdates functions', () => {
-    test('enqueueUpdate schedules an update', () => {
-        const update = jest.fn();
-        enqueueUpdate(update);
-        expect(update).toHaveBeenCalled();
-    });
-
-    test('runUpdates runs all enqueued updates', () => {
-        const update1 = jest.fn();
-        const update2 = jest.fn();
-        enqueueUpdate(update1);
-        enqueueUpdate(update2);
-        runUpdates();
-        expect(update1).toHaveBeenCalled();
-        expect(update2).toHaveBeenCalled();
     });
 });
 

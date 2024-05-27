@@ -266,26 +266,6 @@ export function updateElement(parent, parentVNode, oldVNode, newVNode, index) {
     }
 }
 
-const updateQueue = new Set();
-
-/*
- * Enqueues updates and executes them in a batch using requestAnimationFrame.
- */
-export function enqueueUpdate(update) {
-    updateQueue.add(update);
-    if (updateQueue.size === 1) {
-        requestAnimationFrame(runUpdates);
-    }
-}
-
-/*
- * Runs all updates that have been enqueued.
- */
-export function runUpdates() {
-    updateQueue.forEach(update => update());
-    updateQueue.clear();
-}
-
 /**
  * Creates a virtual DOM element.
  * @param {string} type The element type.

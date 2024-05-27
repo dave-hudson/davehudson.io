@@ -1,7 +1,27 @@
 //import './obsi.js';
-import { h, VDom, enqueueUpdate, updateElement } from './dvdi.js';
+import { h, VDom, updateElement } from './dvdi.js';
 
 console.log('SCRIPT RELOADED!')
+
+const updateQueue = new Set();
+
+/*
+ * Enqueues updates and executes them in a batch using requestAnimationFrame.
+ */
+function enqueueVDomUpdate(update) {
+    updateQueue.add(update);
+    if (updateQueue.size === 1) {
+        requestAnimationFrame(runVDomUpdates);
+    }
+}
+
+/*
+ * Runs all updates that have been enqueued.
+ */
+function runVDomUpdates() {
+    updateQueue.forEach(update => update());
+    updateQueue.clear();
+}
 
 function createState(initialState) {
     let state = initialState;
@@ -12,7 +32,7 @@ function createState(initialState) {
     const setState = (newState) => {
         if (state !== newState) {
             state = newState;
-            subscribers.forEach((subscriber) => enqueueUpdate(subscriber));
+            subscribers.forEach((subscriber) => enqueueVDomUpdate(subscriber));
         }
     };
 
