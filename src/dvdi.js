@@ -82,24 +82,24 @@ function render(vNode) {
     }
 
     const { type, props, childNodes } = vNode;
-    const element = document.createElement(type);
-    vNode.domElement = element;
+    const domElement = document.createElement(type);
+    vNode.domElement = domElement;
 
     for (const key in props) {
         if (key.startsWith('on')) {
-            element.addEventListener(key.substring(2).toLowerCase(), props[key]);
+            domElement.addEventListener(key.substring(2).toLowerCase(), props[key]);
         } else {
-            element[key] = props[key];
+            domElement[key] = props[key];
         }
     }
 
     const len = childNodes.length;
     for (let i = 0; i < len; i++) {
         const vn = childNodes[i];
-        element.appendChild(render(vn));
+        domElement.appendChild(render(vn));
     }
 
-    return element;
+    return domElement;
 }
 
 // Enhanced unrender function to detach events
