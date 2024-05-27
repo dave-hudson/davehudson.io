@@ -88,7 +88,7 @@ describe('updateElement function', () => {
         expect(parent.childNodes).toContain(newVNode.domElement);
     });
 
-    test('updateElement adds a new node to a parent', () => {
+    test('updateElement adds a new node to a parent node', () => {
         const parent = document.createElement('div');
         const parentVNode = new VDom('div');
         const newVNode = new VDom('span', {}, []);
@@ -104,12 +104,32 @@ describe('updateElement function', () => {
         expect(parent.childNodes).not.toContain(oldVNode.domElement);
     });
 
+    test('updateElement removes and old node from a parent node', () => {
+        const parent = document.createElement('div');
+        const parentVNode = new VDom('div');
+        const newVNode = new VDom('span', {}, []);
+        updateElement(parent, parentVNode, null, newVNode, 0);
+        updateElement(parent, parentVNode, newVNode, null, 0);
+        expect(parent.childNodes).not.toContain(newVNode.domElement);
+    });
+
     test('updateElement replaces a node', () => {
         const parent = document.createElement('div');
         const oldVNode = new VDom('span', {}, []);
         const newVNode = new VDom('p', {}, []);
         updateElement(parent, null, null, oldVNode, 0);
         updateElement(parent, null, oldVNode, newVNode, 0);
+        expect(parent.childNodes.length).toBe(1);
+        expect(parent.childNodes).toContain(newVNode.domElement);
+    });
+
+    test('updateElement replaces a node of a parent node', () => {
+        const parent = document.createElement('div');
+        const parentVNode = new VDom('div');
+        const oldVNode = new VDom('span', {}, []);
+        const newVNode = new VDom('p', {}, []);
+        updateElement(parent, parentVNode, null, oldVNode, 0);
+        updateElement(parent, parentVNode, oldVNode, newVNode, 0);
         expect(parent.childNodes.length).toBe(1);
         expect(parent.childNodes).toContain(newVNode.domElement);
     });
@@ -142,6 +162,46 @@ describe('updateElement function', () => {
         updateElement(parent, null, oldVNode, newVNode, 0);
         expect(parent.childNodes.length).toBe(1);
         expect(parent.childNodes[0].textContent).toBe('george');
+    });
+
+    test('updateElement replaces a string node with an identical string node', () => {
+        const parent = document.createElement('div');
+        const oldVNode = 'fred';
+        const newVNode = 'fred';
+        updateElement(parent, null, null, oldVNode, 0);
+        updateElement(parent, null, oldVNode, newVNode, 0);
+        expect(parent.childNodes.length).toBe(1);
+        expect(parent.childNodes[0].textContent).toBe('fred');
+    });
+
+    test('updateElement replaces a composite node', () => {
+        const parent = document.createElement('div');
+        const oldVNode = h('span', {}, h('p', {}, 'old text'));
+        const newVNode = h('span', {}, h('p', {}, 'new text'));
+        updateElement(parent, null, null, oldVNode, 0);
+        updateElement(parent, null, oldVNode, newVNode, 0);
+        expect(parent.childNodes.length).toBe(1);
+        expect(parent.childNodes).toContain(newVNode.domElement);
+    });
+
+    test('updateElement replaces a composite node with a bigger composite node', () => {
+        const parent = document.createElement('div');
+        const oldVNode = h('span', {}, h('p', {}, 'old text'));
+        const newVNode = h('span', {}, h('p', {}, 'new text'), h('h2', {}, 'heading 2'), h('h3', {}, 'heading 3'));
+        updateElement(parent, null, null, oldVNode, 0);
+        updateElement(parent, null, oldVNode, newVNode, 0);
+        expect(parent.childNodes.length).toBe(1);
+        expect(parent.childNodes).toContain(newVNode.domElement);
+    });
+
+    test('updateElement replaces a composite node with a smaller composite node', () => {
+        const parent = document.createElement('div');
+        const oldVNode = h('span', {}, h('p', {}, 'old text'), h('h2', {}, 'heading 2'), h('h3', {}, 'heading 3'));
+        const newVNode = h('span', {}, h('p', {}, 'new text'));
+        updateElement(parent, null, null, oldVNode, 0);
+        updateElement(parent, null, oldVNode, newVNode, 0);
+        expect(parent.childNodes.length).toBe(1);
+        expect(parent.childNodes).toContain(newVNode.domElement);
     });
 
     test('updateElement adds a node with properties', () => {
