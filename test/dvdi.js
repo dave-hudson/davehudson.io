@@ -219,6 +219,26 @@ describe('updateElement function', () => {
         expect(parent.childNodes.length).toBe(0);
     });
 
+    test('updateElement replaces a node with properties', () => {
+        const parent = document.createElement('div');
+        const oldVNode = new VDom('span', { className: 'test', id: 'bob', onClick: () => {} }, []);
+        const newVNode = new VDom('span', { className: 'test', id: 'fred', onClick: () => {} }, []);
+        updateElement(parent, null, null, oldVNode, 0);
+        updateElement(parent, null, oldVNode, newVNode, 0);
+        expect(Object.keys(newVNode.props).length).toBe(3);
+        expect(newVNode.props['id']).toBe('fred');
+    });
+
+    test('updateElement replaces a node with different properties', () => {
+        const parent = document.createElement('div');
+        const oldVNode = new VDom('span', { className: 'test', style: 'bob', onClick: () => {} }, []);
+        const newVNode = new VDom('span', { className: 'test', id: 'fred', onClick: () => { foo(); } }, []);
+        updateElement(parent, null, null, oldVNode, 0);
+        updateElement(parent, null, oldVNode, newVNode, 0);
+        expect(Object.keys(newVNode.props).length).toBe(3);
+        expect(newVNode.props['id']).toBe('fred');
+    });
+
     test('updateElement mounts a component', () => {
         function TestComponent() {
             const component = () => h('div', {},
