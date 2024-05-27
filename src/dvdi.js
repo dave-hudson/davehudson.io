@@ -89,7 +89,7 @@ function render(vNode) {
         if (key.startsWith('on')) {
             domElement.addEventListener(key.substring(2).toLowerCase(), props[key]);
         } else {
-            domElement[key] = props[key];
+            domElement.setAttribute(key, props[key]);
         }
     }
 
@@ -120,7 +120,7 @@ function unrender(vNode) {
         if (key.startsWith('on')) {
             domElement.removeEventListener(key.substring(2).toLowerCase(), props[key]);
         } else {
-            domElement[key] = '';
+            domElement.removeAttribute(key);
         }
     }
 
