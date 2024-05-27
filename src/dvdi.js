@@ -74,11 +74,29 @@ function unmountVNode(vNode) {
     }
 }
 
+function newAttribute(domElement, key, value) {
+    if (key.startsWith('on')) {
+        domElement.addEventListener(key.substring(2).toLowerCase(), value);
+        return;
+    }
+
+    domElement.setAttribute(key, value);
+}
+
+function deleteAttribute(domElement, key, value) {
+    if (key.startsWith('on')) {
+        domElement.removeEventListener(key.substring(2).toLowerCase(), value);
+        return;
+    }
+
+    domElement.removeAttribute(key);
+}
+
 // Enhanced render function to attach events
 function render(vNode) {
     if (typeof vNode === 'string') {
-        const element = document.createTextNode(vNode);
-        return element;
+        const domElement = document.createTextNode(vNode);
+        return domElement;
     }
 
     const { type, props, childNodes } = vNode;
@@ -86,11 +104,7 @@ function render(vNode) {
     vNode.domElement = domElement;
 
     for (const key in props) {
-        if (key.startsWith('on')) {
-            domElement.addEventListener(key.substring(2).toLowerCase(), props[key]);
-        } else {
-            domElement.setAttribute(key, props[key]);
-        }
+        newAttribute(domElement, key, props[key]);
     }
 
     const len = childNodes.length;
@@ -117,11 +131,7 @@ function unrender(vNode) {
     }
 
     for (const key in props) {
-        if (key.startsWith('on')) {
-            domElement.removeEventListener(key.substring(2).toLowerCase(), props[key]);
-        } else {
-            domElement.removeAttribute(key);
-        }
+        deleteAttribute(domElement, key, props[key]);
     }
 
     vNode.domElement = null;
@@ -133,26 +143,18 @@ function changed(vnode1, vnode2) {
            vnode1.type !== vnode2.type;
 }
 
-function updateProps(element, oldProps, newProps) {
+function updateProps(domElement, oldProps, newProps) {
     // Iterate over all the old properties and remove any that are not in the new properties.
     for (const key in oldProps) {
-        if (!(key in newProps)) {
-            if (key.startsWith('on')) {
-                element.removeEventListener(key.substring(2).toLowerCase(), oldProps[key]);
-            } else {
-                element.removeAttribute(key);
-            }
+        if (!(key in newProps) || (oldProps[key] !== newProps[key])) {
+            deleteAttribute(domElement, key, oldProps[key]);
         }
     }
 
     // Iterate over all the new properties and add any that are not in the old properties.
     for (const key in newProps) {
-        if (!(key in oldProps)) {
-            if (key.startsWith('on')) {
-                element.addEventListener(key.substring(2).toLowerCase(), newProps[key]);
-            } else {
-                element.setAttribute(key, newProps[key]);
-            }
+        if (!(key in oldProps) || (oldProps[key] !== newProps[key])) {
+            newAttribute(domElement, key, newProps[key]);
         }
     }
 }
