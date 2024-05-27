@@ -207,11 +207,6 @@ function updateProps(domElement, oldProps, newProps) {
  * Update a DOM element based on differences between virtual DOM nodes.
  */
 export function updateElement(parent, parentVNode, oldVNode, newVNode, index) {
-    if (!oldVNode && !newVNode) {
-        console.log('WTAF?');
-        debugger;
-    }
-
     // Did we add a new node?
     if (!oldVNode && newVNode) {
         if (parentVNode) {
