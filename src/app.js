@@ -140,8 +140,3 @@ function route_init() {
 }
 
 document.addEventListener('DOMContentLoaded', route_init());
-
-const parent = document.createElement('div');
-const parentVNode = new VDom('div');
-const newVNode = new VDom('span', {}, []);
-updateElement(parent, parentVNode, null, newVNode, 0);
