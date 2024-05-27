@@ -1,4 +1,13 @@
+/**
+ * Class representing a virtual DOM node.
+ */
 export class VDom {
+    /**
+     * Create a VDom node.
+     * @param {string} type - The type of the node (e.g., 'div').
+     * @param {Object} [props={}] - The properties and attributes of the node.
+     * @param {Array} [childNodes=[]] - The child nodes of this node.
+     */
     constructor(type, props = {}, childNodes = []) {
         this.type = type;
         this.props = props;
@@ -10,6 +19,10 @@ export class VDom {
         this.unmountCallback = null;
     }
 
+    /**
+     * Append a child node.
+     * @param {VDom|string} vNode - The child node to append.
+     */
     appendChild(vNode) {
         this.childNodes.push(vNode);
         if (typeof vNode === 'string') {
@@ -19,6 +32,10 @@ export class VDom {
         vNode.parentVNode = this;
     }
 
+    /**
+     * Remove a child node.
+     * @param {VDom|string} vNode - The child node to remove.
+     */
     removeChild(vNode) {
         const index = this.childNodes.indexOf(vNode);
         this.childNodes = this.childNodes.slice(0, index).concat(this.childNodes.slice(index + 1));
@@ -29,6 +46,11 @@ export class VDom {
         vNode.parentVNode = null;
     }
 
+    /**
+     * Replace an old child node with a new one.
+     * @param {VDom|string} newVNode - The new child node.
+     * @param {VDom|string} oldVNode - The old child node to replace.
+     */
     replaceChild(newVNode, oldVNode) {
         const index = this.childNodes.indexOf(oldVNode);
         this.childNodes[index] = newVNode;
@@ -42,6 +64,9 @@ export class VDom {
     }
 }
 
+/*
+ * Mount a virtual DOM node.
+ */
 function mountVNode(vNode) {
     if (typeof vNode === 'string') {
         return;
@@ -58,6 +83,9 @@ function mountVNode(vNode) {
     }
 }
 
+/*
+ * Unmount a virtual DOM node.
+ */
 function unmountVNode(vNode) {
     if (typeof vNode === 'string') {
         return;
@@ -74,6 +102,9 @@ function unmountVNode(vNode) {
     }
 }
 
+/*
+ * Add an attribute to a DOM element.
+ */
 function newAttribute(domElement, key, value) {
     if (key.startsWith('on')) {
         domElement.addEventListener(key.substring(2).toLowerCase(), value);
@@ -83,6 +114,9 @@ function newAttribute(domElement, key, value) {
     domElement.setAttribute(key, value);
 }
 
+/*
+ * Remove an attribute from a DOM element.
+ */
 function deleteAttribute(domElement, key, value) {
     if (key.startsWith('on')) {
         domElement.removeEventListener(key.substring(2).toLowerCase(), value);
@@ -92,7 +126,9 @@ function deleteAttribute(domElement, key, value) {
     domElement.removeAttribute(key);
 }
 
-// Enhanced render function to attach events
+/*
+ * Render a virtual DOM node into a real DOM node.
+ */
 function render(vNode) {
     if (typeof vNode === 'string') {
         const domElement = document.createTextNode(vNode);
@@ -116,7 +152,9 @@ function render(vNode) {
     return domElement;
 }
 
-// Enhanced unrender function to detach events
+/*
+ * Unrender a virtual DOM node.
+ */
 function unrender(vNode) {
     if (typeof vNode === 'string') {
         return;
@@ -137,12 +175,18 @@ function unrender(vNode) {
     vNode.domElement = null;
 }
 
+/*
+ * Check if two virtual DOM nodes are different.
+ */
 function changed(vnode1, vnode2) {
     return typeof vnode1 !== typeof vnode2 ||
            (typeof vnode1 === 'string' && vnode1 !== vnode2) ||
            vnode1.type !== vnode2.type;
 }
 
+/*
+ * Update the properties of a DOM element.
+ */
 function updateProps(domElement, oldProps, newProps) {
     // Iterate over all the old properties and remove any that are not in the new properties.
     for (const key in oldProps) {
@@ -159,6 +203,9 @@ function updateProps(domElement, oldProps, newProps) {
     }
 }
 
+/*
+ * Update a DOM element based on differences between virtual DOM nodes.
+ */
 export function updateElement(parent, parentVNode, oldVNode, newVNode, index) {
     if (!oldVNode && !newVNode) {
         console.log('WTAF?');
@@ -226,9 +273,8 @@ export function updateElement(parent, parentVNode, oldVNode, newVNode, index) {
 
 const updateQueue = new Set();
 
-/**
+/*
  * Enqueues updates and executes them in a batch using requestAnimationFrame.
- * @param {Function} update The update function to enqueue.
  */
 export function enqueueUpdate(update) {
     updateQueue.add(update);
@@ -237,7 +283,7 @@ export function enqueueUpdate(update) {
     }
 }
 
-/**
+/*
  * Runs all updates that have been enqueued.
  */
 export function runUpdates() {

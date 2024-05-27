@@ -88,6 +88,14 @@ describe('updateElement function', () => {
         expect(parent.childNodes).toContain(newVNode.domElement);
     });
 
+    test('updateElement adds a new node to a parent', () => {
+        const parent = document.createElement('div');
+        const parentVNode = new VDom('div');
+        const newVNode = new VDom('span', {}, []);
+        updateElement(parent, parentVNode, null, newVNode, 0);
+        expect(parent.childNodes).toContain(newVNode.domElement);
+    });
+
     test('updateElement removes an old node', () => {
         const parent = document.createElement('div');
         const oldVNode = new VDom('span', {}, []);
