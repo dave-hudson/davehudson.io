@@ -1,5 +1,5 @@
 //import './obsi.js';
-import { h, VDom, render, unrender, enqueueUpdate, updateElement } from './dvdi.js';
+import { h, VDom, enqueueUpdate, updateElement } from './dvdi.js';
 
 console.log('SCRIPT RELOADED!')
 
@@ -120,12 +120,3 @@ function route_init() {
 }
 
 document.addEventListener('DOMContentLoaded', route_init());
-
-const vDom = new VDom('div', { id: 'test' }, []);
-const element = render(vDom);
-document.body.appendChild(element);
-console.log(document.body);
-unrender(vDom);
-console.log(document.body);
-console.log(document.body.contains(element));
-console.log(vDom.domElement);
