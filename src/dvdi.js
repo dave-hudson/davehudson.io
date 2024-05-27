@@ -36,12 +36,12 @@ export class VDom {
             return;
         }
 
-        newVNode.parentNode = this;
-        oldVNode.parentNode = null;
+        newVNode.parentVNode = this;
+        oldVNode.parentVNode = null;
     }
 }
 
-function mountVNode(vNode) {
+export function mountVNode(vNode) {
     if (typeof vNode === 'string') {
         return;
     }
@@ -56,7 +56,7 @@ function mountVNode(vNode) {
     }
 }
 
-function unmountVNode(vNode) {
+export function unmountVNode(vNode) {
     if (typeof vNode === 'string') {
         return;
     }
@@ -109,13 +109,7 @@ function unrender(vNode) {
     const len = childNodes.length;
     for (let i = len - 1; i >= 0; i--) {
         const vn = childNodes[i];
-        if (typeof vn === 'string') {
-            continue;
-        }
-
-        const de = vn.domElement;
         vNode.removeChild(vn);
-        domElement.removeChild(de);
         unrender(vn);
     }
 
@@ -180,18 +174,24 @@ export function updateElement(parent, parentVNode, oldVNode, newVNode, index) {
     // Did we remove an old node?
     if (oldVNode && !newVNode) {
         unmountVNode(oldVNode);
-        parentVNode.removeChild(oldVNode);
-        parent.removeChild(parent.childNodes[index]);
         unrender(oldVNode);
+        if (parentVNode) {
+            parentVNode.removeChild(oldVNode);
+        }
+
+        parent.removeChild(parent.childNodes[index]);
         return;
     }
 
     // Did our node change?
     if (changed(oldVNode, newVNode)) {
         unmountVNode(oldVNode);
-        parentVNode.replaceChild(newVNode, oldVNode);
-        parent.replaceChild(render(newVNode), parent.childNodes[index]);
         unrender(oldVNode);
+        if (parentVNode) {
+            parentVNode.replaceChild(newVNode, oldVNode);
+        }
+
+        parent.replaceChild(render(newVNode), parent.childNodes[index]);
         mountVNode(newVNode);
         return;
     }
@@ -235,7 +235,7 @@ export function enqueueUpdate(update) {
 /**
  * Runs all updates that have been enqueued.
  */
-function runUpdates() {
+export function runUpdates() {
     updateQueue.forEach(update => update());
     updateQueue.clear();
 }
