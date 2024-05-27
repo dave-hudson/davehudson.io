@@ -32,12 +32,13 @@ export class VDom {
     replaceChild(newVNode, oldVNode) {
         const index = this.childNodes.indexOf(oldVNode);
         this.childNodes[index] = newVNode;
-        if (typeof newVNode === 'string') {
-            return;
+        if (typeof newVNode !== 'string') {
+            newVNode.parentVNode = this;
         }
 
-        newVNode.parentVNode = this;
-        oldVNode.parentVNode = null;
+        if (typeof oldVNode !== 'string') {
+            oldVNode.parentVNode = null;
+        }
     }
 }
 
