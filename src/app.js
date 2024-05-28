@@ -22,14 +22,6 @@ function runVDomUpdates() {
     updateQueue.clear();
 }
 
-function socialIcon(iconName) {
-    return h('svg', { xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", 'stroke-width': "2", 'stroke-linecap': "round", 'stroke-linejoin': "round", className: "feather ".concat(iconName)},
-        h('path', { d: "M4 11a9 9 0 0 1 9 9" }),
-        h('path', { d: "M4 4a16 16 0 0 1 16 16" }),
-        h('circle', { cx: "5", cy: "19", r: "1" })
-    );
-}
-
 function pageHeader() {
     const component = () => h('div', { className: 'header'},
         h('table', { className: "site-title"},
@@ -44,28 +36,28 @@ function pageHeader() {
                     h('td', {},
                         h('nav', { className: "social" },
                             h('div', { className: "icon" },
-                                h('a', { href: "/", title: 'RSS'},
-                                    socialIcon("feather-rss")
+                                h('a', { href: "/index.xml", title: 'RSS'},
+                                    h('i', { 'data-feather': 'rss' })
                                 )
                             ),
                             h('div', { className: "icon" },
-                                h('a', { href: "/", title: 'Twitter'},
-                                    socialIcon("feather-twitter")
+                                h('a', { href: "https://twitter.com/hashingitcom", title: 'Twitter'},
+                                    h('i', { 'data-feather': 'twitter' })
                                 )
                             ),
                             h('div', { className: "icon" },
-                                h('a', { href: "/", title: 'Facebook'},
-                                    socialIcon("feather-facebook")
+                                h('a', { href: "https://facebook.com/hashingitcom", title: 'Facebook'},
+                                    h('i', { 'data-feather': 'facebook' })
                                 )
                             ),
                             h('div', { className: "icon" },
-                                h('a', { href: "/", title: 'LinkedIn'},
-                                    socialIcon("feather-linkedin")
+                                h('a', { href: "https://linkedin.com/in/davejh", title: 'LinkedIn'},
+                                    h('i', { 'data-feather': 'linkedin' })
                                 )
                             ),
                             h('div', { className: "icon" },
-                                h('a', { href: "/", title: 'GitHub'},
-                                    socialIcon("feather-github")
+                                h('a', { href: "https://github.com/dave-hudson", title: 'GitHub'},
+                                    h('i', { 'data-feather': 'github' })
                                 )
                             )
                         )
