@@ -111,6 +111,11 @@ function newAttribute(domElement, key, value) {
         return;
     }
 
+    if (key == 'className') {
+        domElement.className = value;
+        return;
+    }
+
     domElement.setAttribute(key, value);
 }
 
@@ -120,6 +125,11 @@ function newAttribute(domElement, key, value) {
 function deleteAttribute(domElement, key, value) {
     if (key.startsWith('on')) {
         domElement.removeEventListener(key.substring(2).toLowerCase(), value);
+        return;
+    }
+
+    if (key == 'className') {
+        domElement.className = null;
         return;
     }
 
