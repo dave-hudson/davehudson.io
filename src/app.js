@@ -1,5 +1,4 @@
-//import './obsi.js';
-import { h, VDom, updateElement } from './dvdi.js';
+import { h, VDom, updateElement } from './lib/dvdi.js';
 
 console.log('SCRIPT RELOADED!')
 
