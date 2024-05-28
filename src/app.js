@@ -36,32 +36,59 @@ function pageHeader() {
                     h('td', {},
                         h('nav', { className: "social" },
                             h('div', { className: "icon" },
-                                h('a', { href: "/index.xml", title: 'RSS'},
+                                h('a', { href: "/index.xml", title: 'RSS' },
                                     h('i', { 'data-feather': 'rss' })
                                 )
                             ),
                             h('div', { className: "icon" },
-                                h('a', { href: "https://twitter.com/hashingitcom", title: 'Twitter'},
+                                h('a', { href: "https://twitter.com/hashingitcom", title: 'Twitter' },
                                     h('i', { 'data-feather': 'twitter' })
                                 )
                             ),
                             h('div', { className: "icon" },
-                                h('a', { href: "https://facebook.com/hashingitcom", title: 'Facebook'},
+                                h('a', { href: "https://facebook.com/hashingitcom", title: 'Facebook' },
                                     h('i', { 'data-feather': 'facebook' })
                                 )
                             ),
                             h('div', { className: "icon" },
-                                h('a', { href: "https://linkedin.com/in/davejh", title: 'LinkedIn'},
+                                h('a', { href: "https://linkedin.com/in/davejh", title: 'LinkedIn' },
                                     h('i', { 'data-feather': 'linkedin' })
                                 )
                             ),
                             h('div', { className: "icon" },
-                                h('a', { href: "https://github.com/dave-hudson", title: 'GitHub'},
+                                h('a', { href: "https://github.com/dave-hudson", title: 'GitHub' },
                                     h('i', { 'data-feather': 'github' })
                                 )
                             )
                         )
                     )
+                )
+            )
+        ),
+        h('nav', { className: 'site-menu' },
+            h('div', { className: 'menu' },
+                h('a', { href: '/elements' }, 'Elements')
+            ),
+            h('div', { className: 'menu' },
+                h('a', { href: '/blog' }, 'Blog')
+            ),
+            h('div', { className: 'menu' },
+                h('a', { href: '/journal' }, 'Journal')
+            ),
+            h('div', { className: 'menu' },
+                h('a', { href: '/tags' }, 'Tags')
+            ),
+            h('div', { className: 'menu' },
+                h('a', { href: '/about' }, 'Me')
+            ),
+            h('div', { className: "icon", id: 'dark-mode-moon' },
+                h('a', {},
+                    h('i', { 'data-feather': 'moon' })
+                )
+            ),
+            h('div', { className: "icon", id: 'dark-mode-sun' },
+                h('a', {},
+                    h('i', { 'data-feather': 'sun' })
                 )
             )
         )
@@ -76,9 +103,16 @@ function pageHeader() {
     return vNode;
 }
 
+function pageTitle(title) {
+    return h('div', { className: 'title' },
+        h('h1', {}, title)
+    );
+}
+
 function homePage() {
     return h('div', { className: 'container' },
         pageHeader(),
+        pageTitle('hashingit.com'),
         h('main', { className: 'main-content' },
             h('section', { className: 'description' },
                 'Explore the counters below to interact with the virtual DOM:',
