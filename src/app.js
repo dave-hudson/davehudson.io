@@ -22,58 +22,63 @@ function runVDomUpdates() {
     updateQueue.clear();
 }
 
-function createState(initialState) {
-    let state = initialState;
-    let subscribers = [];
-
-    const getState = () => state;
-
-    const setState = (newState) => {
-        if (state !== newState) {
-            state = newState;
-            subscribers.forEach((subscriber) => enqueueVDomUpdate(subscriber));
-        }
-    };
-
-    const subscribe = (callback) => {
-        return subscribers.push(callback) - 1;
-    };
-
-    const unsubscribe = (index) => {
-        subscribers = subscribers.slice(0, index).concat(subscribers.slice(index + 1));
-    }
-
-    return [getState, setState, subscribe, unsubscribe];
+function socialIcon(iconName) {
+    return h('svg', { xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", 'stroke-width': "2", 'stroke-linecap': "round", 'stroke-linejoin': "round", className: "feather ".concat(iconName)},
+        h('path', { d: "M4 11a9 9 0 0 1 9 9" }),
+        h('path', { d: "M4 4a16 16 0 0 1 16 16" }),
+        h('circle', { cx: "5", cy: "19", r: "1" })
+    );
 }
 
-function Counter() {
-    const [count, setCount, subscribe, unsubscribe] = createState(0);
-
-    const incCount = () => setCount(count() + 1);
-    const decCount = () => setCount(count() - 1);
-
-    const component = () => h('div', {},
-        h('h2', {}, `Count: ${count()}`),
-        h('button', { onClick: () => incCount() }, 'Increment'),
-        h('button', { onClick: () => decCount() }, 'Decrement')
+function pageHeader() {
+    const component = () => h('div', { className: 'header'},
+        h('table', { className: "site-title"},
+            h('tbody', {},
+                h('tr', {},
+                    h('td', {},
+                        h('h1', {}, 'Dave Hudson'),
+                        h('h2', {},
+                            h('a', { href: '/' }, 'hashingit.com')
+                        )
+                    ),
+                    h('td', {},
+                        h('nav', { className: "social" },
+                            h('div', { className: "icon" },
+                                h('a', { href: "/", title: 'RSS'},
+                                    socialIcon("feather-rss")
+                                )
+                            ),
+                            h('div', { className: "icon" },
+                                h('a', { href: "/", title: 'Twitter'},
+                                    socialIcon("feather-twitter")
+                                )
+                            ),
+                            h('div', { className: "icon" },
+                                h('a', { href: "/", title: 'Facebook'},
+                                    socialIcon("feather-facebook")
+                                )
+                            ),
+                            h('div', { className: "icon" },
+                                h('a', { href: "/", title: 'LinkedIn'},
+                                    socialIcon("feather-linkedin")
+                                )
+                            ),
+                            h('div', { className: "icon" },
+                                h('a', { href: "/", title: 'GitHub'},
+                                    socialIcon("feather-github")
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
     );
 
-    let vNode = component()
-    let subIndex = -1;
-
+    let vNode = component();
     vNode.mountCallback = () => {
-        subIndex = subscribe(() => {
-            const parentElem = vNode.parentVNode.domElement;
-            const index = Array.from(parentElem.childNodes).indexOf(vNode.domElement);
-            const newVNode = component();
-            newVNode.parentVNode = vNode.parentVNode;
-            updateElement(parentElem, vNode.parentVNode, vNode, newVNode, index);
-            vNode = newVNode;
-        });
-    };
-
-    vNode.unmountCallback = () => {
-        unsubscribe(subIndex);
+        console.log('feather replace');
+        feather.replace();
     }
 
     return vNode;
@@ -81,12 +86,10 @@ function Counter() {
 
 function homePage() {
     return h('div', { className: 'container' },
-        h('header', { className: 'header' }, 'Welcome to My App with Two Counters'),
+        pageHeader(),
         h('main', { className: 'main-content' },
             h('section', { className: 'description' },
                 'Explore the counters below to interact with the virtual DOM:',
-                Counter(),
-                Counter()
             ),
             h('article', {}, 'More content can follow here.')
         ),
