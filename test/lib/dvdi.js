@@ -1,6 +1,6 @@
 import { jest } from '@jest/globals';
 
-import { VDom, updateElement, h } from '../src/dvdi.js';
+import { VDom, updateElement, h } from '../../src/lib/dvdi.js';
 
 // Mocking the requestAnimationFrame for enqueueUpdate tests
 global.requestAnimationFrame = (callback) => callback();
