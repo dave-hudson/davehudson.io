@@ -225,7 +225,7 @@ function aboutPage() {
     );
 }
 
-function blogPage() {
+function blogPage_201403090000() {
     return h('div', { className: 'container' },
         pageHeader(),
         pageTitle('The Bitcoin runaway mine train'),
@@ -308,6 +308,59 @@ function blogPage() {
                     'fastest hashing engines driving the worldwide hashing rate. Once an order is placed a miner is ' +
                     'committed to fueling this expansion. Unlike the rides in theme parks around the world, this ' +
                     'particular runaway mine train isn’t slowing down for anyone!'
+                )
+            )
+        ),
+        pageFooter()
+    );
+}
+
+function blogPage() {
+    return h('div', { className: 'container' },
+        pageHeader(),
+        pageTitle('Strange spikes in the Bitcoin price'),
+        h('article', { className: 'post' },
+            h('div', { className: 'markdown'},
+                h('p', {},
+                    'There’s something odd about the fluctuations in the price of Bitcoins. The data shows a set of ' +
+                    'spikes when the price jumps up and then falls back somewhat and levels out. This wouldn’t be so ' +
+                    'unusual if the spikes occurred intermittently but in the case of Bitcoins the spikes happen ' +
+                    'with a very surprising regularity!'
+                ),
+                h('p', {}, 'Let’s look at the graph:'),
+                h('figure', {},
+                    h('img', { src: "/content/blog/2014-03-12-0000/20140312_BTC_Price.png" })
+                ),
+                h('p', {},
+                    'The first thing to note is that the graph is plotted with a logarithmic Y axis so each step ' +
+                    'indicates a price point ten times larger than the one below. Using a log scale means that we see ' +
+                    'patterns in the relative change in price much more easily, rather than changes in the actual value.'
+                ),
+                h('p', {},
+                    'There are 7 major spikes in the Bitcoin price starting on 17th November 2010 and finishing on the ' +
+                    '30th November 2013. If we ignore the spike on 10th February 2011 the other 6 spikes have an ' +
+                    'amazingly consistent spacing!'
+                ),
+                h('p', {},
+                    'All of the major price spikes also show another remarkable similarity. In each case the price ' +
+                    'ramps up very quickly, hits its highest point for a day or two and then slowly drops off.'
+                ),
+                h('p', {},
+                    'So there are a few big questions (to which I don’t have any answers right now):'
+                ),
+                h('ul', {},
+                    h('li', {}, 'Why does the price spike up every 7 to 7.5 months?'),
+                    h('li', {}, 'Why does the price never drop back below where it starts from?'),
+                    h('li', {}, 'Is the behaviour just coincidence or is someone or something triggering it?')
+                ),
+                h('p', {},
+                    'Does anyone have any data that might explain this?'
+                ),
+                h('hr', {}),
+                h('h2', {}, 'Data reference'),
+                h('p', {},
+                    h('span', {}, 'Data for this article was sourced via: '),
+                    h('a', { href: "http://blockchain.info" }, 'blockchain.info')
                 )
             )
         ),
