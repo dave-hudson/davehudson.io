@@ -22,6 +22,10 @@ function runVDomUpdates() {
     updateQueue.clear();
 }
 
+let darkTheme = null;
+let darkModeSun = null;
+let darkModeMoon = null;
+
 function sunMoonIcon(isSun, clickCallback) {
     const component = () => h('div', {
             className: "icon",
@@ -91,9 +95,6 @@ function pageHeader() {
         )
     );
 
-    let darkTheme = null;
-    let darkModeSun = null;
-    let darkModeMoon = null;
     const windowMedia = window.matchMedia("(prefers-color-scheme: dark)");
 
     function setDarkTheme(dark) {
