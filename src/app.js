@@ -41,7 +41,7 @@ function sunMoonIcon(isSun, clickCallback) {
 }
 
 function pageHeader() {
-    const component = () => h('div', { className: 'header'},
+    const component = () => h('header', { className: 'header'},
         h('table', { className: "site-title"},
             h('tbody', {},
                 h('tr', {},
@@ -156,7 +156,7 @@ function pageTitle(title) {
 }
 
 function pageFooter() {
-    return h('div', { className: 'footer' },
+    return h('footer', { className: 'footer' },
         h('div', { className: 'copyright' },
             '© 2014-2024 David J. Hudson'
         )
@@ -185,8 +185,8 @@ function aboutPage() {
         h('article', { className: 'post' },
             h('div', { className: 'markdown'},
                 h('p', {},
-                    h('span', {}, 'Hello, good morning/afternoon/evening* and welcome!' ),
-                    h('em', {}, ' (*please delete as appropriate)')
+                    h('span', {}, 'Hello, good morning/afternoon/evening* and welcome! ' ),
+                    h('em', {}, '(*please delete as appropriate)')
                 ),
                 h('p', {},
                     'I’m an unrepentant geek who loves all things engineering, scientific or otherwise techie. ' +
