@@ -179,40 +179,40 @@ body {
     max-height: 15px;
 }
 
-.container .title {
+.container .article .title {
     margin: 0 auto 30px auto;
 }
 
-.container .title h1 {
+.container .article .title h1 {
     margin: 0;
 }
 
-.container .title .meta {
+.container .article .title .meta {
     font-size: 0.725rem;
     color: #777;
 }
 
-.container .markdown code {
+.container .article code {
     font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
     font-size: .95em;
 }
 
-.container .markdown p code {
+.container .article p code {
     color: #a81818;
 }
 
-.container .markdown table {
+.container .article table {
     margin: 25px auto 25px auto;
 }
 
-.container .markdown table th {
+.container .article table th {
     background-color: #bbb;
     padding: 5px 10px;
     border: 1px solid #777;
     font-weight: 600;
 }
 
-.container .markdown table td {
+.container .article table td {
     padding: 5px 10px;
     border: 1px solid #777;
 }
@@ -316,15 +316,6 @@ body {
     max-height: 15px;
 }
 
-.container .disqus {
-    margin: 30px 0 0 0;
-    border-top: 1px solid #bbb;
-}
-
-.container .disqus_thread {
-    margin: 30px 0 0 0;
-}
-
 .container .footer {
     text-align: right;
     font-size: 0.75rem;
@@ -396,98 +387,6 @@ body {
     border-radius: 4px;
     margin-left: 6px;
     background-color: #f9f2f4;
-}
-
-.container .blog-post nav.tags a {
-    display: inline-block;
-    border: 1px solid #5060e0;
-    border-radius: 4px;
-    padding: 0px 6px;
-    color: #5060e0;
-    font-size: 12px;
-    text-decoration: none;
-    margin: 0 1px;
-}
-
-.container .blog-post nav.tags ul {
-    padding-left: 15px;
-    list-style: disc inside;
-    margin: 0;
-    padding: 0;
-}
-
-.container .blog-post nav.tags ul li {
-    margin-top: 10px;
-    display: inline-block;
-    list-style: none;
-}
-
-.container .journal-entries .journal-entry {
-    display: table;
-    width: 100%;
-}
-
-.container .journal-entries .journal-entry .meta {
-    display: table-cell;
-    text-align: right;
-    font-size: 0.725rem;
-    color: #777;
-    margin-left: 5px;
-}
-
-.container .journal-entries .journal-entry .draft-label {
-    color: #5060e0;
-    text-decoration: none;
-    padding: 2px 4px;
-    border-radius: 4px;
-    margin-left: 6px;
-    background-color: #f9f2f4;
-}
-
-.container .journal-entry nav.tags a {
-    display: inline-block;
-    border: 1px solid #5060e0;
-    border-radius: 4px;
-    padding: 0px 6px;
-    color: #5060e0;
-    font-size: 12px;
-    text-decoration: none;
-    margin: 0 1px;
-}
-
-.container .journal-entry nav.tags ul {
-    padding-left: 15px;
-    list-style: disc inside;
-    margin: 0;
-    padding: 0;
-}
-
-.container .journal-entry nav.tags ul li {
-    margin-top: 10px;
-    display: inline-block;
-    list-style: none;
-}
-
-.container .tagged-posts .tagged-post {
-    display: table;
-    width: 100%;
-}
-
-.container .tagged-posts .tagged-post .meta {
-    display: table-cell;
-    text-align: right;
-    font-size: 0.725rem;
-    color: #777;
-    margin-left: 5px;
-}
-
-.container .tag-cloud {
-    margin-top: 20px;
-}
-
-.container .tag-cloud a {
-    margin-right: 15px;
-    white-space: nowrap;
 }
 
 /*
