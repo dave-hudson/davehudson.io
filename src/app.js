@@ -1,4 +1,4 @@
-import { h, VDom, updateElement } from './lib/dvdi.js';
+import { h, VDom, updateElement } from '/lib/dvdi.js';
 
 console.log('SCRIPT RELOADED!')
 
@@ -363,7 +363,7 @@ function blogPage_201403120000() {
     );
 }
 
-function blogPage() {
+function blogPage_202001272336() {
     return h('div', { className: 'container' },
         pageHeader(),
         h('article', { className: 'article' },
@@ -461,6 +461,32 @@ function blogPage() {
     );
 }
 
+function blogLink(href, title, meta) {
+    return h('div', { className: 'blog-post' },
+        h('span', { className: 'title' },
+            h('a', { href: href, onClick: (e) => navigateEvent(e, href) }, title)
+        ),
+        h('span', { className: 'meta' }, meta)
+    )
+}
+
+function blogPage() {
+    return h('div', { className: 'container' },
+        pageHeader(),
+        h('article', { className: 'article' },
+            pageTitle('Blog posts'),
+        ),
+        h('div', { className: 'blog-posts'},
+            h('h2', {}, '2020'),
+            blogLink('/blog/2020-01-27-2336', 'Understanding other people\'s code', '2020-01-27 23:36'),
+            h('h2', {}, '2014'),
+            blogLink('/blog/2014-03-12-0000', 'Strange spikes in the Bitcoin price?', '2014-03-12 00:00'),
+            blogLink('/blog/2014-03-09-0000', 'The Bitcoin runaway mine train', '2014-03-09 00:00'),
+        ),
+        pageFooter()
+    );
+}
+
 function notFoundPage() {
     return h('div', { className: 'container' },
         pageHeader(),
@@ -475,7 +501,10 @@ function notFoundPage() {
 const routes = {
     '/': homePage,
     '/about': aboutPage,
-    '/blog': blogPage
+    '/blog': blogPage,
+    '/blog/2014-03-09-0000': blogPage_201403090000,
+    '/blog/2014-03-12-0000': blogPage_201403120000,
+    '/blog/2020-01-27-2336': blogPage_202001272336
 };
 
 let rootVNode = null;
