@@ -155,44 +155,6 @@ function articleTitle(title, timeStr = '') {
     );
 }
 
-function navPrevNext(prevStr, prevHRef, nextStr, nextHRef) {
-    let component = () => h('nav', { className: 'prev-next'},
-        h('h2', {}, 'More blog posts'),
-        h('table', { className: 'meta-nav' },
-            h('tr', {},
-                h('td', { className: 'prev' },
-                    h('div', { className: 'icon' },
-                        h('a', { href: prevHRef, onClick: (e) => navigateEvent(e, prevHRef) },
-                            h('i', { 'data-feather': 'chevron-left' })
-                        )
-                    )
-                ),
-                h('td', { className: 'prev-text' },
-                    h('a', { href: prevHRef, onClick: (e) => navigateEvent(e, prevHRef) }, prevStr)
-                ),
-                h('td', { className: 'next-text' },
-                    h('a', { href: nextHRef, onClick: (e) => navigateEvent(e, nextHRef) }, nextStr)
-                ),
-                h('td', { className: 'next' },
-                    h('div', { className: 'icon' },
-                        h('a', { href: nextHRef, onClick: (e) => navigateEvent(e, nextHRef) },
-                            h('i', { 'data-feather': 'chevron-right' })
-                        )
-                    )
-                )
-            )
-        )
-    );
-
-    let vNode = component();
-    vNode.mountCallback = () => {
-        // This isn't ideal because we can end up calling this function several times.  Needs a better option!
-        feather.replace();
-    }
-
-    return vNode;
-}
-
 function pageFooter() {
     return h('footer', { className: 'footer' },
         h('div', { className: 'copyright' },
@@ -255,18 +217,6 @@ function aboutPage() {
                 h('a', { href: "http://linkedin.com/in/davejh/" }, 'LinkedIn')
             )
         ),
-        pageFooter()
-    );
-}
-
-function blogArticlePage(title, dateTime, articleFunction, prevTitle, prevHRef, nextTitle, nextHRef) {
-    return h('div', { className: 'container' },
-        pageHeader(),
-        h('article', { className: 'article' },
-            articleTitle(title, dateTime),
-            ...articleFunction()
-        ),
-        navPrevNext(prevTitle, prevHRef, nextTitle, nextHRef),
         pageFooter()
     );
 }
@@ -518,6 +468,65 @@ let blogContent = [
     )
 ]
 
+function navPrevNext(prevStr, prevHRef, nextStr, nextHRef) {
+    let component = () => h('nav', { className: 'prev-next'},
+        h('h2', {}, 'More blog posts'),
+        h('table', { className: 'meta-nav' },
+            h('tr', {},
+                h('td', { className: 'prev' },
+                    !prevStr ? '' : h('div', { className: 'icon' },
+                        h('a', { href: prevHRef, onClick: (e) => navigateEvent(e, prevHRef) },
+                            h('i', { 'data-feather': 'chevron-left' })
+                        )
+                    )
+                ),
+                h('td', { className: 'prev-text' },
+                    !prevStr ? '' : h('a', { href: prevHRef, onClick: (e) => navigateEvent(e, prevHRef) }, prevStr)
+                ),
+                h('td', { className: 'next-text' },
+                    !nextStr ? '' : h('a', { href: nextHRef, onClick: (e) => navigateEvent(e, nextHRef) }, nextStr)
+                ),
+                h('td', { className: 'next' },
+                    !nextStr ? '' : h('div', { className: 'icon' },
+                        h('a', { href: nextHRef, onClick: (e) => navigateEvent(e, nextHRef) },
+                            h('i', { 'data-feather': 'chevron-right' })
+                        )
+                    )
+                )
+            )
+        )
+    );
+
+    let vNode = component();
+    vNode.mountCallback = () => {
+        console.log('feather replace');
+        // This isn't ideal because we can end up calling this function several times.  Needs a better option!
+        feather.replace();
+    }
+
+    return vNode;
+}
+
+function blogArticlePage(index) {
+    let prevArticle = (index > 0) ? blogContent[index - 1] : null;
+    let thisArticle = blogContent[index];
+    let nextArticle = (index < (blogContent.length - 1)) ? blogContent[index + 1] : null;
+    let prevTitle = prevArticle ? prevArticle.title : null;
+    let prevHRef = prevArticle ? prevArticle.hRef : null;
+    let nextTitle = nextArticle ? nextArticle.title : null;
+    let nextHRef = nextArticle ? nextArticle.hRef : null;
+
+    return h('div', { className: 'container' },
+        pageHeader(),
+        h('article', { className: 'article' },
+            articleTitle(thisArticle.title, thisArticle.dateTime),
+            ...thisArticle.articleFunction()
+        ),
+        navPrevNext(prevTitle, prevHRef, nextTitle, nextHRef),
+        pageFooter()
+    );
+}
+
 function blogLink(href, title, meta) {
     return h('div', { className: 'blog-post' },
         h('span', { className: 'title' },
@@ -592,36 +601,9 @@ function navigateEvent(e, path) {
 
 function route_init() {
     // Add all the blog content to the router.
-    let prevBlog = null;
-    let thisBlog = blogContent[0];
-    let nextBlog = blogContent[1];
-    routes[thisBlog.hRef] = () => {
-        const thisTitle = thisBlog.title;
-        const thisDateTime = thisBlog.dateTime;
-        const thisArticleFunction = thisBlog.articleFunction;
-        const nextTitle = nextBlog.title;
-        const nextHRef = nextBlog.hRef;
-        return blogArticlePage(
-            thisTitle, thisDateTime, thisArticleFunction, '', '', nextTitle, nextHRef
-        );
+    for (let i = 0; i < blogContent.length; i++) {
+        routes[blogContent[i].hRef] = () => blogArticlePage(i);
     }
-
-    for (let i = 1; i < blogContent.length - 1; i++) {
-        prevBlog = thisBlog;
-        thisBlog = nextBlog;
-        nextBlog = blogContent[i + 1];
-        routes[thisBlog.hRef] = () => blogArticlePage(
-            thisBlog.title, thisBlog.dateTime, thisBlog.articleFunction,
-            prevBlog.title, prevBlog.hRef, nextBlog.title, nextBlog.hRef
-        );
-    }
-
-    prevBlog = thisBlog;
-    thisBlog = nextBlog;
-    nextBlog = null;
-    routes[thisBlog.hRef] = () => blogArticlePage(
-        thisBlog.title, thisBlog.dateTime, thisBlog.articleFunction, prevBlog.title, prevBlog.hRef, '', ''
-    );
 
     // Set up the navigation for stepping backwards.
     window.onpopstate = () => handleLocation();
