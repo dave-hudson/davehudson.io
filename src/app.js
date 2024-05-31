@@ -148,10 +148,40 @@ function pageHeader() {
     return vNode;
 }
 
-function pageTitle(title, timeStr = '') {
+function articleTitle(title, timeStr = '') {
     return h('header', { className: 'title' },
         h('h1', {}, title),
         h('time', { className: 'meta' }, timeStr)
+    );
+}
+
+function navPrevNext(prevStr, prevHRef, nextStr, nextHRef) {
+    return h('nav', { className: 'prev-next'},
+        h('h2', {}, 'More blog posts'),
+        h('table', { className: 'meta-nav' },
+            h('tr', {},
+                h('td', { className: 'prev' },
+                    h('div', { className: 'icon' },
+                        h('a', { href: prevHRef, title: 'left' },
+                            h('i', { 'data-feather': 'chevron-left' })
+                        )
+                    )
+                ),
+                h('td', { className: 'prev-text' },
+                    h('a', { href: prevHRef }, prevStr)
+                ),
+                h('td', { className: 'next-text' },
+                    h('a', { href: nextHRef }, nextStr)
+                ),
+                h('td', { className: 'next' },
+                    h('div', { className: 'icon' },
+                        h('a', { href: nextHRef, title: 'right' },
+                            h('i', { 'data-feather': 'chevron-right' })
+                        )
+                    )
+                )
+            )
+        )
     );
 }
 
@@ -167,7 +197,7 @@ function homePage() {
     return h('div', { className: 'container' },
         pageHeader(),
         h('article', { className: 'article' },
-            pageTitle('hashingit.com')
+            articleTitle('hashingit.com')
         ),
         pageFooter()
     );
@@ -177,7 +207,7 @@ function aboutPage() {
     return h('div', { className: 'container' },
         pageHeader(),
         h('article', { className: 'article' },
-            pageTitle('About Me', '2024-05-29 07:45'),
+            articleTitle('About Me', '2024-05-29 07:45'),
             h('p', {},
                 h('span', {}, 'Hello, good morning/afternoon/evening* and welcome! ' ),
                 h('em', {}, '(*please delete as appropriate)')
@@ -227,7 +257,7 @@ function blogPage_201403090000() {
     return h('div', { className: 'container' },
         pageHeader(),
         h('article', { className: 'article' },
-            pageTitle('The Bitcoin runaway mine train', '2014-03-09'),
+            articleTitle('The Bitcoin runaway mine train', '2014-03-09'),
             h('p', {},
                 'Bitcoin mining is seemingly unique. There has probably never been any technology problem that ' +
                 'has triggered such sustained growth and it may be a very long time before we see another one. ' +
@@ -315,7 +345,7 @@ function blogPage_201403120000() {
     return h('div', { className: 'container' },
         pageHeader(),
         h('article', { className: 'article' },
-            pageTitle('Strange spikes in the Bitcoin price', '2014-03-12'),
+            articleTitle('Strange spikes in the Bitcoin price', '2014-03-12'),
             h('p', {},
                 'There\'s something odd about the fluctuations in the price of Bitcoins. The data shows a set of ' +
                 'spikes when the price jumps up and then falls back somewhat and levels out. This wouldn\'t be so ' +
@@ -358,6 +388,12 @@ function blogPage_201403120000() {
                 h('a', { href: "http://blockchain.info" }, 'blockchain.info')
             )
         ),
+        navPrevNext(
+            'The Bitcoin runaway mine train',
+            '/blog/2014-03-09-0000',
+            'Understanding other people\'s code',
+            '/blog/2020-01-27-2336'
+        ),
         pageFooter()
     );
 }
@@ -366,7 +402,7 @@ function blogPage_202001272336() {
     return h('div', { className: 'container' },
         pageHeader(),
         h('article', { className: 'article' },
-            pageTitle('Understanding other people\'s code', '2020-01-27 23:36'),
+            articleTitle('Understanding other people\'s code', '2020-01-27 23:36'),
             h('p', {},
                 h('span', {},
                     'When I decided to create this site, one of the main things I wanted to do was keep the blog as ' +
@@ -473,7 +509,7 @@ function blogPage() {
     return h('div', { className: 'container' },
         pageHeader(),
         h('article', { className: 'article' },
-            pageTitle('Blog posts'),
+            articleTitle('Blog posts'),
             h('div', { className: 'blog-posts'},
                 h('h2', {}, '2020'),
                 blogLink('/blog/2020-01-27-2336', 'Understanding other people\'s code', '2020-01-27 23:36'),
