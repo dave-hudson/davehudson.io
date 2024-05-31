@@ -121,7 +121,6 @@ function pageHeader() {
 
     let vNode = component();
     vNode.mountCallback = () => {
-        feather.replace();
         darkTheme = document.getElementById('dark-mode-theme');
         darkModeSun = document.getElementById('dark-mode-sun');
         darkModeMoon = document.getElementById('dark-mode-moon');
@@ -469,7 +468,7 @@ let blogContent = [
 ]
 
 function navPrevNext(prevStr, prevHRef, nextStr, nextHRef) {
-    let component = () => h('nav', { className: 'prev-next'},
+    return h('nav', { className: 'prev-next'},
         h('h2', {}, 'More blog posts'),
         h('table', { className: 'meta-nav' },
             h('tr', {},
@@ -496,15 +495,6 @@ function navPrevNext(prevStr, prevHRef, nextStr, nextHRef) {
             )
         )
     );
-
-    let vNode = component();
-    vNode.mountCallback = () => {
-        console.log('feather replace');
-        // This isn't ideal because we can end up calling this function several times.  Needs a better option!
-        feather.replace();
-    }
-
-    return vNode;
 }
 
 function blogArticlePage(index) {
@@ -591,6 +581,7 @@ function handleLocation() {
     updateElement(app, null, rootVNode, newVNode, 0);
     rootVNode = newVNode;
     console.log(`navigated to ${path}`)
+    feather.replace();
 }
 
 function navigateEvent(e, path) {
