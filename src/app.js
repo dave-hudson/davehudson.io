@@ -186,6 +186,7 @@ function navPrevNext(prevStr, prevHRef, nextStr, nextHRef) {
 
     let vNode = component();
     vNode.mountCallback = () => {
+        // This isn't ideal because we can end up calling this function several times.  Needs a better option!
         feather.replace();
     }
 
@@ -495,6 +496,37 @@ function blogPage_202001272336() {
     );
 }
 
+class BlogPosts {
+    constructor(title, dateTime, hRef, pageFunction) {
+        this.title = title;
+        this.dateTime = dateTime;
+        this.hRef = hRef;
+        this.pageFunction = pageFunction;
+    }
+}
+
+// Enumerate all the blog content served up here.
+let blogContent = [
+    new BlogPosts(
+        'Understanding other people\'s code',
+        '2020-01-27 23:36',
+        '/blog/2020-01-27-2336',
+        blogPage_202001272336
+    ),
+    new BlogPosts(
+        'Strange spikes in the Bitcoin price',
+        '2014-03-12',
+        '/blog/2014-03-12-0000',
+        blogPage_201403120000
+    ),
+    new BlogPosts(
+        'The Bitcoin runaway mine train',
+        '2014-03-09',
+        '/blog/2014-03-09-0000',
+        blogPage_201403090000
+    )
+]
+
 function blogLink(href, title, meta) {
     return h('div', { className: 'blog-post' },
         h('span', { className: 'title' },
@@ -504,18 +536,28 @@ function blogLink(href, title, meta) {
     )
 }
 
+// Handle generating the '/blog' page
 function blogPage() {
+    let pageView = [];
+    let curYear = '';
+
+    // Iterate all the blog content and create year and item enties.
+    for (let i of blogContent) {
+        const iYear = i.dateTime.slice(0, 4);
+        if (curYear != iYear) {
+            curYear = iYear;
+            pageView.push(h('h2', {}, iYear));
+        }
+
+        pageView.push(blogLink(i.hRef, i.title, i.dateTime));
+    }
+
+    // Return the VDOM for the blog page.
     return h('div', { className: 'container' },
         pageHeader(),
         h('article', { className: 'article' },
             articleTitle('Blog posts'),
-            h('div', { className: 'blog-posts'},
-                h('h2', {}, '2020'),
-                blogLink('/blog/2020-01-27-2336', 'Understanding other people\'s code', '2020-01-27 23:36'),
-                h('h2', {}, '2014'),
-                blogLink('/blog/2014-03-12-0000', 'Strange spikes in the Bitcoin price?', '2014-03-12 00:00'),
-                blogLink('/blog/2014-03-09-0000', 'The Bitcoin runaway mine train', '2014-03-09 00:00'),
-            ),
+            h('div', { className: 'blog-posts' }, ...pageView)
         ),
         pageFooter()
     );
@@ -525,7 +567,7 @@ function notFoundPage() {
     return h('div', { className: 'container' },
         pageHeader(),
         h('article', { className: 'article' },
-            pageTitle('404: Page not found'),
+            articleTitle('404: Page not found'),
             h('p', {}, 'Move along, nothing to see here!')
         ),
         pageFooter()
@@ -535,10 +577,7 @@ function notFoundPage() {
 const routes = {
     '/': homePage,
     '/about': aboutPage,
-    '/blog': blogPage,
-    '/blog/2014-03-09-0000': blogPage_201403090000,
-    '/blog/2014-03-12-0000': blogPage_201403120000,
-    '/blog/2020-01-27-2336': blogPage_202001272336
+    '/blog': blogPage
 };
 
 let rootVNode = null;
@@ -561,6 +600,12 @@ function navigateEvent(e, path) {
 }
 
 function route_init() {
+    // Add all the blog content to the router.
+    for (let i of blogContent) {
+        routes[i.hRef] = i.pageFunction;
+    }
+
+    // Set up the navigation for stepping backwards.
     window.onpopstate = () => handleLocation();
     handleLocation();
 }
