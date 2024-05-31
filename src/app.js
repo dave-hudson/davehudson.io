@@ -156,26 +156,26 @@ function articleTitle(title, timeStr = '') {
 }
 
 function navPrevNext(prevStr, prevHRef, nextStr, nextHRef) {
-    return h('nav', { className: 'prev-next'},
+    let component = () => h('nav', { className: 'prev-next'},
         h('h2', {}, 'More blog posts'),
         h('table', { className: 'meta-nav' },
             h('tr', {},
                 h('td', { className: 'prev' },
                     h('div', { className: 'icon' },
-                        h('a', { href: prevHRef, title: 'left' },
+                        h('a', { href: prevHRef, onClick: (e) => navigateEvent(e, prevHRef) },
                             h('i', { 'data-feather': 'chevron-left' })
                         )
                     )
                 ),
                 h('td', { className: 'prev-text' },
-                    h('a', { href: prevHRef }, prevStr)
+                    h('a', { href: prevHRef, onClick: (e) => navigateEvent(e, prevHRef) }, prevStr)
                 ),
                 h('td', { className: 'next-text' },
-                    h('a', { href: nextHRef }, nextStr)
+                    h('a', { href: nextHRef, onClick: (e) => navigateEvent(e, nextHRef) }, nextStr)
                 ),
                 h('td', { className: 'next' },
                     h('div', { className: 'icon' },
-                        h('a', { href: nextHRef, title: 'right' },
+                        h('a', { href: nextHRef, onClick: (e) => navigateEvent(e, nextHRef) },
                             h('i', { 'data-feather': 'chevron-right' })
                         )
                     )
@@ -183,6 +183,13 @@ function navPrevNext(prevStr, prevHRef, nextStr, nextHRef) {
             )
         )
     );
+
+    let vNode = component();
+    vNode.mountCallback = () => {
+        feather.replace();
+    }
+
+    return vNode;
 }
 
 function pageFooter() {
@@ -209,7 +216,7 @@ function aboutPage() {
         h('article', { className: 'article' },
             articleTitle('About Me', '2024-05-29 07:45'),
             h('p', {},
-                h('span', {}, 'Hello, good morning/afternoon/evening* and welcome! ' ),
+                'Hello, good morning/afternoon/evening* and welcome! ',
                 h('em', {}, '(*please delete as appropriate)')
             ),
             h('p', {},
@@ -238,14 +245,12 @@ function aboutPage() {
             ),
             h('h2', {}, 'What\'s this site about?'),
             h('p', {},
-                h('span', {},
-                    'This site is a little bit of an experiment.  Over the years I\'ve researched and developed a lot ' +
-                    'of things I think are interesting, and I wanted to have somewhere to try and share some of what ' +
-                    'I\'ve learned and some of what I learn as I go along. If you do find anything interesting then ' +
-                    'please feel free to reach out to me on: '
-                ),
+                'This site is a little bit of an experiment.  Over the years I\'ve researched and developed a lot ' +
+                'of things I think are interesting, and I wanted to have somewhere to try and share some of what ' +
+                'I\'ve learned and some of what I learn as I go along. If you do find anything interesting then ' +
+                'please feel free to reach out to me on: ',
                 h('a', { href: "http://twitter.com/hashingitcom" }, 'Twitter'),
-                h('span', {}, ' or '),
+                ' or ',
                 h('a', { href: "http://linkedin.com/in/davejh/" }, 'LinkedIn')
             )
         ),
@@ -384,7 +389,7 @@ function blogPage_201403120000() {
             h('hr', {}),
             h('h2', {}, 'Data reference'),
             h('p', {},
-                h('span', {}, 'Data for this article was sourced via: '),
+                'Data for this article was sourced via: ',
                 h('a', { href: "http://blockchain.info" }, 'blockchain.info')
             )
         ),
@@ -404,12 +409,10 @@ function blogPage_202001272336() {
         h('article', { className: 'article' },
             articleTitle('Understanding other people\'s code', '2020-01-27 23:36'),
             h('p', {},
-                h('span', {},
-                    'When I decided to create this site, one of the main things I wanted to do was keep the blog as ' +
-                    'something of a journal. I\'ve tried this in the past when I was writing a C++ library, '
-                ),
+                'When I decided to create this site, one of the main things I wanted to do was keep the blog as ' +
+                'something of a journal. I\'ve tried this in the past when I was writing a C++ library, ',
                 h('a', { href: 'http://github.com/dave-hudson/c8/wiki/Dev-Notes' }, 'c8'),
-                h('span', {}, ', and it was an interesting experience.')
+                ', and it was an interesting experience.'
             ),
             h('p', {},
                 'While my earlier efforts related to something a little more complex, one of the reasons I found the ' +
@@ -423,21 +426,17 @@ function blogPage_202001272336() {
             ),
             h('h2', {}, 'Names matter'),
             h('p', {},
-                h('span', {},
-                    'The names of things really matter. We want them to make sense and not be surprising. The original ' +
-                    'theme files I\'d picked up had some rather odd names. For example the '
-                ),
+                'The names of things really matter. We want them to make sense and not be surprising. The original ' +
+                'theme files I\'d picked up had some rather odd names. For example the ',
                 h('code', {}, '<head>'),
-                h('span', {}, ' tag had a partial HTML snippet file called '),
+                ' tag had a partial HTML snippet file called ',
                 h('code', {}, 'header.html'),
-                h('span', {}, ' while the HTML header was called '),
+                ' while the HTML header was called ',
                 h('code', {}, 'head.html'),
-                h('span', {},
-                    '. These are things that confused me over the last couple of days and would have done so again. ' +
-                    'They weren\'t big sources of confusion, but every incremental time would have been more time wasted ' +
-                    'for me. More importantly, they\'d have been an incremental source of confusion to anyone else who ' +
-                    'read the code for this site.'
-                ),
+                '. These are things that confused me over the last couple of days and would have done so again. ' +
+                'They weren\'t big sources of confusion, but every incremental time would have been more time wasted ' +
+                'for me. More importantly, they\'d have been an incremental source of confusion to anyone else who ' +
+                'read the code for this site.'
             ),
             h('h2', {}, 'Good source code is as simple as possible'),
             h('p', {},
