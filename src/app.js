@@ -121,7 +121,6 @@ function pageHeader() {
 
     let vNode = component();
     vNode.mountCallback = () => {
-        console.log('feather replace');
         feather.replace();
         darkTheme = document.getElementById('dark-mode-theme');
         darkModeSun = document.getElementById('dark-mode-sun');

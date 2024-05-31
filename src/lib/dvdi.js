@@ -218,7 +218,7 @@ function updateProps(domElement, oldProps, newProps) {
  */
 export function updateElement(parent, parentVNode, oldVNode, newVNode, index) {
     // Did we add a new node?
-    if (!oldVNode && newVNode) {
+    if ((oldVNode === null) && newVNode) {
         if (parentVNode) {
             parentVNode.appendChild(newVNode);
         }
@@ -229,7 +229,7 @@ export function updateElement(parent, parentVNode, oldVNode, newVNode, index) {
     }
 
     // Did we remove an old node?
-    if (oldVNode && !newVNode) {
+    if (oldVNode && (newVNode === null)) {
         unmountVNode(oldVNode);
         unrender(oldVNode);
         if (parentVNode) {
@@ -265,14 +265,25 @@ export function updateElement(parent, parentVNode, oldVNode, newVNode, index) {
     updateProps(parent.childNodes[index], oldVNode.props, newVNode.props);
 
     // We iterate backwards to remove any nodes to keep the child lists correct.
-    for (let i = oldVNode.childNodes.length - 1; i > (newVNode.childNodes.length - 1); i--) {
+    let oldLen = oldVNode.childNodes.length;
+    let newLen = newVNode.childNodes.length;
+    for (let i = oldLen - 1; i > (newLen - 1); i--) {
         updateElement(parent.childNodes[index], oldVNode, oldVNode.childNodes[i], null, i);
     }
 
-    // We iterate forwards to update and add nodes.
-    const maxLength = Math.max(oldVNode.childNodes.length, newVNode.childNodes.length);
-    for (let i = 0; i < maxLength; i++) {
+    // We iterate forwards to update and add nodes.  At this point we already know our list of child nodes
+    // cannot be longer than our list of new nodes (although they can be the same length).
+    if (oldLen > newLen) {
+        oldLen = newLen;
+    }
+
+    for (let i = 0; i < oldLen; i++) {
         updateElement(parent.childNodes[index], oldVNode, oldVNode.childNodes[i], newVNode.childNodes[i], i);
+    }
+
+    // We iterate forwards to update and add nodes.
+    for (let i = oldLen; i < newLen; i++) {
+        updateElement(parent.childNodes[index], oldVNode, null, newVNode.childNodes[i], i);
     }
 }
 
