@@ -259,13 +259,14 @@ function aboutPage() {
     );
 }
 
-function blogArticlePage(title, dateTime, articleFunction) {
+function blogArticlePage(title, dateTime, articleFunction, prevTitle, prevHRef, nextTitle, nextHRef) {
     return h('div', { className: 'container' },
         pageHeader(),
         h('article', { className: 'article' },
             articleTitle(title, dateTime),
             ...articleFunction()
         ),
+        navPrevNext(prevTitle, prevHRef, nextTitle, nextHRef),
         pageFooter()
     );
 }
@@ -591,9 +592,36 @@ function navigateEvent(e, path) {
 
 function route_init() {
     // Add all the blog content to the router.
-    for (let i of blogContent) {
-        routes[i.hRef] = () => blogArticlePage(i.title, i.dateTime, i.articleFunction);
+    let prevBlog = null;
+    let thisBlog = blogContent[0];
+    let nextBlog = blogContent[1];
+    routes[thisBlog.hRef] = () => {
+        const thisTitle = thisBlog.title;
+        const thisDateTime = thisBlog.dateTime;
+        const thisArticleFunction = thisBlog.articleFunction;
+        const nextTitle = nextBlog.title;
+        const nextHRef = nextBlog.hRef;
+        return blogArticlePage(
+            thisTitle, thisDateTime, thisArticleFunction, '', '', nextTitle, nextHRef
+        );
     }
+
+    for (let i = 1; i < blogContent.length - 1; i++) {
+        prevBlog = thisBlog;
+        thisBlog = nextBlog;
+        nextBlog = blogContent[i + 1];
+        routes[thisBlog.hRef] = () => blogArticlePage(
+            thisBlog.title, thisBlog.dateTime, thisBlog.articleFunction,
+            prevBlog.title, prevBlog.hRef, nextBlog.title, nextBlog.hRef
+        );
+    }
+
+    prevBlog = thisBlog;
+    thisBlog = nextBlog;
+    nextBlog = null;
+    routes[thisBlog.hRef] = () => blogArticlePage(
+        thisBlog.title, thisBlog.dateTime, thisBlog.articleFunction, prevBlog.title, prevBlog.hRef, '', ''
+    );
 
     // Set up the navigation for stepping backwards.
     window.onpopstate = () => handleLocation();
