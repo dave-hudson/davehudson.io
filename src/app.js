@@ -197,8 +197,7 @@ function aboutPage() {
             ),
             h('figure', {},
                 h('img', { src: "/content/about/dave.jpg", alt: "Me (apparently always pictured with a drink!)" }),
-                h('figcaption', {}, 'Me (apparently always pictured with a drink!)'
-                )
+                h('figcaption', {}, 'Me (apparently always pictured with a drink!)')
             ),
             h('p', {},
                 'That journey has led me all over the world and I\'ve had the privilege of collaborating with some ' +
@@ -420,6 +419,102 @@ function blogArticle_201403170000() {
     ];
 }
 
+function blogArticle_201602030000() {
+    return [
+        h('p', {},
+            'Most participants in the ongoing Bitcoin block size debates have a point of agreement; that a shortage of ' +
+            'block space should have an effect on transaction fees. Arguments aside, then, let\'s see what has actually ' +
+            'been happening. Are fees going through the roof? Are miners going to be celebrating a potential offset to ' +
+            'the block reward halving that looms in July 2016? The results seem a little surprising!'
+        ),
+        h('h2', {}, 'Rewards for a Bitcoin miner'),
+        h('p', {},
+            'Bitcoin miners earn their per-block rewards in two ways. They collect a block reward subsidy that halves ' +
+            'every 210,000 blocks and they collect the fees assigned each transaction within a block. Historically the ' +
+            'fees have represented a tiny fraction of the total reward.'
+        ),
+        h('p', {},
+            'Despite being far smaller, they are still actually worth a reasonable amount of money per year to the block ' +
+            'makers who collect them. At the time of writing they represent around \$20,000 per day, potentially \$7.3M ' +
+            'per year.'
+        ),
+        h('h2', {}, 'An emerging fee market?'),
+        h('p', {},
+            'If capacity is scarce within the Bitcoin blockchain we would expect to see transaction fees rise ' +
+            'dramatically as users seek to ensure their transactions are processed ahead of everyone else\'s, but are ' +
+            'there any strong indications that this has happened?'
+        ),
+        h('figure', {},
+            h('img', { src: '/content/blog/2016-02-03-0000/fees-per-tx-btc.png' }),
+            h('figcaption', {}, 'Fees per Bitcoin transaction in BTC')
+        ),
+        h('p', {},
+            'We can see that throughout 2014 the BTC-denominated average fee per transaction steadily declined, ' +
+            'stabilized in the first half of 2015 and then jumped in July 2015. Thereafter the average fee actually ' +
+            'started to fall again. Transaction fees have bounced back up a little in the first few weeks of 2016, but ' +
+            'this doesn\'t appear to be the fee armageddon that was forecast! If anything fee levels are now back where ' +
+            'they were in early 2014.'
+        ),
+        h('p', {}, 'The trend is certainly curious, so let\'s look at the transaction volumes:'),
+        h('figure', {},
+            h('img', { src: '/content/blog/2016-02-03-0000/tx-per-day.png' }),
+            h('figcaption', {}, 'Transactions per day in the Bitcoin network')
+        ),
+        h('p', {},
+            'As we\'d expect, the transaction volume has been steadily increasing (otherwise there would be no block ' +
+            'size bickering). The last 2 months have seen particular jumps, but that may in part be explained by the ' +
+            'dramatic increases in hash rates again. Rather than a nominal 10 minute block time we\'ve been seeing nearer ' +
+            'to 9 so the available capacity for low-fee or zero-fee transactions has been higher than we\'d expect. ' +
+            'Instead of 6 MBytes per hour we\'ve probably had more like 6.6 MBytes per hour of block capacity.'
+        ),
+        h('p', {},
+            'It\'s quite odd that the transaction rates have jumped quite so much in the last 7 months though, almost ' +
+            'doubling. This is the very same period in which the average per-transaction fee had jumped up. The spike in ' +
+            'July gives some indication of what happened, however, as this corresponds to the first "Bitcoin flood attack"' +
+            ' (see: ',
+            h('a', { href: 'https://en.bitcoin.it/wiki/July_2015_flood_attack' }),
+            '). The flooding event caused the network to adjust fees upwards, but thereafter fees steadily declined again ' +
+            'as fee-bearing transactions saw minimal impact on confirmation times.'
+        ),
+        h('p', {}, 'The first chart we looked at considered BTC-denominated fees, but what if we look at them in USD?'),
+        h('figure', {},
+            h('img', { src: '/content/blog/2016-02-03-0000/fees-per-tx-usd.png' }),
+            h('figcaption', {}, 'Fees per Bitcoin transaction in USD')
+        ),
+        h('p', {},
+            'This one actually looks worse.  It appears that the fee levels have steadily been increasing since July ' +
+            '2015, but we\'re seeing the effect of two different things.  As the BTC-denominated fees started to fade ' +
+            'back, the USD price of BTC was increasing so dollar-denominated fees do look like they\'ve been increasing. ' +
+            'It\'s notable though that they\'re still lower than they were in the first 9 months of 2014.'
+        ),
+        h('h2', {}, 'Total costs per transaction'),
+        h('p', {},
+            'Finally, something curious: If we look at the cost of each transaction as measured by the USD-valued total ' +
+            'mining rewards for each day and the numbers of transactions per day we see that things have been incredibly ' +
+            'stable for the last 12 months:'
+        ),
+        h('figure', {},
+            h('img', { src: '/content/blog/2016-02-03-0000/rewards-per-tx-usd.png' }),
+            h('figcaption', {}, 'Rewards per transaction in USD')
+        ),
+        h('h2', {}, 'Final thoughts'),
+        h('p', {},
+            'Far from a fee market emerging to inflate transaction costs, we don\'t appear to have very much evidence of ' +
+            'anything dramatic happening yet. There are a number of possibilities, but one is that the transaction ' +
+            'volume doesn\'t really reflect transactions that most users care about. Low value fees for unimportant ' +
+            'transactions may well be leaving more interesting transactions unaffected by any concerns about capacity. ' +
+            'While the block size squabbles will continue it\'s unclear that there have yet been any wide-scale ' +
+            'implications for current users of the network.'
+        ),
+        h('hr', {}),
+        h('h2', {}, 'Data reference'),
+        h('p', {},
+            'Data for this article was sourced via: ',
+            h('a', { href: "http://blockchain.info" }, 'blockchain.info')
+        )
+    ];
+}
+
 function blogArticle_201701061400() {
     return [
         h('em', {},
@@ -446,36 +541,25 @@ function blogArticle_201701061400() {
             'touted as solutions to a huge range of problems, the hype fades, gives way to skepticism, and ultimately, real ' +
             'applications.'
         ),
-        h('p', {},
-            'In the late 1990s, the idea of Internet-connecting every electronic device seemed inescapable.'
-        ),
+        h('p', {}, 'In the late 1990s, the idea of Internet-connecting every electronic device seemed inescapable.'),
         h('p', {},
             'Every vending machine, coffee pot, toaster, refrigerator, microwave, and TV, would be cabled to the “net”, and ' +
             'a utopian sharing of data would improve life for everyone.'
         ),
-        h('p', {},
-            'The reality for what we now term the “Internet of Things”, or IoT, was a little different.'
-        ),
-        h('h2', {},
-            'It\'s all about money'
-        ),
-        h('p', {},
-            'The original theory of IoT was that data would make everything better.'
-        ),
+        h('p', {}, 'The reality for what we now term the “Internet of Things”, or IoT, was a little different.'),
+        h('h2', {}, 'It\'s all about money'),
+        h('p', {}, 'The original theory of IoT was that data would make everything better.'),
         h('p', {},
             'Microwave ovens might scan cooking instructions and thus not make mistakes, refrigerators might reorder milk, ' +
             'etc. Automation would liberate users of these appliances, and give them time for other things.'
         ),
-        h('p', {},
-            'Unfortunately, the theory hadn\'t been worked out fully.'
-        ),
+        h('p', {}, 'Unfortunately, the theory hadn\'t been worked out fully.'),
         h('p', {},
             'Adding Internet connectivity to a device is never free-of-charge.  In most cases this was a realm of small, ' +
             'low-CPU-powered devices, with no connectivity, so making them Internet-connected was going to cost money.'
         ),
-        h('p', {},
-            'In the 20 years since those original ideas, little has changed.'
-        ),
+        h('p', {}, 'In the 20 years since those original ideas, little has changed.'
+),
         h('p', {},
             'Let\'s consider the microwave oven example.  A microwave would need a pretty simple IoT hardware design, so ' +
             'perhaps $5 in parts cost. The first problem is that the $5 turns into nearer $15 by the time we add the margins ' +
@@ -487,15 +571,9 @@ function blogArticle_201701061400() {
             'cook. That implies servers, it implies dev-ops teams, it implies software engineers, and it implies business ' +
             'development people who persuade pizza manufacturers to provide cooking details for each new product they design.'
         ),
-        h('p', {},
-            'The infrastructure side has perhaps cost us another $10 per unit.'
-        ),
-        h('h2', {},
-            'Nice ideas'
-        ),
-        h('p', {},
-            'Smart devices are a little like smart contracts.'
-        ),
+        h('p', {}, 'The infrastructure side has perhaps cost us another $10 per unit.'),
+        h('h2', {}, 'Nice ideas' ),
+        h('p', {}, 'Smart devices are a little like smart contracts.'),
         h('p', {},
             'They\'re great when they “just work”, but not so great when people make mistakes.  The 1990s vision of IoT ' +
             'involved lots of network cables, but then we got Wi-Fi, and the wires could go away.'
@@ -518,12 +596,8 @@ function blogArticle_201701061400() {
             'interesting concept into a liability. It isn\'t worth the setup time and $50 to a customer, and the trouble ' +
             'isn\'t worth it for the manufacturer.'
         ),
-        h('h2', {},
-            'Same old story'
-        ),
-        h('p', {},
-            'We have the same challenges when thinking about uses for blockchains.'
-        ),
+        h('h2', {}, 'Same old story'),
+        h('p', {}, 'We have the same challenges when thinking about uses for blockchains.'),
         h('p', {},
             'Not every problem needs a blockchain as a solution. Blockchains cost money in terms of processing, storage and ' +
             'replication technology. In the case of a decentralized cryptocurrency, such as Bitcoin, the blockchain-like ' +
@@ -539,9 +613,7 @@ function blogArticle_201701061400() {
             'A large industrial cold store might contain hundreds of thousands of dollars of refrigerated products, so ' +
             'signaling breakdowns and avoiding stock losses must be a valuable problem to solve?'
         ),
-        h('p', {},
-            'The maths is compelling, but the problem is that it was 25 years ago, too.'
-        ),
+        h('p', {}, 'The maths is compelling, but the problem is that it was 25 years ago, too.'),
         h('p', {},
             'While they might not have matched our IoT vision, many companies already found approaches to network these ' +
             'devices a long time ago.'
@@ -559,9 +631,7 @@ function blogArticle_201701061400() {
             'A naïve view of the problem might well have ignored them. Unexpected stakeholders introduce unexpected costs, ' +
             'and may resist changes that do not also offer them substantial benefits.'
         ),
-        h('p', {},
-            'The implications for blockchains are very similar.'
-        ),
+        h('p', {}, 'The implications for blockchains are very similar.'),
         h('p', {},
             'If a problem is already being solved, then, even if a blockchain might be useful, we need to ask if it offers ' +
             'enough incremental advantages? Do we know what all the problems are, including the ones that might not be ' +
@@ -570,9 +640,7 @@ function blogArticle_201701061400() {
             'analytical needs that require big-data, relational, graph, or time-series, views of any data that is being ' +
             'processed?'
         ),
-        h('h2', {},
-            'Forever is a long time'
-        ),
+        h('h2', {}, 'Forever is a long time'),
         h('p', {},
             'Leaving aside specific uses of IoT for a moment, it\'s worth considering an important characteristic of the ' +
             'devices that were supposed to become smart and connected.  These devices don\'t get replaced very quickly.'
@@ -608,9 +676,7 @@ function blogArticle_201701061400() {
             'These are all governance problems.  How will our IoT device, once installed, continue to function, and avoid ' +
             'becoming a problem?'
         ),
-        h('h2', {},
-            'Parallel problems'
-        ),
+        h('h2', {}, 'Parallel problems'),
         h('p', {},
             'The parallels for blockchains are, again, striking.'
         ),
@@ -631,9 +697,7 @@ function blogArticle_201701061400() {
             'In the case of commercial deployments, what are the implications for rolling out updates and upgrades across ' +
             'organizations that have different priorities?'
         ),
-        h('h2', {},
-            'A new hype?'
-        ),
+        h('h2', {}, 'A new hype?'),
         h('p', {},
             'Our journey through the history of IoT has been somewhat cautionary, and there are many unanswered questions, ' +
             'but this is not the story of a lost war.'
@@ -651,18 +715,14 @@ function blogArticle_201701061400() {
             'Smart TVs and smartphones are barely recognizable from earlier CRT TVs and crude mobile phones, and yet both ' +
             'have a clear lineage to the original idea of connected things.'
         ),
-        h('p', {},
-            'IoT arrived but not quite as expected.'
-        ),
+        h('p', {}, 'IoT arrived but not quite as expected.'),
         h('p', {},
             'Business empires based on the concepts of VHS tapes and DVDs were displaced. Users gained access to far more ' +
             'content, with lower costs and dramatically improved convenience. IoT technologies were not used in ' +
             'isolation, but were combined to solve real problems for the people who ultimately pay for the solutions, ' +
             'customers.'
         ),
-        h('p', {},
-            'This, then, is part of the challenge for blockchains.'
-        ),
+        h('p', {}, 'This, then, is part of the challenge for blockchains.'),
         h('p', {},
             'The commercial refrigeration systems slowly changed too.  Internet connectivity was a better approach than ' +
             'the ad-hoc methods used 20 years ago, and so replaced earlier designs when they reached natural replacement ' +
@@ -674,9 +734,7 @@ function blogArticle_201701061400() {
             'first-generation designs it has also served to highlight challenges, and its ultimate success or failure will ' +
             'depend on its ability to see them resolved.'
         ),
-        h('p', {},
-            'The challenge for other blockchains might be similar, but won\'t be the same.'
-        ),
+        h('p', {}, 'The challenge for other blockchains might be similar, but won\'t be the same.'),
         h('p', {},
             'Blockchain technology will be well served by recognizing, and confronting the hardest problems that we know ' +
             'about, rather than imagining that we can resolve them later. We know that issues such as security, privacy, ' +
@@ -686,9 +744,7 @@ function blogArticle_201701061400() {
             'At the same time, we must avoid the temptation to use blockchains, and blockchain ideas, where they are not ' +
             'the best solutions, and champion those where they are.'
         ),
-        h('p', {},
-            'If we do these things, then 2017 should be a year where blockchain hype gives way to blockchain hope.'
-        )
+        h('p', {}, 'If we do these things, then 2017 should be a year where blockchain hype gives way to blockchain hope.')
     ];
 }
 
@@ -807,6 +863,12 @@ let blogContent = [
         '2014-03-17',
         '/blog/2014-03-17-0000',
         blogArticle_201403170000
+    ),
+    new BlogPosts(
+        'A market for Bitcoin transaction fees?',
+        '2016-02-03',
+        '/blog/2016-02-03-0000',
+        blogArticle_201602030000
     ),
     new BlogPosts(
         'What IoT history reveals about blockchain\'s challenges',
