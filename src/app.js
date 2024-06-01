@@ -445,13 +445,13 @@ class BlogPosts {
     }
 }
 
-// Enumerate all the blog content served up here.
+// Enumerate all the blog content served up here.  Newest content goes at the end.
 let blogContent = [
     new BlogPosts(
-        'Understanding other people\'s code',
-        '2020-01-27 23:36',
-        '/blog/2020-01-27-2336',
-        blogArticle_202001272336
+        'The Bitcoin runaway mine train',
+        '2014-03-09',
+        '/blog/2014-03-09-0000',
+        blogArticle_201403090000
     ),
     new BlogPosts(
         'Strange spikes in the Bitcoin price',
@@ -460,10 +460,10 @@ let blogContent = [
         blogArticle_201403120000
     ),
     new BlogPosts(
-        'The Bitcoin runaway mine train',
-        '2014-03-09',
-        '/blog/2014-03-09-0000',
-        blogArticle_201403090000
+        'Understanding other people\'s code',
+        '2020-01-27 23:36',
+        '/blog/2020-01-27-2336',
+        blogArticle_202001272336
     )
 ]
 
@@ -529,17 +529,18 @@ function blogLink(href, title, meta) {
 // Handle generating the '/blog' page
 function blogPage() {
     let pageView = [];
-    let curYear = '';
+    let headlineYear = '';
 
     // Iterate all the blog content and create year and item enties.
-    for (let i of blogContent) {
-        const iYear = i.dateTime.slice(0, 4);
-        if (curYear != iYear) {
-            curYear = iYear;
-            pageView.push(h('h2', {}, iYear));
+    for (let i = blogContent.length - 1; i >= 0; i--) {
+        const blogPost = blogContent[i];
+        const blogYear = blogPost.dateTime.slice(0, 4);
+        if (headlineYear != blogYear) {
+            headlineYear = blogYear;
+            pageView.push(h('h2', {}, headlineYear));
         }
 
-        pageView.push(blogLink(i.hRef, i.title, i.dateTime));
+        pageView.push(blogLink(blogPost.hRef, blogPost.title, blogPost.dateTime));
     }
 
     // Return the VDOM for the blog page.
