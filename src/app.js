@@ -28,7 +28,7 @@ let darkModeMoon = null;
 
 function sunMoonIcon(isSun, clickCallback) {
     const component = () => h('div', {
-            className: "icon",
+            className: 'icon',
             id: isSun ? 'dark-mode-sun' : 'dark-mode-moon',
             onClick: () => clickCallback(!isSun)
         },
@@ -42,7 +42,7 @@ function sunMoonIcon(isSun, clickCallback) {
 
 function pageHeader() {
     const component = () => h('header', { className: 'header'},
-        h('table', { className: "site-title"},
+        h('table', { className: 'site-title'},
             h('tbody', {},
                 h('tr', {},
                     h('td', {},
@@ -95,7 +95,7 @@ function pageHeader() {
         )
     );
 
-    const windowMedia = window.matchMedia("(prefers-color-scheme: dark)");
+    const windowMedia = window.matchMedia('(prefers-color-scheme: dark)');
 
     function setDarkTheme(dark) {
         if (dark === true) {
@@ -196,7 +196,7 @@ function aboutPage() {
                 'Lately I\'ve been building blockchain and distributed ledger systems.'
             ),
             h('figure', {},
-                h('img', { src: "/content/about/dave.jpg", alt: "Me (apparently always pictured with a drink!)" }),
+                h('img', { src: '/content/about/dave.jpg', alt: 'Me (apparently always pictured with a drink!)' }),
                 h('figcaption', {}, 'Me (apparently always pictured with a drink!)')
             ),
             h('p', {},
@@ -210,9 +210,9 @@ function aboutPage() {
                 'of things I think are interesting, and I wanted to have somewhere to try and share some of what ' +
                 'I\'ve learned and some of what I learn as I go along. If you do find anything interesting then ' +
                 'please feel free to reach out to me on: ',
-                h('a', { href: "http://twitter.com/hashingitcom" }, 'Twitter'),
+                h('a', { href: 'http://twitter.com/hashingitcom' }, 'Twitter'),
                 ' or ',
-                h('a', { href: "http://linkedin.com/in/davejh/" }, 'LinkedIn')
+                h('a', { href: 'http://linkedin.com/in/davejh/' }, 'LinkedIn')
             )
         ),
         pageFooter()
@@ -241,7 +241,7 @@ function blogArticle_201403090000() {
             'Let\'s look at the worldwide hashing data:'
         ),
         h('figure', {},
-            h('img', { src: "/content/blog/2014-03-09-0000/20140309-hash-12months.png" })
+            h('img', { src: '/content/blog/2014-03-09-0000/20140309-hash-12months.png' })
         ),
         h('p', {},
             'The first thing to notice is that this isn\'t an ordinary graph. It\'s plotted on a logarithmic ' +
@@ -312,7 +312,7 @@ function blogArticle_201403120000() {
         ),
         h('p', {}, 'Let\'s look at the graph:'),
         h('figure', {},
-            h('img', { src: "/content/blog/2014-03-12-0000/20140312_BTC_Price.png" })
+            h('img', { src: '/content/blog/2014-03-12-0000/20140312_BTC_Price.png' })
         ),
         h('p', {},
             'The first thing to note is that the graph is plotted with a logarithmic Y axis so each step ' +
@@ -343,7 +343,7 @@ function blogArticle_201403120000() {
         h('h2', {}, 'Data reference'),
         h('p', {},
             'Data for this article was sourced via: ',
-            h('a', { href: "http://blockchain.info" }, 'blockchain.info')
+            h('a', { href: 'http://blockchain.info' }, 'blockchain.info')
         )
     ];
 }
@@ -364,7 +364,7 @@ function blogArticle_201403170000() {
             'and see if we can make any sense of this?'
         ),
         h('figure', {},
-            h('img', { src: "/content/blog/2014-03-17-0000/20140317_Bitcoin-vs-hash.png" })
+            h('img', { src: '/content/blog/2014-03-17-0000/20140317_Bitcoin-vs-hash.png' })
         ),
         h('p', {},
             'This chart is plotted on two logarithmic axis but they\'re not on the same scale. The price trace increases ' +
@@ -387,7 +387,7 @@ function blogArticle_201403170000() {
         h('p', {},
             'From mid 2011 to early 2013 the initial euphoria waned, yet that seems a little strange for something ' +
             'that had seen such rapid growth only a short while earlier. There were the ',
-            h('a', { hRef: '/blog/2014-03-12-0000/', onClick: (e) => navigateEvent(e, '/blog/2014-03-12-0000') },
+            h('a', { hRef: '/blog/2014-03-12-0000/', onClick: (e) => navigateEvent(e, '/blog/2014-03-12-0000')},
                 'strange periodic spikes in the Bitcoin price every 7-ish months'
             ),
             ' but neither the price nor the hashing rate really changed that much. Roll forward to early 2013 though ' +
@@ -414,7 +414,54 @@ function blogArticle_201403170000() {
         h('h2', {}, 'Data reference'),
         h('p', {},
             'Data for this article was sourced via: ',
-            h('a', { href: "http://blockchain.info" }, 'blockchain.info')
+            h('a', { href: 'http://blockchain.info' }, 'blockchain.info')
+        )
+    ];
+}
+
+function blogArticle_201406050000() {
+    return [
+        h('p', {},
+            'About 3 months ago I looked at how the BTC price seems to spike up approximately every 7 months. It seems ' +
+            'to be happening again!'
+        ),
+        h('p', {},
+            'Over the last couple of weeks the BTC price has reversed its earlier falls and has yet again started to jump ' +
+            'back up again. The timing is pretty-much consistent with previous spikes.'
+        ),
+        h('p', {}, 'Let\'s look at the graph (plotted on a logarithmic Y axis):'),
+        h('figure', {},
+            h('img', { src: '/content/blog/2014-06-05-0000/BTC-price.png' }),
+            h('figcaption', {}, 'Chart of BTC price over time')
+        ),
+        h('p', {},
+            'The trend of high points in the graph (red line) shows another ',
+            h('a', { href: '/blog/2014-03-09-0000/', onClick: (e) => navigateEvent(e, '/blog/2014-03-09-0000')}, 
+                'theme park ride'
+            ),
+            '. Like any good thrill ride we see regular highs and lows; here the peaks are anywhere between 212 days ' +
+            'and 235 days, but in general the later ones have been nearer 235 days. 235 days from the last high would ' +
+            'be 2014-07-24. It will be interesting to see if the current rises follow the same trend and if that\'s ' +
+            'near our next destination.'
+        ),
+        h('p', {},
+            'While our roller coaster may be an entertaining ride for many, the gentle slopes of the low point trend ' +
+            '(green line) form an intriguingly steady path. Perhaps it\'s this trend that should be attracting far more ' +
+            'attention?'
+        ),
+        h('hr', {}),
+        h('h2', {}, 'Data reference'),
+        h('p', {},
+            'Data for this article was sourced via: ',
+            h('a', { href: 'http://blockchain.info' }, 'blockchain.info')
+        ),
+        h('hr', {}),
+        h('h2', {}, 'Related articles'),
+        h('p', {},
+            'Data for this article was sourced via: ',
+            h('a', { hRef: '/blog/2014-03-12-0000/', onClick: (e) => navigateEvent(e, '/blog/2014-03-12-0000')},
+                'Strange spikes in the Bitcoin price (2014-03-12)'
+            )
         )
     ];
 }
@@ -510,7 +557,7 @@ function blogArticle_201602030000() {
         h('h2', {}, 'Data reference'),
         h('p', {},
             'Data for this article was sourced via: ',
-            h('a', { href: "http://blockchain.info" }, 'blockchain.info')
+            h('a', { href: 'http://blockchain.info' }, 'blockchain.info')
         )
     ];
 }
@@ -526,7 +573,7 @@ function blogArticle_201701061400() {
         ),
         h('hr', {}),
         h('figure', {},
-            h('img', { src: "/content/blog/2017-01-06-1400/rock-paintings-art.jpg" }),
+            h('img', { src: '/content/blog/2017-01-06-1400/rock-paintings-art.jpg' }),
             h('figcaption', {},
                 'Cave paintings via https://www.shutterstock.com/pic-94533745/' +
                 'stock-photo-famous-prehistoric-rock-paintings-of-tassili-najjer-algeria.html'
@@ -863,6 +910,12 @@ let blogContent = [
         '2014-03-17',
         '/blog/2014-03-17-0000',
         blogArticle_201403170000
+    ),
+    new BlogPosts(
+        'Strange spikes revisited!',
+        '2014-06-05',
+        '/blog/2014-06-05-0000',
+        blogArticle_201406050000
     ),
     new BlogPosts(
         'A market for Bitcoin transaction fees?',
