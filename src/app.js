@@ -196,7 +196,7 @@ function aboutPage() {
                 'Lately I\'ve been building blockchain and distributed ledger systems.'
             ),
             h('figure', {},
-                h('img', { src: '/content/about/dave.jpg', alt: 'Me (apparently always pictured with a drink!)' }),
+                h('img', { src: '/about/dave.jpg', alt: 'Me (apparently always pictured with a drink!)' }),
                 h('figcaption', {}, 'Me (apparently always pictured with a drink!)')
             ),
             h('p', {},
@@ -241,7 +241,7 @@ function blogArticle_201403090000() {
             'Let\'s look at the worldwide hashing data:'
         ),
         h('figure', {},
-            h('img', { src: '/content/blog/2014-03-09-0000/20140309-hash-12months.png' }),
+            h('img', { src: '/blog/2014-03-09-0000/20140309-hash-12months.png' }),
             h('figcaption', {}, 'Worldwide hashing rate')
         ),
         h('p', {},
@@ -313,7 +313,7 @@ function blogArticle_201403120000() {
         ),
         h('p', {}, 'Let\'s look at the graph:'),
         h('figure', {},
-            h('img', { src: '/content/blog/2014-03-12-0000/20140312_BTC_Price.png' }),
+            h('img', { src: '/blog/2014-03-12-0000/20140312_BTC_Price.png' }),
             h('figcaption', {}, 'Bitcoin price over time')
         ),
         h('p', {},
@@ -366,7 +366,7 @@ function blogArticle_201403170000() {
             'and see if we can make any sense of this?'
         ),
         h('figure', {},
-            h('img', { src: '/content/blog/2014-03-17-0000/20140317_Bitcoin-vs-hash.png' }),
+            h('img', { src: '/blog/2014-03-17-0000/20140317_Bitcoin-vs-hash.png' }),
             h('figcaption', {}, 'Bitcoin price vs global hashrate')
         ),
         h('p', {},
@@ -477,7 +477,7 @@ function blogArticle_201403230000() {
             '14 nm, while a state of the art mobile phone or tablet is probably using 28 nm.'
         ),
         h('figure', {},
-            h('img', { src: '/content/blog/2014-03-23-0000/ASIC_geometry.png' }),
+            h('img', { src: '/blog/2014-03-23-0000/ASIC_geometry.png' }),
             h('figcaption', {}, 'ASIC geometry')
         ),
         h('p', {},
@@ -642,7 +642,7 @@ function blogArticle_201404030000() {
             'interesting comparison is between hashing rates and the total daily miners\' reward. Here\'s that new chart:'
         ),
         h('figure', {},
-            h('img', { src: '/content/blog/2014-04-03-0000/hash-vs-reward.png' }),
+            h('img', { src: '/blog/2014-04-03-0000/hash-vs-reward.png' }),
             h('figcaption', {}, 'Bitcoin hashing rate compared with total mining rewards April 2014')
         ),
         h('p', {},
@@ -715,7 +715,7 @@ function blogArticle_201406050000() {
         ),
         h('p', {}, 'Let\'s look at the graph (plotted on a logarithmic Y axis):'),
         h('figure', {},
-            h('img', { src: '/content/blog/2014-06-05-0000/BTC-price.png' }),
+            h('img', { src: '/blog/2014-06-05-0000/BTC-price.png' }),
             h('figcaption', {}, 'Chart of BTC price over time')
         ),
         h('p', {},
@@ -777,7 +777,7 @@ function blogArticle_201602030000() {
             'there any strong indications that this has happened?'
         ),
         h('figure', {},
-            h('img', { src: '/content/blog/2016-02-03-0000/fees-per-tx-btc.png' }),
+            h('img', { src: '/blog/2016-02-03-0000/fees-per-tx-btc.png' }),
             h('figcaption', {}, 'Fees per Bitcoin transaction in BTC')
         ),
         h('p', {},
@@ -789,7 +789,7 @@ function blogArticle_201602030000() {
         ),
         h('p', {}, 'The trend is certainly curious, so let\'s look at the transaction volumes:'),
         h('figure', {},
-            h('img', { src: '/content/blog/2016-02-03-0000/tx-per-day.png' }),
+            h('img', { src: '/blog/2016-02-03-0000/tx-per-day.png' }),
             h('figcaption', {}, 'Transactions per day in the Bitcoin network')
         ),
         h('p', {},
@@ -810,7 +810,7 @@ function blogArticle_201602030000() {
         ),
         h('p', {}, 'The first chart we looked at considered BTC-denominated fees, but what if we look at them in USD?'),
         h('figure', {},
-            h('img', { src: '/content/blog/2016-02-03-0000/fees-per-tx-usd.png' }),
+            h('img', { src: '/blog/2016-02-03-0000/fees-per-tx-usd.png' }),
             h('figcaption', {}, 'Fees per Bitcoin transaction in USD')
         ),
         h('p', {},
@@ -826,7 +826,7 @@ function blogArticle_201602030000() {
             'stable for the last 12 months:'
         ),
         h('figure', {},
-            h('img', { src: '/content/blog/2016-02-03-0000/rewards-per-tx-usd.png' }),
+            h('img', { src: '/blog/2016-02-03-0000/rewards-per-tx-usd.png' }),
             h('figcaption', {}, 'Rewards per transaction in USD')
         ),
         h('h2', {}, 'Final thoughts'),
@@ -858,7 +858,7 @@ function blogArticle_201701061400() {
         ),
         h('hr', {}),
         h('figure', {},
-            h('img', { src: '/content/blog/2017-01-06-1400/rock-paintings-art.jpg' }),
+            h('img', { src: '/blog/2017-01-06-1400/rock-paintings-art.jpg' }),
             h('figcaption', {},
                 'Cave paintings via https://www.shutterstock.com/pic-94533745/' +
                 'stock-photo-famous-prehistoric-rock-paintings-of-tassili-najjer-algeria.html'
