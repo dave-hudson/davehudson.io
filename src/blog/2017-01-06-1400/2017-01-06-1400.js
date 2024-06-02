@@ -4,7 +4,7 @@ export function blogArticle_201701061400() {
     return [
         h('em', {},
             'Note 2020-03-06: This was originally published as an opinion piece at ',
-            h('a', { hRef: 'https://www.coindesk.com/what-iot-history-reveals-about-blockchains-challenges' },
+            h('a', { href: 'https://www.coindesk.com/what-iot-history-reveals-about-blockchains-challenges' },
                 'Coindesk'
             ),
             '.'
