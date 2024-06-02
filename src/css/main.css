@@ -203,6 +203,8 @@ body {
 
 .container .article table {
     margin: 25px auto 25px auto;
+    border-spacing: 0;
+    border-collapse: collapse;
 }
 
 .container .article table th {

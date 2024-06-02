@@ -10,6 +10,7 @@ import { blogArticle_201404280000 } from './2014-04-28-0000/2014-04-28-0000.js';
 import { blogArticle_201404300000 } from './2014-04-30-0000/2014-04-30-0000.js';
 import { blogArticle_201405190000 } from './2014-05-19-0000/2014-05-19-0000.js';
 import { blogArticle_201405200000 } from './2014-05-20-0000/2014-05-20-0000.js';
+import { blogArticle_201405240000 } from './2014-05-24-0000/2014-05-24-0000.js';
 import { blogArticle_201406050000 } from './2014-06-05-0000/2014-06-05-0000.js';
 import { blogArticle_201602030000 } from './2016-02-03-0000/2016-02-03-0000.js';
 import { blogArticle_201701061400 } from './2017-01-06-1400/2017-01-06-1400.js';
@@ -79,6 +80,12 @@ let blogContent = [
         '2014-05-20',
         '/blog/2014-05-20-0000',
         blogArticle_201405200000
+    ),
+    new BlogPosts(
+        'Reach for the ear defenders!',
+        '2014-05-24',
+        '/blog/2014-05-24-0000',
+        blogArticle_201405240000
     ),
     new BlogPosts(
         'Strange spikes revisited!',
