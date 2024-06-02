@@ -73,7 +73,7 @@ let blogContent = [
     ),
     new BlogPosts(
         'What IoT history reveals about blockchain\'s challenges',
-        '2017-01-06-1400',
+        '2017-01-06 14:00',
         '/blog/2017-01-06-1400',
         blogArticle_201701061400
     ),
