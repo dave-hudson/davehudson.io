@@ -1,4 +1,6 @@
 import { h, VDom, updateElement } from '/lib/dvdi.js';
+import { aboutPage } from '/about/about.js';
+import { pageHeader, articleTitle, pageFooter } from "/lib/page.js";
 
 console.log('SCRIPT RELOADED!')
 
@@ -22,198 +24,11 @@ function runVDomUpdates() {
     updateQueue.clear();
 }
 
-let darkTheme = null;
-let darkModeSun = null;
-let darkModeMoon = null;
-
-function sunMoonIcon(isSun, clickCallback) {
-    const component = () => h('div', {
-            className: 'icon',
-            id: isSun ? 'dark-mode-sun' : 'dark-mode-moon',
-            onClick: () => clickCallback(!isSun)
-        },
-        h('a', {},
-            h('i', { 'data-feather': isSun ? 'sun' : 'moon' })
-        )
-    )
-
-    return component();
-}
-
-function pageHeader() {
-    const component = () => h('header', { className: 'header'},
-        h('table', { className: 'site-title'},
-            h('tbody', {},
-                h('tr', {},
-                    h('td', {},
-                        h('h1', {}, 'Dave Hudson'),
-                        h('h2', {},
-                            h('a', { href: '/', onClick: (e) => navigateEvent(e, '/') }, 'hashingit.com')
-                        )
-                    ),
-                    h('td', {},
-                        h('nav', { className: 'social' },
-                            h('div', { className: 'icon' },
-                                h('a', { href: '/index.xml', title: 'RSS' },
-                                    h('i', { 'data-feather': 'rss' })
-                                )
-                            ),
-                            h('div', { className: 'icon' },
-                                h('a', { href: 'https://twitter.com/hashingitcom', title: 'Twitter' },
-                                    h('i', { 'data-feather': 'twitter' })
-                                )
-                            ),
-                            h('div', { className: 'icon' },
-                                h('a', { href: 'https://facebook.com/hashingitcom', title: 'Facebook' },
-                                    h('i', { 'data-feather': 'facebook' })
-                                )
-                            ),
-                            h('div', { className: 'icon' },
-                                h('a', { href: 'https://linkedin.com/in/davejh', title: 'LinkedIn' },
-                                    h('i', { 'data-feather': 'linkedin' })
-                                )
-                            ),
-                            h('div', { className: 'icon' },
-                                h('a', { href: 'https://github.com/dave-hudson', title: 'GitHub' },
-                                    h('i', { 'data-feather': 'github' })
-                                )
-                            )
-                        )
-                    )
-                )
-            )
-        ),
-        h('nav', { className: 'site-menu' },
-            h('div', { className: 'menu' },
-                h('a', { href: '/blog', onClick: (e) => navigateEvent(e, '/blog') }, 'Blog')
-            ),
-            h('div', { className: 'menu' },
-                h('a', { href: '/about', onClick: (e) => navigateEvent(e, '/about') }, 'Me')
-            ),
-            sunMoonIcon(false, setDarkTheme),
-            sunMoonIcon(true, setDarkTheme)
-        )
-    );
-
-    const windowMedia = window.matchMedia('(prefers-color-scheme: dark)');
-
-    function setDarkTheme(dark) {
-        if (dark === true) {
-            darkModeSun.style.display = '';
-            darkModeMoon.style.display = 'none';
-            darkTheme.disabled = false;
-            if (windowMedia.matches) {
-                localStorage.removeItem('darkTheme');
-            } else {
-                localStorage.setItem('darkTheme', 'dark');
-            }
-        } else {
-            darkModeSun.style.display = 'none';
-            darkModeMoon.style.display = '';
-            darkTheme.disabled = true;
-            if (!windowMedia.matches) {
-                localStorage.removeItem('darkTheme');
-            } else {
-                localStorage.setItem('darkTheme', 'light');
-            }
-        }
-    }
-
-    let vNode = component();
-    vNode.mountCallback = () => {
-        darkTheme = document.getElementById('dark-mode-theme');
-        darkModeSun = document.getElementById('dark-mode-sun');
-        darkModeMoon = document.getElementById('dark-mode-moon');
-
-        // If we can, work out whether we should default to dark or light mode.
-        let localDarkTheme = localStorage.getItem('darkTheme');
-        if (localDarkTheme === null) {
-            setDarkTheme(windowMedia.matches);
-        } else {
-            setDarkTheme(localDarkTheme === 'dark');
-        }
-
-        if (windowMedia.addEventListener) {
-            windowMedia.addEventListener('change', () => {
-                setDarkTheme(windowMedia.matches);
-            });
-        } else if (windowMedia.addListener) {
-            windowMedia.addListener(() => {
-                setDarkTheme(windowMedia.matches);
-            });
-        }
-    }
-
-    return vNode;
-}
-
-function articleTitle(title, timeStr = '') {
-    return h('header', { className: 'title' },
-        h('h1', {}, title),
-        h('time', { className: 'meta' }, timeStr)
-    );
-}
-
-function pageFooter() {
-    return h('footer', { className: 'footer' },
-        h('div', { className: 'copyright' },
-            '© 2014-2024 David J. Hudson'
-        )
-    );
-}
-
 function homePage() {
     return h('div', { className: 'container' },
         pageHeader(),
         h('article', { className: 'article' },
             articleTitle('hashingit.com')
-        ),
-        pageFooter()
-    );
-}
-
-function aboutPage() {
-    return h('div', { className: 'container' },
-        pageHeader(),
-        h('article', { className: 'article' },
-            articleTitle('About Me', '2024-05-29 07:45'),
-            h('p', {},
-                'Hello, good morning/afternoon/evening* and welcome! ',
-                h('em', {}, '(*please delete as appropriate)')
-            ),
-            h('p', {},
-                'I\'m an unrepentant geek who loves all things engineering, scientific or otherwise techie. ' +
-                'I would say I love maths too, but I should probably leave that to the experts :-)'
-            ),
-            h('p', {},
-                'I\'ve been playing with computers and writing software since I was 9 which is way more years than ' +
-                'I care to think about. In that time I\'ve had the pleasure of working on everything from massive scale ' +
-                'embedded systems (IoT before anyone called it that) to mainframes, and now to decentralised systems. ' +
-                'Along the way, I stopped to build operating systems, network stacks, compilers. For a while I also ' +
-                'helped design CPU instruction sets.'
-            ),
-            h('p', {},
-                'Lately I\'ve been building blockchain and distributed ledger systems.'
-            ),
-            h('figure', {},
-                h('img', { src: '/about/dave.jpg', alt: 'Me (apparently always pictured with a drink!)' }),
-                h('figcaption', {}, 'Me (apparently always pictured with a drink!)')
-            ),
-            h('p', {},
-                'That journey has led me all over the world and I\'ve had the privilege of collaborating with some ' +
-                'amazing people.  I live in North Wales (UK), but for 17 years I “commuted” to Northern California. ' +
-                'Now my travels tend to take me to London (UK) and Abu Dhabi (UAE).'
-            ),
-            h('h2', {}, 'What\'s this site about?'),
-            h('p', {},
-                'This site is a little bit of an experiment.  Over the years I\'ve researched and developed a lot ' +
-                'of things I think are interesting, and I wanted to have somewhere to try and share some of what ' +
-                'I\'ve learned and some of what I learn as I go along. If you do find anything interesting then ' +
-                'please feel free to reach out to me on: ',
-                h('a', { href: 'http://twitter.com/hashingitcom' }, 'Twitter'),
-                ' or ',
-                h('a', { href: 'http://linkedin.com/in/davejh/' }, 'LinkedIn')
-            )
         ),
         pageFooter()
     );
@@ -1352,7 +1167,7 @@ function handleLocation() {
     feather.replace();
 }
 
-function navigateEvent(e, path) {
+export function navigateEvent(e, path) {
     e.preventDefault();
     window.history.pushState({}, '', path);
     handleLocation();
