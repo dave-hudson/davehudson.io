@@ -7,6 +7,7 @@ import { blogArticle_201403170000 } from './2014-03-17-0000/2014-03-17-0000.js';
 import { blogArticle_201403230000 } from './2014-03-23-0000/2014-03-23-0000.js';
 import { blogArticle_201404030000 } from './2014-04-03-0000/2014-04-03-0000.js';
 import { blogArticle_201404280000 } from './2014-04-28-0000/2014-04-28-0000.js';
+import { blogArticle_201404300000 } from './2014-04-30-0000/2014-04-30-0000.js';
 import { blogArticle_201406050000 } from './2014-06-05-0000/2014-06-05-0000.js';
 import { blogArticle_201602030000 } from './2016-02-03-0000/2016-02-03-0000.js';
 import { blogArticle_201701061400 } from './2017-01-06-1400/2017-01-06-1400.js';
@@ -58,6 +59,12 @@ let blogContent = [
         '2014-04-28',
         '/blog/2014-04-28-0000',
         blogArticle_201404280000
+    ),
+    new BlogPosts(
+        'Prisoner\'s dilemmas?',
+        '2014-04-30',
+        '/blog/2014-04-30-0000',
+        blogArticle_201404300000
     ),
     new BlogPosts(
         'Strange spikes revisited!',
