@@ -47,7 +47,7 @@ function notFoundPage() {
 }
 
 export const routes = {
-    '/': homePage,
+    '': homePage,
     '/about': aboutPage,
     '/blog': blogPage
 };
@@ -55,7 +55,13 @@ export const routes = {
 let rootVNode = null;
 
 function handleLocation() {
-    const path = window.location.pathname;
+    let path = window.location.pathname;
+
+    // If there's a trailing slash on the path, remove it.
+    if (path.endsWith('/')) {
+        path = path.slice(0, -1);
+    }
+
     const pageFunction = routes[path] || notFoundPage;
     const newVNode = pageFunction();
     const app = document.querySelector('#app');
