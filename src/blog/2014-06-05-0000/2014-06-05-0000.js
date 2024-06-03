@@ -18,7 +18,7 @@ export function blogArticle_201406050000() {
         ),
         h('p', {},
             'The trend of high points in the graph (red line) shows another ',
-            h('a', { href: '/blog/2014-03-09-0000/', onClick: (e) => navigateEvent(e, '/blog/2014-03-09-0000')}, 
+            h('a', { href: '/blog/2014-03-09-0000/', onClick: (e) => navigateEvent(e, '/blog/2014-03-09-0000') }, 
                 'theme park ride'
             ),
             '. Like any good thrill ride we see regular highs and lows; here the peaks are anywhere between 212 days ' +
@@ -41,7 +41,7 @@ export function blogArticle_201406050000() {
         h('h2', {}, 'Related articles'),
         h('ul', {},
             h('li', {},
-                h('a', { href: '/blog/2014-03-12-0000/', onClick: (e) => navigateEvent(e, '/blog/2014-03-12-0000')},
+                h('a', { href: '/blog/2014-03-12-0000/', onClick: (e) => navigateEvent(e, '/blog/2014-03-12-0000') },
                     'Strange spikes in the Bitcoin price (2014-03-12)'
                 )
             )
