@@ -55,8 +55,12 @@ body {
     margin: 0;
     text-align: center;
     font-size: 13px;
-    font-weight: 300;
+    font-weight: 400;
     font-style: italic;
+}
+
+.container figure figcaption {
+    margin-bottom: 1.5rem;
 }
 
 .container hr {
