@@ -3,8 +3,8 @@ import { h } from '/lib/dvdi.js';
 export function blogArticle_201403120000() {
     return [
         h('p', {},
-            'There\'s something odd about the fluctuations in the price of Bitcoins. The data shows a set of ' +
-            'spikes when the price jumps up and then falls back somewhat and levels out. This wouldn\'t be so ' +
+            'There\'s something odd about the fluctuations in the price of Bitcoins.  The data shows a set of ' +
+            'spikes when the price jumps up and then falls back somewhat and levels out.  This wouldn\'t be so ' +
             'unusual if the spikes occurred intermittently but in the case of Bitcoins the spikes happen ' +
             'with a very surprising regularity!'
         ),
@@ -15,16 +15,16 @@ export function blogArticle_201403120000() {
         ),
         h('p', {},
             'The first thing to note is that the graph is plotted with a logarithmic Y axis so each step ' +
-            'indicates a price point ten times larger than the one below. Using a log scale means that we see ' +
+            'indicates a price point ten times larger than the one below.  Using a log scale means that we see ' +
             'patterns in the relative change in price much more easily, rather than changes in the actual value.'
         ),
         h('p', {},
             'There are 7 major spikes in the Bitcoin price starting on 17th November 2010 and finishing on the ' +
-            '30th November 2013. If we ignore the spike on 10th February 2011 the other 6 spikes have an ' +
+            '30th November 2013.  If we ignore the spike on 10th February 2011 the other 6 spikes have an ' +
             'amazingly consistent spacing!'
         ),
         h('p', {},
-            'All of the major price spikes also show another remarkable similarity. In each case the price ' +
+            'All of the major price spikes also show another remarkable similarity.  In each case the price ' +
             'ramps up very quickly, hits its highest point for a day or two and then slowly drops off.'
         ),
         h('p', {},

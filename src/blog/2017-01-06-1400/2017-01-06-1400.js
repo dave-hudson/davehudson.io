@@ -22,7 +22,7 @@ export function blogArticle_201701061400() {
             'large-scale industry.'
         ),
         h('p', {},
-            'Early enthusiasm for new technologies is nothing new. With most, an initial wave of excitement sees new ideas ' +
+            'Early enthusiasm for new technologies is nothing new.  With most, an initial wave of excitement sees new ideas ' +
             'touted as solutions to a huge range of problems, the hype fades, gives way to skepticism, and ultimately, real ' +
             'applications.'
         ),
@@ -51,9 +51,9 @@ export function blogArticle_201701061400() {
             'for the company making the circuit boards, the company building the product and the retailer that sells it.'
         ),
         h('p', {},
-            'Our next problem is that just having the hardware in our microwave oven isn\'t sufficient. We need to make it ' +
+            'Our next problem is that just having the hardware in our microwave oven isn\'t sufficient.  We need to make it ' +
             'communicate with servers that know how long, and at what power level, each new type of frozen pizza needs to ' +
-            'cook. That implies servers, it implies dev-ops teams, it implies software engineers, and it implies business ' +
+            'cook.  That implies servers, it implies dev-ops teams, it implies software engineers, and it implies business ' +
             'development people who persuade pizza manufacturers to provide cooking details for each new product they design.'
         ),
         h('p', {}, 'The infrastructure side has perhaps cost us another $10 per unit.'),
@@ -78,20 +78,20 @@ export function blogArticle_201701061400() {
         ),
         h('p', {},
             'The idea of a smart microwave might still look great on a PowerPoint slide, but the niggling details turn an ' +
-            'interesting concept into a liability. It isn\'t worth the setup time and $50 to a customer, and the trouble ' +
+            'interesting concept into a liability.  It isn\'t worth the setup time and $50 to a customer, and the trouble ' +
             'isn\'t worth it for the manufacturer.'
         ),
         h('h2', {}, 'Same old story'),
         h('p', {}, 'We have the same challenges when thinking about uses for blockchains.'),
         h('p', {},
-            'Not every problem needs a blockchain as a solution. Blockchains cost money in terms of processing, storage and ' +
-            'replication technology. In the case of a decentralized cryptocurrency, such as Bitcoin, the blockchain-like ' +
+            'Not every problem needs a blockchain as a solution.  Blockchains cost money in terms of processing, storage and ' +
+            'replication technology.  In the case of a decentralized cryptocurrency, such as Bitcoin, the blockchain-like ' +
             'concept is an essential characteristic to build a viable design, but for other problems we need to ask if the ' +
             'blockchain features are doing something valuable.'
         ),
         h('p', {},
             'If domestic microwaves aren\'t an option, then maybe refrigerators might be? Domestic ones have many of the ' +
-            'same problems as microwaves, but how about commercial refrigeration? What if we could connect these devices so ' +
+            'same problems as microwaves, but how about commercial refrigeration?  What if we could connect these devices so ' +
             'that if they broke down we could avoid expensive losses?'
         ),
         h('p', {},
@@ -104,24 +104,24 @@ export function blogArticle_201701061400() {
             'devices a long time ago.'
         ),
         h('p', {},
-            'This example has another subtlety. Food storage is generally subject to regulations, and many countries ' +
+            'This example has another subtlety.  Food storage is generally subject to regulations, and many countries ' +
             'require that records are kept of the temperatures at which products were stored.'
         ),
         h('p', {},
             'Without networking, there would be a need for someone to manually record temperatures every few hours, and ' +
-            'this is both expensive and error-prone. Commercial refrigeration equipment also involves service companies ' +
+            'this is both expensive and error-prone.  Commercial refrigeration equipment also involves service companies ' +
             'and manufacturers providing on-site repairs, so we have more stakeholders for whom access to data is important.'
         ),
         h('p', {},
-            'A naïve view of the problem might well have ignored them. Unexpected stakeholders introduce unexpected costs, ' +
+            'A naïve view of the problem might well have ignored them.  Unexpected stakeholders introduce unexpected costs, ' +
             'and may resist changes that do not also offer them substantial benefits.'
         ),
         h('p', {}, 'The implications for blockchains are very similar.'),
         h('p', {},
             'If a problem is already being solved, then, even if a blockchain might be useful, we need to ask if it offers ' +
-            'enough incremental advantages? Do we know what all the problems are, including the ones that might not be ' +
-            'obvious unless we were domain experts? Are there stakeholders, such as network architects, security experts, ' +
-            'data architects, dev-ops teams, etc., who must change existing systems to adopt a new one? Are there ' +
+            'enough incremental advantages?  Do we know what all the problems are, including the ones that might not be ' +
+            'obvious unless we were domain experts?  Are there stakeholders, such as network architects, security experts, ' +
+            'data architects, dev-ops teams, etc., who must change existing systems to adopt a new one?  Are there ' +
             'analytical needs that require big-data, relational, graph, or time-series, views of any data that is being ' +
             'processed?'
         ),
@@ -131,21 +131,21 @@ export function blogArticle_201701061400() {
             'devices that were supposed to become smart and connected.  These devices don\'t get replaced very quickly.'
         ),
         h('p', {},
-            'Most of our connected devices get replaced quite quickly. Vendors provide support for a few years but then ' +
+            'Most of our connected devices get replaced quite quickly.  Vendors provide support for a few years but then ' +
             'expect users to discard them and buy new ones.'
         ),
         h('p', {},
-            'The problem is we don\'t do this with most of our electrical items. We typically only replace them when they ' +
+            'The problem is we don\'t do this with most of our electrical items.  We typically only replace them when they ' +
             'fail. By making them connected we introduce entirely new modes of failure.'
         ),
         h('p', {},
-            'One such problem is how do we keep older devices working? Typically, manufacturers don\'t receive any form of ' +
+            'One such problem is how do we keep older devices working?  Typically, manufacturers don\'t receive any form of ' +
             'revenue once a device is sold, so what is the incentive to keep providing software updates once those devices ' +
             'are out of warranty?'
         ),
         h('p', {},
             'Another problem is that, even if we might want to pay for updates and bug fixes, it may not be economically ' +
-            'feasible to provide them. Older devices will have less powerful hardware that may not lend itself to new ' +
+            'feasible to provide them.  Older devices will have less powerful hardware that may not lend itself to new ' +
             'features.'
         ),
         h('p', {},
@@ -173,9 +173,9 @@ export function blogArticle_201701061400() {
         ),
         h('p', {},
             'When we consider the deployment of blockchains into other types of applications, then how are these sorts ' +
-            'of governance issues to be reviewed and resolved? If we consider systems that might potentially operate for ' +
-            'many years, then what does it mean to have immutable storage indefinitely? How will the inevitable mistakes ' +
-            'of various human users be corrected? What are the incentives for participants to keep systems running ' +
+            'of governance issues to be reviewed and resolved?  If we consider systems that might potentially operate for ' +
+            'many years, then what does it mean to have immutable storage indefinitely?  How will the inevitable mistakes ' +
+            'of various human users be corrected?  What are the incentives for participants to keep systems running ' +
             'correctly?'
         ),
         h('p', {},
@@ -202,8 +202,8 @@ export function blogArticle_201701061400() {
         ),
         h('p', {}, 'IoT arrived but not quite as expected.'),
         h('p', {},
-            'Business empires based on the concepts of VHS tapes and DVDs were displaced. Users gained access to far more ' +
-            'content, with lower costs and dramatically improved convenience. IoT technologies were not used in ' +
+            'Business empires based on the concepts of VHS tapes and DVDs were displaced.  Users gained access to far more ' +
+            'content, with lower costs and dramatically improved convenience.  IoT technologies were not used in ' +
             'isolation, but were combined to solve real problems for the people who ultimately pay for the solutions, ' +
             'customers.'
         ),
@@ -211,7 +211,7 @@ export function blogArticle_201701061400() {
         h('p', {},
             'The commercial refrigeration systems slowly changed too.  Internet connectivity was a better approach than ' +
             'the ad-hoc methods used 20 years ago, and so replaced earlier designs when they reached natural replacement ' +
-            'cycles. Likewise, mature and more capable blockchain designs may well have opportunities to replace other ' +
+            'cycles.  Likewise, mature and more capable blockchain designs may well have opportunities to replace other ' +
             'technologies in the future.'
         ),
         h('p', {},
@@ -222,7 +222,7 @@ export function blogArticle_201701061400() {
         h('p', {}, 'The challenge for other blockchains might be similar, but won\'t be the same.'),
         h('p', {},
             'Blockchain technology will be well served by recognizing, and confronting the hardest problems that we know ' +
-            'about, rather than imagining that we can resolve them later. We know that issues such as security, privacy, ' +
+            'about, rather than imagining that we can resolve them later.  We know that issues such as security, privacy, ' +
             'deployment and governance need to be addressed.'
         ),
         h('p', {},

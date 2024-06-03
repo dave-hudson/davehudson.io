@@ -4,12 +4,12 @@ import { navigateEvent } from '/app.js';
 export function blogArticle_201406050000() {
     return [
         h('p', {},
-            'About 3 months ago I looked at how the BTC price seems to spike up approximately every 7 months. It seems ' +
+            'About 3 months ago I looked at how the BTC price seems to spike up approximately every 7 months.  It seems ' +
             'to be happening again!'
         ),
         h('p', {},
             'Over the last couple of weeks the BTC price has reversed its earlier falls and has yet again started to jump ' +
-            'back up again. The timing is pretty-much consistent with previous spikes.'
+            'back up again.  The timing is pretty-much consistent with previous spikes.'
         ),
         h('p', {}, 'Let\'s look at the graph (plotted on a logarithmic Y axis):'),
         h('figure', {},
@@ -22,8 +22,8 @@ export function blogArticle_201406050000() {
                 'theme park ride'
             ),
             '. Like any good thrill ride we see regular highs and lows; here the peaks are anywhere between 212 days ' +
-            'and 235 days, but in general the later ones have been nearer 235 days. 235 days from the last high would ' +
-            'be 2014-07-24. It will be interesting to see if the current rises follow the same trend and if that\'s ' +
+            'and 235 days, but in general the later ones have been nearer 235 days.  235 days from the last high would ' +
+            'be 2014-07-24.  It will be interesting to see if the current rises follow the same trend and if that\'s ' +
             'near our next destination.'
         ),
         h('p', {},
