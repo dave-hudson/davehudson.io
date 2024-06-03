@@ -113,12 +113,6 @@ export function blogArticle_201406100000() {
             'only becomes apparent over a much longer timescale.'
         ),
         h('hr', {}),
-        h('h2', {}, 'Data reference'),
-        h('p', {},
-            'Data for this article was sourced via: ',
-            h('a', { href: 'http://blockchain.info' }, 'blockchain.info')
-        ),
-        h('hr', {}),
         h('h2', {}, 'Related articles'),
         h('ul', {},
             h('li', {},

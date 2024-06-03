@@ -111,8 +111,8 @@ let blogContent = [
     ),
     new BlogPosts(
         'The gambler\'s guide to Bitcoin mining',
-        '2014-06-23',
-        '/blog/2014-06-23-0000',
+        '2014-06-30',
+        '/blog/2014-06-30-0000',
         blogArticle_201406300000
     ),
     new BlogPosts(
