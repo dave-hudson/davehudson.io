@@ -86,12 +86,6 @@ export function blogArticle_201602030000() {
             'transactions may well be leaving more interesting transactions unaffected by any concerns about capacity.  ' +
             'While the block size squabbles will continue it\'s unclear that there have yet been any wide-scale ' +
             'implications for current users of the network.'
-        ),
-        h('hr', {}),
-        h('h2', {}, 'Data reference'),
-        h('p', {},
-            'Data for this article was sourced via: ',
-            h('a', { href: 'http://blockchain.info' }, 'blockchain.info')
         )
     ];
 }

@@ -130,12 +130,6 @@ export function blogArticle_201404030000() {
             'about next time :-)'
         ),
         h('hr', {}),
-        h('h2', {}, 'Data reference'),
-        h('p', {},
-            'Data for this article was sourced via: ',
-            h('a', { href: 'http://blockchain.info' }, 'blockchain.info')
-        ),
-        h('hr', {}),
         h('h2', {}, 'Related articles'),
         h('ul', {},
             h('li', {},

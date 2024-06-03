@@ -37,12 +37,6 @@ export function blogArticle_201403120000() {
         ),
         h('p', {},
             'Does anyone have any data that might explain this?'
-        ),
-        h('hr', {}),
-        h('h2', {}, 'Data reference'),
-        h('p', {},
-            'Data for this article was sourced via: ',
-            h('a', { href: 'http://blockchain.info' }, 'blockchain.info')
         )
     ];
 }

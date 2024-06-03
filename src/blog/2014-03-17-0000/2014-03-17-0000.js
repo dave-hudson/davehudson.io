@@ -63,12 +63,6 @@ export function blogArticle_201403170000() {
             'question, however, is what happens when the number of miners is large and the technology roadmap eventually ' +
             'limits the ability to increase the hash rate? At that point there will need to be some other driver for any ' +
             'other price increases.'
-        ),
-        h('hr', {}),
-        h('h2', {}, 'Data reference'),
-        h('p', {},
-            'Data for this article was sourced via: ',
-            h('a', { href: 'http://blockchain.info' }, 'blockchain.info')
         )
     ];
 }

@@ -15,6 +15,7 @@ import { blogArticle_201406100000 } from './2014-06-10-0000/2014-06-10-0000.js';
 import { blogArticle_201406150000 } from './2014-06-15-0000/2014-06-15-0000.js';
 import { blogArticle_201406230000 } from './2014-06-23-0000/2014-06-23-0000.js';
 import { blogArticle_201406300000 } from './2014-06-30-0000/2014-06-30-0000.js';
+import { blogArticle_201411020000 } from './2014-11-02-0000/2014-11-02-0000.js';
 import { blogArticle_201602030000 } from './2016-02-03-0000/2016-02-03-0000.js';
 import { blogArticle_201701061400 } from './2017-01-06-1400/2017-01-06-1400.js';
 import { blogArticle_202001272336 } from './2020-01-27-2336/2020-01-27-2336.js';
@@ -113,6 +114,12 @@ let blogContent = [
         '2014-06-23',
         '/blog/2014-06-23-0000',
         blogArticle_201406300000
+    ),
+    new BlogPosts(
+        '7 transactions per second? Really?',
+        '2014-11-02',
+        '/blog/2014-11-02-0000',
+        blogArticle_201411020000
     ),
     new BlogPosts(
         'A market for Bitcoin transaction fees?',
