@@ -8,7 +8,6 @@ import { blogArticle_201403230000 } from './2014-03-23-0000/2014-03-23-0000.js';
 import { blogArticle_201404030000 } from './2014-04-03-0000/2014-04-03-0000.js';
 import { blogArticle_201404280000 } from './2014-04-28-0000/2014-04-28-0000.js';
 import { blogArticle_201404300000 } from './2014-04-30-0000/2014-04-30-0000.js';
-import { blogArticle_201405190000 } from './2014-05-19-0000/2014-05-19-0000.js';
 import { blogArticle_201405200000 } from './2014-05-20-0000/2014-05-20-0000.js';
 import { blogArticle_201405240000 } from './2014-05-24-0000/2014-05-24-0000.js';
 import { blogArticle_201406050000 } from './2014-06-05-0000/2014-06-05-0000.js';
@@ -70,12 +69,6 @@ let blogContent = [
         '2014-04-30',
         '/blog/2014-04-30-0000',
         blogArticle_201404300000
-    ),
-    new BlogPosts(
-        'Bitcoins made in China',
-        '2014-05-19',
-        '/blog/2014-05-19-0000',
-        blogArticle_201405190000
     ),
     new BlogPosts(
         'Hash rate headaches',
