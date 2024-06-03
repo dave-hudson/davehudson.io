@@ -12,6 +12,7 @@ import { blogArticle_201405190000 } from './2014-05-19-0000/2014-05-19-0000.js';
 import { blogArticle_201405200000 } from './2014-05-20-0000/2014-05-20-0000.js';
 import { blogArticle_201405240000 } from './2014-05-24-0000/2014-05-24-0000.js';
 import { blogArticle_201406050000 } from './2014-06-05-0000/2014-06-05-0000.js';
+import { blogArticle_201406100000 } from './2014-06-10-0000/2014-06-10-0000.js';
 import { blogArticle_201602030000 } from './2016-02-03-0000/2016-02-03-0000.js';
 import { blogArticle_201701061400 } from './2017-01-06-1400/2017-01-06-1400.js';
 import { blogArticle_202001272336 } from './2020-01-27-2336/2020-01-27-2336.js';
@@ -92,6 +93,12 @@ let blogContent = [
         '2014-06-05',
         '/blog/2014-06-05-0000',
         blogArticle_201406050000
+    ),
+    new BlogPosts(
+        'Lies, damned lies and Bitcoin difficulties',
+        '2014-06-10',
+        '/blog/2014-06-10-0000',
+        blogArticle_201406100000
     ),
     new BlogPosts(
         'A market for Bitcoin transaction fees?',
