@@ -33,11 +33,6 @@ export function pageHeader() {
                     h('td', {},
                         h('nav', { className: 'social' },
                             h('div', { className: 'icon' },
-                                h('a', { href: '/index.xml', title: 'RSS' },
-                                    h('i', { 'data-feather': 'rss' })
-                                )
-                            ),
-                            h('div', { className: 'icon' },
                                 h('a', { href: 'https://twitter.com/hashingitcom', title: 'Twitter' },
                                     h('i', { 'data-feather': 'twitter' })
                                 )
