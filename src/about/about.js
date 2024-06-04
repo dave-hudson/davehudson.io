@@ -6,6 +6,10 @@ export function aboutPage() {
         pageHeader(),
         h('article', { className: 'article' },
             articleTitle('About Me', '2024-05-29 07:45'),
+            h('figure', {},
+                h('img', { src: '/about/dave.jpg', alt: 'Me (apparently always pictured with a drink!)' }),
+                h('figcaption', {}, 'Me (apparently always pictured with a drink!)')
+            ),
             h('p', {},
                 'Hello, good morning/afternoon/evening* and welcome! ',
                 h('em', {}, '(*please delete as appropriate)')
@@ -23,10 +27,6 @@ export function aboutPage() {
             ),
             h('p', {},
                 'Lately I\'ve been building blockchain and distributed ledger systems.'
-            ),
-            h('figure', {},
-                h('img', { src: '/about/dave.jpg', alt: 'Me (apparently always pictured with a drink!)' }),
-                h('figcaption', {}, 'Me (apparently always pictured with a drink!)')
             ),
             h('p', {},
                 'That journey has led me all over the world and I\'ve had the privilege of collaborating with some ' +

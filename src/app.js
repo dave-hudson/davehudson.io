@@ -29,7 +29,14 @@ function homePage() {
     return h('div', { className: 'container' },
         pageHeader(),
         h('article', { className: 'article' },
-            articleTitle('hashingit.com')
+            articleTitle('hashingit.com'),
+            h('p', {},
+                'Welcome to my (Dave Hudson\'s) space in the Internet!'
+            ),
+            h('p', {},
+                'The site started out as my blog about Bitcoin mining (hence the name).  Now, though, whenever I find the ' +
+                'time, I write about anything I find interesting.'
+            )
         ),
         pageFooter()
     );
