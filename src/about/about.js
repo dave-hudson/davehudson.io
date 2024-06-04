@@ -6,10 +6,6 @@ export function aboutPage() {
         pageHeader(),
         h('article', { className: 'article' },
             articleTitle('About Me', '2024-05-29 07:45'),
-            h('figure', {},
-                h('img', { src: '/about/dave.jpg', alt: 'Me (apparently always pictured with a drink!)' }),
-                h('figcaption', {}, 'Me (apparently always pictured with a drink!)')
-            ),
             h('p', {},
                 'Hello, good morning/afternoon/evening* and welcome! ',
                 h('em', {}, '(*please delete as appropriate)')
@@ -17,6 +13,10 @@ export function aboutPage() {
             h('p', {},
                 'I\'m an unrepentant geek who loves all things engineering, scientific or otherwise techie. ' +
                 'I would say I love maths too, but I should probably leave that to the experts :-)'
+            ),
+            h('figure', {},
+                h('img', { src: '/about/dave.jpg', alt: 'Me (apparently always pictured with a drink!)' }),
+                h('figcaption', {}, 'Me (apparently always pictured with a drink!)')
             ),
             h('p', {},
                 'I\'ve been playing with computers and writing software since I was 9 which is way more years than ' +
