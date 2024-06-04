@@ -138,16 +138,16 @@ let blogContent = [
         blogArticle_201411120000
     ),
     new BlogPosts(
-        'The myth of the megabyte Bitcoin block',
-        '2015-01-18',
-        '/blog/2015-01-18-0000',
-        blogArticle_201501180000
-    ),
-    new BlogPosts(
         'Pool wars?',
         '2014-12-05',
         '/blog/2014-12-05-0000',
         blogArticle_201412050000
+    ),
+    new BlogPosts(
+        'The myth of the megabyte Bitcoin block',
+        '2015-01-18',
+        '/blog/2015-01-18-0000',
+        blogArticle_201501180000
     ),
     new BlogPosts(
         'A market for Bitcoin transaction fees?',
