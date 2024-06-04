@@ -45,7 +45,7 @@ export function blogArticle_201411120000() {
             h('a', { href: '/blog/2014-11-02-0000/', onClick: (e) => navigateEvent(e, '/blog/2014-11-02-0000') },
                 '7 transactions per second?  Really?'
             ),
-            'there\'s actually a hard limit on transaction space and the current mean transaction size limits the network ' +
+            '", there\'s actually a hard limit on transaction space and the current mean transaction size limits the network ' +
             'to less than 3.5 transactions per second so the fee structure is designed to prevent people from consuming ' +
             'too much block space with low-value transactions (if anyone wants to do micropayments then they really need to ' +
             'aggregate them together).'

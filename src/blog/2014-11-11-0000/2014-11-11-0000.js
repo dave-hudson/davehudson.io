@@ -14,7 +14,7 @@ export function blogArticle_201411110000() {
             'Bitcoin mining (and therefore transaction processing) is what\'s known as a Non-Homogenous (or Inhomogeneous) ' +
             'Poisson Process.  In the article, "',
             h('a', { href: '/blog/2014-05-20-0000/', onClick: (e) => navigateEvent(e, '/blog/2014-05-20-0000') },
-                'Hash rate headaches (2014-05-20)'
+                'Hash rate headaches'
             ),
             '" we saw how this actually works and that our nominal 10 minute spacing between Bitcoin blocks isn\'t quite as ' +
             'straightforward as we might hope.  For transaction processing though things get even more complicated.  Now ' +
@@ -24,7 +24,7 @@ export function blogArticle_201411110000() {
         h('p', {},
             'In the case of Bitcoin the transactions do have some other biases.  We saw in "',
             h('a', { href: '/blog/2014-11-02-0000/', onClick: (e) => navigateEvent(e, '/blog/2014-11-02-0000') },
-                '7 transactions per second?  Really? (2014-11-02)'
+                '7 transactions per second?  Really?'
             ),
             '" that Sundays are usually quieter than other days, while Bitcoin transactions can also be perturbed by network ' +
             'delays, orphan races and mining fees that might incentivize some transactions to be processed quicker than ' +

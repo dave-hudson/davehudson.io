@@ -228,7 +228,6 @@ export function blogArticle_201701061400() {
         h('p', {},
             'At the same time, we must avoid the temptation to use blockchains, and blockchain ideas, where they are not ' +
             'the best solutions, and champion those where they are.'
-        ),
-        h('p', {}, 'If we do these things, then 2017 should be a year where blockchain hype gives way to blockchain hope.')
+        )
     ];
 }

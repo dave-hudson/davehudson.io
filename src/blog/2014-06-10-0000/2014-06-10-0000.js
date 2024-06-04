@@ -69,7 +69,7 @@ export function blogArticle_201406100000() {
             h('a', { href: '/blog/2014-05-20-0000/', onClick: (e) => navigateEvent(e, '/blog/2014-05-20-0000') },
                 'Hash rate headaches'
             ),
-            'but it turns out to be a surprisingly effective estimate nonetheless.'
+            '") but it turns out to be a surprisingly effective estimate nonetheless.'
         ),
         h('h2', {}, 'Checking the baseline'),
         h('p', {},
@@ -78,9 +78,9 @@ export function blogArticle_201406100000() {
             h('a', { href: '/blog/2014-05-24-0000/', onClick: (e) => navigateEvent(e, '/blog/2014-05-24-0000') },
                 'Reach for the ear defenders'
             ),
-            'The question is what does our noise profile look like if we subtract out the baseline hash rate estimate?  This ' +
-            'should approximately follow Bitcoin\'s Poisson process noise profile and should oscillate about zero.  Here\'s ' +
-            'what it actually looks like for the last 12 months:'
+            '").  The question is what does our noise profile look like if we subtract out the baseline hash rate estimate?  ' +
+            'This should approximately follow Bitcoin\'s Poisson process noise profile and should oscillate about zero.  ' +
+            'Here\'s what it actually looks like for the last 12 months:'
         ),
         h('figure', {},
             h('img', { src: '/blog/2014-06-10-0000/12m-hash-rate-variation.png' }),

@@ -7,15 +7,15 @@ export function blogArticle_201501180000() {
             'It\'s well described how Bitcoin has a one Megabyte block limit; it\'s defined in the Bitcoin Core source ' +
             'code.  The knowledge of that 1 Mbyte limit has even served in some of my analysis such as "',
             h('a', { href: '/blog/2014-11-12-0000/', onClick: (e) => navigateEvent(e, '/blog/2014-11-12-0000') },
-                'The future of Bitcoin transaction fees? (2014-11-12)'
+                'The future of Bitcoin transaction fees?'
             ),
             '", "',
             h('a', { href: '/blog/2014-11-11-0000/', onClick: (e) => navigateEvent(e, '/blog/2014-11-11-0000') },
-                'Bitcoin traffic bulletin (2014-11-11)'
+                'Bitcoin traffic bulletin'
             ),
             '", and "',
             h('a', { href: '/blog/2014-11-02-0000/', onClick: (e) => navigateEvent(e, '/blog/2014-11-02-0000') },
-                '7 Transactions per second?  Really? (2014-11-02)'
+                '7 Transactions per second?  Really?'
             ),
             '".  Turns out that I was wrong; in practice this limit is actually quite a lot smaller!'
         ),
@@ -23,7 +23,7 @@ export function blogArticle_201501180000() {
         h('p', {},
             'Back in "',
             h('a', { href: '/blog/2014-11-11-0000/', onClick: (e) => navigateEvent(e, '/blog/2014-11-11-0000') },
-                'Bitcoin traffic bulletin (2014-11-11)'
+                'Bitcoin traffic bulletin'
             ),
             '" we saw how first transaction confirmation times were highly dependent on how full mined blocks were.  ' +
             'Essentially anything larger than 30% started to show noticeably slower confirmations than the default 415 ' +
@@ -95,7 +95,7 @@ export function blogArticle_201501180000() {
             'block "full" at some level below 1M bytes.  Far from the 3.2 transactions per second that we thought the network ' +
             'could sustain in "',
             h('a', { href: '/blog/2014-11-02-0000/', onClick: (e) => navigateEvent(e, '/blog/2014-11-02-0000') },
-                '7 Transactions per second?  Really? (2014-11-02)'
+                '7 Transactions per second?  Really?'
             ),
             '" every miner imposing a 750k bytes limit would mean the network capacity was actually only 2.4 TPS!'
         ),
