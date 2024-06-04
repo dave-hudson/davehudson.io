@@ -63,10 +63,8 @@ function handleLocation() {
     }
 
     let pageFunction = routes[path];
-    console.log(pageFunction);
     if (pageFunction === undefined) {
         pageFunction = () => notFoundPage(path);
-        console.log(pageFunction);
     }
 
     const newVNode = pageFunction();
