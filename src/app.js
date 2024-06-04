@@ -35,12 +35,12 @@ function homePage() {
     );
 }
 
-function notFoundPage() {
+function notFoundPage(path) {
     return h('div', { className: 'container' },
         pageHeader(),
         h('article', { className: 'article' },
-            articleTitle('404: Page not found'),
-            h('p', {}, 'Move along, nothing to see here!')
+            articleTitle(`404: Page "${path}" not found`),
+            h('p', {}, `This is unlikely to be the page you were looking for!  Please check on the navigation above.`)
         ),
         pageFooter()
     );
@@ -62,7 +62,13 @@ function handleLocation() {
         path = path.slice(0, -1);
     }
 
-    const pageFunction = routes[path] || notFoundPage;
+    let pageFunction = routes[path];
+    console.log(pageFunction);
+    if (pageFunction === undefined) {
+        pageFunction = () => notFoundPage(path);
+        console.log(pageFunction);
+    }
+
     const newVNode = pageFunction();
     const app = document.querySelector('#app');
 

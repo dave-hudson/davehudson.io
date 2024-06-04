@@ -102,10 +102,10 @@ function aboutPage() {
     );
 }
 
-function notFoundPage() {
+function notFoundPage(path) {
     return h('div', null,
-        h('h1', null, '404: Page Not Found'),
-        h('a', { href: '/', onClick: (e) => navigateEvent(e, '/') }, 'Home')
+        h('h1', null, `404: Page "${path}" not found`),
+        h('p', {}, `This is unlikely to be the page you were looking for!  Please check on the navigation above.`)
     );
 }
 
