@@ -16,6 +16,7 @@ import { blogArticle_201406150000 } from './2014-06-15-0000/2014-06-15-0000.js';
 import { blogArticle_201406230000 } from './2014-06-23-0000/2014-06-23-0000.js';
 import { blogArticle_201406300000 } from './2014-06-30-0000/2014-06-30-0000.js';
 import { blogArticle_201411020000 } from './2014-11-02-0000/2014-11-02-0000.js';
+import { blogArticle_201411110000 } from './2014-11-11-0000/2014-11-11-0000.js';
 import { blogArticle_201411120000 } from './2014-11-12-0000/2014-11-12-0000.js';
 import { blogArticle_201412050000 } from './2014-12-05-0000/2014-12-05-0000.js';
 import { blogArticle_201602030000 } from './2016-02-03-0000/2016-02-03-0000.js';
@@ -122,6 +123,12 @@ let blogContent = [
         '2014-11-02',
         '/blog/2014-11-02-0000',
         blogArticle_201411020000
+    ),
+    new BlogPosts(
+        'Bitcoin traffic bulletin',
+        '2014-11-11',
+        '/blog/2014-11-11-0000',
+        blogArticle_201411110000
     ),
     new BlogPosts(
         'The future of Bitcoin transaction fees?',
