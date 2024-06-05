@@ -34,7 +34,7 @@ export function blogArticle_201404280000() {
         h('p', {},
             'If we take our 86 MW number then that equates to 2.06M kWh of electricity per day.  Electricity prices vary ' +
             'quite a lot based on location but the range is probably as low as \$0.08 all the way through to \$0.50 (see ',
-            h('a', { href: 'energyusecalculator.com/global_electricity_prices' },
+            h('a', { href: 'http://energyusecalculator.com/global_electricity_prices' },
                 'http://energyusecalculator.com/global_electricity_prices.htm'
             ),
             ' but a reasonable working average might be \$0.20.  Commercial users might average a lower raw cost for ' +
