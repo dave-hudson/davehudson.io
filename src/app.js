@@ -61,6 +61,10 @@ export const routes = {
 
 let rootVNode = null;
 
+function saveScrollPosition() {
+    history.replaceState({ scrollPosition }, document.title);
+}
+
 function handleLocation() {
     let path = window.location.pathname;
 
@@ -85,8 +89,14 @@ function handleLocation() {
 
 export function navigateEvent(e, path) {
     e.preventDefault();
-    window.history.pushState({}, '', path);
+    const scrollPosition = {
+        y: window.scrollY,
+        x: window.scrollX
+    }
+
+    window.history.pushState({ scrollPosition }, '', path);
     handleLocation();
+    window.scrollTo(0, 0);
 }
 
 function routeInit() {
@@ -94,7 +104,16 @@ function routeInit() {
     blogRouteInit();
 
     // Set up the navigation for stepping backwards.
-    window.onpopstate = () => handleLocation();
+    window.onpopstate = (e) => {
+        handleLocation();
+        if (!e.state) {
+            window.scrollTo(0, 0);
+        } else {
+            const scrollPosition = e.state.scrollPosition;
+            window.scrollTo(scrollPosition.x, scrollPosition.y);
+        }
+    };
+
     handleLocation();
 }
 
