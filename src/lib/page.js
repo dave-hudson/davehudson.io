@@ -25,8 +25,7 @@ export function pageHeader() {
             h('tbody', {},
                 h('tr', {},
                     h('td', {},
-                        h('h1', {}, 'Dave Hudson'),
-                        h('h2', {},
+                        h('h1', {},
                             h('a', { href: '/', onClick: (e) => navigateEvent(e, '/') }, 'hashingit.com')
                         )
                     ),
