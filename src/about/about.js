@@ -5,7 +5,7 @@ export function aboutPage() {
     return h('div', { className: 'container' },
         pageHeader(),
         h('article', { className: 'article' },
-            articleTitle('About Me', '2024-05-29 07:45'),
+            articleTitle('About me (Dave Hudson)', '2024-05-29 07:45'),
             h('p', {},
                 'Hello, good morning/afternoon/evening* and welcome! ',
                 h('em', {}, '(*please delete as appropriate)')
