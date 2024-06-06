@@ -65,10 +65,16 @@ export function blogArticle_202001272336() {
             'single mind.  It has a singular style.'
         ),
         h('p', {},
-            'It doesn\'t really matter what the style is, it should just always feel the same.  When `addFoo()`, ' +
-            '`subtractBar()`, and `multiplyThing()`, are suddenly joined by `BlahDivide()` the inconsistency is grating.  ' +
-            'We\'re left wondering how and why this last one is different from the others.  Even if we eventually conclude ' +
-            'it isn\'t, we\'ve expended unecessary time and mental effort thinking about it' 
+            'It doesn\'t really matter what the style is, it should just always feel the same.  When ',
+            h('code', {}, 'addFoo()'),
+            ', ',
+            h('code', {}, 'subtractFoo()'),
+            ', and ',
+            h('code', {}, 'multiplyFoo()'),
+            ', are suddenly joined by ',
+            h('code', {}, 'FooDivide()'),
+            ', the inconsistency is grating.  We\'re left wondering how and why this last one is different from the others.  ' +
+            'Even if we eventually conclude it isn\'t, we\'ve expended unecessary time and mental effort thinking about it.' 
         ),
         h('h2', {}, 'Self documenting code completely misses the point of comments'),
         h('p', {},
