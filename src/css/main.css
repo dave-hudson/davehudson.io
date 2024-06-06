@@ -134,6 +134,7 @@ body {
 
 .container .header table.site-title {
     width: 100%;
+    border-spacing: 0;
 }
 
 .container .header table.site-title td {
