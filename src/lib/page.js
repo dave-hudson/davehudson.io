@@ -32,13 +32,8 @@ export function pageHeader() {
                     h('td', {},
                         h('nav', { className: 'social' },
                             h('div', { className: 'icon' },
-                                h('a', { href: 'https://twitter.com/hashingitcom', title: 'Twitter' },
+                                h('a', { href: 'https://twitter.com/davehudsonio', title: 'Twitter' },
                                     h('i', { 'data-feather': 'twitter' })
-                                )
-                            ),
-                            h('div', { className: 'icon' },
-                                h('a', { href: 'https://facebook.com/hashingitcom', title: 'Facebook' },
-                                    h('i', { 'data-feather': 'facebook' })
                                 )
                             ),
                             h('div', { className: 'icon' },

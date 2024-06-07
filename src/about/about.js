@@ -36,7 +36,7 @@ export function aboutPage() {
             h('h2', {}, 'Contact me'),
             h('p', {},
                 'Please feel free to reach out to me on: ',
-                h('a', { href: 'http://twitter.com/hashingitcom' }, 'Twitter'),
+                h('a', { href: 'http://twitter.com/davehudsonio' }, 'Twitter'),
                 ' or ',
                 h('a', { href: 'http://linkedin.com/in/davejh/' }, 'LinkedIn')
             )
