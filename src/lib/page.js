@@ -48,7 +48,7 @@ export function pageHeader() {
                             ),
                             h('div', { className: 'icon' },
                                 h('a', {
-                                        href: 'mailto:blog@davehudson.io?subject=Email\ about\ davehudson.io',
+                                        href: 'mailto:hello@davehudson.io?subject=Email\ about\ davehudson.io',
                                         title: 'Email'
                                     },
                                     h('i', { 'data-feather': 'mail' })
