@@ -36,9 +36,11 @@ export function aboutPage() {
             h('h2', {}, 'Contact me'),
             h('p', {},
                 'Please feel free to reach out to me on: ',
-                h('a', { href: 'http://twitter.com/davehudsonio' }, 'Twitter'),
-                ' or ',
-                h('a', { href: 'http://linkedin.com/in/davejh/' }, 'LinkedIn')
+                h('a', { href: 'mailto:blog@davehudson.io?subject=Email\ about\ davehudson.io' }, 'Email'),
+                ', ',
+                h('a', { href: 'http://linkedin.com/in/davejh/' }, 'LinkedIn'),
+                ', or ',
+                h('a', { href: 'http://twitter.com/davehudsonio' }, 'Twitter')
             )
         ),
         pageFooter()

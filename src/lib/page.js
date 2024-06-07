@@ -45,6 +45,14 @@ export function pageHeader() {
                                 h('a', { href: 'https://github.com/dave-hudson', title: 'GitHub' },
                                     h('i', { 'data-feather': 'github' })
                                 )
+                            ),
+                            h('div', { className: 'icon' },
+                                h('a', {
+                                        href: 'mailto:blog@davehudson.io?subject=Email\ about\ davehudson.io',
+                                        title: 'Email'
+                                    },
+                                    h('i', { 'data-feather': 'mail' })
+                                )
                             )
                         )
                     )
