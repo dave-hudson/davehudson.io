@@ -53,7 +53,12 @@ function notFoundPage(path) {
         pageHeader(),
         h('article', { className: 'article' },
             articleTitle(`404: Page "${path}" not found`),
-            h('p', {}, `This is unlikely to be the page you were looking for!  Please check on the navigation above.`)
+            h('p', {}, 'This is unlikely to be the page you were looking for!'),
+            h('p', {},
+                'If you\'ve arrived here via an old link from the hashingit.com blog, please take a look at ',
+                h('a', { href: '/blog', onClick: (e) => navigateEvent(e, '/blog') }, 'Blog'),
+                '.  You should find all the original articles there.'
+            )
         ),
         pageFooter()
     );
