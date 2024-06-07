@@ -29,13 +29,19 @@ function homePage() {
     return h('div', { className: 'container' },
         pageHeader(),
         h('article', { className: 'article' },
-            articleTitle('hashingit.com'),
+            articleTitle('davehudson.io'),
             h('p', {},
                 'Welcome to my (Dave Hudson\'s) space in the Internet!'
             ),
+            h('h2', {}, 'What\'s new?'),
             h('p', {},
-                'The site started out as my blog about Bitcoin mining (hence the name).  Now, though, whenever I find the ' +
-                'time, I write about anything I find interesting.'
+                'Pretty much everything on this site is currently being reworked.  Over the next few weeks I will be ' +
+                'adding links to various open source projects I\'ve worked on.  I will also be adding some new blog ' +
+                'posts about the JavaScript engine I built to serve up this site.' 
+            ),
+            h('h2', {}, 'hashingit.com'),
+            h('p', {},
+                'The site started out as my blog about Bitcoin mining under the original site name hashingit.com.'
             )
         ),
         pageFooter()
