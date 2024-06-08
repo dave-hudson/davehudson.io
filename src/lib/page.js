@@ -32,6 +32,11 @@ export function pageHeader() {
                     h('td', {},
                         h('nav', { className: 'social' },
                             h('div', { className: 'icon' },
+                                h('a', { href: 'https://instagram.com/davehudsonio', title: 'Instagram' },
+                                    h('i', { 'data-feather': 'instagram' })
+                                )
+                            ),
+                            h('div', { className: 'icon' },
                                 h('a', { href: 'https://twitter.com/davehudsonio', title: 'Twitter' },
                                     h('i', { 'data-feather': 'twitter' })
                                 )
