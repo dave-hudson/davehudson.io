@@ -42,6 +42,11 @@ function homePage() {
             h('h2', {}, 'hashingit.com'),
             h('p', {},
                 'The site started out as my blog about Bitcoin mining under the original site name hashingit.com.'
+            ),
+            h('p', {},
+                'If you\'ve arrived here via an old link from the hashingit.com blog, please take a look at ',
+                h('a', { href: '/blog', onClick: (e) => navigateEvent(e, '/blog') }, 'Blog'),
+                '.  You should find all the original articles there.'
             )
         ),
         pageFooter()
