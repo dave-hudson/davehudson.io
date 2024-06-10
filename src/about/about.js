@@ -39,8 +39,10 @@ export function aboutPage() {
                 h('a', { href: 'mailto:hello@davehudson.io?subject=Email\ about\ davehudson.io' }, 'Email'),
                 ', ',
                 h('a', { href: 'http://linkedin.com/in/davejh/' }, 'LinkedIn'),
+                ', ',
+                h('a', { href: 'http://twitter.com/davehudsonio' }, 'Twitter'),
                 ', or ',
-                h('a', { href: 'http://twitter.com/davehudsonio' }, 'Twitter')
+                h('a', { href: 'http://instagram.com/davehudsonio' }, 'Instagram')
             )
         ),
         pageFooter()
