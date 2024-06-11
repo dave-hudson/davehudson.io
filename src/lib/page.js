@@ -69,6 +69,9 @@ export function pageHeader() {
                 h('a', { href: '/blog', onClick: (e) => navigateEvent(e, '/blog') }, 'Blog')
             ),
             h('div', { className: 'menu' },
+                h('a', { href: '/projects', onClick: (e) => navigateEvent(e, '/projects') }, 'Projects')
+            ),
+            h('div', { className: 'menu' },
                 h('a', { href: '/about', onClick: (e) => navigateEvent(e, '/about') }, 'Me')
             ),
             sunMoonIcon(false, setDarkTheme),

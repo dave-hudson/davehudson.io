@@ -1,6 +1,7 @@
 import { h, VDom, updateElement } from '/lib/dvdi.js';
 import { aboutPage } from '/about/about.js';
 import { blogPage, blogRouteInit } from '/blog/blog.js';
+import { projectsPage } from '/projects/projects.js';
 import { pageHeader, articleTitle, pageFooter } from "/lib/page.js";
 
 console.log('SCRIPT RELOADED!')
@@ -35,8 +36,7 @@ function homePage() {
             ),
             h('h2', {}, 'What\'s new?'),
             h('p', {},
-                'Pretty much everything on this site is currently being reworked.  Over the next few weeks I will be ' +
-                'adding links to various open source projects I\'ve worked on.  I will also be adding some new blog ' +
+                'Pretty much everything on this site is currently being reworked.  I will also be adding some new blog ' +
                 'posts about the JavaScript engine I built to serve up this site.' 
             ),
             h('h2', {}, 'hashingit.com'),
@@ -47,6 +47,12 @@ function homePage() {
                 'If you\'ve arrived here via an old link from the hashingit.com blog, please take a look at ',
                 h('a', { href: '/blog', onClick: (e) => navigateEvent(e, '/blog') }, 'Blog'),
                 '.  You should find all the original articles there.'
+            ),
+            h('h2', {}, 'Projects'),
+            h('p', {},
+                'Over many years I\'ve been involved with a lot of open source projects.  You can find more details at ',
+                h('a', { href: '/projects', onClick: (e) => navigateEvent(e, '/projects') }, 'Projects'),
+                '.'
             )
         ),
         pageFooter()
@@ -72,6 +78,7 @@ function notFoundPage(path) {
 export const routes = {
     '': homePage,
     '/about': aboutPage,
+    '/projects': projectsPage,
     '/blog': blogPage
 };
 
