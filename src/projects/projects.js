@@ -35,8 +35,7 @@ export function projectsPage() {
                 '.  There\'s also a project wiki here: ',
                 h('a', { href: 'https://github.com/dave-hudson/c8/wiki' },
                     'https://github.com/dave-hudson/c8/wiki'
-                ),
-                '.'
+                )
             ),
             h('p', {},
                 'When I built this code I also tracked the development journey on the wiki.  This includes all my notes on ' +
@@ -50,8 +49,7 @@ export function projectsPage() {
                 'From 2001 to 2012 I maintained the backends for Ubicom\'s IP2k and Ubicom32 processor family versions of gcc. ' +
                 'I no longer have links for the IP2k version, but the 32-bit Ubicom32 version can be found here: ',
                 h('a', { href: 'https://git.codelinaro.org/clo/external-ubicom/ubicom32-toolchain' },
-                    'https://git.codelinaro.org/clo/external-ubicom/ubicom32-toolchain'),
-                '.'
+                    'https://git.codelinaro.org/clo/external-ubicom/ubicom32-toolchain')
             ),
             h('p', {},
                 'The Ubicom32 processor family was very unusual.  All versions were heavily multithreaded (between 8 and 12 ' +
