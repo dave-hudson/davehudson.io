@@ -43,6 +43,10 @@ body {
     border-color: #444;
 }
 
+.container .header nav.site-menu button {
+    color: #70a0f0;
+}
+
 .container .prev-next {
     border-top: 1px solid #444;
 }

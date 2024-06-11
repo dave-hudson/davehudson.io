@@ -526,6 +526,19 @@ body {
     margin-right: 15px;
 }
 
+.container .header nav.site-menu button {
+    border-style: none;
+    border-width: 0;
+    padding-block: 0;
+    padding-inline: 0;
+    color: #5060e0;
+    background-color: transparent;
+}
+
+.container .header nav.site-menu button:hover {
+    color: #ff748c;
+}
+
 .container .header nav.site-menu .icon {
     float: right;
     margin-left: 7px;
