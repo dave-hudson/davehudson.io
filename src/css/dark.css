@@ -49,6 +49,7 @@ body {
 
 .container .footer {
     border-color: #444;
+    color: #aaa;
 }
 
 .container .recent-blog-posts .recent-blog-post .meta {
@@ -57,10 +58,6 @@ body {
 
 .container .blog-posts .blog-post .meta {
     color: #aaa;
-}
-
-.container .blog-posts .blog-post .draft-label {
-    color: #7088d0;
 }
 
 /*

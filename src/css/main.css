@@ -523,7 +523,7 @@ body {
     margin: 0;
     padding: 0;
     display: inline-block;
-    margin-right: 12px;
+    margin-right: 15px;
 }
 
 .container .header nav.site-menu .icon {
@@ -547,7 +547,7 @@ body {
 
 .container .article .title .meta {
     font-size: 0.725rem;
-    color: #777;
+    color: #555;
 }
 
 .container .article code {
@@ -679,7 +679,7 @@ body {
 .container .footer {
     text-align: right;
     font-size: 0.75rem;
-    color: #777;
+    color: #555;
     border-top: 1px solid #bbb;
     padding: 0;
     margin-top: 30px;
@@ -699,7 +699,7 @@ body {
 
 .container .recent-blog-posts .recent-blog-post .meta {
     font-size: 0.725rem;
-    color: #777;
+    color: #555;
     margin-bottom: 15px;
 }
 
@@ -736,17 +736,8 @@ body {
     display: table-cell;
     text-align: right;
     font-size: 0.725rem;
-    color: #777;
+    color: #555;
     margin-left: 5px;
-}
-
-.container .blog-posts .blog-post .draft-label {
-    color: #5060e0;
-    text-decoration: none;
-    padding: 2px 4px;
-    border-radius: 4px;
-    margin-left: 6px;
-    background-color: #f9f2f4;
 }
 
 /*
