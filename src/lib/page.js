@@ -11,7 +11,7 @@ function sunMoonIcon(isSun, clickCallback) {
             id: isSun ? 'dark-mode-sun' : 'dark-mode-moon',
             onClick: () => clickCallback(!isSun)
         },
-        h('button', {},
+        h('button', { 'aria-label': isSun ? 'Light mode' : 'Dark mode' },
             h('i', { 'data-feather': isSun ? 'sun' : 'moon' })
         )
     )
