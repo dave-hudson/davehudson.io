@@ -84,10 +84,6 @@ export const routes = {
 
 let rootVNode = null;
 
-function saveScrollPosition() {
-    history.replaceState({ scrollPosition }, document.title);
-}
-
 function handleLocation() {
     let path = window.location.pathname;
 
