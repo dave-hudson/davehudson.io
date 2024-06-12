@@ -1,5 +1,6 @@
-import { h, VDom, updateElement } from '/lib/dvdi.js';
+import { h } from '/lib/dvdi.js';
 import { navigateEvent } from '/app.js';
+import { mailIcon, gitHubIcon, linkedInIcon, twitterIcon, instagramIcon, moonIcon, sunIcon } from '/lib/feather.js';
 
 let darkTheme = null;
 let darkModeSun = null;
@@ -9,10 +10,12 @@ function sunMoonIcon(isSun, clickCallback) {
     const component = () => h('div', {
             className: 'icon',
             id: isSun ? 'dark-mode-sun' : 'dark-mode-moon',
-            onClick: () => clickCallback(!isSun)
         },
-        h('button', { 'aria-label': isSun ? 'Light mode' : 'Dark mode' },
-            h('i', { 'data-feather': isSun ? 'sun' : 'moon' })
+        h('button', {
+                'aria-label': isSun ? 'Light mode' : 'Dark mode',
+                onClick: () => clickCallback(!isSun)
+            },
+            isSun ? sunIcon() : moonIcon()
         )
     )
 
@@ -33,22 +36,22 @@ export function pageHeader() {
                         h('nav', { className: 'social' },
                             h('div', { className: 'icon' },
                                 h('a', { href: 'https://instagram.com/davehudsonio', title: 'Instagram' },
-                                    h('i', { 'data-feather': 'instagram' })
+                                    instagramIcon()
                                 )
                             ),
                             h('div', { className: 'icon' },
                                 h('a', { href: 'https://twitter.com/davehudsonio', title: 'Twitter' },
-                                    h('i', { 'data-feather': 'twitter' })
+                                    twitterIcon()
                                 )
                             ),
                             h('div', { className: 'icon' },
                                 h('a', { href: 'https://linkedin.com/in/davejh', title: 'LinkedIn' },
-                                    h('i', { 'data-feather': 'linkedin' })
+                                    linkedInIcon()
                                 )
                             ),
                             h('div', { className: 'icon' },
                                 h('a', { href: 'https://github.com/dave-hudson', title: 'GitHub' },
-                                    h('i', { 'data-feather': 'github' })
+                                    gitHubIcon()
                                 )
                             ),
                             h('div', { className: 'icon' },
@@ -56,7 +59,7 @@ export function pageHeader() {
                                         href: 'mailto:hello@davehudson.io?subject=Email\ about\ davehudson.io',
                                         title: 'Email'
                                     },
-                                    h('i', { 'data-feather': 'mail' })
+                                    mailIcon(),
                                 )
                             )
                         )

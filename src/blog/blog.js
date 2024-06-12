@@ -1,6 +1,7 @@
 import { h } from '/lib/dvdi.js';
 import { pageHeader, articleTitle, pageFooter } from '/lib/page.js';
 import { routes, navigateEvent } from '/app.js';
+import { chevronLeftIcon, chevronRightIcon } from '/lib/feather.js';
 import { blogArticle_201403090000 } from './2014-03-09-0000/2014-03-09-0000.js';
 import { blogArticle_201403120000 } from './2014-03-12-0000/2014-03-12-0000.js';
 import { blogArticle_201403170000 } from './2014-03-17-0000/2014-03-17-0000.js';
@@ -198,7 +199,7 @@ function navPrevNext(prevStr, prevHRef, nextStr, nextHRef) {
                 h('td', { className: 'prev' },
                     !prevStr ? '' : h('div', { className: 'icon' },
                         h('a', { href: prevHRef, onClick: (e) => navigateEvent(e, prevHRef) },
-                            h('i', { 'data-feather': 'chevron-left' })
+                            chevronLeftIcon()
                         )
                     )
                 ),
@@ -211,7 +212,7 @@ function navPrevNext(prevStr, prevHRef, nextStr, nextHRef) {
                 h('td', { className: 'next' },
                     !nextStr ? '' : h('div', { className: 'icon' },
                         h('a', { href: nextHRef, onClick: (e) => navigateEvent(e, nextHRef) },
-                            h('i', { 'data-feather': 'chevron-right' })
+                            chevronRightIcon()
                         )
                     )
                 )

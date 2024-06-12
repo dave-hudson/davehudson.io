@@ -1,14 +1,27 @@
+/*
+ * Various different namespaces that can be used in the DOM.
+ */
+const namespaces = {
+    svg: 'http://www.w3.org/2000/svg',
+    html: 'http://www.w3.org/1999/xhtml',
+    xml: 'http://www.w3.org/XML/1998/namespace',
+    xlink: 'http://www.w3.org/1999/xlink',
+    xmlns: 'http://www.w3.org/2000/xmlns/'
+}
+
 /**
  * Class representing a virtual DOM node.
  */
 export class VDom {
     /**
      * Create a VDom node.
+     * @param {string} namespace - The namespace for the matching DOM element.
      * @param {string} type - The type of the node (e.g., 'div').
      * @param {Object} [props={}] - The properties and attributes of the node.
      * @param {Array} [childNodes=[]] - The child nodes of this node.
      */
-    constructor(type, props = {}, childNodes = []) {
+    constructor(namespace, type, props = {}, childNodes = []) {
+        this.namespace = namespace;
         this.type = type;
         this.props = props;
         this.parentVNode = null;
@@ -111,12 +124,18 @@ function newAttribute(domElement, key, value) {
         return;
     }
 
-    if (key == 'className') {
+    if (key === 'className') {
         domElement.className = value;
         return;
     }
 
-    domElement.setAttribute(key, value);
+    const [prefix, ...unqualifiedName] = key.split(':')
+    let ns = null
+    if (prefix === 'xmlns' || unqualifiedName.length && namespaces[prefix]) {
+        ns = namespaces[prefix]
+    }
+
+    domElement.setAttributeNS(ns, key, String(value))
 }
 
 /*
@@ -133,7 +152,13 @@ function deleteAttribute(domElement, key, value) {
         return;
     }
 
-    domElement.removeAttribute(key);
+    const [prefix, ...unqualifiedName] = key.split(':')
+    let ns = null
+    if (prefix === 'xmlns' || unqualifiedName.length && namespaces[prefix]) {
+        ns = namespaces[prefix]
+    }
+
+    domElement.removeAttributeNS(ns, key);
 }
 
 /*
@@ -145,8 +170,8 @@ function render(vNode) {
         return domElement;
     }
 
-    const { type, props, childNodes } = vNode;
-    const domElement = document.createElement(type);
+    const { namespace, type, props, childNodes } = vNode;
+    const domElement = document.createElementNS(namespaces[namespace], type);
     vNode.domElement = domElement;
 
     for (const key in props) {
@@ -170,7 +195,7 @@ function unrender(vNode) {
         return;
     }
 
-    const { type, props, childNodes, domElement } = vNode;
+    const { props, childNodes, domElement } = vNode;
     const len = childNodes.length;
     for (let i = len - 1; i >= 0; i--) {
         const vn = childNodes[i];
@@ -190,8 +215,9 @@ function unrender(vNode) {
  */
 function changed(vnode1, vnode2) {
     return typeof vnode1 !== typeof vnode2 ||
-           (typeof vnode1 === 'string' && vnode1 !== vnode2) ||
-           vnode1.type !== vnode2.type;
+            (typeof vnode1 === 'string' && (vnode1 !== vnode2)) ||
+            (typeof vnode1 !== 'string' && (vnode1.namespace !== vnode2.namespace)) ||
+            vnode1.type !== vnode2.type;
 }
 
 /*
@@ -218,7 +244,7 @@ function updateProps(domElement, oldProps, newProps) {
  */
 export function updateElement(parent, parentVNode, oldVNode, newVNode, index) {
     // Did we add a new node?
-    if ((oldVNode === null) && newVNode) {
+    if ((oldVNode === null) && (newVNode !== null)) {
         if (parentVNode) {
             parentVNode.appendChild(newVNode);
         }
@@ -229,7 +255,7 @@ export function updateElement(parent, parentVNode, oldVNode, newVNode, index) {
     }
 
     // Did we remove an old node?
-    if (oldVNode && (newVNode === null)) {
+    if ((oldVNode !== null) && (newVNode === null)) {
         unmountVNode(oldVNode);
         unrender(oldVNode);
         if (parentVNode) {
@@ -288,14 +314,30 @@ export function updateElement(parent, parentVNode, oldVNode, newVNode, index) {
 }
 
 /**
- * Creates a virtual DOM element.
+ * Creates an HTML virtual DOM element.
  * @param {string} type The element type.
  * @param {Object} props The properties and attributes of the element.
  * @param {Array} childNodes The child elements or strings.
  * @returns {Object} A virtual DOM element.
  */
 export function h(type, props, ...childNodes) {
-    let v = new VDom(type, props || {}, [])
+    let v = new VDom('html', type, props || {}, [])
+    for (let i of childNodes) {
+        v.appendChild(i);
+    }
+
+    return v;
+}
+
+/**
+ * Creates an SVG virtual DOM element.
+ * @param {string} type The element type.
+ * @param {Object} props The properties and attributes of the element.
+ * @param {Array} childNodes The child elements or strings.
+ * @returns {Object} A virtual DOM element.
+ */
+export function svg(type, props, ...childNodes) {
+    let v = new VDom('svg', type, props || {}, [])
     for (let i of childNodes) {
         v.appendChild(i);
     }

@@ -7,30 +7,30 @@ global.requestAnimationFrame = (callback) => callback();
 
 describe('VDom Class', () => {
     test('constructor initializes properties correctly', () => {
-        const vDom = new VDom('div', { id: 'test' }, []);
+        const vDom = new VDom('html', 'div', { id: 'test' }, []);
         expect(vDom.type).toBe('div');
         expect(vDom.props).toEqual({ id: 'test' });
         expect(vDom.childNodes).toEqual([]);
     });
 
     test('appendChild adds a child VNode', () => {
-        const vDom = new VDom('div', {}, []);
-        const child = new VDom('span', {}, []);
+        const vDom = new VDom('html', 'div', {}, []);
+        const child = new VDom('html', 'span', {}, []);
         vDom.appendChild(child);
         expect(vDom.childNodes).toContain(child);
         expect(child.parentVNode).toBe(vDom);
     });
 
     test('appendChild adds a string child VNode', () => {
-        const vDom = new VDom('div', {}, []);
+        const vDom = new VDom('html', 'div', {}, []);
         const child = 'fred';
         vDom.appendChild(child);
         expect(vDom.childNodes).toContain(child);
     });
 
     test('removeChild removes a child VNode', () => {
-        const vDom = new VDom('div', {}, []);
-        const child = new VDom('span', {}, []);
+        const vDom = new VDom('html', 'div', {}, []);
+        const child = new VDom('html', 'span', {}, []);
         vDom.appendChild(child);
         vDom.removeChild(child);
         expect(vDom.childNodes).not.toContain(child);
@@ -38,7 +38,7 @@ describe('VDom Class', () => {
     });
 
     test('removeChild removes a child VNode', () => {
-        const vDom = new VDom('div', {}, []);
+        const vDom = new VDom('html', 'div', {}, []);
         const child = 'fred';
         vDom.appendChild(child);
         vDom.removeChild(child);
@@ -46,9 +46,9 @@ describe('VDom Class', () => {
     });
 
     test('replaceChild replaces an old child VNode with a new one', () => {
-        const vDom = new VDom('div', {}, []);
-        const oldChild = new VDom('span', {}, []);
-        const newChild = new VDom('p', {}, []);
+        const vDom = new VDom('html', 'div', {}, []);
+        const oldChild = new VDom('html', 'span', {}, []);
+        const newChild = new VDom('html', 'p', {}, []);
         vDom.appendChild(oldChild);
         vDom.replaceChild(newChild, oldChild);
         expect(vDom.childNodes).not.toContain(oldChild);
@@ -58,9 +58,9 @@ describe('VDom Class', () => {
     });
 
     test('replaceChild replaces an old string child VNode with a new one', () => {
-        const vDom = new VDom('div', {}, []);
+        const vDom = new VDom('html', 'div', {}, []);
         const oldChild = 'fred';
-        const newChild = new VDom('p', {}, []);
+        const newChild = new VDom('html', 'p', {}, []);
         vDom.appendChild(oldChild);
         vDom.replaceChild(newChild, oldChild);
         expect(vDom.childNodes).not.toContain(oldChild);
@@ -69,8 +69,8 @@ describe('VDom Class', () => {
     });
 
     test('replaceChild replaces an old child VNode with a new string one', () => {
-        const vDom = new VDom('div', {}, []);
-        const oldChild = new VDom('span', {}, []);
+        const vDom = new VDom('html', 'div', {}, []);
+        const oldChild = new VDom('html', 'span', {}, []);
         const newChild = 'fred';
         vDom.appendChild(oldChild);
         vDom.replaceChild(newChild, oldChild);
@@ -83,22 +83,22 @@ describe('VDom Class', () => {
 describe('updateElement function', () => {
     test('updateElement adds a new node', () => {
         const parent = document.createElement('div');
-        const newVNode = new VDom('span', {}, []);
+        const newVNode = new VDom('html', 'span', {}, []);
         updateElement(parent, null, null, newVNode, 0);
         expect(parent.childNodes).toContain(newVNode.domElement);
     });
 
     test('updateElement adds a new node to a parent node', () => {
         const parent = document.createElement('div');
-        const parentVNode = new VDom('div');
-        const newVNode = new VDom('span', {}, []);
+        const parentVNode = new VDom('html', 'div');
+        const newVNode = new VDom('html', 'span', {}, []);
         updateElement(parent, parentVNode, null, newVNode, 0);
         expect(parent.childNodes).toContain(newVNode.domElement);
     });
 
     test('updateElement removes an old node', () => {
         const parent = document.createElement('div');
-        const oldVNode = new VDom('span', {}, []);
+        const oldVNode = new VDom('html', 'span', {}, []);
         updateElement(parent, null, null, oldVNode, 0);
         updateElement(parent, null, oldVNode, null, 0);
         expect(parent.childNodes).not.toContain(oldVNode.domElement);
@@ -106,8 +106,8 @@ describe('updateElement function', () => {
 
     test('updateElement removes and old node from a parent node', () => {
         const parent = document.createElement('div');
-        const parentVNode = new VDom('div');
-        const newVNode = new VDom('span', {}, []);
+        const parentVNode = new VDom('html', 'div');
+        const newVNode = new VDom('html', 'span', {}, []);
         updateElement(parent, parentVNode, null, newVNode, 0);
         updateElement(parent, parentVNode, newVNode, null, 0);
         expect(parent.childNodes).not.toContain(newVNode.domElement);
@@ -115,8 +115,8 @@ describe('updateElement function', () => {
 
     test('updateElement replaces a node', () => {
         const parent = document.createElement('div');
-        const oldVNode = new VDom('span', {}, []);
-        const newVNode = new VDom('p', {}, []);
+        const oldVNode = new VDom('html', 'span', {}, []);
+        const newVNode = new VDom('html', 'p', {}, []);
         updateElement(parent, null, null, oldVNode, 0);
         updateElement(parent, null, oldVNode, newVNode, 0);
         expect(parent.childNodes.length).toBe(1);
@@ -125,9 +125,9 @@ describe('updateElement function', () => {
 
     test('updateElement replaces a node of a parent node', () => {
         const parent = document.createElement('div');
-        const parentVNode = new VDom('div');
-        const oldVNode = new VDom('span', {}, []);
-        const newVNode = new VDom('p', {}, []);
+        const parentVNode = new VDom('html', 'div');
+        const oldVNode = new VDom('html', 'span', {}, []);
+        const newVNode = new VDom('html', 'p', {}, []);
         updateElement(parent, parentVNode, null, oldVNode, 0);
         updateElement(parent, parentVNode, oldVNode, newVNode, 0);
         expect(parent.childNodes.length).toBe(1);
@@ -136,7 +136,7 @@ describe('updateElement function', () => {
 
     test('updateElement replaces a node with a string node', () => {
         const parent = document.createElement('div');
-        const oldVNode = new VDom('span', {}, []);
+        const oldVNode = new VDom('html', 'span', {}, []);
         const newVNode = 'george';
         updateElement(parent, null, null, oldVNode, 0);
         updateElement(parent, null, oldVNode, newVNode, 0);
@@ -147,7 +147,7 @@ describe('updateElement function', () => {
     test('updateElement replaces a string node with a node', () => {
         const parent = document.createElement('div');
         const oldVNode = 'fred';
-        const newVNode = new VDom('span', {}, []);
+        const newVNode = new VDom('html', 'span', {}, []);
         updateElement(parent, null, null, oldVNode, 0);
         updateElement(parent, null, oldVNode, newVNode, 0);
         expect(parent.childNodes.length).toBe(1);
@@ -206,14 +206,14 @@ describe('updateElement function', () => {
 
     test('updateElement adds a node with properties', () => {
         const parent = document.createElement('div');
-        const newVNode = new VDom('span', { className: 'test', onClick: () => {} }, []);
+        const newVNode = new VDom('html', 'span', { className: 'test', onClick: () => {} }, []);
         updateElement(parent, null, null, newVNode, 0);
         expect(parent.childNodes).toContain(newVNode.domElement);
     });
 
     test('updateElement removes a node with properties', () => {
         const parent = document.createElement('div');
-        const newVNode = new VDom('span', { className: 'test', onClick: () => {} }, []);
+        const newVNode = new VDom('html', 'span', { className: 'test', onClick: () => {} }, []);
         updateElement(parent, null, null, newVNode, 0);
         updateElement(parent, null, newVNode, null, 0);
         expect(parent.childNodes.length).toBe(0);
@@ -221,8 +221,8 @@ describe('updateElement function', () => {
 
     test('updateElement replaces a node with properties', () => {
         const parent = document.createElement('div');
-        const oldVNode = new VDom('span', { className: 'test', id: 'bob', onClick: () => {} }, []);
-        const newVNode = new VDom('span', { className: 'test', id: 'fred', onClick: () => {} }, []);
+        const oldVNode = new VDom('html', 'span', { className: 'test', id: 'bob', onClick: () => {} }, []);
+        const newVNode = new VDom('html', 'span', { className: 'test', id: 'fred', onClick: () => {} }, []);
         updateElement(parent, null, null, oldVNode, 0);
         updateElement(parent, null, oldVNode, newVNode, 0);
         expect(Object.keys(newVNode.props).length).toBe(3);
@@ -231,8 +231,8 @@ describe('updateElement function', () => {
 
     test('updateElement replaces a node with different properties', () => {
         const parent = document.createElement('div');
-        const oldVNode = new VDom('span', { className: 'test', style: 'bob', onClick: () => {} }, []);
-        const newVNode = new VDom('span', { className: 'test', id: 'fred', onClick: () => { foo(); } }, []);
+        const oldVNode = new VDom('html', 'span', { className: 'test', style: 'bob', onClick: () => {} }, []);
+        const newVNode = new VDom('html', 'span', { className: 'test', id: 'fred', onClick: () => { foo(); } }, []);
         updateElement(parent, null, null, oldVNode, 0);
         updateElement(parent, null, oldVNode, newVNode, 0);
         expect(Object.keys(newVNode.props).length).toBe(3);

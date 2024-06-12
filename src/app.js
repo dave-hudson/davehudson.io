@@ -107,7 +107,6 @@ function handleLocation() {
     updateElement(app, null, rootVNode, newVNode, 0);
     rootVNode = newVNode;
     console.log(`navigated to ${path}`)
-    feather.replace();
 }
 
 export function navigateEvent(e, path) {
