@@ -36,7 +36,7 @@ export function blogArticle_201404030000() {
             'have the next 2016 blocks take 2 weeks to complete.  Between the adoption of GPUs and the introduction of ' +
             'ASICs for mining this actually worked out quite well but the huge increases in hashing capacity enabled by ' +
             'ASICs have meant that the difficulty level has lagged behind. ',
-            h('a', { href: '/blog/2014-03-23-0000/', onClick: (e) => navigateEvent(e, '/blog/2014-03-23-0000') },
+            h('a', { href: '/blog/2014-03-23-0000', onClick: (e) => navigateEvent(e, '/blog/2014-03-23-0000') },
                 'ASIC technology'
             ),
             ' limits will eventually slow this but not for some months at least.'
@@ -84,7 +84,7 @@ export function blogArticle_201404030000() {
         ),
         h('p', {},
             'In an earlier article, "',
-            h('a', { href: '/blog/2014-03-17-0000/', onClick: (e) => navigateEvent(e, '/blog/2014-03-17-0000') },
+            h('a', { href: '/blog/2014-03-17-0000', onClick: (e) => navigateEvent(e, '/blog/2014-03-17-0000') },
                 'Chickens and eggs?'
             ),
             '", I speculated about the relationship between hashing rates and BTC price.  In retrospect it seems a more ' +
@@ -133,12 +133,12 @@ export function blogArticle_201404030000() {
         h('h2', {}, 'Related articles'),
         h('ul', {},
             h('li', {},
-                h('a', { href: '/blog/2014-03-23-0000/', onClick: (e) => navigateEvent(e, '/blog/2014-03-23-0000') },
+                h('a', { href: '/blog/2014-03-23-0000', onClick: (e) => navigateEvent(e, '/blog/2014-03-23-0000') },
                     'Where next for Bitcoin mining ASICs? (2014-03-23)'
                 )
             ),
             h('li', {},
-                h('a', { href: '/blog/2014-03-09-0000/', onClick: (e) => navigateEvent(e, '/blog/2014-03-09-0000') },
+                h('a', { href: '/blog/2014-03-09-0000', onClick: (e) => navigateEvent(e, '/blog/2014-03-09-0000') },
                     'The Bitcoin runaway mine train (2014-03-09)'
                 )
             )

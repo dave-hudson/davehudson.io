@@ -73,7 +73,7 @@ export function blogArticle_201512190000() {
             'period of 2016 blocks.  If we start out at, say, 300 PH/s but add 0.2% new capacity every day, then after 14 ' +
             'days (a little more than the 2016 blocks take) we\'d have 308.5 PH/s.  That means that towards the end of the ' +
             '2016 blocks we\'re actually going to see blocks found more quickly than at the start.  In addition, as we saw in "',
-            h('a', { href: '/blog/2014-06-10-0000/', onClick: (e) => navigateEvent(e, '/blog/2014-06-10-0000') },
+            h('a', { href: '/blog/2014-06-10-0000', onClick: (e) => navigateEvent(e, '/blog/2014-06-10-0000') },
                 'Lies, damned lies and Bitcoin difficulties'
             ),
             '", the nominal hash rate calculated at the end of each difficulty period lags about a week behind the current ' +
@@ -163,22 +163,22 @@ export function blogArticle_201512190000() {
         h('h2', {}, 'Related articles'),
         h('ul', {},
             h('li', {},
-                h('a', { href: '/blog/2015-02-06-0000/', onClick: (e) => navigateEvent(e, '/blog/2015-02-06-0000') },
+                h('a', { href: '/blog/2015-02-06-0000', onClick: (e) => navigateEvent(e, '/blog/2015-02-06-0000') },
                     'Waiting for blocks (2015-02-06)'
                 )
             ),
             h('li', {},
-                h('a', { href: '/blog/2014-06-10-0000/', onClick: (e) => navigateEvent(e, '/blog/2014-06-10-0000') },
+                h('a', { href: '/blog/2014-06-10-0000', onClick: (e) => navigateEvent(e, '/blog/2014-06-10-0000') },
                     'Lies, damned lies and Bitcoin difficulties (2014-06-10)'
                 )
             ),
             h('li', {},
-                h('a', { href: '/blog/2014-05-24-0000/', onClick: (e) => navigateEvent(e, '/blog/2014-05-24-0000') },
+                h('a', { href: '/blog/2014-05-24-0000', onClick: (e) => navigateEvent(e, '/blog/2014-05-24-0000') },
                     'Reach for the ear defenders (2014-05-24)'
                 )
             ),
             h('li', {},
-                h('a', { href: '/blog/2014-05-20-0000/', onClick: (e) => navigateEvent(e, '/blog/2014-05-20-0000') },
+                h('a', { href: '/blog/2014-05-20-0000', onClick: (e) => navigateEvent(e, '/blog/2014-05-20-0000') },
                     'Hash rate headaches (2014-05-20)'
                 )
             )

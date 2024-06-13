@@ -1,4 +1,4 @@
-import { h, VDom, updateElement } from '/lib/dvdi.js';
+import { h, updateElement } from '/lib/dvdi.js';
 import { aboutPage } from '/about/about.js';
 import { blogPage, blogRouteInit } from '/blog/blog.js';
 import { projectsPage } from '/projects/projects.js';

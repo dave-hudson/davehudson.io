@@ -5,7 +5,7 @@ export function blogArticle_201512200000() {
     return [
         h('p', {},
             'In November 2014 I wrote an article, "',
-            h('a', { href: '/blog/2014-11-11-0000/', onClick: (e) => navigateEvent(e, '/blog/2014-11-11-0000') },
+            h('a', { href: '/blog/2014-11-11-0000', onClick: (e) => navigateEvent(e, '/blog/2014-11-11-0000') },
                 'Bitcoin traffic bulletin?'
             ),
             '" that sought to look at what happens if the Bitcoin network started to get congested.  Since then there has ' +
@@ -15,7 +15,7 @@ export function blogArticle_201512200000() {
             'In the original blog post the network\'s block capacity was at about 30%.  As of early December 2015 the ' +
             'network\'s block capacity is at least 58%.  In practice some blocks are mined smaller than the full 1M bytes ' +
             'that could be used (see "',
-            h('a', { href: '/blog/2015-01-18-0000/', onClick: (e) => navigateEvent(e, '/blog/2015-01-18-0000') },
+            h('a', { href: '/blog/2015-01-18-0000', onClick: (e) => navigateEvent(e, '/blog/2015-01-18-0000') },
                 'The myth of the megabyte Bitcoin block'
             ),
             '") and so we may have more block capacity being used:'
@@ -45,12 +45,12 @@ export function blogArticle_201512200000() {
         h('h2', {}, 'Related articles'),
         h('ul', {},
             h('li', {},
-                h('a', { href: '/blog/2015-01-18-0000/', onClick: (e) => navigateEvent(e, '/blog/2015-01-18-0000') },
+                h('a', { href: '/blog/2015-01-18-0000', onClick: (e) => navigateEvent(e, '/blog/2015-01-18-0000') },
                     'The myth of the megabyte Bitcoin block (2015-01-18)'
                 )
             ),
             h('li', {},
-                h('a', { href: '/blog/2014-11-11-0000/', onClick: (e) => navigateEvent(e, '/blog/2014-11-11-0000') },
+                h('a', { href: '/blog/2014-11-11-0000', onClick: (e) => navigateEvent(e, '/blog/2014-11-11-0000') },
                     'Bitcoin traffic bulletin? (2014-11-11)'
                 )
             )

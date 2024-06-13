@@ -13,7 +13,7 @@ export function blogArticle_201405240000() {
         h('h2', {}, 'A simple question'),
         h('p', {},
             'An earlier article, "',
-            h('a', { href: '/blog/2014-05-20-0000/', onClick: (e) => navigateEvent(e, '/blog/2014-05-20-0000') },
+            h('a', { href: '/blog/2014-05-20-0000', onClick: (e) => navigateEvent(e, '/blog/2014-05-20-0000') },
                 'Hash rate headaches'
             ),
             '" looked at the statistics associated with Bitcoin mining and how it is a random Poisson Process.  It was ' +
@@ -168,7 +168,7 @@ export function blogArticle_201405240000() {
         h('h2', {}, 'Related articles'),
         h('ul', {},
             h('li', {},
-                h('a', { href: '/blog/2014-05-20-0000/', onClick: (e) => navigateEvent(e, '/blog/2014-05-20-0000') },
+                h('a', { href: '/blog/2014-05-20-0000', onClick: (e) => navigateEvent(e, '/blog/2014-05-20-0000') },
                     'Hash rate headaches (2014-05-20)'
                 )
             )

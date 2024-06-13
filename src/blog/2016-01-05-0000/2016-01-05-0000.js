@@ -17,7 +17,7 @@ export function blogArticle_201601050000() {
         h('p', {},
             'The Bitcoin network is secured and processes transactions by mining.  Mining comprises two activities, block ' +
             'making and hashing.  Block making is generally the preserve of very large miners or mining pool operators (see "',
-            h('a', { href: '/blog/2014-06-30-0000/', onClick: (e) => navigateEvent(e, '/blog/2014-06-30-0000') },
+            h('a', { href: '/blog/2014-06-30-0000', onClick: (e) => navigateEvent(e, '/blog/2014-06-30-0000') },
                 'The gambler\'s guide to Bitcoin mining'
             ),
             '") while hashing is the activity that can be decentralized to many different operators.  For our purposes, ' +
@@ -143,7 +143,7 @@ export function blogArticle_201601050000() {
         h('h2', {}, 'Related articles'),
         h('ul', {},
             h('li', {},
-                h('a', { href: '/blog/2014-06-30-0000/', onClick: (e) => navigateEvent(e, '/blog/2014-06-30-0000') },
+                h('a', { href: '/blog/2014-06-30-0000', onClick: (e) => navigateEvent(e, '/blog/2014-06-30-0000') },
                     'The gambler\'s guide to Bitcoin mining (2014-06-30)'
                 )
             ),
