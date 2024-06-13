@@ -7,7 +7,7 @@ let darkModeSun = null;
 let darkModeMoon = null;
 
 function sunMoonIcon(isSun, clickCallback) {
-    const component = () => h('div', {
+    return h('div', {
             className: 'icon',
             id: isSun ? 'dark-mode-sun' : 'dark-mode-moon',
         },
@@ -18,8 +18,6 @@ function sunMoonIcon(isSun, clickCallback) {
             isSun ? sunIcon() : moonIcon()
         )
     )
-
-    return component();
 }
 
 export function pageHeader() {
