@@ -1,6 +1,6 @@
 import { h } from '/lib/dvdi.js';
 import { navigateEvent } from '/app.js';
-import { mailIcon, gitHubIcon, linkedInIcon, twitterIcon, instagramIcon, moonIcon, sunIcon } from '/lib/icons.js';
+import { mailIcon, gitHubIcon, linkedInIcon, xIcon, instagramIcon, moonIcon, sunIcon } from '/lib/icons.js';
 
 let darkTheme = null;
 let darkModeSun = null;
@@ -38,8 +38,8 @@ export function pageHeader() {
                                 )
                             ),
                             h('div', { className: 'icon' },
-                                h('a', { href: 'https://twitter.com/davehudsonio', title: 'Twitter' },
-                                    twitterIcon()
+                                h('a', { href: 'https://x.com/davehudsonio', title: 'X' },
+                                    xIcon()
                                 )
                             ),
                             h('div', { className: 'icon' },

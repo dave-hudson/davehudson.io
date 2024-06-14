@@ -40,7 +40,7 @@ export function aboutPage() {
                 ', ',
                 h('a', { href: 'http://linkedin.com/in/davejh/' }, 'LinkedIn'),
                 ', ',
-                h('a', { href: 'http://twitter.com/davehudsonio' }, 'Twitter'),
+                h('a', { href: 'http://x.com/davehudsonio' }, 'X'),
                 ', or ',
                 h('a', { href: 'http://instagram.com/davehudsonio' }, 'Instagram')
             )
