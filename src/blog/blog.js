@@ -2,7 +2,6 @@ import { h } from '/lib/dvdi.js';
 import { pageHeader, articleTitle, pageFooter } from '/lib/page.js';
 import { navigateEvent } from '/app.js';
 import { chevronLeftIcon, chevronRightIcon } from '/lib/icons.js';
-import { BlogPost } from '/blog/BlogPost.js'
 import { blogPost_201403090000 } from './2014-03-09-0000/2014-03-09-0000.js';
 import { blogPost_201403120000 } from './2014-03-12-0000/2014-03-12-0000.js';
 import { blogPost_201403170000 } from './2014-03-17-0000/2014-03-17-0000.js';
@@ -124,14 +123,14 @@ export function blogPage() {
 
     // Iterate all the blog content and create year and item enties.
     for (let i = blogContent.length - 1; i >= 0; i--) {
-        const blogPost = blogContent[i];
-        const blogYear = blogPost.dateTime.slice(0, 4);
+        const { hRef, title, dateTime } = blogContent[i];
+        const blogYear = dateTime.slice(0, 4);
         if (headlineYear != blogYear) {
             headlineYear = blogYear;
             pageView.push(h('h2', {}, headlineYear));
         }
 
-        pageView.push(blogLink(blogPost.hRef, blogPost.title, blogPost.dateTime));
+        pageView.push(blogLink(hRef, title, dateTime));
     }
 
     // Return the VDOM for the blog page.
