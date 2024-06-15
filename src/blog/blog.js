@@ -1,6 +1,6 @@
 import { h } from '/lib/dvdi.js';
 import { pageHeader, articleTitle, pageFooter } from '/lib/page.js';
-import { routes, navigateEvent } from '/app.js';
+import { navigateEvent } from '/app.js';
 import { chevronLeftIcon, chevronRightIcon } from '/lib/icons.js';
 import { blogArticle_201403090000 } from './2014-03-09-0000/2014-03-09-0000.js';
 import { blogArticle_201403120000 } from './2014-03-12-0000/2014-03-12-0000.js';
@@ -278,9 +278,13 @@ export function blogPage() {
     );
 }
 
-export function blogRouteInit() {
-    // Add all the blog content to the router.
+// Collect all the routes to be used with the blog pages.
+export function getBlogRoutes() {
+    let blogRoutes = {};
+
     for (let i = 0; i < blogContent.length; i++) {
-        routes[blogContent[i].hRef] = () => blogArticlePage(i);
+        blogRoutes[blogContent[i].hRef] = () => blogArticlePage(i);
     }
+
+    return blogRoutes;
 }

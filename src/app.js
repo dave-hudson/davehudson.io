@@ -1,6 +1,6 @@
 import { h, updateElement } from '/lib/dvdi.js';
 import { aboutPage } from '/about/about.js';
-import { blogPage, blogRouteInit } from '/blog/blog.js';
+import { blogPage, getBlogRoutes } from '/blog/blog.js';
 import { projectsPage } from '/projects/projects.js';
 import { pageHeader, articleTitle, pageFooter } from "/lib/page.js";
 
@@ -75,7 +75,7 @@ function notFoundPage(path) {
     );
 }
 
-export const routes = {
+let routes = {
     '': homePage,
     '/about': aboutPage,
     '/projects': projectsPage,
@@ -119,7 +119,8 @@ export function navigateEvent(e, path) {
 
 function routeInit() {
     // Add all the blog content to the router.
-    blogRouteInit();
+    const blogRoutes = getBlogRoutes();
+    Object.assign(routes, blogRoutes);
 
     // Set up the navigation for stepping backwards.
     window.onpopstate = (e) => {
