@@ -63,10 +63,10 @@ function navPrevNext(prevStr, prevHRef, nextStr, nextHRef) {
         h('table', { className: 'meta-nav' },
             h('tr', {},
                 h('td', { className: 'prev' },
-                    !prevStr ? '' : h('div', { className: 'icon' },
-                        h('a', { href: prevHRef, onClick: (e) => navigateEvent(e, prevHRef) },
-                            chevronLeftIcon()
-                        )
+                    !prevStr ? '' : h('a', {
+                            className: 'icon', href: prevHRef, onClick: (e) => navigateEvent(e, prevHRef)
+                        },
+                        chevronLeftIcon()
                     )
                 ),
                 h('td', { className: 'prev-text' },
@@ -76,10 +76,10 @@ function navPrevNext(prevStr, prevHRef, nextStr, nextHRef) {
                     !nextStr ? '' : h('a', { href: nextHRef, onClick: (e) => navigateEvent(e, nextHRef) }, nextStr)
                 ),
                 h('td', { className: 'next' },
-                    !nextStr ? '' : h('div', { className: 'icon' },
-                        h('a', { href: nextHRef, onClick: (e) => navigateEvent(e, nextHRef) },
-                            chevronRightIcon()
-                        )
+                    !nextStr ? '' : h('a', {
+                            className: 'icon', href: nextHRef, onClick: (e) => navigateEvent(e, nextHRef)
+                        },
+                        chevronRightIcon()
                     )
                 )
             )
