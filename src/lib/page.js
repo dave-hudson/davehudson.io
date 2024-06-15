@@ -7,16 +7,13 @@ let darkModeSun = null;
 let darkModeMoon = null;
 
 function sunMoonIcon(isSun, clickCallback) {
-    return h('div', {
+    return h('button', {
             className: 'icon',
             id: isSun ? 'dark-mode-sun' : 'dark-mode-moon',
+            'aria-label': isSun ? 'Light mode' : 'Dark mode',
+            onClick: () => clickCallback(!isSun)
         },
-        h('button', {
-                'aria-label': isSun ? 'Light mode' : 'Dark mode',
-                onClick: () => clickCallback(!isSun)
-            },
-            isSun ? sunIcon() : moonIcon()
-        )
+        isSun ? sunIcon() : moonIcon()
     )
 }
 
@@ -32,33 +29,24 @@ export function pageHeader() {
                     ),
                     h('td', {},
                         h('nav', { className: 'social' },
-                            h('div', { className: 'icon' },
-                                h('a', { href: 'https://instagram.com/davehudsonio', title: 'Instagram' },
-                                    instagramIcon()
-                                )
+                            h('a', { className: 'icon', href: 'https://instagram.com/davehudsonio', title: 'Instagram' },
+                                instagramIcon()
                             ),
-                            h('div', { className: 'icon' },
-                                h('a', { href: 'https://x.com/davehudsonio', title: 'X' },
-                                    xIcon()
-                                )
+                            h('a', { className: 'icon', href: 'https://x.com/davehudsonio', title: 'X' },
+                                xIcon()
                             ),
-                            h('div', { className: 'icon' },
-                                h('a', { href: 'https://linkedin.com/in/davejh', title: 'LinkedIn' },
-                                    linkedInIcon()
-                                )
+                            h('a', { className: 'icon', href: 'https://linkedin.com/in/davejh', title: 'LinkedIn' },
+                                linkedInIcon()
                             ),
-                            h('div', { className: 'icon' },
-                                h('a', { href: 'https://github.com/dave-hudson', title: 'GitHub' },
-                                    gitHubIcon()
-                                )
+                            h('a', { className: 'icon', href: 'https://github.com/dave-hudson', title: 'GitHub' },
+                                gitHubIcon()
                             ),
-                            h('div', { className: 'icon' },
-                                h('a', {
-                                        href: 'mailto:hello@davehudson.io?subject=Email\ about\ davehudson.io',
-                                        title: 'Email'
-                                    },
-                                    mailIcon(),
-                                )
+                            h('a', {
+                                    className: 'icon',
+                                    href: 'mailto:hello@davehudson.io?subject=Email\ about\ davehudson.io',
+                                    title: 'Email'
+                                },
+                                mailIcon(),
                             )
                         )
                     )
@@ -66,15 +54,9 @@ export function pageHeader() {
             )
         ),
         h('nav', { className: 'site-menu' },
-            h('div', { className: 'menu' },
-                h('a', { href: '/blog', onClick: (e) => navigateEvent(e, '/blog') }, 'Blog')
-            ),
-            h('div', { className: 'menu' },
-                h('a', { href: '/projects', onClick: (e) => navigateEvent(e, '/projects') }, 'Projects')
-            ),
-            h('div', { className: 'menu' },
-                h('a', { href: '/about', onClick: (e) => navigateEvent(e, '/about') }, 'Me')
-            ),
+            h('a', { className: 'menu', href: '/blog', onClick: (e) => navigateEvent(e, '/blog') }, 'Blog'),
+            h('a', { className: 'menu', href: '/projects', onClick: (e) => navigateEvent(e, '/projects') }, 'Projects'),
+            h('a', { className: 'menu', href: '/about', onClick: (e) => navigateEvent(e, '/about') }, 'Me'),
             sunMoonIcon(false, setDarkTheme),
             sunMoonIcon(true, setDarkTheme)
         )
