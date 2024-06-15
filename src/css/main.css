@@ -702,44 +702,6 @@ body {
     margin-top: 15px;
 }
 
-.container .recent-blog-posts .recent-blog-post {
-    margin-bottom: 30px;
-}
-
-.container .recent-blog-posts .recent-blog-post .title {
-    margin: 0 auto 30px auto;
-}
-
-.container .recent-blog-posts .recent-blog-post .meta {
-    font-size: 0.725rem;
-    color: #555;
-    margin-bottom: 15px;
-}
-
-.container .recent-blog-posts .recent-blog-post nav.tags a {
-    display: inline-block;
-    border: 1px solid #5060e0;
-    border-radius: 4px;
-    padding: 0px 6px;
-    color: #5060e0;
-    font-size: 12px;
-    text-decoration: none;
-    margin: 0 1px;
-}
-
-.container .recent-blog-posts .recent-blog-post nav.tags ul {
-    padding-left: 15px;
-    list-style: disc inside;
-    margin: 0;
-    padding: 0;
-}
-
-.container .recent-blog-posts .recent-blog-post nav.tags ul li {
-    margin-top: 10px;
-    display: inline-block;
-    list-style: none;
-}
-
 .container .blog-posts .blog-post {
     display: table;
     width: 100%;
