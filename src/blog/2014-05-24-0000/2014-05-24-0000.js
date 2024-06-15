@@ -1,7 +1,8 @@
 import { h } from '/lib/dvdi.js';
 import { navigateEvent } from '/app.js';
+import { BlogPost } from '/blog/BlogPost.js'
 
-export function blogArticle_201405240000() {
+function blogArticle_201405240000() {
     return [
         h('p', {},
             'Everyone knows that mining is a noisy task.  Did you realize just how noisy Bitcoin mining is though? ' +
@@ -175,3 +176,10 @@ export function blogArticle_201405240000() {
         )
     ];
 }
+
+export const blogPost_201405240000 = new BlogPost(
+    'Reach for the ear defenders!',
+    '2014-05-24',
+    '/blog/2014-05-24-0000',
+    blogArticle_201405240000
+);

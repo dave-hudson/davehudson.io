@@ -1,6 +1,7 @@
 import { h } from '/lib/dvdi.js';
+import { BlogPost } from '/blog/BlogPost.js'
 
-export function blogArticle_202001272336() {
+function blogArticle_202001272336() {
     return [
         h('p', {},
             'A few days ago I decided to move away from my old Joomla-based blog site and set up my own static web site.  ' +
@@ -125,3 +126,10 @@ export function blogArticle_202001272336() {
         )
     ];
 }
+
+export const blogPost_202001272336 = new BlogPost(
+    'Understanding other people\'s code',
+    '2020-01-27 23:36',
+    '/blog/2020-01-27-2336',
+    blogArticle_202001272336
+);

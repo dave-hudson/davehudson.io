@@ -1,7 +1,8 @@
 import { h } from '/lib/dvdi.js';
 import { navigateEvent } from '/app.js';
+import { BlogPost } from '/blog/BlogPost.js'
 
-export function blogArticle_201404300000() {
+function blogArticle_201404300000() {
     return [
         h('p', {},
             'Over the last few months I\'ve written about patterns and trends in Bitcoin mining while I\'ve been trying ' +
@@ -160,3 +161,10 @@ export function blogArticle_201404300000() {
         )
     ];
 }
+
+export const blogPost_201404300000 = new BlogPost(
+    'Prisoner\'s dilemmas?',
+    '2014-04-30',
+    '/blog/2014-04-30-0000',
+    blogArticle_201404300000
+);

@@ -1,7 +1,8 @@
 import { h } from '/lib/dvdi.js';
 import { navigateEvent } from '/app.js';
+import { BlogPost } from '/blog/BlogPost.js'
 
-export function blogArticle_201512190000() {
+function blogArticle_201512190000() {
     return [
         h('p', {},
             'Bitcoin blocks take 10 minutes to find don\'t they?  Well, actually no they don\'t.  Sometimes they can be found ' +
@@ -185,3 +186,10 @@ export function blogArticle_201512190000() {
         )
     ];
 }
+
+export const blogPost_201512190000 = new BlogPost(
+    'Waiting for blocks',
+    '2015-12-19',
+    '/blog/2015-12-19-0000',
+    blogArticle_201512190000
+);

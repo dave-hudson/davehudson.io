@@ -1,7 +1,8 @@
 import { h } from '/lib/dvdi.js';
 import { navigateEvent } from '/app.js';
+import { BlogPost } from '/blog/BlogPost.js'
 
-export function blogArticle_201403170000() {
+function blogArticle_201403170000() {
     return [
         h('p', {},
             'Which comes first: The miners or the money?  Much as the old question of “Which came first: The ' +
@@ -66,3 +67,10 @@ export function blogArticle_201403170000() {
         )
     ];
 }
+
+export const blogPost_201403170000 = new BlogPost(
+    'Chickens and eggs?',
+    '2014-03-17',
+    '/blog/2014-03-17-0000',
+    blogArticle_201403170000
+);

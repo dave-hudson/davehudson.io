@@ -1,7 +1,8 @@
 import { h } from '/lib/dvdi.js';
 import { navigateEvent } from '/app.js';
+import { BlogPost } from '/blog/BlogPost.js'
 
-export function blogArticle_201512200000() {
+function blogArticle_201512200000() {
     return [
         h('p', {},
             'In November 2014 I wrote an article, "',
@@ -57,3 +58,10 @@ export function blogArticle_201512200000() {
         )
     ];
 }
+
+export const blogPost_201512200000 = new BlogPost(
+    'Bitcoin traffic bulletin (redux)',
+    '2015-12-20',
+    '/blog/2015-12-20-0000',
+    blogArticle_201512200000
+);

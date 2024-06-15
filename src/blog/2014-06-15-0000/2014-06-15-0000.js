@@ -1,7 +1,8 @@
 import { h } from '/lib/dvdi.js';
 import { navigateEvent } from '/app.js';
+import { BlogPost } from '/blog/BlogPost.js'
 
-export function blogArticle_201406150000() {
+function blogArticle_201406150000() {
     return [
         h('p', {},
             '2016 blocks is the magic number that corresponds to each change in difficulty within the Bitcoin network.  ' +
@@ -126,3 +127,10 @@ export function blogArticle_201406150000() {
         )
     ];
 }
+
+export const blogPost_201406150000 = new BlogPost(
+    'Finding 2016 blocks',
+    '2014-06-15',
+    '/blog/2014-06-15-0000',
+    blogArticle_201406150000
+);

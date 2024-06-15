@@ -1,7 +1,8 @@
 import { h } from '/lib/dvdi.js';
 import { navigateEvent } from '/app.js';
+import { BlogPost } from '/blog/BlogPost.js'
 
-export function blogArticle_201412050000() {
+function blogArticle_201412050000() {
     return [
         h('p', {},
             'A few days ago, Ittay Eyal published an intriguing paper, "',
@@ -291,3 +292,10 @@ export function blogArticle_201412050000() {
         )
     ];
 }
+
+export const blogPost_201412050000 = new BlogPost(
+    'Pool wars?',
+    '2014-12-05',
+    '/blog/2014-12-05-0000',
+    blogArticle_201412050000
+);

@@ -1,7 +1,8 @@
 import { h } from '/lib/dvdi.js';
 import { navigateEvent } from '/app.js';
+import { BlogPost } from '/blog/BlogPost.js'
 
-export function blogArticle_201406100000() {
+function blogArticle_201406100000() {
     return [
         h('p', {},
             'Bitcoin difficulty and hash rate statistics should be considered an illness.  The symptoms include anxiety, ' +
@@ -128,3 +129,10 @@ export function blogArticle_201406100000() {
         )
     ];
 }
+
+export const blogPost_201406100000 = new BlogPost(
+    'Lies, damned lies and Bitcoin difficulties',
+    '2014-06-10',
+    '/blog/2014-06-10-0000',
+    blogArticle_201406100000
+);

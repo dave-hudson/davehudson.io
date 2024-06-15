@@ -1,7 +1,8 @@
 import { h } from '/lib/dvdi.js';
 import { navigateEvent } from '/app.js';
+import { BlogPost } from '/blog/BlogPost.js'
 
-export function blogArticle_201406050000() {
+function blogArticle_201406050000() {
     return [
         h('p', {},
             'About 3 months ago I looked at how the BTC price seems to spike up approximately every 7 months.  It seems ' +
@@ -42,3 +43,10 @@ export function blogArticle_201406050000() {
         )
     ];
 }
+
+export const blogPost_201406050000 = new BlogPost(
+    'Strange spikes revisited!',
+    '2014-06-05',
+    '/blog/2014-06-05-0000',
+    blogArticle_201406050000
+);

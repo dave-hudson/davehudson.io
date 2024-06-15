@@ -1,6 +1,7 @@
 import { h } from '/lib/dvdi.js';
+import { BlogPost } from '/blog/BlogPost.js'
 
-export function blogArticle_201405200000() {
+function blogArticle_201405200000() {
     return [
         h('p', {},
             'One of the more infuriating challenges when trying to do any sort of analysis of Bitcoin mining is to ' +
@@ -118,3 +119,10 @@ export function blogArticle_201405200000() {
         )
     ];
 }
+
+export const blogPost_201405200000 = new BlogPost(
+    'Hash rate headaches',
+    '2014-05-20',
+    '/blog/2014-05-20-0000',
+    blogArticle_201405200000
+);

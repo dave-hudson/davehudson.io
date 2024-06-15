@@ -1,6 +1,7 @@
 import { h } from '/lib/dvdi.js';
+import { BlogPost } from '/blog/BlogPost.js'
 
-export function blogArticle_201602030000() {
+function blogArticle_201602030000() {
     return [
         h('p', {},
             'Most participants in the ongoing Bitcoin block size debates have a point of agreement; that a shortage of ' +
@@ -89,3 +90,10 @@ export function blogArticle_201602030000() {
         )
     ];
 }
+
+export const blogPost_201602030000 = new BlogPost(
+    'A market for Bitcoin transaction fees?',
+    '2016-02-03',
+    '/blog/2016-02-03-0000',
+    blogArticle_201602030000
+);

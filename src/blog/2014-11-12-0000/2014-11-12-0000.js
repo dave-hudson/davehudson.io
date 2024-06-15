@@ -1,7 +1,8 @@
 import { h } from '/lib/dvdi.js';
 import { navigateEvent } from '/app.js';
+import { BlogPost } from '/blog/BlogPost.js'
 
-export function blogArticle_201411120000() {
+function blogArticle_201411120000() {
     return [
         h('p', {},
             'Bitcoin is often touted as having substantially lower fees associated with using it than most other financial ' +
@@ -183,3 +184,10 @@ export function blogArticle_201411120000() {
         )
     ];
 }
+
+export const blogPost_201411120000 = new BlogPost(
+    'The future of Bitcoin transaction fees?',
+    '2014-11-12',
+    '/blog/2014-11-12-0000',
+    blogArticle_201411120000
+);

@@ -1,7 +1,8 @@
 import { h } from '/lib/dvdi.js';
 import { navigateEvent } from '/app.js';
+import { BlogPost } from '/blog/BlogPost.js'
 
-export function blogArticle_201406300000() {
+function blogArticle_201406300000() {
     return [
         h('p', {},
             'What\'s the best way to get a return when we mine Bitcoins?  Should we mine on our own, mine with a small pool ' +
@@ -121,3 +122,10 @@ export function blogArticle_201406300000() {
         )
     ];
 }
+
+export const blogPost_201406300000 = new BlogPost(
+    'The gambler\'s guide to Bitcoin mining',
+    '2014-06-30',
+    '/blog/2014-06-30-0000',
+    blogArticle_201406300000
+);

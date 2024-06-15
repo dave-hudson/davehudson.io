@@ -1,7 +1,8 @@
 import { h } from '/lib/dvdi.js';
 import { navigateEvent } from '/app.js';
+import { BlogPost } from '/blog/BlogPost.js'
 
-export function blogArticle_201411110000() {
+function blogArticle_201411110000() {
     return [
         h('p', {},
             'The Bitcoin network is currently running at around 30% of its maximum capacity, but what does that actually mean ' +
@@ -208,3 +209,10 @@ export function blogArticle_201411110000() {
         )
     ];
 }
+
+export const blogPost_201411110000 = new BlogPost(
+    'Bitcoin traffic bulletin',
+    '2014-11-11',
+    '/blog/2014-11-11-0000',
+    blogArticle_201411110000
+);

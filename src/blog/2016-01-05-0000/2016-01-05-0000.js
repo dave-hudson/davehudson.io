@@ -1,6 +1,7 @@
 import { h } from '/lib/dvdi.js';
+import { BlogPost } from '/blog/BlogPost.js'
 
-export function blogArticle_201601050000() {
+function blogArticle_201601050000() {
     return [
         h('p', {},
             '"Exahash" sounds like it could well have been the hammer of the Norse Gods of old as it defeated all in battle.  ' +
@@ -155,3 +156,10 @@ export function blogArticle_201601050000() {
         )
     ];
 }
+
+export const blogPost_201601050000 = new BlogPost(
+    'Behold mighty exahash, hammer of the blocks!',
+    '2016-01-05',
+    '/blog/2016-01-05-0000',
+    blogArticle_201601050000
+);

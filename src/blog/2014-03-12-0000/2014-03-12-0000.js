@@ -1,6 +1,7 @@
 import { h } from '/lib/dvdi.js';
+import { BlogPost } from '/blog/BlogPost.js'
 
-export function blogArticle_201403120000() {
+function blogArticle_201403120000() {
     return [
         h('p', {},
             'There\'s something odd about the fluctuations in the price of Bitcoins.  The data shows a set of ' +
@@ -40,3 +41,10 @@ export function blogArticle_201403120000() {
         )
     ];
 }
+
+export const blogPost_201403120000 = new BlogPost(
+    'Strange spikes in the Bitcoin price',
+    '2014-03-12',
+    '/blog/2014-03-12-0000',
+    blogArticle_201403120000
+);

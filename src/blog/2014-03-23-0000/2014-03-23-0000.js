@@ -1,7 +1,8 @@
 import { h } from '/lib/dvdi.js';
 import { navigateEvent } from '/app.js';
+import { BlogPost } from '/blog/BlogPost.js'
 
-export function blogArticle_201403230000() {
+function blogArticle_201403230000() {
     return [
         h('p', {},
             'ASIC mining is now the norm for Bitcoin, and 28 nm ASICs are now becoming the mainstream replacing the 65 ' +
@@ -130,3 +131,10 @@ export function blogArticle_201403230000() {
         )
     ];
 }
+
+export const blogPost_201403230000 = new BlogPost(
+    'Where next for Bitcoin mining ASICs?',
+    '2014-03-23',
+    '/blog/2014-03-23-0000',
+    blogArticle_201403230000
+);

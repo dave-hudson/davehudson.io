@@ -1,6 +1,7 @@
 import { h } from '/lib/dvdi.js';
+import { BlogPost } from '/blog/BlogPost.js'
 
-export function blogArticle_201701061400() {
+function blogArticle_201701061400() {
     return [
         h('em', {},
             'Note 2020-03-06: This was originally published as an opinion piece at ',
@@ -231,3 +232,10 @@ export function blogArticle_201701061400() {
         )
     ];
 }
+
+export const blogPost_201701061400 = new BlogPost(
+    'What IoT history reveals about blockchain\'s challenges',
+    '2017-01-06 14:00',
+    '/blog/2017-01-06-1400',
+    blogArticle_201701061400
+);

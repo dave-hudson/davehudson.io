@@ -1,7 +1,8 @@
 import { h } from '/lib/dvdi.js';
 import { navigateEvent } from '/app.js';
+import { BlogPost } from '/blog/BlogPost.js'
 
-export function blogArticle_201404030000() {
+function blogArticle_201404030000() {
     return [
         h('p', {},
             'Bitcoin mining can be a very profitable activity. It\'s good that it is because Bitcoin, as a system, only ' +
@@ -145,3 +146,10 @@ export function blogArticle_201404030000() {
         )
     ];
 }
+
+export const blogPost_201404030000 = new BlogPost(
+    'The rewards for a Bitcoin miner',
+    '2014-04-03',
+    '/blog/2014-04-03-0000',
+    blogArticle_201404030000
+);

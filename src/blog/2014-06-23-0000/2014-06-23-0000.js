@@ -1,7 +1,8 @@
 import { h } from '/lib/dvdi.js';
 import { navigateEvent } from '/app.js';
+import { BlogPost } from '/blog/BlogPost.js'
 
-export function blogArticle_201406230000() {
+function blogArticle_201406230000() {
     return [
         h('p', {},
             'Every so often a Bitcoin mining pool is reported to manage more than half of the Bitcoin hashing capacity, ' +
@@ -92,3 +93,10 @@ export function blogArticle_201406230000() {
         )
     ];
 }
+
+export const blogPost_201406230000 = new BlogPost(
+    '51% of the network',
+    '2014-06-23',
+    '/blog/2014-06-23-0000',
+    blogArticle_201406230000
+);

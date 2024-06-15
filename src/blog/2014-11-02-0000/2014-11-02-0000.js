@@ -1,7 +1,8 @@
 import { h } from '/lib/dvdi.js';
 import { navigateEvent } from '/app.js';
+import { BlogPost } from '/blog/BlogPost.js'
 
-export function blogArticle_201411020000() {
+function blogArticle_201411020000() {
     return [
         h('p', {},
             'The general wisdom seems to be that the Bitcoin network can currently sustain 7 transactions per second.  ' +
@@ -161,3 +162,10 @@ export function blogArticle_201411020000() {
         )
     ];
 }
+
+export const blogPost_201411020000 = new BlogPost(
+    '7 transactions per second? Really?',
+    '2014-11-02',
+    '/blog/2014-11-02-0000',
+    blogArticle_201411020000
+);

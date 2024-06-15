@@ -1,7 +1,8 @@
 import { h } from '/lib/dvdi.js';
 import { navigateEvent } from '/app.js';
+import { BlogPost } from '/blog/BlogPost.js'
 
-export function blogArticle_201404280000() {
+function blogArticle_201404280000() {
     return [
         h('p', {},
             'One of the more common questions asked when people think about the scale of Bitcoin mining is just how much ' +
@@ -180,3 +181,10 @@ export function blogArticle_201404280000() {
         )
     ];
 }
+
+export const blogPost_201404280000 = new BlogPost(
+    'Megawatts of mining',
+    '2014-04-28',
+    '/blog/2014-04-28-0000',
+    blogArticle_201404280000
+);
