@@ -19,38 +19,28 @@ function sunMoonIcon(isSun, clickCallback) {
 
 export function pageHeader() {
     const component = () => h('header', { className: 'header'},
-        h('table', { className: 'site-title'},
-            h('tbody', {},
-                h('tr', {},
-                    h('td', {},
-                        h('h1', {},
-                            h('a', { href: '/', onClick: (e) => navigateEvent(e, '/') }, 'davehudson.io')
-                        )
-                    ),
-                    h('td', {},
-                        h('nav', { className: 'social' },
-                            h('a', { className: 'icon', href: 'https://instagram.com/davehudsonio', title: 'Instagram' },
-                                instagramIcon()
-                            ),
-                            h('a', { className: 'icon', href: 'https://x.com/davehudsonio', title: 'X' },
-                                xIcon()
-                            ),
-                            h('a', { className: 'icon', href: 'https://linkedin.com/in/davejh', title: 'LinkedIn' },
-                                linkedInIcon()
-                            ),
-                            h('a', { className: 'icon', href: 'https://github.com/dave-hudson', title: 'GitHub' },
-                                gitHubIcon()
-                            ),
-                            h('a', {
-                                    className: 'icon',
-                                    href: 'mailto:hello@davehudson.io?subject=Email\ about\ davehudson.io',
-                                    title: 'Email'
-                                },
-                                mailIcon(),
-                            )
-                        )
-                    )
-                )
+        h('nav', { className: 'site-title' },
+            h('h1', {},
+                h('a', { href: '/', onClick: (e) => navigateEvent(e, '/') }, 'davehudson.io')
+            ),
+            h('a', { className: 'icon', href: 'https://instagram.com/davehudsonio', title: 'Instagram' },
+                instagramIcon()
+            ),
+            h('a', { className: 'icon', href: 'https://x.com/davehudsonio', title: 'X' },
+                xIcon()
+            ),
+            h('a', { className: 'icon', href: 'https://linkedin.com/in/davejh', title: 'LinkedIn' },
+                linkedInIcon()
+            ),
+            h('a', { className: 'icon', href: 'https://github.com/dave-hudson', title: 'GitHub' },
+                gitHubIcon()
+            ),
+            h('a', {
+                    className: 'icon',
+                    href: 'mailto:hello@davehudson.io?subject=Email\ about\ davehudson.io',
+                    title: 'Email'
+                },
+                mailIcon(),
             )
         ),
         h('nav', { className: 'site-menu' },
