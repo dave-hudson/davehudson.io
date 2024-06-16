@@ -113,7 +113,7 @@ export function articleTitle(title, timeStr = '') {
 
 export function pageFooter() {
     return h('footer', { className: 'footer' },
-        h('div', { className: 'copyright' },
+        h('p', { className: 'copyright' },
             '© 2014-2024 David J. Hudson'
         )
     );
