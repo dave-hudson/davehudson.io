@@ -11,13 +11,6 @@ function blogArticle_201701061400() {
             '.'
         ),
         h('hr', {}),
-        h('figure', {},
-            h('img', { src: '/blog/2017-01-06-1400/rock-paintings-art.jpg' }),
-            h('figcaption', {},
-                'Cave paintings via https://www.shutterstock.com/pic-94533745/' +
-                'stock-photo-famous-prehistoric-rock-paintings-of-tassili-najjer-algeria.html'
-            )
-        ),
         h('p', {},
             '2009 saw Satoshi Nakamoto deploy the first Bitcoin node, and within five years its blockchain had become a' +
             'large-scale industry.'

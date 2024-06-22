@@ -1,3 +1,0 @@
-User-agent: *
-
-Sitemap: https://davehudson.io/sitemap.xml
