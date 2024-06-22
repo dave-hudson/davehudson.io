@@ -9,7 +9,7 @@ BUILD_FILES := $(patsubst src/%, build/%, $(FILES))
 .PHONY: all
 
 all: $(BUILD_FILES) build/app.js
-	./node_modules/.bin/esbuild src/app.js --bundle --outfile=build/app.js
+	./node_modules/.bin/esbuild src/app.js --bundle --sourcemap --outfile=build/app.js
 
 # Rule to copy files to the build directory if they have been modified
 build/%: src/%
