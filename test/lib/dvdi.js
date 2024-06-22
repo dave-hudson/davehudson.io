@@ -1,6 +1,6 @@
 import { jest } from '@jest/globals';
 
-import { VDom, updateElement, h } from '../../src/lib/dvdi.js';
+import { VDom, updateElement, h, svg } from '../../src/lib/dvdi.js';
 
 // Mocking the requestAnimationFrame for enqueueUpdate tests
 global.requestAnimationFrame = (callback) => callback();
@@ -239,6 +239,26 @@ describe('updateElement function', () => {
         expect(newVNode.props['id']).toBe('fred');
     });
 
+    test('updateElement replaces an HTML node with an SVG node', () => {
+        const parent = document.createElement('div');
+        const oldVNode = new VDom('html', 'span', { className: 'test', style: 'bob', onClick: () => {} }, []);
+        const newVNode = new VDom('svg', 'svg', { xmlns: 'http://www.w3.org/2000/svg', onClick: () => { foo(); } }, []);
+        updateElement(parent, null, null, oldVNode, 0);
+        updateElement(parent, null, oldVNode, newVNode, 0);
+        expect(Object.keys(newVNode.props).length).toBe(2);
+        expect(newVNode.props['xmlns']).toBe('http://www.w3.org/2000/svg');
+    });
+
+    test('updateElement replaces an SVG node with an HTML node', () => {
+        const parent = document.createElement('div');
+        const oldVNode = new VDom('svg', 'svg', { xmlns: 'http://www.w3.org/2000/svg', onClick: () => { foo(); } }, []);
+        const newVNode = new VDom('html', 'span', { className: 'test', style: 'bob', onClick: () => {} }, []);
+        updateElement(parent, null, null, oldVNode, 0);
+        updateElement(parent, null, oldVNode, newVNode, 0);
+        expect(Object.keys(newVNode.props).length).toBe(3);
+        expect(newVNode.props['style']).toBe('bob');
+    });
+
     test('updateElement mounts a component', () => {
         function TestComponent() {
             const component = () => h('div', {},
@@ -294,6 +314,21 @@ describe('h function', () => {
     test('h created with no params', () => {
         const vDom = h('div');
         expect(vDom.type).toBe('div');
+        expect(vDom.props).toEqual({});
+    });
+});
+
+describe('svg function', () => {
+    test('svg creates a virtual DOM element', () => {
+        const vDom = svg('svg', { xmlns: 'http://www.w3.org/2000/svg' }, 'child');
+        expect(vDom.type).toBe('svg');
+        expect(vDom.props).toEqual({ xmlns: 'http://www.w3.org/2000/svg' });
+        expect(vDom.childNodes).toContain('child');
+    });
+
+    test('svg created with no params', () => {
+        const vDom = svg('svg');
+        expect(vDom.type).toBe('svg');
         expect(vDom.props).toEqual({});
     });
 });
