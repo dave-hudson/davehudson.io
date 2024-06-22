@@ -1,6 +1,6 @@
-import { h } from '/lib/dvdi.js';
-import { navigateEvent } from '/app.js';
-import { mailIcon, gitHubIcon, linkedInIcon, xIcon, instagramIcon, moonIcon, sunIcon } from '/lib/icons.js';
+import { h } from './dvdi.js';
+import { navigateEvent } from '../app.js';
+import { mailIcon, gitHubIcon, linkedInIcon, xIcon, instagramIcon, moonIcon, sunIcon } from './icons.js';
 
 let darkTheme = null;
 let darkModeSun = null;

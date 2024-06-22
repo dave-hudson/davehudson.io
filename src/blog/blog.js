@@ -1,7 +1,7 @@
-import { h } from '/lib/dvdi.js';
-import { pageHeader, articleTitle, pageFooter } from '/lib/page.js';
-import { navigateEvent } from '/app.js';
-import { chevronLeftIcon, chevronRightIcon } from '/lib/icons.js';
+import { h } from '../lib/dvdi.js';
+import { pageHeader, articleTitle, pageFooter } from '../lib/page.js';
+import { navigateEvent } from '../app.js';
+import { chevronLeftIcon, chevronRightIcon } from '../lib/icons.js';
 import { blogPost_201403090000 } from './2014-03-09-0000/2014-03-09-0000.js';
 import { blogPost_201403120000 } from './2014-03-12-0000/2014-03-12-0000.js';
 import { blogPost_201403170000 } from './2014-03-17-0000/2014-03-17-0000.js';

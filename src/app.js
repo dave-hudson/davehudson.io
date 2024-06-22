@@ -1,8 +1,8 @@
-import { h, updateElement } from '/lib/dvdi.js';
-import { aboutPage } from '/about/about.js';
-import { blogPage, getBlogRoutes } from '/blog/blog.js';
-import { projectsPage } from '/projects/projects.js';
-import { pageHeader, articleTitle, pageFooter } from "/lib/page.js";
+import { h, updateElement } from './lib/dvdi.js';
+import { aboutPage } from './about/about.js';
+import { blogPage, getBlogRoutes } from './blog/blog.js';
+import { projectsPage } from './projects/projects.js';
+import { pageHeader, articleTitle, pageFooter } from "./lib/page.js";
 
 console.log('SCRIPT RELOADED!')
 

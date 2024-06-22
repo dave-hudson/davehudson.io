@@ -1,5 +1,5 @@
-import { h } from '/lib/dvdi.js';
-import { BlogPost } from '/blog/BlogPost.js'
+import { h } from '../../lib/dvdi.js';
+import { BlogPost } from '../BlogPost.js'
 
 function blogArticle_202001272336() {
     return [

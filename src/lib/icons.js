@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { svg } from '/lib/dvdi.js';
+import { svg } from './dvdi.js';
 
 export function chevronLeftIcon() {
     return svg('svg', {

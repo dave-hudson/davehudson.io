@@ -1,5 +1,5 @@
-import { h } from '/lib/dvdi.js';
-import { pageHeader, articleTitle, pageFooter } from "/lib/page.js";
+import { h } from '../lib/dvdi.js';
+import { pageHeader, articleTitle, pageFooter } from "../lib/page.js";
 
 export function aboutPage() {
     return h('div', { className: 'container' },
