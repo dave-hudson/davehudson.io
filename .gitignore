@@ -1,6 +1,9 @@
 # Ignore temp files
 *~
 
+# Ignore build files
+build/
+
 # Ignore coverage files
 coverage/
 
