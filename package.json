@@ -7,9 +7,7 @@
   "scripts": {
     "start": "node server.js",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "test:coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
-    "clean": "rimraf coverage/",
-    "build": "esbuild src/app.js --bundle --outfile=out.js"
+    "test:coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"
   },
   "keywords": [],
   "author": "",
