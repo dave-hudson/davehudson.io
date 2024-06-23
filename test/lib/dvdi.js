@@ -242,16 +242,28 @@ describe('updateElement function', () => {
     test('updateElement replaces an HTML node with an SVG node', () => {
         const parent = document.createElement('div');
         const oldVNode = new VDom('html', 'span', { className: 'test', style: 'bob', onClick: () => {} }, []);
-        const newVNode = new VDom('svg', 'svg', { xmlns: 'http://www.w3.org/2000/svg', onClick: () => { foo(); } }, []);
+        const newVNode = new VDom('svg', 'svg', {
+                xmlns: 'http://www.w3.org/2000/svg',
+                'xml:space': 'preserve',
+                onClick: () => { foo(); }
+            },
+            []
+        );
         updateElement(parent, null, null, oldVNode, 0);
         updateElement(parent, null, oldVNode, newVNode, 0);
-        expect(Object.keys(newVNode.props).length).toBe(2);
+        expect(Object.keys(newVNode.props).length).toBe(3);
         expect(newVNode.props['xmlns']).toBe('http://www.w3.org/2000/svg');
     });
 
     test('updateElement replaces an SVG node with an HTML node', () => {
         const parent = document.createElement('div');
-        const oldVNode = new VDom('svg', 'svg', { xmlns: 'http://www.w3.org/2000/svg', onClick: () => { foo(); } }, []);
+        const oldVNode = new VDom('svg', 'svg', {
+                xmlns: 'http://www.w3.org/2000/svg',
+                'xml:space': 'preserve',
+                onClick: () => { foo(); }
+            },
+            []
+        );
         const newVNode = new VDom('html', 'span', { className: 'test', style: 'bob', onClick: () => {} }, []);
         updateElement(parent, null, null, oldVNode, 0);
         updateElement(parent, null, oldVNode, newVNode, 0);
