@@ -23,16 +23,24 @@ build/%: src/%
 	@cp $< $@
 
 #
+# Rule to build a tarball of the built site.
+#
+.PHONY: tar
+
+tar: all
+	tar -czvf davehudson.io.tar.gz -C build .
+
+#
 # Rules to clean up after builds.
 #
 .PHONY: clean 
 
 clean:
-	rm -f $(BUILD_FILES)
+	rm -f $(BUILD_FILES) davehudson.io.tar.gz
 
 .PHONY: realclean
 
-realclean:
+realclean: clean
 	rm -fr build coverage
 
 .PHONY: start
@@ -44,7 +52,7 @@ start: all
 	npm run start &
 
 #
-#
+# Run tests.
 #
 .PHONY: test
 
