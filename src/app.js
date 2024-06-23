@@ -48,11 +48,22 @@ function homePage() {
                 h('a', { href: '/blog', onClick: (e) => navigateEvent(e, '/blog') }, 'Blog'),
                 '.  You should find all the original articles there.'
             ),
+            h('h2', {}, 'Blog'),
+            h('p', {},
+                h('a', { href: '/blog', onClick: (e) => navigateEvent(e, '/blog') }, 'Blog'),
+                ' posts I\'ve written over the years.'
+            ),
             h('h2', {}, 'Projects'),
             h('p', {},
                 'Over many years I\'ve been involved with a lot of open source projects.  You can find more details at ',
                 h('a', { href: '/projects', onClick: (e) => navigateEvent(e, '/projects') }, 'Projects'),
                 '.'
+            ),
+            h('h2', {}, 'Me'),
+            h('p', {},
+                'About ',
+                h('a', { href: '/about', onClick: (e) => navigateEvent(e, '/about') }, 'Me'),
+                ' - \'nuff said!'
             )
         ),
         pageFooter()
