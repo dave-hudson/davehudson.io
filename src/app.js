@@ -34,11 +34,33 @@ function homePage() {
             h('p', {},
                 'Welcome to my (Dave Hudson\'s) space in the Internet!'
             ),
+            h('hr', {}, ''),
             h('h2', {}, 'What\'s new?'),
             h('p', {},
                 'Pretty much everything on this site is currently being reworked.  I will also be adding some new blog ' +
                 'posts about the JavaScript engine I built to serve up this site.' 
             ),
+            h('hr', {}, ''),
+            h('h2', {}, 'Blog'),
+            h('p', {},
+                h('a', { href: '/blog', onClick: (e) => navigateEvent(e, '/blog') }, 'Blog'),
+                ' posts I\'ve written over the years.'
+            ),
+            h('hr', {}, ''),
+            h('h2', {}, 'Projects'),
+            h('p', {},
+                'Over many years I\'ve been involved with a lot of open source projects.  You can find more details at ',
+                h('a', { href: '/projects', onClick: (e) => navigateEvent(e, '/projects') }, 'Projects'),
+                '.'
+            ),
+            h('hr', {}, ''),
+            h('h2', {}, 'Me'),
+            h('p', {},
+                'About ',
+                h('a', { href: '/about', onClick: (e) => navigateEvent(e, '/about') }, 'Me'),
+                ' - \'nuff said!'
+            ),
+            h('hr', {}, ''),
             h('h2', {}, 'hashingit.com'),
             h('p', {},
                 'The site started out as my blog about Bitcoin mining under the original site name hashingit.com.'
@@ -47,23 +69,6 @@ function homePage() {
                 'If you\'ve arrived here via an old link from the hashingit.com blog, please take a look at ',
                 h('a', { href: '/blog', onClick: (e) => navigateEvent(e, '/blog') }, 'Blog'),
                 '.  You should find all the original articles there.'
-            ),
-            h('h2', {}, 'Blog'),
-            h('p', {},
-                h('a', { href: '/blog', onClick: (e) => navigateEvent(e, '/blog') }, 'Blog'),
-                ' posts I\'ve written over the years.'
-            ),
-            h('h2', {}, 'Projects'),
-            h('p', {},
-                'Over many years I\'ve been involved with a lot of open source projects.  You can find more details at ',
-                h('a', { href: '/projects', onClick: (e) => navigateEvent(e, '/projects') }, 'Projects'),
-                '.'
-            ),
-            h('h2', {}, 'Me'),
-            h('p', {},
-                'About ',
-                h('a', { href: '/about', onClick: (e) => navigateEvent(e, '/about') }, 'Me'),
-                ' - \'nuff said!'
             )
         ),
         pageFooter()
