@@ -20,9 +20,7 @@ function sunMoonIcon(isSun, clickCallback) {
 export function pageHeader() {
     const component = () => h('header', { className: 'header'},
         h('nav', { className: 'site-title' },
-            h('h1', {},
-                h('a', { href: '/', onClick: (e) => navigateEvent(e, '/') }, 'davehudson.io')
-            ),
+            h('a', { className: 'home-link', href: '/', onClick: (e) => navigateEvent(e, '/') }, 'davehudson.io'),
             h('a', { className: 'icon', href: 'https://instagram.com/davehudsonio', title: 'Instagram' },
                 instagramIcon()
             ),

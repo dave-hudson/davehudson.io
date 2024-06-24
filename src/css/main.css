@@ -494,8 +494,13 @@ body {
     border: none;
 }
 
-.container .header .site-title h1 {
+.container .header .site-title .home-link {
+    font-size: 2rem;
+    margin: 0;
     display: inline-block;
+    font-family: Lalezar, sans-serif;
+    line-height: 1;
+    font-weight: 300;
 }
 
 .container .header .site-title .icon {
