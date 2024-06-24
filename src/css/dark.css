@@ -23,7 +23,7 @@ body {
 }
 
 .container .article .title .meta {
-    color: #aaa;
+    color: #eaa;
 }
 
 .container .article p code {
@@ -57,5 +57,5 @@ body {
 }
 
 .container .blog-posts .blog-post .meta {
-    color: #aaa;
+    color: #eaa;
 }

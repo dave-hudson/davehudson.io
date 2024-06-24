@@ -563,7 +563,7 @@ body {
 
 .container .article .title .meta {
     font-size: 0.725rem;
-    color: #555;
+    color: #a55;
 }
 
 .container .article code {
@@ -665,6 +665,6 @@ body {
     display: table-cell;
     text-align: right;
     font-size: 0.725rem;
-    color: #555;
+    color: #a55;
     margin-left: 5px;
 }
