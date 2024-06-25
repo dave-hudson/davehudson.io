@@ -30,15 +30,10 @@ function homePage() {
     return h('div', { className: 'container' },
         pageHeader(),
         h('article', { className: 'article' },
-            articleTitle('davehudson.io'),
+            articleTitle('Dreaming in data and code'),
             h('p', {},
-                'Welcome to my (Dave Hudson\'s) space in the Internet!'
-            ),
-            h('hr', {}, ''),
-            h('h2', {}, 'What\'s new?'),
-            h('p', {},
-                'Pretty much everything on this site is currently being reworked.  I will also be adding some new blog ' +
-                'posts about the JavaScript engine I built to serve up this site.' 
+                'Software is the most amazing playground for an engineer.  A few inconvenient laws of physics aside, ' +
+                'if we can imagine something, then we can probably build it with data and code.'
             ),
             h('hr', {}, ''),
             h('h2', {}, 'Blog'),
@@ -59,16 +54,6 @@ function homePage() {
                 'About ',
                 h('a', { href: '/about', onClick: (e) => navigateEvent(e, '/about') }, 'Me'),
                 ' - \'nuff said!'
-            ),
-            h('hr', {}, ''),
-            h('h2', {}, 'hashingit.com'),
-            h('p', {},
-                'The site started out as my blog about Bitcoin mining under the original site name hashingit.com.'
-            ),
-            h('p', {},
-                'If you\'ve arrived here via an old link from the hashingit.com blog, please take a look at ',
-                h('a', { href: '/blog', onClick: (e) => navigateEvent(e, '/blog') }, 'Blog'),
-                '.  You should find all the original articles there.'
             )
         ),
         pageFooter()
