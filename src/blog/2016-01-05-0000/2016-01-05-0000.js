@@ -1,7 +1,7 @@
 import { h } from '../../lib/dvdi.js';
 import { BlogPost } from '../BlogPost.js'
 
-function blogArticle_201601050000() {
+function blogOpening_201601050000() {
     return [
         h('p', {},
             '"Exahash" sounds like it could well have been the hammer of the Norse Gods of old as it defeated all in battle.  ' +
@@ -13,7 +13,13 @@ function blogArticle_201601050000() {
             'Common wisdom that this ever-increasing hash rate makes the Bitcoin network continually stronger, but what does ' +
             'that strength mean?  What is it stronger than?  What guarantees does it offer?  The answer, as so often, is ' +
             'perhaps less clear-cut than we might first imagine!'
-        ),
+        )
+    ]
+}
+
+function blogArticle_201601050000() {
+    return [
+        ...blogOpening_201601050000(),
         h('h2', {}, 'The nature of Bitcoin hashing (an aside)'),
         h('p', {},
             'The Bitcoin network is secured and processes transactions by mining.  Mining comprises two activities, block ' +
@@ -161,5 +167,6 @@ export const blogPost_201601050000 = new BlogPost(
     'Behold mighty exahash, hammer of the blocks!',
     '2016-01-05',
     '/blog/2016-01-05-0000',
+    blogOpening_201601050000,
     blogArticle_201601050000
 );

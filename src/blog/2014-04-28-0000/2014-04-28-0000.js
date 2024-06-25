@@ -2,7 +2,7 @@ import { h } from '../../lib/dvdi.js';
 import { navigateEvent } from '../../app.js';
 import { BlogPost } from '../BlogPost.js'
 
-function blogArticle_201404280000() {
+function blogOpening_201404280000() {
     return [
         h('p', {},
             'One of the more common questions asked when people think about the scale of Bitcoin mining is just how much ' +
@@ -14,7 +14,13 @@ function blogArticle_201404280000() {
             'interesting role in predicting future mining behaviour.  They play a major role in defining the viability of ' +
             'mining hardware, help determine the upper limit on the worldwide hashing rate and the potential scale of ' +
             'future mining operations.'
-        ),
+        )
+    ]
+}
+
+function blogArticle_201404280000() {
+    return [
+        ...blogOpening_201404280000(),
         h('h2', {}, 'What are the electricity costs?'),
         h('p', {},
             'At the time of writing (2014-04-27) a state-of-the-art 28 nm mining ASIC achieves between 700 and 800 GH/s ' +
@@ -186,5 +192,6 @@ export const blogPost_201404280000 = new BlogPost(
     'Megawatts of mining',
     '2014-04-28',
     '/blog/2014-04-28-0000',
+    blogOpening_201404280000,
     blogArticle_201404280000
 );

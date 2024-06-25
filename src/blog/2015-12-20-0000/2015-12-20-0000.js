@@ -2,7 +2,7 @@ import { h } from '../../lib/dvdi.js';
 import { navigateEvent } from '../../app.js';
 import { BlogPost } from '../BlogPost.js'
 
-function blogArticle_201512200000() {
+function blogOpening_201512200000() {
     return [
         h('p', {},
             'In November 2014 I wrote an article, "',
@@ -11,7 +11,13 @@ function blogArticle_201512200000() {
             ),
             '" that sought to look at what happens if the Bitcoin network started to get congested.  Since then there has ' +
             'been considerable debate about the Bitcoin block size and there are now many proposals to increase block capacity.'
-        ),
+        )
+    ]
+}
+
+function blogArticle_201512200000() {
+    return [
+        ...blogOpening_201512200000(),
         h('p', {},
             'In the original blog post the network\'s block capacity was at about 30%.  As of early December 2015 the ' +
             'network\'s block capacity is at least 58%.  In practice some blocks are mined smaller than the full 1M bytes ' +
@@ -63,5 +69,6 @@ export const blogPost_201512200000 = new BlogPost(
     'Bitcoin traffic bulletin (redux)',
     '2015-12-20',
     '/blog/2015-12-20-0000',
+    blogOpening_201512200000,
     blogArticle_201512200000
 );

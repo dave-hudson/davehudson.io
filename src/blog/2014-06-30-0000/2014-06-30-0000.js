@@ -2,7 +2,7 @@ import { h } from '../../lib/dvdi.js';
 import { navigateEvent } from '../../app.js';
 import { BlogPost } from '../BlogPost.js'
 
-function blogArticle_201406300000() {
+function blogOpening_201406300000() {
     return [
         h('p', {},
             'What\'s the best way to get a return when we mine Bitcoins?  Should we mine on our own, mine with a small pool ' +
@@ -11,7 +11,13 @@ function blogArticle_201406300000() {
         h('p', {},
             'Whether we want to be a gambler or an investor is really a question of how much risk we\'re prepared to take, ' +
             'but what are those risks and what are the odds of success?'
-        ),
+        )
+    ]
+}
+
+function blogArticle_201406300000() {
+    return [
+        ...blogOpening_201406300000(),
         h('h2', {}, 'Starting thoughts'),
         h('p', {},
             'Before we can look at the odds of getting a particular return we need to establish a few starting conditions.  ' +
@@ -127,5 +133,6 @@ export const blogPost_201406300000 = new BlogPost(
     'The gambler\'s guide to Bitcoin mining',
     '2014-06-30',
     '/blog/2014-06-30-0000',
+    blogOpening_201406300000,
     blogArticle_201406300000
 );

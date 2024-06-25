@@ -1,14 +1,20 @@
 import { h } from '../../lib/dvdi.js';
 import { BlogPost } from '../BlogPost.js'
 
-function blogArticle_201403120000() {
+function blogOpening_201403120000() {
     return [
         h('p', {},
             'There\'s something odd about the fluctuations in the price of Bitcoins.  The data shows a set of ' +
             'spikes when the price jumps up and then falls back somewhat and levels out.  This wouldn\'t be so ' +
             'unusual if the spikes occurred intermittently but in the case of Bitcoins the spikes happen ' +
             'with a very surprising regularity!'
-        ),
+        )
+    ]
+}
+
+function blogArticle_201403120000() {
+    return [
+        ...blogOpening_201403120000(),
         h('p', {}, 'Let\'s look at the graph:'),
         h('figure', {},
             h('img', { src: '/blog/2014-03-12-0000/20140312_BTC_Price.png' }),
@@ -46,5 +52,6 @@ export const blogPost_201403120000 = new BlogPost(
     'Strange spikes in the Bitcoin price',
     '2014-03-12',
     '/blog/2014-03-12-0000',
+    blogOpening_201403120000,
     blogArticle_201403120000
 );

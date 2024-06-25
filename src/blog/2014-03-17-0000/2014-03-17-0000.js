@@ -2,7 +2,7 @@ import { h } from '../../lib/dvdi.js';
 import { navigateEvent } from '../../app.js';
 import { BlogPost } from '../BlogPost.js'
 
-function blogArticle_201403170000() {
+function blogOpening_201403170000() {
     return [
         h('p', {},
             'Which comes first: The miners or the money?  Much as the old question of “Which came first: The ' +
@@ -12,7 +12,13 @@ function blogArticle_201403170000() {
         h('p', {},
             'The generally-held belief is that as the value of Bitcoins has increased there has been more interest ' +
             'in Bitcoins and this has in turn driven miners to mine, but is it really this simple?'
-        ),
+        )
+    ]
+}
+
+function blogArticle_201403170000() {
+    return [
+        ...blogOpening_201403170000(),
         h('p', {},
             'Let\'s look at a chart comparing the value of Bitcoin in US Dollars vs the global hashrate in GHash/s ' +
             'and see if we can make any sense of this?'
@@ -72,5 +78,6 @@ export const blogPost_201403170000 = new BlogPost(
     'Chickens and eggs?',
     '2014-03-17',
     '/blog/2014-03-17-0000',
+    blogOpening_201403170000,
     blogArticle_201403170000
 );

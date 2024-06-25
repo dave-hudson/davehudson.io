@@ -2,13 +2,19 @@ import { h } from '../../lib/dvdi.js';
 import { navigateEvent } from '../../app.js';
 import { BlogPost } from '../BlogPost.js'
 
-function blogArticle_201404030000() {
+function blogOpening_201404030000() {
     return [
         h('p', {},
             'Bitcoin mining can be a very profitable activity. It\'s good that it is because Bitcoin, as a system, only ' +
             'works because of the mining activity; it\'s the mining that ensures the transactions actually take place.  ' +
             'Just how much money does it generate though and does this help us make any predictions for the future?'
-        ),
+        )
+    ]
+}
+
+function blogArticle_201404030000() {
+    return [
+        ...blogOpening_201404030000(),
         h('p', {},
             'Like mining any other finite resource, Bitcoin mining gets harder over time and requires more investment to ' +
             'mine profitably.  Mining requires a capital outlay to buy mining equipment, incurs operating costs to keep ' +
@@ -151,5 +157,6 @@ export const blogPost_201404030000 = new BlogPost(
     'The rewards for a Bitcoin miner',
     '2014-04-03',
     '/blog/2014-04-03-0000',
+    blogOpening_201404030000,
     blogArticle_201404030000
 );

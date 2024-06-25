@@ -2,7 +2,7 @@ import { h } from '../../lib/dvdi.js';
 import { navigateEvent } from '../../app.js';
 import { BlogPost } from '../BlogPost.js'
 
-function blogArticle_201404300000() {
+function blogOpening_201404300000() {
     return [
         h('p', {},
             'Over the last few months I\'ve written about patterns and trends in Bitcoin mining while I\'ve been trying ' +
@@ -11,7 +11,13 @@ function blogArticle_201404300000() {
             'lower power consumption per hash, lower price per kWh of electricity or higher BTC price, one thing is ' +
             'inescapable:  The Bitcoin difficulty increases quickly absorb everything thrown at them in order to maintain ' +
             'the system\'s block finding rate.  This has very significant implications for the not-too-distant future.'
-        ),
+        )
+    ]
+}
+
+function blogArticle_201404300000() {
+    return [
+        ...blogOpening_201404300000(),
         h('h2', {}, 'The role of difficulty'),
         h('p', {},
             'The Bitcoin difficulty concept is a very elegant approach to ensure that no matter how the hashing ' +
@@ -166,5 +172,6 @@ export const blogPost_201404300000 = new BlogPost(
     'Prisoner\'s dilemmas?',
     '2014-04-30',
     '/blog/2014-04-30-0000',
+    blogOpening_201404300000,
     blogArticle_201404300000
 );

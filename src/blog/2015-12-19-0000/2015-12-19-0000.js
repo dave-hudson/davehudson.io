@@ -2,7 +2,7 @@ import { h } from '../../lib/dvdi.js';
 import { navigateEvent } from '../../app.js';
 import { BlogPost } from '../BlogPost.js'
 
-function blogArticle_201512190000() {
+function blogOpening_201512190000() {
     return [
         h('p', {},
             'Bitcoin blocks take 10 minutes to find don\'t they?  Well, actually no they don\'t.  Sometimes they can be found ' +
@@ -13,7 +13,13 @@ function blogArticle_201512190000() {
         h('p', {},
             'So what should we expect?  What happens during hashing growth phases, and what would happen if the network were ' +
             'to lose large amounts of hashing capacity?'
-        ),
+        )
+    ]
+}
+
+function blogArticle_201512190000() {
+    return [
+        ...blogOpening_201512190000(),
         h('h2', {}, 'Running like clockwork?'),
         h('p', {},
             'In a somewhat perfect world we might hope that our nominal 10 minute gap between blocks would be exactly 10 ' +
@@ -191,5 +197,6 @@ export const blogPost_201512190000 = new BlogPost(
     'Waiting for blocks',
     '2015-12-19',
     '/blog/2015-12-19-0000',
+    blogOpening_201512190000,
     blogArticle_201512190000
 );

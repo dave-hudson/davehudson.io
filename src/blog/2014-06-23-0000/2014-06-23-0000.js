@@ -2,14 +2,20 @@ import { h } from '../../lib/dvdi.js';
 import { navigateEvent } from '../../app.js';
 import { BlogPost } from '../BlogPost.js'
 
-function blogArticle_201406230000() {
+function blogOpening_201406230000() {
     return [
         h('p', {},
             'Every so often a Bitcoin mining pool is reported to manage more than half of the Bitcoin hashing capacity, ' +
             'exposing the spectre of a so called "51% attack".  Ignoring the perceived threat though, can we really trust ' +
             'the statistics?  We\'ve seen, previously, that Bitcoin mining statistics aren\'t quite as obvious as we might ' +
             'hope, so what do they look like in these cases?'
-        ),
+        )
+    ]
+}
+
+function blogArticle_201406230000() {
+    return [
+        ...blogOpening_201406230000(),
         h('h2', {}, 'A day in the life of a 50% mining pool'),
         h('p', {},
             'Let\'s look at what happens when a Bitcoin mining pool has 50% of the actual global hash rate and see what the ' +
@@ -98,5 +104,6 @@ export const blogPost_201406230000 = new BlogPost(
     '51% of the network',
     '2014-06-23',
     '/blog/2014-06-23-0000',
+    blogOpening_201406230000,
     blogArticle_201406230000
 );

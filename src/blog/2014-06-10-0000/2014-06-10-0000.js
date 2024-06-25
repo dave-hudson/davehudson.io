@@ -2,7 +2,7 @@ import { h } from '../../lib/dvdi.js';
 import { navigateEvent } from '../../app.js';
 import { BlogPost } from '../BlogPost.js'
 
-function blogArticle_201406100000() {
+function blogOpening_201406100000() {
     return [
         h('p', {},
             'Bitcoin difficulty and hash rate statistics should be considered an illness.  The symptoms include anxiety, ' +
@@ -10,7 +10,13 @@ function blogArticle_201406100000() {
             'smaller-than-expected difficulty changes and collectively dismaying when things go the other way.  ' +
             'Authoritative-looking charts have people puzzling about why things are so erratic and chasing non-existent ' +
             'mining conspiracies. The truth is out there...'
-        ),
+        )
+    ]
+}
+
+function blogArticle_201406100000() {
+    return [
+        ...blogOpening_201406100000(),
         h('h2', {}, 'Difficulty charts'),
         h('p', {},
             'When we start to think about mining, difficulty charts are not far away. Most of them are presented something ' +
@@ -134,5 +140,6 @@ export const blogPost_201406100000 = new BlogPost(
     'Lies, damned lies and Bitcoin difficulties',
     '2014-06-10',
     '/blog/2014-06-10-0000',
+    blogOpening_201406100000,
     blogArticle_201406100000
 );

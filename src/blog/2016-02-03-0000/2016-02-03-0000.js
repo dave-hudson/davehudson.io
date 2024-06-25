@@ -1,14 +1,20 @@
 import { h } from '../../lib/dvdi.js';
 import { BlogPost } from '../BlogPost.js'
 
-function blogArticle_201602030000() {
+function blogOpening_201602030000() {
     return [
         h('p', {},
             'Most participants in the ongoing Bitcoin block size debates have a point of agreement; that a shortage of ' +
             'block space should have an effect on transaction fees.  Arguments aside, then, let\'s see what has actually ' +
             'been happening. Are fees going through the roof?  Are miners going to be celebrating a potential offset to ' +
             'the block reward halving that looms in July 2016?  The results seem a little surprising!'
-        ),
+        )
+    ]
+}
+
+function blogArticle_201602030000() {
+    return [
+        ...blogOpening_201602030000(),
         h('h2', {}, 'Rewards for a Bitcoin miner'),
         h('p', {},
             'Bitcoin miners earn their per-block rewards in two ways.  They collect a block reward subsidy that halves ' +
@@ -95,5 +101,6 @@ export const blogPost_201602030000 = new BlogPost(
     'A market for Bitcoin transaction fees?',
     '2016-02-03',
     '/blog/2016-02-03-0000',
+    blogOpening_201602030000,
     blogArticle_201602030000
 );

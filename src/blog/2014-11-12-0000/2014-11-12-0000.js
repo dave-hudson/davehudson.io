@@ -2,14 +2,20 @@ import { h } from '../../lib/dvdi.js';
 import { navigateEvent } from '../../app.js';
 import { BlogPost } from '../BlogPost.js'
 
-function blogArticle_201411120000() {
+function blogOpening_201411120000() {
     return [
         h('p', {},
             'Bitcoin is often touted as having substantially lower fees associated with using it than most other financial ' +
             'systems, but fees and costs are very different things.  The reality of things in the Bitcoin ecosystem is ' +
             'rarely simple, and this one is no exception.  What then are the actual numbers, where are they heading and what ' +
             'are the consequences?'
-        ),
+        )
+    ]
+}
+
+function blogArticle_201411120000() {
+    return [
+        ...blogOpening_201411120000(),
         h('h2', {}, 'Transaction fees'),
         h('p', {},
             'Probably the biggest challenge in looking at the costs of transactions is to work out what that actually ' +
@@ -189,5 +195,6 @@ export const blogPost_201411120000 = new BlogPost(
     'The future of Bitcoin transaction fees?',
     '2014-11-12',
     '/blog/2014-11-12-0000',
+    blogOpening_201411120000,
     blogArticle_201411120000
 );

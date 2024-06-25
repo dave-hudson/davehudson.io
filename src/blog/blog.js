@@ -144,6 +144,36 @@ export function blogPage() {
     );
 }
 
+// Handle the blog summaries on the home page.
+export function blogSummaries(numEntries) {
+    let view = [];
+
+    // If we've been asked for more blog summaries than there are, then clip the list.
+    const lastEntry = blogContent.length > numEntries ? blogContent.length - numEntries : 0;
+
+    // Generate a list of HTML elements that match each blog post.
+    for (let i = blogContent.length - 1; i >= lastEntry; i--) {
+        const { hRef, title, dateTime, openingFunction } = blogContent[i];
+        view.push(h('hr', {}));
+        view.push(h('article', { className: 'article' },
+            h('header', { className: 'title' },
+                h('h2', {},
+                    h('a', { href: hRef, onClick: (e) => navigateEvent(e, hRef) }, title)
+                ),
+                h('span', { className: 'meta' }, dateTime)
+            ),
+            ...openingFunction(),
+            h('p', {},
+                h('em', {},
+                    h('a', { href: hRef, onClick: (e) => navigateEvent(e, hRef) }, '[read more]')
+                )
+            )
+        ));
+    }
+
+    return view;
+}
+
 // Collect all the routes to be used with the blog pages.
 export function getBlogRoutes() {
     let blogRoutes = {};

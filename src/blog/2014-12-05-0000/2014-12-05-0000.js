@@ -2,7 +2,7 @@ import { h } from '../../lib/dvdi.js';
 import { navigateEvent } from '../../app.js';
 import { BlogPost } from '../BlogPost.js'
 
-function blogArticle_201412050000() {
+function blogOpening_201412050000() {
     return [
         h('p', {},
             'A few days ago, Ittay Eyal published an intriguing paper, "',
@@ -12,7 +12,13 @@ function blogArticle_201412050000() {
             '".  It describes an attack where an open mining pool may be attacked using block withholding.  Given that most ' +
             'Bitcoin mining is managed by open mining pools then it seems like it ought to raise a few eyebrows (perhaps ' +
             'more than it has already).  Just how does this attack work though, who wins, who loses and by how much?'
-        ),
+        )
+    ]
+}
+
+function blogArticle_201412050000() {
+    return [
+        ...blogOpening_201412050000(),
         h('h2', {}, 'Mining pools'),
         h('p', {},
             'Before we can really talk about winners and losers we really need to take a simple look at how mining pools pay ' +
@@ -297,5 +303,6 @@ export const blogPost_201412050000 = new BlogPost(
     'Pool wars?',
     '2014-12-05',
     '/blog/2014-12-05-0000',
+    blogOpening_201412050000,
     blogArticle_201412050000
 );

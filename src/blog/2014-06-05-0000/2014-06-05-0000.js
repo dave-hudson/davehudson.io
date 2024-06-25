@@ -2,7 +2,7 @@ import { h } from '../../lib/dvdi.js';
 import { navigateEvent } from '../../app.js';
 import { BlogPost } from '../BlogPost.js'
 
-function blogArticle_201406050000() {
+function blogOpening_201406050000() {
     return [
         h('p', {},
             'About 3 months ago I looked at how the BTC price seems to spike up approximately every 7 months.  It seems ' +
@@ -11,7 +11,13 @@ function blogArticle_201406050000() {
         h('p', {},
             'Over the last couple of weeks the BTC price has reversed its earlier falls and has yet again started to jump ' +
             'back up again.  The timing is pretty-much consistent with previous spikes.'
-        ),
+        )
+    ]
+}
+
+function blogArticle_201406050000() {
+    return [
+        ...blogOpening_201406050000(),
         h('p', {}, 'Let\'s look at the graph (plotted on a logarithmic Y axis):'),
         h('figure', {},
             h('img', { src: '/blog/2014-06-05-0000/BTC-price.png' }),
@@ -48,5 +54,6 @@ export const blogPost_201406050000 = new BlogPost(
     'Strange spikes revisited!',
     '2014-06-05',
     '/blog/2014-06-05-0000',
+    blogOpening_201406050000,
     blogArticle_201406050000
 );

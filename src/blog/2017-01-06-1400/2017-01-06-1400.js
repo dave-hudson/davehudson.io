@@ -1,18 +1,10 @@
 import { h } from '../../lib/dvdi.js';
 import { BlogPost } from '../BlogPost.js'
 
-function blogArticle_201701061400() {
+function blogOpening_201701061400() {
     return [
-        h('em', {},
-            'Note 2020-03-06: This was originally published as an opinion piece at ',
-            h('a', { href: 'https://www.coindesk.com/what-iot-history-reveals-about-blockchains-challenges' },
-                'Coindesk'
-            ),
-            '.'
-        ),
-        h('hr', {}),
         h('p', {},
-            '2009 saw Satoshi Nakamoto deploy the first Bitcoin node, and within five years its blockchain had become a' +
+            '2009 saw Satoshi Nakamoto deploy the first Bitcoin node, and within five years its blockchain had become a ' +
             'large-scale industry.'
         ),
         h('p', {},
@@ -25,7 +17,21 @@ function blogArticle_201701061400() {
             'Every vending machine, coffee pot, toaster, refrigerator, microwave, and TV, would be cabled to the “net”, and ' +
             'a utopian sharing of data would improve life for everyone.'
         ),
-        h('p', {}, 'The reality for what we now term the “Internet of Things”, or IoT, was a little different.'),
+        h('p', {}, 'The reality for what we now term the “Internet of Things”, or IoT, was a little different.')
+    ];
+}
+
+function blogArticle_201701061400() {
+    return [
+        h('em', {},
+            'Note 2020-03-06: This was originally published as an opinion piece at ',
+            h('a', { href: 'https://www.coindesk.com/what-iot-history-reveals-about-blockchains-challenges' },
+                'Coindesk'
+            ),
+            '.'
+        ),
+        h('hr', {}),
+        ...blogOpening_201701061400(),
         h('h2', {}, 'It\'s all about money'),
         h('p', {}, 'The original theory of IoT was that data would make everything better.'),
         h('p', {},
@@ -230,5 +236,6 @@ export const blogPost_201701061400 = new BlogPost(
     'What IoT history reveals about blockchain\'s challenges',
     '2017-01-06 14:00',
     '/blog/2017-01-06-1400',
+    blogOpening_201701061400,
     blogArticle_201701061400
 );

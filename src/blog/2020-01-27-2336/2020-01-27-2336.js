@@ -1,7 +1,7 @@
 import { h } from '../../lib/dvdi.js';
 import { BlogPost } from '../BlogPost.js'
 
-function blogArticle_202001272336() {
+function blogOpening_202001272336() {
     return [
         h('p', {},
             'A few days ago I decided to move away from my old Joomla-based blog site and set up my own static web site.  ' +
@@ -20,7 +20,13 @@ function blogArticle_202001272336() {
             'I ended up with a frustrating effort to reverse engineer what they\'d ended up building.  It\'s not like this ' +
             'was a surprise - I\'ve done this dozens, maybe hundreds of times.  But I wish, as an industry, we could do ' +
             'better.  I\'ve worked with many engineers and tried to persuade them we should, so maybe I can persuade you too?'
-        ),
+        )
+    ];
+}
+
+function blogArticle_202001272336() {
+    return [
+        ...blogOpening_202001272336(),
         h('h2', {}, 'Names matter'),
         h('p', {},
             'As the joke goes, "there are two hard problems in computer sciences, cache invalidation, naming things, and ' +
@@ -131,5 +137,6 @@ export const blogPost_202001272336 = new BlogPost(
     'Understanding other people\'s code',
     '2020-01-27 23:36',
     '/blog/2020-01-27-2336',
+    blogOpening_202001272336,
     blogArticle_202001272336
 );

@@ -2,7 +2,7 @@ import { h } from '../../lib/dvdi.js';
 import { navigateEvent } from '../../app.js';
 import { BlogPost } from '../BlogPost.js';
 
-function blogArticle_201411020000() {
+function blogOpening_201411020000() {
     return [
         h('p', {},
             'The general wisdom seems to be that the Bitcoin network can currently sustain 7 transactions per second.  ' +
@@ -14,7 +14,13 @@ function blogArticle_201411020000() {
             ),
             ' may not be seeing its hashing engines running away quite as much as they were earlier this year, but are we ' +
             'heading for other problems instead?'
-        ),
+        )
+    ]
+}
+
+function blogArticle_201411020000() {
+    return [
+        ...blogOpening_201411020000(),
         h('h2', {}, 'Bitcoin transactions per day'),
         h('p', {},
             'Before we can really think about Bitcoin transaction processing we need to look at how its transaction processing ' +
@@ -167,5 +173,6 @@ export const blogPost_201411020000 = new BlogPost(
     '7 transactions per second? Really?',
     '2014-11-02',
     '/blog/2014-11-02-0000',
+    blogOpening_201411020000,
     blogArticle_201411020000
 );

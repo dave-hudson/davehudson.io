@@ -1,6 +1,6 @@
 import { h, updateElement } from './lib/dvdi.js';
 import { aboutPage } from './about/about.js';
-import { blogPage, getBlogRoutes } from './blog/blog.js';
+import { blogPage, blogSummaries, getBlogRoutes } from './blog/blog.js';
 import { projectsPage } from './projects/projects.js';
 import { pageHeader, articleTitle, pageFooter } from "./lib/page.js";
 
@@ -35,26 +35,10 @@ function homePage() {
                 'Software is the most amazing playground for an engineer.  A few inconvenient laws of physics aside, ' +
                 'if we can imagine something, then we can probably build it with data and code.'
             ),
-            h('hr', {}, ''),
-            h('h2', {}, 'Blog'),
             h('p', {},
-                h('a', { href: '/blog', onClick: (e) => navigateEvent(e, '/blog') }, 'Blog'),
-                ' posts I\'ve written over the years.'
+                'This site describes some of my journey through it.'
             ),
-            h('hr', {}, ''),
-            h('h2', {}, 'Projects'),
-            h('p', {},
-                'Over many years I\'ve been involved with a lot of open source projects.  You can find more details at ',
-                h('a', { href: '/projects', onClick: (e) => navigateEvent(e, '/projects') }, 'Projects'),
-                '.'
-            ),
-            h('hr', {}, ''),
-            h('h2', {}, 'Me'),
-            h('p', {},
-                'About ',
-                h('a', { href: '/about', onClick: (e) => navigateEvent(e, '/about') }, 'Me'),
-                ' - \'nuff said!'
-            )
+            ...blogSummaries(7),
         ),
         pageFooter()
     );

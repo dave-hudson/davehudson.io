@@ -2,14 +2,20 @@ import { h } from '../../lib/dvdi.js';
 import { navigateEvent } from '../../app.js';
 import { BlogPost } from '../BlogPost.js'
 
-function blogArticle_201411110000() {
+function blogOpening_201411110000() {
     return [
         h('p', {},
             'The Bitcoin network is currently running at around 30% of its maximum capacity, but what does that actually mean ' +
             'to its users?  Should we care?  What about when we reach 50%, or 90%?  When roads start to get full of cars they ' +
             'start to get congested, when large numbers of visitors enter or exit a building everyone slows down and takes ' +
             'longer to set where they want, but what happens with Bitcoin?'
-        ),
+        )
+    ]
+}
+
+function blogArticle_201411110000() {
+    return [
+        ...blogOpening_201411110000(),
         h('h2', {}, 'Bitcoin transaction processing'),
         h('p', {},
             'Bitcoin mining (and therefore transaction processing) is what\'s known as a Non-Homogenous (or Inhomogeneous) ' +
@@ -214,5 +220,6 @@ export const blogPost_201411110000 = new BlogPost(
     'Bitcoin traffic bulletin',
     '2014-11-11',
     '/blog/2014-11-11-0000',
+    blogOpening_201411110000,
     blogArticle_201411110000
 );

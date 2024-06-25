@@ -2,7 +2,7 @@ import { h } from '../../lib/dvdi.js';
 import { navigateEvent } from '../../app.js';
 import { BlogPost } from '../BlogPost.js'
 
-function blogArticle_201501180000() {
+function blogOpening_201501180000() {
     return [
         h('p', {},
             'It\'s well described how Bitcoin has a one Megabyte block limit; it\'s defined in the Bitcoin Core source ' +
@@ -19,7 +19,13 @@ function blogArticle_201501180000() {
                 '7 Transactions per second?  Really?'
             ),
             '".  Turns out that I was wrong; in practice this limit is actually quite a lot smaller!'
-        ),
+        )
+    ]
+}
+
+function blogArticle_201501180000() {
+    return [
+        ...blogOpening_201501180000(),
         h('h2', {}, 'A puzzle'),
         h('p', {},
             'Back in "',
@@ -248,5 +254,6 @@ export const blogPost_201501180000 = new BlogPost(
     'The myth of the megabyte Bitcoin block',
     '2015-01-18',
     '/blog/2015-01-18-0000',
+    blogOpening_201501180000,
     blogArticle_201501180000
 );

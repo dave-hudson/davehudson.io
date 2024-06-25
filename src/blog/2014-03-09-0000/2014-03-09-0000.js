@@ -1,7 +1,7 @@
 import { h } from '../../lib/dvdi.js';
 import { BlogPost } from '../BlogPost.js'
 
-function blogArticle_201403090000() {
+function blogOpening_201403090000() {
     return [
         h('p', {},
             'Bitcoin mining is seemingly unique. T here has probably never been any technology problem that ' +
@@ -9,7 +9,13 @@ function blogArticle_201403090000() {
             'A convergence of the scalable Bitcoin protocol design, readily available technology, money ' +
             'and mining incentives have accelerated this particular mine train in a truly explosive way.  ' +
             'Let\'s look at the trends and what they suggest for future mining activities.'
-        ),
+        )
+    ]
+}
+
+function blogArticle_201403090000() {
+    return [
+        ...blogOpening_201403090000(),
         h('h2', {}, 'What has been happening?'),
         h('p', {},
             'There is probably a lot to be said for looking at the history of Bitcoin mining prior to the ' +
@@ -89,5 +95,6 @@ export const blogPost_201403090000 = new BlogPost(
     'The Bitcoin runaway mine train',
     '2014-03-09',
     '/blog/2014-03-09-0000',
+    blogOpening_201403090000,
     blogArticle_201403090000
 );

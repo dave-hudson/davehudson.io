@@ -2,12 +2,18 @@ import { h } from '../../lib/dvdi.js';
 import { navigateEvent } from '../../app.js';
 import { BlogPost } from '../BlogPost.js'
 
-function blogArticle_201405240000() {
+function blogOpening_201405240000() {
     return [
         h('p', {},
             'Everyone knows that mining is a noisy task.  Did you realize just how noisy Bitcoin mining is though? ' +
             'These aren\'t the noises you were looking for...'
-        ),
+        )
+    ]
+}
+
+function blogArticle_201405240000() {
+    return [
+        ...blogOpening_201405240000(),
         h('figure', {},
             h('img', { src: '/blog/2014-05-24-0000/high-noise-levels.jpg' }),
         ),
@@ -181,5 +187,6 @@ export const blogPost_201405240000 = new BlogPost(
     'Reach for the ear defenders!',
     '2014-05-24',
     '/blog/2014-05-24-0000',
+    blogOpening_201405240000,
     blogArticle_201405240000
 );

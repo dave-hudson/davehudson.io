@@ -1,7 +1,7 @@
 import { h } from '../../lib/dvdi.js';
 import { BlogPost } from '../BlogPost.js'
 
-function blogArticle_201405200000() {
+function blogOpening_201405200000() {
     return [
         h('p', {},
             'One of the more infuriating challenges when trying to do any sort of analysis of Bitcoin mining is to ' +
@@ -10,7 +10,13 @@ function blogArticle_201405200000() {
             'and it appears that huge amounts of hashing capacity have either come online or gone offline.  This ' +
             'explanation may appeal to conspiracy theorists, and will sometimes be the real cause, but there is a much ' +
             'more mundane reason most of the time (but nonetheless surprising).'
-        ),
+        )
+    ]
+}
+
+function blogArticle_201405200000() {
+    return [
+        ...blogOpening_201405200000(),
         h('h2', {}, 'Isn\'t mining set up to generate a block once every 10 minutes?'),
         h('p', {},
             'The first thing to look at is the way mining operates.  The use of the SHA256 hash is intended to make it ' +
@@ -124,5 +130,6 @@ export const blogPost_201405200000 = new BlogPost(
     'Hash rate headaches',
     '2014-05-20',
     '/blog/2014-05-20-0000',
+    blogOpening_201405200000,
     blogArticle_201405200000
 );
