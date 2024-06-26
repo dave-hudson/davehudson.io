@@ -6,6 +6,7 @@ include src/manifest/Makefile.inc
 include src/projects/Makefile.inc
 
 FILES += \
+	src/dream-data-code.png \
 	src/index.html \
 	src/robots.txt \
 	src/sitemap.xml

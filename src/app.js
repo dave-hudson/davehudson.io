@@ -31,6 +31,9 @@ function homePage() {
         pageHeader(),
         h('article', { className: 'article' },
             articleTitle('Dreaming in data and code'),
+            h('figure', {},
+                h('img', { src: '/dream-data-code.png' }),
+            ),
             h('p', {},
                 'Software is the most amazing playground for an engineer.  A few inconvenient laws of physics aside, ' +
                 'if we can imagine something, then we can probably build it.'
@@ -43,7 +46,7 @@ function homePage() {
             h('p', {},
                 'This site was created to let me explore, and try to explain things that people dream in data and code.'
             ),
-            ...blogSummaries(7),
+                ...blogSummaries(7),
         ),
         h('hr', {}),
         h('h2', {}, 'More blog posts'),
