@@ -40,6 +40,12 @@ function homePage() {
             ),
             ...blogSummaries(7),
         ),
+        h('hr', {}),
+        h('h2', {}, 'More blog posts'),
+        h('p', {},
+            'You can find older blog posts:  ',
+            h('a', { href: '/blog', onClick: (e) => navigateEvent(e, '/blog') }, 'here')
+        ),
         pageFooter()
     );
 }
