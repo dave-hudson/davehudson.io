@@ -32,7 +32,12 @@ function homePage() {
         h('article', { className: 'article' },
             articleTitle('Dreaming in data and code'),
             h('figure', {},
-                h('img', { src: '/dream-data-code.webp' }),
+                h('img', {
+                    src: '/dream-data-code.webp',
+                    width: '800',
+                    height: '286',
+                    alt: 'Conceptual image of dreaming in data and code'
+                }),
             ),
             h('p', {},
                 'Software is the most amazing playground for an engineer.  A few inconvenient laws of physics aside, ' +
