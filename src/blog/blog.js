@@ -99,9 +99,11 @@ function blogArticlePage(index) {
     return h('div', {},
         pageHeader(),
         h('main', { className: 'article' },
-            h('h1', {}, thisArticle.title),
-            h('p', { className: 'meta'}, h('time', {}, thisArticle.dateTime)),
-            ...thisArticle.articleFunction()
+            h('article', {},
+                h('h1', {}, thisArticle.title),
+                h('p', { className: 'meta' }, h('time', {}, thisArticle.dateTime)),
+                ...thisArticle.articleFunction()
+            )
         ),
         navPrevNext(prevTitle, prevHRef, nextTitle, nextHRef),
         pageFooter()
@@ -156,13 +158,11 @@ export function blogSummaries(numEntries) {
     for (let i = blogContent.length - 1; i >= lastEntry; i--) {
         const { hRef, title, dateTime, openingFunction } = blogContent[i];
         view.push(h('hr', {}));
-        view.push(h('article', { className: 'article' },
-            h('header', { className: 'title' },
-                h('h2', {},
-                    h('a', { href: hRef, onClick: (e) => navigateEvent(e, hRef) }, title)
-                ),
-                h('span', { className: 'meta' }, dateTime)
+        view.push(h('section', { className: 'article' },
+            h('h2', {},
+                h('a', { href: hRef, onClick: (e) => navigateEvent(e, hRef) }, title)
             ),
+            h('p', { className: 'meta' }, h('time', {}, dateTime)),
             ...openingFunction(),
             h('p', {},
                 h('em', {},

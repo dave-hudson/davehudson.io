@@ -34,16 +34,18 @@ export function aboutPage() {
                 'amazing people.  I live in North Wales (UK), but for 17 years I “commuted” to Northern California. ' +
                 'Now my travels tend to take me to London (UK) and Abu Dhabi (UAE).'
             ),
-            h('h2', {}, 'Contact me'),
-            h('p', {},
-                'Please feel free to reach out to me on: ',
-                h('a', { href: 'mailto:hello@davehudson.io?subject=Email\ about\ davehudson.io' }, 'Email'),
-                ', ',
-                h('a', { href: 'http://linkedin.com/in/davejh/' }, 'LinkedIn'),
-                ', ',
-                h('a', { href: 'http://x.com/davehudsonio' }, 'X'),
-                ', or ',
-                h('a', { href: 'http://instagram.com/davehudsonio' }, 'Instagram')
+            h('section', {},
+                h('h2', {}, 'Contact me'),
+                h('p', {},
+                    'Please feel free to reach out to me on: ',
+                    h('a', { href: 'mailto:hello@davehudson.io?subject=Email\ about\ davehudson.io' }, 'Email'),
+                    ', ',
+                    h('a', { href: 'http://linkedin.com/in/davejh/' }, 'LinkedIn'),
+                    ', ',
+                    h('a', { href: 'http://x.com/davehudsonio' }, 'X'),
+                    ', or ',
+                    h('a', { href: 'http://instagram.com/davehudsonio' }, 'Instagram')
+                )
             )
         ),
         pageFooter()
