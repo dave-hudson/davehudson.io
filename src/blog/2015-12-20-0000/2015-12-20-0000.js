@@ -49,16 +49,18 @@ function blogArticle_201512200000() {
             'was certainly affected, not least because transactions with small fees could be almost indefinitely delayed.'
         ),
         h('hr', {}),
-        h('h2', {}, 'Related articles'),
-        h('ul', {},
-            h('li', {},
-                h('a', { href: '/blog/2015-01-18-0000', onClick: (e) => navigateEvent(e, '/blog/2015-01-18-0000') },
-                    'The myth of the megabyte Bitcoin block (2015-01-18)'
-                )
-            ),
-            h('li', {},
-                h('a', { href: '/blog/2014-11-11-0000', onClick: (e) => navigateEvent(e, '/blog/2014-11-11-0000') },
-                    'Bitcoin traffic bulletin? (2014-11-11)'
+        h('section', {},
+            h('h2', {}, 'Related articles'),
+            h('ul', {},
+                h('li', {},
+                    h('a', { href: '/blog/2015-01-18-0000', onClick: (e) => navigateEvent(e, '/blog/2015-01-18-0000') },
+                        'The myth of the megabyte Bitcoin block (2015-01-18)'
+                    )
+                ),
+                h('li', {},
+                    h('a', { href: '/blog/2014-11-11-0000', onClick: (e) => navigateEvent(e, '/blog/2014-11-11-0000') },
+                        'Bitcoin traffic bulletin? (2014-11-11)'
+                    )
                 )
             )
         )

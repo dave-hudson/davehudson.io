@@ -39,11 +39,13 @@ function blogArticle_201406050000() {
             'attention?'
         ),
         h('hr', {}),
-        h('h2', {}, 'Related articles'),
-        h('ul', {},
-            h('li', {},
-                h('a', { href: '/blog/2014-03-12-0000', onClick: (e) => navigateEvent(e, '/blog/2014-03-12-0000') },
-                    'Strange spikes in the Bitcoin price (2014-03-12)'
+        h('section', {},
+            h('h2', {}, 'Related articles'),
+            h('ul', {},
+                h('li', {},
+                    h('a', { href: '/blog/2014-03-12-0000', onClick: (e) => navigateEvent(e, '/blog/2014-03-12-0000') },
+                        'Strange spikes in the Bitcoin price (2014-03-12)'
+                    )
                 )
             )
         )
