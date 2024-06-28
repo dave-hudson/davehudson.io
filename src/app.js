@@ -2,7 +2,7 @@ import { h, updateElement } from './lib/dvdi.js';
 import { aboutPage } from './about/about.js';
 import { blogPage, blogSummaries, getBlogRoutes } from './blog/blog.js';
 import { projectsPage } from './projects/projects.js';
-import { pageHeader, articleTitle, pageFooter } from "./lib/page.js";
+import { pageHeader, pageFooter } from "./lib/page.js";
 
 console.log('SCRIPT RELOADED!')
 
@@ -27,47 +27,49 @@ function runVDomUpdates() {
 }
 
 function homePage() {
-    return h('div', { className: 'container' },
+    return h('div', {},
         pageHeader(),
-        h('article', { className: 'article' },
-            articleTitle('Dreaming in data and code'),
-            h('figure', {},
-                h('img', {
-                    src: '/dream-data-code.webp',
-                    width: '800',
-                    height: '286',
-                    alt: 'Conceptual image of dreaming in data and code'
-                }),
+        h('main', { className: 'article'},
+            h('article', {},
+                h('h1', {}, 'Dreaming in data and code'),
+                    h('figure', {},
+                    h('img', {
+                        src: '/dream-data-code.webp',
+                        width: '800',
+                        height: '286',
+                        alt: 'Conceptual image of dreaming in data and code'
+                    }),
+                ),
+                h('p', {},
+                    'Software is the most amazing playground for an engineer.  A few inconvenient laws of physics aside, ' +
+                    'if we can imagine something, then we can probably build it.'
+                ),
+                h('p', {},
+                    'Software engineering is a surprisingly artistic endeavour.  There can be many elegant solutions to any ' +
+                    'given problem, and all come with trade-offs.  But, in exploring all those choices and their consequences, ' +
+                    'we may gain some new insights to help guide us in the future.'
+                ),
+                h('p', {},
+                    'This site was created to let me explore, and try to explain things that people dream in data and code.'
+                ),
+                    ...blogSummaries(7),
             ),
+            h('hr', {}),
+            h('h2', {}, 'More blog posts'),
             h('p', {},
-                'Software is the most amazing playground for an engineer.  A few inconvenient laws of physics aside, ' +
-                'if we can imagine something, then we can probably build it.'
+                'You can find older blog posts on this page: ',
+                h('a', { href: '/blog', onClick: (e) => navigateEvent(e, '/blog') }, 'Blog')
             ),
-            h('p', {},
-                'Software engineering is a surprisingly artistic endeavour.  There can be many elegant solutions to any ' +
-                'given problem, and all come with trade-offs.  But, in exploring all those choices and their consequences, ' +
-                'we may gain some new insights to help guide us in the future.'
-            ),
-            h('p', {},
-                'This site was created to let me explore, and try to explain things that people dream in data and code.'
-            ),
-                ...blogSummaries(7),
-        ),
-        h('hr', {}),
-        h('h2', {}, 'More blog posts'),
-        h('p', {},
-            'You can find older blog posts on this page: ',
-            h('a', { href: '/blog', onClick: (e) => navigateEvent(e, '/blog') }, 'Blog')
         ),
         pageFooter()
     );
 }
 
 function notFoundPage(path) {
-    return h('div', { className: 'container' },
+    return h('div', {},
         pageHeader(),
-        h('article', { className: 'article' },
-            articleTitle(`404: Page "${path}" not found`),
+        h('main', { className: 'article' },
+            h('h1', {}, `404: Page "${path}" not found`),
             h('p', {}, 'This is unlikely to be the page you were looking for!'),
             h('p', {},
                 'If you\'ve arrived here via an old link from the hashingit.com blog, please take a look at ',

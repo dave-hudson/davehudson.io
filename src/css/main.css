@@ -358,10 +358,7 @@ html {
 }
 
 body {
-    background: #f4f4f4
-}
-
-.container {
+    background-color: #f4f4f4;
     font-family: Open Sans, sans-serif;
     font-weight: 400;
     color: #0c0c0c;
@@ -372,21 +369,21 @@ body {
     margin: 0 auto;
 }
 
-.container a {
+a {
     color: #5060e0;
     text-decoration: none;
 }
 
-.container a:hover {
+a:hover {
     color: #ff748c;
     text-decoration: underline;
 }
 
-.container a img {
+a img {
     border: none;
 }
 
-.container blockquote {
+blockquote {
     margin-left: 1rem;
     font-style: italic;
     font-size: 1.4rem;
@@ -396,16 +393,16 @@ body {
     padding-left: 20px;
 }
 
-.container blockquote cite {
+blockquote cite {
     font-size: 70%;
     opacity: .8;
 }
 
-.container blockquote em {
+blockquote em {
     font-weight: 600;
 }
 
-.container figure {
+figure {
     margin: 0;
     text-align: center;
     font-size: 13px;
@@ -413,11 +410,11 @@ body {
     font-style: italic;
 }
 
-.container figure figcaption {
+figure figcaption {
     margin-bottom: 1.5rem;
 }
 
-.container hr {
+hr {
     display: block;
     height: 1px;
     border: 0;
@@ -426,55 +423,55 @@ body {
     padding: 0;
 }
 
-.container img {
+img {
     margin: 25px auto 25px auto;
     max-width: 100%;
     display: block;
 }
 
-.container h1,
-.container h2,
-.container h3,
-.container h4,
-.container h5,
-.container h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: Lalezar, sans-serif;
     line-height: 1;
     font-weight: 300;
     margin-bottom: 0;
 }
 
-.container h1 {
+h1 {
     margin-top: 2rem;
     font-size: 2.75rem;
 }
 
-.container h2 {
+h2 {
     margin-top: 2rem;
     font-size: 2rem;
 }
 
-.container h3 {
+h3 {
     font-size: 1.6rem;
 }
 
-.container h4 {
+h4 {
     font-size: 1.2rem;
 }
 
-.container h5 {
+h5 {
     font-size: 1rem;
 }
 
-.container h6 {
+h6 {
     font-size: .9rem;
 }
 
-.container .header {
+.header {
     margin-bottom: 30px;
 }
 
-.container .header .site-title {
+.header .site-title {
     width: 100%;
     border-spacing: 0;
     padding: 0;
@@ -482,7 +479,7 @@ body {
     border: none;
 }
 
-.container .header .site-title .home-link {
+.header .site-title .home-link {
     font-size: 2rem;
     margin: 0;
     display: inline-block;
@@ -491,33 +488,33 @@ body {
     font-weight: 300;
 }
 
-.container .header .site-title .icon {
+.header .site-title .icon {
     margin: 6px 0 0 0;
     border: none;
     float: right;
     margin-left: 7px;
 }
 
-.container .header .site-title .icon svg {
+.header .site-title .icon svg {
     max-width: 18px;
     max-height: 18px;
 }
 
-.container .header .site-menu {
+.header .site-menu {
     margin-top: 10px;
     padding: 0.6rem 0 0.6rem 0;
     border-top: 1px solid #bbb;
     border-bottom: 1px solid #bbb;
 }
 
-.container .header .site-menu .menu {
+.header .site-menu .menu {
     margin: 0;
     padding: 0;
     display: inline-block;
     margin-right: 15px;
 }
 
-.container .header .site-menu button {
+.header .site-menu button {
     border-style: none;
     border-width: 0;
     padding-block: 0;
@@ -526,114 +523,107 @@ body {
     background-color: transparent;
 }
 
-.container .header .site-menu button:hover {
+.header .site-menu button:hover {
     color: #ff748c;
 }
 
-.container .header .site-menu .icon {
+.header .site-menu .icon {
     float: right;
     margin-left: 7px;
     padding-top: 2px;
 }
 
-.container .header .site-menu .icon svg {
+.header .site-menu .icon svg {
     max-width: 18px;
     max-height: 18px;
 }
 
-.container .article .title {
-    margin: 0 auto 30px auto;
-}
-
-.container .article .title h1 {
-    margin: 0;
-}
-
-.container .article .title .meta {
+.article .meta {
     font-size: 0.725rem;
     color: #a55;
-    margin-bottom: 30px;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
 }
 
-.container .article code {
+.article code {
     font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
     font-size: .95em;
 }
 
-.container .article p code {
+.article p code {
     color: #a81818;
 }
 
-.container .article table {
+.article table {
     margin: 25px auto 25px auto;
     border-spacing: 0;
     border-collapse: collapse;
 }
 
-.container .article table th {
+.article table th {
     background-color: #bbb;
     padding: 5px 10px;
     border: 1px solid #777;
     font-weight: 600;
 }
 
-.container .article table td {
+.article table td {
     padding: 5px 10px;
     border: 1px solid #777;
 }
 
-.container .prev-next {
+.prev-next {
     margin: 30px 0 30px 0;
     border-top: 1px solid #bbb;
 }
 
-.container .prev-next .meta-nav {
+.prev-next .meta-nav {
     margin-top: 15px;
     border: none;
     width: 100%;
 }
 
-.container .prev-next .meta-nav td {
+.prev-next .meta-nav td {
     padding: 0 0 0 0;
 }
 
-.container .prev-next .meta-nav .prev {
+.prev-next .meta-nav .prev {
     text-align: left;
     border: none;
     width: 30px;
     padding-top: 5px;
 }
 
-.container .prev-next .meta-nav .prev svg {
+.prev-next .meta-nav .prev svg {
     max-width: 15px;
     max-height: 15px;
 }
 
-.container .prev-next .meta-nav .prev-text {
+.prev-next .meta-nav .prev-text {
     text-align: left;
     border: none;
     padding-right: 1px;
 }
 
-.container .prev-next .meta-nav .next-text {
+.prev-next .meta-nav .next-text {
     text-align: right;
     border: none;
     padding-left: 1px;
 }
 
-.container .prev-next .meta-nav .next {
+.prev-next .meta-nav .next {
     text-align: right;
     border: none;
     width: 30px;
     padding-top: 5px;
 }
 
-.container .prev-next .meta-nav .next svg {
+.prev-next .meta-nav .next svg {
     max-width: 15px;
     max-height: 15px;
 }
 
-.container .footer {
+.footer {
     text-align: right;
     font-size: 0.75rem;
     color: #555;
@@ -642,16 +632,16 @@ body {
     margin-top: 30px;
 }
 
-.container .footer .copyright {
+.footer .copyright {
     margin-top: 15px;
 }
 
-.container .blog-posts .blog-post {
+.blog-posts .blog-post {
     display: table;
     width: 100%;
 }
 
-.container .blog-posts .blog-post .meta {
+.blog-posts .blog-post .meta {
     display: table-cell;
     text-align: right;
     font-size: 0.725rem;

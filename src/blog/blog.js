@@ -1,5 +1,5 @@
 import { h } from '../lib/dvdi.js';
-import { pageHeader, articleTitle, pageFooter } from '../lib/page.js';
+import { pageHeader, pageFooter } from '../lib/page.js';
 import { navigateEvent } from '../app.js';
 import { chevronLeftIcon, chevronRightIcon } from '../lib/icons.js';
 import { blogPost_201403090000 } from './2014-03-09-0000/2014-03-09-0000.js';
@@ -96,10 +96,11 @@ function blogArticlePage(index) {
     let nextTitle = nextArticle ? nextArticle.title : null;
     let nextHRef = nextArticle ? nextArticle.hRef : null;
 
-    return h('div', { className: 'container' },
+    return h('div', {},
         pageHeader(),
-        h('article', { className: 'article' },
-            articleTitle(thisArticle.title, thisArticle.dateTime),
+        h('main', { className: 'article' },
+            h('h1', {}, thisArticle.title),
+            h('p', { className: 'meta'}, h('time', {}, thisArticle.dateTime)),
             ...thisArticle.articleFunction()
         ),
         navPrevNext(prevTitle, prevHRef, nextTitle, nextHRef),
@@ -134,10 +135,10 @@ export function blogPage() {
     }
 
     // Return the VDOM for the blog page.
-    return h('div', { className: 'container' },
+    return h('div', {},
         pageHeader(),
-        h('article', { className: 'article' },
-            articleTitle('Blog posts'),
+        h('main', { className: 'article' },
+            h('h1', {}, 'Blog posts'),
             h('div', { className: 'blog-posts' }, ...pageView)
         ),
         pageFooter()

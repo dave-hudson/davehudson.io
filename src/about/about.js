@@ -1,11 +1,12 @@
 import { h } from '../lib/dvdi.js';
-import { pageHeader, articleTitle, pageFooter } from "../lib/page.js";
+import { pageHeader, pageFooter } from "../lib/page.js";
 
 export function aboutPage() {
-    return h('div', { className: 'container' },
+    return h('div', {},
         pageHeader(),
-        h('article', { className: 'article' },
-            articleTitle('About me (Dave Hudson)', '2024-05-29 07:45'),
+        h('main', { className: 'article' },
+            h('h1', {}, 'About me (Dave Hudson)'),
+            h('p', { className: 'meta'}, h('time', {}, '2024-05-29 07:45')),
             h('p', {},
                 'Hello, good morning/afternoon/evening* and welcome! ',
                 h('em', {}, '(*please delete as appropriate)')
