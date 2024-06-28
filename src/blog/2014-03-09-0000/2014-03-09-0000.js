@@ -15,7 +15,6 @@ function blogOpening_201403090000() {
 
 function blogArticle_201403090000() {
     return [
-        ...blogOpening_201403090000(),
         h('section', {},
             h('h2', {}, 'What has been happening?'),
             h('p', {},
@@ -103,6 +102,8 @@ export const blogPost_201403090000 = new BlogPost(
     'The Bitcoin runaway mine train',
     '2014-03-09',
     '/blog/2014-03-09-0000',
+    null,
     blogOpening_201403090000,
-    blogArticle_201403090000
+    blogArticle_201403090000,
+    null
 );

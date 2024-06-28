@@ -18,7 +18,6 @@ function blogOpening_201403230000() {
 
 function blogArticle_201403230000() {
     return [
-        ...blogOpening_201403230000(),
         h('section', {},
                 h('h2', {}, 'Why have things moved so fast?'),
             h('p', {},
@@ -148,6 +147,8 @@ export const blogPost_201403230000 = new BlogPost(
     'Where next for Bitcoin mining ASICs?',
     '2014-03-23',
     '/blog/2014-03-23-0000',
+    null,
     blogOpening_201403230000,
-    blogArticle_201403230000
+    blogArticle_201403230000,
+    null
 );

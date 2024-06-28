@@ -17,7 +17,6 @@ function blogOpening_201406300000() {
 
 function blogArticle_201406300000() {
     return [
-        ...blogOpening_201406300000(),
         h('section', {},
             h('h2', {}, 'Starting thoughts'),
             h('p', {},
@@ -121,7 +120,12 @@ function blogArticle_201406300000() {
                 'proposal to remove them will have to address the issue of variance if it is to gain any sort of widespread ' +
                 'acceptance.'
             )
-        ),
+        )
+    ];
+}
+
+function blogPostScript_201406300000() {
+    return [
         h('hr', {}),
         h('section', {},
             h('h2', {}, 'Related articles'),
@@ -145,6 +149,8 @@ export const blogPost_201406300000 = new BlogPost(
     'The gambler\'s guide to Bitcoin mining',
     '2014-06-30',
     '/blog/2014-06-30-0000',
+    null,
     blogOpening_201406300000,
-    blogArticle_201406300000
+    blogArticle_201406300000,
+    blogPostScript_201406300000
 );

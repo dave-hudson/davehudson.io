@@ -19,7 +19,6 @@ function blogOpening_201601050000() {
 
 function blogArticle_201601050000() {
     return [
-        ...blogOpening_201601050000(),
         h('section', {},
             h('h2', {}, 'The nature of Bitcoin hashing (an aside)'),
             h('p', {},
@@ -153,7 +152,12 @@ function blogArticle_201601050000() {
                 'whether, environmental concerns aside, proof-of-work alone will be sufficient to secure the long-term history ' +
                 'of the Bitcoin blockchain.'
             )
-        ),
+        )
+    ];
+}
+
+function blogPostscript_20160105000() {
+    return [
         h('hr', {}),
         h('section', {},
             h('h2', {}, 'Related articles'),
@@ -177,6 +181,8 @@ export const blogPost_201601050000 = new BlogPost(
     'Behold mighty exahash, hammer of the blocks!',
     '2016-01-05',
     '/blog/2016-01-05-0000',
+    null,
     blogOpening_201601050000,
-    blogArticle_201601050000
+    blogArticle_201601050000,
+    blogPostscript_20160105000
 );

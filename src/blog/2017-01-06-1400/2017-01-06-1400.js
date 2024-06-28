@@ -21,7 +21,7 @@ function blogOpening_201701061400() {
     ];
 }
 
-function blogArticle_201701061400() {
+function blogPreScript_201701061400() {
     return [
         h('em', {},
             'Note 2020-03-06: This was originally published as an opinion piece at ',
@@ -29,9 +29,12 @@ function blogArticle_201701061400() {
                 'Coindesk'
             ),
             '.'
-        ),
-        h('hr', {}),
-        ...blogOpening_201701061400(),
+        )
+    ];
+}
+
+function blogArticle_201701061400() {
+    return [
         h('section', {},
             h('h2', {}, 'It\'s all about money'),
             h('p', {}, 'The original theory of IoT was that data would make everything better.'),
@@ -44,8 +47,7 @@ function blogArticle_201701061400() {
                 'Adding Internet connectivity to a device is never free-of-charge.  In most cases this was a realm of small, ' +
                 'low-CPU-powered devices, with no connectivity, so making them Internet-connected was going to cost money.'
             ),
-            h('p', {}, 'In the 20 years since those original ideas, little has changed.'
-    ),
+            h('p', {}, 'In the 20 years since those original ideas, little has changed.'),
             h('p', {},
                 'Let\'s consider the microwave oven example.  A microwave would need a pretty simple IoT hardware design, so ' +
                 'perhaps $5 in parts cost. The first problem is that the $5 turns into nearer $15 by the time we add the margins ' +
@@ -248,6 +250,8 @@ export const blogPost_201701061400 = new BlogPost(
     'What IoT history reveals about blockchain\'s challenges',
     '2017-01-06 14:00',
     '/blog/2017-01-06-1400',
+    blogPreScript_201701061400,
     blogOpening_201701061400,
-    blogArticle_201701061400
+    blogArticle_201701061400,
+    null
 );

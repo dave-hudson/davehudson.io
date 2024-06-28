@@ -17,7 +17,6 @@ function blogOpening_201404300000() {
 
 function blogArticle_201404300000() {
     return [
-        ...blogOpening_201404300000(),
         h('section', {},
             h('h2', {}, 'The role of difficulty'),
             h('p', {},
@@ -150,7 +149,12 @@ function blogArticle_201404300000() {
                 h('a', { href: 'https://bitcointalk.org/index.php?topic=580632.msg6572887#msg6572887' }, 'insightful remark'),
                 ' when I first posted a link to it!'
             )
-        ),
+        )
+    ];
+}
+
+function blogPostScript_201404300000() {
+    return [
         h('hr', {}),
         h('section', {},
             h('h2', {}, 'Related articles'),
@@ -184,6 +188,8 @@ export const blogPost_201404300000 = new BlogPost(
     'Prisoner\'s dilemmas?',
     '2014-04-30',
     '/blog/2014-04-30-0000',
+    null,
     blogOpening_201404300000,
-    blogArticle_201404300000
+    blogArticle_201404300000,
+    blogPostScript_201404300000
 );

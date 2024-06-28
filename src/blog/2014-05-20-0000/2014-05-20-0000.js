@@ -16,7 +16,6 @@ function blogOpening_201405200000() {
 
 function blogArticle_201405200000() {
     return [
-        ...blogOpening_201405200000(),
         h('section', {},
             h('h2', {}, 'Isn\'t mining set up to generate a block once every 10 minutes?'),
             h('p', {},
@@ -142,6 +141,8 @@ export const blogPost_201405200000 = new BlogPost(
     'Hash rate headaches',
     '2014-05-20',
     '/blog/2014-05-20-0000',
+    null,
     blogOpening_201405200000,
-    blogArticle_201405200000
+    blogArticle_201405200000,
+    null
 );

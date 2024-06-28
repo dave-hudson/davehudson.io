@@ -15,7 +15,6 @@ function blogOpening_201406230000() {
 
 function blogArticle_201406230000() {
     return [
-        ...blogOpening_201406230000(),
         h('section', {},
             h('h2', {}, 'A day in the life of a 50% mining pool'),
             h('p', {},
@@ -83,7 +82,12 @@ function blogArticle_201406230000() {
                 'hashing, but as we\'ve seen before, we should be wary that daily statistics alone aren\'t enough to show that ' +
                 'this level has been reached.'
             )
-        ),
+        )
+    ];
+}
+
+function blogPostScript_201406230000() {
+    return [
         h('hr', {}),
         h('section', {},
             h('h2', {}, 'Related articles'),
@@ -112,6 +116,8 @@ export const blogPost_201406230000 = new BlogPost(
     '51% of the network',
     '2014-06-23',
     '/blog/2014-06-23-0000',
+    null,
     blogOpening_201406230000,
-    blogArticle_201406230000
+    blogArticle_201406230000,
+    blogPostScript_201406230000
 );

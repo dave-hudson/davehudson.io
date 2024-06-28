@@ -19,7 +19,6 @@ function blogOpening_201512190000() {
 
 function blogArticle_201512190000() {
     return [
-        ...blogOpening_201512190000(),
         h('section', {},
             h('h2', {}, 'Running like clockwork?'),
             h('p', {},
@@ -177,7 +176,12 @@ function blogArticle_201512190000() {
                     'github.com/dave-hudson/waiting-for-blocks'
                 )
             )
-        ),
+        )
+    ];
+}
+
+function blogPostScript_201512190000() {
+    return [
         h('hr', {}),
         h('section', {},
             h('h2', {}, 'Related articles'),
@@ -211,6 +215,8 @@ export const blogPost_201512190000 = new BlogPost(
     'Waiting for blocks',
     '2015-12-19',
     '/blog/2015-12-19-0000',
+    null,
     blogOpening_201512190000,
-    blogArticle_201512190000
+    blogArticle_201512190000,
+    blogPostScript_201512190000
 );

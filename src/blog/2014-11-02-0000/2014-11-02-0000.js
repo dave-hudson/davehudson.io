@@ -20,7 +20,6 @@ function blogOpening_201411020000() {
 
 function blogArticle_201411020000() {
     return [
-        ...blogOpening_201411020000(),
         h('section', {},
             h('h2', {}, 'Bitcoin transactions per day'),
             h('p', {},
@@ -156,7 +155,12 @@ function blogArticle_201411020000() {
                 'characteristic that helps miners finally achieve revenues from fees instead of block rewards.  That, however, ' +
                 'seems like a story for another day...'
             )
-        ),
+        )
+    ];
+}
+
+function blogPostScript_201411020000() {
+    return [
         h('hr', {}),
         h('section', {},
             h('h2', {}, 'Related articles'),
@@ -185,6 +189,8 @@ export const blogPost_201411020000 = new BlogPost(
     '7 transactions per second? Really?',
     '2014-11-02',
     '/blog/2014-11-02-0000',
+    null,
     blogOpening_201411020000,
-    blogArticle_201411020000
+    blogArticle_201411020000,
+    blogPostScript_201411020000
 );

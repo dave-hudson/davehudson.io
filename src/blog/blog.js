@@ -95,6 +95,15 @@ function blogArticlePage(index) {
     let prevHRef = prevArticle ? prevArticle.hRef : null;
     let nextTitle = nextArticle ? nextArticle.title : null;
     let nextHRef = nextArticle ? nextArticle.hRef : null;
+    let preText = '';
+    if (thisArticle.preScriptFunction !== null) {
+        preText = thisArticle.preScriptFunction();
+    }
+
+    let postText = '';
+    if (thisArticle.postScriptFunction !== null) {
+        postText = thisArticle.postScriptFunction();
+    }
 
     return h('div', {},
         pageHeader(),
@@ -102,10 +111,13 @@ function blogArticlePage(index) {
             h('article', {},
                 h('h1', {}, thisArticle.title),
                 h('p', { className: 'meta' }, h('time', {}, thisArticle.dateTime)),
+                ...preText,
+                ...thisArticle.openingFunction(),
                 ...thisArticle.articleFunction()
-            )
+            ),
+            ...postText,
+            navPrevNext(prevTitle, prevHRef, nextTitle, nextHRef),
         ),
-        navPrevNext(prevTitle, prevHRef, nextTitle, nextHRef),
         pageFooter()
     );
 }

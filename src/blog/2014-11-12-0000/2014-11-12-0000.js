@@ -15,7 +15,6 @@ function blogOpening_201411120000() {
 
 function blogArticle_201411120000() {
     return [
-        ...blogOpening_201411120000(),
         h('section', {},
             h('h2', {}, 'Transaction fees'),
             h('p', {},
@@ -183,7 +182,12 @@ function blogArticle_201411120000() {
                 'There will inevitably have to be changes to way in which mining is funded in order to keep things running ' +
                 'smoothly.'
             )
-        ),
+        )
+    ];
+}
+
+function blogPostScript_201411120000() {
+    return [
         h('hr', {}),
         h('section', {},
             h('h2', {}, 'Related articles'),
@@ -207,6 +211,8 @@ export const blogPost_201411120000 = new BlogPost(
     'The future of Bitcoin transaction fees?',
     '2014-11-12',
     '/blog/2014-11-12-0000',
+    null,
     blogOpening_201411120000,
-    blogArticle_201411120000
+    blogArticle_201411120000,
+    blogPostScript_201411120000
 );

@@ -16,7 +16,6 @@ function blogOpening_201406100000() {
 
 function blogArticle_201406100000() {
     return [
-        ...blogOpening_201406100000(),
         h('section', {},
             h('h2', {}, 'Difficulty charts'),
             h('p', {},
@@ -126,7 +125,12 @@ function blogArticle_201406100000() {
                 'those numbers, tantalizing as they may seem, are largely meaningless.  They are the lies among the truth that ' +
                 'only becomes apparent over a much longer timescale.'
             )
-        ),
+        )
+    ];
+}
+
+function blogPostScript_201406100000() {
+    return [
         h('hr', {}),
         h('section', {},
             h('h2', {}, 'Related articles'),
@@ -150,6 +154,8 @@ export const blogPost_201406100000 = new BlogPost(
     'Lies, damned lies and Bitcoin difficulties',
     '2014-06-10',
     '/blog/2014-06-10-0000',
+    null,
     blogOpening_201406100000,
-    blogArticle_201406100000
+    blogArticle_201406100000,
+    blogPostScript_201406100000
 );

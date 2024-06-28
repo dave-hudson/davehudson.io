@@ -25,7 +25,6 @@ function blogOpening_201501180000() {
 
 function blogArticle_201501180000() {
     return [
-        ...blogOpening_201501180000(),
         h('section', {},
             h('h2', {}, 'A puzzle'),
             h('p', {},
@@ -243,7 +242,12 @@ function blogArticle_201501180000() {
                     'https://github.com/dave-hudson/the-myth-of-the-megabyte-bitcoin-block'
                 )
             )
-        ),
+        )
+    ];
+}
+
+function blogPostScript_201501180000() {
+    return [
         h('hr', {}),
         h('section', {},
             h('h2', {}, 'Related articles'),
@@ -272,6 +276,8 @@ export const blogPost_201501180000 = new BlogPost(
     'The myth of the megabyte Bitcoin block',
     '2015-01-18',
     '/blog/2015-01-18-0000',
+    null,
     blogOpening_201501180000,
-    blogArticle_201501180000
+    blogArticle_201501180000,
+    blogPostScript_201501180000
 );

@@ -15,7 +15,6 @@ function blogOpening_201411110000() {
 
 function blogArticle_201411110000() {
     return [
-        ...blogOpening_201411110000(),
         h('section', {},
             h('h2', {}, 'Bitcoin transaction processing'),
             h('p', {},
@@ -207,7 +206,12 @@ function blogArticle_201411110000() {
                     'https://github.com/dave-hudson/bitcoin-traffic-bulletin'
                 )
             )
-        ),
+        )
+    ];
+}
+
+function blogPostScript_201411110000() {
+    return [
         h('hr', {}),
         h('section', {},
             h('h2', {}, 'Related articles'),
@@ -236,6 +240,8 @@ export const blogPost_201411110000 = new BlogPost(
     'Bitcoin traffic bulletin',
     '2014-11-11',
     '/blog/2014-11-11-0000',
+    null,
     blogOpening_201411110000,
-    blogArticle_201411110000
+    blogArticle_201411110000,
+    blogPostScript_201411110000
 );

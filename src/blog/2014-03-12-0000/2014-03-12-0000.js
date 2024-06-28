@@ -14,7 +14,6 @@ function blogOpening_201403120000() {
 
 function blogArticle_201403120000() {
     return [
-        ...blogOpening_201403120000(),
         h('p', {}, 'Let\'s look at the graph:'),
         h('figure', {},
             h('img', { src: '/blog/2014-03-12-0000/20140312_BTC_Price.png' }),
@@ -52,6 +51,8 @@ export const blogPost_201403120000 = new BlogPost(
     'Strange spikes in the Bitcoin price',
     '2014-03-12',
     '/blog/2014-03-12-0000',
+    null,
     blogOpening_201403120000,
-    blogArticle_201403120000
+    blogArticle_201403120000,
+    null
 );

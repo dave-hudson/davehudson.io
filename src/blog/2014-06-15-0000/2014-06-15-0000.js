@@ -13,7 +13,6 @@ function blogOpening_201406150000() {
 
 function blogArticle_201406150000() {
     return [
-        ...blogOpening_201406150000(),
         h('section', {},
             h('h2', {}, 'The simple case'),
             h('p', {},
@@ -117,7 +116,12 @@ function blogArticle_201406150000() {
                 'clearly has a very substantial fraction but the error margins even across an entire 2016 block period are ' +
                 'surprisingly large.  As ever Bitcoin statistics often lead to more questions than answers!'
             )
-        ),
+        )
+    ];
+}
+
+function blogPostScript_201406150000() {
+    return [
         h('hr', {}),
         h('section', {},
             h('h2', {}, 'Related articles'),
@@ -146,6 +150,8 @@ export const blogPost_201406150000 = new BlogPost(
     'Finding 2016 blocks',
     '2014-06-15',
     '/blog/2014-06-15-0000',
+    null,
     blogOpening_201406150000,
-    blogArticle_201406150000
+    blogArticle_201406150000,
+    blogPostScript_201406150000
 );

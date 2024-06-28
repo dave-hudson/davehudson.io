@@ -20,7 +20,6 @@ function blogOpening_201404280000() {
 
 function blogArticle_201404280000() {
     return [
-        ...blogOpening_201404280000(),
         h('section', {},
             h('h2', {}, 'What are the electricity costs?'),
             h('p', {},
@@ -175,7 +174,12 @@ function blogArticle_201404280000() {
                 'It is somewhat ironic that rather the decentralized hashing we may be on the verge of moving much of it ' +
                 'into large, highly centralized, mining facilities.'
             )
-        ),
+        )
+    ];
+}
+
+function blogPostScript_201404280000() {
+    return [
         h('hr', {}),
         h('section', {},
             h('h2', {}, 'Related articles'),
@@ -204,6 +208,8 @@ export const blogPost_201404280000 = new BlogPost(
     'Megawatts of mining',
     '2014-04-28',
     '/blog/2014-04-28-0000',
+    null,
     blogOpening_201404280000,
-    blogArticle_201404280000
+    blogArticle_201404280000,
+    blogPostScript_201404280000
 );

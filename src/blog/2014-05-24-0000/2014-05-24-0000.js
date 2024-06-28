@@ -13,7 +13,6 @@ function blogOpening_201405240000() {
 
 function blogArticle_201405240000() {
     return [
-        ...blogOpening_201405240000(),
         h('figure', {},
             h('img', { src: '/blog/2014-05-24-0000/high-noise-levels.jpg' }),
         ),
@@ -174,7 +173,12 @@ function blogArticle_201405240000() {
                 'where no-one can hear your scream, it seems that in Cyberspace a little noise can sometimes be very loud' +
                 'indeed!'
             )
-        ),
+        )
+    ];
+}
+
+function blogPostScript_201405240000() {
+    return [
         h('hr', {}),
         h('section', {},
             h('h2', {}, 'Related articles'),
@@ -193,6 +197,8 @@ export const blogPost_201405240000 = new BlogPost(
     'Reach for the ear defenders!',
     '2014-05-24',
     '/blog/2014-05-24-0000',
+    null,
     blogOpening_201405240000,
-    blogArticle_201405240000
+    blogArticle_201405240000,
+    blogPostScript_201405240000
 );

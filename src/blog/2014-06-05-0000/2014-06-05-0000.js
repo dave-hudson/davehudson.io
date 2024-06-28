@@ -17,7 +17,6 @@ function blogOpening_201406050000() {
 
 function blogArticle_201406050000() {
     return [
-        ...blogOpening_201406050000(),
         h('p', {}, 'Let\'s look at the graph (plotted on a logarithmic Y axis):'),
         h('figure', {},
             h('img', { src: '/blog/2014-06-05-0000/BTC-price.png' }),
@@ -37,7 +36,12 @@ function blogArticle_201406050000() {
             'While our roller coaster may be an entertaining ride for many, the gentle slopes of the low point trend ' +
             '(green line) form an intriguingly steady path. Perhaps it\'s this trend that should be attracting far more ' +
             'attention?'
-        ),
+        )
+    ];
+}
+
+function blogPostScript_201406050000() {
+    return [
         h('hr', {}),
         h('section', {},
             h('h2', {}, 'Related articles'),
@@ -56,6 +60,8 @@ export const blogPost_201406050000 = new BlogPost(
     'Strange spikes revisited!',
     '2014-06-05',
     '/blog/2014-06-05-0000',
+    null,
     blogOpening_201406050000,
-    blogArticle_201406050000
+    blogArticle_201406050000,
+    blogPostScript_201406050000
 );

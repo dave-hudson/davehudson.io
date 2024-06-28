@@ -17,7 +17,6 @@ function blogOpening_201512200000() {
 
 function blogArticle_201512200000() {
     return [
-        ...blogOpening_201512200000(),
         h('p', {},
             'In the original blog post the network\'s block capacity was at about 30%.  As of early December 2015 the ' +
             'network\'s block capacity is at least 58%.  In practice some blocks are mined smaller than the full 1M bytes ' +
@@ -47,7 +46,12 @@ function blogArticle_201512200000() {
             'volumes of transactions.  In each instance transaction confirmation times were seen to increase, and ' +
             'arguably fees increases to match.  This suggests that the network can adapt reasonably well, but service ' +
             'was certainly affected, not least because transactions with small fees could be almost indefinitely delayed.'
-        ),
+        )
+    ];
+}
+
+function blogPostScript_201512200000() {
+    return [
         h('hr', {}),
         h('section', {},
             h('h2', {}, 'Related articles'),
@@ -71,6 +75,8 @@ export const blogPost_201512200000 = new BlogPost(
     'Bitcoin traffic bulletin (redux)',
     '2015-12-20',
     '/blog/2015-12-20-0000',
+    null,
     blogOpening_201512200000,
-    blogArticle_201512200000
+    blogArticle_201512200000,
+    blogPostScript_201512200000
 );

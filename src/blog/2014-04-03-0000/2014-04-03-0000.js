@@ -14,7 +14,6 @@ function blogOpening_201404030000() {
 
 function blogArticle_201404030000() {
     return [
-        ...blogOpening_201404030000(),
         h('p', {},
             'Like mining any other finite resource, Bitcoin mining gets harder over time and requires more investment to ' +
             'mine profitably.  Mining requires a capital outlay to buy mining equipment, incurs operating costs to keep ' +
@@ -143,7 +142,12 @@ function blogArticle_201404030000() {
                 'to slow down and that will start to change the mining economics again\... seems like something to write ' +
                 'about next time :-)'
             )
-        ),
+        )
+    ];
+}
+
+function blogPostScript_201404030000() {
+    return [
         h('hr', {}),
         h('section', {},
             h('h2', {}, 'Related articles'),
@@ -167,6 +171,8 @@ export const blogPost_201404030000 = new BlogPost(
     'The rewards for a Bitcoin miner',
     '2014-04-03',
     '/blog/2014-04-03-0000',
+    null,
     blogOpening_201404030000,
-    blogArticle_201404030000
+    blogArticle_201404030000,
+    blogPostScript_201404030000
 );

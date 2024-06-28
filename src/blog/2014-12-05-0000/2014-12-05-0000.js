@@ -18,7 +18,6 @@ function blogOpening_201412050000() {
 
 function blogArticle_201412050000() {
     return [
-        ...blogOpening_201412050000(),
         h('section', {},
             h('h2', {}, 'Mining pools'),
             h('p', {},
@@ -305,7 +304,12 @@ function blogArticle_201412050000() {
                     'https://github.com/dave-hudson/pool-wars'
                 )
             )
-        ),
+        )
+    ];
+}
+
+function blogPostScript_201412050000() {
+    return [
         h('hr', {}),
         h('section', {},
             h('h2', {}, 'Related articles'),
@@ -329,6 +333,8 @@ export const blogPost_201412050000 = new BlogPost(
     'Pool wars?',
     '2014-12-05',
     '/blog/2014-12-05-0000',
+    null,
     blogOpening_201412050000,
-    blogArticle_201412050000
+    blogArticle_201412050000,
+    null
 );
