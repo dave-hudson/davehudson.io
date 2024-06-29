@@ -41,15 +41,7 @@ function homePage() {
             ),
             h('p', {},
                 'Software is the most amazing playground for an engineer.  A few inconvenient laws of physics aside, ' +
-                'if we can imagine something, then we can probably build it.'
-            ),
-            h('p', {},
-                'Software engineering is a surprisingly artistic endeavour.  There can be many elegant solutions to any ' +
-                'given problem, and all come with trade-offs.  But, in exploring all those choices and their consequences, ' +
-                'we may gain some new insights to help guide us in the future.'
-            ),
-            h('p', {},
-                'This site was created to let me explore, and try to explain things that people dream in data and code.'
+                'if we can imagine something, then we can probably build it in data and code.'
             ),
             ...blogSummaries(7),
             h('hr', {}),
