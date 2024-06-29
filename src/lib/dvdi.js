@@ -129,13 +129,13 @@ function newAttribute(domElement, key, value) {
         return;
     }
 
-    const [prefix, ...unqualifiedName] = key.split(':')
-    let ns = null
+    const [prefix, ...unqualifiedName] = key.split(':');
+    let ns = null;
     if (prefix === 'xmlns' || unqualifiedName.length && namespaces[prefix]) {
-        ns = namespaces[prefix]
+        ns = namespaces[prefix];
     }
 
-    domElement.setAttributeNS(ns, key, String(value))
+    domElement.setAttributeNS(ns, key, String(value));
 }
 
 /*
@@ -148,14 +148,14 @@ function deleteAttribute(domElement, key, value) {
     }
 
     if (key == 'className') {
-        domElement.className = null;
+        domElement.className = '';
         return;
     }
 
-    const [prefix, ...unqualifiedName] = key.split(':')
-    let ns = null
+    const [prefix, ...unqualifiedName] = key.split(':');
+    let ns = null;
     if (prefix === 'xmlns' || unqualifiedName.length && namespaces[prefix]) {
-        ns = namespaces[prefix]
+        ns = namespaces[prefix];
     }
 
     domElement.removeAttributeNS(ns, key);
@@ -321,7 +321,7 @@ export function updateElement(parent, parentVNode, oldVNode, newVNode, index) {
  * @returns {Object} A virtual DOM element.
  */
 export function h(type, props, ...childNodes) {
-    let v = new VDom('html', type, props || {}, [])
+    let v = new VDom('html', type, props || {}, []);
     for (let i of childNodes) {
         v.appendChild(i);
     }
@@ -337,7 +337,7 @@ export function h(type, props, ...childNodes) {
  * @returns {Object} A virtual DOM element.
  */
 export function svg(type, props, ...childNodes) {
-    let v = new VDom('svg', type, props || {}, [])
+    let v = new VDom('svg', type, props || {}, []);
     for (let i of childNodes) {
         v.appendChild(i);
     }
