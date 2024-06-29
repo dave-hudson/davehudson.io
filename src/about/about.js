@@ -4,7 +4,7 @@ import { pageHeader, pageFooter } from "../lib/page.js";
 export function aboutPage() {
     return h('div', {},
         pageHeader(),
-        h('main', { className: 'article' },
+        h('main', { className: 'main' },
             h('h1', {}, 'About me (Dave Hudson)'),
             h('p', { className: 'meta'}, h('time', {}, '2024-05-29 07:45')),
             h('p', {},

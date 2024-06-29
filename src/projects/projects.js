@@ -4,7 +4,7 @@ import { pageHeader, pageFooter } from "../lib/page.js";
 export function projectsPage() {
     return h('div', {},
         pageHeader(),
-        h('main', { className: 'article' },
+        h('main', { className: 'main' },
             h('h1', {}, 'Open source projects'),
             h('p', { className: 'meta'}, h('time', {}, '2024-06-10 21:30')),
             h('p', {},

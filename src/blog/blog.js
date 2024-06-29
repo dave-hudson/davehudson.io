@@ -107,7 +107,7 @@ function blogArticlePage(index) {
 
     return h('div', {},
         pageHeader(),
-        h('main', { className: 'article' },
+        h('main', { className: 'main' },
             h('article', {},
                 h('h1', {}, thisArticle.title),
                 h('p', { className: 'meta' }, h('time', {}, thisArticle.dateTime)),
@@ -124,7 +124,7 @@ function blogArticlePage(index) {
 
 function blogLink(href, title, meta) {
     return h('div', { className: 'blog-post' },
-        h('span', { className: 'title' },
+        h('span', {},
             h('a', { href: href, onClick: (e) => navigateEvent(e, href) }, title)
         ),
         h('span', { className: 'meta' }, meta)
@@ -134,26 +134,35 @@ function blogLink(href, title, meta) {
 // Handle generating the '/blog' page
 export function blogPage() {
     let pageView = [];
+    let yearSection = null;
     let headlineYear = '';
 
     // Iterate all the blog content and create year and item enties.
     for (let i = blogContent.length - 1; i >= 0; i--) {
         const { hRef, title, dateTime } = blogContent[i];
         const blogYear = dateTime.slice(0, 4);
-        if (headlineYear != blogYear) {
+        if (headlineYear !== blogYear) {
+            if (yearSection !== null) {
+                pageView.push(yearSection)
+            }
+
             headlineYear = blogYear;
-            pageView.push(h('h2', {}, headlineYear));
+            yearSection = h('section', {},
+                h('h2', {}, headlineYear)
+            )
         }
 
-        pageView.push(blogLink(hRef, title, dateTime));
+        yearSection.appendChild(blogLink(hRef, title, dateTime));
     }
+
+    const sections = [...pageView, yearSection];
 
     // Return the VDOM for the blog page.
     return h('div', {},
         pageHeader(),
-        h('main', { className: 'article' },
+        h('main', { className: 'main' },
             h('h1', {}, 'Blog posts'),
-            h('div', { className: 'blog-posts' }, ...pageView)
+            h('div', { className: 'blog-posts' }, ...sections)
         ),
         pageFooter()
     );
@@ -170,7 +179,7 @@ export function blogSummaries(numEntries) {
     for (let i = blogContent.length - 1; i >= lastEntry; i--) {
         const { hRef, title, dateTime, openingFunction } = blogContent[i];
         view.push(h('hr', {}));
-        view.push(h('section', { className: 'article' },
+        view.push(h('section', {},
             h('h2', {},
                 h('a', { href: hRef, onClick: (e) => navigateEvent(e, hRef) }, title)
             ),

@@ -29,7 +29,7 @@ function runVDomUpdates() {
 function homePage() {
     return h('div', {},
         pageHeader(),
-        h('main', { className: 'article'},
+        h('main', { className: 'main'},
             h('h1', {}, 'Dreaming in data and code'),
                 h('figure', {},
                 h('img', {
@@ -68,7 +68,7 @@ function homePage() {
 function notFoundPage(path) {
     return h('div', {},
         pageHeader(),
-        h('main', { className: 'article' },
+        h('main', { className: 'main' },
             h('h1', {}, `404: Page "${path}" not found`),
             h('p', {}, 'This is unlikely to be the page you were looking for!'),
             h('p', {},

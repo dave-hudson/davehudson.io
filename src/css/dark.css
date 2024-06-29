@@ -19,23 +19,6 @@ hr {
     border-color: #444;
 }
 
-.article .meta {
-    color: #eaa;
-}
-
-.article p code {
-    color: #d06060;
-}
-
-.article table th {
-    background-color: #444;
-    border: 1px solid #777;
-}
-
-.article table td {
-    border: 1px solid #777;
-}
-
 .header nav.site-menu {
     border-color: #444;
 }
@@ -44,15 +27,32 @@ hr {
     color: #70a0f0;
 }
 
-.prev-next {
+.main .meta {
+    color: #eaa;
+}
+
+.main p code {
+    color: #d06060;
+}
+
+.main table th {
+    background-color: #444;
+    border: 1px solid #777;
+}
+
+.main table td {
+    border: 1px solid #777;
+}
+
+.main .blog-posts .blog-post .meta {
+    color: #eaa;
+}
+
+.main .prev-next {
     border-top: 1px solid #444;
 }
 
 .footer {
     border-color: #444;
     color: #aaa;
-}
-
-.blog-posts .blog-post .meta {
-    color: #eaa;
 }
