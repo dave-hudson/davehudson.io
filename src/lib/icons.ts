@@ -21,9 +21,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { svg } from './dvdi.js';
+import { svg, VDom } from './dvdi';
 
-export function chevronLeftIcon() {
+type SVGProps = {
+    xmlns: string;
+    width?: number;
+    height?: number;
+    viewBox?: string;
+    fill?: string;
+    stroke?: string;
+    'stroke-width'?: number;
+    'stroke-linecap'?: string;
+    'stroke-linejoin'?: string;
+    points?: string;
+    d?: string;
+    x1?: number;
+    y1?: number;
+    x2?: number;
+    y2?: number;
+    x?: number;
+    y?: number;
+    rx?: number;
+    ry?: number;
+    cx?: number;
+    cy?: number;
+    r?: number;
+}
+
+export function chevronLeftIcon(): VDom {
     return svg('svg', {
             xmlns: 'http://www.w3.org/2000/svg',
             width: 24,
@@ -36,10 +61,10 @@ export function chevronLeftIcon() {
             'stroke-linejoin': 'round'
         },
         svg('polyline', { points: '15 18 9 12 15 6' })
-    )
+    );
 }
 
-export function chevronRightIcon() {
+export function chevronRightIcon(): VDom {
     return svg('svg', {
             xmlns: 'http://www.w3.org/2000/svg',
             width: 24,
@@ -52,10 +77,10 @@ export function chevronRightIcon() {
             'stroke-linejoin': 'round'
         },
         svg('polyline', { points: '9 18 15 12 9 6' })
-    )
+    );
 }
 
-export function gitHubIcon() {
+export function gitHubIcon(): VDom {
     return svg('svg', {
             xmlns: 'http://www.w3.org/2000/svg',
             width: 24,
@@ -73,10 +98,10 @@ export function gitHubIcon() {
                 '0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22'
             }
         )
-    )
+    );
 }
 
-export function instagramIcon() {
+export function instagramIcon(): VDom {
     return svg('svg', {
             xmlns: 'http://www.w3.org/2000/svg',
             width: 24,
@@ -91,10 +116,10 @@ export function instagramIcon() {
         svg('rect', { x: 2, y: 2, width: 20, height: 20, rx: 5, ry: 5 }),
         svg('path', { d: 'M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z' }),
         svg('line', { x1: 17.5, y1: 6.5, x2: 17.51, y2: 6.5 })
-    )
+    );
 }
 
-export function linkedInIcon() {
+export function linkedInIcon(): VDom {
     return svg('svg', {
             xmlns: 'http://www.w3.org/2000/svg',
             width: 24,
@@ -109,9 +134,10 @@ export function linkedInIcon() {
         svg('path', { d: 'M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z' }),
         svg('rect', { x: 2, y: 9, width: 4, height: 12 }),
         svg('circle', { cx: 4, cy: 4, r: 2 })
-    )
+    );
 }
-export function mailIcon() {
+
+export function mailIcon(): VDom {
     return svg('svg', {
             xmlns: 'http://www.w3.org/2000/svg',
             width: 24,
@@ -125,10 +151,10 @@ export function mailIcon() {
         },
         svg('path', { d: 'M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z' }),
         svg('polyline', { points: '22,6 12,13 2,6' })
-    )
+    );
 }
 
-export function moonIcon() {
+export function moonIcon(): VDom {
     return svg('svg', {
             xmlns: 'http://www.w3.org/2000/svg',
             width: 24,
@@ -141,10 +167,10 @@ export function moonIcon() {
             'stroke-linejoin': 'round'
         },
         svg('path', { d: 'M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z' })
-    )
+    );
 }
 
-export function sunIcon() {
+export function sunIcon(): VDom {
     return svg('svg', {
             xmlns: 'http://www.w3.org/2000/svg',
             width: 24,
@@ -165,10 +191,10 @@ export function sunIcon() {
         svg('line', { x1: 21, y1: 12, x2: 23, y2: 12 }),
         svg('line', { x1: 4.22, y1: 19.78, x2: 5.64, y2: 18.36 }),
         svg('line', { x1: 18.36, y1: 5.64, x2: 19.78, y2: 4.22 })
-    )
+    );
 }
 
-export function xIcon() {
+export function xIcon(): VDom {
     return svg('svg', {
             xmlns: 'http://www.w3.org/2000/svg',
             width: 24,
@@ -183,5 +209,6 @@ export function xIcon() {
         svg('polygon', { points: '21.3,21.1 9.9,2.9 2.7,2.9 14.1,21.1' }),
         svg('line', { x1: 2.7, y1: 21.1, x2: 9.9, y2: 14.5 }),
         svg('line', { x1: 14.1, y1: 9.5, x2: 21.3, y2: 2.9 })
-    )
+    );
 }
+

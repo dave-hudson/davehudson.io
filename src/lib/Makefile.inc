@@ -1,6 +1,7 @@
-TS_FILES += src/lib/dvdi.ts
+TS_FILES += \
+	src/lib/dvdi.ts \
+	src/lib/icons.ts
 
 JS_FILES += \
-	src/lib/icons.js \
 	src/lib/page.js
 
