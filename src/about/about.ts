@@ -1,7 +1,7 @@
-import { h } from '../lib/dvdi.js';
-import { pageHeader, pageFooter } from "../lib/page.js";
+import { h, VDom } from '../lib/dvdi';
+import { pageHeader, articleTitle, pageFooter } from "../lib/page";
 
-export function aboutPage() {
+export function aboutPage(): VDom {
     return h('div', {},
         pageHeader(),
         h('main', { className: 'main' },

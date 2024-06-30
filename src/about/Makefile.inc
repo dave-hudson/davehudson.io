@@ -1,3 +1,4 @@
 FILES += src/about/dave.jpg
 
-JS_FILES += src/about/about.js
+TS_FILES += src/about/about.ts
+

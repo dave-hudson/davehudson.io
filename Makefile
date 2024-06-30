@@ -10,7 +10,7 @@ TS_FILES :=
 include src/Makefile.inc
 
 %.js: %.ts
-	tsc --target es6 --module es6 --esModuleInterop true --moduleResolution node $< --outDir $(dir $<)
+	tsc --target es6 --module es6 --esModuleInterop true --moduleResolution node $<
 
 #
 # Convert source file paths to build file paths.
