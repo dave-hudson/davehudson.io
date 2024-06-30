@@ -39,7 +39,7 @@ tar: all
 .PHONY: clean 
 
 clean:
-	rm -f $(BUILD_FILES) davehudson.io.tar.gz
+	rm -f $(TS_FILES:.ts=.js) $(BUILD_FILES) davehudson.io.tar.gz
 
 .PHONY: realclean
 
