@@ -148,8 +148,8 @@ function newAttribute(domElement: HTMLElement, key: string, value: any) {
 
     const [prefix, ...unqualifiedName] = key.split(':');
     let ns: string | null = null;
-    if (prefix === 'xmlns' || unqualifiedName.length && namespaces[prefix]) {
-        ns = namespaces[prefix];
+    if (prefix === 'xmlns' || unqualifiedName.length && namespaces[prefix as keyof typeof namespaces]) {
+        ns = namespaces[prefix as keyof typeof namespaces];
     }
 
     domElement.setAttributeNS(ns, key, String(value));
@@ -171,8 +171,8 @@ function deleteAttribute(domElement: HTMLElement, key: string, value: any) {
 
     const [prefix, ...unqualifiedName] = key.split(':');
     let ns: string | null = null;
-    if (prefix === 'xmlns' || unqualifiedName.length && namespaces[prefix]) {
-        ns = namespaces[prefix];
+    if (prefix === 'xmlns' || unqualifiedName.length && namespaces[prefix as keyof typeof namespaces]) {
+        ns = namespaces[prefix as keyof typeof namespaces];
     }
 
     domElement.removeAttributeNS(ns, key);
@@ -188,7 +188,7 @@ function render(vNode: VDom | string): HTMLElement | Text {
     }
 
     const { namespace, type, props, childNodes } = vNode;
-    const domElement = document.createElementNS(namespaces[namespace], type) as HTMLElement;
+    const domElement = document.createElementNS(namespaces[namespace as keyof typeof namespaces], type) as HTMLElement;
     vNode.domElement = domElement;
 
     for (const key in props) {
@@ -283,19 +283,16 @@ export function updateElement(parent: HTMLElement, parentVNode: VDom | null, old
         return;
     }
 
-    const oldVNodeRestricted = oldVNode as VDom | string;
-    const newVNodeRestricted = newVNode as VDom | string;
-
     // Did our node change?
-    if (changed(oldVNodeRestricted, newVNodeRestricted)) {
-        unmountVNode(oldVNodeRestricted);
-        unrender(oldVNodeRestricted);
+    if (changed(oldVNode as VDom | string, newVNode as VDom | string)) {
+        unmountVNode(oldVNode as VDom | string);
+        unrender(oldVNode as VDom | string);
         if (parentVNode) {
-            parentVNode.replaceChild(newVNodeRestricted, oldVNodeRestricted);
+            parentVNode.replaceChild(newVNode as VDom | string, oldVNode as VDom | string);
         }
 
-        parent.replaceChild(render(newVNodeRestricted), parent.childNodes[index]);
-        mountVNode(newVNodeRestricted);
+        parent.replaceChild(render(newVNode as VDom | string), parent.childNodes[index]);
+        mountVNode(newVNode as VDom | string);
         return;
     }
 

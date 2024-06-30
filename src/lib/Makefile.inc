@@ -1,2 +1,2 @@
-# TS_FILES += src/lib/dvdi.ts
+TS_FILES += src/lib/dvdi.ts
 

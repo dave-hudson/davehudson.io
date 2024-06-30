@@ -12,7 +12,7 @@ BUILD_FILES := $(patsubst src/%, build/%, $(FILES))
 
 .PHONY: all
 
-all: $(BUILD_FILES) build/app.js $(TS_FILES:.ts=.js)
+all: $(TS_FILES:.ts=.js) $(BUILD_FILES) build/app.js
 	./node_modules/.bin/esbuild src/app.js --bundle --sourcemap --outfile=build/app.js
 
 #
@@ -23,7 +23,7 @@ build/%: src/%
 	@cp $< $@
 
 %.js: %.ts
-	tsc $< --outDir $(dir $<) --target es6
+	tsc --target es6 --module es6 --esModuleInterop true --moduleResolution node $< --outDir $(dir $<)
 
 #
 # Rule to build a tarball of the built site.
