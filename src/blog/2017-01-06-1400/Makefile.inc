@@ -1,2 +1,4 @@
 FILES += $(wildcard src/blog/2017-01-06-1400/*.jpg)
 
+JS_FILES += src/blog/2017-01-06-1400/2017-01-06-1400.js
+
