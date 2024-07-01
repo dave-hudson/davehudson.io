@@ -1,6 +1,6 @@
-import { h } from '../../lib/dvdi.js';
+import { h } from '../../lib/dvdi';
 import { navigateEvent } from '../../app.js';
-import { BlogPost } from '../BlogPost.js'
+import { BlogPost } from '../BlogPost'
 
 function blogOpening_201404300000() {
     return [
