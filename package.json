@@ -48,6 +48,8 @@
     ]
   },
   "dependencies": {
-    "express": "^4.19.2"
+    "@types/node": "^20.14.9",
+    "express": "^4.19.2",
+    "typescript": "^5.5.2"
   }
 }

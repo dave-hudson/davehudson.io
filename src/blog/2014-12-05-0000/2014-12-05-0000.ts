@@ -1,8 +1,8 @@
-import { h } from '../../lib/dvdi';
-import { navigateEvent } from '../../app.js';
+import { h, VDom } from '../../lib/dvdi';
+import { navigateEvent } from '../../app';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201412050000() {
+function blogOpening_201412050000(): VDom[] {
     return [
         h('p', {},
             'A few days ago, Ittay Eyal published an intriguing paper, "',
@@ -16,7 +16,7 @@ function blogOpening_201412050000() {
     ]
 }
 
-function blogArticle_201412050000() {
+function blogArticle_201412050000(): VDom[] {
     return [
         h('section', {},
             h('h2', {}, 'Mining pools'),
@@ -308,7 +308,7 @@ function blogArticle_201412050000() {
     ];
 }
 
-function blogPostScript_201412050000() {
+function blogPostScript_201412050000(): VDom[] {
     return [
         h('hr', {}),
         h('section', {},
@@ -336,5 +336,5 @@ export const blogPost_201412050000 = new BlogPost(
     null,
     blogOpening_201412050000,
     blogArticle_201412050000,
-    null
+    blogPostScript_201412050000
 );

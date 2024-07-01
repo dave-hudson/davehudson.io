@@ -1,8 +1,8 @@
-import { h } from '../../lib/dvdi';
-import { navigateEvent } from '../../app.js';
+import { h, VDom } from '../../lib/dvdi';
+import { navigateEvent } from '../../app';
 import { BlogPost } from '../BlogPost';
 
-function blogOpening_201411020000() {
+function blogOpening_201411020000(): VDom[] {
     return [
         h('p', {},
             'The general wisdom seems to be that the Bitcoin network can currently sustain 7 transactions per second.  ' +
@@ -18,7 +18,7 @@ function blogOpening_201411020000() {
     ]
 }
 
-function blogArticle_201411020000() {
+function blogArticle_201411020000(): VDom[] {
     return [
         h('section', {},
             h('h2', {}, 'Bitcoin transactions per day'),
@@ -159,7 +159,7 @@ function blogArticle_201411020000() {
     ];
 }
 
-function blogPostScript_201411020000() {
+function blogPostScript_201411020000(): VDom[] {
     return [
         h('hr', {}),
         h('section', {},

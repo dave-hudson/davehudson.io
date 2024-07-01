@@ -4,19 +4,19 @@ export class BlogPost {
     title: string;
     dateTime: string;
     hRef: string;
-    preScriptFunction: () => VDom;
-    openingFunction: () => VDom;
-    articleFunction: () => VDom;
-    postScriptFunction: () => VDom;
+    preScriptFunction: (() => VDom[]) | null;
+    openingFunction: () => VDom[];
+    articleFunction: () => VDom[];
+    postScriptFunction: (() => VDom[]) | null;
 
     constructor(
         title: string,
         dateTime: string,
         hRef: string,
-        preScriptFunction: () => VDom,
-        openingFunction: () => VDom,
-        articleFunction: () => VDom,
-        postScriptFunction: () => VDom
+        preScriptFunction: (() => VDom[]) | null,
+        openingFunction: () => VDom[],
+        articleFunction: () => VDom[],
+        postScriptFunction: (() => VDom[]) | null
     ) {
         this.title = title;
         this.dateTime = dateTime;

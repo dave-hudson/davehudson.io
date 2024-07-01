@@ -1,8 +1,8 @@
-import { h } from '../../lib/dvdi';
-import { navigateEvent } from '../../app.js';
+import { h, VDom } from '../../lib/dvdi';
+import { navigateEvent } from '../../app';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201512190000() {
+function blogOpening_201512190000(): VDom[] {
     return [
         h('p', {},
             'Bitcoin blocks take 10 minutes to find don\'t they?  Well, actually no they don\'t.  Sometimes they can be found ' +
@@ -17,7 +17,7 @@ function blogOpening_201512190000() {
     ]
 }
 
-function blogArticle_201512190000() {
+function blogArticle_201512190000(): VDom[] {
     return [
         h('section', {},
             h('h2', {}, 'Running like clockwork?'),
@@ -180,7 +180,7 @@ function blogArticle_201512190000() {
     ];
 }
 
-function blogPostScript_201512190000() {
+function blogPostScript_201512190000(): VDom[] {
     return [
         h('hr', {}),
         h('section', {},

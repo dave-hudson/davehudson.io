@@ -1,8 +1,8 @@
-import { h, updateElement } from './lib/dvdi.js';
-import { aboutPage } from './about/about.js';
-import { blogPage, blogSummaries, getBlogRoutes } from './blog/blog.js';
-import { projectsPage } from './projects/projects.js';
-import { pageHeader, pageFooter } from "./lib/page.js";
+import { h, updateElement, VDom } from './lib/dvdi';
+import { aboutPage } from './about/about';
+import { blogPage, blogSummaries, getBlogRoutes } from './blog/blog';
+import { projectsPage } from './projects/projects';
+import { pageHeader, pageFooter } from "./lib/page";
 
 console.log('SCRIPT RELOADED!')
 
@@ -11,22 +11,22 @@ const updateQueue = new Set();
 /*
  * Enqueues updates and executes them in a batch using requestAnimationFrame.
  */
-function enqueueVDomUpdate(update) {
-    updateQueue.add(update);
-    if (updateQueue.size === 1) {
-        requestAnimationFrame(runVDomUpdates);
-    }
-}
+//function enqueueVDomUpdate(update) {
+//    updateQueue.add(update);
+//    if (updateQueue.size === 1) {
+//        requestAnimationFrame(runVDomUpdates);
+//    }
+//}
 
 /*
  * Runs all updates that have been enqueued.
  */
-function runVDomUpdates() {
-    updateQueue.forEach(update => update());
-    updateQueue.clear();
-}
+//function runVDomUpdates() {
+//    updateQueue.forEach(update => update());
+//    updateQueue.clear();
+//}
 
-function homePage() {
+function homePage(): VDom {
     return h('div', {},
         pageHeader(),
         h('main', { className: 'main'},
@@ -57,7 +57,7 @@ function homePage() {
     );
 }
 
-function notFoundPage(path) {
+function notFoundPage(path): VDom {
     return h('div', {},
         pageHeader(),
         h('main', { className: 'main' },
@@ -98,7 +98,7 @@ function handleLocation() {
     const newVNode = pageFunction();
     const app = document.querySelector('#app');
 
-    updateElement(app, null, rootVNode, newVNode, 0);
+    updateElement((app as HTMLElement), null, rootVNode, newVNode, 0);
     rootVNode = newVNode;
     console.log(`navigated to ${path}`)
 }
@@ -115,7 +115,7 @@ export function navigateEvent(e, path) {
     window.scrollTo(0, 0);
 }
 
-function routeInit() {
+function routeInit(event: Event): void {
     // Add all the blog content to the router.
     const blogRoutes = getBlogRoutes();
     Object.assign(routes, blogRoutes);
@@ -134,4 +134,4 @@ function routeInit() {
     handleLocation();
 }
 
-document.addEventListener('DOMContentLoaded', routeInit());
+document.addEventListener('DOMContentLoaded', routeInit);

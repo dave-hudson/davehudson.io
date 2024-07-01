@@ -1,7 +1,7 @@
-import { h } from '../../lib/dvdi.js';
-import { BlogPost } from '../BlogPost.js'
+import { h, VDom } from '../../lib/dvdi';
+import { BlogPost } from '../BlogPost'
 
-function blogOpening_201403120000() {
+function blogOpening_201403120000(): VDom[] {
     return [
         h('p', {},
             'There\'s something odd about the fluctuations in the price of Bitcoins.  The data shows a set of ' +
@@ -12,7 +12,7 @@ function blogOpening_201403120000() {
     ]
 }
 
-function blogArticle_201403120000() {
+function blogArticle_201403120000(): VDom[] {
     return [
         h('p', {}, 'Let\'s look at the graph:'),
         h('figure', {},

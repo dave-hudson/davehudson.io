@@ -1,8 +1,8 @@
-import { h } from '../../lib/dvdi';
-import { navigateEvent } from '../../app.js';
+import { h, VDom } from '../../lib/dvdi';
+import { navigateEvent } from '../../app';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201411120000() {
+function blogOpening_201411120000(): VDom[] {
     return [
         h('p', {},
             'Bitcoin is often touted as having substantially lower fees associated with using it than most other financial ' +
@@ -13,7 +13,7 @@ function blogOpening_201411120000() {
     ]
 }
 
-function blogArticle_201411120000() {
+function blogArticle_201411120000(): VDom[] {
     return [
         h('section', {},
             h('h2', {}, 'Transaction fees'),
@@ -186,7 +186,7 @@ function blogArticle_201411120000() {
     ];
 }
 
-function blogPostScript_201411120000() {
+function blogPostScript_201411120000(): VDom[] {
     return [
         h('hr', {}),
         h('section', {},

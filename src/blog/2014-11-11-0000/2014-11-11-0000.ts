@@ -1,8 +1,8 @@
-import { h } from '../../lib/dvdi';
-import { navigateEvent } from '../../app.js';
+import { h, VDom } from '../../lib/dvdi';
+import { navigateEvent } from '../../app';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201411110000() {
+function blogOpening_201411110000(): VDom[] {
     return [
         h('p', {},
             'The Bitcoin network is currently running at around 30% of its maximum capacity, but what does that actually mean ' +
@@ -13,7 +13,7 @@ function blogOpening_201411110000() {
     ]
 }
 
-function blogArticle_201411110000() {
+function blogArticle_201411110000(): VDom[] {
     return [
         h('section', {},
             h('h2', {}, 'Bitcoin transaction processing'),
@@ -210,7 +210,7 @@ function blogArticle_201411110000() {
     ];
 }
 
-function blogPostScript_201411110000() {
+function blogPostScript_201411110000(): VDom[] {
     return [
         h('hr', {}),
         h('section', {},

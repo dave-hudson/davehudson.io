@@ -1,8 +1,8 @@
-import { h } from '../../lib/dvdi';
-import { navigateEvent } from '../../app.js';
+import { h, VDom } from '../../lib/dvdi';
+import { navigateEvent } from '../../app';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201406150000() {
+function blogOpening_201406150000(): VDom[] {
     return [
         h('p', {},
             '2016 blocks is the magic number that corresponds to each change in difficulty within the Bitcoin network.  ' +
@@ -11,7 +11,7 @@ function blogOpening_201406150000() {
     ]
 }
 
-function blogArticle_201406150000() {
+function blogArticle_201406150000(): VDom[] {
     return [
         h('section', {},
             h('h2', {}, 'The simple case'),
@@ -120,7 +120,7 @@ function blogArticle_201406150000() {
     ];
 }
 
-function blogPostScript_201406150000() {
+function blogPostScript_201406150000(): VDom[] {
     return [
         h('hr', {}),
         h('section', {},

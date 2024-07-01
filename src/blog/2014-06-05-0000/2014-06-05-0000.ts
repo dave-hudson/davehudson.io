@@ -1,8 +1,8 @@
-import { h } from '../../lib/dvdi';
-import { navigateEvent } from '../../app.js';
+import { h, VDom } from '../../lib/dvdi';
+import { navigateEvent } from '../../app';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201406050000() {
+function blogOpening_201406050000(): VDom[] {
     return [
         h('p', {},
             'About 3 months ago I looked at how the BTC price seems to spike up approximately every 7 months.  It seems ' +
@@ -15,7 +15,7 @@ function blogOpening_201406050000() {
     ]
 }
 
-function blogArticle_201406050000() {
+function blogArticle_201406050000(): VDom[] {
     return [
         h('p', {}, 'Let\'s look at the graph (plotted on a logarithmic Y axis):'),
         h('figure', {},
@@ -40,7 +40,7 @@ function blogArticle_201406050000() {
     ];
 }
 
-function blogPostScript_201406050000() {
+function blogPostScript_201406050000(): VDom[] {
     return [
         h('hr', {}),
         h('section', {},

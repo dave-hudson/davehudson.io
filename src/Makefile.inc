@@ -12,5 +12,5 @@ FILES += \
 	src/robots.txt \
 	src/sitemap.xml
 
-JS_FILES += src/app.js
+TS_FILES += src/app.ts
 

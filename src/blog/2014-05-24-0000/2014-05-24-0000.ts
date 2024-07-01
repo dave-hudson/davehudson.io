@@ -1,8 +1,8 @@
-import { h } from '../../lib/dvdi';
-import { navigateEvent } from '../../app.js';
+import { h, VDom } from '../../lib/dvdi';
+import { navigateEvent } from '../../app';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201405240000() {
+function blogOpening_201405240000(): VDom[] {
     return [
         h('p', {},
             'Everyone knows that mining is a noisy task.  Did you realize just how noisy Bitcoin mining is though? ' +
@@ -11,7 +11,7 @@ function blogOpening_201405240000() {
     ]
 }
 
-function blogArticle_201405240000() {
+function blogArticle_201405240000(): VDom[] {
     return [
         h('figure', {},
             h('img', { src: '/blog/2014-05-24-0000/high-noise-levels.jpg' }),
@@ -177,7 +177,7 @@ function blogArticle_201405240000() {
     ];
 }
 
-function blogPostScript_201405240000() {
+function blogPostScript_201405240000(): VDom[] {
     return [
         h('hr', {}),
         h('section', {},

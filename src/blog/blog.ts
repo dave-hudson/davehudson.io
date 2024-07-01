@@ -1,32 +1,32 @@
-import { h } from '../lib/dvdi.js';
-import { pageHeader, pageFooter } from '../lib/page.js';
-import { navigateEvent } from '../app.js';
-import { chevronLeftIcon, chevronRightIcon } from '../lib/icons.js';
-import { blogPost_201403090000 } from './2014-03-09-0000/2014-03-09-0000.js';
-import { blogPost_201403120000 } from './2014-03-12-0000/2014-03-12-0000.js';
-import { blogPost_201403170000 } from './2014-03-17-0000/2014-03-17-0000.js';
-import { blogPost_201403230000 } from './2014-03-23-0000/2014-03-23-0000.js';
-import { blogPost_201404030000 } from './2014-04-03-0000/2014-04-03-0000.js';
-import { blogPost_201404280000 } from './2014-04-28-0000/2014-04-28-0000.js';
-import { blogPost_201404300000 } from './2014-04-30-0000/2014-04-30-0000.js';
-import { blogPost_201405200000 } from './2014-05-20-0000/2014-05-20-0000.js';
-import { blogPost_201405240000 } from './2014-05-24-0000/2014-05-24-0000.js';
-import { blogPost_201406050000 } from './2014-06-05-0000/2014-06-05-0000.js';
-import { blogPost_201406100000 } from './2014-06-10-0000/2014-06-10-0000.js';
-import { blogPost_201406150000 } from './2014-06-15-0000/2014-06-15-0000.js';
-import { blogPost_201406230000 } from './2014-06-23-0000/2014-06-23-0000.js';
-import { blogPost_201406300000 } from './2014-06-30-0000/2014-06-30-0000.js';
-import { blogPost_201411020000 } from './2014-11-02-0000/2014-11-02-0000.js';
-import { blogPost_201411110000 } from './2014-11-11-0000/2014-11-11-0000.js';
-import { blogPost_201411120000 } from './2014-11-12-0000/2014-11-12-0000.js';
-import { blogPost_201412050000 } from './2014-12-05-0000/2014-12-05-0000.js';
-import { blogPost_201501180000 } from './2015-01-18-0000/2015-01-18-0000.js';
-import { blogPost_201512190000 } from './2015-12-19-0000/2015-12-19-0000.js';
-import { blogPost_201512200000 } from './2015-12-20-0000/2015-12-20-0000.js';
-import { blogPost_201601050000 } from './2016-01-05-0000/2016-01-05-0000.js';
-import { blogPost_201602030000 } from './2016-02-03-0000/2016-02-03-0000.js';
-import { blogPost_201701061400 } from './2017-01-06-1400/2017-01-06-1400.js';
-import { blogPost_202001272336 } from './2020-01-27-2336/2020-01-27-2336.js';
+import { h, VDom } from '../lib/dvdi';
+import { pageHeader, pageFooter } from '../lib/page';
+import { navigateEvent } from '../app';
+import { chevronLeftIcon, chevronRightIcon } from '../lib/icons';
+import { blogPost_201403090000 } from './2014-03-09-0000/2014-03-09-0000';
+import { blogPost_201403120000 } from './2014-03-12-0000/2014-03-12-0000';
+import { blogPost_201403170000 } from './2014-03-17-0000/2014-03-17-0000';
+import { blogPost_201403230000 } from './2014-03-23-0000/2014-03-23-0000';
+import { blogPost_201404030000 } from './2014-04-03-0000/2014-04-03-0000';
+import { blogPost_201404280000 } from './2014-04-28-0000/2014-04-28-0000';
+import { blogPost_201404300000 } from './2014-04-30-0000/2014-04-30-0000';
+import { blogPost_201405200000 } from './2014-05-20-0000/2014-05-20-0000';
+import { blogPost_201405240000 } from './2014-05-24-0000/2014-05-24-0000';
+import { blogPost_201406050000 } from './2014-06-05-0000/2014-06-05-0000';
+import { blogPost_201406100000 } from './2014-06-10-0000/2014-06-10-0000';
+import { blogPost_201406150000 } from './2014-06-15-0000/2014-06-15-0000';
+import { blogPost_201406230000 } from './2014-06-23-0000/2014-06-23-0000';
+import { blogPost_201406300000 } from './2014-06-30-0000/2014-06-30-0000';
+import { blogPost_201411020000 } from './2014-11-02-0000/2014-11-02-0000';
+import { blogPost_201411110000 } from './2014-11-11-0000/2014-11-11-0000';
+import { blogPost_201411120000 } from './2014-11-12-0000/2014-11-12-0000';
+import { blogPost_201412050000 } from './2014-12-05-0000/2014-12-05-0000';
+import { blogPost_201501180000 } from './2015-01-18-0000/2015-01-18-0000';
+import { blogPost_201512190000 } from './2015-12-19-0000/2015-12-19-0000';
+import { blogPost_201512200000 } from './2015-12-20-0000/2015-12-20-0000';
+import { blogPost_201601050000 } from './2016-01-05-0000/2016-01-05-0000';
+import { blogPost_201602030000 } from './2016-02-03-0000/2016-02-03-0000';
+import { blogPost_201701061400 } from './2017-01-06-1400/2017-01-06-1400';
+import { blogPost_202001272336 } from './2020-01-27-2336/2020-01-27-2336';
 
 // Enumerate all the blog content served up here.  Newest content goes at the end.
 const blogContent = [
@@ -57,7 +57,7 @@ const blogContent = [
     blogPost_202001272336
 ]
 
-function navPrevNext(prevStr, prevHRef, nextStr, nextHRef) {
+function navPrevNext(prevStr, prevHRef, nextStr, nextHRef): VDom {
     return h('nav', { className: 'prev-next'},
         h('h2', {}, 'More blog posts'),
         h('table', { className: 'meta-nav' },
@@ -87,7 +87,7 @@ function navPrevNext(prevStr, prevHRef, nextStr, nextHRef) {
     );
 }
 
-function blogArticlePage(index) {
+function blogArticlePage(index): VDom {
     let prevArticle = (index > 0) ? blogContent[index - 1] : null;
     let thisArticle = blogContent[index];
     let nextArticle = (index < (blogContent.length - 1)) ? blogContent[index + 1] : null;
@@ -95,12 +95,12 @@ function blogArticlePage(index) {
     let prevHRef = prevArticle ? prevArticle.hRef : null;
     let nextTitle = nextArticle ? nextArticle.title : null;
     let nextHRef = nextArticle ? nextArticle.hRef : null;
-    let preText = '';
+    let preText: VDom[] = [];
     if (thisArticle.preScriptFunction !== null) {
         preText = thisArticle.preScriptFunction();
     }
 
-    let postText = '';
+    let postText: VDom[] = [];
     if (thisArticle.postScriptFunction !== null) {
         postText = thisArticle.postScriptFunction();
     }
@@ -133,8 +133,8 @@ function blogLink(href, title, meta) {
 
 // Handle generating the '/blog' page
 export function blogPage() {
-    let pageView = [];
-    let yearSection = null;
+    let pageView: VDom[] = [];
+    let yearSection: (VDom | null) = null;
     let headlineYear = '';
 
     // Iterate all the blog content and create year and item enties.
@@ -152,10 +152,10 @@ export function blogPage() {
             )
         }
 
-        yearSection.appendChild(blogLink(hRef, title, dateTime));
+        (yearSection as VDom).appendChild(blogLink(hRef, title, dateTime));
     }
 
-    const sections = [...pageView, yearSection];
+    const sections = [...pageView, (yearSection as VDom)];
 
     // Return the VDOM for the blog page.
     return h('div', {},
@@ -170,7 +170,7 @@ export function blogPage() {
 
 // Handle the blog summaries on the home page.
 export function blogSummaries(numEntries) {
-    let view = [];
+    let view: VDom[] = [];
 
     // If we've been asked for more blog summaries than there are, then clip the list.
     const lastEntry = blogContent.length > numEntries ? blogContent.length - numEntries : 0;

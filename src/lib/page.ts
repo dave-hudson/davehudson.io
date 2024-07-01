@@ -1,5 +1,5 @@
-import { h } from './dvdi';
-import { navigateEvent } from '../app.js';
+import { h, VDom } from './dvdi';
+import { navigateEvent } from '../app';
 import { mailIcon, gitHubIcon, linkedInIcon, xIcon, instagramIcon, moonIcon, sunIcon } from './icons';
 
 let darkTheme: HTMLLinkElement | null = null;
@@ -17,7 +17,7 @@ function sunMoonIcon(isSun: boolean, clickCallback: (isSun: boolean) => void) {
     );
 }
 
-export function pageHeader() {
+export function pageHeader(): VDom {
     const component = () => h('header', { className: 'header' },
         h('nav', { className: 'site-title' },
             h('a', { className: 'home-link', href: '/', onClick: (e: Event) => navigateEvent(e, '/') }, 'davehudson.io'),
@@ -120,7 +120,7 @@ export function pageHeader() {
     return vNode;
 }
 
-export function pageFooter() {
+export function pageFooter(): VDom {
     return h('footer', { className: 'footer' },
         h('p', { className: 'copyright' },
             '© 2014-2024 David J. Hudson'

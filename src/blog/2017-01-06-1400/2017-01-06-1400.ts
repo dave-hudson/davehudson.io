@@ -1,7 +1,19 @@
-import { h } from '../../lib/dvdi';
+import { h, VDom } from '../../lib/dvdi';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201701061400() {
+function blogPreScript_201701061400(): VDom[] {
+    return [
+        h('em', {},
+            'Note 2020-03-06: This was originally published as an opinion piece at ',
+            h('a', { href: 'https://www.coindesk.com/what-iot-history-reveals-about-blockchains-challenges' },
+                'Coindesk'
+            ),
+            '.'
+        )
+    ];
+}
+
+function blogOpening_201701061400(): VDom[] {
     return [
         h('p', {},
             '2009 saw Satoshi Nakamoto deploy the first Bitcoin node, and within five years its blockchain had become a ' +
@@ -21,19 +33,7 @@ function blogOpening_201701061400() {
     ];
 }
 
-function blogPreScript_201701061400() {
-    return [
-        h('em', {},
-            'Note 2020-03-06: This was originally published as an opinion piece at ',
-            h('a', { href: 'https://www.coindesk.com/what-iot-history-reveals-about-blockchains-challenges' },
-                'Coindesk'
-            ),
-            '.'
-        )
-    ];
-}
-
-function blogArticle_201701061400() {
+function blogArticle_201701061400(): VDom[] {
     return [
         h('section', {},
             h('h2', {}, 'It\'s all about money'),

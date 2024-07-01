@@ -1,8 +1,8 @@
-import { h } from '../../lib/dvdi';
-import { navigateEvent } from '../../app.js';
+import { h, VDom } from '../../lib/dvdi';
+import { navigateEvent } from '../../app';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201404300000() {
+function blogOpening_201404300000(): VDom[] {
     return [
         h('p', {},
             'Over the last few months I\'ve written about patterns and trends in Bitcoin mining while I\'ve been trying ' +
@@ -15,7 +15,7 @@ function blogOpening_201404300000() {
     ]
 }
 
-function blogArticle_201404300000() {
+function blogArticle_201404300000(): VDom[] {
     return [
         h('section', {},
             h('h2', {}, 'The role of difficulty'),
@@ -153,7 +153,7 @@ function blogArticle_201404300000() {
     ];
 }
 
-function blogPostScript_201404300000() {
+function blogPostScript_201404300000(): VDom[] {
     return [
         h('hr', {}),
         h('section', {},

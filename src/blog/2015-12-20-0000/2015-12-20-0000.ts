@@ -1,8 +1,8 @@
-import { h } from '../../lib/dvdi';
-import { navigateEvent } from '../../app.js';
+import { h, VDom } from '../../lib/dvdi';
+import { navigateEvent } from '../../app';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201512200000() {
+function blogOpening_201512200000(): VDom[] {
     return [
         h('p', {},
             'In November 2014 I wrote an article, "',
@@ -15,7 +15,7 @@ function blogOpening_201512200000() {
     ]
 }
 
-function blogArticle_201512200000() {
+function blogArticle_201512200000(): VDom[] {
     return [
         h('p', {},
             'In the original blog post the network\'s block capacity was at about 30%.  As of early December 2015 the ' +
@@ -50,7 +50,7 @@ function blogArticle_201512200000() {
     ];
 }
 
-function blogPostScript_201512200000() {
+function blogPostScript_201512200000(): VDom[] {
     return [
         h('hr', {}),
         h('section', {},

@@ -1,8 +1,8 @@
-import { h } from '../../lib/dvdi';
-import { navigateEvent } from '../../app.js';
+import { h, VDom } from '../../lib/dvdi';
+import { navigateEvent } from '../../app';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201404030000() {
+function blogOpening_201404030000(): VDom[] {
     return [
         h('p', {},
             'Bitcoin mining can be a very profitable activity. It\'s good that it is because Bitcoin, as a system, only ' +
@@ -12,7 +12,7 @@ function blogOpening_201404030000() {
     ]
 }
 
-function blogArticle_201404030000() {
+function blogArticle_201404030000(): VDom[] {
     return [
         h('p', {},
             'Like mining any other finite resource, Bitcoin mining gets harder over time and requires more investment to ' +
@@ -146,7 +146,7 @@ function blogArticle_201404030000() {
     ];
 }
 
-function blogPostScript_201404030000() {
+function blogPostScript_201404030000(): VDom[] {
     return [
         h('hr', {}),
         h('section', {},

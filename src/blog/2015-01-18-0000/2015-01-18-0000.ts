@@ -1,8 +1,8 @@
-import { h } from '../../lib/dvdi';
-import { navigateEvent } from '../../app.js';
+import { h, VDom } from '../../lib/dvdi';
+import { navigateEvent } from '../../app';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201501180000() {
+function blogOpening_201501180000(): VDom[] {
     return [
         h('p', {},
             'It\'s well described how Bitcoin has a one Megabyte block limit; it\'s defined in the Bitcoin Core source ' +
@@ -23,7 +23,7 @@ function blogOpening_201501180000() {
     ]
 }
 
-function blogArticle_201501180000() {
+function blogArticle_201501180000(): VDom[] {
     return [
         h('section', {},
             h('h2', {}, 'A puzzle'),
@@ -246,7 +246,7 @@ function blogArticle_201501180000() {
     ];
 }
 
-function blogPostScript_201501180000() {
+function blogPostScript_201501180000(): VDom[] {
     return [
         h('hr', {}),
         h('section', {},

@@ -1,7 +1,7 @@
-import { h } from '../../lib/dvdi';
+import { h, VDom } from '../../lib/dvdi';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201602030000() {
+function blogOpening_201602030000(): VDom[] {
     return [
         h('p', {},
             'Most participants in the ongoing Bitcoin block size debates have a point of agreement; that a shortage of ' +
@@ -12,7 +12,7 @@ function blogOpening_201602030000() {
     ]
 }
 
-function blogArticle_201602030000() {
+function blogArticle_201602030000(): VDom[] {
     return [
         h('section', {},
             h('h2', {}, 'Rewards for a Bitcoin miner'),
