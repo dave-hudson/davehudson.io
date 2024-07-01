@@ -8,9 +8,6 @@ TS_FILES :=
 
 include src/Makefile.inc
 
-%.js: %.ts
-	tsc --target es6 --module es6 --esModuleInterop true --moduleResolution node --skipLibCheck $<
-
 #
 # Convert source file paths to build file paths.
 #
@@ -23,8 +20,8 @@ build/%: src/%
 	@mkdir -p $(dir $@)
 	@cp $< $@
 
-build/app.js: $(patsubst %.ts, %.js, $(TS_FILES))
-	./node_modules/.bin/esbuild src/app.js --bundle --sourcemap --outfile=build/app.js
+build/app.js:
+	./node_modules/.bin/esbuild src/app.ts --bundle --sourcemap --platform=browser --outfile=build/app.js --loader:.ts=ts
 
 .PHONY: all
 
@@ -44,8 +41,7 @@ tar: all
 .PHONY: clean 
 
 clean:
-	rm -f $(patsubst %.ts, %.js, $(TS_FILES)) $(BUILD_FILES) build/app.js davehudson.io.tar.gz
-	find src/ -name "*.js" -print -exec rm -f {} \;
+	rm -f $(BUILD_FILES) build/app.js davehudson.io.tar.gz
 
 .PHONY: realclean
 
