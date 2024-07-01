@@ -1,5 +1,5 @@
 import { h, VDom } from '../lib/dvdi';
-import { pageHeader, articleTitle, pageFooter } from "../lib/page";
+import { pageHeader, pageFooter } from "../lib/page";
 
 export function aboutPage(): VDom {
     return h('div', {},

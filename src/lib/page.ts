@@ -120,13 +120,6 @@ export function pageHeader() {
     return vNode;
 }
 
-export function articleTitle(title: string, timeStr: string = '') {
-    return h('header', { className: 'title' },
-        h('h1', {}, title),
-        h('time', { className: 'meta' }, timeStr)
-    );
-}
-
 export function pageFooter() {
     return h('footer', { className: 'footer' },
         h('p', { className: 'copyright' },
