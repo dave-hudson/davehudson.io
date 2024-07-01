@@ -23,7 +23,7 @@ build/%: src/%
 .PHONY: build/app.js
 
 build/app.js:
-	tsc -noEmit --target es6 --module es6 --esModuleInterop true --moduleResolution node --skipLibCheck src/app.ts
+	tsc -noEmit --strict --target es6 --module es6 --esModuleInterop true --moduleResolution node --skipLibCheck src/app.ts
 	./node_modules/.bin/esbuild src/app.ts --bundle --sourcemap --platform=browser --outfile=build/app.js --loader:.ts=ts --log-level=info
 
 .PHONY: all

@@ -49,7 +49,7 @@ function homePage(): VDom {
                 h('h2', {}, 'More blog posts'),
                 h('p', {},
                     'You can find older blog posts on this page: ',
-                    h('a', { href: '/blog', onClick: (e) => navigateEvent(e, '/blog') }, 'Blog')
+                    h('a', { href: '/blog', onClick: (e: MouseEvent) => navigateEvent(e, '/blog') }, 'Blog')
                 )
             ),
         ),
@@ -57,7 +57,7 @@ function homePage(): VDom {
     );
 }
 
-function notFoundPage(path): VDom {
+function notFoundPage(path: string): VDom {
     return h('div', {},
         pageHeader(),
         h('main', { className: 'main' },
@@ -65,7 +65,7 @@ function notFoundPage(path): VDom {
             h('p', {}, 'This is unlikely to be the page you were looking for!'),
             h('p', {},
                 'If you\'ve arrived here via an old link from the hashingit.com blog, please take a look at ',
-                h('a', { href: '/blog', onClick: (e) => navigateEvent(e, '/blog') }, 'Blog'),
+                h('a', { href: '/blog', onClick: (e: MouseEvent) => navigateEvent(e, '/blog') }, 'Blog'),
                 '.  You should find all the original articles there.'
             )
         ),
@@ -73,14 +73,14 @@ function notFoundPage(path): VDom {
     );
 }
 
-let routes = {
-    '': homePage,
-    '/about': aboutPage,
-    '/projects': projectsPage,
-    '/blog': blogPage
-};
+let routes: Map<string, (() => VDom)> = new Map([
+    ['', homePage],
+    ['/about', aboutPage],
+    ['/projects', projectsPage],
+    ['/blog', blogPage]
+]);
 
-let rootVNode = null;
+let rootVNode: VDom | null = null;
 
 function handleLocation() {
     let path = window.location.pathname;
@@ -90,9 +90,11 @@ function handleLocation() {
         path = path.slice(0, -1);
     }
 
-    let pageFunction = routes[path];
-    if (pageFunction === undefined) {
-        pageFunction = () => notFoundPage(path);
+    let pageFunction = () => notFoundPage(path);
+    if (path === '') {
+        pageFunction = homePage;
+    } else if (routes.has(path)) {
+        pageFunction = (routes.get(path)) as (() => VDom);
     }
 
     const newVNode = pageFunction();
@@ -103,7 +105,7 @@ function handleLocation() {
     console.log(`navigated to ${path}`)
 }
 
-export function navigateEvent(e, path) {
+export function navigateEvent(e: MouseEvent, path: string) {
     e.preventDefault();
     const scrollPosition = {
         y: window.scrollY,

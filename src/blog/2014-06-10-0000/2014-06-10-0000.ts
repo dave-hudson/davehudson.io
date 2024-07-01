@@ -75,7 +75,7 @@ function blogArticle_201406100000(): VDom[] {
             h('p', {},
                 'This particular baseline isn\'t perfect because it has no way to account for statistical noise in the hashing ' +
                 'rate (see \"',
-                h('a', { href: '/blog/2014-05-20-0000/', onClick: (e) => navigateEvent(e, '/blog/2014-05-20-0000') },
+                h('a', { href: '/blog/2014-05-20-0000/', onClick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-20-0000') },
                     'Hash rate headaches'
                 ),
                 '") but it turns out to be a surprisingly effective estimate nonetheless.'
@@ -86,7 +86,7 @@ function blogArticle_201406100000(): VDom[] {
             h('p', {},
                 'Visually our baseline looks pretty reasonable.  We know that even if the hash rate was constant the difficulty ' +
                 'would change as a result of random noise (see \"',
-                h('a', { href: '/blog/2014-05-24-0000/', onClick: (e) => navigateEvent(e, '/blog/2014-05-24-0000') },
+                h('a', { href: '/blog/2014-05-24-0000/', onClick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-24-0000') },
                     'Reach for the ear defenders'
                 ),
                 '").  The question is what does our noise profile look like if we subtract out the baseline hash rate estimate?  ' +
@@ -136,12 +136,12 @@ function blogPostScript_201406100000(): VDom[] {
             h('h2', {}, 'Related articles'),
             h('ul', {},
                 h('li', {},
-                    h('a', { href: '/blog/2014-05-24-0000/', onClick: (e) => navigateEvent(e, '/blog/2014-05-24-0000') },
+                    h('a', { href: '/blog/2014-05-24-0000/', onClick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-24-0000') },
                         'Reach for the ear defenders! (2014-05-24)'
                     )
                 ),
                 h('li', {},
-                    h('a', { href: '/blog/2014-05-20-0000/', onClick: (e) => navigateEvent(e, '/blog/2014-05-20-0000') },
+                    h('a', { href: '/blog/2014-05-20-0000/', onClick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-20-0000') },
                         'Hash rate headaches (2014-05-20)'
                     )
                 )

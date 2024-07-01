@@ -213,7 +213,7 @@ function blogArticle_201412050000(): VDom[] {
             h('ul', {},
                 h('li', {},
                     'Small mining pools suffer from significantly worse reward variances as we\'ve seen before in, "',
-                    h('a', { href: '/blog/2014-06-30-0000', onClick: (e) => navigateEvent(e, '/blog/2014-06-30-0000') },
+                    h('a', { href: '/blog/2014-06-30-0000', onClick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-06-30-0000') },
                         'The gambler\'s guide to Bitcoin mining'
                     ),
                     '"'
@@ -315,12 +315,12 @@ function blogPostScript_201412050000(): VDom[] {
             h('h2', {}, 'Related articles'),
             h('ul', {},
                 h('li', {},
-                    h('a', { href: '/blog/2014-06-30-0000', onClick: (e) => navigateEvent(e, '/blog/2014-06-30-0000') },
+                    h('a', { href: '/blog/2014-06-30-0000', onClick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-06-30-0000') },
                         'The gambler\'s guide to Bitcoin mining (2014-06-30)'
                     )
                 ),
                 h('li', {},
-                    h('a', { href: '/blog/2014-04-03-0000', onClick: (e) => navigateEvent(e, '/blog/2014-04-03-0000') },
+                    h('a', { href: '/blog/2014-04-03-0000', onClick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-04-03-0000') },
                         'The rewards for a Bitcoin miner (2014-04-03)'
                     )
                 )

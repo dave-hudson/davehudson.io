@@ -1,9 +1,6 @@
 import { jest } from '@jest/globals';
 
-import { VDom, updateElement, h, svg } from '../../src/lib/dvdi.js';
-
-// Mocking the requestAnimationFrame for enqueueUpdate tests
-global.requestAnimationFrame = (callback) => callback();
+import { VDom, updateElement, h, svg } from '../../src/lib/dvdi';
 
 describe('VDom Class', () => {
     test('constructor initializes properties correctly', () => {
@@ -37,7 +34,7 @@ describe('VDom Class', () => {
         expect(child.parentVNode).toBeNull();
     });
 
-    test('removeChild removes a child VNode', () => {
+    test('removeChild removes a string child VNode', () => {
         const vDom = new VDom('html', 'div', {}, []);
         const child = 'fred';
         vDom.appendChild(child);
@@ -232,7 +229,7 @@ describe('updateElement function', () => {
     test('updateElement replaces a node with different properties', () => {
         const parent = document.createElement('div');
         const oldVNode = new VDom('html', 'span', { className: 'test', style: 'bob', onClick: () => {} }, []);
-        const newVNode = new VDom('html', 'span', { className: 'test', id: 'fred', onClick: () => { foo(); } }, []);
+        const newVNode = new VDom('html', 'span', { className: 'test', id: 'fred', onClick: () => {} }, []);
         updateElement(parent, null, null, oldVNode, 0);
         updateElement(parent, null, oldVNode, newVNode, 0);
         expect(Object.keys(newVNode.props).length).toBe(3);
@@ -245,7 +242,7 @@ describe('updateElement function', () => {
         const newVNode = new VDom('svg', 'svg', {
                 xmlns: 'http://www.w3.org/2000/svg',
                 'xml:space': 'preserve',
-                onClick: () => { foo(); }
+                onClick: () => { console.log('click'); }
             },
             []
         );
@@ -260,7 +257,7 @@ describe('updateElement function', () => {
         const oldVNode = new VDom('svg', 'svg', {
                 xmlns: 'http://www.w3.org/2000/svg',
                 'xml:space': 'preserve',
-                onClick: () => { foo(); }
+                onClick: () => { console.log('click'); }
             },
             []
         );

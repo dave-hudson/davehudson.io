@@ -337,7 +337,7 @@ export function updateElement(parent: HTMLElement, parentVNode: VDom | null, old
  * @param childNodes The child elements or strings.
  * @returns A virtual DOM element.
  */
-export function h(type: string, props: Props, ...childNodes: (VDom | string)[]): VDom {
+export function h(type: string, props?: Props, ...childNodes: (VDom | string)[]): VDom {
     let v = new VDom('html', type, props || {}, [])
     for (let i of childNodes) {
         v.appendChild(i);
@@ -353,7 +353,7 @@ export function h(type: string, props: Props, ...childNodes: (VDom | string)[]):
  * @param childNodes The child elements or strings.
  * @returns A virtual DOM element.
  */
-export function svg(type: string, props: Props, ...childNodes: (VDom | string)[]): VDom {
+export function svg(type: string, props?: Props, ...childNodes: (VDom | string)[]): VDom {
     let v = new VDom('svg', type, props || {}, [])
     for (let i of childNodes) {
         v.appendChild(i);

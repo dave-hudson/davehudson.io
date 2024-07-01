@@ -160,22 +160,22 @@ function blogPostScript_201404300000(): VDom[] {
             h('h2', {}, 'Related articles'),
             h('ul', {},
                 h('li', {},
-                    h('a', { href: '/blog/2014-04-28-0000', onClick: (e) => navigateEvent(e, '/blog/2014-04-28-0000') },
+                    h('a', { href: '/blog/2014-04-28-0000', onClick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-04-28-0000') },
                         'Megawatts of mining (2014-04-28)'
                     )
                 ),
                 h('li', {},
-                    h('a', { href: '/blog/2014-04-03-0000', onClick: (e) => navigateEvent(e, '/blog/2014-04-03-0000') },
+                    h('a', { href: '/blog/2014-04-03-0000', onClick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-04-03-0000') },
                         'The rewards for a Bitcoin miner (2014-04-03)'
                     )
                 ),
                 h('li', {},
-                    h('a', { href: '/blog/2014-03-23-0000', onClick: (e) => navigateEvent(e, '/blog/2014-03-23-0000') },
+                    h('a', { href: '/blog/2014-03-23-0000', onClick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-03-23-0000') },
                         'Where next for Bitcoin mining ASICs? (2014-03-23)'
                     )
                 ),
                 h('li', {},
-                    h('a', { href: '/blog/2014-03-09-0000', onClick: (e) => navigateEvent(e, '/blog/2014-03-09-0000') },
+                    h('a', { href: '/blog/2014-03-09-0000', onClick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-03-09-0000') },
                         'The Bitcoin runaway mine train (2014-03-09)'
                     )
                 )

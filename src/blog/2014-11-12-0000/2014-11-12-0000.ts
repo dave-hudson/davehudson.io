@@ -49,7 +49,7 @@ function blogArticle_201411120000(): VDom[] {
             h('p', {},
                 'The fee structure means that BTC transfers are incredibly inexpensive for large transactions, but that small ' +
                 'transfers can become much more expensive.  As we\'ve seen before in "',
-                h('a', { href: '/blog/2014-11-02-0000/', onClick: (e) => navigateEvent(e, '/blog/2014-11-02-0000') },
+                h('a', { href: '/blog/2014-11-02-0000/', onClick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-11-02-0000') },
                     '7 transactions per second?  Really?'
                 ),
                 '", there\'s actually a hard limit on transaction space and the current mean transaction size limits the network ' +
@@ -193,12 +193,12 @@ function blogPostScript_201411120000(): VDom[] {
             h('h2', {}, 'Related articles'),
             h('ul', {},
                 h('li', {},
-                    h('a', { href: '/blog/2014-11-02-0000/', onClick: (e) => navigateEvent(e, '/blog/2014-11-02-0000') },
+                    h('a', { href: '/blog/2014-11-02-0000/', onClick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-11-02-0000') },
                         '7 transactions per second?  Really? (2014-11-02)'
                     )
                 ),
                 h('li', {},
-                    h('a', { href: '/blog/2014-04-03-0000/', onClick: (e) => navigateEvent(e, '/blog/2014-04-03-0000') },
+                    h('a', { href: '/blog/2014-04-03-0000/', onClick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-04-03-0000') },
                         'The rewards for a Bitcoin miner (2014-04-03'
                     )
                 )

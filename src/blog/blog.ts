@@ -27,9 +27,10 @@ import { blogPost_201601050000 } from './2016-01-05-0000/2016-01-05-0000';
 import { blogPost_201602030000 } from './2016-02-03-0000/2016-02-03-0000';
 import { blogPost_201701061400 } from './2017-01-06-1400/2017-01-06-1400';
 import { blogPost_202001272336 } from './2020-01-27-2336/2020-01-27-2336';
+import { BlogPost } from './BlogPost';
 
 // Enumerate all the blog content served up here.  Newest content goes at the end.
-const blogContent = [
+const blogContent: BlogPost[] = [
     blogPost_201403090000,
     blogPost_201403120000,
     blogPost_201403170000,
@@ -57,27 +58,27 @@ const blogContent = [
     blogPost_202001272336
 ]
 
-function navPrevNext(prevStr, prevHRef, nextStr, nextHRef): VDom {
+function navPrevNext(prevStr: string | null, prevHRef: string | null, nextStr: string | null, nextHRef: string | null): VDom {
     return h('nav', { className: 'prev-next'},
         h('h2', {}, 'More blog posts'),
         h('table', { className: 'meta-nav' },
             h('tr', {},
                 h('td', { className: 'prev' },
                     !prevStr ? '' : h('a', {
-                            className: 'icon', href: prevHRef, onClick: (e) => navigateEvent(e, prevHRef)
+                            className: 'icon', href: prevHRef, onClick: (e: MouseEvent) => navigateEvent(e, (prevHRef as string))
                         },
                         chevronLeftIcon()
                     )
                 ),
                 h('td', { className: 'prev-text' },
-                    !prevStr ? '' : h('a', { href: prevHRef, onClick: (e) => navigateEvent(e, prevHRef) }, prevStr)
+                    !prevStr ? '' : h('a', { href: prevHRef, onClick: (e: MouseEvent) => navigateEvent(e, (prevHRef as string)) }, prevStr)
                 ),
                 h('td', { className: 'next-text' },
-                    !nextStr ? '' : h('a', { href: nextHRef, onClick: (e) => navigateEvent(e, nextHRef) }, nextStr)
+                    !nextStr ? '' : h('a', { href: nextHRef, onClick: (e: MouseEvent) => navigateEvent(e, (nextHRef as string)) }, nextStr)
                 ),
                 h('td', { className: 'next' },
                     !nextStr ? '' : h('a', {
-                            className: 'icon', href: nextHRef, onClick: (e) => navigateEvent(e, nextHRef)
+                            className: 'icon', href: nextHRef, onClick: (e: MouseEvent) => navigateEvent(e, (nextHRef as string))
                         },
                         chevronRightIcon()
                     )
@@ -87,7 +88,7 @@ function navPrevNext(prevStr, prevHRef, nextStr, nextHRef): VDom {
     );
 }
 
-function blogArticlePage(index): VDom {
+function blogArticlePage(index: number): VDom {
     let prevArticle = (index > 0) ? blogContent[index - 1] : null;
     let thisArticle = blogContent[index];
     let nextArticle = (index < (blogContent.length - 1)) ? blogContent[index + 1] : null;
@@ -122,10 +123,10 @@ function blogArticlePage(index): VDom {
     );
 }
 
-function blogLink(href, title, meta) {
+function blogLink(href: string, title: string, meta: string) {
     return h('div', { className: 'blog-post' },
         h('span', {},
-            h('a', { href: href, onClick: (e) => navigateEvent(e, href) }, title)
+            h('a', { href: href, onClick: (e: MouseEvent) => navigateEvent(e, href) }, title)
         ),
         h('span', { className: 'meta' }, meta)
     )
@@ -169,7 +170,7 @@ export function blogPage() {
 }
 
 // Handle the blog summaries on the home page.
-export function blogSummaries(numEntries) {
+export function blogSummaries(numEntries: number) {
     let view: VDom[] = [];
 
     // If we've been asked for more blog summaries than there are, then clip the list.
@@ -181,13 +182,13 @@ export function blogSummaries(numEntries) {
         view.push(h('hr', {}));
         view.push(h('section', {},
             h('h2', {},
-                h('a', { href: hRef, onClick: (e) => navigateEvent(e, hRef) }, title)
+                h('a', { href: hRef, onClick: (e: MouseEvent) => navigateEvent(e, hRef) }, title)
             ),
             h('p', { className: 'meta' }, h('time', {}, dateTime)),
             ...openingFunction(),
             h('p', {},
                 h('em', {},
-                    h('a', { href: hRef, onClick: (e) => navigateEvent(e, hRef) }, '[read more]')
+                    h('a', { href: hRef, onClick: (e: MouseEvent) => navigateEvent(e, hRef) }, '[read more]')
                 )
             )
         ));
@@ -198,10 +199,10 @@ export function blogSummaries(numEntries) {
 
 // Collect all the routes to be used with the blog pages.
 export function getBlogRoutes() {
-    let blogRoutes = {};
+    let blogRoutes: Map<string, (() => VDom)> = new Map();
 
     for (let i = 0; i < blogContent.length; i++) {
-        blogRoutes[blogContent[i].hRef] = () => blogArticlePage(i);
+        blogRoutes.set(blogContent[i].hRef, () => blogArticlePage(i));
     }
 
     return blogRoutes;
