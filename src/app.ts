@@ -120,7 +120,9 @@ export function navigateEvent(e: MouseEvent, path: string) {
 function routeInit(event: Event): void {
     // Add all the blog content to the router.
     const blogRoutes = getBlogRoutes();
-    Object.assign(routes, blogRoutes);
+    blogRoutes.forEach((value, key) => {
+        routes.set(key, value);
+    });
 
     // Set up the navigation for stepping backwards.
     window.onpopstate = (e) => {
