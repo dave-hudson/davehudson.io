@@ -291,6 +291,7 @@ export function updateElement(parent: HTMLElement, parentVNode: VDom | null, old
             parentVNode.replaceChild(newVNode as VDom | string, oldVNode as VDom | string);
         }
 
+//        console.log(parent.childNodes[index], (oldVNode as VDom).domElement);
         parent.replaceChild(render(newVNode as VDom | string), parent.childNodes[index]);
         mountVNode(newVNode as VDom | string);
         return;
@@ -305,13 +306,13 @@ export function updateElement(parent: HTMLElement, parentVNode: VDom | null, old
     // and update them.  To keep things sane, don't forget we need to record DOM element
     // in the new VDOM node.
     (newVNode as VDom).domElement = (oldVNode as VDom).domElement;
-    updateProps(parent.childNodes[index] as HTMLElement, (oldVNode as VDom).props, (newVNode as VDom).props);
+    updateProps((oldVNode as VDom).domElement as HTMLElement, (oldVNode as VDom).props, (newVNode as VDom).props);
 
     // We iterate backwards to remove any nodes to keep the child lists correct.
     let oldLen = (oldVNode as VDom).childNodes.length;
     let newLen = (newVNode as VDom).childNodes.length;
     for (let i = oldLen - 1; i > (newLen - 1); i--) {
-        updateElement(parent.childNodes[index] as HTMLElement, oldVNode as VDom, (oldVNode as VDom).childNodes[i], null, i);
+        updateElement((oldVNode as VDom).domElement as HTMLElement, oldVNode as VDom, (oldVNode as VDom).childNodes[i], null, i);
     }
 
     // We iterate forwards to update and add nodes.  At this point we already know our list of child nodes
@@ -321,12 +322,12 @@ export function updateElement(parent: HTMLElement, parentVNode: VDom | null, old
     }
 
     for (let i = 0; i < oldLen; i++) {
-        updateElement(parent.childNodes[index] as HTMLElement, oldVNode as VDom, (oldVNode as VDom).childNodes[i], (newVNode as VDom).childNodes[i], i);
+        updateElement((oldVNode as VDom).domElement as HTMLElement, oldVNode as VDom, (oldVNode as VDom).childNodes[i], (newVNode as VDom).childNodes[i], i);
     }
 
     // We iterate forwards to update and add nodes.
     for (let i = oldLen; i < newLen; i++) {
-        updateElement(parent.childNodes[index] as HTMLElement, oldVNode as VDom, null, (newVNode as VDom).childNodes[i], i);
+        updateElement((oldVNode as VDom).domElement as HTMLElement, oldVNode as VDom, null, (newVNode as VDom).childNodes[i], i);
     }
 }
 
