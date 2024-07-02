@@ -231,10 +231,22 @@ function unrender(vNode: VNode | string) {
  * Check if two virtual DOM nodes are different.
  */
 function changed(vnode1: VNode | string, vnode2: VNode | string): boolean {
-    return typeof vnode1 !== typeof vnode2 ||
-            (typeof vnode1 === 'string' && (vnode1 !== vnode2)) ||
-            (typeof vnode1 !== 'string' && typeof vnode2 !== 'string' && (vnode1.namespace !== vnode2.namespace)) ||
-            (vnode1 as VNode).type !== (vnode2 as VNode).type;
+    // Are our nodes of different types?
+    if (typeof vnode1 != typeof vnode2) {
+        return true;
+    }
+
+    // Do we have 2 strings?  If we do then just compare them
+    if (typeof vnode1 === 'string') {
+        return vnode1 !== vnode2;
+    }
+
+    // We have two elements.
+    if ((vnode1 as VNode).namespace !== (vnode2 as VNode).namespace) {
+        return true;
+    }
+
+    return (vnode1 as VNode).type !== (vnode2 as VNode).type;
 }
 
 /*
