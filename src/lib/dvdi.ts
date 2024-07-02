@@ -181,7 +181,7 @@ function deleteAttribute(domElement: HTMLElement, key: string, value: any) {
 /*
  * Render a virtual DOM node into a real DOM node.
  */
-function render(vNode: VNode | string): HTMLElement | Text {
+function render(vNode: VNode | string): Node {
     if (typeof vNode === 'string') {
         const domElement = document.createTextNode(vNode);
         return domElement;
