@@ -100,7 +100,7 @@ function handleLocation() {
     const newVNode = pageFunction();
     const app = document.querySelector('#app');
 
-    updateElement((app as HTMLElement), null, rootVNode, newVNode, 0);
+    updateElement((app as HTMLElement), null, null, rootVNode, newVNode);
     rootVNode = newVNode;
     console.log(`navigated to ${path}`)
 }
