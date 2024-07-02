@@ -25,7 +25,7 @@ export class VNode {
     props: Props;
     parentVNode: VNode | null;
     childNodes: (VNode | string)[];
-    domElement: HTMLElement | Text | null;
+    domElement: HTMLElement | null;
     isMounted: boolean;
     mountCallback: (() => void) | null;
     unmountCallback: (() => void) | null;
