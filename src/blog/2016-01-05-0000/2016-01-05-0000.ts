@@ -1,8 +1,8 @@
-import { h, VDom } from '../../lib/dvdi';
+import { h, VNode } from '../../lib/dvdi';
 import { navigateEvent } from '../../app';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201601050000(): VDom[] {
+function blogOpening_201601050000(): VNode[] {
     return [
         h('p', {},
             '"Exahash" sounds like it could well have been the hammer of the Norse Gods of old as it defeated all in battle.  ' +
@@ -18,7 +18,7 @@ function blogOpening_201601050000(): VDom[] {
     ]
 }
 
-function blogArticle_201601050000(): VDom[] {
+function blogArticle_201601050000(): VNode[] {
     return [
         h('section', {},
             h('h2', {}, 'The nature of Bitcoin hashing (an aside)'),
@@ -157,7 +157,7 @@ function blogArticle_201601050000(): VDom[] {
     ];
 }
 
-function blogPostscript_20160105000(): VDom[] {
+function blogPostscript_20160105000(): VNode[] {
     return [
         h('hr', {}),
         h('section', {},

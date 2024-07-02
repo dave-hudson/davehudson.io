@@ -1,8 +1,8 @@
-import { h, VDom } from '../../lib/dvdi';
+import { h, VNode } from '../../lib/dvdi';
 import { navigateEvent } from '../../app';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201403230000(): VDom[] {
+function blogOpening_201403230000(): VNode[] {
     return [
         h('p', {},
             'ASIC mining is now the norm for Bitcoin, and 28 nm ASICs are now becoming the mainstream replacing the 65 ' +
@@ -16,7 +16,7 @@ function blogOpening_201403230000(): VDom[] {
     ]
 }
 
-function blogArticle_201403230000(): VDom[] {
+function blogArticle_201403230000(): VNode[] {
     return [
         h('section', {},
                 h('h2', {}, 'Why have things moved so fast?'),

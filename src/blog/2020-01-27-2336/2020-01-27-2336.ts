@@ -1,7 +1,7 @@
-import { h, VDom } from '../../lib/dvdi';
+import { h, VNode } from '../../lib/dvdi';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_202001272336(): VDom[] {
+function blogOpening_202001272336(): VNode[] {
     return [
         h('p', {},
             'A few days ago I decided to move away from my old Joomla-based blog site and set up my own static web site.  ' +
@@ -24,7 +24,7 @@ function blogOpening_202001272336(): VDom[] {
     ];
 }
 
-function blogArticle_202001272336(): VDom[] {
+function blogArticle_202001272336(): VNode[] {
     return [
         h('section', {},
             h('h2', {}, 'Names matter'),

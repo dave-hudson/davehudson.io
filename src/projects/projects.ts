@@ -1,7 +1,7 @@
-import { h, VDom } from '../lib/dvdi';
+import { h, VNode } from '../lib/dvdi';
 import { pageHeader, pageFooter } from "../lib/page";
 
-export function projectsPage(): VDom {
+export function projectsPage(): VNode {
     return h('div', {},
         pageHeader(),
         h('main', { className: 'main' },

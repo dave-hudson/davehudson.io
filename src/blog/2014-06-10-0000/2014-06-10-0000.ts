@@ -1,8 +1,8 @@
-import { h, VDom } from '../../lib/dvdi';
+import { h, VNode } from '../../lib/dvdi';
 import { navigateEvent } from '../../app';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201406100000(): VDom[] {
+function blogOpening_201406100000(): VNode[] {
     return [
         h('p', {},
             'Bitcoin difficulty and hash rate statistics should be considered an illness.  The symptoms include anxiety, ' +
@@ -14,7 +14,7 @@ function blogOpening_201406100000(): VDom[] {
     ]
 }
 
-function blogArticle_201406100000(): VDom[] {
+function blogArticle_201406100000(): VNode[] {
     return [
         h('section', {},
             h('h2', {}, 'Difficulty charts'),
@@ -129,7 +129,7 @@ function blogArticle_201406100000(): VDom[] {
     ];
 }
 
-function blogPostScript_201406100000(): VDom[] {
+function blogPostScript_201406100000(): VNode[] {
     return [
         h('hr', {}),
         h('section', {},

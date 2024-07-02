@@ -1,8 +1,8 @@
-import { h, VDom } from '../../lib/dvdi';
+import { h, VNode } from '../../lib/dvdi';
 import { navigateEvent } from '../../app';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201412050000(): VDom[] {
+function blogOpening_201412050000(): VNode[] {
     return [
         h('p', {},
             'A few days ago, Ittay Eyal published an intriguing paper, "',
@@ -16,7 +16,7 @@ function blogOpening_201412050000(): VDom[] {
     ]
 }
 
-function blogArticle_201412050000(): VDom[] {
+function blogArticle_201412050000(): VNode[] {
     return [
         h('section', {},
             h('h2', {}, 'Mining pools'),
@@ -308,7 +308,7 @@ function blogArticle_201412050000(): VDom[] {
     ];
 }
 
-function blogPostScript_201412050000(): VDom[] {
+function blogPostScript_201412050000(): VNode[] {
     return [
         h('hr', {}),
         h('section', {},

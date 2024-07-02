@@ -1,8 +1,8 @@
-import { h, VDom } from '../../lib/dvdi';
+import { h, VNode } from '../../lib/dvdi';
 import { navigateEvent } from '../../app';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201403170000(): VDom[] {
+function blogOpening_201403170000(): VNode[] {
     return [
         h('p', {},
             'Which comes first: The miners or the money?  Much as the old question of “Which came first: The ' +
@@ -16,7 +16,7 @@ function blogOpening_201403170000(): VDom[] {
     ]
 }
 
-function blogArticle_201403170000(): VDom[] {
+function blogArticle_201403170000(): VNode[] {
     return [
         h('p', {},
             'Let\'s look at a chart comparing the value of Bitcoin in US Dollars vs the global hashrate in GHash/s ' +

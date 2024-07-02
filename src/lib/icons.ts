@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { svg, VDom } from './dvdi';
+import { svg, VNode } from './dvdi';
 
 type SVGProps = {
     xmlns: string;
@@ -48,7 +48,7 @@ type SVGProps = {
     r?: number;
 }
 
-export function chevronLeftIcon(): VDom {
+export function chevronLeftIcon(): VNode {
     return svg('svg', {
             xmlns: 'http://www.w3.org/2000/svg',
             width: 24,
@@ -64,7 +64,7 @@ export function chevronLeftIcon(): VDom {
     );
 }
 
-export function chevronRightIcon(): VDom {
+export function chevronRightIcon(): VNode {
     return svg('svg', {
             xmlns: 'http://www.w3.org/2000/svg',
             width: 24,
@@ -80,7 +80,7 @@ export function chevronRightIcon(): VDom {
     );
 }
 
-export function gitHubIcon(): VDom {
+export function gitHubIcon(): VNode {
     return svg('svg', {
             xmlns: 'http://www.w3.org/2000/svg',
             width: 24,
@@ -101,7 +101,7 @@ export function gitHubIcon(): VDom {
     );
 }
 
-export function instagramIcon(): VDom {
+export function instagramIcon(): VNode {
     return svg('svg', {
             xmlns: 'http://www.w3.org/2000/svg',
             width: 24,
@@ -119,7 +119,7 @@ export function instagramIcon(): VDom {
     );
 }
 
-export function linkedInIcon(): VDom {
+export function linkedInIcon(): VNode {
     return svg('svg', {
             xmlns: 'http://www.w3.org/2000/svg',
             width: 24,
@@ -137,7 +137,7 @@ export function linkedInIcon(): VDom {
     );
 }
 
-export function mailIcon(): VDom {
+export function mailIcon(): VNode {
     return svg('svg', {
             xmlns: 'http://www.w3.org/2000/svg',
             width: 24,
@@ -154,7 +154,7 @@ export function mailIcon(): VDom {
     );
 }
 
-export function moonIcon(): VDom {
+export function moonIcon(): VNode {
     return svg('svg', {
             xmlns: 'http://www.w3.org/2000/svg',
             width: 24,
@@ -170,7 +170,7 @@ export function moonIcon(): VDom {
     );
 }
 
-export function sunIcon(): VDom {
+export function sunIcon(): VNode {
     return svg('svg', {
             xmlns: 'http://www.w3.org/2000/svg',
             width: 24,
@@ -194,7 +194,7 @@ export function sunIcon(): VDom {
     );
 }
 
-export function xIcon(): VDom {
+export function xIcon(): VNode {
     return svg('svg', {
             xmlns: 'http://www.w3.org/2000/svg',
             width: 24,

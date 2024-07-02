@@ -1,8 +1,8 @@
-import { h, VDom } from '../../lib/dvdi';
+import { h, VNode } from '../../lib/dvdi';
 import { navigateEvent } from '../../app';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201406300000(): VDom[] {
+function blogOpening_201406300000(): VNode[] {
     return [
         h('p', {},
             'What\'s the best way to get a return when we mine Bitcoins?  Should we mine on our own, mine with a small pool ' +
@@ -15,7 +15,7 @@ function blogOpening_201406300000(): VDom[] {
     ]
 }
 
-function blogArticle_201406300000(): VDom[] {
+function blogArticle_201406300000(): VNode[] {
     return [
         h('section', {},
             h('h2', {}, 'Starting thoughts'),
@@ -124,7 +124,7 @@ function blogArticle_201406300000(): VDom[] {
     ];
 }
 
-function blogPostScript_201406300000(): VDom[] {
+function blogPostScript_201406300000(): VNode[] {
     return [
         h('hr', {}),
         h('section', {},

@@ -1,4 +1,4 @@
-import { h, updateElement, VDom } from './lib/dvdi';
+import { h, updateElement, VNode } from './lib/dvdi';
 import { aboutPage } from './about/about';
 import { blogPage, blogSummaries, getBlogRoutes } from './blog/blog';
 import { projectsPage } from './projects/projects';
@@ -11,22 +11,22 @@ const updateQueue = new Set();
 /*
  * Enqueues updates and executes them in a batch using requestAnimationFrame.
  */
-//function enqueueVDomUpdate(update) {
+//function enqueueVNodeUpdate(update) {
 //    updateQueue.add(update);
 //    if (updateQueue.size === 1) {
-//        requestAnimationFrame(runVDomUpdates);
+//        requestAnimationFrame(runVNodeUpdates);
 //    }
 //}
 
 /*
  * Runs all updates that have been enqueued.
  */
-//function runVDomUpdates() {
+//function runVNodeUpdates() {
 //    updateQueue.forEach(update => update());
 //    updateQueue.clear();
 //}
 
-function homePage(): VDom {
+function homePage(): VNode {
     return h('div', {},
         pageHeader(),
         h('main', { className: 'main'},
@@ -57,7 +57,7 @@ function homePage(): VDom {
     );
 }
 
-function notFoundPage(path: string): VDom {
+function notFoundPage(path: string): VNode {
     return h('div', {},
         pageHeader(),
         h('main', { className: 'main' },
@@ -73,14 +73,14 @@ function notFoundPage(path: string): VDom {
     );
 }
 
-let routes: Map<string, (() => VDom)> = new Map([
+let routes: Map<string, (() => VNode)> = new Map([
     ['', homePage],
     ['/about', aboutPage],
     ['/projects', projectsPage],
     ['/blog', blogPage]
 ]);
 
-let rootVNode: VDom | null = null;
+let rootVNode: VNode | null = null;
 
 function handleLocation() {
     let path = window.location.pathname;
@@ -94,7 +94,7 @@ function handleLocation() {
     if (path === '') {
         pageFunction = homePage;
     } else if (routes.has(path)) {
-        pageFunction = (routes.get(path)) as (() => VDom);
+        pageFunction = (routes.get(path)) as (() => VNode);
     }
 
     const newVNode = pageFunction();

@@ -1,8 +1,8 @@
-import { h, VDom } from '../../lib/dvdi';
+import { h, VNode } from '../../lib/dvdi';
 import { navigateEvent } from '../../app';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201406230000(): VDom[] {
+function blogOpening_201406230000(): VNode[] {
     return [
         h('p', {},
             'Every so often a Bitcoin mining pool is reported to manage more than half of the Bitcoin hashing capacity, ' +
@@ -13,7 +13,7 @@ function blogOpening_201406230000(): VDom[] {
     ]
 }
 
-function blogArticle_201406230000(): VDom[] {
+function blogArticle_201406230000(): VNode[] {
     return [
         h('section', {},
             h('h2', {}, 'A day in the life of a 50% mining pool'),
@@ -86,7 +86,7 @@ function blogArticle_201406230000(): VDom[] {
     ];
 }
 
-function blogPostScript_201406230000(): VDom[] {
+function blogPostScript_201406230000(): VNode[] {
     return [
         h('hr', {}),
         h('section', {},

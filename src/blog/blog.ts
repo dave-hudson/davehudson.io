@@ -1,4 +1,4 @@
-import { h, VDom } from '../lib/dvdi';
+import { h, VNode } from '../lib/dvdi';
 import { pageHeader, pageFooter } from '../lib/page';
 import { navigateEvent } from '../app';
 import { chevronLeftIcon, chevronRightIcon } from '../lib/icons';
@@ -58,7 +58,7 @@ const blogContent: BlogPost[] = [
     blogPost_202001272336
 ]
 
-function navPrevNext(prevStr: string | null, prevHRef: string | null, nextStr: string | null, nextHRef: string | null): VDom {
+function navPrevNext(prevStr: string | null, prevHRef: string | null, nextStr: string | null, nextHRef: string | null): VNode {
     return h('nav', { className: 'prev-next'},
         h('h2', {}, 'More blog posts'),
         h('table', { className: 'meta-nav' },
@@ -88,7 +88,7 @@ function navPrevNext(prevStr: string | null, prevHRef: string | null, nextStr: s
     );
 }
 
-function blogArticlePage(index: number): VDom {
+function blogArticlePage(index: number): VNode {
     let prevArticle = (index > 0) ? blogContent[index - 1] : null;
     let thisArticle = blogContent[index];
     let nextArticle = (index < (blogContent.length - 1)) ? blogContent[index + 1] : null;
@@ -96,12 +96,12 @@ function blogArticlePage(index: number): VDom {
     let prevHRef = prevArticle ? prevArticle.hRef : null;
     let nextTitle = nextArticle ? nextArticle.title : null;
     let nextHRef = nextArticle ? nextArticle.hRef : null;
-    let preText: VDom[] = [];
+    let preText: VNode[] = [];
     if (thisArticle.preScriptFunction !== null) {
         preText = thisArticle.preScriptFunction();
     }
 
-    let postText: VDom[] = [];
+    let postText: VNode[] = [];
     if (thisArticle.postScriptFunction !== null) {
         postText = thisArticle.postScriptFunction();
     }
@@ -134,8 +134,8 @@ function blogLink(href: string, title: string, meta: string) {
 
 // Handle generating the '/blog' page
 export function blogPage() {
-    let pageView: VDom[] = [];
-    let yearSection: (VDom | null) = null;
+    let pageView: VNode[] = [];
+    let yearSection: (VNode | null) = null;
     let headlineYear = '';
 
     // Iterate all the blog content and create year and item enties.
@@ -153,10 +153,10 @@ export function blogPage() {
             )
         }
 
-        (yearSection as VDom).appendChild(blogLink(hRef, title, dateTime));
+        (yearSection as VNode).appendChild(blogLink(hRef, title, dateTime));
     }
 
-    const sections = [...pageView, (yearSection as VDom)];
+    const sections = [...pageView, (yearSection as VNode)];
 
     // Return the VDOM for the blog page.
     return h('div', {},
@@ -171,7 +171,7 @@ export function blogPage() {
 
 // Handle the blog summaries on the home page.
 export function blogSummaries(numEntries: number) {
-    let view: VDom[] = [];
+    let view: VNode[] = [];
 
     // If we've been asked for more blog summaries than there are, then clip the list.
     const lastEntry = blogContent.length > numEntries ? blogContent.length - numEntries : 0;
@@ -199,7 +199,7 @@ export function blogSummaries(numEntries: number) {
 
 // Collect all the routes to be used with the blog pages.
 export function getBlogRoutes() {
-    let blogRoutes: Map<string, (() => VDom)> = new Map();
+    let blogRoutes: Map<string, (() => VNode)> = new Map();
 
     for (let i = 0; i < blogContent.length; i++) {
         blogRoutes.set(blogContent[i].hRef, () => blogArticlePage(i));

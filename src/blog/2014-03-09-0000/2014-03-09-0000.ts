@@ -1,7 +1,7 @@
-import { h, VDom } from '../../lib/dvdi';
+import { h, VNode } from '../../lib/dvdi';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201403090000(): VDom[] {
+function blogOpening_201403090000(): VNode[] {
     return [
         h('p', {},
             'Bitcoin mining is seemingly unique. T here has probably never been any technology problem that ' +
@@ -13,7 +13,7 @@ function blogOpening_201403090000(): VDom[] {
     ]
 }
 
-function blogArticle_201403090000(): VDom[] {
+function blogArticle_201403090000(): VNode[] {
     return [
         h('section', {},
             h('h2', {}, 'What has been happening?'),

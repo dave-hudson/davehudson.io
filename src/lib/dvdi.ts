@@ -19,25 +19,25 @@ interface Props {
 /**
  * Class representing a virtual DOM node.
  */
-export class VDom {
+export class VNode {
     namespace: string;
     type: string;
     props: Props;
-    parentVNode: VDom | null;
-    childNodes: (VDom | string)[];
+    parentVNode: VNode | null;
+    childNodes: (VNode | string)[];
     domElement: HTMLElement | Text | null;
     isMounted: boolean;
     mountCallback: (() => void) | null;
     unmountCallback: (() => void) | null;
 
     /**
-     * Create a VDom node.
+     * Create a VNode node.
      * @param namespace - The namespace for the matching DOM element.
      * @param type - The type of the node (e.g., 'div').
      * @param props - The properties and attributes of the node.
      * @param childNodes - The child nodes of this node.
      */
-    constructor(namespace: string, type: string, props: Props = {}, childNodes: (VDom | string)[] = []) {
+    constructor(namespace: string, type: string, props: Props = {}, childNodes: (VNode | string)[] = []) {
         this.namespace = namespace;
         this.type = type;
         this.props = props;
@@ -53,7 +53,7 @@ export class VDom {
      * Append a child node.
      * @param vNode - The child node to append.
      */
-    appendChild(vNode: VDom | string) {
+    appendChild(vNode: VNode | string) {
         this.childNodes.push(vNode);
         if (typeof vNode === 'string') {
             return;
@@ -66,7 +66,7 @@ export class VDom {
      * Remove a child node.
      * @param vNode - The child node to remove.
      */
-    removeChild(vNode: VDom | string) {
+    removeChild(vNode: VNode | string) {
         const index = this.childNodes.indexOf(vNode);
         this.childNodes = this.childNodes.slice(0, index).concat(this.childNodes.slice(index + 1));
         if (typeof vNode === 'string') {
@@ -81,7 +81,7 @@ export class VDom {
      * @param newVNode - The new child node.
      * @param oldVNode - The old child node to replace.
      */
-    replaceChild(newVNode: VDom | string, oldVNode: VDom | string) {
+    replaceChild(newVNode: VNode | string, oldVNode: VNode | string) {
         const index = this.childNodes.indexOf(oldVNode);
         this.childNodes[index] = newVNode;
         if (typeof newVNode !== 'string') {
@@ -97,7 +97,7 @@ export class VDom {
 /*
  * Mount a virtual DOM node.
  */
-function mountVNode(vNode: VDom | string) {
+function mountVNode(vNode: VNode | string) {
     if (typeof vNode === 'string') {
         return;
     }
@@ -116,7 +116,7 @@ function mountVNode(vNode: VDom | string) {
 /*
  * Unmount a virtual DOM node.
  */
-function unmountVNode(vNode: VDom | string) {
+function unmountVNode(vNode: VNode | string) {
     if (typeof vNode === 'string') {
         return;
     }
@@ -181,7 +181,7 @@ function deleteAttribute(domElement: HTMLElement, key: string, value: any) {
 /*
  * Render a virtual DOM node into a real DOM node.
  */
-function render(vNode: VDom | string): HTMLElement | Text {
+function render(vNode: VNode | string): HTMLElement | Text {
     if (typeof vNode === 'string') {
         const domElement = document.createTextNode(vNode);
         return domElement;
@@ -207,7 +207,7 @@ function render(vNode: VDom | string): HTMLElement | Text {
 /*
  * Unrender a virtual DOM node.
  */
-function unrender(vNode: VDom | string) {
+function unrender(vNode: VNode | string) {
     if (typeof vNode === 'string') {
         return;
     }
@@ -230,11 +230,11 @@ function unrender(vNode: VDom | string) {
 /*
  * Check if two virtual DOM nodes are different.
  */
-function changed(vnode1: VDom | string, vnode2: VDom | string): boolean {
+function changed(vnode1: VNode | string, vnode2: VNode | string): boolean {
     return typeof vnode1 !== typeof vnode2 ||
             (typeof vnode1 === 'string' && (vnode1 !== vnode2)) ||
             (typeof vnode1 !== 'string' && typeof vnode2 !== 'string' && (vnode1.namespace !== vnode2.namespace)) ||
-            (vnode1 as VDom).type !== (vnode2 as VDom).type;
+            (vnode1 as VNode).type !== (vnode2 as VNode).type;
 }
 
 /*
@@ -259,7 +259,7 @@ function updateProps(domElement: HTMLElement, oldProps: Props, newProps: Props) 
 /*
  * Update a DOM element based on differences between virtual DOM nodes.
  */
-export function updateElement(parent: HTMLElement, child: Node | null, parentVNode: VDom | null, oldChildVNode: VDom | string | null, newChildVNode: VDom | string | null) {
+export function updateElement(parent: HTMLElement, child: Node | null, parentVNode: VNode | null, oldChildVNode: VNode | string | null, newChildVNode: VNode | string | null) {
     // Did we add a new node?
     if ((oldChildVNode === null) && (newChildVNode !== null)) {
         if (parentVNode) {
@@ -284,15 +284,15 @@ export function updateElement(parent: HTMLElement, child: Node | null, parentVNo
     }
 
     // Did our node change?
-    if (changed(oldChildVNode as VDom | string, newChildVNode as VDom | string)) {
-        unmountVNode(oldChildVNode as VDom | string);
-        unrender(oldChildVNode as VDom | string);
+    if (changed(oldChildVNode as VNode | string, newChildVNode as VNode | string)) {
+        unmountVNode(oldChildVNode as VNode | string);
+        unrender(oldChildVNode as VNode | string);
         if (parentVNode) {
-            parentVNode.replaceChild(newChildVNode as VDom | string, oldChildVNode as VDom | string);
+            parentVNode.replaceChild(newChildVNode as VNode | string, oldChildVNode as VNode | string);
         }
 
-        parent.replaceChild(render(newChildVNode as VDom | string), child as Node);
-        mountVNode(newChildVNode as VDom | string);
+        parent.replaceChild(render(newChildVNode as VNode | string), child as Node);
+        mountVNode(newChildVNode as VNode | string);
         return;
     }
 
@@ -304,15 +304,15 @@ export function updateElement(parent: HTMLElement, child: Node | null, parentVNo
     // Our new VDOM node is the same as our old VDOM node we need to scan the children
     // and update them.  To keep things sane, don't forget we need to record DOM element
     // in the new VDOM node.
-    (newChildVNode as VDom).domElement = (oldChildVNode as VDom).domElement;
-    updateProps((oldChildVNode as VDom).domElement as HTMLElement, (oldChildVNode as VDom).props, (newChildVNode as VDom).props);
+    (newChildVNode as VNode).domElement = (oldChildVNode as VNode).domElement;
+    updateProps((oldChildVNode as VNode).domElement as HTMLElement, (oldChildVNode as VNode).props, (newChildVNode as VNode).props);
 
     // We iterate backwards to remove any nodes to keep the child lists correct.
-    let oldLen = (oldChildVNode as VDom).childNodes.length;
-    let newLen = (newChildVNode as VDom).childNodes.length;
+    let oldLen = (oldChildVNode as VNode).childNodes.length;
+    let newLen = (newChildVNode as VNode).childNodes.length;
     for (let i = oldLen - 1; i > (newLen - 1); i--) {
-        const nextParent = (oldChildVNode as VDom).domElement as HTMLElement;
-        updateElement(nextParent, nextParent.childNodes[i], oldChildVNode as VDom, (oldChildVNode as VDom).childNodes[i], null);
+        const nextParent = (oldChildVNode as VNode).domElement as HTMLElement;
+        updateElement(nextParent, nextParent.childNodes[i], oldChildVNode as VNode, (oldChildVNode as VNode).childNodes[i], null);
     }
 
     // We iterate forwards to update and add nodes.  At this point we already know our list of child nodes
@@ -322,14 +322,14 @@ export function updateElement(parent: HTMLElement, child: Node | null, parentVNo
     }
 
     for (let i = 0; i < oldLen; i++) {
-        const nextParent = (oldChildVNode as VDom).domElement as HTMLElement;
-        updateElement(nextParent, nextParent.childNodes[i], oldChildVNode as VDom, (oldChildVNode as VDom).childNodes[i], (newChildVNode as VDom).childNodes[i]);
+        const nextParent = (oldChildVNode as VNode).domElement as HTMLElement;
+        updateElement(nextParent, nextParent.childNodes[i], oldChildVNode as VNode, (oldChildVNode as VNode).childNodes[i], (newChildVNode as VNode).childNodes[i]);
     }
 
     // We iterate forwards to update and add nodes.
     for (let i = oldLen; i < newLen; i++) {
-        const nextParent = (oldChildVNode as VDom).domElement as HTMLElement;
-        updateElement(nextParent, nextParent.childNodes[i], oldChildVNode as VDom, null, (newChildVNode as VDom).childNodes[i]);
+        const nextParent = (oldChildVNode as VNode).domElement as HTMLElement;
+        updateElement(nextParent, nextParent.childNodes[i], oldChildVNode as VNode, null, (newChildVNode as VNode).childNodes[i]);
     }
 }
 
@@ -340,8 +340,8 @@ export function updateElement(parent: HTMLElement, child: Node | null, parentVNo
  * @param childNodes The child elements or strings.
  * @returns A virtual DOM element.
  */
-export function h(type: string, props?: Props, ...childNodes: (VDom | string)[]): VDom {
-    let v = new VDom('html', type, props || {}, [])
+export function h(type: string, props?: Props, ...childNodes: (VNode | string)[]): VNode {
+    let v = new VNode('html', type, props || {}, [])
     for (let i of childNodes) {
         v.appendChild(i);
     }
@@ -356,8 +356,8 @@ export function h(type: string, props?: Props, ...childNodes: (VDom | string)[])
  * @param childNodes The child elements or strings.
  * @returns A virtual DOM element.
  */
-export function svg(type: string, props?: Props, ...childNodes: (VDom | string)[]): VDom {
-    let v = new VDom('svg', type, props || {}, [])
+export function svg(type: string, props?: Props, ...childNodes: (VNode | string)[]): VNode {
+    let v = new VNode('svg', type, props || {}, [])
     for (let i of childNodes) {
         v.appendChild(i);
     }
