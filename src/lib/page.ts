@@ -1,4 +1,4 @@
-import { h, VNode } from './dvdi';
+import { h, VElement, VNode } from './dvdi';
 import { navigateEvent } from '../app';
 import { mailIcon, gitHubIcon, linkedInIcon, xIcon, instagramIcon, moonIcon, sunIcon } from './icons';
 
@@ -93,7 +93,7 @@ export function pageHeader(): VNode {
     }
 
     let vNode = component();
-    vNode.mountCallback = () => {
+    (vNode as VElement).mountCallback = () => {
         darkTheme = document.getElementById('dark-mode-theme') as HTMLLinkElement;
         darkModeSun = document.getElementById('dark-mode-sun');
         darkModeMoon = document.getElementById('dark-mode-moon');

@@ -1,4 +1,4 @@
-import { h, VNode } from '../lib/dvdi';
+import { h, VElement, VNode } from '../lib/dvdi';
 import { pageHeader, pageFooter } from '../lib/page';
 import { navigateEvent } from '../app';
 import { chevronLeftIcon, chevronRightIcon } from '../lib/icons';
@@ -153,7 +153,7 @@ export function blogPage() {
             )
         }
 
-        (yearSection as VNode).appendChild(blogLink(hRef, title, dateTime));
+        (yearSection as VElement).appendChild(blogLink(hRef, title, dateTime));
     }
 
     const sections = [...pageView, (yearSection as VNode)];
