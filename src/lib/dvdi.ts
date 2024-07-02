@@ -20,15 +20,7 @@ interface Props {
  * Class representing a virtual DOM node.
  */
 export class VNode {
-    namespace: string;
-    type: string;
-    props: Props;
     parentVNode: VNode | null;
-    childNodes: (VNode | string)[];
-    domElement: HTMLElement | null;
-    isMounted: boolean;
-    mountCallback: (() => void) | null;
-    unmountCallback: (() => void) | null;
 
     /**
      * Create a VNode node.
@@ -37,11 +29,42 @@ export class VNode {
      * @param props - The properties and attributes of the node.
      * @param childNodes - The child nodes of this node.
      */
-    constructor(namespace: string, type: string, props: Props = {}, childNodes: (VNode | string)[] = []) {
+    constructor() {
+        this.parentVNode = null;
+    }
+}
+
+class VText extends VNode {
+    text: string;
+
+    constructor(text: string) {
+        super();
+        this.text = text;
+    }
+}
+
+class VElement extends VNode {
+    namespace: string;
+    type: string;
+    props: Props;
+    childNodes: VNode[];
+    domElement: HTMLElement | null;
+    isMounted: boolean;
+    mountCallback: (() => void) | null;
+    unmountCallback: (() => void) | null;
+
+    /**
+     * Create a VElement node.
+     * @param namespace - The namespace for the matching DOM element.
+     * @param type - The type of the node (e.g., 'div').
+     * @param props - The properties and attributes of the node.
+     * @param childNodes - The child nodes of this node.
+     */
+    constructor(namespace: string, type: string, props: Props = {}, childNodes: VNode[] = []) {
+        super();
         this.namespace = namespace;
         this.type = type;
         this.props = props;
-        this.parentVNode = null;
         this.childNodes = childNodes;
         this.domElement = null;
         this.isMounted = false;
@@ -51,9 +74,9 @@ export class VNode {
 
     /**
      * Append a child node.
-     * @param vNode - The child node to append.
+     * @param vElement - The child node to append.
      */
-    appendChild(vNode: VNode | string) {
+    appendChild(vNode: VNode) {
         this.childNodes.push(vNode);
         if (typeof vNode === 'string') {
             return;
@@ -66,13 +89,9 @@ export class VNode {
      * Remove a child node.
      * @param vNode - The child node to remove.
      */
-    removeChild(vNode: VNode | string) {
+    removeChild(vNode: VNode) {
         const index = this.childNodes.indexOf(vNode);
         this.childNodes = this.childNodes.slice(0, index).concat(this.childNodes.slice(index + 1));
-        if (typeof vNode === 'string') {
-            return;
-        }
-
         vNode.parentVNode = null;
     }
 
@@ -81,34 +100,29 @@ export class VNode {
      * @param newVNode - The new child node.
      * @param oldVNode - The old child node to replace.
      */
-    replaceChild(newVNode: VNode | string, oldVNode: VNode | string) {
+    replaceChild(newVNode: VNode, oldVNode: VNode) {
         const index = this.childNodes.indexOf(oldVNode);
         this.childNodes[index] = newVNode;
-        if (typeof newVNode !== 'string') {
-            newVNode.parentVNode = this;
-        }
-
-        if (typeof oldVNode !== 'string') {
-            oldVNode.parentVNode = null;
-        }
+        newVNode.parentVNode = this;
+        oldVNode.parentVNode = null;
     }
 }
 
 /*
  * Mount a virtual DOM node.
  */
-function mountVNode(vNode: VNode | string) {
-    if (typeof vNode === 'string') {
+function mountVNode(vNode: VNode) {
+    if (!(vNode instanceof VElement)) {
         return;
     }
 
-    if (vNode.mountCallback && !vNode.isMounted) {
-        vNode.mountCallback();
+    if (((vNode as VElement).mountCallback !== null) && !(vNode as VElement).isMounted) {
+        (vNode as VElement).mountCallback();
     }
 
-    vNode.isMounted = true;
+    (vNode as VElement).isMounted = true;
 
-    for (let i of vNode.childNodes) {
+    for (let i of (vNode as VElement).childNodes) {
         mountVNode(i);
     }
 }
@@ -116,13 +130,13 @@ function mountVNode(vNode: VNode | string) {
 /*
  * Unmount a virtual DOM node.
  */
-function unmountVNode(vNode: VNode | string) {
-    if (typeof vNode === 'string') {
+function unmountVNode(vNode: VNode) {
+    if (!(vNode instanceof VElement)) {
         return;
     }
 
-    if (vNode.unmountCallback && vNode.isMounted) {
-        vNode.unmountCallback();
+    if (((vNode as VElement).unmountCallback !== null) && (vNode as VElement).isMounted) {
+        (vNode as VElement).unmountCallback();
     }
 
     vNode.isMounted = false;
@@ -181,8 +195,8 @@ function deleteAttribute(domElement: HTMLElement, key: string, value: any) {
 /*
  * Render a virtual DOM node into a real DOM node.
  */
-function render(vNode: VNode | string): Node {
-    if (typeof vNode === 'string') {
+function render(vNode: VNode): Node {
+    if (!(vNode instanceof VElement)) {
         const domElement = document.createTextNode(vNode);
         return domElement;
     }
@@ -271,7 +285,7 @@ function updateProps(domElement: HTMLElement, oldProps: Props, newProps: Props) 
 /*
  * Update a DOM element based on differences between virtual DOM nodes.
  */
-export function updateElement(parent: HTMLElement, child: Node | null, parentVNode: VNode | null, oldChildVNode: VNode | string | null, newChildVNode: VNode | string | null) {
+export function updateElement(parent: HTMLElement, child: Node | null, parentVNode: VElement | null, oldChildVNode: VNode | null, newChildVNode: VNode | null) {
     // Did we add a new node?
     if ((oldChildVNode === null) && (newChildVNode !== null)) {
         if (parentVNode) {
@@ -352,8 +366,8 @@ export function updateElement(parent: HTMLElement, child: Node | null, parentVNo
  * @param childNodes The child elements or strings.
  * @returns A virtual DOM element.
  */
-export function h(type: string, props?: Props, ...childNodes: (VNode | string)[]): VNode {
-    let v = new VNode('html', type, props || {}, [])
+export function h(type: string, props?: Props, ...childNodes: VNode[]): VNode {
+    let v = new VElement('html', type, props || {}, [])
     for (let i of childNodes) {
         v.appendChild(i);
     }
@@ -368,8 +382,8 @@ export function h(type: string, props?: Props, ...childNodes: (VNode | string)[]
  * @param childNodes The child elements or strings.
  * @returns A virtual DOM element.
  */
-export function svg(type: string, props?: Props, ...childNodes: (VNode | string)[]): VNode {
-    let v = new VNode('svg', type, props || {}, [])
+export function svg(type: string, props?: Props, ...childNodes: VNode[]): VNode {
+    let v = new VElement('svg', type, props || {}, [])
     for (let i of childNodes) {
         v.appendChild(i);
     }
