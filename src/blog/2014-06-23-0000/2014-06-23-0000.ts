@@ -93,17 +93,17 @@ function blogPostScript_201406230000(): VNode[] {
             h('h2', {}, 'Related articles'),
             h('ul', {},
                 h('li', {},
-                    h('a', { href: '/blog/2014-06-10-0000/', onClick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-06-10-0000') },
+                    h('a', { href: '/blog/2014-06-10-0000/', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-06-10-0000') },
                         'Lies, damned lies and Bitcoin difficulties (2014-06-10)'
                     )
                 ),
                 h('li', {},
-                    h('a', { href: '/blog/2014-05-24-0000/', onClick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-24-0000') },
+                    h('a', { href: '/blog/2014-05-24-0000/', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-24-0000') },
                         'Reach for the ear defenders! (2014-05-24)'
                     )
                 ),
                 h('li', {},
-                    h('a', { href: '/blog/2014-05-20-0000/', onClick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-20-0000') },
+                    h('a', { href: '/blog/2014-05-20-0000/', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-20-0000') },
                         'Hash rate headaches (2014-05-20)'
                     )
                 )

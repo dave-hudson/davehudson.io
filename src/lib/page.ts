@@ -11,7 +11,7 @@ function sunMoonIcon(isSun: boolean, clickCallback: (isSun: boolean) => void) {
             className: 'icon',
             id: isSun ? 'dark-mode-sun' : 'dark-mode-moon',
             'aria-label': isSun ? 'Light mode' : 'Dark mode',
-            onClick: () => clickCallback(!isSun)
+            onclick: () => clickCallback(!isSun)
         },
         isSun ? sunIcon() : moonIcon()
     );
@@ -20,7 +20,7 @@ function sunMoonIcon(isSun: boolean, clickCallback: (isSun: boolean) => void) {
 export function pageHeader(): VNode {
     const component = () => h('header', { className: 'header' },
         h('nav', { className: 'site-title' },
-            h('a', { className: 'home-link', href: '/', onClick: (e: MouseEvent) => navigateEvent(e, '/') }, 'davehudson.io'),
+            h('a', { className: 'home-link', href: '/', onclick: (e: MouseEvent) => navigateEvent(e, '/') }, 'davehudson.io'),
             h('a', { className: 'icon', href: 'https://instagram.com/davehudsonio', title: 'Instagram' },
                 instagramIcon()
             ),
@@ -42,9 +42,9 @@ export function pageHeader(): VNode {
             )
         ),
         h('nav', { className: 'site-menu' },
-            h('a', { className: 'menu', href: '/blog', onClick: (e: MouseEvent) => navigateEvent(e, '/blog') }, 'Blog'),
-            h('a', { className: 'menu', href: '/projects', onClick: (e: MouseEvent) => navigateEvent(e, '/projects') }, 'Projects'),
-            h('a', { className: 'menu', href: '/about', onClick: (e: MouseEvent) => navigateEvent(e, '/about') }, 'Me'),
+            h('a', { className: 'menu', href: '/blog', onclick: (e: MouseEvent) => navigateEvent(e, '/blog') }, 'Blog'),
+            h('a', { className: 'menu', href: '/projects', onclick: (e: MouseEvent) => navigateEvent(e, '/projects') }, 'Projects'),
+            h('a', { className: 'menu', href: '/about', onclick: (e: MouseEvent) => navigateEvent(e, '/about') }, 'Me'),
             sunMoonIcon(false, setDarkTheme),
             sunMoonIcon(true, setDarkTheme)
         )

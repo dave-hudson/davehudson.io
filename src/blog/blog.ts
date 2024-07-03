@@ -67,7 +67,7 @@ function navPrevNext(prevStr: string | null, prevHRef: string | null, nextStr: s
                     !prevStr ? '' : h('a', {
                             className: 'icon',
                             href: (prevHRef as string),
-                            onClick: (e: MouseEvent) => navigateEvent(e, (prevHRef as string))
+                            onclick: (e: MouseEvent) => navigateEvent(e, (prevHRef as string))
                         },
                         chevronLeftIcon()
                     )
@@ -75,7 +75,7 @@ function navPrevNext(prevStr: string | null, prevHRef: string | null, nextStr: s
                 h('td', { className: 'prev-text' },
                     !prevStr ? '' : h('a', {
                             href: (prevHRef as string),
-                            onClick: (e: MouseEvent) => navigateEvent(e, (prevHRef as string))
+                            onclick: (e: MouseEvent) => navigateEvent(e, (prevHRef as string))
                         },
                         prevStr
                     )
@@ -83,7 +83,7 @@ function navPrevNext(prevStr: string | null, prevHRef: string | null, nextStr: s
                 h('td', { className: 'next-text' },
                     !nextStr ? '' : h('a', {
                             href: (nextHRef as string),
-                            onClick: (e: MouseEvent) => navigateEvent(e, (nextHRef as string))
+                            onclick: (e: MouseEvent) => navigateEvent(e, (nextHRef as string))
                         },
                         nextStr
                     )
@@ -92,7 +92,7 @@ function navPrevNext(prevStr: string | null, prevHRef: string | null, nextStr: s
                     !nextStr ? '' : h('a', {
                             className: 'icon',
                             href: (nextHRef as string),
-                            onClick: (e: MouseEvent) => navigateEvent(e, (nextHRef as string))
+                            onclick: (e: MouseEvent) => navigateEvent(e, (nextHRef as string))
                         },
                         chevronRightIcon()
                     )
@@ -140,7 +140,7 @@ function blogArticlePage(index: number): VNode {
 function blogLink(href: string, title: string, meta: string) {
     return h('div', { className: 'blog-post' },
         h('span', {},
-            h('a', { href: href, onClick: (e: MouseEvent) => navigateEvent(e, href) }, title)
+            h('a', { href: href, onclick: (e: MouseEvent) => navigateEvent(e, href) }, title)
         ),
         h('span', { className: 'meta' }, meta)
     )
@@ -196,13 +196,13 @@ export function blogSummaries(numEntries: number) {
         view.push(h('hr', {}));
         view.push(h('section', {},
             h('h2', {},
-                h('a', { href: hRef, onClick: (e: MouseEvent) => navigateEvent(e, hRef) }, title)
+                h('a', { href: hRef, onclick: (e: MouseEvent) => navigateEvent(e, hRef) }, title)
             ),
             h('p', { className: 'meta' }, h('time', {}, dateTime)),
             ...openingFunction(),
             h('p', {},
                 h('em', {},
-                    h('a', { href: hRef, onClick: (e: MouseEvent) => navigateEvent(e, hRef) }, '[read more]')
+                    h('a', { href: hRef, onclick: (e: MouseEvent) => navigateEvent(e, hRef) }, '[read more]')
                 )
             )
         ));

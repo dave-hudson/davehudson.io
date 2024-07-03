@@ -49,7 +49,7 @@ function homePage(): VNode {
                 h('h2', {}, 'More blog posts'),
                 h('p', {},
                     'You can find older blog posts on this page: ',
-                    h('a', { href: '/blog', onClick: (e: MouseEvent) => navigateEvent(e, '/blog') }, 'Blog')
+                    h('a', { href: '/blog', onclick: (e: MouseEvent) => navigateEvent(e, '/blog') }, 'Blog')
                 )
             ),
         ),
@@ -65,7 +65,7 @@ function notFoundPage(path: string): VNode {
             h('p', {}, 'This is unlikely to be the page you were looking for!'),
             h('p', {},
                 'If you\'ve arrived here via an old link from the hashingit.com blog, please take a look at ',
-                h('a', { href: '/blog', onClick: (e: MouseEvent) => navigateEvent(e, '/blog') }, 'Blog'),
+                h('a', { href: '/blog', onclick: (e: MouseEvent) => navigateEvent(e, '/blog') }, 'Blog'),
                 '.  You should find all the original articles there.'
             )
         ),

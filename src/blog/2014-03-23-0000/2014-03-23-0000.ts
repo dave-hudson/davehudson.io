@@ -112,7 +112,7 @@ function blogArticle_201403230000(): VNode[] {
             h('p', {},
                 'This doesn\'t mean that there are no more big jumps possible.  It\'s likely that designers this year will ' +
                 'have to start (if they haven\'t already) at other ways to try to keep propelling the ASIC ',
-                h('a', { href: '/blog/2014-03-09-0000', onClick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-03-09-0000') },
+                h('a', { href: '/blog/2014-03-09-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-03-09-0000') },
                     'mining train'
                 ),
                 '.  Here are a few thoughts on where things may go next:'

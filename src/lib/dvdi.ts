@@ -27,7 +27,7 @@ interface HTMLAttributes {
     height?: number;
     href?: string;
     id?: string;
-    onClick?: (e: MouseEvent) => void;
+    onclick?: (e: MouseEvent) => void;
     src?: string;
     title?: string;
     width?: number;
@@ -268,7 +268,7 @@ function unmountVNode(vNode: VNode) {
  */
 function newAttribute(domElement: HTMLElement, key: string, value: any) {
     if (key.startsWith('on')) {
-        domElement.addEventListener(key.substring(2).toLowerCase(), value);
+        domElement.addEventListener(key.substring(2), value);
         return;
     }
 
@@ -291,7 +291,7 @@ function newAttribute(domElement: HTMLElement, key: string, value: any) {
  */
 function deleteAttribute(domElement: HTMLElement, key: string, value: any) {
     if (key.startsWith('on')) {
-        domElement.removeEventListener(key.substring(2).toLowerCase(), value);
+        domElement.removeEventListener(key.substring(2), value);
         return;
     }
 

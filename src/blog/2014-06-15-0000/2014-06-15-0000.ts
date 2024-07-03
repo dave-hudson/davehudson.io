@@ -17,7 +17,7 @@ function blogArticle_201406150000(): VNode[] {
             h('h2', {}, 'The simple case'),
             h('p', {},
                 'In an earlier article, "',
-                h('a', { href: '/blog/2014-05-20-0000/', onClick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-20-0000') },
+                h('a', { href: '/blog/2014-05-20-0000/', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-20-0000') },
                     'Hash rate headaches'
                 ),
                 '", I looked at the probabilities of finding a particular number of blocks in a given time.  This time around ' +
@@ -37,7 +37,7 @@ function blogArticle_201406150000(): VNode[] {
             ),
             h('p', {},
                 'As we\'d expect, the average time to find 2016 blocks is indeed 14 days.  We can see the effects of the ' +
-                h('a', { href: '/blog/2014-05-24-0000/', onClick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-24-0000') },
+                h('a', { href: '/blog/2014-05-24-0000/', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-24-0000') },
                     'noise'
                 ),
                 'in the hashing design though and how once every 10 difficulty changes we\'d be likely to see the time at +/- ' +
@@ -47,7 +47,7 @@ function blogArticle_201406150000(): VNode[] {
         h('section', {},
             h('h2', {}, 'Practical complexities'),
             h('p', {},
-                h('a', { href: '/blog/2014-05-20-0000/', onClick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-20-0000') },
+                h('a', { href: '/blog/2014-05-20-0000/', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-20-0000') },
                     'Previously'
                 ),
                 'I\'ve talked about how Bitcoin hashing is a Poisson process.  @coinometrics pointed out on Twitter that things ' +
@@ -60,7 +60,7 @@ function blogArticle_201406150000(): VNode[] {
             h('p', {},
                 'Another complication is that the current difficulty level doesn\'t really indicate the the actual hashing rate ' +
                 'of the network even on the day it\'s first set. In the article, "',
-                h('a', { href: '/blog/2014-06-10-0000/', onClick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-65-10-0000') },
+                h('a', { href: '/blog/2014-06-10-0000/', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-65-10-0000') },
                     'Lies, damned lies and Bitcoin difficulties'
                 ),
                 'I showed that a more accurate starting measure was to multiple the new difficulty by the square root of the ' +
@@ -127,17 +127,17 @@ function blogPostScript_201406150000(): VNode[] {
             h('h2', {}, 'Related articles'),
             h('ul', {},
                 h('li', {},
-                    h('a', { href: '/blog/2014-06-10-0000/', onClick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-06-10-0000') },
+                    h('a', { href: '/blog/2014-06-10-0000/', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-06-10-0000') },
                         'Lies, damned lies and Bitcoin difficulties (2014-06-10)'
                     )
                 ),
                 h('li', {},
-                    h('a', { href: '/blog/2014-05-24-0000/', onClick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-24-0000') },
+                    h('a', { href: '/blog/2014-05-24-0000/', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-24-0000') },
                         'Reach for the ear defenders! (2014-05-24)'
                     )
                 ),
                 h('li', {},
-                    h('a', { href: '/blog/2014-05-20-0000/', onClick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-20-0000') },
+                    h('a', { href: '/blog/2014-05-20-0000/', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-20-0000') },
                         'Hash rate headaches (2014-05-20)'
                     )
                 )
