@@ -1,8 +1,20 @@
 import { jest } from '@jest/globals';
 
-import { VElement, VNode, VText, updateElement, h, svg } from '../../src/lib/dvdi';
+import {
+    VElement,
+    assertIsVElement,
+    isVElement,
+    VNode,
+    assertIsVNode,
+    VText,
+    assertIsVText,
+    isVText,
+    updateElement,
+    h,
+    svg
+} from '../../src/lib/dvdi';
 
-describe('VNode Class', () => {
+describe('VNode Class and sub-classes', () => {
     test('constructor initializes properties correctly', () => {
         const vNode = new VElement('html', 'div', { id: 'test' }, []);
         expect(vNode.type).toBe('div');
@@ -75,6 +87,42 @@ describe('VNode Class', () => {
         expect(vNode.childNodes).toContain(newChild);
         expect(oldChild.parentVNode).toBe(null);
     });
+});
+
+describe('VNode Type Guards', () => {
+    test('VNode type guards work correctly for a VNode', () => {
+        const newVNode = new VNode();
+        expect(() => assertIsVNode(newVNode)).not.toThrow();
+    })
+
+    test('VNode type guards work correctly for a non-VNode', () => {
+        const newVNode = new Object();
+        expect(() => assertIsVNode(newVNode)).toThrow();
+    })
+
+    test('VElement type guards work correctly for a VElement', () => {
+        const newVNode = new VElement('html', 'div');
+        expect(() => assertIsVElement(newVNode)).not.toThrow();
+        expect(isVElement(newVNode)).toBe(true);
+    })
+
+    test('VElement type guards work correctly for a non-VElement', () => {
+        const newVNode = new VNode();
+        expect(() => assertIsVElement(newVNode)).toThrow();
+        expect(isVElement(newVNode)).toBe(false);
+    })
+
+    test('VText type guards work correctly for a VText', () => {
+        const newVNode = new VText('str');
+        expect(() => assertIsVText(newVNode)).not.toThrow();
+        expect(isVText(newVNode)).toBe(true);
+    })
+
+    test('VText type guards work correctly for a non-VText', () => {
+        const newVNode = new VNode();
+        expect(() => assertIsVText(newVNode)).toThrow();
+        expect(isVText(newVNode)).toBe(false);
+    })
 });
 
 describe('updateElement function', () => {
