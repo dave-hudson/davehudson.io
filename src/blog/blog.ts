@@ -65,20 +65,34 @@ function navPrevNext(prevStr: string | null, prevHRef: string | null, nextStr: s
             h('tr', {},
                 h('td', { className: 'prev' },
                     !prevStr ? '' : h('a', {
-                            className: 'icon', href: prevHRef, onClick: (e: MouseEvent) => navigateEvent(e, (prevHRef as string))
+                            className: 'icon',
+                            href: (prevHRef as string),
+                            onClick: (e: MouseEvent) => navigateEvent(e, (prevHRef as string))
                         },
                         chevronLeftIcon()
                     )
                 ),
                 h('td', { className: 'prev-text' },
-                    !prevStr ? '' : h('a', { href: prevHRef, onClick: (e: MouseEvent) => navigateEvent(e, (prevHRef as string)) }, prevStr)
+                    !prevStr ? '' : h('a', {
+                            href: (prevHRef as string),
+                            onClick: (e: MouseEvent) => navigateEvent(e, (prevHRef as string))
+                        },
+                        prevStr
+                    )
                 ),
                 h('td', { className: 'next-text' },
-                    !nextStr ? '' : h('a', { href: nextHRef, onClick: (e: MouseEvent) => navigateEvent(e, (nextHRef as string)) }, nextStr)
+                    !nextStr ? '' : h('a', {
+                            href: (nextHRef as string),
+                            onClick: (e: MouseEvent) => navigateEvent(e, (nextHRef as string))
+                        },
+                        nextStr
+                    )
                 ),
                 h('td', { className: 'next' },
                     !nextStr ? '' : h('a', {
-                            className: 'icon', href: nextHRef, onClick: (e: MouseEvent) => navigateEvent(e, (nextHRef as string))
+                            className: 'icon',
+                            href: (nextHRef as string),
+                            onClick: (e: MouseEvent) => navigateEvent(e, (nextHRef as string))
                         },
                         chevronRightIcon()
                     )

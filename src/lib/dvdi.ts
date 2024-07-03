@@ -10,16 +10,33 @@ const namespaces = {
 }
 
 /**
- * Interface representing the properties of a virtual DOM node.
+ * Interface representing the attributes of a virtual DOM node.
  */
-interface Props {
+interface Attributes {
     [key: string]: any;
 }
 
 /**
- * Interface representing the properties of an SVG virtual DOM node.
+ * Interface representing the attributes of an HTML virtual DOM node.
  */
-interface SVGProps {
+interface HTMLAttributes {
+    align?: string;
+    alt?: string;
+    'aria-label'?: string;
+    className?: string;
+    height?: number;
+    href?: string;
+    id?: string;
+    onClick?: (e: MouseEvent) => void;
+    src?: string;
+    title?: string;
+    width?: number;
+}
+
+/**
+ * Interface representing the attributes of an SVG virtual DOM node.
+ */
+interface SVGAttributes {
     cx?: number;
     cy?: number;
     d?: string;
@@ -120,7 +137,7 @@ export function assertIsVText(vNode: VNode): asserts vNode is VText {
 export class VElement extends VNode {
     namespace: string;
     type: string;
-    props: Props;
+    attrs: Attributes;
     childNodes: VNode[];
     domElement: HTMLElement | null;
     isMounted: boolean;
@@ -132,14 +149,14 @@ export class VElement extends VNode {
      *
      * @param namespace - The namespace for the matching DOM element.
      * @param type - The type of the node (e.g., 'div').
-     * @param props - The properties and attributes of the node.
+     * @param attrs - The attributes of the node.
      * @param childNodes - The child nodes of this node.
      */
-    constructor(namespace: string, type: string, props: Props = {}, childNodes: VNode[] = []) {
+    constructor(namespace: string, type: string, attrs: Attributes = {}, childNodes: VNode[] = []) {
         super();
         this.namespace = namespace;
         this.type = type;
-        this.props = props;
+        this.attrs = attrs;
         this.childNodes = childNodes;
         this.domElement = null;
         this.isMounted = false;
@@ -302,12 +319,12 @@ function render(vNode: VNode): Node {
     }
 
     assertIsVElement(vNode);
-    const { namespace, type, props, childNodes } = vNode;
+    const { namespace, type, attrs, childNodes } = vNode;
     const domElement = document.createElementNS(namespaces[namespace as keyof typeof namespaces], type) as HTMLElement;
     vNode.domElement = domElement;
 
-    for (const key in props) {
-        newAttribute(domElement, key, props[key]);
+    for (const key in attrs) {
+        newAttribute(domElement, key, attrs[key]);
     }
 
     const len = childNodes.length;
@@ -328,7 +345,7 @@ function unrender(vNode: VNode) {
     }
 
     assertIsVElement(vNode);
-    const { props, childNodes, domElement } = vNode;
+    const { attrs, childNodes, domElement } = vNode;
     const len = childNodes.length;
     for (let i = len - 1; i >= 0; i--) {
         const vn = childNodes[i];
@@ -336,8 +353,8 @@ function unrender(vNode: VNode) {
         unrender(vn);
     }
 
-    for (const key in props) {
-        deleteAttribute(domElement as HTMLElement, key, props[key]);
+    for (const key in attrs) {
+        deleteAttribute(domElement as HTMLElement, key, attrs[key]);
     }
 
     vNode.domElement = null;
@@ -369,20 +386,20 @@ function changed(vNode1: VNode, vNode2: VNode): boolean {
 }
 
 /*
- * Update the properties of a DOM element.
+ * Update the attributes of a DOM element.
  */
-function updateProps(domElement: HTMLElement, oldProps: Props, newProps: Props) {
-    // Iterate over all the old properties and remove any that are not in the new properties.
-    for (const key in oldProps) {
-        if (!(key in newProps) || (oldProps[key] !== newProps[key])) {
-            deleteAttribute(domElement, key, oldProps[key]);
+function updateAttributes(domElement: HTMLElement, oldAttrs: Attributes, newAttrs: Attributes) {
+    // Iterate over all the old attributes and remove any that are not in the new attributes.
+    for (const key in oldAttrs) {
+        if (!(key in newAttrs) || (oldAttrs[key] !== newAttrs[key])) {
+            deleteAttribute(domElement, key, oldAttrs[key]);
         }
     }
 
-    // Iterate over all the new properties and add any that are not in the old properties.
-    for (const key in newProps) {
-        if (!(key in oldProps) || (oldProps[key] !== newProps[key])) {
-            newAttribute(domElement, key, newProps[key]);
+    // Iterate over all the new attributes and add any that are not in the old attributes.
+    for (const key in newAttrs) {
+        if (!(key in oldAttrs) || (oldAttrs[key] !== newAttrs[key])) {
+            newAttribute(domElement, key, newAttrs[key]);
         }
     }
 }
@@ -440,7 +457,7 @@ export function updateElement(parent: HTMLElement, child: Node | null, parentVNo
     assertIsVElement(oldChildVNode);
     assertIsVElement(newChildVNode);
     newChildVNode.domElement = oldChildVNode.domElement;
-    updateProps(oldChildVNode.domElement as HTMLElement, oldChildVNode.props, newChildVNode.props);
+    updateAttributes(oldChildVNode.domElement as HTMLElement, oldChildVNode.attrs, newChildVNode.attrs);
 
     // We iterate backwards to remove any nodes to keep the child lists correct.
     let oldLen = oldChildVNode.childNodes.length;
@@ -477,12 +494,12 @@ export function updateElement(parent: HTMLElement, child: Node | null, parentVNo
  * Creates an HTML virtual DOM element.
  *
  * @param type The element type.
- * @param props The properties and attributes of the element.
+ * @param attrs The attributes of the element.
  * @param childNodes The child elements or strings.
  * @returns A virtual DOM element.
  */
-export function h(type: string, props?: Props, ...childNodes: (VNode | string)[]): VElement {
-    let v = new VElement('html', type, props || {}, [])
+export function h(type: string, attrs?: HTMLAttributes, ...childNodes: (VNode | string)[]): VElement {
+    let v = new VElement('html', type, attrs || {}, [])
     for (let i of childNodes) {
         if (typeof i === 'string') {
             v.appendChild(new VText(i));
@@ -498,12 +515,12 @@ export function h(type: string, props?: Props, ...childNodes: (VNode | string)[]
  * Creates an SVG virtual DOM element.
  *
  * @param type The element type.
- * @param props The properties and attributes of the element.
+ * @param attrs The attributes of the element.
  * @param childNodes The child elements or strings.
  * @returns A virtual DOM element.
  */
-export function svg(type: string, props?: SVGProps, ...childNodes: (VNode | string)[]): VElement {
-    let v = new VElement('svg', type, props || {}, [])
+export function svg(type: string, attrs?: SVGAttributes, ...childNodes: (VNode | string)[]): VElement {
+    let v = new VElement('svg', type, attrs || {}, [])
     for (let i of childNodes) {
         if (typeof i === 'string') {
             v.appendChild(new VText(i));

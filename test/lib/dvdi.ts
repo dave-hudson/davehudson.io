@@ -18,7 +18,7 @@ describe('VNode Class and sub-classes', () => {
     test('constructor initializes properties correctly', () => {
         const vNode = new VElement('html', 'div', { id: 'test' }, []);
         expect(vNode.type).toBe('div');
-        expect(vNode.props).toEqual({ id: 'test' });
+        expect(vNode.attrs).toEqual({ id: 'test' });
         expect(vNode.childNodes).toEqual([]);
     });
 
@@ -290,8 +290,8 @@ describe('updateElement function', () => {
         const newVNode = new VElement('html', 'span', { className: 'test', id: 'fred', onClick: () => {} }, []);
         updateElement(parent, null, null, null, oldVNode);
         updateElement(parent, parent.childNodes[0], null, oldVNode, newVNode);
-        expect(Object.keys(newVNode.props).length).toBe(3);
-        expect(newVNode.props['id']).toBe('fred');
+        expect(Object.keys(newVNode.attrs).length).toBe(3);
+        expect(newVNode.attrs['id']).toBe('fred');
     });
 
     test('updateElement replaces a node with different properties', () => {
@@ -300,8 +300,8 @@ describe('updateElement function', () => {
         const newVNode = new VElement('html', 'span', { className: 'test', id: 'fred', onClick: () => {} }, []);
         updateElement(parent, null, null, null, oldVNode);
         updateElement(parent, parent.childNodes[0], null, oldVNode, newVNode);
-        expect(Object.keys(newVNode.props).length).toBe(3);
-        expect(newVNode.props['id']).toBe('fred');
+        expect(Object.keys(newVNode.attrs).length).toBe(3);
+        expect(newVNode.attrs['id']).toBe('fred');
     });
 
     test('updateElement replaces an HTML node with an SVG node', () => {
@@ -316,8 +316,8 @@ describe('updateElement function', () => {
         );
         updateElement(parent, null, null, null, oldVNode);
         updateElement(parent, parent.childNodes[0], null, oldVNode, newVNode);
-        expect(Object.keys(newVNode.props).length).toBe(3);
-        expect(newVNode.props['xmlns']).toBe('http://www.w3.org/2000/svg');
+        expect(Object.keys(newVNode.attrs).length).toBe(3);
+        expect(newVNode.attrs['xmlns']).toBe('http://www.w3.org/2000/svg');
     });
 
     test('updateElement replaces an SVG node with an HTML node', () => {
@@ -332,8 +332,8 @@ describe('updateElement function', () => {
         const newVNode = new VElement('html', 'span', { className: 'test', style: 'bob', onClick: () => {} }, []);
         updateElement(parent, null, null, null, oldVNode);
         updateElement(parent, parent.childNodes[0], null, oldVNode, newVNode);
-        expect(Object.keys(newVNode.props).length).toBe(3);
-        expect(newVNode.props['style']).toBe('bob');
+        expect(Object.keys(newVNode.attrs).length).toBe(3);
+        expect(newVNode.attrs['style']).toBe('bob');
     });
 
     test('updateElement mounts a component', () => {
@@ -384,7 +384,7 @@ describe('h function', () => {
     test('h creates a virtual DOM element', () => {
         const vNode = h('div', { id: 'test' }, 'child');
         expect(vNode.type).toBe('div');
-        expect(vNode.props).toEqual({ id: 'test' });
+        expect(vNode.attrs).toEqual({ id: 'test' });
         expect(vNode.childNodes[0] instanceof VText);
         expect((vNode.childNodes[0] as VText).text).toBe('child');
     });
@@ -392,7 +392,7 @@ describe('h function', () => {
     test('h created with no params', () => {
         const vNode = h('div');
         expect(vNode.type).toBe('div');
-        expect(vNode.props).toEqual({});
+        expect(vNode.attrs).toEqual({});
     });
 });
 
@@ -400,7 +400,7 @@ describe('svg function', () => {
     test('svg creates a virtual DOM element', () => {
         const vNode = svg('svg', { xmlns: 'http://www.w3.org/2000/svg' }, 'child');
         expect(vNode.type).toBe('svg');
-        expect(vNode.props).toEqual({ xmlns: 'http://www.w3.org/2000/svg' });
+        expect(vNode.attrs).toEqual({ xmlns: 'http://www.w3.org/2000/svg' });
         expect(vNode.childNodes[0] instanceof VText);
         expect((vNode.childNodes[0] as VText).text).toBe('child');
     });
@@ -408,6 +408,6 @@ describe('svg function', () => {
     test('svg created with no params', () => {
         const vNode = svg('svg');
         expect(vNode.type).toBe('svg');
-        expect(vNode.props).toEqual({});
+        expect(vNode.attrs).toEqual({});
     });
 });
