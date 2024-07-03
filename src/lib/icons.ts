@@ -23,31 +23,6 @@
  */
 import { svg, VNode } from './dvdi';
 
-type SVGProps = {
-    xmlns: string;
-    width?: number;
-    height?: number;
-    viewBox?: string;
-    fill?: string;
-    stroke?: string;
-    'stroke-width'?: number;
-    'stroke-linecap'?: string;
-    'stroke-linejoin'?: string;
-    points?: string;
-    d?: string;
-    x1?: number;
-    y1?: number;
-    x2?: number;
-    y2?: number;
-    x?: number;
-    y?: number;
-    rx?: number;
-    ry?: number;
-    cx?: number;
-    cy?: number;
-    r?: number;
-}
-
 export function chevronLeftIcon(): VNode {
     return svg('svg', {
             xmlns: 'http://www.w3.org/2000/svg',

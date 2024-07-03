@@ -17,6 +17,34 @@ interface Props {
 }
 
 /**
+ * Interface representing the properties of an SVG virtual DOM node.
+ */
+interface SVGProps {
+    cx?: number;
+    cy?: number;
+    d?: string;
+    fill?: string;
+    height?: number;
+    points?: string;
+    r?: number;
+    rx?: number;
+    ry?: number;
+    stroke?: string;
+    'stroke-linecap'?: string;
+    'stroke-linejoin'?: string;
+    'stroke-width'?: number;
+    viewBox?: string;
+    width?: number;
+    x?: number;
+    x1?: number;
+    x2?: number;
+    y?: number;
+    y1?: number;
+    y2?: number;
+    xmlns?: string;
+}
+
+/**
  * Class representing a virtual DOM node.
  */
 export class VNode {
@@ -474,13 +502,13 @@ export function h(type: string, props?: Props, ...childNodes: (VNode | string)[]
  * @param childNodes The child elements or strings.
  * @returns A virtual DOM element.
  */
-export function svg(type: string, props?: Props, ...childNodes: (VNode | string)[]): VElement {
+export function svg(type: string, props?: SVGProps, ...childNodes: (VNode | string)[]): VElement {
     let v = new VElement('svg', type, props || {}, [])
     for (let i of childNodes) {
         if (typeof i === 'string') {
             v.appendChild(new VText(i));
         } else {
-            v.appendChild(i as VNode);
+            v.appendChild(i);
         }
     }
 

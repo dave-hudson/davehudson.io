@@ -6,7 +6,7 @@ import { pageHeader, pageFooter } from "./lib/page";
 
 console.log('SCRIPT RELOADED!')
 
-const updateQueue = new Set();
+//const updateQueue = new Set();
 
 /*
  * Enqueues updates and executes them in a batch using requestAnimationFrame.
