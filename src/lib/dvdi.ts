@@ -24,25 +24,71 @@ export class VNode {
 
     /**
      * Create a VNode node.
-     * @param namespace - The namespace for the matching DOM element.
-     * @param type - The type of the node (e.g., 'div').
-     * @param props - The properties and attributes of the node.
-     * @param childNodes - The child nodes of this node.
      */
     constructor() {
         this.parentVNode = null;
     }
 }
 
+/**
+ * Asserts that a given parameter is of type VNode.
+ *
+ * This function throws an error if the provided parameter is not an instance of VNode,
+ * ensuring that it can be safely treated as a VNode in subsequent code.
+ *
+ * @param {V} any - The parameter to check.
+ * @throws {Error} Throws an error if the parameter is not a VNode.
+ */
+export function assertIsVNode(v: any): asserts v is VNode {
+    if (!(v instanceof VNode)) {
+        throw new Error(`Not a VNode: ${v}`);
+    }
+}
+
+/**
+ * Class representing a virtual DOM text node.
+ */
 export class VText extends VNode {
     text: string;
 
+    /**
+     * Create a VText node
+     * @param text - The text represented by the node.
+     */
     constructor(text: string) {
         super();
         this.text = text;
     }
 }
 
+/**
+ * Type guard function to check if a given VNode is of type VText.
+ *
+ * @param {VNode} vNode - The VNode to check.
+ * @returns {vNode is VText} - Returns true if the vNode is an instance of VText, otherwise false.
+ */
+export function isVText(vNode: VNode): vNode is VText {
+    return vNode instanceof VText;
+}
+
+/**
+ * Asserts that a given VNode is of type VText.
+ *
+ * This function throws an error if the provided VNode is not an instance of VText,
+ * ensuring that the VNode can be safely treated as a VText in subsequent code.
+ *
+ * @param {VNode} vNode - The VNode to check.
+ * @throws {Error} Throws an error if the VNode is not a VText.
+ */
+export function assertIsVText(vNode: VNode): asserts vNode is VText {
+    if (!(vNode instanceof VText)) {
+        throw new Error(`Not a VText ${vNode}`);
+    }
+}
+
+/**
+ * Class representing a virtual DOM element node.
+ */
 export class VElement extends VNode {
     namespace: string;
     type: string;
@@ -55,6 +101,7 @@ export class VElement extends VNode {
 
     /**
      * Create a VElement node.
+     *
      * @param namespace - The namespace for the matching DOM element.
      * @param type - The type of the node (e.g., 'div').
      * @param props - The properties and attributes of the node.
@@ -74,6 +121,7 @@ export class VElement extends VNode {
 
     /**
      * Append a child node.
+     *
      * @param vElement - The child node to append.
      */
     appendChild(vNode: VNode) {
@@ -93,6 +141,7 @@ export class VElement extends VNode {
 
     /**
      * Replace an old child node with a new one.
+     *
      * @param newVNode - The new child node.
      * @param oldVNode - The old child node to replace.
      */
@@ -104,22 +153,47 @@ export class VElement extends VNode {
     }
 }
 
+/**
+ * Type guard function to check if a given VNode is of type VElement.
+ *
+ * @param {VNode} vNode - The VNode to check.
+ * @returns {vNode is VElement} - Returns true if the vNode is an instance of VElement, otherwise false.
+ */
+export function isVElement(vNode: VNode): vNode is VElement {
+    return vNode instanceof VElement;
+}
+
+/**
+ * Asserts that a given VNode is of type VElement.
+ *
+ * This function throws an error if the provided VNode is not an instance of VElement,
+ * ensuring that the VNode can be safely treated as a VElement in subsequent code.
+ *
+ * @param {VNode} vNode - The VNode to check.
+ * @throws {Error} Throws an error if the VNode is not a VElement.
+ */
+export function assertIsVElement(vNode: VNode): asserts vNode is VElement {
+    if (!(vNode instanceof VElement)) {
+        throw new Error(`Not a VElement ${vNode}`);
+    }
+}
+
 /*
  * Mount a virtual DOM node.
  */
 function mountVNode(vNode: VNode) {
-    if (vNode instanceof VText) {
+    if (isVText(vNode)) {
         return;
     }
 
-    const ve = vNode as VElement;
-    if ((ve.mountCallback !== null) && !ve.isMounted) {
-        ve.mountCallback();
+    assertIsVElement(vNode);
+    if ((vNode.mountCallback !== null) && !vNode.isMounted) {
+        vNode.mountCallback();
     }
 
-    (vNode as VElement).isMounted = true;
+    vNode.isMounted = true;
 
-    for (let i of (vNode as VElement).childNodes) {
+    for (let i of vNode.childNodes) {
         mountVNode(i);
     }
 }
@@ -128,18 +202,18 @@ function mountVNode(vNode: VNode) {
  * Unmount a virtual DOM node.
  */
 function unmountVNode(vNode: VNode) {
-    if (vNode instanceof VText) {
+    if (isVText(vNode)) {
         return;
     }
 
-    const ve = vNode as VElement;
-    if ((ve.unmountCallback !== null) && ve.isMounted) {
-        ve.unmountCallback();
+    assertIsVElement(vNode);
+    if ((vNode.unmountCallback !== null) && vNode.isMounted) {
+        vNode.unmountCallback();
     }
 
-    (vNode as VElement).isMounted = false;
+    vNode.isMounted = false;
 
-    for (let i of (vNode as VElement).childNodes) {
+    for (let i of vNode.childNodes) {
         unmountVNode(i);
     }
 }
@@ -194,14 +268,15 @@ function deleteAttribute(domElement: HTMLElement, key: string, value: any) {
  * Render a virtual DOM node into a real DOM node.
  */
 function render(vNode: VNode): Node {
-    if (vNode instanceof VText) {
-        const domElement = document.createTextNode((vNode as VText).text);
+    if (isVText(vNode)) {
+        const domElement = document.createTextNode(vNode.text);
         return domElement;
     }
 
-    const { namespace, type, props, childNodes } = vNode as VElement;
+    assertIsVElement(vNode);
+    const { namespace, type, props, childNodes } = vNode;
     const domElement = document.createElementNS(namespaces[namespace as keyof typeof namespaces], type) as HTMLElement;
-    (vNode as VElement).domElement = domElement;
+    vNode.domElement = domElement;
 
     for (const key in props) {
         newAttribute(domElement, key, props[key]);
@@ -220,15 +295,16 @@ function render(vNode: VNode): Node {
  * Unrender a virtual DOM node.
  */
 function unrender(vNode: VNode) {
-    if (vNode instanceof VText) {
+    if (isVText(vNode)) {
         return;
     }
 
-    const { props, childNodes, domElement } = vNode as VElement;
+    assertIsVElement(vNode);
+    const { props, childNodes, domElement } = vNode;
     const len = childNodes.length;
     for (let i = len - 1; i >= 0; i--) {
         const vn = childNodes[i];
-        (vNode as VElement).removeChild(vn);
+        vNode.removeChild(vn);
         unrender(vn);
     }
 
@@ -236,29 +312,32 @@ function unrender(vNode: VNode) {
         deleteAttribute(domElement as HTMLElement, key, props[key]);
     }
 
-    (vNode as VElement).domElement = null;
+    vNode.domElement = null;
 }
 
 /*
  * Check if two virtual DOM nodes are different.
  */
-function changed(vnode1: VNode, vnode2: VNode): boolean {
+function changed(vNode1: VNode, vNode2: VNode): boolean {
     // Are our nodes of different types?
-    if ((vnode1 instanceof VText) !== (vnode2 instanceof VText)) {
+    if (isVText(vNode1) !== isVText(vNode2)) {
         return true;
     }
 
     // Do we have 2 strings?  If we do then just compare them
-    if (vnode1 instanceof VText) {
-        return (vnode1 as VText).text !== (vnode2 as VText).text;
+    if (isVText(vNode1)) {
+        assertIsVText(vNode2)
+        return vNode1.text !== vNode2.text;
     }
 
     // We have two elements.
-    if ((vnode1 as VElement).namespace !== (vnode2 as VElement).namespace) {
+    assertIsVElement(vNode1);
+    assertIsVElement(vNode2);
+    if (vNode1.namespace !== vNode2.namespace) {
         return true;
     }
 
-    return (vnode1 as VElement).type !== (vnode2 as VElement).type;
+    return vNode1.type !== vNode2.type;
 }
 
 /*
@@ -308,35 +387,39 @@ export function updateElement(parent: HTMLElement, child: Node | null, parentVNo
     }
 
     // Did our node change?
-    if (changed(oldChildVNode as VNode, newChildVNode as VNode)) {
-        unmountVNode(oldChildVNode as VNode);
-        unrender(oldChildVNode as VNode);
+    assertIsVNode(oldChildVNode);
+    assertIsVNode(newChildVNode);
+    if (changed(oldChildVNode, newChildVNode)) {
+        unmountVNode(oldChildVNode);
+        unrender(oldChildVNode);
         if (parentVNode) {
-            parentVNode.replaceChild(newChildVNode as VNode, oldChildVNode as VNode);
+            parentVNode.replaceChild(newChildVNode, oldChildVNode);
         }
 
-        parent.replaceChild(render(newChildVNode as VNode), child as Node);
-        mountVNode(newChildVNode as VNode);
+        parent.replaceChild(render(newChildVNode), child as Node);
+        mountVNode(newChildVNode);
         return;
     }
 
     // If this is a string VNode we can't have anything else to do.
-    if (oldChildVNode instanceof VText) {
+    if (isVText(oldChildVNode)) {
         return;
     }
 
     // Our new VDOM node is the same as our old VDOM node we need to scan the children
     // and update them.  To keep things sane, don't forget we need to record DOM element
     // in the new VDOM node.
-    (newChildVNode as VElement).domElement = (oldChildVNode as VElement).domElement;
-    updateProps((oldChildVNode as VElement).domElement as HTMLElement, (oldChildVNode as VElement).props, (newChildVNode as VElement).props);
+    assertIsVElement(oldChildVNode);
+    assertIsVElement(newChildVNode);
+    newChildVNode.domElement = oldChildVNode.domElement;
+    updateProps(oldChildVNode.domElement as HTMLElement, oldChildVNode.props, newChildVNode.props);
 
     // We iterate backwards to remove any nodes to keep the child lists correct.
-    let oldLen = (oldChildVNode as VElement).childNodes.length;
-    let newLen = (newChildVNode as VElement).childNodes.length;
+    let oldLen = oldChildVNode.childNodes.length;
+    let newLen = newChildVNode.childNodes.length;
     for (let i = oldLen - 1; i > (newLen - 1); i--) {
-        const nextParent = (oldChildVNode as VElement).domElement as HTMLElement;
-        updateElement(nextParent, nextParent.childNodes[i], oldChildVNode as VElement, (oldChildVNode as VElement).childNodes[i], null);
+        const nextParent = oldChildVNode.domElement as HTMLElement;
+        updateElement(nextParent, nextParent.childNodes[i], oldChildVNode, oldChildVNode.childNodes[i], null);
     }
 
     // We iterate forwards to update and add nodes.  At this point we already know our list of child nodes
@@ -346,14 +429,19 @@ export function updateElement(parent: HTMLElement, child: Node | null, parentVNo
     }
 
     for (let i = 0; i < oldLen; i++) {
-        const nextParent = (oldChildVNode as VElement).domElement as HTMLElement;
-        updateElement(nextParent, nextParent.childNodes[i], oldChildVNode as VElement, (oldChildVNode as VElement).childNodes[i], (newChildVNode as VElement).childNodes[i]);
+        const nextParent = oldChildVNode.domElement as HTMLElement;
+        updateElement(nextParent,
+            nextParent.childNodes[i],
+            oldChildVNode,
+            oldChildVNode.childNodes[i],
+            newChildVNode.childNodes[i]
+        );
     }
 
     // We iterate forwards to update and add nodes.
     for (let i = oldLen; i < newLen; i++) {
-        const nextParent = (oldChildVNode as VElement).domElement as HTMLElement;
-        updateElement(nextParent, nextParent.childNodes[i], oldChildVNode as VElement, null, (newChildVNode as VElement).childNodes[i]);
+        const nextParent = oldChildVNode.domElement as HTMLElement;
+        updateElement(nextParent, nextParent.childNodes[i], oldChildVNode, null, newChildVNode.childNodes[i]);
     }
 }
 
@@ -370,7 +458,7 @@ export function h(type: string, props?: Props, ...childNodes: (VNode | string)[]
         if (typeof i === 'string') {
             v.appendChild(new VText(i));
         } else {
-            v.appendChild(i as VNode);
+            v.appendChild(i);
         }
     }
 
