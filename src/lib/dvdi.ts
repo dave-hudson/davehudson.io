@@ -447,6 +447,7 @@ export function updateElement(parent: HTMLElement, child: Node | null, parentVNo
 
 /**
  * Creates an HTML virtual DOM element.
+ *
  * @param type The element type.
  * @param props The properties and attributes of the element.
  * @param childNodes The child elements or strings.
@@ -467,6 +468,7 @@ export function h(type: string, props?: Props, ...childNodes: (VNode | string)[]
 
 /**
  * Creates an SVG virtual DOM element.
+ *
  * @param type The element type.
  * @param props The properties and attributes of the element.
  * @param childNodes The child elements or strings.
