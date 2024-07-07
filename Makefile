@@ -35,6 +35,7 @@ build/app.js:
 		--noPropertyAccessFromIndexSignature \
 		--noFallthroughCasesInSwitch \
 		--noUnusedLocals \
+		--skipLibCheck \
 		src/app.ts
 	./node_modules/.bin/esbuild \
 		--bundle \
