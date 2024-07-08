@@ -154,7 +154,7 @@ export const blogPost_201406100000 = new BlogPost(
     'Lies, damned lies and Bitcoin difficulties',
     '2014-06-10',
     '/blog/2014-06-10-0000',
-    '',
+    'This blog post looks at the statistics associated with Bitcoin difficulties and how they change over time.',
     null,
     blogOpening_201406100000,
     blogArticle_201406100000,

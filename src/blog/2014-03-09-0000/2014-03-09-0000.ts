@@ -102,7 +102,8 @@ export const blogPost_201403090000 = new BlogPost(
     'The Bitcoin runaway mine train',
     '2014-03-09',
     '/blog/2014-03-09-0000',
-    '',
+    'This blog post explores some trends in Bitcoin mining.  It reviews the rate of growth of the Bitcoin hashing rate ' +
+    'and some of the motivations for this.',
     null,
     blogOpening_201403090000,
     blogArticle_201403090000,

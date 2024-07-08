@@ -5,7 +5,7 @@ import { BlogPost } from '../BlogPost'
 function blogOpening_201404030000(): VNode[] {
     return [
         h('p', {},
-            'Bitcoin mining can be a very profitable activity. It\'s good that it is because Bitcoin, as a system, only ' +
+            'Bitcoin mining can be a very profitable activity.  It\'s good that it is because Bitcoin, as a system, only ' +
             'works because of the mining activity; it\'s the mining that ensures the transactions actually take place.  ' +
             'Just how much money does it generate though and does this help us make any predictions for the future?'
         )
@@ -171,7 +171,7 @@ export const blogPost_201404030000 = new BlogPost(
     'The rewards for a Bitcoin miner',
     '2014-04-03',
     '/blog/2014-04-03-0000',
-    '',
+    'How much can Bitcoin miners earn?  This blog post considers the possible rewards for a Bitcoin miner.',
     null,
     blogOpening_201404030000,
     blogArticle_201404030000,

@@ -182,7 +182,8 @@ export const blogPost_201601050000 = new BlogPost(
     'Behold mighty exahash, hammer of the blocks!',
     '2016-01-05',
     '/blog/2016-01-05-0000',
-    '',
+    'As the Bitcoin mining network approaches one exahash per second, this article discusses the security guarantees of the ' +
+    'proof-of-work network, and the implications this has had for the security of Bitcoin in the preceding years.',
     null,
     blogOpening_201601050000,
     blogArticle_201601050000,

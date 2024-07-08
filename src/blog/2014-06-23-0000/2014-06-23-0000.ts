@@ -116,7 +116,8 @@ export const blogPost_201406230000 = new BlogPost(
     '51% of the network',
     '2014-06-23',
     '/blog/2014-06-23-0000',
-    '',
+    'Bitcoin is touted as secure as long as a single bad actor cannot gain control more more than 50% of the mining network.  ' +
+    'This blog post looks at how we might recognize an actor with this level of hashing power.',
     null,
     blogOpening_201406230000,
     blogArticle_201406230000,

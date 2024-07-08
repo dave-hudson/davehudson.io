@@ -240,7 +240,8 @@ export const blogPost_201411110000 = new BlogPost(
     'Bitcoin traffic bulletin',
     '2014-11-11',
     '/blog/2014-11-11-0000',
-    '',
+    'This blog post looks at how quickly a Bitcoin transaction will be confirmed.  As the network becomes more congested, ' +
+    'the confirmation times increase.  It explores what will happen if/as the congestion gets worse.',
     null,
     blogOpening_201411110000,
     blogArticle_201411110000,

@@ -211,7 +211,8 @@ export const blogPost_201411120000 = new BlogPost(
     'The future of Bitcoin transaction fees?',
     '2014-11-12',
     '/blog/2014-11-12-0000',
-    '',
+    'Bitcoin is often touted as a low-cost transaction network, but fees appear to be changing.  This article review the ' +
+    'current state of Bitcoin transaction fees.',
     null,
     blogOpening_201411120000,
     blogArticle_201411120000,

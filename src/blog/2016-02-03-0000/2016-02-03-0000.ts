@@ -6,7 +6,7 @@ function blogOpening_201602030000(): VNode[] {
         h('p', {},
             'Most participants in the ongoing Bitcoin block size debates have a point of agreement; that a shortage of ' +
             'block space should have an effect on transaction fees.  Arguments aside, then, let\'s see what has actually ' +
-            'been happening. Are fees going through the roof?  Are miners going to be celebrating a potential offset to ' +
+            'been happening.  Are fees going through the roof?  Are miners going to be celebrating a potential offset to ' +
             'the block reward halving that looms in July 2016?  The results seem a little surprising!'
         )
     ]
@@ -108,7 +108,8 @@ export const blogPost_201602030000 = new BlogPost(
     'A market for Bitcoin transaction fees?',
     '2016-02-03',
     '/blog/2016-02-03-0000',
-    '',
+    'This blog post explores the possibilily that we might be seeing a market for Bitcoin transaction fees.  It reviews the ' +
+    'data to see if this is happening yet, or not.',
     null,
     blogOpening_201602030000,
     blogArticle_201602030000,

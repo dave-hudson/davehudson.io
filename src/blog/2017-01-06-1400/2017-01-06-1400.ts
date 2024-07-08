@@ -250,7 +250,7 @@ export const blogPost_201701061400 = new BlogPost(
     'What IoT history reveals about blockchain\'s challenges',
     '2017-01-06 14:00',
     '/blog/2017-01-06-1400',
-    '',
+    'Before blockchain, IoT went through a similary hype cycle.  This article explores the similarities and offers lessons.',
     blogPreScript_201701061400,
     blogOpening_201701061400,
     blogArticle_201701061400,

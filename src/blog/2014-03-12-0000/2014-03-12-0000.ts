@@ -51,7 +51,7 @@ export const blogPost_201403120000 = new BlogPost(
     'Strange spikes in the Bitcoin price',
     '2014-03-12',
     '/blog/2014-03-12-0000',
-    '',
+    'There are strange periodic spikes in the Bitcoin price.  This blog post looks at them.',
     null,
     blogOpening_201403120000,
     blogArticle_201403120000,

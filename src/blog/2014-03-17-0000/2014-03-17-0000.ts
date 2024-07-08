@@ -36,7 +36,7 @@ function blogArticle_201403170000(): VNode[] {
         h('p', {},
             'We can see something a little curious here though.  The hashing rate does indeed speed up as the price of a ' +
             'Bitcoin increases and the rate slows once the price starts to fall but it\'s almost as if the hashing ' +
-            'rate has been acting as an anchor for the price. If we think about the hardware that has been used for ' +
+            'rate has been acting as an anchor for the price.  If we think about the hardware that has been used for ' +
             'hashing, however, there\'s an interesting pattern.'
         ),
         h('p', {},
@@ -67,7 +67,7 @@ function blogArticle_201403170000(): VNode[] {
             'the miners investing in mining.  The price increases have encouraged more miners too and that means more ' +
             'money spent on mining by those new miners.  This really does feel like a “chicken and egg” problem.  A bigger ' +
             'question, however, is what happens when the number of miners is large and the technology roadmap eventually ' +
-            'limits the ability to increase the hash rate? At that point there will need to be some other driver for any ' +
+            'limits the ability to increase the hash rate?  At that point there will need to be some other driver for any ' +
             'other price increases.'
         )
     ];
@@ -77,7 +77,8 @@ export const blogPost_201403170000 = new BlogPost(
     'Chickens and eggs?',
     '2014-03-17',
     '/blog/2014-03-17-0000',
-    '',
+    'Does Bitcoin mining drive the price of Bitcoin, or does Bitcoin\'s price drive the mining network.  This article ' +
+    'reviews the data.',
     null,
     blogOpening_201403170000,
     blogArticle_201403170000,

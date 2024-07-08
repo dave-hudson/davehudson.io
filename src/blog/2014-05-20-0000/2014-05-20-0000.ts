@@ -141,7 +141,7 @@ export const blogPost_201405200000 = new BlogPost(
     'Hash rate headaches',
     '2014-05-20',
     '/blog/2014-05-20-0000',
-    '',
+    'This blog post looks at how often the Bitcoin mining network finds fewer or more than 6 blocks per hour, and why.',
     null,
     blogOpening_201405200000,
     blogArticle_201405200000,
