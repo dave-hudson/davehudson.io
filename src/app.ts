@@ -82,10 +82,22 @@ export interface routeDetails {
 }
 
 let routes: Map<string, routeDetails> = new Map([
-    ['', { pageRender: homePage, metaData: '' }],
-    ['/about', { pageRender: aboutPage, metaData: '' }],
-    ['/projects', { pageRender: projectsPage, metaData: '' }],
-    ['/blog', { pageRender: blogPage, metaData: '' }]
+    ['', {
+        pageRender: homePage,
+        metaData: ''
+    }],
+    ['/about', {
+        pageRender: aboutPage,
+        metaData: 'An introduction to Dave Hudson and how to contact him.' 
+    }],
+    ['/projects', {
+        pageRender: projectsPage,
+        metaData: ''
+    }],
+    ['/blog', {
+        pageRender: blogPage,
+        metaData: ''
+    }]
 ]);
 
 let rootVNode: VNode | null = null;
@@ -108,8 +120,21 @@ function handleLocation() {
     const newVNode = pageInfo.pageRender();
     const app = document.querySelector('#app');
 
+    // Render the new page.
     updateElement((app as HTMLElement), null, null, rootVNode, newVNode);
     rootVNode = newVNode;
+
+    // Update the metadata for the new page.
+    const metaDescription: HTMLMetaElement | null = document.querySelector('meta[name="description"]');
+    if (metaDescription !== null) {
+        metaDescription.content = pageInfo.metaData;
+    }
+
+    const metaOGDescription: HTMLMetaElement | null = document.querySelector('meta[property="og:description"]');
+    if (metaOGDescription !== null) {
+        metaOGDescription.content = pageInfo.metaData;
+    }
+
     console.log(`navigated to ${path}`)
 }
 
