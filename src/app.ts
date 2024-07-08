@@ -111,9 +111,7 @@ function handleLocation() {
     }
 
     let pageInfo = { pageRender: () => notFoundPage(path), metaData: '' };
-    if (path === '') {
-        pageInfo = { pageRender: homePage, metaData: '' };
-    } else if (routes.has(path)) {
+    if (routes.has(path)) {
         pageInfo = (routes.get(path) as routeDetails);
     }
 
