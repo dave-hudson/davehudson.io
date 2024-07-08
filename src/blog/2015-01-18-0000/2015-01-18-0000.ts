@@ -276,6 +276,7 @@ export const blogPost_201501180000 = new BlogPost(
     'The myth of the megabyte Bitcoin block',
     '2015-01-18',
     '/blog/2015-01-18-0000',
+    '',
     null,
     blogOpening_201501180000,
     blogArticle_201501180000,

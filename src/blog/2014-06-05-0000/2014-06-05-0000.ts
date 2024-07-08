@@ -60,6 +60,7 @@ export const blogPost_201406050000 = new BlogPost(
     'Strange spikes revisited!',
     '2014-06-05',
     '/blog/2014-06-05-0000',
+    '',
     null,
     blogOpening_201406050000,
     blogArticle_201406050000,

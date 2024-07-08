@@ -250,6 +250,7 @@ export const blogPost_201701061400 = new BlogPost(
     'What IoT history reveals about blockchain\'s challenges',
     '2017-01-06 14:00',
     '/blog/2017-01-06-1400',
+    '',
     blogPreScript_201701061400,
     blogOpening_201701061400,
     blogArticle_201701061400,

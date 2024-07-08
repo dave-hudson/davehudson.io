@@ -240,6 +240,7 @@ export const blogPost_201411110000 = new BlogPost(
     'Bitcoin traffic bulletin',
     '2014-11-11',
     '/blog/2014-11-11-0000',
+    '',
     null,
     blogOpening_201411110000,
     blogArticle_201411110000,

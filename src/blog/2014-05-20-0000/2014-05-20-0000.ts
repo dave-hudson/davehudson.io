@@ -141,6 +141,7 @@ export const blogPost_201405200000 = new BlogPost(
     'Hash rate headaches',
     '2014-05-20',
     '/blog/2014-05-20-0000',
+    '',
     null,
     blogOpening_201405200000,
     blogArticle_201405200000,

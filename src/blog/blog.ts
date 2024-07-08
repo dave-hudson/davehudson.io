@@ -1,6 +1,6 @@
 import { h, VElement, VNode } from '../lib/dvdi';
 import { pageHeader, pageFooter } from '../lib/page';
-import { navigateEvent } from '../app';
+import { navigateEvent, routeDetails } from '../app';
 import { chevronLeftIcon, chevronRightIcon } from '../lib/icons';
 import { blogPost_201403090000 } from './2014-03-09-0000/2014-03-09-0000';
 import { blogPost_201403120000 } from './2014-03-12-0000/2014-03-12-0000';
@@ -213,10 +213,10 @@ export function blogSummaries(numEntries: number) {
 
 // Collect all the routes to be used with the blog pages.
 export function getBlogRoutes() {
-    let blogRoutes: Map<string, (() => VNode)> = new Map();
+    let blogRoutes: Map<string, routeDetails> = new Map();
 
     for (let i = 0; i < blogContent.length; i++) {
-        blogRoutes.set(blogContent[i].hRef, () => blogArticlePage(i));
+        blogRoutes.set(blogContent[i].hRef, { pageRender: () => blogArticlePage(i), metaData: blogContent[i].metaData });
     }
 
     return blogRoutes;

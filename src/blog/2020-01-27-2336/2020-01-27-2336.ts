@@ -148,6 +148,7 @@ export const blogPost_202001272336 = new BlogPost(
     'Understanding other people\'s code',
     '2020-01-27 23:36',
     '/blog/2020-01-27-2336',
+    '',
     null,
     blogOpening_202001272336,
     blogArticle_202001272336,

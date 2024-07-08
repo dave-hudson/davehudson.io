@@ -197,6 +197,7 @@ export const blogPost_201405240000 = new BlogPost(
     'Reach for the ear defenders!',
     '2014-05-24',
     '/blog/2014-05-24-0000',
+    '',
     null,
     blogOpening_201405240000,
     blogArticle_201405240000,

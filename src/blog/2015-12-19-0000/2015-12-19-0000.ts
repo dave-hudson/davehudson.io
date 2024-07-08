@@ -215,6 +215,7 @@ export const blogPost_201512190000 = new BlogPost(
     'Waiting for blocks',
     '2015-12-19',
     '/blog/2015-12-19-0000',
+    '',
     null,
     blogOpening_201512190000,
     blogArticle_201512190000,

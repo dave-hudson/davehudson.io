@@ -147,6 +147,7 @@ export const blogPost_201403230000 = new BlogPost(
     'Where next for Bitcoin mining ASICs?',
     '2014-03-23',
     '/blog/2014-03-23-0000',
+    '',
     null,
     blogOpening_201403230000,
     blogArticle_201403230000,

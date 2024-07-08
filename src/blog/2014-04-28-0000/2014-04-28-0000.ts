@@ -208,6 +208,7 @@ export const blogPost_201404280000 = new BlogPost(
     'Megawatts of mining',
     '2014-04-28',
     '/blog/2014-04-28-0000',
+    '',
     null,
     blogOpening_201404280000,
     blogArticle_201404280000,

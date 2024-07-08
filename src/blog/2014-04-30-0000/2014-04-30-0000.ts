@@ -188,6 +188,7 @@ export const blogPost_201404300000 = new BlogPost(
     'Prisoner\'s dilemmas?',
     '2014-04-30',
     '/blog/2014-04-30-0000',
+    '',
     null,
     blogOpening_201404300000,
     blogArticle_201404300000,

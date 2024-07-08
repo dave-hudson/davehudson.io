@@ -108,6 +108,7 @@ export const blogPost_201602030000 = new BlogPost(
     'A market for Bitcoin transaction fees?',
     '2016-02-03',
     '/blog/2016-02-03-0000',
+    '',
     null,
     blogOpening_201602030000,
     blogArticle_201602030000,

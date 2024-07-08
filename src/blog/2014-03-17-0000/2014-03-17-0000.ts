@@ -77,6 +77,7 @@ export const blogPost_201403170000 = new BlogPost(
     'Chickens and eggs?',
     '2014-03-17',
     '/blog/2014-03-17-0000',
+    '',
     null,
     blogOpening_201403170000,
     blogArticle_201403170000,

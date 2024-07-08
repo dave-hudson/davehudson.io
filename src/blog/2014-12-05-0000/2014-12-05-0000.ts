@@ -333,6 +333,7 @@ export const blogPost_201412050000 = new BlogPost(
     'Pool wars?',
     '2014-12-05',
     '/blog/2014-12-05-0000',
+    '',
     null,
     blogOpening_201412050000,
     blogArticle_201412050000,

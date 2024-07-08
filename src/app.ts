@@ -73,11 +73,19 @@ function notFoundPage(path: string): VNode {
     );
 }
 
-let routes: Map<string, (() => VNode)> = new Map([
-    ['', homePage],
-    ['/about', aboutPage],
-    ['/projects', projectsPage],
-    ['/blog', blogPage]
+/**
+ * Interface representing everything required to render a page.
+ */
+export interface routeDetails {
+    pageRender: () => VNode;
+    metaData: string;
+}
+
+let routes: Map<string, routeDetails> = new Map([
+    ['', { pageRender: homePage, metaData: '' }],
+    ['/about', { pageRender: aboutPage, metaData: '' }],
+    ['/projects', { pageRender: projectsPage, metaData: '' }],
+    ['/blog', { pageRender: blogPage, metaData: '' }]
 ]);
 
 let rootVNode: VNode | null = null;
@@ -90,14 +98,14 @@ function handleLocation() {
         path = path.slice(0, -1);
     }
 
-    let pageFunction = () => notFoundPage(path);
+    let pageInfo = { pageRender: () => notFoundPage(path), metaData: '' };
     if (path === '') {
-        pageFunction = homePage;
+        pageInfo = { pageRender: homePage, metaData: '' };
     } else if (routes.has(path)) {
-        pageFunction = (routes.get(path)) as (() => VNode);
+        pageInfo = (routes.get(path) as routeDetails);
     }
 
-    const newVNode = pageFunction();
+    const newVNode = pageInfo.pageRender();
     const app = document.querySelector('#app');
 
     updateElement((app as HTMLElement), null, null, rootVNode, newVNode);

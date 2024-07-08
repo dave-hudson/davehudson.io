@@ -189,6 +189,7 @@ export const blogPost_201411020000 = new BlogPost(
     '7 transactions per second? Really?',
     '2014-11-02',
     '/blog/2014-11-02-0000',
+    '',
     null,
     blogOpening_201411020000,
     blogArticle_201411020000,

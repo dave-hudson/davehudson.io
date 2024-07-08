@@ -182,6 +182,7 @@ export const blogPost_201601050000 = new BlogPost(
     'Behold mighty exahash, hammer of the blocks!',
     '2016-01-05',
     '/blog/2016-01-05-0000',
+    '',
     null,
     blogOpening_201601050000,
     blogArticle_201601050000,

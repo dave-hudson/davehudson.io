@@ -75,6 +75,7 @@ export const blogPost_201512200000 = new BlogPost(
     'Bitcoin traffic bulletin (redux)',
     '2015-12-20',
     '/blog/2015-12-20-0000',
+    '',
     null,
     blogOpening_201512200000,
     blogArticle_201512200000,

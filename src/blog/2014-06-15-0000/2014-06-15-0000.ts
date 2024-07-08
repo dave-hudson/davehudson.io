@@ -150,6 +150,7 @@ export const blogPost_201406150000 = new BlogPost(
     'Finding 2016 blocks',
     '2014-06-15',
     '/blog/2014-06-15-0000',
+    '',
     null,
     blogOpening_201406150000,
     blogArticle_201406150000,

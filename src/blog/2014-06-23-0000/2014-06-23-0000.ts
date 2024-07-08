@@ -116,6 +116,7 @@ export const blogPost_201406230000 = new BlogPost(
     '51% of the network',
     '2014-06-23',
     '/blog/2014-06-23-0000',
+    '',
     null,
     blogOpening_201406230000,
     blogArticle_201406230000,

@@ -171,6 +171,7 @@ export const blogPost_201404030000 = new BlogPost(
     'The rewards for a Bitcoin miner',
     '2014-04-03',
     '/blog/2014-04-03-0000',
+    '',
     null,
     blogOpening_201404030000,
     blogArticle_201404030000,
