@@ -20,9 +20,7 @@ build/%: src/%
 	@mkdir -p $(dir $@)
 	@cp $< $@
 
-.PHONY: build/app.js
-
-build/app.js:
+build/app.js: $(TS_FILES)
 	tsc \
 		-noEmit \
 		--strict \
