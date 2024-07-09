@@ -49,11 +49,19 @@ build/app.js: $(TS_FILES)
 all: $(BUILD_FILES) build/app.js
 
 #
+# Rule to pre-render all the pages of the site.
+#
+.PHONY: prerender
+
+prerender: all
+	node prerender.js
+
+#
 # Rule to build a tarball of the built site.
 #
 .PHONY: tar
 
-tar: all
+tar: prerender
 	tar -czvf davehudson.io.tar.gz -C build .
 
 #
