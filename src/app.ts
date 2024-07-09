@@ -105,6 +105,8 @@ let rootVNode: VNode | null = null;
 function handleLocation() {
     let path = window.location.pathname;
 
+    console.log(`Navigating to ${path}`)
+
     // If there's a trailing slash on the path, remove it.
     if (path.endsWith('/')) {
         path = path.slice(0, -1);
@@ -116,10 +118,10 @@ function handleLocation() {
     }
 
     const newVNode = pageInfo.pageRender();
-    const app = document.querySelector('#app');
+    const appElement = document.querySelector('#app');
 
     // Render the new page.
-    updateElement((app as HTMLElement), null, null, rootVNode, newVNode);
+    updateElement((appElement as HTMLElement), null, null, rootVNode, newVNode);
     rootVNode = newVNode;
 
     // Update the metadata for the new page.
@@ -132,8 +134,6 @@ function handleLocation() {
     if (metaOGDescription !== null) {
         metaOGDescription.content = pageInfo.metaData;
     }
-
-    console.log(`navigated to ${path}`)
 }
 
 export function navigateEvent(e: MouseEvent, path: string) {
@@ -148,7 +148,12 @@ export function navigateEvent(e: MouseEvent, path: string) {
     window.scrollTo(0, 0);
 }
 
-function routeInit(event: Event): void {
+/**
+ * Called when the page is first loaded.
+ *
+ * @param event - the DOMContentLoaded event.
+ */
+function onDOMContentLoaded(event: Event): void {
     // Add all the blog content to the router.
     const blogRoutes = getBlogRoutes();
     blogRoutes.forEach((value, key) => {
@@ -166,7 +171,17 @@ function routeInit(event: Event): void {
         }
     };
 
+    // Look to see if our app HTML element has children.  If it does then it means we've loaded a pre-rendered version of the
+    // HTML, in which case we want to remove this content so the VDOM takes control properly.
+    const appElement = document.querySelector('#app');
+    if (appElement?.firstChild) {
+        console.log(`Page was already pre-rendered: ${window.location.pathname}`);
+        while (appElement.firstChild) {
+            appElement.removeChild(appElement.firstChild);
+        }
+    }
+
     handleLocation();
 }
 
-document.addEventListener('DOMContentLoaded', routeInit);
+document.addEventListener('DOMContentLoaded', onDOMContentLoaded);
