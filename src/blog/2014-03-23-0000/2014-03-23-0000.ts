@@ -65,8 +65,11 @@ function blogArticle_201403230000(): VNode[] {
                 '14 nm, while a state of the art mobile phone or tablet is probably using 28 nm.'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-03-23-0000/ASIC_geometry.png' }),
-                h('figcaption', {}, 'ASIC geometry')
+                h('img', {
+                    src: '/blog/2014-03-23-0000/ASIC_geometry.png',
+                    alt: 'Depiction of relative sizes of ASICs in different geometries'
+                }),
+                h('figcaption', {}, 'Relative sizes of ASICs in different geometries')
             ),
             h('p', {},
                 'Looking at this as a picture we can see just how much difference there is between 110 nm, 65 nm and 28 nm.  ' +

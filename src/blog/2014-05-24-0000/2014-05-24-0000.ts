@@ -14,7 +14,10 @@ function blogOpening_201405240000(): VNode[] {
 function blogArticle_201405240000(): VNode[] {
     return [
         h('figure', {},
-            h('img', { src: '/blog/2014-05-24-0000/high-noise-levels.jpg' }),
+            h('img', {
+                src: '/blog/2014-05-24-0000/high-noise-levels.jpg',
+                alt: 'Image of a high noise level warning sign'
+            }),
         ),
         h('section', {},
             h('h2', {}, 'A simple question'),
@@ -46,9 +49,12 @@ function blogArticle_201405240000(): VNode[] {
                 'small impact. Here\'s one run:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-05-24-0000/simulation.png' }),
+                h('img', {
+                    src: '/blog/2014-05-24-0000/simulation.png',
+                    alt: 'Chart showing the noise spikes in the Bitcoin difficulty based on a simulation of a constant hash rate'
+                }),
                 h('figcaption', {},
-                    'Chart showing noise spikes in the Bitcoin difficulty based on a simulation at a constant hash rate'
+                    'Chart showing noise spikes in the Bitcoin difficulty based on a simulation of a constant hash rate'
                 )
             ),
             h('p', {},
@@ -161,16 +167,19 @@ function blogArticle_201405240000(): VNode[] {
             ),
             h('p', {},
                 'One simulation isn\'t anywhere near sufficient of course.  As we compare more trials though the behaviour ' +
-                'is essentially the same. Here are 2 different simulation runs overlaid on top of our original one:'
+                'is essentially the same. Here are 2 additional simulation runs overlaid on top of our original one:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-05-24-0000/simulation_x3.png' }),
+                h('img', {
+                    src: '/blog/2014-05-24-0000/simulation_x3.png',
+                    alt: 'Chart showing 2 additional different simulations of mining with a constant hash rate'
+                }),
                 h('figcaption', {}, 'Simulated mining with constant hash rate')
             ),
             h('p', {},
                 'The good news for miners is that for every spike that goes up there\'s one that goes down, but the cries ' +
                 'of despair from the latest 18.10% difficulty change are already echoing around the Internet.  Unlike space, ' +
-                'where no-one can hear your scream, it seems that in Cyberspace a little noise can sometimes be very loud' +
+                'where no-one can hear your scream, it seems that in Cyberspace a little noise can sometimes be very loud ' +
                 'indeed!'
             )
         )

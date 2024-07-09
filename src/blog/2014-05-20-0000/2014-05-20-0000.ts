@@ -45,8 +45,11 @@ function blogArticle_201405200000(): VNode[] {
                 'Here\'s what the probabilities look like for a single hour:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-05-20-0000/blocks-per-hour.png' }),
-                h('figcaption', {}, 'Probabilities of blocks in a given hour')
+                h('img', {
+                    src: '/blog/2014-05-20-0000/blocks-per-hour.png',
+                    alt: 'Chart showing probabilities of finding a certain number of blocks in any given hour'
+                }),
+                h('figcaption', {}, 'Probabilities of blocks in any given hour')
             ),
             h('p', {},
                 'The chart shows the probability (between 0 and 1) for each block count in yellow and the cumulative ' +
@@ -66,7 +69,11 @@ function blogArticle_201405200000(): VNode[] {
                 '(we\'re seeing 6.6 blocks per hour):'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-05-20-0000/cumulative-blocks-per-hour.png' }),
+                h('img', {
+                    src: '/blog/2014-05-20-0000/cumulative-blocks-per-hour.png',
+                    alt: 'Chart showing probabilities of finding a certain number of blocks in any given hour with nominal ' +
+                        'hash rate, and one that is 10% higher than nominal'
+                }),
                 h('figcaption', {}, 'Cumulative probabilities')
             ),
             h('p', {},
@@ -95,8 +102,11 @@ function blogArticle_201405200000(): VNode[] {
                 'Let\'s look at the probabilities for a 14 day period:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-05-20-0000/blocks-per-14-days.png' }),
-                h('figcaption', {}, 'Probabilities over a 14 day period')
+                h('img', {
+                    src: '/blog/2014-05-20-0000/blocks-per-14-days.png',
+                    alt: 'Chart showing the probabilities of finding different numbers of blocks in a 14 day period'
+                }),
+                h('figcaption', {}, 'Probabilities of finding different numbers of blocks in a 14 day period')
             ),
             h('p', {},
                 'The scale here is different to our original graphs, and we\'re only looking at the numbers closer to the ' +

@@ -50,8 +50,15 @@ function blogArticle_201406300000(): VNode[] {
                 'for blocks on our own.  What might we expect?'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-06-30-0000/solo-mine.png' }),
-                h('figcaption', {}, 'Solo mining with 0.01% of the Bitcoin hash rate for 15 difficulty changes')
+                h('img', {
+                    src: '/blog/2014-06-30-0000/solo-mine.png',
+                    alt: 'Chart showing the probability of different rewards for solo mining with 0.01% of the Bitcoin hash rate ' +
+                        'over 15 difficulty changes'
+                }),
+                h('figcaption', {},
+                    'Probability of different rewards for solo mining with 0.01% of the Bitcoin hash rate over 15 difficulty ' +
+                    'changes'
+                )
             ),
             h('p', {},
                 'The chart shows 15 difficulty changes (6 months).  It plots the cumulative probability of achieving a particular ' +
@@ -72,8 +79,14 @@ function blogArticle_201406300000(): VNode[] {
                 'achieve when run this way?'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-06-30-0000/small-pool-mine.png' }),
-                h('figcaption', {}, 'Bitcoin mining reward with 10% of a pool that has 0.1% of the total network hash rate')
+                h('img', {
+                    src: '/blog/2014-06-30-0000/small-pool-mine.png',
+                    alt: 'Chart showing probabilities of Bitcoin mining rewards with 10% of a pool that has 0.1% of the total ' +
+                        'network hash rate'
+                }),
+                h('figcaption', {},
+                    'Probabilities of Bitcoin mining rewards with 10% of a pool that has 0.1% of the total network hash rate'
+                )
             ),
             h('p', {},
                 'Our gambler self may be disappointed to see that the potentially large payouts have vanished; 10% of miners will ' +
@@ -97,7 +110,10 @@ function blogArticle_201406300000(): VNode[] {
                 'miners have been keen to participate in such pools.  Just how good are the reasons to do so?'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-06-30-0000/mining-comparison.png' }),
+                h('img', {
+                    src: '/blog/2014-06-30-0000/mining-comparison.png',
+                    alt: 'Chart showing a comparison of Bitcoin mining rewards for different pool sizes'
+                }),
                 h('figcaption', {}, 'Comparison of Bitcoin mining rewards for different pool sizes')
             ),
             h('p', {},

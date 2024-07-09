@@ -23,7 +23,10 @@ function blogArticle_201406100000(): VNode[] {
                 'like this:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-06-10-0000/6m-hash-rate-linear.png' }),
+                h('img', {
+                    src: '/blog/2014-06-10-0000/6m-hash-rate-linear.png',
+                    alt: 'Bitcoin hash rate for the last 6 months (June 2014)'
+                }),
                 h('figcaption', {}, 'Bitcoin hash rate for the last 6 months (June 2014) on a linear scale')
             ),
             h('p', {},
