@@ -88,7 +88,7 @@ let routes: Map<string, routeDetails> = new Map([
     }],
     ['/about', {
         pageRender: aboutPage,
-        metaData: 'An introduction to Dave Hudson and how to contact him.' 
+        metaData: 'An brief introduction to Dave Hudson, what the site is about, and how to contact him.'
     }],
     ['/projects', {
         pageRender: projectsPage,
@@ -96,7 +96,8 @@ let routes: Map<string, routeDetails> = new Map([
     }],
     ['/blog', {
         pageRender: blogPage,
-        metaData: 'A list of blog posts.'
+        metaData: 'This page indexes all Dave\'s blog posts, presented in date order with the most recent posts at the top ' +
+            'of the page'
     }]
 ]);
 
