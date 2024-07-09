@@ -9,11 +9,11 @@ const __dirname = path.dirname(__filename);
 
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, 'build'), {
-        setHeaders: function (res, path) {
-            res.setHeader('Cache-Control', 'public, max-age=10');
-        }
+    index: 'index.html',
+    setHeaders: function (res, path) {
+        res.setHeader('Cache-Control', 'public, max-age=10');
     }
-));
+}));
 
 // Handle every other route with index.html
 app.get('*', function(request, response) {
