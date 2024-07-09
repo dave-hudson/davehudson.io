@@ -172,8 +172,8 @@ function blogArticle_201512190000(): VNode[] {
             h('h2', {}, 'Source code'),
             h('p', {},
                 'The source code for the simulation tool that generated the results for this article can be found on github at: ',
-                h('a', { href: 'github.com/dave-hudson/waiting-for-blocks' },
-                    'github.com/dave-hudson/waiting-for-blocks'
+                h('a', { href: 'https://github.com/dave-hudson/waiting-for-blocks' },
+                    'https://github.com/dave-hudson/waiting-for-blocks'
                 )
             )
         )
@@ -186,11 +186,6 @@ function blogPostScript_201512190000(): VNode[] {
         h('section', {},
             h('h2', {}, 'Related articles'),
             h('ul', {},
-                h('li', {},
-                    h('a', { href: '/blog/2015-02-06-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2015-02-06-0000') },
-                        'Waiting for blocks (2015-02-06)'
-                    )
-                ),
                 h('li', {},
                     h('a', { href: '/blog/2014-06-10-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-06-10-0000') },
                         'Lies, damned lies and Bitcoin difficulties (2014-06-10)'
