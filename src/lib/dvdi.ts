@@ -25,12 +25,12 @@ interface HTMLAttributes {
     alt?: string;
     'aria-label'?: string;
     className?: string;
-    height?: number;
+    height?: number | string;
     href?: string;
     id?: string;
     src?: string;
     title?: string;
-    width?: number;
+    width?: number | string;
 
     // Event attributes.
     onclick?: (event: MouseEvent) => void;
