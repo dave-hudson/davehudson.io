@@ -13,4 +13,3 @@ FILES += \
 	src/sitemap.xml
 
 TS_FILES += src/app.ts
-

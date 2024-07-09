@@ -19,6 +19,7 @@ BUILD_FILES := $(patsubst src/%, build/%, $(FILES))
 build/%: src/%
 	@mkdir -p $(dir $@)
 	@cp $< $@
+	echo "Copied $< to $@"
 
 build/app.js: $(TS_FILES)
 	tsc \
