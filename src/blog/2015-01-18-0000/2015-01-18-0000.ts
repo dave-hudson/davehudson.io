@@ -276,8 +276,8 @@ export const blogPost_201501180000 = new BlogPost(
     'The myth of the megabyte Bitcoin block',
     '2015-01-18',
     '/blog/2015-01-18-0000',
-    'The Bitcoin protocol has been limited to a 1 MByte block size, but miners can choose an arbitrary smaller limit.  This ' +
-    'blog post looks at what the true effective block size ism, and what it has been previously.',
+    'Bitcoin transactions have been limited to a 1 MByte block size, but miners can choose smaller limits.  This ' +
+    'blog post looks at what the true effective block size is.',
     null,
     blogOpening_201501180000,
     blogArticle_201501180000,

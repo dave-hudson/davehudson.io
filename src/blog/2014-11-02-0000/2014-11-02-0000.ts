@@ -189,8 +189,8 @@ export const blogPost_201411020000 = new BlogPost(
     '7 transactions per second? Really?',
     '2014-11-02',
     '/blog/2014-11-02-0000',
-    'In theory the Bitcoin network can process 7 transactions per second, but as the transactions get more complex then ' +
-    'that number reduces.  This article looks at how many transactions it has really been able to handle over time.',
+    'In theory the Bitcoin network can process 7 transactions per second.  This article looks at how many transactions it has ' +
+    'really been able to handle over time.',
     null,
     blogOpening_201411020000,
     blogArticle_201411020000,

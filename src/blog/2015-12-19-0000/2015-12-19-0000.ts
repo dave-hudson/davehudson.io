@@ -210,8 +210,8 @@ export const blogPost_201512190000 = new BlogPost(
     'Waiting for blocks',
     '2015-12-19',
     '/blog/2015-12-19-0000',
-    'This article reviews the process by which Bitcoin blocks are mined, and how quickly each successive block might be found.  It ' +
-    'considers the impact of changes in the underlying hash rate to see how that changes the steady-state view.',
+    'This article reviews how Bitcoin blocks are mined and how quickly each new block might be found.  It ' +
+    'also reviews the impact of changes in the underlying hash rate.',
     null,
     blogOpening_201512190000,
     blogArticle_201512190000,

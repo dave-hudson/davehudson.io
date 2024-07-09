@@ -208,7 +208,7 @@ export const blogPost_201404280000 = new BlogPost(
     'Megawatts of mining',
     '2014-04-28',
     '/blog/2014-04-28-0000',
-    'Bitcoin mining is an exercise that converts large amounts of electricity into the proof-of-work that secures the ' +
+    'Bitcoin mining converts large amounts of electricity into the proof-of-work that secures the ' +
     'network.  This blog post looks at some of the economics related to this.',
     null,
     blogOpening_201404280000,
