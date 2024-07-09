@@ -24,7 +24,7 @@ function blogArticle_201406050000(): VNode[] {
         ),
         h('p', {},
             'The trend of high points in the graph (red line) shows another ',
-            h('a', { href: '/blog/2014-03-09-0000/', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-03-09-0000') }, 
+            h('a', { href: '/blog/2014-03-09-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-03-09-0000') }, 
                 'theme park ride'
             ),
             '. Like any good thrill ride we see regular highs and lows; here the peaks are anywhere between 212 days ' +
