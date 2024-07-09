@@ -15,9 +15,9 @@ app.use(express.static(path.join(__dirname, 'build'), {
     }
 }));
 
-// Handle every other route with index.html
+// Handle every other route with spa.html
 app.get('*', function(request, response) {
-    response.sendFile(path.resolve(__dirname, 'src/index.html'));
+    response.sendFile(path.resolve(__dirname, 'build/spa.html'));
 });
 
 const PORT = process.env.PORT || 3000;
