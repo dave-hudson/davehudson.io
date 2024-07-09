@@ -6,6 +6,7 @@ import { parseStringPromise } from 'xml2js';
 // Define the path to your sitemap.xml file
 const sitemapPath = './build/sitemap.xml';
 const outputDir = './build';
+const localBaseUrl = 'http://localhost:3000';
 
 /**
  * Utility function to create directories recursively
@@ -36,23 +37,20 @@ const ensureDirectoryExistence = (filePath) => {
     }
 
     for (const url of urls) {
-        console.log(`Processing URL: ${url}`)
+        const urlPath = new URL(url).pathname;
+        const localURL = url.replace(/^https?:\/\/[^\/]+/, localBaseUrl);
+
+        console.log(`Processing URL: ${localURL}`)
         const page = await browser.newPage();
-        await page.goto(url, { waitUntil: 'networkidle0' });
+        await page.goto(localURL, { waitUntil: 'networkidle0' });
 
         // Get the content of the page
         const html = await page.content();
 
-        // Determine the file name based on the URL
-        const urlPath = new URL(url).pathname;
+        // Write the content to an appropriate pre-rendered file.
         const filePath = path.join(outputDir, urlPath, 'index.html');
-
         ensureDirectoryExistence(filePath);
-
-        // Save the HTML content to the file
         fs.writeFileSync(filePath, html);
-
-        // Close the page to free up resources
         await page.close();
     }
 
