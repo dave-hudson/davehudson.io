@@ -5,7 +5,19 @@ import { parseStringPromise } from 'xml2js';
 
 // Define the path to your sitemap.xml file
 const sitemapPath = './build/sitemap.xml';
-const outputDir = './prerendered';
+const outputDir = './build';
+
+/**
+ * Utility function to create directories recursively
+ */
+const ensureDirectoryExistence = (filePath) => {
+    const dirname = path.dirname(filePath);
+    if (fs.existsSync(dirname)) {
+        return true;
+    }
+    ensureDirectoryExistence(dirname);
+    fs.mkdirSync(dirname);
+};
 
 (async () => {
     // Read and parse the sitemap.xml file
@@ -32,8 +44,10 @@ const outputDir = './prerendered';
         const html = await page.content();
 
         // Determine the file name based on the URL
-        const fileName = url === 'https://davehudson.io' ? 'index.html' : `${url.split('/').pop() || 'index'}.html`;
-        const filePath = path.join(outputDir, fileName);
+        const urlPath = new URL(url).pathname;
+        const filePath = path.join(outputDir, urlPath, 'index.html');
+
+        ensureDirectoryExistence(filePath);
 
         // Save the HTML content to the file
         fs.writeFileSync(filePath, html);
@@ -45,4 +59,3 @@ const outputDir = './prerendered';
     // Close the browser
     await browser.close();
 })();
-
