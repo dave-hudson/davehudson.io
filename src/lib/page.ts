@@ -63,7 +63,7 @@ export function pageHeader(): VNode {
             }
 
             if (darkTheme) {
-                darkTheme.disabled = false;
+                darkTheme.removeAttribute('disabled');
             }
 
             if (windowMedia.matches) {
@@ -81,7 +81,7 @@ export function pageHeader(): VNode {
             }
 
             if (darkTheme) {
-                darkTheme.disabled = true;
+                darkTheme.setAttribute('disabled', 'true');
             }
 
             if (!windowMedia.matches) {
