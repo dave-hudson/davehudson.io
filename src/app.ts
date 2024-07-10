@@ -77,25 +77,30 @@ function notFoundPage(path: string): VNode {
  * Interface representing everything required to render a page.
  */
 export interface routeDetails {
+    title: string;
     pageRender: () => VNode;
     metaData: string;
 }
 
 let routes: Map<string, routeDetails> = new Map([
     ['', {
+        title: 'Dreaming in data and code',
         pageRender: homePage,
         metaData: 'davehudson.io is Dave Hudson\'s blog site.  Dave discusses things he finds interesting in the ' +
             'world of software development - dreams in data and code!'
     }],
     ['/about', {
+        title: 'About me (Dave Hudson)',
         pageRender: aboutPage,
         metaData: 'An brief introduction to Dave Hudson, what the site is about, and how to contact him.'
     }],
     ['/projects', {
+        title: 'Open source projects',
         pageRender: projectsPage,
         metaData: 'A quick summary of the open source projects that Dave has developed or contributed to.'
     }],
     ['/blog', {
+        title: 'Blog posts',
         pageRender: blogPage,
         metaData: 'This page indexes all Dave\'s blog posts, presented in date order with the most recent posts at the top ' +
             'of the page'
@@ -114,7 +119,7 @@ function handleLocation() {
         path = path.slice(0, -1);
     }
 
-    let pageInfo = { pageRender: () => notFoundPage(path), metaData: '' };
+    let pageInfo = { title: '404 - Not found', pageRender: () => notFoundPage(path), metaData: '' };
     if (routes.has(path)) {
         pageInfo = (routes.get(path) as routeDetails);
     }
@@ -132,9 +137,29 @@ function handleLocation() {
         metaDescription.content = pageInfo.metaData;
     }
 
+    const metaOGTitle: HTMLMetaElement | null = document.querySelector('meta[property="og:title"]');
+    if (metaOGTitle !== null) {
+        metaOGTitle.content = pageInfo.title;
+    }
+
     const metaOGDescription: HTMLMetaElement | null = document.querySelector('meta[property="og:description"]');
     if (metaOGDescription !== null) {
         metaOGDescription.content = pageInfo.metaData;
+    }
+
+    const metaOGURL: HTMLMetaElement | null = document.querySelector('meta[property="og:url"]');
+    if (metaOGURL !== null) {
+        metaOGURL.content = window.location.href;
+    }
+
+    const metaTwitterTitle: HTMLMetaElement | null = document.querySelector('meta[name="twitter:title"]');
+    if (metaTwitterTitle !== null) {
+        metaTwitterTitle.content = pageInfo.title;
+    }
+
+    const metaTwitterDescription: HTMLMetaElement | null = document.querySelector('meta[name="twitter:description"]');
+    if (metaTwitterDescription !== null) {
+        metaTwitterDescription.content = pageInfo.metaData;
     }
 }
 

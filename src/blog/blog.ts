@@ -216,7 +216,11 @@ export function getBlogRoutes() {
     let blogRoutes: Map<string, routeDetails> = new Map();
 
     for (let i = 0; i < blogContent.length; i++) {
-        blogRoutes.set(blogContent[i].hRef, { pageRender: () => blogArticlePage(i), metaData: blogContent[i].metaData });
+        blogRoutes.set(blogContent[i].hRef, {
+            title: blogContent[i].title,
+            pageRender: () => blogArticlePage(i),
+            metaData: blogContent[i].metaData
+        });
     }
 
     return blogRoutes;
