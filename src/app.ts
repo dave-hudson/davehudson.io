@@ -84,7 +84,8 @@ export interface routeDetails {
 let routes: Map<string, routeDetails> = new Map([
     ['', {
         pageRender: homePage,
-        metaData: 'davehudson.io is Dave Hudson\'s blog site.  It explores ideas that have been expressed in software.'
+        metaData: 'davehudson.io is Dave Hudson\'s blog site.  Dave discusses things he finds interesting in the ' +
+            'world of software development - dreams in data and code!'
     }],
     ['/about', {
         pageRender: aboutPage,
