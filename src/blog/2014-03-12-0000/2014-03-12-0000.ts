@@ -16,7 +16,12 @@ function blogArticle_201403120000(): VNode[] {
     return [
         h('p', {}, 'Let\'s look at the graph:'),
         h('figure', {},
-            h('img', { src: '/blog/2014-03-12-0000/20140312_BTC_Price.png' }),
+            h('img', {
+                src: '/blog/2014-03-12-0000/20140312_BTC_Price.png',
+                alt: 'Chart plotting the Bitcoin price over time',
+                width: 1759,
+                height: 1188
+            }),
             h('figcaption', {}, 'Bitcoin price over time')
         ),
         h('p', {},

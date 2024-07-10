@@ -23,8 +23,13 @@ function blogArticle_201403170000(): VNode[] {
             'and see if we can make any sense of this?'
         ),
         h('figure', {},
-            h('img', { src: '/blog/2014-03-17-0000/20140317_Bitcoin-vs-hash.png' }),
-            h('figcaption', {}, 'Bitcoin price vs global hashrate')
+            h('img', {
+                src: '/blog/2014-03-17-0000/20140317_Bitcoin-vs-hash.png',
+                alt: 'Chart showing the Bitcoin price overlaid with global hashrate',
+                width: 1759,
+                height: 1188
+            }),
+            h('figcaption', {}, 'Bitcoin price overlaid with global hashrate')
         ),
         h('p', {},
             'This chart is plotted on two logarithmic axis but they\'re not on the same scale.  The price trace increases ' +

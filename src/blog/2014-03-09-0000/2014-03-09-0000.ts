@@ -29,7 +29,12 @@ function blogArticle_201403090000(): VNode[] {
                 'Let\'s look at the worldwide hashing data:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-03-09-0000/20140309-hash-12months.png' }),
+                h('img', {
+                    src: '/blog/2014-03-09-0000/20140309-hash-12months.png',
+                    alt: 'Chart showing the worldwide hashing rate plotted against an exponential trend line',
+                    width: 1763,
+                    height: 1005
+                }),
                 h('figcaption', {}, 'Worldwide hashing rate')
             ),
             h('p', {},
