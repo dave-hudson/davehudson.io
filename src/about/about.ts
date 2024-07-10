@@ -16,7 +16,12 @@ export function aboutPage(): VNode {
                 'I would say I love maths too, but I should probably leave that to the experts :-)'
             ),
             h('figure', {},
-                h('img', { src: '/about/dave.jpg', alt: 'Me (apparently always pictured with a drink!)' }),
+                h('img', {
+                    src: '/about/dave.jpg',
+                    alt: 'Me (apparently always pictured with a drink!)',
+                    width: 539,
+                    height: 509
+                }),
                 h('figcaption', {}, 'Me (apparently always pictured with a drink!)')
             ),
             h('p', {},
