@@ -26,6 +26,7 @@ app.use((req, res, next) => {
 
         // If the path is a file then serve it.
         if (!stats.isDirectory()) {
+            res.setHeader('Cache-Control', 'public, max-age=10');
             res.sendFile(tryPath);
             return;
         }
@@ -33,6 +34,7 @@ app.use((req, res, next) => {
         // If the path is a directory then see if there's a pre-rendered version of the page that we can serve instead.
 	const tryPathIndex = path.join(tryPath, 'index.html');
         if (existsSync(tryPathIndex)) {
+            res.setHeader('Cache-Control', 'public, max-age=10');
             res.sendFile(tryPathIndex);
             return;
         }
