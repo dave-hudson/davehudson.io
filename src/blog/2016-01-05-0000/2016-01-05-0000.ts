@@ -66,7 +66,12 @@ function blogArticle_201601050000(): VNode[] {
                 '2009 wasn\'t very interesting for Bitcoin mining so we take up our story from 2010:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2016-01-05-0000/hash-rate.png' }),
+                h('img', {
+                    src: '/blog/2016-01-05-0000/hash-rate.png',
+                    alt: 'Chart showing hash rates in the Bitcoin network from 2010 to 2016',
+                    width: 1757,
+                    height: 1263
+                }),
                 h('figcaption', {}, 'Hash rates in the Bitcoin network from 2010 to 2016')
             ),
             h('p', {},
@@ -100,7 +105,12 @@ function blogArticle_201601050000(): VNode[] {
                 'rate numbers aren\'t precise, but statistically, over time, they work out pretty accurately:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2016-01-05-0000/number-of-hashes.png' }),
+                h('img', {
+                    src: '/blog/2016-01-05-0000/number-of-hashes.png',
+                    alt: 'Chart showing numbers of Bitcoin hashes over all time and per day',
+                    width: 1757,
+                    height: 1263
+                }),
                 h('figcaption', {}, 'Numbers of Bitcoin hashes over all time and per day')
             ),
             h('p', {},
@@ -128,7 +138,12 @@ function blogArticle_201601050000(): VNode[] {
                 'total hashes computed over all time to the hashes computed on each day up to that point:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2016-01-05-0000/ratio-of-hashes.png' }),
+                h('img', {
+                    src: '/blog/2016-01-05-0000/ratio-of-hashes.png',
+                    alt: 'Chart showing ratio of total cumulative hashes to daily hashes',
+                    width: 1757,
+                    height: 1263
+                }),
                 h('figcaption', {}, 'Ratio of total cumulative hashes to daily hashes')
             ),
             h('p', {},

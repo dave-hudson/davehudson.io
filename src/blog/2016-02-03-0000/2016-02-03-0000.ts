@@ -35,7 +35,12 @@ function blogArticle_201602030000(): VNode[] {
                 'there any strong indications that this has happened?'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2016-02-03-0000/fees-per-tx-btc.png' }),
+                h('img', {
+                    src: '/blog/2016-02-03-0000/fees-per-tx-btc.png',
+                    alt: 'Chart showing fees per Bitcoin transaction in BTC',
+                    width: 1900,
+                    height: 1269
+                }),
                 h('figcaption', {}, 'Fees per Bitcoin transaction in BTC')
             ),
             h('p', {},
@@ -47,7 +52,12 @@ function blogArticle_201602030000(): VNode[] {
             ),
             h('p', {}, 'The trend is certainly curious, so let\'s look at the transaction volumes:'),
             h('figure', {},
-                h('img', { src: '/blog/2016-02-03-0000/tx-per-day.png' }),
+                h('img', {
+                    src: '/blog/2016-02-03-0000/tx-per-day.png',
+                    alt: 'Chart showing transactions per day in the Bitcoin network',
+                    width: 1900,
+                    height: 1269
+                }),
                 h('figcaption', {}, 'Transactions per day in the Bitcoin network')
             ),
             h('p', {},
@@ -68,7 +78,12 @@ function blogArticle_201602030000(): VNode[] {
             ),
             h('p', {}, 'The first chart we looked at considered BTC-denominated fees, but what if we look at them in USD?'),
             h('figure', {},
-                h('img', { src: '/blog/2016-02-03-0000/fees-per-tx-usd.png' }),
+                h('img', {
+                    src: '/blog/2016-02-03-0000/fees-per-tx-usd.png',
+                    alt: 'Chart showing fees per Bitcoin transaction in USD',
+                    width: 1900,
+                    height: 1269
+                }),
                 h('figcaption', {}, 'Fees per Bitcoin transaction in USD')
             ),
             h('p', {},
@@ -86,7 +101,12 @@ function blogArticle_201602030000(): VNode[] {
                 'stable for the last 12 months:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2016-02-03-0000/rewards-per-tx-usd.png' }),
+                h('img', {
+                    src: '/blog/2016-02-03-0000/rewards-per-tx-usd.png',
+                    alt: 'Chart showing rewards per transaction in USD',
+                    width: 1900,
+                    height: 1269
+                }),
                 h('figcaption', {}, 'Rewards per transaction in USD')
             )
         ),

@@ -27,17 +27,28 @@ function blogArticle_201512200000(): VNode[] {
             '") and so we may have more block capacity being used:'
         ),
         h('figure', {},
-            h('img', { src: '/blog/2015-12-20-0000/blocksizes.png' }),
-            h('figcaption', {}, 'Block sizes over time')
+            h('img', {
+                src: '/blog/2015-12-20-0000/blocksizes.png',
+                alt: 'Scatter plot showing effective block sizes over time',
+                width: 1758,
+                height: 1135
+            }),
+            h('figcaption', {}, 'Effective block sizes over time')
         ),
         h('p', {},
             'The simple Monte Carlo simulation from that earlier post models the effects of loading on first transaction ' +
             'confirmations:'
         ),
         h('figure', {},
-            h('img', { src: '/blog/2015-12-20-0000/first-conf-0-100.png' }),
+            h('img', {
+                src: '/blog/2015-12-20-0000/first-conf-0-100.png',
+                alt: 'Chart showing probabilities for the time to a first block confirmation with the Bitcoin network at ' +
+                    'various load levels (log scale)',
+                width: 1761,
+                height: 1094
+            }),
             h('figcaption', {}, 
-                'Probabilities for time to a first block confirmation with the Bitcoin network at various load levels ' +
+                'Probabilities for the time to a first block confirmation with the Bitcoin network at various load levels ' +
                 '(log scale)'
             )
         ),

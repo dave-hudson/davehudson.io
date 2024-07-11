@@ -83,8 +83,13 @@ function blogArticle_201412050000(): VNode[] {
                 'wishes to attack another open pool that has 25% of the network:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-12-05-0000/c1-25-25-yes-no.png' }),
-                h('figcaption', {}, '25% mining pool attacks another 25% pool using block withholding')
+                h('img', {
+                    src: '/blog/2014-12-05-0000/c1-25-25-yes-no.png',
+                    alt: 'Chart showing a 25% mining pool performaing a block withholding attack another 25% pool',
+                    width: 1761,
+                    height: 1038
+                }),
+                h('figcaption', {}, 'A 25% mining pool performing a block withholding attack against another 25% pool')
             ),
             h('p', {},
                 'The vertical axis shows the percentage gains that the various participants in the network will see above what ' +
@@ -118,8 +123,13 @@ function blogArticle_201412050000(): VNode[] {
                 'and our victim has 10%:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-12-05-0000/c1-10-10-yes-no.png' }),
-                h('figcaption', {}, 'A 10% miner attacking a 10% open mining pool using a block withholding attack')
+                h('img', {
+                    src: '/blog/2014-12-05-0000/c1-10-10-yes-no.png',
+                    alt: 'Chart showing 10% miner performing a block withholding attack against another 10% open mining pool',
+                    width: 1761,
+                    height: 1038
+                }),
+                h('figcaption', {}, 'A 10% miner performing a block withholding attack against a 10% open mining pool')
             ),
             h('p', {},
                 'The curves are similar, they\'re just scaled down.  In fact the attacker has less scope to win, achieving a ' +
@@ -153,7 +163,12 @@ function blogArticle_201412050000(): VNode[] {
                 'each other in similar proportions:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-12-05-0000/c1-25-25-yes-yes.png' }),
+                h('img', {
+                    src: '/blog/2014-12-05-0000/c1-25-25-yes-yes.png',
+                    alt: 'A chart showing two 25% mining pools performing block withholding attacks against each other',
+                    width: 1761,
+                    height: 1038
+                }),
                 h('figcaption', {}, 'Two 25% mining pools performing block withholding attacks against each other')
             ),
             h('p', {},
@@ -176,8 +191,13 @@ function blogArticle_201412050000(): VNode[] {
                 'We\'ve seen two large pools involved, but what happens with a large attacker and a small open pool?'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-12-05-0000/c1-25-1-yes-no.png' }),
-                h('figcaption', {}, '25% miner attacks a 1% pool with a block withholding attack')
+                h('img', {
+                    src: '/blog/2014-12-05-0000/c1-25-1-yes-no.png',
+                    alt: 'Chart showing a 25% miner performing a block withholding attack against a 1% pool',
+                    width: 1761,
+                    height: 1038
+                }),
+                h('figcaption', {}, 'A 25% miner performing a block withholding attack against a 1% pool')
             ),
             h('p', {},
                 'There is a very small period here where the attacker makes a slight gain, but it quickly dissipates.  At the ' +
@@ -192,8 +212,13 @@ function blogArticle_201412050000(): VNode[] {
                 'If this works one way round then can it work the other way round?'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-12-05-0000/c1-25-1-no-yes.png' }),
-                h('figcaption', {}, '1% miner attacks a 25% mining pool with a block withholding attack')
+                h('img', {
+                    src: '/blog/2014-12-05-0000/c1-25-1-no-yes.png',
+                    alt: 'Chart showing a 1% miner performing a block withholding attack against a 25% mining pool',
+                    width: 1761,
+                    height: 1038
+                }),
+                h('figcaption', {}, '1% miner performing a block withholding attack against a 25% mining pool')
             ),
             h('p', {},
                 'Clearly the answer is yes a small attacker can still gain a small amount at the expense of a large victim!  ' +
@@ -272,7 +297,12 @@ function blogArticle_201412050000(): VNode[] {
                 'Let\'s see what this might look like:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-12-05-0000/c2-25-25-yes-no.png' }),
+                h('img', {
+                    src: '/blog/2014-12-05-0000/c2-25-25-yes-no.png',
+                    alt: 'Chart showing what happens when a 25% attacker stealth attacks a 25% open pool',
+                    width: 1761,
+                    height: 1038
+                }),
                 h('figcaption', {}, 'A 25% attacker stealth attacks a 25% open pool')
             ),
             h('p', {},
