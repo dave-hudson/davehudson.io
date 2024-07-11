@@ -14,7 +14,7 @@ const numCPUs = os.cpus().length;
 console.log(`Number of CPU cores: ${numCPUs}`);
 
 // Set the concurrency limit and retry limit
-const maxConcurrentRenders = numCPUs * 2;
+const maxConcurrentRenders = numCPUs;
 const maxRetries = 3;
 
 // Utility function to create directories recursively
