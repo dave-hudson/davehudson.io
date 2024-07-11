@@ -218,8 +218,8 @@ export function getBlogRoutes() {
     for (let i = 0; i < blogContent.length; i++) {
         blogRoutes.set(blogContent[i].hRef, {
             title: blogContent[i].title,
-            pageRender: () => blogArticlePage(i),
-            metaData: blogContent[i].metaData
+            render: () => blogArticlePage(i),
+            metadata: blogContent[i].metadata
         });
     }
 

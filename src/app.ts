@@ -78,31 +78,31 @@ function notFoundPage(path: string): VNode {
  */
 export interface routeDetails {
     title: string;
-    pageRender: () => VNode;
-    metaData: string;
+    render: () => VNode;
+    metadata: string;
 }
 
 let routes: Map<string, routeDetails> = new Map([
     ['', {
         title: 'Dreaming in data and code',
-        pageRender: homePage,
-        metaData: 'davehudson.io is Dave Hudson\'s blog site.  Dave discusses things he finds interesting in the ' +
+        render: homePage,
+        metadata: 'davehudson.io is Dave Hudson\'s blog site.  Dave discusses things he finds interesting in the ' +
             'world of software development - dreams in data and code!'
     }],
     ['/about', {
         title: 'About me (Dave Hudson)',
-        pageRender: aboutPage,
-        metaData: 'An brief introduction to Dave Hudson, what the site is about, and how to contact him.'
+        render: aboutPage,
+        metadata: 'An brief introduction to Dave Hudson, what the site is about, and how to contact him.'
     }],
     ['/projects', {
         title: 'Open source projects',
-        pageRender: projectsPage,
-        metaData: 'A quick summary of the open source projects that Dave has developed or contributed to.'
+        render: projectsPage,
+        metadata: 'A quick summary of the open source projects that Dave has developed or contributed to.'
     }],
     ['/blog', {
         title: 'Blog posts',
-        pageRender: blogPage,
-        metaData: 'This page indexes all Dave\'s blog posts, presented in date order with the most recent posts at the top ' +
+        render: blogPage,
+        metadata: 'This page indexes all Dave\'s blog posts, presented in date order with the most recent posts at the top ' +
             'of the page'
     }]
 ]);
@@ -119,12 +119,12 @@ function handleLocation() {
         path = path.slice(0, -1);
     }
 
-    let pageInfo = { title: '404 - Not found', pageRender: () => notFoundPage(path), metaData: '' };
+    let pageInfo = { title: '404 - Not found', render: () => notFoundPage(path), metadata: '' };
     if (routes.has(path)) {
         pageInfo = (routes.get(path) as routeDetails);
     }
 
-    const newVNode = pageInfo.pageRender();
+    const newVNode = pageInfo.render();
     const appElement = document.querySelector('#app');
 
     // Render the new page.
@@ -134,7 +134,7 @@ function handleLocation() {
     // Update the metadata for the new page.
     const metaDescription: HTMLMetaElement | null = document.querySelector('meta[name="description"]');
     if (metaDescription !== null) {
-        metaDescription.content = pageInfo.metaData;
+        metaDescription.content = pageInfo.metadata;
     }
 
     const metaOGTitle: HTMLMetaElement | null = document.querySelector('meta[property="og:title"]');
@@ -144,7 +144,7 @@ function handleLocation() {
 
     const metaOGDescription: HTMLMetaElement | null = document.querySelector('meta[property="og:description"]');
     if (metaOGDescription !== null) {
-        metaOGDescription.content = pageInfo.metaData;
+        metaOGDescription.content = pageInfo.metadata;
     }
 
     const metaOGURL: HTMLMetaElement | null = document.querySelector('meta[property="og:url"]');
@@ -159,7 +159,7 @@ function handleLocation() {
 
     const metaTwitterDescription: HTMLMetaElement | null = document.querySelector('meta[name="twitter:description"]');
     if (metaTwitterDescription !== null) {
-        metaTwitterDescription.content = pageInfo.metaData;
+        metaTwitterDescription.content = pageInfo.metadata;
     }
 }
 
