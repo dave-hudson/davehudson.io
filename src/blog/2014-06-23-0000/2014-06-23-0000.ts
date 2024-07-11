@@ -26,7 +26,9 @@ function blogArticle_201406230000(): VNode[] {
                 h('img', {
                     src: '/blog/2014-06-23-0000/24hours0percent.png',
                     alt: 'Chart showing how much of the network a 50% mining pool may appear to have with no network hash ' +
-                        'rate explansion'
+                        'rate explansion',
+                    width: 1898,
+                    height: 1036
                 }),
                 h('figcaption', {},
                     'Observed hash rates for a mining pool with 50% of the Bitcoin network over 24 hours, assuming no network ' +
@@ -51,7 +53,9 @@ function blogArticle_201406230000(): VNode[] {
                 h('img', {
                     src: '/blog/2014-06-23-0000/24hours2percent.png',
                     alt: 'Chart showing how much of the network a 50% mining pool may appear to have with the network expanding ' +
-                        'at 2% per day'
+                        'at 2% per day',
+                    width: 1898,
+                    height: 1036
                 }),
                 h('figcaption', {},
                     'Observed hash rates for a mining pool with 50% of the Bitcoin network over 24 hours, assuming a 2% network ' +
@@ -74,7 +78,9 @@ function blogArticle_201406230000(): VNode[] {
                 h('img', {
                     src: '/blog/2014-06-23-0000/2016blocks0percentgrowth.png',
                     alt: 'Chart showing how much of the network a 50% mining pool may appear to have over the course of 2016 ' +
-                        'blocks.'
+                        'blocks.',
+                    width: 1899,
+                    height: 1036
                 }),
                 h('figcaption', {},
                     '2016 Bitcoin blocks for a pool having 50% of the network and with no network expansion'

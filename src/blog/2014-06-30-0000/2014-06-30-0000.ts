@@ -53,7 +53,9 @@ function blogArticle_201406300000(): VNode[] {
                 h('img', {
                     src: '/blog/2014-06-30-0000/solo-mine.png',
                     alt: 'Chart showing the probability of different rewards for solo mining with 0.01% of the Bitcoin hash rate ' +
-                        'over 15 difficulty changes'
+                        'over 15 difficulty changes',
+                    width: 1899,
+                    height: 1036
                 }),
                 h('figcaption', {},
                     'Probability of different rewards for solo mining with 0.01% of the Bitcoin hash rate over 15 difficulty ' +
@@ -82,7 +84,9 @@ function blogArticle_201406300000(): VNode[] {
                 h('img', {
                     src: '/blog/2014-06-30-0000/small-pool-mine.png',
                     alt: 'Chart showing probabilities of Bitcoin mining rewards with 10% of a pool that has 0.1% of the total ' +
-                        'network hash rate'
+                        'network hash rate',
+                    width: 1899,
+                    height: 1036
                 }),
                 h('figcaption', {},
                     'Probabilities of Bitcoin mining rewards with 10% of a pool that has 0.1% of the total network hash rate'
@@ -112,7 +116,9 @@ function blogArticle_201406300000(): VNode[] {
             h('figure', {},
                 h('img', {
                     src: '/blog/2014-06-30-0000/mining-comparison.png',
-                    alt: 'Chart showing a comparison of Bitcoin mining rewards for different pool sizes'
+                    alt: 'Chart showing a comparison of Bitcoin mining rewards for different pool sizes',
+                    width: 1899,
+                    height: 1036
                 }),
                 h('figcaption', {}, 'Comparison of Bitcoin mining rewards for different pool sizes')
             ),

@@ -32,8 +32,13 @@ function blogArticle_201406150000(): VNode[] {
                 'Let\'s start with the simple cases where the global hashing rate isn\'t changing:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-06-15-0000/find2016_0.png' }),
-                h('figcaption', {}, 'Time to find 2016 Bitcoin blocks with 0% hash rate expansion')
+                h('img', {
+                    src: '/blog/2014-06-15-0000/find2016_0.png',
+                    alt: 'Chart showing time to find 2016 Bitcoin blocks with a 0% hash rate expansion',
+                    width: 1899,
+                    height: 1036
+                }),
+                h('figcaption', {}, 'Time to find 2016 Bitcoin blocks with a 0% hash rate expansion')
             ),
             h('p', {},
                 'As we\'d expect, the average time to find 2016 blocks is indeed 14 days.  We can see the effects of the ' +
@@ -70,8 +75,13 @@ function blogArticle_201406150000(): VNode[] {
                 'Let\'s see what happens when we have a 1% daily hashing rate expansion:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-06-15-0000/find2016_1.png' }),
-                h('figcaption', {}, 'Time to find 2016 Bitcoin blocks with 1% hash rate expansion')
+                h('img', {
+                    src: '/blog/2014-06-15-0000/find2016_1.png',
+                    alt: 'Chart showing time to find 2016 Bitcoin blocks with a 1% hash rate expansion',
+                    width: 1899,
+                    height: 1036
+                }),
+                h('figcaption', {}, 'Time to find 2016 Bitcoin blocks with a 1% hash rate expansion')
             ),
             h('p', {},
                 'With a 1% daily expansion rate we now typically find our 2016 blocks after 12.37 days (a little under 12 days, ' +
@@ -81,8 +91,13 @@ function blogArticle_201406150000(): VNode[] {
                 'Now let\'s look at a 2% daily hashing rate increase:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-06-15-0000/find2016_2.png' }),
-                h('figcaption', {}, 'Time to find 2016 Bitcoin blocks with 2% hash rate expansion')
+                h('img', {
+                    src: '/blog/2014-06-15-0000/find2016_2.png',
+                    alt: 'Chart showing time to find 2016 Bitcoin blocks with a 2% hash rate expansion',
+                    width: 1899,
+                    height: 1036
+                }),
+                h('figcaption', {}, 'Time to find 2016 Bitcoin blocks with a 2% hash rate expansion')
             ),
             h('p', {},
                 'With a 2% daily expansion rate we now typically find our 2016 blocks after 11.19 days (a little over 11 days, 4.5 ' +
@@ -103,7 +118,12 @@ function blogArticle_201406150000(): VNode[] {
                 'Here\'s a final chart.  This shows the 3 earlier charts superimposed on each other:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-06-15-0000/find2016_combined.png' }),
+                h('img', {
+                    src: '/blog/2014-06-15-0000/find2016_combined.png',
+                    alt: 'Chart showing time to find 2016 Bitcoin blocks with 0%, 1% and 2% hash rate expansions',
+                    width: 1898,
+                    height: 1036
+                }),
                 h('figcaption', {}, 'Time to find 2016 Bitcoin blocks with 0%, 1% and 2% hash rate expansions')
             ),
             h('p', {},

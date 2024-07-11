@@ -34,9 +34,9 @@ function homePage(): VNode {
                 h('figure', {},
                 h('img', {
                     src: '/dream-data-code.webp',
+                    alt: 'Conceptual image of dreaming in data and code',
                     width: 800,
-                    height: 286,
-                    alt: 'Conceptual image of dreaming in data and code'
+                    height: 286
                 }),
             ),
             h('p', {},
