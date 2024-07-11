@@ -19,7 +19,12 @@ function blogArticle_201406050000(): VNode[] {
     return [
         h('p', {}, 'Let\'s look at the graph (plotted on a logarithmic Y axis):'),
         h('figure', {},
-            h('img', { src: '/blog/2014-06-05-0000/BTC-price.png' }),
+            h('img', {
+                src: '/blog/2014-06-05-0000/BTC-price.png',
+                alt: 'Chart of BTC price over time',
+                width: 1759,
+                height: 1188
+            }),
             h('figcaption', {}, 'Chart of BTC price over time')
         ),
         h('p', {},

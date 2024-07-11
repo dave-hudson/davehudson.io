@@ -25,7 +25,9 @@ function blogArticle_201406100000(): VNode[] {
             h('figure', {},
                 h('img', {
                     src: '/blog/2014-06-10-0000/6m-hash-rate-linear.png',
-                    alt: 'Bitcoin hash rate for the last 6 months (June 2014)'
+                    alt: 'Chart showing Bitcoin hash rate for the last 6 months (linear scale June 2014)',
+                    width: 1759,
+                    height: 1032
                 }),
                 h('figcaption', {}, 'Bitcoin hash rate for the last 6 months (June 2014) on a linear scale')
             ),
@@ -47,7 +49,12 @@ function blogArticle_201406100000(): VNode[] {
                 'log chart:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-06-10-0000/6m-hash-rate-log.png' }),
+                h('img', {
+                    src: '/blog/2014-06-10-0000/6m-hash-rate-log.png',
+                    alt: 'Chart showing Bitcoin hash rate for the last 6 months (logarithmic scale June 2014)',
+                    width: 1759,
+                    height: 1032
+                }),
                 h('figcaption', {}, 'Bitcoin hash rate for the last 6 months (June 2014) on a logarithmic scale')
             ),
             h('p', {},
@@ -97,7 +104,12 @@ function blogArticle_201406100000(): VNode[] {
                 'Here\'s what it actually looks like for the last 12 months:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-06-10-0000/12m-hash-rate-variation.png' }),
+                h('img', {
+                    src: '/blog/2014-06-10-0000/12m-hash-rate-variation.png',
+                    alt: 'Graph showing Bitcoin hash rate variations for 12 months (June 2014)',
+                    width: 1759,
+                    height: 1031
+                }),
                 h('figcaption', {}, '12 month Bitcoin hash rate variations (June 2014)')
             ),
             h('p', {},
@@ -107,7 +119,12 @@ function blogArticle_201406100000(): VNode[] {
                 'the probability histogram for the variations about our baseline:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-06-10-0000/12m-hash-rate-variation-probability.png' }),
+                h('img', { src:
+                    '/blog/2014-06-10-0000/12m-hash-rate-variation-probability.png',
+                    alt: 'Histogram showing 12 month Bitcoin mining hash rate variation probability (June 2014)',
+                    width: 1761,
+                    height: 1033
+                }),
                 h('figcaption', {}, '12 month Bitcoin mining hash rate variation probability histogram (June 2014)')
             ),
             h('p', {},

@@ -44,7 +44,12 @@ function blogArticle_201404300000(): VNode[] {
                 'has a choice: confess (known as defecting) or remain silent (known as cooperating).'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-04-30-0000/Prisoners_Dilemma.png' }),
+                h('img', {
+                    src: '/blog/2014-04-30-0000/Prisoners_Dilemma.png',
+                    alt: 'Infographic showing the principal of the Prisoner\'s Dilema',
+                    width: 1000,
+                    height: 773
+                }),
                 h('figcaption', {}, 'Depiction of the Prisoner\'s Dilema. Image by Chris Jensen and Greg Riestenberg')
             ),
             h('p', {},

@@ -47,7 +47,9 @@ function blogArticle_201405200000(): VNode[] {
             h('figure', {},
                 h('img', {
                     src: '/blog/2014-05-20-0000/blocks-per-hour.png',
-                    alt: 'Chart showing probabilities of finding a certain number of blocks in any given hour'
+                    alt: 'Chart showing probabilities of finding a certain number of blocks in any given hour',
+                    width: 1899,
+                    height: 1002
                 }),
                 h('figcaption', {}, 'Probabilities of blocks in any given hour')
             ),
@@ -72,7 +74,9 @@ function blogArticle_201405200000(): VNode[] {
                 h('img', {
                     src: '/blog/2014-05-20-0000/cumulative-blocks-per-hour.png',
                     alt: 'Chart showing probabilities of finding a certain number of blocks in any given hour with nominal ' +
-                        'hash rate, and one that is 10% higher than nominal'
+                        'hash rate, and one that is 10% higher than nominal',
+                    width: 1899,
+                    height: 1005
                 }),
                 h('figcaption', {}, 'Cumulative probabilities')
             ),
@@ -104,7 +108,9 @@ function blogArticle_201405200000(): VNode[] {
             h('figure', {},
                 h('img', {
                     src: '/blog/2014-05-20-0000/blocks-per-14-days.png',
-                    alt: 'Chart showing the probabilities of finding different numbers of blocks in a 14 day period'
+                    alt: 'Chart showing the probabilities of finding different numbers of blocks in a 14 day period',
+                    width: 1899,
+                    height: 1003
                 }),
                 h('figcaption', {}, 'Probabilities of finding different numbers of blocks in a 14 day period')
             ),

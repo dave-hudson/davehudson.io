@@ -102,7 +102,12 @@ function blogArticle_201404030000(): VNode[] {
                 'interesting comparison is between hashing rates and the total daily miners\' reward. Here\'s that new chart:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-04-03-0000/hash-vs-reward.png' }),
+                h('img', {
+                    src: '/blog/2014-04-03-0000/hash-vs-reward.png',
+                    alt: 'Chart comparing Bitcoin hashing rate with mining rewards as of April 2014',
+                    width: 1758,
+                    height: 1188
+                }),
                 h('figcaption', {}, 'Bitcoin hashing rate compared with total mining rewards April 2014')
             ),
             h('p', {},

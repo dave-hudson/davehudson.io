@@ -67,7 +67,9 @@ function blogArticle_201403230000(): VNode[] {
             h('figure', {},
                 h('img', {
                     src: '/blog/2014-03-23-0000/ASIC_geometry.png',
-                    alt: 'Depiction of relative sizes of ASICs in different geometries'
+                    alt: 'Depiction of relative sizes of ASICs in different geometries',
+                    width: 505,
+                    height: 391
                 }),
                 h('figcaption', {}, 'Relative sizes of ASICs in different geometries')
             ),

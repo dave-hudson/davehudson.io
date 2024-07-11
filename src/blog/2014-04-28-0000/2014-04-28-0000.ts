@@ -142,7 +142,12 @@ function blogArticle_201404280000(): VNode[] {
                 ', while the 2 years after are predicted.'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-04-28-0000/hash-predict.png' }),
+                h('img', {
+                    src: '/blog/2014-04-28-0000/hash-predict.png',
+                    alt: 'Chart showing predictions of the Bitcoin hashing rate as of April 2014',
+                    width: 1492,
+                    height: 1036
+                }),
                 h('figcaption', {}, 'Predictions of the Bitcoin hashing rate April 2014. Shows an S curve appearing')
             ),
             h('p', {},

@@ -16,7 +16,9 @@ function blogArticle_201405240000(): VNode[] {
         h('figure', {},
             h('img', {
                 src: '/blog/2014-05-24-0000/high-noise-levels.jpg',
-                alt: 'Image of a high noise level warning sign'
+                alt: 'Image of a high noise level warning sign',
+                width: 253,
+                height: 190
             }),
         ),
         h('section', {},
@@ -51,7 +53,9 @@ function blogArticle_201405240000(): VNode[] {
             h('figure', {},
                 h('img', {
                     src: '/blog/2014-05-24-0000/simulation.png',
-                    alt: 'Chart showing the noise spikes in the Bitcoin difficulty based on a simulation of a constant hash rate'
+                    alt: 'Chart showing the noise spikes in the Bitcoin difficulty based on a simulation of a constant hash rate',
+                    width: 1758,
+                    height: 1033
                 }),
                 h('figcaption', {},
                     'Chart showing noise spikes in the Bitcoin difficulty based on a simulation of a constant hash rate'
@@ -172,7 +176,9 @@ function blogArticle_201405240000(): VNode[] {
             h('figure', {},
                 h('img', {
                     src: '/blog/2014-05-24-0000/simulation_x3.png',
-                    alt: 'Chart showing 2 additional different simulations of mining with a constant hash rate'
+                    alt: 'Chart showing 2 additional different simulations of mining with a constant hash rate',
+                    width: 1759,
+                    height: 1088
                 }),
                 h('figcaption', {}, 'Simulated mining with constant hash rate')
             ),
