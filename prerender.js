@@ -3,23 +3,63 @@ import fs from 'fs';
 import path from 'path';
 import { parseStringPromise } from 'xml2js';
 
-// Define the path to your sitemap.xml file
+// Define the paths to the sitemap.xml file and output directory
 const sitemapPath = './build/sitemap.xml';
-
 const outputDir = './build';
 const localBaseUrl = 'http://localhost:3000';
-const maxConcurrentRenders = 16;
 
-/**
- * Utility function to create directories recursively
- */
+// Set the concurrency limit and retry limit
+const maxConcurrentRenders = 16;
+const maxRetries = 3;
+
+// Utility function to create directories recursively
 const ensureDirectoryExistence = (filePath) => {
     const dirname = path.dirname(filePath);
     if (fs.existsSync(dirname)) {
         return true;
     }
+
     ensureDirectoryExistence(dirname);
     fs.mkdirSync(dirname);
+};
+
+// Utility function to delete a file if it exists
+const deleteFileIfExists = (filePath) => {
+    if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath);
+    }
+};
+
+// Function to render a single page with retries
+const renderPageWithRetries = async (url, browser, retries = maxRetries) => {
+    const localUrl = url.replace(/^https?:\/\/[^\/]+/, localBaseUrl);
+    const urlPath = new URL(url).pathname;
+    const filePath = path.join(outputDir, urlPath, 'index.html');
+
+    // Ensure the directory exists
+    ensureDirectoryExistence(filePath);
+
+    // Delete the target file if it exists
+    deleteFileIfExists(filePath);
+
+    try {
+        const page = await browser.newPage();
+        await page.goto(localUrl, { waitUntil: 'networkidle0' });
+        const html = await page.content();
+
+        // Save the HTML content to the file
+        fs.writeFileSync(filePath, html);
+        await page.close();
+        console.log(`Successfully rendered: ${localUrl}`);
+    } catch (error) {
+        console.error(`Error rendering ${localUrl}: ${error.message}`);
+        if (retries > 0) {
+            console.log(`Retrying... (${maxRetries - retries + 1}/${maxRetries})`);
+            await renderPageWithRetries(url, browser, retries - 1);
+        } else {
+            console.error(`Failed to render ${localUrl} after ${maxRetries} retries.`);
+        }
+    }
 };
 
 (async () => {
@@ -33,36 +73,25 @@ const ensureDirectoryExistence = (filePath) => {
     // Launch Puppeteer
     const browser = await puppeteer.launch();
 
-    // Helper function to render a single page
-    const renderPage = async (url) => {
-        // Before we attempt to render the file, ensure we have the target directory ready.
-        const urlPath = new URL(url).pathname;
-        const filePath = path.join(outputDir, urlPath, 'index.html');
-        ensureDirectoryExistence(filePath);
+    // Function to process URLs with a limit on concurrency
+    const processUrls = async (urls, limit) => {
+        const activePromises = [];
+        for (const url of urls) {
+            const promise = renderPageWithRetries(url, browser).then(() => {
+                activePromises.splice(activePromises.indexOf(promise), 1);
+            });
 
-        // If the target file already exists then delete it!  We do this because the target file will be
-        // the one served up by our webserver so we'll end up re-rendering it instead of the new content.
-        if (fs.existsSync(filePath)) {
-            fs.unlinkSync(filePath);
+            activePromises.push(promise);
+            if (activePromises.length >= limit) {
+                await Promise.race(activePromises);
+            }
         }
 
-        // Render the page and generate HTML.
-        const localURL = url.replace(/^https?:\/\/[^\/]+/, localBaseUrl);
-        console.log(`Processing URL: ${localURL}`)
-        const page = await browser.newPage();
-        await page.goto(localURL, { waitUntil: 'networkidle0' });
-        const html = await page.content();
-
-        // Finally, write the HTML to a file.
-        fs.writeFileSync(filePath, html);
-        await page.close();
+        await Promise.all(activePromises);
     };
 
-    // Process URLs in batches of maxConcurrentRenders
-    for (let i = 0; i < urls.length; i += maxConcurrentRenders) {
-        const batch = urls.slice(i, i + maxConcurrentRenders).map(url => renderPage(url));
-        await Promise.all(batch);
-    }
+    // Process all URLs with the defined concurrency limit
+    await processUrls(urls, maxConcurrentRenders);
 
     // Close the browser
     await browser.close();
