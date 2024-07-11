@@ -2,14 +2,19 @@ import puppeteer from 'puppeteer';
 import fs from 'fs';
 import path from 'path';
 import { parseStringPromise } from 'xml2js';
+import os from 'os';
 
 // Define the paths to the sitemap.xml file and output directory
 const sitemapPath = './build/sitemap.xml';
 const outputDir = './build';
 const localBaseUrl = 'http://localhost:3000';
 
+// Determine the number of CPU cores
+const numCPUs = os.cpus().length;
+console.log(`Number of CPU cores: ${numCPUs}`);
+
 // Set the concurrency limit and retry limit
-const maxConcurrentRenders = 16;
+const maxConcurrentRenders = numCPUs * 2;
 const maxRetries = 3;
 
 // Utility function to create directories recursively
