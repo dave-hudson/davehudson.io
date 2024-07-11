@@ -57,7 +57,12 @@ function blogArticle_201501180000(): VNode[] {
                 'confirmation time.  Let\'s look at it:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2015-01-18-0000/conf_time_vs_block_size.png' }),
+                h('img', {
+                    src: '/blog/2015-01-18-0000/conf_time_vs_block_size.png',
+                    alt: 'Chart of block usage vs mean confirmation time',
+                    width: 1761,
+                    height: 974
+                }),
                 h('figcaption', {}, 'Block usage vs mean confirmation time')
             ),
             h('p', {},
@@ -118,7 +123,12 @@ function blogArticle_201501180000(): VNode[] {
                 'block size capacity of the network over time:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2015-01-18-0000/est_block_sz_vs_block_usage.png' }),
+                h('img', {
+                    src: '/blog/2015-01-18-0000/est_block_sz_vs_block_usage.png',
+                    alt: 'Chart showing estimated Bitcoin block size limits for 2013 and 2014',
+                    width: 1761,
+                    height: 973
+                }),
                 h('figcaption', {}, 'Estimated Bitcoin block size limits for 2013 and 2014')
             ),
             h('p', {},
@@ -176,8 +186,13 @@ function blogArticle_201501180000(): VNode[] {
                 'Let\'s look at our original one but now with the estimated block usage too:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2015-01-18-0000/conf_time_vs_est_vs_block_size.png' }),
-                h('figcaption', {}, 'Block usage vs estimated block usage vs conf delay')
+                h('img', {
+                    src: '/blog/2015-01-18-0000/conf_time_vs_est_vs_block_size.png',
+                    alt: 'Chart showing block usage vs estimated block usage vs confirmation delay',
+                    width: 1761,
+                    height: 974
+                }),
+                h('figcaption', {}, 'Block usage vs estimated block usage vs confirmation delay')
             ),
             h('p', {},
                 'This is quite striking, even more so if we realize that in late 2013 and early 2014 we were seeing huge hash ' +

@@ -22,7 +22,12 @@ function blogArticle_201411120000(): VNode[] {
                 'means.  For anyone sending BTC the obvious "cost" is the transaction fee, so let\'s look at that:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-11-12-0000/fee-per-trans-linear.png' }),
+                h('img', {
+                    src: '/blog/2014-11-12-0000/fee-per-trans-linear.png',
+                    alt: 'Chart showing fees per transaction (linear scale)',
+                    width: 2030,
+                    height: 1132
+                }),
                 h('figcaption', {}, 'Fees per transaction (linear scale)')
             ),
             h('p', {},
@@ -31,7 +36,12 @@ function blogArticle_201411120000(): VNode[] {
                 'logarithmic scale:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-11-12-0000/fee-per-trans-log.png' }),
+                h('img', {
+                    src: '/blog/2014-11-12-0000/fee-per-trans-log.png',
+                    alt: 'Chart showing fees per transaction (log scale)',
+                    width: 2030,
+                    height: 1132
+                }),
                 h('figcaption', {}, 'Fees per transaction (log scale)')
             ),
             h('p', {},
@@ -75,7 +85,12 @@ function blogArticle_201411120000(): VNode[] {
                 'Let\'s look at things from the perspective of a miner:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-11-12-0000/miners-reward.png' }),
+                h('img', {
+                    src: '/blog/2014-11-12-0000/miners-reward.png',
+                    alt: 'Chart showing miners\' reward (log scale)',
+                    width: 2032,
+                    height: 1132
+                }),
                 h('figcaption', {}, 'Miners\' reward (log scale)')
             ),
             h('p', {},
@@ -145,7 +160,12 @@ function blogArticle_201411120000(): VNode[] {
                 'Let\'s start with the obvious one: What is the cost to the whole network for an average transaction?'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-11-12-0000/cost-per-trans-log.png' }),
+                h('img', {
+                    src: '/blog/2014-11-12-0000/cost-per-trans-log.png',
+                    alt: 'Chart of cost per Bitcoin transaction (log scale)',
+                    width: 2030,
+                    height: 1132
+                }),
                 h('figcaption', {}, 'Cost per Bitcoin transaction (log scale)')
             ),
             h('p', {},
@@ -167,7 +187,12 @@ function blogArticle_201411120000(): VNode[] {
                 'estimate the actual transaction volume though so we can try to use that here:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-11-12-0000/cost-per-btc-trans.png' }),
+                h('img', {
+                    src: '/blog/2014-11-12-0000/cost-per-btc-trans.png',
+                    alt: 'Chart of estaimated cost per BTC transferred (log scale)',
+                    width: 2032,
+                    height: 1132
+                }),
                 h('figcaption', {}, 'Estimated cost per BTC transferred (log scale)')
             ),
             h('p', {},
