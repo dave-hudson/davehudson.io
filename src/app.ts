@@ -4,8 +4,6 @@ import { blogPage, blogSummaries, getBlogRoutes } from './blog/blog';
 import { projectsPage } from './projects/projects';
 import { pageHeader, pageFooter } from "./lib/page";
 
-console.log('SCRIPT RELOADED!')
-
 //const updateQueue = new Set();
 
 /*
