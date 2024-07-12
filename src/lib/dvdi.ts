@@ -25,6 +25,7 @@ interface HTMLAttributes {
     alt?: string;
     'aria-label'?: string;
     className?: string;
+    datetime?: string;
     height?: number | string;
     href?: string;
     id?: string;

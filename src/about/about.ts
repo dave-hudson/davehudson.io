@@ -6,7 +6,10 @@ export function aboutPage(): VNode {
         pageHeader(),
         h('main', { className: 'main' },
             h('h1', {}, 'About me (Dave Hudson)'),
-            h('p', { className: 'meta'}, h('time', {}, '2024-05-29 07:45')),
+            h('p', { className: 'meta'},
+                'Last updated: ',
+                h('time', { datetime: '2024-05-29T07:45' }, '2024-05-29 07:45')
+            ),
             h('p', {},
                 'Hello, good morning/afternoon/evening* and welcome! ',
                 h('em', {}, '(*please delete as appropriate)')

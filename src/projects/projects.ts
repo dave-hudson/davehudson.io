@@ -6,7 +6,10 @@ export function projectsPage(): VNode {
         pageHeader(),
         h('main', { className: 'main' },
             h('h1', {}, 'Open source projects'),
-            h('p', { className: 'meta'}, h('time', {}, '2024-06-10 21:30')),
+            h('p', { className: 'meta'},
+                'Last updated: ',
+                h('time', { datetime: '2024-06-10T21:30'}, '2024-06-10 21:30')
+            ),
             h('p', {},
                 'I\'ve been involved in building open source software since the early 90s.  Unfortunately I can\'t find ' +
                 'links for some of them, but here are ones for which I do.'

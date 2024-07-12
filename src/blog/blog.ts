@@ -120,12 +120,27 @@ function blogArticlePage(index: number): VNode {
         postText = thisArticle.postScriptFunction();
     }
 
+    // Parse the ISO 8601 date string into a Date object
+    const date = new Date(thisArticle.dateTime);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    let formattedDate = `${year}-${month}-${day}`
+    if (thisArticle.dateTime.length > 10) {
+        formattedDate += ` ${hours}:${minutes}`
+    }
+
     return h('div', {},
         pageHeader(),
         h('main', { className: 'main' },
             h('article', {},
                 h('h1', {}, thisArticle.title),
-                h('p', { className: 'meta' }, h('time', {}, thisArticle.dateTime)),
+                h('p', { className: 'meta' },
+                    'Published: ',
+                    h('time', { datetime: thisArticle.dateTime }, formattedDate)
+                ),
                 ...preText,
                 ...thisArticle.openingFunction(),
                 ...thisArticle.articleFunction()
@@ -150,24 +165,31 @@ function blogLink(href: string, title: string, meta: string) {
 export function blogPage() {
     let pageView: VNode[] = [];
     let yearSection: (VNode | null) = null;
-    let headlineYear = '';
+    let headlineYear: number = 0;
 
     // Iterate all the blog content and create year and item enties.
     for (let i = blogContent.length - 1; i >= 0; i--) {
         const { hRef, title, dateTime } = blogContent[i];
-        const blogYear = dateTime.slice(0, 4);
-        if (headlineYear !== blogYear) {
+
+        // Parse the ISO 8601 date string into a Date object
+        const date = new Date(dateTime);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const formattedDate = `${year}-${month}-${day}`
+
+        if (headlineYear !== year) {
             if (yearSection !== null) {
                 pageView.push(yearSection)
             }
 
-            headlineYear = blogYear;
+            headlineYear = year;
             yearSection = h('section', {},
-                h('h2', {}, headlineYear)
+                h('h2', {}, `${year}`)
             )
         }
 
-        (yearSection as VElement).appendChild(blogLink(hRef, title, dateTime));
+        (yearSection as VElement).appendChild(blogLink(hRef, title, formattedDate));
     }
 
     const sections = [...pageView, (yearSection as VNode)];
@@ -193,12 +215,20 @@ export function blogSummaries(numEntries: number) {
     // Generate a list of HTML elements that match each blog post.
     for (let i = blogContent.length - 1; i >= lastEntry; i--) {
         const { hRef, title, dateTime, openingFunction } = blogContent[i];
+
+        // Parse the ISO 8601 date string into a Date object
+        const date = new Date(dateTime);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const formattedDate = `${year}-${month}-${day}`
+
         view.push(h('hr', {}));
         view.push(h('section', {},
             h('h2', {},
                 h('a', { href: hRef, onclick: (e: MouseEvent) => navigateEvent(e, hRef) }, title)
             ),
-            h('p', { className: 'meta' }, h('time', {}, dateTime)),
+            h('p', { className: 'meta' }, 'Published: ', formattedDate),
             ...openingFunction(),
             h('p', {},
                 h('em', {},
