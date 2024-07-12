@@ -97,7 +97,7 @@ let routes: Map<string, routeDetails> = new Map([
         render: aboutPage,
         description: 'An brief introduction to Dave Hudson, what the site is about, and how to contact him.',
         imageURL: 'https://davehudson.io/about/dave.jpg',
-        pageType: 'website'
+        pageType: 'profile'
     }],
     ['/projects', {
         title: 'Open source projects',
@@ -118,6 +118,75 @@ let routes: Map<string, routeDetails> = new Map([
 
 let rootVNode: VNode | null = null;
 
+/**
+ * Update page metadata.
+ *
+ * @param pageInfo - information about the page we're updating.
+ */
+function handleMetadata(pageInfo: routeDetails) {
+    const metaDescription: HTMLMetaElement | null = document.querySelector('meta[name="description"]');
+    if (metaDescription !== null) {
+        metaDescription.content = pageInfo.description;
+    }
+}
+
+/**
+ * Update page open graph metadata.
+ *
+ * @param pageInfo - information about the page we're updating.
+ */
+function handleOGMetadata(pageInfo: routeDetails) {
+    const metaOGType: HTMLMetaElement | null = document.querySelector('meta[property="og:type"]');
+    if (metaOGType !== null) {
+        metaOGType.content = pageInfo.pageType;
+    }
+
+    const metaOGTitle: HTMLMetaElement | null = document.querySelector('meta[property="og:title"]');
+    if (metaOGTitle !== null) {
+        metaOGTitle.content = pageInfo.title;
+    }
+
+    const metaOGDescription: HTMLMetaElement | null = document.querySelector('meta[property="og:description"]');
+    if (metaOGDescription !== null) {
+        metaOGDescription.content = pageInfo.description;
+    }
+
+    const metaOGURL: HTMLMetaElement | null = document.querySelector('meta[property="og:url"]');
+    if (metaOGURL !== null) {
+        metaOGURL.content = 'https://davehudson.io' + window.location.pathname;
+    }
+
+    const metaOGImage: HTMLMetaElement | null = document.querySelector('meta[property="og:image"]');
+    if (metaOGImage !== null) {
+        metaOGImage.content = pageInfo.imageURL;
+    }
+}
+
+/**
+ * Update page twitter metadata.
+ *
+ * @param pageInfo - information about the page we're updating.
+ */
+function handleTwitterMetadata(pageInfo: routeDetails) {
+    const metaTwitterTitle: HTMLMetaElement | null = document.querySelector('meta[name="twitter:title"]');
+    if (metaTwitterTitle !== null) {
+        metaTwitterTitle.content = pageInfo.title;
+    }
+
+    const metaTwitterDescription: HTMLMetaElement | null = document.querySelector('meta[name="twitter:description"]');
+    if (metaTwitterDescription !== null) {
+        metaTwitterDescription.content = pageInfo.description;
+    }
+
+    const metaTwitterImage: HTMLMetaElement | null = document.querySelector('meta[name="twitter:image"]');
+    if (metaTwitterImage !== null) {
+        metaTwitterImage.content = pageInfo.imageURL;
+    }
+}
+
+/**
+ * Handle navigation to a new route.
+ */
 function handleLocation() {
     let path = window.location.pathname;
 
@@ -147,51 +216,9 @@ function handleLocation() {
     updateElement((appElement as HTMLElement), null, null, rootVNode, newVNode);
     rootVNode = newVNode;
 
-    // Update the metadata tags for the new page.
-    const metaDescription: HTMLMetaElement | null = document.querySelector('meta[name="description"]');
-    if (metaDescription !== null) {
-        metaDescription.content = pageInfo.description;
-    }
-
-    const metaOGType: HTMLMetaElement | null = document.querySelector('meta[property="og:type"]');
-    if (metaOGType !== null) {
-        metaOGType.content = pageInfo.pageType;
-    }
-
-    const metaOGTitle: HTMLMetaElement | null = document.querySelector('meta[property="og:title"]');
-    if (metaOGTitle !== null) {
-        metaOGTitle.content = pageInfo.title;
-    }
-
-    const metaOGDescription: HTMLMetaElement | null = document.querySelector('meta[property="og:description"]');
-    if (metaOGDescription !== null) {
-        metaOGDescription.content = pageInfo.description;
-    }
-
-    const metaOGURL: HTMLMetaElement | null = document.querySelector('meta[property="og:url"]');
-    if (metaOGURL !== null) {
-        metaOGURL.content = window.location.href;
-    }
-
-    const metaOGImage: HTMLMetaElement | null = document.querySelector('meta[property="og:image"]');
-    if (metaOGImage !== null) {
-        metaOGImage.content = pageInfo.imageURL;
-    }
-
-    const metaTwitterTitle: HTMLMetaElement | null = document.querySelector('meta[name="twitter:title"]');
-    if (metaTwitterTitle !== null) {
-        metaTwitterTitle.content = pageInfo.title;
-    }
-
-    const metaTwitterDescription: HTMLMetaElement | null = document.querySelector('meta[name="twitter:description"]');
-    if (metaTwitterDescription !== null) {
-        metaTwitterDescription.content = pageInfo.description;
-    }
-
-    const metaTwitterImage: HTMLMetaElement | null = document.querySelector('meta[name="twitter:image"]');
-    if (metaTwitterImage !== null) {
-        metaTwitterImage.content = pageInfo.imageURL;
-    }
+    handleMetadata(pageInfo);
+    handleOGMetadata(pageInfo);
+    handleTwitterMetadata(pageInfo);
 }
 
 export function navigateEvent(e: MouseEvent, path: string) {
