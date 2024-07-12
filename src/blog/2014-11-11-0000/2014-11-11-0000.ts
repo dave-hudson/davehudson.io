@@ -260,6 +260,7 @@ export const blogPost_201411110000 = new BlogPost(
     '/blog/2014-11-11-0000',
     'This blog post looks at how quickly a Bitcoin transaction will be confirmed.  It explores what will happen as the ' +
     'network starts to get congested.',
+    '/blog/2014-11-11-0000/first-conf-0-linear.png',
     null,
     blogOpening_201411110000,
     blogArticle_201411110000,

@@ -153,6 +153,7 @@ export const blogPost_201403230000 = new BlogPost(
     '2014-03-23',
     '/blog/2014-03-23-0000',
     'This blog post looks at the use of ASICs in Bitcoin mining, and how this might evolve in the future.',
+    '/blog/2014-03-23-0000/ASIC_geometry.png',
     null,
     blogOpening_201403230000,
     blogArticle_201403230000,

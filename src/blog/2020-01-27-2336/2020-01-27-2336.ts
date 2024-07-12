@@ -151,6 +151,7 @@ export const blogPost_202001272336 = new BlogPost(
     'This article offers thoughts on software source code and readability.  It offers thoughts on how to make software easier ' +
     'future readers/maintainers to understand.',
     null,
+    null,
     blogOpening_202001272336,
     blogArticle_202001272336,
     null

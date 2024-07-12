@@ -194,6 +194,7 @@ export const blogPost_201404300000 = new BlogPost(
     '2014-04-30',
     '/blog/2014-04-30-0000',
     'This blog post looks at the rationale that leads Bitcoin miners to cooperate to secure the mining network.',
+    '/blog/2014-04-30-0000/Prisoners_Dilemma.png',
     null,
     blogOpening_201404300000,
     blogArticle_201404300000,

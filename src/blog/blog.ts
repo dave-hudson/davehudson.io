@@ -216,10 +216,19 @@ export function getBlogRoutes() {
     let blogRoutes: Map<string, routeDetails> = new Map();
 
     for (let i = 0; i < blogContent.length; i++) {
+        let img = blogContent[i].imageURL;
+        if (img === null) {
+            img = '/about/dave.html';
+        }
+
+        const imgURL = 'https://davehudson.io' + img;
+
         blogRoutes.set(blogContent[i].hRef, {
             title: blogContent[i].title,
             render: () => blogArticlePage(i),
-            description: blogContent[i].description
+            description: blogContent[i].description,
+            imageURL: imgURL,
+            pageType: 'article'
         });
     }
 

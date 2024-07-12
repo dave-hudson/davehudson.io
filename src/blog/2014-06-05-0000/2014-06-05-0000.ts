@@ -66,6 +66,7 @@ export const blogPost_201406050000 = new BlogPost(
     '2014-06-05',
     '/blog/2014-06-05-0000',
     'This blog post revisits the strange spikes in the Bitcoin price that we looked at previously.',
+    '/blog/2014-06-05-0000/BTC-price.png',
     null,
     blogOpening_201406050000,
     blogArticle_201406050000,

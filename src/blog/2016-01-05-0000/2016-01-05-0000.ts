@@ -199,6 +199,7 @@ export const blogPost_201601050000 = new BlogPost(
     '/blog/2016-01-05-0000',
     'As the Bitcoin mining network approaches one exahash per second, this article discusses the security guarantees offeredb ' +
     'proof-of-work.',
+    '/blog/2016-01-05-0000/hash-rate.png',
     null,
     blogOpening_201601050000,
     blogArticle_201601050000,

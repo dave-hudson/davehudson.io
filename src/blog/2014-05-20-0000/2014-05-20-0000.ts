@@ -158,6 +158,7 @@ export const blogPost_201405200000 = new BlogPost(
     '2014-05-20',
     '/blog/2014-05-20-0000',
     'This blog post looks at how often the Bitcoin mining network finds fewer or more than 6 blocks per hour, and why.',
+    '/blog/2014-05-20-0000/blocks-per-hour.png',
     null,
     blogOpening_201405200000,
     blogArticle_201405200000,

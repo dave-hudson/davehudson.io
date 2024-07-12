@@ -177,6 +177,7 @@ export const blogPost_201404030000 = new BlogPost(
     '2014-04-03',
     '/blog/2014-04-03-0000',
     'How much can Bitcoin miners earn?  This blog post considers the possible rewards for a Bitcoin miner.',
+    '/blog/2014-04-03-0000/hash-vs-reward.png',
     null,
     blogOpening_201404030000,
     blogArticle_201404030000,

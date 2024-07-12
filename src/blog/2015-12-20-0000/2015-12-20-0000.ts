@@ -87,6 +87,7 @@ export const blogPost_201512200000 = new BlogPost(
     '2015-12-20',
     '/blog/2015-12-20-0000',
     'This blog post updates and earlier post "Bitcoin traffic bulletin" to review how full Bitcoin blocks are now.',
+    '/blog/2015-12-20-0000/blocksizes.png',
     null,
     blogOpening_201512200000,
     blogArticle_201512200000,

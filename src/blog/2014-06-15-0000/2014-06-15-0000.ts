@@ -172,6 +172,7 @@ export const blogPost_201406150000 = new BlogPost(
     '/blog/2014-06-15-0000',
     'Bitcoin mining sees a difficulty change every 2016 blocks.  This nominally takes 14 days, but that number can vary.  ' +
     'This blog post looks at the variability.',
+    '/blog/2014-06-15-0000/find2016_0.png',
     null,
     blogOpening_201406150000,
     blogArticle_201406150000,

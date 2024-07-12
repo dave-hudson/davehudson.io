@@ -239,6 +239,7 @@ export const blogPost_201512190000 = new BlogPost(
     '/blog/2015-12-19-0000',
     'This article reviews how Bitcoin blocks are mined and how quickly each new block might be found.  It ' +
     'also reviews the impact of changes in the underlying hash rate.',
+    '/blog/2015-12-19-0000/1b_single.png',
     null,
     blogOpening_201512190000,
     blogArticle_201512190000,

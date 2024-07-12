@@ -5,6 +5,7 @@ export class BlogPost {
     dateTime: string;
     hRef: string;
     description: string;
+    imageURL: string | null;
     preScriptFunction: (() => VNode[]) | null;
     openingFunction: () => VNode[];
     articleFunction: () => VNode[];
@@ -15,6 +16,7 @@ export class BlogPost {
         dateTime: string,
         hRef: string,
         description: string,
+        imageURL: string | null,
         preScriptFunction: (() => VNode[]) | null,
         openingFunction: () => VNode[],
         articleFunction: () => VNode[],
@@ -24,6 +26,7 @@ export class BlogPost {
         this.dateTime = dateTime;
         this.hRef = hRef;
         this.description = description;
+        this.imageURL = imageURL;
         this.preScriptFunction = preScriptFunction;
         this.openingFunction = openingFunction;
         this.articleFunction = articleFunction;

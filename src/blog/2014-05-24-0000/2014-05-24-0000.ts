@@ -214,6 +214,7 @@ export const blogPost_201405240000 = new BlogPost(
     '/blog/2014-05-24-0000',
     'Bitcoin mining relies on a highly random process, but random approaches are quite noisy!  This blog post looks at ' +
     'some of that statistical noise.',
+    '/blog/2014-05-24-0000/simulation.png',
     null,
     blogOpening_201405240000,
     blogArticle_201405240000,

@@ -293,6 +293,7 @@ export const blogPost_201501180000 = new BlogPost(
     '/blog/2015-01-18-0000',
     'Bitcoin transactions have been limited to a 1 MByte block size, but miners can choose smaller limits.  This ' +
     'blog post looks at what the true effective block size is.',
+    '/blog/2015-01-18-0000/conf_time_vs_block_size.png',
     null,
     blogOpening_201501180000,
     blogArticle_201501180000,

@@ -79,6 +79,8 @@ export interface routeDetails {
     title: string;
     render: () => VNode;
     description: string;
+    imageURL: string;
+    pageType: string;
 }
 
 let routes: Map<string, routeDetails> = new Map([
@@ -86,23 +88,31 @@ let routes: Map<string, routeDetails> = new Map([
         title: 'Dreaming in data and code',
         render: homePage,
         description: 'davehudson.io is Dave Hudson\'s blog site.  Dave discusses things he finds interesting in the ' +
-            'world of software development - dreams in data and code!'
+            'world of software development - dreams in data and code!',
+        imageURL: 'https://davehudson.io/dream-data-code.webp',
+        pageType: 'website'
     }],
     ['/about', {
         title: 'About me (Dave Hudson)',
         render: aboutPage,
-        description: 'An brief introduction to Dave Hudson, what the site is about, and how to contact him.'
+        description: 'An brief introduction to Dave Hudson, what the site is about, and how to contact him.',
+        imageURL: 'https://davehudson.io/about/dave.jpg',
+        pageType: 'website'
     }],
     ['/projects', {
         title: 'Open source projects',
         render: projectsPage,
-        description: 'A quick summary of the open source projects that Dave has developed or contributed to.'
+        description: 'A quick summary of the open source projects that Dave has developed or contributed to.',
+        imageURL: 'https://davehudson.io/about/dave.jpg',
+        pageType: 'website'
     }],
     ['/blog', {
         title: 'Blog posts',
         render: blogPage,
         description: 'This page indexes all Dave\'s blog posts, presented in date order with the most recent posts at the top ' +
-            'of the page'
+            'of the page',
+        imageURL: 'https://davehudson.io/about/dave.jpg',
+        pageType: 'website'
     }]
 ]);
 
@@ -118,7 +128,14 @@ function handleLocation() {
         path = path.slice(0, -1);
     }
 
-    let pageInfo = { title: '404 - Not found', render: () => notFoundPage(path), description: '' };
+    let pageInfo = {
+        title: '404 - Not found',
+        render: () => notFoundPage(path),
+        description: '',
+        imageURL: 'https://davehudson.io/about/dave.jpg',
+        pageType: 'website'
+    };
+
     if (routes.has(path)) {
         pageInfo = (routes.get(path) as routeDetails);
     }
@@ -130,10 +147,15 @@ function handleLocation() {
     updateElement((appElement as HTMLElement), null, null, rootVNode, newVNode);
     rootVNode = newVNode;
 
-    // Update the description for the new page.
+    // Update the metadata tags for the new page.
     const metaDescription: HTMLMetaElement | null = document.querySelector('meta[name="description"]');
     if (metaDescription !== null) {
         metaDescription.content = pageInfo.description;
+    }
+
+    const metaOGType: HTMLMetaElement | null = document.querySelector('meta[property="og:type"]');
+    if (metaOGType !== null) {
+        metaOGType.content = pageInfo.pageType;
     }
 
     const metaOGTitle: HTMLMetaElement | null = document.querySelector('meta[property="og:title"]');
@@ -151,6 +173,11 @@ function handleLocation() {
         metaOGURL.content = window.location.href;
     }
 
+    const metaOGImage: HTMLMetaElement | null = document.querySelector('meta[property="og:image"]');
+    if (metaOGImage !== null) {
+        metaOGImage.content = pageInfo.imageURL;
+    }
+
     const metaTwitterTitle: HTMLMetaElement | null = document.querySelector('meta[name="twitter:title"]');
     if (metaTwitterTitle !== null) {
         metaTwitterTitle.content = pageInfo.title;
@@ -159,6 +186,11 @@ function handleLocation() {
     const metaTwitterDescription: HTMLMetaElement | null = document.querySelector('meta[name="twitter:description"]');
     if (metaTwitterDescription !== null) {
         metaTwitterDescription.content = pageInfo.description;
+    }
+
+    const metaTwitterImage: HTMLMetaElement | null = document.querySelector('meta[name="twitter:image"]');
+    if (metaTwitterImage !== null) {
+        metaTwitterImage.content = pageInfo.imageURL;
     }
 }
 

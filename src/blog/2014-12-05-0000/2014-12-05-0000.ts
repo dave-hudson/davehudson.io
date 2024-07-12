@@ -365,6 +365,7 @@ export const blogPost_201412050000 = new BlogPost(
     '/blog/2014-12-05-0000',
     'This blog post reviews a hypothetical block witholding attack against Bitcoin mining pools.  It reviews the attack ' +
     'vector and the potential rewards for an attacker.',
+    '/blog/2014-12-05-0000/c1-25-25-yes-no.png',
     null,
     blogOpening_201412050000,
     blogArticle_201412050000,

@@ -130,6 +130,7 @@ export const blogPost_201602030000 = new BlogPost(
     '/blog/2016-02-03-0000',
     'This blog post explores the possibilily that we might be seeing a market for Bitcoin transaction fees.  It reviews the ' +
     'data to see if this is happening yet, or not.',
+    '/blog/2016-02-03-0000/fees-per-tx-btc.png',
     null,
     blogOpening_201602030000,
     blogArticle_201602030000,

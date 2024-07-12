@@ -172,6 +172,7 @@ export const blogPost_201406300000 = new BlogPost(
     '2014-06-30',
     '/blog/2014-06-30-0000',
     'This blog post reviews the statistics and probabilities associated with mining Bitcoin in various different ways.',
+    '/blog/2014-06-30-0000/solo-mine.png',
     null,
     blogOpening_201406300000,
     blogArticle_201406300000,

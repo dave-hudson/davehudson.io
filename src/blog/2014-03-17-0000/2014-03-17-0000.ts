@@ -84,6 +84,7 @@ export const blogPost_201403170000 = new BlogPost(
     '/blog/2014-03-17-0000',
     'Does Bitcoin mining drive the price of Bitcoin, or does Bitcoin\'s price drive the mining network.  This article ' +
     'reviews the data.',
+    '/blog/2014-03-17-0000/20140317_Bitcoin-vs-hash.png',
     null,
     blogOpening_201403170000,
     blogArticle_201403170000,
