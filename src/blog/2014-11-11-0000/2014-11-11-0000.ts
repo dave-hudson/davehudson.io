@@ -74,7 +74,13 @@ function blogArticle_201411110000(): VNode[] {
                 'block.  The network load for this example is 0.1%, or 0.0035 TPS.'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-11-11-0000/first-conf-0-linear.png' }),
+                h('img', {
+                    src: '/blog/2014-11-11-0000/first-conf-0-linear.png',
+                    alt: 'Chart showing probabilities for time to a first block confirmation with the Bitcoin network loaded ' +
+                        'at 0.1% (linear scale)',
+                    width: 1761,
+                    height: 1164
+                }),
                 h('figcaption', {},
                     'Probabilities for time to a first block confirmation with the Bitcoin network loaded at 0.1% (linear scale)'
                 )
@@ -101,9 +107,15 @@ function blogArticle_201411110000(): VNode[] {
                 'Here\'s the same graph with a logarithmic time (horizontal) axis:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-11-11-0000/first-conf-0-log.png' }),
+                h('img', {
+                    src: '/blog/2014-11-11-0000/first-conf-0-log.png',
+                    alt: 'Chart showing probabilities for time to first block confirmation with the Bitcoin network loaded at ' +
+                        '0.1% (log scale)',
+                    width: 1760,
+                    height: 1167
+                }),
                 h('figcaption', {},
-                    'Probabilities for time to a first block confirmation with the Bitcoin network loaded at 0.1% (log scale'
+                    'Probabilities for time to a first block confirmation with the Bitcoin network loaded at 0.1% (log scale)'
                 )
             ),
             h('p', {},
@@ -126,7 +138,13 @@ function blogArticle_201411110000(): VNode[] {
                 'Let\'s look at network loading from 0.1% all the way to 100%:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-11-11-0000/first-conf-0-100.png' }),
+                h('img', {
+                    src: '/blog/2014-11-11-0000/first-conf-0-100.png',
+                    alt: 'Chart showing probabilities for time to a first block confirmation with the Bitcoin network at various ' +
+                        'load levels (log scale)',
+                    width: 1761,
+                    height: 1094
+                }),
                 h('figcaption', {},
                     'Probabilities for time to a first block confirmation with the Bitcoin network at various load levels (log scale)'
                 )

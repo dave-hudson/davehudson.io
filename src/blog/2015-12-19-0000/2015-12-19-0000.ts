@@ -26,7 +26,12 @@ function blogArticle_201512190000(): VNode[] {
                 'minutes, but anyone who has ever watched block arrival times will know that that\'s not what happens:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2015-12-19-0000/1b_single.png' }),
+                h('img', {
+                    src: '/blog/2015-12-19-0000/1b_single.png',
+                    alt: 'Chart shwoing probabilities for finding one Bitcoin block',
+                    width: 2031,
+                    height: 1202
+                }),
                 h('figcaption', {}, 'Probabilities for finding one Bitcoin block')
             ),
             h('p', {},
@@ -63,7 +68,12 @@ function blogArticle_201512190000(): VNode[] {
                 '(SPV wallets)?'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2015-12-19-0000/6b_single.png' }),
+                h('img', {
+                    src: '/blog/2015-12-19-0000/6b_single.png',
+                    alt: 'Chart showing probabilities of finding 6 consecutive Bitcoin blocks',
+                    width: 2032,
+                    height: 1202
+                }),
                 h('figcaption', {}, 'Probabilities of finding 6 consecutive Bitcoin blocks')
             ),
             h('p', {},
@@ -96,7 +106,13 @@ function blogArticle_201512190000(): VNode[] {
                 'hash rate we can see the following:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2015-12-19-0000/1b_double.png' }),
+                h('img', {
+                    src: '/blog/2015-12-19-0000/1b_double.png',
+                    alt: 'Chart showing a comparison of probabilities for finding a Bitcoin block with 0% and 0.2% per day hash ' +
+                        'rate expansion',
+                    width: 2032,
+                    height: 1202
+                }),
                 h('figcaption', {},
                     'Comparison of probabilities for finding a Bitcoin block with 0% and 0.2% per day hash rate expansion'
                 )
@@ -125,7 +141,13 @@ function blogArticle_201512190000(): VNode[] {
                 'first difficulty period for which the change was occurring; they do match a second or subsequent period:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2015-12-19-0000/1b_triple.png' }),
+                h('img', {
+                    src: '/blog/2015-12-19-0000/1b_triple.png',
+                    alt: 'Chart showing probabilities of finding a single Bitcoin block under -2%, 0% and +2% daily hash rate ' +
+                        'changes',
+                    width: 2032,
+                    height: 1202
+                }),
                 h('figcaption', {}, 'Probabilities of finding a single Bitcoin block under -2%, 0% and +2% daily hash rate changes')
             ),
             h('p', {},
@@ -136,7 +158,12 @@ function blogArticle_201512190000(): VNode[] {
                 'Now let\'s look at the same behaviour for our 6 confirmations:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2015-12-19-0000/6b_triple.png' }),
+                h('img', {
+                    src: '/blog/2015-12-19-0000/6b_triple.png',
+                    alt: 'Chart showing probabilities for 6 Bitcoin blocks being found during -2%, 0% and +2% hash rate changes per day',
+                    width: 2032,
+                    height: 1202
+                }),
                 h('figcaption', {},
                     'Probabilities for 6 Bitcoin blocks being found during -2%, 0% and +2% hash rate changes per day'
                 )

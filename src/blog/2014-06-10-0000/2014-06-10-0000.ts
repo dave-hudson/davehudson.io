@@ -119,8 +119,8 @@ function blogArticle_201406100000(): VNode[] {
                 'the probability histogram for the variations about our baseline:'
             ),
             h('figure', {},
-                h('img', { src:
-                    '/blog/2014-06-10-0000/12m-hash-rate-variation-probability.png',
+                h('img', {
+                    src: '/blog/2014-06-10-0000/12m-hash-rate-variation-probability.png',
                     alt: 'Histogram showing 12 month Bitcoin mining hash rate variation probability (June 2014)',
                     width: 1761,
                     height: 1033

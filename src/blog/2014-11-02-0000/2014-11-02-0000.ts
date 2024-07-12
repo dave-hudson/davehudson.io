@@ -28,8 +28,13 @@ function blogArticle_201411020000(): VNode[] {
                 '4 years:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-11-02-0000/trans-per-day-linear.png' }),
-                h('figcaption', {}, 'Number of Bitcoin transactions per day (linear chart)')
+                h('img', {
+                    src: '/blog/2014-11-02-0000/trans-per-day-linear.png',
+                    alt: 'Chart showing number of Bitcoin transactions per day (linear scale)',
+                    width: 2031,
+                    height: 1063
+                }),
+                h('figcaption', {}, 'Number of Bitcoin transactions per day (linear scale)')
             ),
             h('p', {},
                 'As with all of our Bitcoin rollercoaster rides there are highs and lows, but the trend is generally up over time.  ' +
@@ -39,8 +44,13 @@ function blogArticle_201411020000(): VNode[] {
                 'numbers makes things look worse.  One solution is to look at this on a log scale:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-11-02-0000/trans-per-day-log.png' }),
-                h('figcaption', {}, 'Number of Bitcoin transactions per day (log chart)')
+                h('img', {
+                    src: '/blog/2014-11-02-0000/trans-per-day-log.png',
+                    alt: 'Chart showing number of Bitcoin transactions per day (log scale)',
+                    width: 2031,
+                    height: 1063
+                }),
+                h('figcaption', {}, 'Number of Bitcoin transactions per day (log scale)')
             ),
             h('p', {},
                 'With this view the growth may not look quite as impressive but we can see that the daily variations really ' +
@@ -58,7 +68,12 @@ function blogArticle_201411020000(): VNode[] {
                 'that\'s surprisingly consistent!'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-11-02-0000/sunday-trans.png' }),
+                h('img', {
+                    src: '/blog/2014-11-02-0000/sunday-trans.png',
+                    alt: 'Chart showing periodic variations in the Bitcoin transaction processing rate with dips on Sundays',
+                    width: 2031,
+                    height: 1063
+                }),
                 h('figcaption', {}, 'Periodic variations in the Bitcoin transaction processing rate with dips on Sundays')
             ),
             h('p', {},
@@ -76,15 +91,25 @@ function blogArticle_201411020000(): VNode[] {
                 'over individual days?'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-11-02-0000/avg-block-size-linear.png' }),
-                h('figcaption', {}, 'Average Bitcoin block size over the last 16 months (linear chart)')
+                h('img', {
+                    src: '/blog/2014-11-02-0000/avg-block-size-linear.png',
+                    alt: 'Chart showing average Bitcoin block size over the last 16 months (linear scale)',
+                    width: 2031,
+                    height: 1063
+                }),
+                h('figcaption', {}, 'Average Bitcoin block size over the last 16 months (linear scale)')
             ),
             h('p', {},
                 'In the interests of consistency let\'s see that on a log scale too:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-11-02-0000/avg-block-size-log.png' }),
-                h('figcaption', {}, 'Average Bitcoin block size over the last 16 months (log chart)')
+                h('img', {
+                    src: '/blog/2014-11-02-0000/avg-block-size-log.png',
+                    alt: 'Chart showing average Bitcoin block size over the last 16 months (log scale)',
+                    width: 2031,
+                    height: 1063
+                }),
+                h('figcaption', {}, 'Average Bitcoin block size over the last 16 months (log scale)')
             ),
             h('p', {},
                 'Something definitely doesn\'t appear to add up!'
@@ -100,7 +125,12 @@ function blogArticle_201411020000(): VNode[] {
                 'number of transactions per day:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-11-02-0000/blksize-vs-transactions.png' }),
+                h('img', {
+                    src: '/blog/2014-11-02-0000/blksize-vs-transactions.png',
+                    alt: 'Chart showing a comparison of average block size and transaction rate per day over the last 2 years',
+                    width: 2031,
+                    height: 1063
+                }),
                 h('figcaption', {}, 'Comparison of average block size and transaction rate per day over the last 2 years')
             ),
             h('p', {},
@@ -119,15 +149,25 @@ function blogArticle_201411020000(): VNode[] {
                 'transactions):'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-11-02-0000/sustained-trans-per-second-linear.png' }),
-                h('figcaption', {}, 'Sustainable transactions per second rate (linear chart)')
+                h('img', {
+                    src: '/blog/2014-11-02-0000/sustained-trans-per-second-linear.png',
+                    alt: 'Chart showing sustainable transactions per second rate (linear scale)',
+                    width: 2032,
+                    height: 1063
+                }),
+                h('figcaption', {}, 'Sustainable transactions per second rate (linear scale)')
             ),
             h('p', {},
                 'Here\'s the log version too:'
             ),
             h('figure', {},
-                h('img', { src: '/blog/2014-11-02-0000/sustained-trans-per-second-log.png' }),
-                h('figcaption', {}, 'Sustainable transactions per second rate (log chart)')
+                h('img', {
+                    src: '/blog/2014-11-02-0000/sustained-trans-per-second-log.png',
+                    alt: 'Chart showing sustainable transactions per second rate (log scale)',
+                    width: 2032,
+                    height: 1063
+                }),
+                h('figcaption', {}, 'Sustainable transactions per second rate (log scale)')
             ),
             h('p', {},
                 'Unlike our other graphs the log chart reduces the apparent volatility of the left side of the chart this time, ' +
