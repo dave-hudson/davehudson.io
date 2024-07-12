@@ -219,7 +219,7 @@ export function getBlogRoutes() {
         blogRoutes.set(blogContent[i].hRef, {
             title: blogContent[i].title,
             render: () => blogArticlePage(i),
-            metadata: blogContent[i].metadata
+            description: blogContent[i].description
         });
     }
 

@@ -4,7 +4,7 @@ export class BlogPost {
     title: string;
     dateTime: string;
     hRef: string;
-    metadata: string;
+    description: string;
     preScriptFunction: (() => VNode[]) | null;
     openingFunction: () => VNode[];
     articleFunction: () => VNode[];
@@ -14,7 +14,7 @@ export class BlogPost {
         title: string,
         dateTime: string,
         hRef: string,
-        metadata: string,
+        description: string,
         preScriptFunction: (() => VNode[]) | null,
         openingFunction: () => VNode[],
         articleFunction: () => VNode[],
@@ -23,7 +23,7 @@ export class BlogPost {
         this.title = title;
         this.dateTime = dateTime;
         this.hRef = hRef;
-        this.metadata = metadata;
+        this.description = description;
         this.preScriptFunction = preScriptFunction;
         this.openingFunction = openingFunction;
         this.articleFunction = articleFunction;

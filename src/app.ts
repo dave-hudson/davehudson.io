@@ -78,30 +78,30 @@ function notFoundPage(path: string): VNode {
 export interface routeDetails {
     title: string;
     render: () => VNode;
-    metadata: string;
+    description: string;
 }
 
 let routes: Map<string, routeDetails> = new Map([
     ['', {
         title: 'Dreaming in data and code',
         render: homePage,
-        metadata: 'davehudson.io is Dave Hudson\'s blog site.  Dave discusses things he finds interesting in the ' +
+        description: 'davehudson.io is Dave Hudson\'s blog site.  Dave discusses things he finds interesting in the ' +
             'world of software development - dreams in data and code!'
     }],
     ['/about', {
         title: 'About me (Dave Hudson)',
         render: aboutPage,
-        metadata: 'An brief introduction to Dave Hudson, what the site is about, and how to contact him.'
+        description: 'An brief introduction to Dave Hudson, what the site is about, and how to contact him.'
     }],
     ['/projects', {
         title: 'Open source projects',
         render: projectsPage,
-        metadata: 'A quick summary of the open source projects that Dave has developed or contributed to.'
+        description: 'A quick summary of the open source projects that Dave has developed or contributed to.'
     }],
     ['/blog', {
         title: 'Blog posts',
         render: blogPage,
-        metadata: 'This page indexes all Dave\'s blog posts, presented in date order with the most recent posts at the top ' +
+        description: 'This page indexes all Dave\'s blog posts, presented in date order with the most recent posts at the top ' +
             'of the page'
     }]
 ]);
@@ -118,7 +118,7 @@ function handleLocation() {
         path = path.slice(0, -1);
     }
 
-    let pageInfo = { title: '404 - Not found', render: () => notFoundPage(path), metadata: '' };
+    let pageInfo = { title: '404 - Not found', render: () => notFoundPage(path), description: '' };
     if (routes.has(path)) {
         pageInfo = (routes.get(path) as routeDetails);
     }
@@ -130,10 +130,10 @@ function handleLocation() {
     updateElement((appElement as HTMLElement), null, null, rootVNode, newVNode);
     rootVNode = newVNode;
 
-    // Update the metadata for the new page.
+    // Update the description for the new page.
     const metaDescription: HTMLMetaElement | null = document.querySelector('meta[name="description"]');
     if (metaDescription !== null) {
-        metaDescription.content = pageInfo.metadata;
+        metaDescription.content = pageInfo.description;
     }
 
     const metaOGTitle: HTMLMetaElement | null = document.querySelector('meta[property="og:title"]');
@@ -143,7 +143,7 @@ function handleLocation() {
 
     const metaOGDescription: HTMLMetaElement | null = document.querySelector('meta[property="og:description"]');
     if (metaOGDescription !== null) {
-        metaOGDescription.content = pageInfo.metadata;
+        metaOGDescription.content = pageInfo.description;
     }
 
     const metaOGURL: HTMLMetaElement | null = document.querySelector('meta[property="og:url"]');
@@ -158,7 +158,7 @@ function handleLocation() {
 
     const metaTwitterDescription: HTMLMetaElement | null = document.querySelector('meta[name="twitter:description"]');
     if (metaTwitterDescription !== null) {
-        metaTwitterDescription.content = pageInfo.metadata;
+        metaTwitterDescription.content = pageInfo.description;
     }
 }
 
