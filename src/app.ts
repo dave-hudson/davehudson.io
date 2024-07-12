@@ -40,8 +40,9 @@ function homePage(): VNode {
                 }),
             ),
             h('p', {},
-                'Software is the most amazing playground for an engineer.  A few inconvenient laws of physics aside, ' +
-                'if we can imagine something, then we can probably build it in data and code.'
+                'A few inconvenient laws of physics aside, if we can imagine something, then we can probably build it as software.  ' +
+                'This site is where I (Dave) write about interesting things in the world of software development - dreams in data ' +
+                'and code.'
             ),
             ...blogSummaries(7),
             h('hr', {}),
