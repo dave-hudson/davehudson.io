@@ -91,7 +91,7 @@ async function renderPage(browser, url, outputPath, retries) {
     const page = await browser.newPage();
     for (let attempt = 1; attempt <= retries; attempt++) {
         try {
-            await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000 });
+            await page.goto(url, { waitUntil: 'networkidle0', timeout: 30000 });
             const content = await page.content();
             await fs.writeFile(outputPath, content, 'utf-8');
             console.log(`Rendered: ${url}`);
@@ -107,34 +107,6 @@ async function renderPage(browser, url, outputPath, retries) {
                 process.exit(1);
             }
         }
-    }
-}
-
-/**
- * Task queue to control the number of parallel renders.
- */
-class TaskQueue {
-    constructor(maxConcurrent) {
-        this.maxConcurrent = maxConcurrent;
-        this.running = 0;
-        this.queue = [];
-    }
-
-    addTask(task) {
-        this.queue.push(task);
-        this.runNext();
-    }
-
-    async runNext() {
-        if (this.running >= this.maxConcurrent || this.queue.length === 0) {
-            return;
-        }
-
-        const task = this.queue.shift();
-        this.running++;
-        await task();
-        this.running--;
-        this.runNext();
     }
 }
 
@@ -162,30 +134,32 @@ async function main() {
     }
 
     const browser = await puppeteer.launch();
-    const taskQueue = new TaskQueue(parallelRenders);
 
-    urls.forEach(url => {
+    const tasks = urls.map(async url => {
         const urlPath = new URL(url).pathname;
         const outputPath = path.join(outputDir, urlPath, 'index.html');
 
-        taskQueue.addTask(async () => {
-            await createDirectories(outputDir, urlPath);
+        await createDirectories(outputDir, urlPath);
 
-            try {
-                await fs.rm(outputPath, { force: true });
-            } catch (error) {
-                console.error(`Failed to delete existing file ${outputPath}: ${error.message}`);
-                process.exit(1);
-            }
+        try {
+            await fs.rm(outputPath, { force: true });
+        } catch (error) {
+            console.error(`Failed to delete existing file ${outputPath}: ${error.message}`);
+            process.exit(1);
+        }
 
-            await renderPage(browser, url, outputPath, maxRetries);
-        });
+        await renderPage(browser, url, outputPath, maxRetries);
     });
 
-    // Wait for all tasks to complete
-    while (taskQueue.running > 0 || taskQueue.queue.length > 0) {
-        await new Promise(resolve => setTimeout(resolve, 100));
+    const parallelTasks = [];
+    for (let i = 0; i < tasks.length; i += parallelRenders) {
+        parallelTasks.push(Promise.allSettled(tasks.slice(i, i + parallelRenders)));
     }
+
+    await Promise.all(parallelTasks).catch(error => {
+        console.error(`Error rendering pages: ${error.message}`);
+        process.exit(1);
+    });
 
     await browser.close();
     console.log('All pages rendered successfully.');
