@@ -577,8 +577,3 @@ export function highlight(code: string, lexerClass: new (input: string) => BaseL
 
     return highlightedCode;
 }
-
-// Example usage:
-const code = `#include <iostream>\nclass MyClass { public: void method(); };`; // Example C++ code
-const highlightedCode = highlight(code, CppLexer);
-console.log(highlightedCode);
