@@ -20,8 +20,8 @@ async function loadFile(filePath: string, storeFunction: (content: VNode[]) => v
             throw new Error(`Failed to fetch file: ${response.statusText}`);
         }
         const content = await response.text();
-        code1.push(...highlight(content, JavaScriptLexer));
-        console.log('loaded file');
+        storeFunction(highlight(content, JavaScriptLexer));
+        console.log('loaded file', filePath, content);
     } catch (error) {
         console.error('Error loading file:', error);
     }
@@ -44,7 +44,7 @@ function blogOpening_2024_07_15_0800(): VNode[] {
 
 function blogArticle_2024_07_15_0800(): VNode[] {
     if (code1.length === 0) {
-        loadFile('./2024-07-15-0800-file1.js', writeCode1);
+        loadFile('/blog/2024-07-15-0800/2024-07-15-0800-file1.js', writeCode1);
     }
 
     return [
