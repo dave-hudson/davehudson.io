@@ -30,7 +30,6 @@ interface HTMLAttributes {
     href?: string;
     id?: string;
     src?: string;
-    style?: string;
     title?: string;
     width?: number | string;
 
