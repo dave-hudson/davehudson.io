@@ -35,6 +35,38 @@ hr {
     color: #d06060;
 }
 
+.main pre {
+    background-color: #1c1c1c;
+}
+
+.main pre code .keyword {
+    color: #ffc0cb;
+}
+
+.main pre code .identifier {
+    color: #80b0f0;
+}
+
+.main pre code .number {
+    color: #c0c040;
+}
+
+.main pre code .string {
+    color: #d06060;
+}
+
+.main pre code .comment {
+    color: #00c000;
+}
+
+.main pre code .operator {
+    color: #e0e0e0;
+}
+
+.main pre code .preprocessor {
+    color: #808080;
+}
+
 .main table th {
     background-color: #444;
     border: 1px solid #777;

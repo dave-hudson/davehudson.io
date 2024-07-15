@@ -6,15 +6,15 @@ interface Token {
 }
 
 const styles: { [key: string]: string } = {
-    KEYWORD: 'color: blue; font-weight: bold;',
-    IDENTIFIER: 'color: black;',
-    NUMBER: 'color: purple;',
-    STRING: 'color: brown;',
-    COMMENT: 'color: green; font-style: italic;',
-    OPERATOR_OR_PUNCTUATION: 'color: red;',
-    PREPROCESSOR: 'color: gray;',
-    WHITESPACE: 'color: inherit;',
-    NEWLINE: 'color: inherit;',
+    KEYWORD: 'keyword',
+    IDENTIFIER: 'identifier',
+    NUMBER: 'number',
+    STRING: 'string',
+    COMMENT: 'comment',
+    OPERATOR_OR_PUNCTUATION: 'operator',
+    PREPROCESSOR: 'preprocessor',
+    WHITESPACE: '',
+    NEWLINE: '',
 };
 
 /**
@@ -662,8 +662,8 @@ export function highlight(code: string, lexerClass: new (input: string) => BaseL
     let token: Token | null;
 
     while ((token = lexer.nextToken()) !== null) {
-        const style = styles[token.type] || 'color: black;';
-        const codeFragment = h('span', { style: style }, `${token.value}`);
+        const style = styles[token.type] || '';
+        const codeFragment = h('span', { className: style }, `${token.value}`);
         highlightedCode.push(codeFragment);
     }
 

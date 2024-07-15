@@ -557,6 +557,39 @@ pre {
     color: #a81818;
 }
 
+.main pre {
+    background-color: #ececec;
+    padding: 8px;
+}
+
+.main pre code .keyword {
+    color: #c0408b;
+}
+
+.main pre code .identifier {
+    color: #4058d0;
+}
+
+.main pre code .number {
+    color: #c08a00;
+}
+
+.main pre code .string {
+    color: #f06030;
+}
+
+.main pre code .comment {
+    color: #006400;
+}
+
+.main pre code .operator {
+    color: #141414;
+}
+
+.main pre code .preprocessor {
+    color: #a0a0a0;
+}
+
 .main table {
     margin: 25px auto 25px auto;
     border-spacing: 0;

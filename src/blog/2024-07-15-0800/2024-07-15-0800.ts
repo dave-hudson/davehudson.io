@@ -21,7 +21,7 @@ function blogOpening_2024_07_15_0800(): VNode[] {
 
 function blogArticle_2024_07_15_0800(): VNode[] {
 const blogCode = '// app.ts\n' +
-'document.getElementById(\'fileInput\')?.addEventListener(\'change\', handleFileSelect, false);\n' +
+'document.getElementById(\'fileInput\')?.addEventListener(\'change\', handleFileSelect, false); kdfj\n' +
 '\n' +
 'function handleFileSelect(event: Event) {\n' +
 '    const input = event.target as HTMLInputElement;\n' +
