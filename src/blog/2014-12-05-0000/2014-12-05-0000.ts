@@ -2,7 +2,7 @@ import { h, VNode } from '../../lib/dvdi';
 import { navigateEvent } from '../../app';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201412050000(): VNode[] {
+function blogOpening_2014_12_05_0000(): VNode[] {
     return [
         h('p', {},
             'A few days ago, Ittay Eyal published an intriguing paper, "',
@@ -16,7 +16,7 @@ function blogOpening_201412050000(): VNode[] {
     ]
 }
 
-function blogArticle_201412050000(): VNode[] {
+function blogArticle_2014_12_05_0000(): VNode[] {
     return [
         h('section', {},
             h('h2', {}, 'Mining pools'),
@@ -338,7 +338,7 @@ function blogArticle_201412050000(): VNode[] {
     ];
 }
 
-function blogPostScript_201412050000(): VNode[] {
+function blogPostScript_2014_12_05_0000(): VNode[] {
     return [
         h('hr', {}),
         h('section', {},
@@ -359,7 +359,7 @@ function blogPostScript_201412050000(): VNode[] {
     ];
 }
 
-export const blogPost_201412050000 = new BlogPost(
+export const blogPost_2014_12_05_0000 = new BlogPost(
     'Pool wars?',
     '2014-12-05',
     '/blog/2014-12-05-0000',
@@ -367,7 +367,7 @@ export const blogPost_201412050000 = new BlogPost(
     'vector and the potential rewards for an attacker.',
     '/blog/2014-12-05-0000/c1-25-25-yes-no.png',
     null,
-    blogOpening_201412050000,
-    blogArticle_201412050000,
-    blogPostScript_201412050000
+    blogOpening_2014_12_05_0000,
+    blogArticle_2014_12_05_0000,
+    blogPostScript_2014_12_05_0000
 );

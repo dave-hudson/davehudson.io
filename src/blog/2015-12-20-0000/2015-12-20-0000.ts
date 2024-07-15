@@ -2,7 +2,7 @@ import { h, VNode } from '../../lib/dvdi';
 import { navigateEvent } from '../../app';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201512200000(): VNode[] {
+function blogOpening_2015_12_20_0000(): VNode[] {
     return [
         h('p', {},
             'In November 2014 I wrote an article, "',
@@ -15,7 +15,7 @@ function blogOpening_201512200000(): VNode[] {
     ]
 }
 
-function blogArticle_201512200000(): VNode[] {
+function blogArticle_2015_12_20_0000(): VNode[] {
     return [
         h('p', {},
             'In the original blog post the network\'s block capacity was at about 30%.  As of early December 2015 the ' +
@@ -61,7 +61,7 @@ function blogArticle_201512200000(): VNode[] {
     ];
 }
 
-function blogPostScript_201512200000(): VNode[] {
+function blogPostScript_2015_12_20_0000(): VNode[] {
     return [
         h('hr', {}),
         h('section', {},
@@ -82,14 +82,14 @@ function blogPostScript_201512200000(): VNode[] {
     ];
 }
 
-export const blogPost_201512200000 = new BlogPost(
+export const blogPost_2015_12_20_0000 = new BlogPost(
     'Bitcoin traffic bulletin (redux)',
     '2015-12-20',
     '/blog/2015-12-20-0000',
     'This blog post updates and earlier post "Bitcoin traffic bulletin" to review how full Bitcoin blocks are now.',
     '/blog/2015-12-20-0000/blocksizes.png',
     null,
-    blogOpening_201512200000,
-    blogArticle_201512200000,
-    blogPostScript_201512200000
+    blogOpening_2015_12_20_0000,
+    blogArticle_2015_12_20_0000,
+    blogPostScript_2015_12_20_0000
 );

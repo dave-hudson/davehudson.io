@@ -2,7 +2,7 @@ import { h, VNode } from '../../lib/dvdi';
 import { navigateEvent } from '../../app';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201601050000(): VNode[] {
+function blogOpening_2016_01_05_0000(): VNode[] {
     return [
         h('p', {},
             '"Exahash" sounds like it could well have been the hammer of the Norse Gods of old as it defeated all in battle.  ' +
@@ -18,7 +18,7 @@ function blogOpening_201601050000(): VNode[] {
     ]
 }
 
-function blogArticle_201601050000(): VNode[] {
+function blogArticle_2016_01_05_0000(): VNode[] {
     return [
         h('section', {},
             h('h2', {}, 'The nature of Bitcoin hashing (an aside)'),
@@ -172,7 +172,7 @@ function blogArticle_201601050000(): VNode[] {
     ];
 }
 
-function blogPostscript_20160105000(): VNode[] {
+function blogPostscript_2016_01_05_000(): VNode[] {
     return [
         h('hr', {}),
         h('section', {},
@@ -193,7 +193,7 @@ function blogPostscript_20160105000(): VNode[] {
     ];
 }
 
-export const blogPost_201601050000 = new BlogPost(
+export const blogPost_2016_01_05_0000 = new BlogPost(
     'Behold mighty exahash, hammer of the blocks!',
     '2016-01-05',
     '/blog/2016-01-05-0000',
@@ -201,7 +201,7 @@ export const blogPost_201601050000 = new BlogPost(
     'proof-of-work.',
     '/blog/2016-01-05-0000/hash-rate.png',
     null,
-    blogOpening_201601050000,
-    blogArticle_201601050000,
-    blogPostscript_20160105000
+    blogOpening_2016_01_05_0000,
+    blogArticle_2016_01_05_0000,
+    blogPostscript_2016_01_05_000
 );

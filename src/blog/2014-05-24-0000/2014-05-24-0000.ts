@@ -2,7 +2,7 @@ import { h, VNode } from '../../lib/dvdi';
 import { navigateEvent } from '../../app';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201405240000(): VNode[] {
+function blogOpening_2014_05_24_0000(): VNode[] {
     return [
         h('p', {},
             'Everyone knows that mining is a noisy task.  Did you realize just how noisy Bitcoin mining is though? ' +
@@ -11,7 +11,7 @@ function blogOpening_201405240000(): VNode[] {
     ]
 }
 
-function blogArticle_201405240000(): VNode[] {
+function blogArticle_2014_05_24_0000(): VNode[] {
     return [
         h('figure', {},
             h('img', {
@@ -192,7 +192,7 @@ function blogArticle_201405240000(): VNode[] {
     ];
 }
 
-function blogPostScript_201405240000(): VNode[] {
+function blogPostScript_2014_05_24_0000(): VNode[] {
     return [
         h('hr', {}),
         h('section', {},
@@ -208,7 +208,7 @@ function blogPostScript_201405240000(): VNode[] {
     ];
 }
 
-export const blogPost_201405240000 = new BlogPost(
+export const blogPost_2014_05_24_0000 = new BlogPost(
     'Reach for the ear defenders!',
     '2014-05-24',
     '/blog/2014-05-24-0000',
@@ -216,7 +216,7 @@ export const blogPost_201405240000 = new BlogPost(
     'some of that statistical noise.',
     '/blog/2014-05-24-0000/simulation.png',
     null,
-    blogOpening_201405240000,
-    blogArticle_201405240000,
-    blogPostScript_201405240000
+    blogOpening_2014_05_24_0000,
+    blogArticle_2014_05_24_0000,
+    blogPostScript_2014_05_24_0000
 );

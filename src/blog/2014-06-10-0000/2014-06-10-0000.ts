@@ -2,7 +2,7 @@ import { h, VNode } from '../../lib/dvdi';
 import { navigateEvent } from '../../app';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201406100000(): VNode[] {
+function blogOpening_2014_06_10_0000(): VNode[] {
     return [
         h('p', {},
             'Bitcoin difficulty and hash rate statistics should be considered an illness.  The symptoms include anxiety, ' +
@@ -14,7 +14,7 @@ function blogOpening_201406100000(): VNode[] {
     ]
 }
 
-function blogArticle_201406100000(): VNode[] {
+function blogArticle_2014_06_10_0000(): VNode[] {
     return [
         h('section', {},
             h('h2', {}, 'Difficulty charts'),
@@ -149,7 +149,7 @@ function blogArticle_201406100000(): VNode[] {
     ];
 }
 
-function blogPostScript_201406100000(): VNode[] {
+function blogPostScript_2014_06_10_0000(): VNode[] {
     return [
         h('hr', {}),
         h('section', {},
@@ -170,14 +170,14 @@ function blogPostScript_201406100000(): VNode[] {
     ];
 }
 
-export const blogPost_201406100000 = new BlogPost(
+export const blogPost_2014_06_10_0000 = new BlogPost(
     'Lies, damned lies and Bitcoin difficulties',
     '2014-06-10',
     '/blog/2014-06-10-0000',
     'This blog post looks at the statistics associated with Bitcoin difficulties and how they change over time.',
     '/blog/2014-06-10-0000/6m-hash-rate-linear.png',
     null,
-    blogOpening_201406100000,
-    blogArticle_201406100000,
-    blogPostScript_201406100000
+    blogOpening_2014_06_10_0000,
+    blogArticle_2014_06_10_0000,
+    blogPostScript_2014_06_10_0000
 );

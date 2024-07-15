@@ -1,7 +1,7 @@
 import { h, VNode } from '../../lib/dvdi';
 import { BlogPost } from '../BlogPost'
 
-function blogPreScript_201701061400(): VNode[] {
+function blogPreScript_2017_01_06_1400(): VNode[] {
     return [
         h('em', {},
             'Note 2020-03-06: This was originally published as an opinion piece at ',
@@ -13,7 +13,7 @@ function blogPreScript_201701061400(): VNode[] {
     ];
 }
 
-function blogOpening_201701061400(): VNode[] {
+function blogOpening_2017_01_06_1400(): VNode[] {
     return [
         h('p', {},
             '2009 saw Satoshi Nakamoto deploy the first Bitcoin node, and within five years its blockchain had become a ' +
@@ -33,7 +33,7 @@ function blogOpening_201701061400(): VNode[] {
     ];
 }
 
-function blogArticle_201701061400(): VNode[] {
+function blogArticle_2017_01_06_1400(): VNode[] {
     return [
         h('section', {},
             h('h2', {}, 'It\'s all about money'),
@@ -246,14 +246,14 @@ function blogArticle_201701061400(): VNode[] {
     ];
 }
 
-export const blogPost_201701061400 = new BlogPost(
+export const blogPost_2017_01_06_1400 = new BlogPost(
     'What IoT history reveals about blockchain\'s challenges',
     '2017-01-06T14:00',
     '/blog/2017-01-06-1400',
     'Before blockchain, IoT went through a similary hype cycle.  This article explores the similarities and offers lessons.',
     '',
-    blogPreScript_201701061400,
-    blogOpening_201701061400,
-    blogArticle_201701061400,
+    blogPreScript_2017_01_06_1400,
+    blogOpening_2017_01_06_1400,
+    blogArticle_2017_01_06_1400,
     null
 );

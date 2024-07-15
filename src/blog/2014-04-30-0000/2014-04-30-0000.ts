@@ -2,7 +2,7 @@ import { h, VNode } from '../../lib/dvdi';
 import { navigateEvent } from '../../app';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201404300000(): VNode[] {
+function blogOpening_2014_04_30_0000(): VNode[] {
     return [
         h('p', {},
             'Over the last few months I\'ve written about patterns and trends in Bitcoin mining while I\'ve been trying ' +
@@ -15,7 +15,7 @@ function blogOpening_201404300000(): VNode[] {
     ]
 }
 
-function blogArticle_201404300000(): VNode[] {
+function blogArticle_2014_04_30_0000(): VNode[] {
     return [
         h('section', {},
             h('h2', {}, 'The role of difficulty'),
@@ -158,7 +158,7 @@ function blogArticle_201404300000(): VNode[] {
     ];
 }
 
-function blogPostScript_201404300000(): VNode[] {
+function blogPostScript_2014_04_30_0000(): VNode[] {
     return [
         h('hr', {}),
         h('section', {},
@@ -189,14 +189,14 @@ function blogPostScript_201404300000(): VNode[] {
     ];
 }
 
-export const blogPost_201404300000 = new BlogPost(
+export const blogPost_2014_04_30_0000 = new BlogPost(
     'Prisoner\'s dilemmas?',
     '2014-04-30',
     '/blog/2014-04-30-0000',
     'This blog post looks at the rationale that leads Bitcoin miners to cooperate to secure the mining network.',
     '/blog/2014-04-30-0000/Prisoners_Dilemma.png',
     null,
-    blogOpening_201404300000,
-    blogArticle_201404300000,
-    blogPostScript_201404300000
+    blogOpening_2014_04_30_0000,
+    blogArticle_2014_04_30_0000,
+    blogPostScript_2014_04_30_0000
 );

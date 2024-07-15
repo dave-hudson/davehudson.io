@@ -2,7 +2,7 @@ import { h, VNode} from '../../lib/dvdi';
 import { navigateEvent } from '../../app';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201404280000(): VNode[] {
+function blogOpening_2014_04_28_0000(): VNode[] {
     return [
         h('p', {},
             'One of the more common questions asked when people think about the scale of Bitcoin mining is just how much ' +
@@ -18,7 +18,7 @@ function blogOpening_201404280000(): VNode[] {
     ]
 }
 
-function blogArticle_201404280000(): VNode[] {
+function blogArticle_2014_04_28_0000(): VNode[] {
     return [
         h('section', {},
             h('h2', {}, 'What are the electricity costs?'),
@@ -183,7 +183,7 @@ function blogArticle_201404280000(): VNode[] {
     ];
 }
 
-function blogPostScript_201404280000(): VNode[] {
+function blogPostScript_2014_04_28_0000(): VNode[] {
     return [
         h('hr', {}),
         h('section', {},
@@ -209,7 +209,7 @@ function blogPostScript_201404280000(): VNode[] {
     ];
 }
 
-export const blogPost_201404280000 = new BlogPost(
+export const blogPost_2014_04_28_0000 = new BlogPost(
     'Megawatts of mining',
     '2014-04-28',
     '/blog/2014-04-28-0000',
@@ -217,7 +217,7 @@ export const blogPost_201404280000 = new BlogPost(
     'network.  This blog post looks at some of the economics related to this.',
     '/blog/2014-04-28-0000/hash-predict.png',
     null,
-    blogOpening_201404280000,
-    blogArticle_201404280000,
-    blogPostScript_201404280000
+    blogOpening_2014_04_28_0000,
+    blogArticle_2014_04_28_0000,
+    blogPostScript_2014_04_28_0000
 );

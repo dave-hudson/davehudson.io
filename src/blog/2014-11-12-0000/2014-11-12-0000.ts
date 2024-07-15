@@ -2,7 +2,7 @@ import { h, VNode } from '../../lib/dvdi';
 import { navigateEvent } from '../../app';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201411120000(): VNode[] {
+function blogOpening_2014_11_12_0000(): VNode[] {
     return [
         h('p', {},
             'Bitcoin is often touted as having substantially lower fees associated with using it than most other financial ' +
@@ -13,7 +13,7 @@ function blogOpening_201411120000(): VNode[] {
     ]
 }
 
-function blogArticle_201411120000(): VNode[] {
+function blogArticle_2014_11_12_0000(): VNode[] {
     return [
         h('section', {},
             h('h2', {}, 'Transaction fees'),
@@ -211,7 +211,7 @@ function blogArticle_201411120000(): VNode[] {
     ];
 }
 
-function blogPostScript_201411120000(): VNode[] {
+function blogPostScript_2014_11_12_0000(): VNode[] {
     return [
         h('hr', {}),
         h('section', {},
@@ -232,7 +232,7 @@ function blogPostScript_201411120000(): VNode[] {
     ];
 }
 
-export const blogPost_201411120000 = new BlogPost(
+export const blogPost_2014_11_12_0000 = new BlogPost(
     'The future of Bitcoin transaction fees?',
     '2014-11-12',
     '/blog/2014-11-12-0000',
@@ -240,7 +240,7 @@ export const blogPost_201411120000 = new BlogPost(
     'current state of Bitcoin transaction fees.',
     '/blog/2014-11-12-0000/fee-per-trans-linear.png',
     null,
-    blogOpening_201411120000,
-    blogArticle_201411120000,
-    blogPostScript_201411120000
+    blogOpening_2014_11_12_0000,
+    blogArticle_2014_11_12_0000,
+    blogPostScript_2014_11_12_0000
 );

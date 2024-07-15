@@ -2,7 +2,7 @@ import { h, VNode } from '../../lib/dvdi';
 import { navigateEvent } from '../../app';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201403230000(): VNode[] {
+function blogOpening_2014_03_23_0000(): VNode[] {
     return [
         h('p', {},
             'ASIC mining is now the norm for Bitcoin, and 28 nm ASICs are now becoming the mainstream replacing the 65 ' +
@@ -16,7 +16,7 @@ function blogOpening_201403230000(): VNode[] {
     ]
 }
 
-function blogArticle_201403230000(): VNode[] {
+function blogArticle_2014_03_23_0000(): VNode[] {
     return [
         h('section', {},
                 h('h2', {}, 'Why have things moved so fast?'),
@@ -148,14 +148,14 @@ function blogArticle_201403230000(): VNode[] {
     ];
 }
 
-export const blogPost_201403230000 = new BlogPost(
+export const blogPost_2014_03_23_0000 = new BlogPost(
     'Where next for Bitcoin mining ASICs?',
     '2014-03-23',
     '/blog/2014-03-23-0000',
     'This blog post looks at the use of ASICs in Bitcoin mining, and how this might evolve in the future.',
     '/blog/2014-03-23-0000/ASIC_geometry.png',
     null,
-    blogOpening_201403230000,
-    blogArticle_201403230000,
+    blogOpening_2014_03_23_0000,
+    blogArticle_2014_03_23_0000,
     null
 );

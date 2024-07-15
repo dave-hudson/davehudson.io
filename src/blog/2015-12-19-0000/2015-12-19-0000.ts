@@ -2,7 +2,7 @@ import { h, VNode } from '../../lib/dvdi';
 import { navigateEvent } from '../../app';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201512190000(): VNode[] {
+function blogOpening_2015_12_19_0000(): VNode[] {
     return [
         h('p', {},
             'Bitcoin blocks take 10 minutes to find don\'t they?  Well, actually no they don\'t.  Sometimes they can be found ' +
@@ -17,7 +17,7 @@ function blogOpening_201512190000(): VNode[] {
     ]
 }
 
-function blogArticle_201512190000(): VNode[] {
+function blogArticle_2015_12_19_0000(): VNode[] {
     return [
         h('section', {},
             h('h2', {}, 'Running like clockwork?'),
@@ -207,7 +207,7 @@ function blogArticle_201512190000(): VNode[] {
     ];
 }
 
-function blogPostScript_201512190000(): VNode[] {
+function blogPostScript_2015_12_19_0000(): VNode[] {
     return [
         h('hr', {}),
         h('section', {},
@@ -233,7 +233,7 @@ function blogPostScript_201512190000(): VNode[] {
     ];
 }
 
-export const blogPost_201512190000 = new BlogPost(
+export const blogPost_2015_12_19_0000 = new BlogPost(
     'Waiting for blocks',
     '2015-12-19',
     '/blog/2015-12-19-0000',
@@ -241,7 +241,7 @@ export const blogPost_201512190000 = new BlogPost(
     'also reviews the impact of changes in the underlying hash rate.',
     '/blog/2015-12-19-0000/1b_single.png',
     null,
-    blogOpening_201512190000,
-    blogArticle_201512190000,
-    blogPostScript_201512190000
+    blogOpening_2015_12_19_0000,
+    blogArticle_2015_12_19_0000,
+    blogPostScript_2015_12_19_0000
 );

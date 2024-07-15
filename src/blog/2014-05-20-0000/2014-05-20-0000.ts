@@ -1,7 +1,7 @@
 import { h, VNode } from '../../lib/dvdi';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201405200000(): VNode[] {
+function blogOpening_2014_05_20_0000(): VNode[] {
     return [
         h('p', {},
             'One of the more infuriating challenges when trying to do any sort of analysis of Bitcoin mining is to ' +
@@ -14,7 +14,7 @@ function blogOpening_201405200000(): VNode[] {
     ]
 }
 
-function blogArticle_201405200000(): VNode[] {
+function blogArticle_2014_05_20_0000(): VNode[] {
     return [
         h('section', {},
             h('h2', {}, 'Isn\'t mining set up to generate a block once every 10 minutes?'),
@@ -153,14 +153,14 @@ function blogArticle_201405200000(): VNode[] {
     ];
 }
 
-export const blogPost_201405200000 = new BlogPost(
+export const blogPost_2014_05_20_0000 = new BlogPost(
     'Hash rate headaches',
     '2014-05-20',
     '/blog/2014-05-20-0000',
     'This blog post looks at how often the Bitcoin mining network finds fewer or more than 6 blocks per hour, and why.',
     '/blog/2014-05-20-0000/blocks-per-hour.png',
     null,
-    blogOpening_201405200000,
-    blogArticle_201405200000,
+    blogOpening_2014_05_20_0000,
+    blogArticle_2014_05_20_0000,
     null
 );

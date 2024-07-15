@@ -2,7 +2,7 @@ import { h, VNode } from '../../lib/dvdi';
 import { navigateEvent } from '../../app';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201411110000(): VNode[] {
+function blogOpening_2014_11_11_0000(): VNode[] {
     return [
         h('p', {},
             'The Bitcoin network is currently running at around 30% of its maximum capacity, but what does that actually mean ' +
@@ -13,7 +13,7 @@ function blogOpening_201411110000(): VNode[] {
     ]
 }
 
-function blogArticle_201411110000(): VNode[] {
+function blogArticle_2014_11_11_0000(): VNode[] {
     return [
         h('section', {},
             h('h2', {}, 'Bitcoin transaction processing'),
@@ -228,7 +228,7 @@ function blogArticle_201411110000(): VNode[] {
     ];
 }
 
-function blogPostScript_201411110000(): VNode[] {
+function blogPostScript_2014_11_11_0000(): VNode[] {
     return [
         h('hr', {}),
         h('section', {},
@@ -254,7 +254,7 @@ function blogPostScript_201411110000(): VNode[] {
     ];
 }
 
-export const blogPost_201411110000 = new BlogPost(
+export const blogPost_2014_11_11_0000 = new BlogPost(
     'Bitcoin traffic bulletin',
     '2014-11-11',
     '/blog/2014-11-11-0000',
@@ -262,7 +262,7 @@ export const blogPost_201411110000 = new BlogPost(
     'network starts to get congested.',
     '/blog/2014-11-11-0000/first-conf-0-linear.png',
     null,
-    blogOpening_201411110000,
-    blogArticle_201411110000,
-    blogPostScript_201411110000
+    blogOpening_2014_11_11_0000,
+    blogArticle_2014_11_11_0000,
+    blogPostScript_2014_11_11_0000
 );

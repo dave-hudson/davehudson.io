@@ -2,7 +2,7 @@ import { h, VNode } from '../../lib/dvdi';
 import { navigateEvent } from '../../app';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201406230000(): VNode[] {
+function blogOpening_2014_06_23_0000(): VNode[] {
     return [
         h('p', {},
             'Every so often a Bitcoin mining pool is reported to manage more than half of the Bitcoin hashing capacity, ' +
@@ -13,7 +13,7 @@ function blogOpening_201406230000(): VNode[] {
     ]
 }
 
-function blogArticle_201406230000(): VNode[] {
+function blogArticle_2014_06_23_0000(): VNode[] {
     return [
         h('section', {},
             h('h2', {}, 'A day in the life of a 50% mining pool'),
@@ -108,7 +108,7 @@ function blogArticle_201406230000(): VNode[] {
     ];
 }
 
-function blogPostScript_201406230000(): VNode[] {
+function blogPostScript_2014_06_23_0000(): VNode[] {
     return [
         h('hr', {}),
         h('section', {},
@@ -134,7 +134,7 @@ function blogPostScript_201406230000(): VNode[] {
     ];
 }
 
-export const blogPost_201406230000 = new BlogPost(
+export const blogPost_2014_06_23_0000 = new BlogPost(
     '51% of the network',
     '2014-06-23',
     '/blog/2014-06-23-0000',
@@ -142,7 +142,7 @@ export const blogPost_201406230000 = new BlogPost(
     'This blog post looks at how 50% of the mining network might appear.',
     '/blog/2014-06-23-0000/24hours0percent.png',
     null,
-    blogOpening_201406230000,
-    blogArticle_201406230000,
-    blogPostScript_201406230000
+    blogOpening_2014_06_23_0000,
+    blogArticle_2014_06_23_0000,
+    blogPostScript_2014_06_23_0000
 );

@@ -2,7 +2,7 @@ import { h, VNode } from '../../lib/dvdi';
 import { navigateEvent } from '../../app';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201406300000(): VNode[] {
+function blogOpening_2014_06_30_0000(): VNode[] {
     return [
         h('p', {},
             'What\'s the best way to get a return when we mine Bitcoins?  Should we mine on our own, mine with a small pool ' +
@@ -15,7 +15,7 @@ function blogOpening_201406300000(): VNode[] {
     ]
 }
 
-function blogArticle_201406300000(): VNode[] {
+function blogArticle_2014_06_30_0000(): VNode[] {
     return [
         h('section', {},
             h('h2', {}, 'Starting thoughts'),
@@ -146,7 +146,7 @@ function blogArticle_201406300000(): VNode[] {
     ];
 }
 
-function blogPostScript_201406300000(): VNode[] {
+function blogPostScript_2014_06_30_0000(): VNode[] {
     return [
         h('hr', {}),
         h('section', {},
@@ -167,14 +167,14 @@ function blogPostScript_201406300000(): VNode[] {
     ];
 }
 
-export const blogPost_201406300000 = new BlogPost(
+export const blogPost_2014_06_30_0000 = new BlogPost(
     'The gambler\'s guide to Bitcoin mining',
     '2014-06-30',
     '/blog/2014-06-30-0000',
     'This blog post reviews the statistics and probabilities associated with mining Bitcoin in various different ways.',
     '/blog/2014-06-30-0000/solo-mine.png',
     null,
-    blogOpening_201406300000,
-    blogArticle_201406300000,
-    blogPostScript_201406300000
+    blogOpening_2014_06_30_0000,
+    blogArticle_2014_06_30_0000,
+    blogPostScript_2014_06_30_0000
 );

@@ -2,7 +2,7 @@ import { h, VNode } from '../../lib/dvdi';
 import { navigateEvent } from '../../app';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201406050000(): VNode[] {
+function blogOpening_2014_06_05_0000(): VNode[] {
     return [
         h('p', {},
             'About 3 months ago I looked at how the BTC price seems to spike up approximately every 7 months.  It seems ' +
@@ -15,7 +15,7 @@ function blogOpening_201406050000(): VNode[] {
     ]
 }
 
-function blogArticle_201406050000(): VNode[] {
+function blogArticle_2014_06_05_0000(): VNode[] {
     return [
         h('p', {}, 'Let\'s look at the graph (plotted on a logarithmic Y axis):'),
         h('figure', {},
@@ -45,7 +45,7 @@ function blogArticle_201406050000(): VNode[] {
     ];
 }
 
-function blogPostScript_201406050000(): VNode[] {
+function blogPostScript_2014_06_05_0000(): VNode[] {
     return [
         h('hr', {}),
         h('section', {},
@@ -61,14 +61,14 @@ function blogPostScript_201406050000(): VNode[] {
     ];
 }
 
-export const blogPost_201406050000 = new BlogPost(
+export const blogPost_2014_06_05_0000 = new BlogPost(
     'Strange spikes revisited!',
     '2014-06-05',
     '/blog/2014-06-05-0000',
     'This blog post revisits the strange spikes in the Bitcoin price that we looked at previously.',
     '/blog/2014-06-05-0000/BTC-price.png',
     null,
-    blogOpening_201406050000,
-    blogArticle_201406050000,
-    blogPostScript_201406050000
+    blogOpening_2014_06_05_0000,
+    blogArticle_2014_06_05_0000,
+    blogPostScript_2014_06_05_0000
 );

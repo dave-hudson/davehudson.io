@@ -2,7 +2,7 @@ import { h, VNode } from '../../lib/dvdi';
 import { navigateEvent } from '../../app';
 import { BlogPost } from '../BlogPost';
 
-function blogOpening_201411020000(): VNode[] {
+function blogOpening_2014_11_02_0000(): VNode[] {
     return [
         h('p', {},
             'The general wisdom seems to be that the Bitcoin network can currently sustain 7 transactions per second.  ' +
@@ -18,7 +18,7 @@ function blogOpening_201411020000(): VNode[] {
     ]
 }
 
-function blogArticle_201411020000(): VNode[] {
+function blogArticle_2014_11_02_0000(): VNode[] {
     return [
         h('section', {},
             h('h2', {}, 'Bitcoin transactions per day'),
@@ -199,7 +199,7 @@ function blogArticle_201411020000(): VNode[] {
     ];
 }
 
-function blogPostScript_201411020000(): VNode[] {
+function blogPostScript_2014_11_02_0000(): VNode[] {
     return [
         h('hr', {}),
         h('section', {},
@@ -225,7 +225,7 @@ function blogPostScript_201411020000(): VNode[] {
     ];
 }
 
-export const blogPost_201411020000 = new BlogPost(
+export const blogPost_2014_11_02_0000 = new BlogPost(
     '7 transactions per second? Really?',
     '2014-11-02',
     '/blog/2014-11-02-0000',
@@ -233,7 +233,7 @@ export const blogPost_201411020000 = new BlogPost(
     'really been able to handle over time.',
     '/blog/2014-11-02-0000/trans-per-day-linear.png',
     null,
-    blogOpening_201411020000,
-    blogArticle_201411020000,
-    blogPostScript_201411020000
+    blogOpening_2014_11_02_0000,
+    blogArticle_2014_11_02_0000,
+    blogPostScript_2014_11_02_0000
 );

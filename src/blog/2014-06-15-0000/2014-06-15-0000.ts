@@ -2,7 +2,7 @@ import { h, VNode } from '../../lib/dvdi';
 import { navigateEvent } from '../../app';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201406150000(): VNode[] {
+function blogOpening_2014_06_15_0000(): VNode[] {
     return [
         h('p', {},
             '2016 blocks is the magic number that corresponds to each change in difficulty within the Bitcoin network.  ' +
@@ -11,7 +11,7 @@ function blogOpening_201406150000(): VNode[] {
     ]
 }
 
-function blogArticle_201406150000(): VNode[] {
+function blogArticle_2014_06_15_0000(): VNode[] {
     return [
         h('section', {},
             h('h2', {}, 'The simple case'),
@@ -140,7 +140,7 @@ function blogArticle_201406150000(): VNode[] {
     ];
 }
 
-function blogPostScript_201406150000(): VNode[] {
+function blogPostScript_2014_06_15_0000(): VNode[] {
     return [
         h('hr', {}),
         h('section', {},
@@ -166,7 +166,7 @@ function blogPostScript_201406150000(): VNode[] {
     ];
 }
 
-export const blogPost_201406150000 = new BlogPost(
+export const blogPost_2014_06_15_0000 = new BlogPost(
     'Finding 2016 blocks',
     '2014-06-15',
     '/blog/2014-06-15-0000',
@@ -174,7 +174,7 @@ export const blogPost_201406150000 = new BlogPost(
     'This blog post looks at the variability.',
     '/blog/2014-06-15-0000/find2016_0.png',
     null,
-    blogOpening_201406150000,
-    blogArticle_201406150000,
-    blogPostScript_201406150000
+    blogOpening_2014_06_15_0000,
+    blogArticle_2014_06_15_0000,
+    blogPostScript_2014_06_15_0000
 );

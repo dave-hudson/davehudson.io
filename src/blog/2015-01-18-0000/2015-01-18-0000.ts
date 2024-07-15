@@ -2,7 +2,7 @@ import { h, VNode } from '../../lib/dvdi';
 import { navigateEvent } from '../../app';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201501180000(): VNode[] {
+function blogOpening_2015_01_18_0000(): VNode[] {
     return [
         h('p', {},
             'It\'s well described how Bitcoin has a one Megabyte block limit; it\'s defined in the Bitcoin Core source ' +
@@ -23,7 +23,7 @@ function blogOpening_201501180000(): VNode[] {
     ]
 }
 
-function blogArticle_201501180000(): VNode[] {
+function blogArticle_2015_01_18_0000(): VNode[] {
     return [
         h('section', {},
             h('h2', {}, 'A puzzle'),
@@ -261,7 +261,7 @@ function blogArticle_201501180000(): VNode[] {
     ];
 }
 
-function blogPostScript_201501180000(): VNode[] {
+function blogPostScript_2015_01_18_0000(): VNode[] {
     return [
         h('hr', {}),
         h('section', {},
@@ -287,7 +287,7 @@ function blogPostScript_201501180000(): VNode[] {
     ];
 }
 
-export const blogPost_201501180000 = new BlogPost(
+export const blogPost_2015_01_18_0000 = new BlogPost(
     'The myth of the megabyte Bitcoin block',
     '2015-01-18',
     '/blog/2015-01-18-0000',
@@ -295,7 +295,7 @@ export const blogPost_201501180000 = new BlogPost(
     'blog post looks at what the true effective block size is.',
     '/blog/2015-01-18-0000/conf_time_vs_block_size.png',
     null,
-    blogOpening_201501180000,
-    blogArticle_201501180000,
-    blogPostScript_201501180000
+    blogOpening_2015_01_18_0000,
+    blogArticle_2015_01_18_0000,
+    blogPostScript_2015_01_18_0000
 );

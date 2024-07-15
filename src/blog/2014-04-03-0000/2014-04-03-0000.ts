@@ -2,7 +2,7 @@ import { h, VNode } from '../../lib/dvdi';
 import { navigateEvent } from '../../app';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201404030000(): VNode[] {
+function blogOpening_2014_04_03_0000(): VNode[] {
     return [
         h('p', {},
             'Bitcoin mining can be a very profitable activity.  It\'s good that it is because Bitcoin, as a system, only ' +
@@ -12,7 +12,7 @@ function blogOpening_201404030000(): VNode[] {
     ]
 }
 
-function blogArticle_201404030000(): VNode[] {
+function blogArticle_2014_04_03_0000(): VNode[] {
     return [
         h('p', {},
             'Like mining any other finite resource, Bitcoin mining gets harder over time and requires more investment to ' +
@@ -151,7 +151,7 @@ function blogArticle_201404030000(): VNode[] {
     ];
 }
 
-function blogPostScript_201404030000(): VNode[] {
+function blogPostScript_2014_04_03_0000(): VNode[] {
     return [
         h('hr', {}),
         h('section', {},
@@ -172,14 +172,14 @@ function blogPostScript_201404030000(): VNode[] {
     ];
 }
 
-export const blogPost_201404030000 = new BlogPost(
+export const blogPost_2014_04_03_0000 = new BlogPost(
     'The rewards for a Bitcoin miner',
     '2014-04-03',
     '/blog/2014-04-03-0000',
     'How much can Bitcoin miners earn?  This blog post considers the possible rewards for a Bitcoin miner.',
     '/blog/2014-04-03-0000/hash-vs-reward.png',
     null,
-    blogOpening_201404030000,
-    blogArticle_201404030000,
-    blogPostScript_201404030000
+    blogOpening_2014_04_03_0000,
+    blogArticle_2014_04_03_0000,
+    blogPostScript_2014_04_03_0000
 );

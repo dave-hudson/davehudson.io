@@ -1,7 +1,7 @@
 import { h, VNode } from '../../lib/dvdi';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201403120000(): VNode[] {
+function blogOpening_2014_03_12_0000(): VNode[] {
     return [
         h('p', {},
             'There\'s something odd about the fluctuations in the price of Bitcoins.  The data shows a set of ' +
@@ -12,7 +12,7 @@ function blogOpening_201403120000(): VNode[] {
     ]
 }
 
-function blogArticle_201403120000(): VNode[] {
+function blogArticle_2014_03_12_0000(): VNode[] {
     return [
         h('p', {}, 'Let\'s look at the graph:'),
         h('figure', {},
@@ -52,14 +52,14 @@ function blogArticle_201403120000(): VNode[] {
     ];
 }
 
-export const blogPost_201403120000 = new BlogPost(
+export const blogPost_2014_03_12_0000 = new BlogPost(
     'Strange spikes in the Bitcoin price',
     '2014-03-12',
     '/blog/2014-03-12-0000',
     'There are strange periodic spikes in the Bitcoin price.  This blog post looks at them.',
     '/blog/2014-03-12-0000/20140312_BTC_Price.png',
     null,
-    blogOpening_201403120000,
-    blogArticle_201403120000,
+    blogOpening_2014_03_12_0000,
+    blogArticle_2014_03_12_0000,
     null
 );

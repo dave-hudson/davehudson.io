@@ -2,7 +2,7 @@ import { h, VNode } from '../../lib/dvdi';
 import { navigateEvent } from '../../app';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201403170000(): VNode[] {
+function blogOpening_2014_03_17_0000(): VNode[] {
     return [
         h('p', {},
             'Which comes first: The miners or the money?  Much as the old question of “Which came first: The ' +
@@ -16,7 +16,7 @@ function blogOpening_201403170000(): VNode[] {
     ]
 }
 
-function blogArticle_201403170000(): VNode[] {
+function blogArticle_2014_03_17_0000(): VNode[] {
     return [
         h('p', {},
             'Let\'s look at a chart comparing the value of Bitcoin in US Dollars vs the global hashrate in GHash/s ' +
@@ -78,7 +78,7 @@ function blogArticle_201403170000(): VNode[] {
     ];
 }
 
-export const blogPost_201403170000 = new BlogPost(
+export const blogPost_2014_03_17_0000 = new BlogPost(
     'Chickens and eggs?',
     '2014-03-17',
     '/blog/2014-03-17-0000',
@@ -86,7 +86,7 @@ export const blogPost_201403170000 = new BlogPost(
     'reviews the data.',
     '/blog/2014-03-17-0000/20140317_Bitcoin-vs-hash.png',
     null,
-    blogOpening_201403170000,
-    blogArticle_201403170000,
+    blogOpening_2014_03_17_0000,
+    blogArticle_2014_03_17_0000,
     null
 );

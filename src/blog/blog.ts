@@ -2,62 +2,62 @@ import { h, VElement, VNode } from '../lib/dvdi';
 import { pageHeader, pageFooter } from '../lib/page';
 import { navigateEvent, routeDetails } from '../app';
 import { chevronLeftIcon, chevronRightIcon } from '../lib/icons';
-import { blogPost_201403090000 } from './2014-03-09-0000/2014-03-09-0000';
-import { blogPost_201403120000 } from './2014-03-12-0000/2014-03-12-0000';
-import { blogPost_201403170000 } from './2014-03-17-0000/2014-03-17-0000';
-import { blogPost_201403230000 } from './2014-03-23-0000/2014-03-23-0000';
-import { blogPost_201404030000 } from './2014-04-03-0000/2014-04-03-0000';
-import { blogPost_201404280000 } from './2014-04-28-0000/2014-04-28-0000';
-import { blogPost_201404300000 } from './2014-04-30-0000/2014-04-30-0000';
-import { blogPost_201405200000 } from './2014-05-20-0000/2014-05-20-0000';
-import { blogPost_201405240000 } from './2014-05-24-0000/2014-05-24-0000';
-import { blogPost_201406050000 } from './2014-06-05-0000/2014-06-05-0000';
-import { blogPost_201406100000 } from './2014-06-10-0000/2014-06-10-0000';
-import { blogPost_201406150000 } from './2014-06-15-0000/2014-06-15-0000';
-import { blogPost_201406230000 } from './2014-06-23-0000/2014-06-23-0000';
-import { blogPost_201406300000 } from './2014-06-30-0000/2014-06-30-0000';
-import { blogPost_201411020000 } from './2014-11-02-0000/2014-11-02-0000';
-import { blogPost_201411110000 } from './2014-11-11-0000/2014-11-11-0000';
-import { blogPost_201411120000 } from './2014-11-12-0000/2014-11-12-0000';
-import { blogPost_201412050000 } from './2014-12-05-0000/2014-12-05-0000';
-import { blogPost_201501180000 } from './2015-01-18-0000/2015-01-18-0000';
-import { blogPost_201512190000 } from './2015-12-19-0000/2015-12-19-0000';
-import { blogPost_201512200000 } from './2015-12-20-0000/2015-12-20-0000';
-import { blogPost_201601050000 } from './2016-01-05-0000/2016-01-05-0000';
-import { blogPost_201602030000 } from './2016-02-03-0000/2016-02-03-0000';
-import { blogPost_201701061400 } from './2017-01-06-1400/2017-01-06-1400';
-import { blogPost_202001272336 } from './2020-01-27-2336/2020-01-27-2336';
-import { blogPost_202407131608 } from './2024-07-13-1608/2024-07-13-1608';
+import { blogPost_2014_03_09_0000 } from './2014-03-09-0000/2014-03-09-0000';
+import { blogPost_2014_03_12_0000 } from './2014-03-12-0000/2014-03-12-0000';
+import { blogPost_2014_03_17_0000 } from './2014-03-17-0000/2014-03-17-0000';
+import { blogPost_2014_03_23_0000 } from './2014-03-23-0000/2014-03-23-0000';
+import { blogPost_2014_04_03_0000 } from './2014-04-03-0000/2014-04-03-0000';
+import { blogPost_2014_04_28_0000 } from './2014-04-28-0000/2014-04-28-0000';
+import { blogPost_2014_04_30_0000 } from './2014-04-30-0000/2014-04-30-0000';
+import { blogPost_2014_05_20_0000 } from './2014-05-20-0000/2014-05-20-0000';
+import { blogPost_2014_05_24_0000 } from './2014-05-24-0000/2014-05-24-0000';
+import { blogPost_2014_06_05_0000 } from './2014-06-05-0000/2014-06-05-0000';
+import { blogPost_2014_06_10_0000 } from './2014-06-10-0000/2014-06-10-0000';
+import { blogPost_2014_06_15_0000 } from './2014-06-15-0000/2014-06-15-0000';
+import { blogPost_2014_06_23_0000 } from './2014-06-23-0000/2014-06-23-0000';
+import { blogPost_2014_06_30_0000 } from './2014-06-30-0000/2014-06-30-0000';
+import { blogPost_2014_11_02_0000 } from './2014-11-02-0000/2014-11-02-0000';
+import { blogPost_2014_11_11_0000 } from './2014-11-11-0000/2014-11-11-0000';
+import { blogPost_2014_11_12_0000 } from './2014-11-12-0000/2014-11-12-0000';
+import { blogPost_2014_12_05_0000 } from './2014-12-05-0000/2014-12-05-0000';
+import { blogPost_2015_01_18_0000 } from './2015-01-18-0000/2015-01-18-0000';
+import { blogPost_2015_12_19_0000 } from './2015-12-19-0000/2015-12-19-0000';
+import { blogPost_2015_12_20_0000 } from './2015-12-20-0000/2015-12-20-0000';
+import { blogPost_2016_01_05_0000 } from './2016-01-05-0000/2016-01-05-0000';
+import { blogPost_2016_02_03_0000 } from './2016-02-03-0000/2016-02-03-0000';
+import { blogPost_2017_01_06_1400 } from './2017-01-06-1400/2017-01-06-1400';
+import { blogPost_2020_01_27_2336 } from './2020-01-27-2336/2020-01-27-2336';
+import { blogPost_2024_07_15_0800 } from './2024-07-15-0800/2024-07-15-0800';
 import { BlogPost } from './BlogPost';
 
 // Enumerate all the blog content served up here.  Newest content goes at the end.
 const blogContent: BlogPost[] = [
-    blogPost_201403090000,
-    blogPost_201403120000,
-    blogPost_201403170000,
-    blogPost_201403230000,
-    blogPost_201404030000,
-    blogPost_201404280000,
-    blogPost_201404300000,
-    blogPost_201405200000,
-    blogPost_201405240000,
-    blogPost_201406050000,
-    blogPost_201406100000,
-    blogPost_201406150000,
-    blogPost_201406230000,
-    blogPost_201406300000,
-    blogPost_201411020000,
-    blogPost_201411110000,
-    blogPost_201411120000,
-    blogPost_201412050000,
-    blogPost_201501180000,
-    blogPost_201512190000,
-    blogPost_201512200000,
-    blogPost_201601050000,
-    blogPost_201602030000,
-    blogPost_201701061400,
-    blogPost_202001272336,
-    blogPost_202407131608
+    blogPost_2014_03_09_0000,
+    blogPost_2014_03_12_0000,
+    blogPost_2014_03_17_0000,
+    blogPost_2014_03_23_0000,
+    blogPost_2014_04_03_0000,
+    blogPost_2014_04_28_0000,
+    blogPost_2014_04_30_0000,
+    blogPost_2014_05_20_0000,
+    blogPost_2014_05_24_0000,
+    blogPost_2014_06_05_0000,
+    blogPost_2014_06_10_0000,
+    blogPost_2014_06_15_0000,
+    blogPost_2014_06_23_0000,
+    blogPost_2014_06_30_0000,
+    blogPost_2014_11_02_0000,
+    blogPost_2014_11_11_0000,
+    blogPost_2014_11_12_0000,
+    blogPost_2014_12_05_0000,
+    blogPost_2015_01_18_0000,
+    blogPost_2015_12_19_0000,
+    blogPost_2015_12_20_0000,
+    blogPost_2016_01_05_0000,
+    blogPost_2016_02_03_0000,
+    blogPost_2017_01_06_1400,
+    blogPost_2020_01_27_2336,
+    blogPost_2024_07_15_0800
 ]
 
 function navPrevNext(prevStr: string | null, prevHRef: string | null, nextStr: string | null, nextHRef: string | null): VNode {

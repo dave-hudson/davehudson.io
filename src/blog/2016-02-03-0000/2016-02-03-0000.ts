@@ -1,7 +1,7 @@
 import { h, VNode } from '../../lib/dvdi';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201602030000(): VNode[] {
+function blogOpening_2016_02_03_0000(): VNode[] {
     return [
         h('p', {},
             'Most participants in the ongoing Bitcoin block size debates have a point of agreement; that a shortage of ' +
@@ -12,7 +12,7 @@ function blogOpening_201602030000(): VNode[] {
     ]
 }
 
-function blogArticle_201602030000(): VNode[] {
+function blogArticle_2016_02_03_0000(): VNode[] {
     return [
         h('section', {},
             h('h2', {}, 'Rewards for a Bitcoin miner'),
@@ -124,7 +124,7 @@ function blogArticle_201602030000(): VNode[] {
     ];
 }
 
-export const blogPost_201602030000 = new BlogPost(
+export const blogPost_2016_02_03_0000 = new BlogPost(
     'A market for Bitcoin transaction fees?',
     '2016-02-03',
     '/blog/2016-02-03-0000',
@@ -132,7 +132,7 @@ export const blogPost_201602030000 = new BlogPost(
     'data to see if this is happening yet, or not.',
     '/blog/2016-02-03-0000/fees-per-tx-btc.png',
     null,
-    blogOpening_201602030000,
-    blogArticle_201602030000,
+    blogOpening_2016_02_03_0000,
+    blogArticle_2016_02_03_0000,
     null
 );

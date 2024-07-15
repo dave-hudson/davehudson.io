@@ -1,7 +1,7 @@
 import { h, VNode } from '../../lib/dvdi';
 import { BlogPost } from '../BlogPost'
 
-function blogOpening_201403090000(): VNode[] {
+function blogOpening_2014_03_09_0000(): VNode[] {
     return [
         h('p', {},
             'Bitcoin mining is seemingly unique. T here has probably never been any technology problem that ' +
@@ -13,7 +13,7 @@ function blogOpening_201403090000(): VNode[] {
     ]
 }
 
-function blogArticle_201403090000(): VNode[] {
+function blogArticle_2014_03_09_0000(): VNode[] {
     return [
         h('section', {},
             h('h2', {}, 'What has been happening?'),
@@ -103,7 +103,7 @@ function blogArticle_201403090000(): VNode[] {
     ];
 }
 
-export const blogPost_201403090000 = new BlogPost(
+export const blogPost_2014_03_09_0000 = new BlogPost(
     'The Bitcoin runaway mine train',
     '2014-03-09',
     '/blog/2014-03-09-0000',
@@ -111,7 +111,7 @@ export const blogPost_201403090000 = new BlogPost(
     'and some of the motivations for this.',
     '/blog/2014-03-09-0000/20140309-hash-12months.png',
     null,
-    blogOpening_201403090000,
-    blogArticle_201403090000,
+    blogOpening_2014_03_09_0000,
+    blogArticle_2014_03_09_0000,
     null
 );
