@@ -273,7 +273,7 @@ function blogArticle_2024_07_15_0800(): VElement[] {
 }
 
 export const blogPost_2024_07_15_0800 = new BlogPost(
-    'Can my tools build tools?  Pre-rendering web pages with ChatGPT',
+    'Can my tools build tools?  Pre-rendering web pages with help from ChatGPT',
     '2024-07-15T08:00',
     '/blog/2024-07-15-0800',
     'ChatGPT 4o is pretty amazing, but how good is it at building non-trivial software?' +
