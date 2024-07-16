@@ -219,6 +219,8 @@ function handleLocation() {
     handleMetadata(pageInfo);
     handleOGMetadata(pageInfo);
     handleTwitterMetadata(pageInfo);
+
+    console.log(`Navigated to ${path}`)
 }
 
 export function navigateEvent(e: MouseEvent, path: string) {
