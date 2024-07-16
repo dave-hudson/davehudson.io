@@ -5,7 +5,7 @@ function blogPreScript_2017_01_06_1400(): VNode[] {
     return [
         h('em', {},
             'Note 2020-03-06: This was originally published as an opinion piece at ',
-            h('a', { href: 'https://www.coindesk.com/what-iot-history-reveals-about-blockchains-challenges' },
+            h('a', { href: 'https://www.coindesk.com/what-iot-history-reveals-about-blockchains-challenges', target: '_blank' },
                 'Coindesk'
             ),
             '.'
@@ -179,7 +179,7 @@ function blogArticle_2017_01_06_1400(): VNode[] {
             h('p', {},
                 'With Bitcoin, the block size has seen miners incentivized to restrict block expansion to maximize mining ' +
                 'rewards, while the ',
-                h('a', { href: 'https://www.coindesk.com/understanding-dao-hack-journalists'}, 'DAO hack'),
+                h('a', { href: 'https://www.coindesk.com/understanding-dao-hack-journalists', target: '_blank'}, 'DAO hack'),
                 ' incentivized users to want their coins back.'
             ),
             h('p', {},

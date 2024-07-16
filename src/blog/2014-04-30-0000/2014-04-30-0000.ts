@@ -151,7 +151,10 @@ function blogArticle_2014_04_30_0000(): VNode[] {
             h('h2', {}, 'Acknowledgments'),
             h('p', {},
                 'The last line of this article was rewritten thanks to an ',
-                h('a', { href: 'https://bitcointalk.org/index.php?topic=580632.msg6572887#msg6572887' }, 'insightful remark'),
+                h('a', {
+                    href: 'https://bitcointalk.org/index.php?topic=580632.msg6572887#msg6572887',
+                    target: '_blank'
+                }, 'insightful remark'),
                 ' when I first posted a link to it!'
             )
         )

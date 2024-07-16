@@ -6,7 +6,7 @@ function blogOpening_2014_12_05_0000(): VNode[] {
     return [
         h('p', {},
             'A few days ago, Ittay Eyal published an intriguing paper, "',
-            h('a', { href: 'http://hackingdistributed.com/2014/12/03/the-miners-dilemma/' },
+            h('a', { href: 'http://hackingdistributed.com/2014/12/03/the-miners-dilemma/', target: '_blank' },
                 'The Miner\'s Dilemma'
             ),
             '".  It describes an attack where an open mining pool may be attacked using block withholding.  Given that most ' +
@@ -330,7 +330,7 @@ function blogArticle_2014_12_05_0000(): VNode[] {
             h('p', {},
                 'This article was written with the help of data from a C language simulation.  The data was rendered into ' +
                 'charts using Excel.  The source code can be found on github: ',
-                h('a', { href: 'https://github.com/dave-hudson/pool-wars' },
+                h('a', { href: 'https://github.com/dave-hudson/pool-wars', target: '_blank' },
                     'https://github.com/dave-hudson/pool-wars'
                 )
             )

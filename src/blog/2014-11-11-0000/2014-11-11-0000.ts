@@ -60,7 +60,7 @@ function blogArticle_2014_11_11_0000(): VNode[] {
                 'also ignores network propagation delays (how long it takes for a transaction to be seen by all mining nodes) but ' +
                 'that will really just add a fairly small starting delay of up to a few seconds per transaction and so this is ' +
                 'probably ok too (see: ',
-                h('a', { href: 'http://bitcoinstats.com/network/propagation' },
+                h('a', { href: 'http://bitcoinstats.com/network/propagation', target: '_blank' },
                     'http://bitcoinstats.com/network/propagation'
                 ),
                 ').  It does mean that the data is probably a little too optimistic about how quickly transactions can be mined.  ' +
@@ -220,7 +220,7 @@ function blogArticle_2014_11_11_0000(): VNode[] {
             h('p', {},
                 'This article was written with the help of data from a C language simulation.  The data was rendered into charts ' +
                 'using Excel.  The source code can be found on github: ',
-                h('a', { href: 'https://github.com/dave-hudson/bitcoin-traffic-bulletin' },
+                h('a', { href: 'https://github.com/dave-hudson/bitcoin-traffic-bulletin', target: '_blank' },
                     'https://github.com/dave-hudson/bitcoin-traffic-bulletin'
                 )
             )

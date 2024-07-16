@@ -239,9 +239,9 @@ function blogArticle_2015_01_18_0000(): VNode[] {
             h('h2', {}, 'Acknowledgments'),
             h('p', {},
                 'Many thanks to ',
-                h('a', { href: 'https://twitter.com/oocBlog' }, '@oocBlog'),
+                h('a', { href: 'https://twitter.com/oocBlog', target: '_blank' }, '@oocBlog'),
                 ' (author of the ',
-                h('a', { href: 'https://organofcorti.blogspot.com' }, 'Neighbourhood Pool Watch'),
+                h('a', { href: 'https://organofcorti.blogspot.com', target: '_blank' }, 'Neighbourhood Pool Watch'),
                 ') blog; well worth reading every week).  After I spotted the trends that led me to speculate about block size ' +
                 'limits he generated the raw data that I needed to perform my analysis.'
             )
@@ -253,7 +253,7 @@ function blogArticle_2015_01_18_0000(): VNode[] {
                 'When I came to write this article I also wrote a C++ application that would combine all of the raw data into a ' +
                 'form I could use with Excel to generate the charts.  The source code, and the source CSV data files can be ' +
                 'found on github: ',
-                h('a', { href: 'https://github.com/dave-hudson/the-myth-of-the-megabyte-bitcoin-block' },
+                h('a', { href: 'https://github.com/dave-hudson/the-myth-of-the-megabyte-bitcoin-block', target: '_blank' },
                     'https://github.com/dave-hudson/the-myth-of-the-megabyte-bitcoin-block'
                 )
             )

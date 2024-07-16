@@ -25,7 +25,7 @@ export function projectsPage(): VNode {
                 ),
                 h('p', {},
                     ' I wrote this one in C++ and spent a few hours coming up with ways to shrink the problem search space: ',
-                    h('a', { href: '' },
+                    h('a', { href: 'https://github.com/dave-hudson/countdown', target: '_blank' },
                         'https://github.com/dave-hudson/countdown'
                     ),
                     '.  It\'s pretty quick but I never attempted to tune it to the instruction level!'
@@ -36,18 +36,18 @@ export function projectsPage(): VNode {
                 h('p', {},
                     'c8 is a high performance arbitrary precision natural numbers, integers, and rational numbers library written ' +
                     'in "modern" C++.  The git repo is here: ',
-                    h('a', { href: 'https://github.com/dave-hudson/c8' },
+                    h('a', { href: 'https://github.com/dave-hudson/c8', target: '_blank' },
                         'https://github.com/dave-hudson/c8'
                     ),
                     '.  There\'s also a project wiki here: ',
-                    h('a', { href: 'https://github.com/dave-hudson/c8/wiki' },
+                    h('a', { href: 'https://github.com/dave-hudson/c8/wiki', target: '_blank' },
                         'https://github.com/dave-hudson/c8/wiki'
                     )
                 ),
                 h('p', {},
                     'When I built this code I also tracked the development journey on the wiki.  This includes all my notes on ' +
                     'how I was performance tuning things, down to the machine instruction level in many cases: ',
-                    h('a', { href: 'https://github.com/dave-hudson/c8/wiki/Dev-Notes' },
+                    h('a', { href: 'https://github.com/dave-hudson/c8/wiki/Dev-Notes', target: '_blank' },
                         'https://github.com/dave-hudson/c8/wiki/Dev-Notes'
                     )
                 )
@@ -57,7 +57,7 @@ export function projectsPage(): VNode {
                 h('p', {},
                     'From 2001 to 2012 I maintained the backends for Ubicom\'s IP2k and Ubicom32 processor family versions of gcc. ' +
                     'I no longer have links for the IP2k version, but the 32-bit Ubicom32 version can be found here: ',
-                    h('a', { href: 'https://git.codelinaro.org/clo/external-ubicom/ubicom32-toolchain' },
+                    h('a', { href: 'https://git.codelinaro.org/clo/external-ubicom/ubicom32-toolchain', target: '_blank' },
                         'https://git.codelinaro.org/clo/external-ubicom/ubicom32-toolchain')
                 ),
                 h('p', {},
@@ -81,7 +81,7 @@ export function projectsPage(): VNode {
                     'ipOS.  While ipOS started out very similar to Liquorice, it quickly diverged as we simplified concepts ' +
                     'eliminated the software threading, and implemented much better design patterns to support some of the ' +
                     'networking.  Liquorice has some interesting ideas, and is a very small IP stack: ',
-                    h('a', { href: 'https://github.com/dave-hudson/liquorice' },
+                    h('a', { href: 'https://github.com/dave-hudson/liquorice', target: '_blank' },
                         'https://github.com/dave-hudson/liquorice'
                     )
                 )
@@ -101,7 +101,7 @@ export function projectsPage(): VNode {
                 ),
                 h('p', {},
                     'Andy Valencia (the guy behind the project) has an archive of the code and the mailing lists here: ',
-                    h('a', { href: 'https://sources.vsta.org:7100/vsta/index' },
+                    h('a', { href: 'https://sources.vsta.org:7100/vsta/index', target: '_blank' },
                         'https://sources.vsta.org:7100/vsta/index')
                 )
             ),
@@ -110,7 +110,7 @@ export function projectsPage(): VNode {
                 h('p', {},
                     'I wrote the first 2 versions of mkdosfs back in 1993 and 1994.  Eventually other maintainers folded this ' +
                     'into the dosfstools repo, and can be found here (my original notes are in the change logs): ',
-                    h('a', { href: 'https://github.com/dosfstools/dosfstools' },
+                    h('a', { href: 'https://github.com/dosfstools/dosfstools', target: '_blank' },
                         'https://github.com/dosfstools/dosfstools')
                 )
             )

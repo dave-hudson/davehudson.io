@@ -48,11 +48,11 @@ export function aboutPage(): VNode {
                     'Please feel free to reach out to me on: ',
                     h('a', { href: 'mailto:hello@davehudson.io?subject=Email\ about\ davehudson.io' }, 'Email'),
                     ', ',
-                    h('a', { href: 'http://linkedin.com/in/davejh/' }, 'LinkedIn'),
+                    h('a', { href: 'http://linkedin.com/in/davejh/', target: '_blank' }, 'LinkedIn'),
                     ', ',
-                    h('a', { href: 'http://x.com/davehudsonio' }, 'X'),
+                    h('a', { href: 'http://x.com/davehudsonio', target: '_blank' }, 'X'),
                     ', or ',
-                    h('a', { href: 'http://instagram.com/davehudsonio' }, 'Instagram')
+                    h('a', { href: 'http://instagram.com/davehudsonio', target: '_blank' }, 'Instagram')
                 )
             )
         ),

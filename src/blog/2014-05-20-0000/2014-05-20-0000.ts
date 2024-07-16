@@ -24,7 +24,7 @@ function blogArticle_2014_05_20_0000(): VNode[] {
                 'computing the hash and seeing if it solved a block.  Essentially each minor change in the an attempt to ' +
                 'solve a block gives a totally random effect, so trying one hash means that the next attempt is neither no ' +
                 'more likely, or no less likely, to succeed!  This highly random nature means that mining is a ',
-                h('a', { href: 'http://en.wikipedia.org/wiki/Poisson_process' }, 'Poisson Process'),
+                h('a', { href: 'http://en.wikipedia.org/wiki/Poisson_process', target: '_blank' }, 'Poisson Process'),
                 ' As each attempt to solve a block is unpredictable then in theory everyone might mine all day and never ' +
                 'solve a block.  Similarly it\'s also possible that a single miner might find 6 blocks in a succession. Both ' +
                 'outcomes are possible, but both are staggeringly unlikely!'
@@ -145,7 +145,7 @@ function blogArticle_2014_05_20_0000(): VNode[] {
             h('p', {},
                 'This article was written with the help of data from a C language application that generates the probability ' +
                 'distributions. The data was rendered into charts using Excel.  The source code can be found on github: ',
-                h('a', { href: 'https://github.com/dave-hudson/hash-rate-headaches' },
+                h('a', { href: 'https://github.com/dave-hudson/hash-rate-headaches', target: '_blank' },
                     'https://github.com/dave-hudson/hash-rate-headaches'
                 )
             )

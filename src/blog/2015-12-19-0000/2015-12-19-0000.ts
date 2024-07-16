@@ -199,7 +199,7 @@ function blogArticle_2015_12_19_0000(): VNode[] {
             h('h2', {}, 'Source code'),
             h('p', {},
                 'The source code for the simulation tool that generated the results for this article can be found on github at: ',
-                h('a', { href: 'https://github.com/dave-hudson/waiting-for-blocks' },
+                h('a', { href: 'https://github.com/dave-hudson/waiting-for-blocks', target: '_blank' },
                     'https://github.com/dave-hudson/waiting-for-blocks'
                 )
             )

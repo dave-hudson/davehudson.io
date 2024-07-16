@@ -21,16 +21,16 @@ export function pageHeader(): VNode {
     const component = () => h('header', { className: 'header' },
         h('nav', { className: 'site-title' },
             h('a', { className: 'home-link', href: '/', onclick: (e: MouseEvent) => navigateEvent(e, '/') }, 'davehudson.io'),
-            h('a', { className: 'icon', href: 'https://instagram.com/davehudsonio', title: 'Instagram' },
+            h('a', { className: 'icon', href: 'https://instagram.com/davehudsonio', target: '_blank', title: 'Instagram' },
                 instagramIcon()
             ),
-            h('a', { className: 'icon', href: 'https://x.com/davehudsonio', title: 'X' },
+            h('a', { className: 'icon', href: 'https://x.com/davehudsonio', target: '_blank', title: 'X' },
                 xIcon()
             ),
-            h('a', { className: 'icon', href: 'https://linkedin.com/in/davejh', title: 'LinkedIn' },
+            h('a', { className: 'icon', href: 'https://linkedin.com/in/davejh', target: '_blank', title: 'LinkedIn' },
                 linkedInIcon()
             ),
-            h('a', { className: 'icon', href: 'https://github.com/dave-hudson', title: 'GitHub' },
+            h('a', { className: 'icon', href: 'https://github.com/dave-hudson', target: '_blank', title: 'GitHub' },
                 gitHubIcon()
             ),
             h('a', {
