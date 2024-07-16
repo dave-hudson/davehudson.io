@@ -1,33 +1,110 @@
-import { h, VNode } from '../../lib/dvdi';
+import { assertIsVElement, h, updateElement, VElement, VNode } from '../../lib/dvdi';
 import { BlogPost } from '../BlogPost';
 import { highlight, JavaScriptLexer } from '../../lib/Lexer';
+import { cloneObject } from '../../lib/cloneObject';
 
-const code1: VNode[] = [];
-const code2: VNode[] = [];
+const code: VNode[][] = [[], []];
+let codeVElement: (VElement | null)[] = [null, null];
+const codeFunction: (() => VElement)[] = [
+    blogCode0_2024_07_15_0800,
+    blogCode1_2024_07_15_0800
+];
 
-function writeCode1(content: VNode[]) {
-    code1.push(...content);
+/**
+ * Callback to write the contents of the file load for the first code fragment.
+ * @param content
+ */
+function writeCode(segment: number, content: VElement[]) {
+    code[segment].push(...content);
+    if (codeVElement[segment] === null) {
+        return;
+    }
+
+    assertIsVElement(codeVElement[segment]);
+    if (codeVElement[segment].parentVNode === null) {
+        return;
+    }
+
+    const parentElem = (codeVElement[segment].parentVNode as VElement).domElement;
+    if (parentElem === null) {
+        return;
+    }
+
+    if (codeVElement[segment].domElement === null) {
+        return;
+    }
+
+    const index = Array.from(parentElem.childNodes).indexOf(codeVElement[segment].domElement);
+    const newVElement = codeFunction[segment]();
+    newVElement.parentVNode = codeVElement[segment].parentVNode;
+    updateElement(parentElem,
+        parentElem.childNodes[index],
+        codeVElement[segment].parentVNode as VElement,
+        codeVElement[segment],
+        newVElement
+    );
+    codeVElement[segment] = newVElement;
 }
 
-//function writeCode2(content: VNode[]) {
-//    code2.push(...content);
-//}
-
-async function loadFile(filePath: string, storeFunction: (content: VNode[]) => void) {
+async function loadFile(segment: number, filePath: string, storeFunction: (segment: number, content: VElement[]) => void) {
     try {
         const response = await fetch(filePath);
         if (!response.ok) {
             throw new Error(`Failed to fetch file: ${response.statusText}`);
         }
+
         const content = await response.text();
-        storeFunction(highlight(content, JavaScriptLexer));
-        console.log('loaded file', filePath, content);
+        storeFunction(segment, highlight(content, JavaScriptLexer));
     } catch (error) {
         console.error('Error loading file:', error);
     }
 }
 
-function blogOpening_2024_07_15_0800(): VNode[] {
+function blogCode0_2024_07_15_0800(): VElement {
+    const cloneCode = cloneObject(code[0]);
+    const contents = h('pre', {},
+        h('code', {}, ...cloneCode)
+    );
+
+    contents.mountCallback = () => {
+        codeVElement[0] = contents;
+        console.log('mounted');
+        if (code[0].length === 0) {
+            loadFile(0, '/blog/2024-07-15-0800/2024-07-15-0800-file0.js', writeCode);
+        }
+    }
+
+    contents.unmountCallback = () => {
+        codeVElement[0] = null;
+        console.log('unmounted');
+    }
+
+    return contents;
+}
+
+function blogCode1_2024_07_15_0800(): VElement {
+    const cloneCode = cloneObject(code[1]);
+    const contents = h('pre', {},
+        h('code', {}, ...cloneCode)
+    );
+
+    contents.mountCallback = () => {
+        codeVElement[1] = contents;
+        console.log('mounted');
+        if (code[1].length === 0) {
+            loadFile(1, '/blog/2024-07-15-0800/2024-07-15-0800-file1.js', writeCode);
+        }
+    }
+
+    contents.unmountCallback = () => {
+        codeVElement[1] = null;
+        console.log('unmounted');
+    }
+
+    return contents;
+}
+
+function blogOpening_2024_07_15_0800(): VElement[] {
     return [
         h('p', {},
             'We\'re all trying to work out the implications of generative AI.  We\'ve all seen examples of it building ' +
@@ -42,11 +119,7 @@ function blogOpening_2024_07_15_0800(): VNode[] {
     ]
 }
 
-function blogArticle_2024_07_15_0800(): VNode[] {
-    if (code1.length === 0) {
-        loadFile('/blog/2024-07-15-0800/2024-07-15-0800-file1.js', writeCode1);
-    }
-
+function blogArticle_2024_07_15_0800(): VElement[] {
     return [
         h('section', {},
             h('h2', {}, 'A quick aside'),
@@ -129,11 +202,7 @@ function blogArticle_2024_07_15_0800(): VNode[] {
                 'The chat went on for about half an hour with me asking questions and suggesting things I\'d like to see ' +
                 'added.  We ended up with this version:',
             ),
-            h('pre', {},
-                h('code', {},
-                    ...code1
-                )
-            ),
+            blogCode0_2024_07_15_0800(),
             h('p', {},
                 'It has a few rather quirky features because I wanted to render my site using a local express.js server and ' +
                 'not the one that host my live blog, so it does some translation of the sitemap.xml file to find the correct URL ' +
@@ -147,11 +216,7 @@ function blogArticle_2024_07_15_0800(): VNode[] {
                 'I\'m fairly impatient (I hate waiting for builds), so I upped the ante a little and asked for a parallelized ' +
                 'version.  A little back and forth and we ended up with this:'
             ),
-            h('pre', {},
-                h('code', {},
-                    ...code2
-                )
-            ),
+            blogCode1_2024_07_15_0800(),
             h('p', {},
                 'This one could complete in about 12 seconds.  Now we we\'re getting close to what I wanted!  A manual tweak ' +
                 'to run 16 in parallel and rendering was just under 6 seconds.  I\'ll take that as a huge win!'
@@ -192,9 +257,9 @@ function blogArticle_2024_07_15_0800(): VNode[] {
 }
 
 export const blogPost_2024_07_15_0800 = new BlogPost(
-    'Can my tools build tools?  Pre-rendering with ChatGPT',
-    '2024-07-13T16:08',
-    '/blog/2024-07-13-1608',
+    'Can my tools build tools?  Pre-rendering web pages with ChatGPT',
+    '2024-07-15T08:00',
+    '/blog/2024-07-15-0800',
     'ChatGPT 4o is pretty amazing, but how good is it at building non-trivial software?' +
     'Here\'s how it did when I had it help build a website pre-rendering tool',
     null,
