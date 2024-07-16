@@ -2,6 +2,7 @@ import { assertIsVElement, h, updateElement, VElement, VNode } from '../../lib/d
 import { BlogPost } from '../BlogPost';
 import { highlight, JavaScriptLexer } from '../../lib/Lexer';
 import { cloneObject } from '../../lib/cloneObject';
+import { navigateEvent } from '../../app';
 
 const code: VNode[][] = [[], []];
 let codeVElement: (VElement | null)[] = [null, null];
@@ -114,7 +115,9 @@ function blogOpening_2024_07_15_0800(): VElement[] {
         ),
         h('p', {},
             'How about a more interesting challenge?  How well can these tools build something new?  I decided to give this ' +
-            'a try.  I needed a tool to use with my blog site, davehudson.io. How well would ChatGPT be able to help?'
+            'a try.  I needed a tool to use with my blog site, ',
+            h('a', { href: '/', onclick: (e: MouseEvent) => navigateEvent(e, '/') }, 'davehudson.io'),
+            '.  How well would ChatGPT be able to help?'
         )
     ]
 }
@@ -122,6 +125,12 @@ function blogOpening_2024_07_15_0800(): VElement[] {
 function blogArticle_2024_07_15_0800(): VElement[] {
     return [
         h('section', {},
+            h('img', {
+                src: '/blog/2024-07-15-0800/2024-07-15-0800-image.webp',
+                alt: 'Image of a spanner in a workshop building another spanner',
+                width: 1792,
+                height: 1024
+            }),
             h('h2', {}, 'A quick aside'),
             h('p', {},
                 'Humans have a long history of building tools.  About 2.6 million years ago, in the early Stone Age, our ' +
@@ -151,13 +160,13 @@ function blogArticle_2024_07_15_0800(): VElement[] {
                 'suggested I needed to pre-render these pages.',
             ),
             h('p', {},
-                'It suggested I should follow the crowd and serve up the pre-rendered pages to crawlers and bots but serve ' +
-                'the dynamic version to humans.  While apparently common practice, that seemed a bit clunky, so I decided ' +
-                'I\'d serve the static version to everyone but then let the dynamic code take over after that first page load ' +
-                'thus any first page is the only page you “load”).',
+                'It also recommended I should follow the crowd and serve up the pre-rendered pages to crawlers and bots but ' +
+                'serve the dynamic version to humans.  While apparently common practice, that seemed a bit clunky, so I ' +
+                'decided I\'d serve the static version to everyone but then let the dynamic code take over after that first ' +
+                'page load thus any first page is the only page you “load”).',
             ),
             h('p', {},
-                'It next, helpfully, suggested some projects or commercial services that might do what I needed, but my ' +
+                'It next, helpfully, identified some projects or commercial services that might do what I needed, but my ' +
                 'intuition was I could do something local, fast, and free (except for my time).  Being able to work offline ' +
                 'was a bonus because I spend a lot of time on trains and planes and Internet access is awful on both.',
             ),
@@ -165,7 +174,7 @@ function blogArticle_2024_07_15_0800(): VElement[] {
             h('p', {},
                 'Here\'s my initial prompt in a new session:',
             ),
-            h('em', {},
+            h('div', { className: 'pink-note' },
                 h('p', {},
                     'How do I use google chrome to pre-render my single page app website?'
                 )
@@ -173,7 +182,7 @@ function blogArticle_2024_07_15_0800(): VElement[] {
             h('p', {},
                 'And the first reply:',
             ),
-            h('em', {},
+            h('div', { className: 'blue-note' },
                 h('p', {},
                     'Pre-rendering a single-page application (SPA) using Google Chrome involves generating static HTML ' +
                     'content that can be served to search engines and users to improve SEO and performance.  Here are the ' +
@@ -195,30 +204,37 @@ function blogArticle_2024_07_15_0800(): VElement[] {
                     'DevTools Protocol.  Here\'s a basic example of using Puppeteer to pre-render your SPA:'
                 ),
                 h('p', {},
-                    '...goes on to give some code fragments.'
+                    h('em', {},
+                        '...goes on to give some code fragments.'
+                    )
                 )
             ),
             h('p', {},
-                'The chat went on for about half an hour with me asking questions and suggesting things I\'d like to see ' +
-                'added.  We ended up with this version:',
+                'I like to build things - option 2 was the only way to go!',
+            ),
+            h('p', {},
+                'The chat went on for about half an hour with me asking questions and suggesting things I\'d like to see, ' +
+                'and with ChatGPT writing all the code.  We ended up with this version:',
             ),
             blogCode0_2024_07_15_0800(),
             h('p', {},
-                'It has a few rather quirky features because I wanted to render my site using a local express.js server and ' +
-                'not the one that host my live blog, so it does some translation of the sitemap.xml file to find the correct URL ' +
-                'to render.',
+                'It has a few rather quirky features because I wanted to render my site using a local ',
+                h('code', {}, 'express.js'),
+                ' server and not the one that hosts my live blog, so it does some translation of the ',
+                h('code', {}, 'sitemap.xml'),
+                ' file to find the correct URL to render.',
             ),
             h('h2', {}, 'Let\'s make this more interesting!'),
             h('p', {},
                 'We could almost declare victory at this point.  To render 29 pages took 47 seconds on my M1 MacBook Air.'
             ),
             h('p', {},
-                'I\'m fairly impatient (I hate waiting for builds), so I upped the ante a little and asked for a parallelized ' +
-                'version.  A little back and forth and we ended up with this:'
+                'I\'m fairly impatient though, and hate waiting for builds.  So, I upped the ante a little and asked for ' +
+                'a parallelized version.  A little back and forth and we ended up with this:'
             ),
             blogCode1_2024_07_15_0800(),
             h('p', {},
-                'This one could complete in about 12 seconds.  Now we we\'re getting close to what I wanted!  A manual tweak ' +
+                'This one could complete in about 12 seconds.  Now we were getting close to what I wanted!  A manual tweak ' +
                 'to run 16 in parallel and rendering was just under 6 seconds.  I\'ll take that as a huge win!'
             ),
             h('p', {},
@@ -226,9 +242,9 @@ function blogArticle_2024_07_15_0800(): VElement[] {
             ),
             h('h2', {}, 'A sign of things to come'),
             h('p', {},
-                'Just like a human engineer, it made mistakes.  It needed dialogue and questioning to keep it on the right ' +
-                'path, and it works even better if you can give it a way to assess if it\'s doing the right things (that\'s ' +
-                'a subject for another time).'
+                'Just like a human engineer, ChatGPT made mistakes.  It needed dialogue and questioning to keep it on the ' +
+                'right path, and it worked better if you could give it a way to assess if it\'s doing the right things ' +
+                '(that\'s a subject for another time).'
             ),
             h('p', {},
                 'As the code got longer, it was also a little irritating in wanting to give me all the code all the time, ' +
@@ -236,7 +252,7 @@ function blogArticle_2024_07_15_0800(): VElement[] {
             ),
             h('p', {},
                 'However, I got an effective solution to my problem in 2 hours rather than 2 days.  Left unassisted, I\'d have ' +
-                'probably still be reading docs after 2 hours.'
+                'probably still be reading docs at the 2 hours point.'
             ),
             h('p', {},
                 'This was seriously impressive.'
@@ -247,10 +263,10 @@ function blogArticle_2024_07_15_0800(): VElement[] {
             ),
             h('p', {},
                 'I read Fred Brooks\', “The Mythical Man Month” almost 30 years ago.  “No Silver Bullet - Essence and ' +
-                'Accident in Software Engineering” was the chapter that has resonated with me for all that time.  That ' +
+                'Accident in Software Engineering” was the chapter that has resonated with me for all that time.  It ' +
                 'posed that in the 10 years after it was written there wouldn\'t be a single technology that would give ' +
-                'a 10x improvement.  That has remained true for almost 50 years, but that 10x barrier may finally be ' +
-                'about to break.'
+                'a 10x improvement.  That has remained true for almost 50 years.  I have a feeling that 10x barrier may ' +
+                'finally be about to break.'
             )
         )
     ];
@@ -262,7 +278,7 @@ export const blogPost_2024_07_15_0800 = new BlogPost(
     '/blog/2024-07-15-0800',
     'ChatGPT 4o is pretty amazing, but how good is it at building non-trivial software?' +
     'Here\'s how it did when I had it help build a website pre-rendering tool',
-    null,
+    '/blog/2024-07-15-0000/2024-07-15-0000-image.webp',
     null,
     blogOpening_2024_07_15_0800,
     blogArticle_2024_07_15_0800,

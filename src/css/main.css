@@ -608,6 +608,18 @@ pre {
     border: 1px solid #777;
 }
 
+.main .pink-note {
+    background-color: #ececec;
+    color: #c040c0;
+    padding: 1px 8px;
+}
+
+.main .blue-note {
+    background-color: #ececec;
+    color: #4058d0;
+    padding: 1px 8px;
+}
+
 .main .blog-posts .blog-post {
     display: table;
     width: 100%;
