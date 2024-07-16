@@ -1,11 +1,11 @@
-import { h, VNode } from './dvdi';
+import { h, VElement } from './dvdi';
 
 interface Token {
     type: string;
     value: string;
 }
 
-const styles: { [key: string]: string } = {
+const styles: { [key: string]: string | null } = {
     KEYWORD: 'keyword',
     IDENTIFIER: 'identifier',
     NUMBER: 'number',
@@ -13,8 +13,8 @@ const styles: { [key: string]: string } = {
     COMMENT: 'comment',
     OPERATOR_OR_PUNCTUATION: 'operator',
     PREPROCESSOR: 'preprocessor',
-    WHITESPACE: '',
-    NEWLINE: '',
+    WHITESPACE: null,
+    NEWLINE: null,
 };
 
 /**
@@ -656,14 +656,14 @@ export class CppLexer extends CLexer {
  * @param lexerClass - The lexer class to use for tokenizing.
  * @returns The highlighted code as HTML.
  */
-export function highlight(code: string, lexerClass: new (input: string) => BaseLexer): VNode[] {
-    let highlightedCode: VNode[] = [];
+export function highlight(code: string, lexerClass: new (input: string) => BaseLexer): VElement[] {
+    let highlightedCode: VElement[] = [];
     const lexer = new lexerClass(code);
     let token: Token | null;
 
     while ((token = lexer.nextToken()) !== null) {
-        const style = styles[token.type] || '';
-        const codeFragment = h('span', { className: style }, `${token.value}`);
+        const style = styles[token.type];
+        const codeFragment = h('span', style !== null ? { className: style } : {}, `${token.value}`);
         highlightedCode.push(codeFragment);
     }
 
