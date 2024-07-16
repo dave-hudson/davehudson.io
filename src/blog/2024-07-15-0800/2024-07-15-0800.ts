@@ -278,7 +278,7 @@ export const blogPost_2024_07_15_0800 = new BlogPost(
     '/blog/2024-07-15-0800',
     'ChatGPT 4o is pretty amazing, but how good is it at building non-trivial software?' +
     'Here\'s how it did when I had it help build a website pre-rendering tool',
-    '/blog/2024-07-15-0000/2024-07-15-0000-image.webp',
+    '/blog/2024-07-15-0800/2024-07-15-0800-image.webp',
     null,
     blogOpening_2024_07_15_0800,
     blogArticle_2024_07_15_0800,
