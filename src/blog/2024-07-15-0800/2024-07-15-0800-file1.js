@@ -13,6 +13,7 @@ const __dirname = dirname(__filename);
 const sitemapPath = path.join(__dirname, 'sitemap.xml');
 const outputDir = path.join(__dirname, 'prerendered');
 const localBaseUrl = 'http://localhost:3000';
+const maxConcurrentRenders = 4;
 
 // Utility function to create directories recursively
 const ensureDirectoryExistence = (filePath) => {
@@ -35,28 +36,23 @@ const ensureDirectoryExistence = (filePath) => {
   // Launch Puppeteer
   const browser = await puppeteer.launch();
 
-  for (const url of urls) {
-    // Replace the base URL with the local base URL
+  // Helper function to render a single page
+  const renderPage = async (url) => {
     const localUrl = url.replace(/^https?:\/\/[^\/]+/, localBaseUrl);
-
     const page = await browser.newPage();
     await page.goto(localUrl, { waitUntil: 'networkidle0' });
-
-    // Get the content of the page
     const html = await page.content();
-
-    // Generate the file path based on the original URL path
     const urlPath = new URL(url).pathname;
     const filePath = path.join(outputDir, urlPath, 'index.html');
-
-    // Ensure the directory exists
     ensureDirectoryExistence(filePath);
-
-    // Save the HTML content to the file
     fs.writeFileSync(filePath, html);
-
-    // Close the page to free up resources
     await page.close();
+  };
+
+  // Process URLs in batches of maxConcurrentRenders
+  for (let i = 0; i < urls.length; i += maxConcurrentRenders) {
+    const batch = urls.slice(i, i + maxConcurrentRenders).map(url => renderPage(url));
+    await Promise.all(batch);
   }
 
   // Close the browser
