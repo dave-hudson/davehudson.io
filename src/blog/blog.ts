@@ -69,6 +69,7 @@ function navPrevNext(prevStr: string | null, prevHRef: string | null, nextStr: s
                     !prevStr ? '' : h('a', {
                             className: 'icon',
                             href: (prevHRef as string),
+                            'aria-label': prevStr,
                             onclick: (e: MouseEvent) => navigateEvent(e, (prevHRef as string))
                         },
                         chevronLeftIcon()
@@ -94,6 +95,7 @@ function navPrevNext(prevStr: string | null, prevHRef: string | null, nextStr: s
                     !nextStr ? '' : h('a', {
                             className: 'icon',
                             href: (nextHRef as string),
+                            'aria-label': nextStr,
                             onclick: (e: MouseEvent) => navigateEvent(e, (nextHRef as string))
                         },
                         chevronRightIcon()
