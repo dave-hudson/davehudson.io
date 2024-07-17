@@ -6,7 +6,7 @@
 FILES :=
 TS_FILES :=
 
-include src/Makefile.inc
+include src/Makefile.mk
 
 #
 # Convert source file paths to build file paths.
