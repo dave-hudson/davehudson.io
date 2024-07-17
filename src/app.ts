@@ -1,6 +1,7 @@
 import { h, updateElement, VNode } from './lib/dvdi';
 import { aboutPage } from './about/about';
 import { blogPage, blogSummaries, getBlogRoutes } from './blog/blog';
+import { experimentsPage, getExperimentRoutes } from './experiments/experiments';
 import { projectsPage } from './projects/projects';
 import { pageHeader, pageFooter } from "./lib/page";
 
@@ -110,7 +111,14 @@ let routes: Map<string, routeDetails> = new Map([
         title: 'Blog posts',
         render: blogPage,
         description: 'This page indexes all Dave\'s blog posts, presented in date order with the most recent posts at the top ' +
-            'of the page',
+            'of the page.',
+        imageURL: 'https://davehudson.io/about/dave.jpg',
+        pageType: 'website'
+    }],
+    ['/experiments', {
+        title: 'Experiments',
+        render: experimentsPage,
+        description: 'This page indexed all the experiment pages on this site.',
         imageURL: 'https://davehudson.io/about/dave.jpg',
         pageType: 'website'
     }]
@@ -241,9 +249,15 @@ export function navigateEvent(e: MouseEvent, path: string) {
  * @param event - the DOMContentLoaded event.
  */
 function onDOMContentLoaded(event: Event): void {
-    // Add all the blog content to the router.
+    // Add all blog content to the router.
     const blogRoutes = getBlogRoutes();
     blogRoutes.forEach((value, key) => {
+        routes.set(key, value);
+    });
+
+    // Add all experiments content to the router.
+    const experimentRoutes = getExperimentRoutes();
+    experimentRoutes.forEach((value, key) => {
         routes.set(key, value);
     });
 
