@@ -1,6 +1,7 @@
 import { assertIsVElement, h, updateElement, VElement, VNode } from '../../lib/dvdi';
 import { BlogPost } from '../BlogPost';
-import { highlight, JavaScriptLexer } from '../../lib/Lexer';
+import { JavaScriptLexer } from '../../lib/JavaScriptLexer';
+import { highlight } from '../../lib/highlight'
 import { cloneObject } from '../../lib/cloneObject';
 import { navigateEvent } from '../../app';
 
