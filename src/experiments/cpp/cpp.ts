@@ -1,7 +1,7 @@
 import { assertIsVElement, h, updateElement, VElement, VNode } from '../../lib/dvdi';
 import { ExperimentPage } from '../ExperimentPage';
 import { pageHeader, pageFooter } from '../../lib/page';
-import { CLexer } from '../../lib/CLexer';
+import { CppLexer } from '../../lib/CppLexer';
 import { highlight } from '../../lib/highlight'
 import { cloneObject } from '../../lib/cloneObject';
 
@@ -33,7 +33,7 @@ function writeCode(content: VElement[]) {
     }
 
     const index = Array.from(parentElem.childNodes).indexOf(codeVElement.domElement);
-    const newVElement = experimentSyntaxCComponent();
+    const newVElement = experimentSyntaxCppComponent();
     newVElement.parentVNode = codeVElement.parentVNode;
     updateElement(parentElem,
         parentElem.childNodes[index],
@@ -52,13 +52,13 @@ async function loadFile(filePath: string, storeFunction: (content: VElement[]) =
         }
 
         const content = await response.text();
-        storeFunction(highlight(content, CLexer));
+        storeFunction(highlight(content, CppLexer));
     } catch (error) {
         console.error('Error loading file:', error);
     }
 }
 
-function experimentSyntaxCComponent(): VElement {
+function experimentSyntaxCppComponent(): VElement {
     const cloneCode = cloneObject(code);
     const contents = h('pre', {},
         h('code', {}, ...cloneCode)
@@ -68,7 +68,7 @@ function experimentSyntaxCComponent(): VElement {
         codeVElement = contents;
         console.log('mounted');
         if (code.length === 0) {
-            loadFile('/experiments/C/test.c', writeCode);
+            loadFile('/experiments/cpp/test.cpp', writeCode);
         }
     }
 
@@ -80,20 +80,20 @@ function experimentSyntaxCComponent(): VElement {
     return contents;
 }
 
-function experimentSyntaxCPage(): VNode {
+function experimentSyntaxCppPage(): VNode {
     return h('div', {},
         pageHeader(),
         h('main', { className: 'main' },
             h('article', {},
-                h('h1', {}, 'C syntax example'),
-                experimentSyntaxCComponent()
+                h('h1', {}, 'C++ syntax example'),
+                experimentSyntaxCppComponent()
             ),
         ),
         pageFooter()
     );
 }
 
-export const experimentSyntaxC = new ExperimentPage(
-    '/experiments/C',
-    experimentSyntaxCPage
+export const experimentSyntaxCpp = new ExperimentPage(
+    '/experiments/cpp',
+    experimentSyntaxCppPage
 );

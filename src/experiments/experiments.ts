@@ -1,12 +1,22 @@
 import { h, VNode } from '../lib/dvdi';
 import { pageHeader, pageFooter } from "../lib/page";
 import { navigateEvent, routeDetails } from '../app';
-import { experimentSyntaxC } from './C/C';
+import { experimentSyntaxC } from './c/c';
+import { experimentSyntaxCpp } from './cpp/cpp';
+import { experimentSyntaxHTML } from './html/html';
+import { experimentSyntaxJavaScript } from './javascript/javascript';
+import { experimentSyntaxPython } from './python/python';
+import { experimentSyntaxTypeScript } from './typescript/typescript';
 import { ExperimentPage } from './ExperimentPage';
 
 // Enumerate all the blog content served up here.  Newest content goes at the end.
 const experimentsContent: ExperimentPage[] = [
-    experimentSyntaxC
+    experimentSyntaxC,
+    experimentSyntaxCpp,
+    experimentSyntaxHTML,
+    experimentSyntaxJavaScript,
+    experimentSyntaxPython,
+    experimentSyntaxTypeScript
 ];
 
 export function experimentsPage(): VNode {
@@ -19,10 +29,50 @@ export function experimentsPage(): VNode {
                 h('ul', {},
                     h('li', {},
                         h('a', {
-                                href: ('/experiments/C'),
-                                onclick: (e: MouseEvent) => navigateEvent(e, '/experiments/C')
+                                href: ('/experiments/c'),
+                                onclick: (e: MouseEvent) => navigateEvent(e, '/experiments/c')
                             },
                             'C'
+                        )
+                    ),
+                    h('li', {},
+                        h('a', {
+                                href: ('/experiments/cpp'),
+                                onclick: (e: MouseEvent) => navigateEvent(e, '/experiments/cpp')
+                            },
+                            'C++'
+                        )
+                    ),
+                    h('li', {},
+                        h('a', {
+                                href: ('/experiments/html'),
+                                onclick: (e: MouseEvent) => navigateEvent(e, '/experiments/html')
+                            },
+                            'HTML'
+                        )
+                    ),
+                    h('li', {},
+                        h('a', {
+                                href: ('/experiments/javascript'),
+                                onclick: (e: MouseEvent) => navigateEvent(e, '/experiments/javascript')
+                            },
+                            'JavaScript'
+                        )
+                    ),
+                    h('li', {},
+                        h('a', {
+                                href: ('/experiments/python'),
+                                onclick: (e: MouseEvent) => navigateEvent(e, '/experiments/python')
+                            },
+                            'Python'
+                        )
+                    ),
+                    h('li', {},
+                        h('a', {
+                                href: ('/experiments/typescript'),
+                                onclick: (e: MouseEvent) => navigateEvent(e, '/experiments/typescript')
+                            },
+                            'TypeScript'
                         )
                     )
                 )

@@ -1,10 +1,9 @@
 import { Lexer, Token, styles } from './Lexer';
 import { JavaScriptLexer } from './JavaScriptLexer';
 
-styles.HTML_TAG = 'html-tag';
-styles.HTML_ATTRIBUTE = 'html-attribute';
-styles.HTML_ATTRIBUTE_VALUE = 'html-attribute-value';
-styles.HTML_COMMENT = 'html-comment';
+styles['HTML_TAG']= 'html-tag';
+styles['HTML_ATTRIBUTE'] = 'html-attribute';
+styles['HTML_ATTRIBUTE_VALUE'] = 'html-attribute-value';
 
 /**
  * Lexer class for HTML, extending the base lexer functionality.
@@ -23,7 +22,7 @@ export class HTMLLexer extends Lexer {
      * Gets the next token from the input.
      * @returns The next token, or null if end of input.
      */
-    public nextToken(): Token | null {
+    public override nextToken(): Token | null {
         if (this.jsLexer) {
             const jsToken = this.jsLexer.nextToken();
             if (jsToken) {
@@ -75,7 +74,7 @@ export class HTMLLexer extends Lexer {
         }
 
         this.position++; // Skip '>'
-        return { type: 'HTML_COMMENT', value: this.input.slice(start, this.position) };
+        return { type: 'COMMENT', value: this.input.slice(start, this.position) };
     }
 
     /**
@@ -83,7 +82,6 @@ export class HTMLLexer extends Lexer {
      * @returns The HTML tag token.
      */
     protected readHtmlTag(): Token {
-        let start = this.position;
         this.position++; // Skip '<'
         let tagName = '';
 

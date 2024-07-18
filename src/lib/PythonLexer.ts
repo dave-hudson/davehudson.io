@@ -1,4 +1,4 @@
-import { Token, Lexer } from './Lexer'
+import { Lexer } from './Lexer'
 
 /**
  * Lexer for Python code.
