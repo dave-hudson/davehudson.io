@@ -1,7 +1,8 @@
 import { Lexer, Token, styles } from './Lexer';
 import { JavaScriptLexer } from './JavaScriptLexer';
 
-styles['HTML_TAG']= 'html-tag';
+styles['HTML_DOCTYPE'] = 'html-doctype';
+styles['HTML_TAG'] = 'html-tag';
 styles['HTML_ATTRIBUTE'] = 'html-attribute';
 styles['HTML_ATTRIBUTE_VALUE'] = 'html-attribute-value';
 
@@ -49,6 +50,10 @@ export class HTMLLexer extends Lexer {
         }
 
         if (this.contextStack[this.contextStack.length - 1] === 'html') {
+            if (this.input.startsWith('<!DOCTYPE', this.position)) {
+                return this.readDoctype();
+            }
+
             if (ch === '<' && this.input[this.position + 1] === '!') {
                 return this.readHtmlComment();
             }
@@ -63,6 +68,24 @@ export class HTMLLexer extends Lexer {
     }
 
     /**
+     * Reads a <!DOCTYPE> declaration in the input.
+     * @returns The doctype token.
+     */
+    protected readDoctype(): Token {
+        let start = this.position;
+        this.position += 9; // Skip "<!DOCTYPE"
+        while (this.position < this.input.length && this.input[this.position] !== '>') {
+            this.position++;
+        }
+
+        if (this.position < this.input.length) {
+            this.position++; // Skip '>'
+        }
+
+        return { type: 'HTML_DOCTYPE', value: this.input.slice(start, this.position) };
+    }
+
+    /**
      * Reads an HTML comment in the input.
      * @returns The HTML comment token.
      */
@@ -73,7 +96,10 @@ export class HTMLLexer extends Lexer {
             this.position++;
         }
 
-        this.position++; // Skip '>'
+        if (this.position < this.input.length) {
+            this.position++; // Skip '>'
+        }
+
         return { type: 'COMMENT', value: this.input.slice(start, this.position) };
     }
 
@@ -82,8 +108,14 @@ export class HTMLLexer extends Lexer {
      * @returns The HTML tag token.
      */
     protected readHtmlTag(): Token {
+        let start = this.position;
         this.position++; // Skip '<'
         let tagName = '';
+
+        // Check if it's a closing tag
+        if (this.input[this.position] === '/') {
+            this.position++; // Skip '/'
+        }
 
         while (this.position < this.input.length && /[a-zA-Z]/.test(this.input[this.position])) {
             tagName += this.input[this.position++];
@@ -100,10 +132,13 @@ export class HTMLLexer extends Lexer {
             }
         }
 
+        if (this.position < this.input.length) {
+            this.position++; // Skip '>'
+        }
+
         if (tagName.toLowerCase() === 'script') {
             this.contextStack.push('script');
-            const scriptStartPos = this.position + 1; // Start of the script content
-            this.position++; // Skip '>'
+            const scriptStartPos = this.position; // Start of the script content
             while (this.position < this.input.length) {
                 if (this.input.slice(this.position, this.position + 9).toLowerCase() === '</script>') {
                     const scriptContent = this.input.slice(scriptStartPos, this.position);
@@ -113,13 +148,9 @@ export class HTMLLexer extends Lexer {
                 }
                 this.position++;
             }
-
-            return { type: 'HTML_TAG', value: `<${tagName}>` };
         }
 
-        this.position++; // Skip '>'
-
-        return { type: 'HTML_TAG', value: `<${tagName}>` };
+        return { type: 'HTML_TAG', value: this.input.slice(start, this.position) };
     }
 
     /**
@@ -131,6 +162,7 @@ export class HTMLLexer extends Lexer {
         while (this.position < this.input.length && /[\w-]/.test(this.input[this.position])) {
             this.position++;
         }
+
         const attributeName = this.input.slice(start, this.position);
 
         // Skip any spaces before the '=' sign
@@ -156,7 +188,6 @@ export class HTMLLexer extends Lexer {
 
                 this.position++; // Skip the closing quote
                 const attributeValue = this.input.slice(start, this.position);
-
                 return { type: 'HTML_ATTRIBUTE', value: `${attributeName}=${attributeValue}` };
             }
         }
