@@ -221,7 +221,6 @@ export class HTMLLexer extends Lexer {
                 return;
             }
 
-            console.log('next char: ', this.input[position]);
             const valueFirstChar = this.input[position];
             if (valueFirstChar === '\'' || valueFirstChar === '"') {
                 position++; // Skip over the opening quote.
