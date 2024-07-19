@@ -1,4 +1,4 @@
-import { Token, Lexer } from './Lexer'
+import { Lexer } from './Lexer'
 
 /**
  * Lexer for C code.
@@ -56,7 +56,7 @@ export class CLexer extends Lexer {
      * Reads an identifier or keyword token in C.
      * @returns The identifier or keyword token.
      */
-    protected override readIdentifierOrKeyword(): Token {
+    protected override readIdentifierOrKeyword(): void {
         const start = this.position;
         while (this.isLetterOrDigit(this.input[this.position])) {
             this.position++;
@@ -64,35 +64,36 @@ export class CLexer extends Lexer {
 
         const value = this.input.slice(start, this.position);
         const type = this.isKeyword(value) ? 'KEYWORD' : 'IDENTIFIER';
-        return { type, value };
+        this.tokenStream.push({ type, value });
     }
 
     /**
      * Reads a preprocessor directive token in C.
      * @returns The preprocessor directive token.
      */
-    protected readPreprocessorDirective(): Token {
+    protected readPreprocessorDirective(): void {
         const start = this.position;
         while (this.position < this.input.length && this.input[this.position] !== '\n') {
             this.position++;
         }
 
-        return { type: 'PREPROCESSOR', value: this.input.slice(start, this.position) };
+        this.tokenStream.push({ type: 'PREPROCESSOR', value: this.input.slice(start, this.position) });
     }
 
     /**
      * Gets the next token from the input.
      * @returns The next token, or null if end of input.
      */
-    public override nextToken(): Token | null {
+    public override nextToken(): boolean {
         if (this.position >= this.input.length) {
-            return null;
+            return false;
         }
 
         const ch = this.input[this.position];
 
         if (ch === '#') {
-            return this.readPreprocessorDirective();
+            this.readPreprocessorDirective();
+            return true;
         }
 
         return super.nextToken();

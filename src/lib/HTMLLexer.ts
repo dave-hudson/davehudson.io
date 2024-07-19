@@ -1,4 +1,4 @@
-import { Lexer, Token, styles } from './Lexer';
+import { Lexer, styles } from './Lexer';
 import { JavaScriptLexer } from './JavaScriptLexer';
 
 styles['HTML_DOCTYPE'] = 'html-doctype';
@@ -34,9 +34,9 @@ export class HTMLLexer extends Lexer {
      * Gets the next token from the input.
      * @returns The next token, or null if end of input.
      */
-    public override nextToken(): Token | null {
+    public override nextToken(): boolean {
         // If we're parsing JavaScript then do the tokenization via the JavaScript lexer.
-        if (this.jsLexer) {
+/*        if (this.jsLexer) {
             const jsToken = this.jsLexer.nextToken();
             if (jsToken) {
                 return jsToken;
@@ -48,11 +48,12 @@ export class HTMLLexer extends Lexer {
             // Handle the remaining content after </script>
             this.currentContext = LexerContext.None;
         }
-
+*/
         if (this.position >= this.input.length) {
-            return null;
+            return false;
         }
 
+/*
         switch (this.currentContext) {
             case LexerContext.Tag:
                 return this.readHtmlAttribute();
@@ -63,41 +64,48 @@ export class HTMLLexer extends Lexer {
             default:
                 break;
         }
+*/
 
         const ch = this.input[this.position];
 
         if (ch === '\n') {
             this.position++;
-            return { type: 'NEWLINE', value: '\n' };
+            this.tokenStream.push({ type: 'NEWLINE', value: '\n' });
+            return true;
         }
 
         if (/\s/.test(ch)) {
-            return this.readWhitespace();
+            this.readWhitespace();
+            return true;
         }
 
         if (this.contextStack[this.contextStack.length - 1] === 'html') {
             if (this.input.startsWith('<!DOCTYPE', this.position)) {
-                return this.readDoctype();
+                this.readDoctype();
+                return true;
             }
 
             if (ch === '<' && this.input[this.position + 1] === '!') {
-                return this.readHtmlComment();
+                this.readHtmlComment();
+                return true;
             }
 
             if (ch === '<') {
-                return this.readHtmlTag();
+                this.readHtmlTag();
+                return true;
             }
         }
 
         // Handle text content between tags.
-        return this.readText();
+        this.readText();
+        return true;
     }
 
     /**
      * Reads a <!DOCTYPE> declaration in the input.
      * @returns The doctype token.
      */
-    protected readDoctype(): Token {
+    protected readDoctype(): void {
         let start = this.position;
         this.position += 9; // Skip "<!DOCTYPE"
         while (this.position < this.input.length && this.input[this.position] !== '>') {
@@ -108,14 +116,14 @@ export class HTMLLexer extends Lexer {
             this.position++; // Skip '>'
         }
 
-        return { type: 'HTML_DOCTYPE', value: this.input.slice(start, this.position) };
+        this.tokenStream.push({ type: 'HTML_DOCTYPE', value: this.input.slice(start, this.position) });
     }
 
     /**
      * Reads an HTML comment in the input.
      * @returns The HTML comment token.
      */
-    protected readHtmlComment(): Token {
+    protected readHtmlComment(): void {
         let start = this.position;
         this.position += 4; // Skip "<!--"
         while (this.position < this.input.length && !(this.input[this.position - 2] === '-' && this.input[this.position - 1] === '-' && this.input[this.position] === '>')) {
@@ -126,14 +134,14 @@ export class HTMLLexer extends Lexer {
             this.position++; // Skip '>'
         }
 
-        return { type: 'COMMENT', value: this.input.slice(start, this.position) };
+        this.tokenStream.push({ type: 'COMMENT', value: this.input.slice(start, this.position) });
     }
 
     /**
      * Reads an HTML tag in the input, including attributes.
      * @returns The HTML tag token.
      */
-    protected readHtmlTag(): Token {
+    protected readHtmlTag(): void {
 //        let start = this.position;
         this.position++; // Skip '<'
         let tagName = '';
@@ -148,20 +156,34 @@ export class HTMLLexer extends Lexer {
             tagName += this.input[this.position++];
         }
 
-        this.currentContext = LexerContext.Tag;
-        if (tagName.toLowerCase() === 'script' && !isClosingTag) {
-            this.scriptContentStart = this.position;
-            this.contextStack.push('script');
+        const tagNameEnd = this.position;
+    
+        // Now find the '>'
+        while (this.position < this.input.length && this.input[this.position] !== '>') {
+            this.position++;
         }
 
-        return { type: 'HTML_TAG', value: `<${isClosingTag ? '/' : ''}${tagName}` };
+        const tagEnd = this.position;
+        if (this.position < this.input.length) {
+            this.position++; // Skip '>'
+        }
+
+        console.log('tag: ', this.input.slice(tagNameEnd, tagEnd));
+
+//        this.currentContext = LexerContext.Tag;
+//        if (tagName.toLowerCase() === 'script' && !isClosingTag) {
+//            this.scriptContentStart = this.position;
+//            this.contextStack.push('script');
+//        }
+
+        this.tokenStream.push({ type: 'HTML_TAG', value: `<${isClosingTag ? '/' : ''}${tagName}` });
     }
 
     /**
      * Reads an HTML attribute in the input.
      * @returns The HTML attribute token.
      */
-    protected readHtmlAttribute(): Token | null {
+    protected readHtmlAttribute(): void {
         // Skip leading whitespace
         let start = this.position;
         while (this.position < this.input.length && /\s/.test(this.input[this.position])) {
@@ -178,10 +200,10 @@ export class HTMLLexer extends Lexer {
                     this.jsLexer = new JavaScriptLexer(this.input.slice(this.position));
                 }
 
-                return { type: 'HTML_TAG', value: whitespace + '>' };
+                this.tokenStream.push({ type: 'HTML_TAG', value: whitespace + '>' });
             }
 
-            return null;
+            return;
         }
 
         start = this.position;
@@ -201,23 +223,24 @@ export class HTMLLexer extends Lexer {
             this.position++; // Skip '='
 
             this.currentContext = LexerContext.Attribute;
-            return {
+            this.tokenStream.push({
                 type: 'HTML_ATTRIBUTE',
                 value: `${whitespace}${attributeName}${spacesBeforeEqual}=`
-            };
+            });
+            return;
         }
 
-        return {
+        this.tokenStream.push({
             type: 'HTML_ATTRIBUTE',
             value: `${whitespace}${attributeName}` // Attribute without value
-        };
+        });
     }
 
     /**
      * Reads an HTML attribute value in the input.
      * @returns The HTML attribute value token.
      */
-    protected readHtmlAttributeValue(): Token | null {
+    protected readHtmlAttributeValue(): void {
         // Skip leading whitespace
         let start = this.position;
         while (this.position < this.input.length && /\s/.test(this.input[this.position])) {
@@ -237,27 +260,26 @@ export class HTMLLexer extends Lexer {
             }
 
             this.currentContext = LexerContext.Tag;
-            return { type: 'HTML_ATTRIBUTE_VALUE', value: this.input.slice(start, this.position) };
+            this.tokenStream.push({ type: 'HTML_ATTRIBUTE_VALUE', value: this.input.slice(start, this.position) });
         }
 
         this.currentContext = LexerContext.Tag;
-        return null;
     }
 
     /**
      * Reads text content between HTML tags.
      * @returns The text token.
      */
-    protected readText(): Token | null {
+    protected readText(): void {
         let start = this.position;
         while (this.position < this.input.length && this.input[this.position] !== '<') {
             this.position++;
         }
 
         if (start === this.position) {
-            return this.nextToken();
+            this.nextToken();
         }
 
-        return { type: 'TEXT', value: this.input.slice(start, this.position) };
+        this.tokenStream.push({ type: 'TEXT', value: this.input.slice(start, this.position) });
     }
 }
