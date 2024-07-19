@@ -50,9 +50,7 @@ export class Lexer {
             return null;
         }
 
-        const token = this.tokenStream[this.tokenIndex];
-        this.tokenIndex++
-        return token;
+        return this.tokenStream[this.tokenIndex++];
     }
 
     /**

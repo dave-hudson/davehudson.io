@@ -7,26 +7,18 @@ styles['HTML_ATTRIBUTE'] = 'html-attribute';
 styles['HTML_ATTRIBUTE_VALUE'] = 'html-attribute-value';
 styles['TEXT'] = null;
 
-enum LexerContext {
-    None,
-    Tag,
-    Attribute
-}
-
 /**
  * Lexer class for HTML, extending the base lexer functionality.
  */
 export class HTMLLexer extends Lexer {
     protected contextStack: string[];
     protected jsLexer: JavaScriptLexer | null;
-    protected currentContext: LexerContext;
     protected scriptContentStart: number;
 
     constructor(input: string) {
         super(input);
         this.contextStack = ['html'];
         this.jsLexer = null;
-        this.currentContext = LexerContext.None;
         this.scriptContentStart = 0;
     }
 
@@ -52,19 +44,6 @@ export class HTMLLexer extends Lexer {
         if (this.position >= this.input.length) {
             return false;
         }
-
-/*
-        switch (this.currentContext) {
-            case LexerContext.Tag:
-                return this.readHtmlAttribute();
-
-            case LexerContext.Attribute:
-                return this.readHtmlAttributeValue();
-
-            default:
-                break;
-        }
-*/
 
         const ch = this.input[this.position];
 
@@ -142,13 +121,12 @@ export class HTMLLexer extends Lexer {
      * @returns The HTML tag token.
      */
     protected readHtmlTag(): void {
-//        let start = this.position;
         this.position++; // Skip '<'
         let tagName = '';
 
-        // Check if it's a closing tag
-        const isClosingTag = this.input[this.position] === '/';
-        if (isClosingTag) {
+        // Check if this is a closing tag
+        const isCloseTag = this.input[this.position] === '/';
+        if (isCloseTag) {
             this.position++; // Skip '/'
         }
 
@@ -163,12 +141,21 @@ export class HTMLLexer extends Lexer {
             this.position++;
         }
 
-        const tagEnd = this.position;
+        // Check if this is an empty tag.
+        const isEmptyTag = this.input[this.position - 1] === '/';
+        let tagEnd = this.position;
+        if (isEmptyTag) {
+            tagEnd--;
+        }
+
         if (this.position < this.input.length) {
             this.position++; // Skip '>'
         }
 
-        console.log('tag: ', this.input.slice(tagNameEnd, tagEnd));
+        this.tokenStream.push({ type: 'OPERATOR_OR_PUNCTUATION', value: isCloseTag ? '</' : '<' });
+        this.tokenStream.push({ type: 'HTML_TAG', value: tagName });
+        this.readHtmlAttribute(tagNameEnd, tagEnd)
+        this.tokenStream.push({ type: 'OPERATOR_OR_PUNCTUATION', value: isEmptyTag ? '/>' : '>' });
 
 //        this.currentContext = LexerContext.Tag;
 //        if (tagName.toLowerCase() === 'script' && !isClosingTag) {
@@ -176,94 +163,129 @@ export class HTMLLexer extends Lexer {
 //            this.contextStack.push('script');
 //        }
 
-        this.tokenStream.push({ type: 'HTML_TAG', value: `<${isClosingTag ? '/' : ''}${tagName}` });
     }
 
     /**
      * Reads an HTML attribute in the input.
      * @returns The HTML attribute token.
      */
-    protected readHtmlAttribute(): void {
-        // Skip leading whitespace
-        let start = this.position;
-        while (this.position < this.input.length && /\s/.test(this.input[this.position])) {
-            this.position++;
-        }
-        const whitespace = this.input.slice(start, this.position);
+    protected readHtmlAttribute(start: number, end: number): void {
+        let position = start;
 
-        if (this.position >= this.input.length || this.input[this.position] === '>') {
-            this.currentContext = LexerContext.None; // End of tag
-            if (this.input[this.position] === '>') {
-                this.position++; // Skip '>'
-                if (this.contextStack[this.contextStack.length - 1] === 'script') {
-                    console.log('JS parse from: ', this.input.slice(this.position));
-                    this.jsLexer = new JavaScriptLexer(this.input.slice(this.position));
+        while (true) {
+            // Skip leading whitespace
+            let whitespace = '';
+            while (position < end && /\s/.test(this.input[position])) {
+                whitespace += this.input[position++];
+            }
+
+            if (whitespace.length) {
+                this.tokenStream.push({ type: 'WHITESPACE', value: whitespace });
+            }
+
+            if (position >= end) {
+                return;
+            }
+
+    /*
+            if (this.position >= this.input.length || this.input[this.position] === '>') {
+                this.currentContext = LexerContext.None; // End of tag
+                if (this.input[this.position] === '>') {
+                    this.position++; // Skip '>'
+                    if (this.contextStack[this.contextStack.length - 1] === 'script') {
+                        console.log('JS parse from: ', this.input.slice(this.position));
+                        this.jsLexer = new JavaScriptLexer(this.input.slice(this.position));
+                    }
+
+                    this.tokenStream.push({ type: 'HTML_TAG', value: whitespace + '>' });
                 }
 
-                this.tokenStream.push({ type: 'HTML_TAG', value: whitespace + '>' });
+                return;
+            }
+    */
+
+            let attributeName = '';
+            while (position < end && /[\w-]/.test(this.input[position])) {
+                attributeName += this.input[position++];
             }
 
-            return;
-        }
+            this.tokenStream.push({ type: 'HTML_ATTRIBUTE', value: attributeName });
 
-        start = this.position;
-        while (this.position < this.input.length && /[\w-]/.test(this.input[this.position])) {
-            this.position++;
-        }
-
-        const attributeName = this.input.slice(start, this.position);
-
-        // Skip any spaces before the '=' sign
-        let spacesBeforeEqual = '';
-        while (this.position < this.input.length && /\s/.test(this.input[this.position])) {
-            spacesBeforeEqual += this.input[this.position++];
-        }
-
-        if (this.position < this.input.length && this.input[this.position] === '=') {
-            this.position++; // Skip '='
-
-            this.currentContext = LexerContext.Attribute;
-            this.tokenStream.push({
-                type: 'HTML_ATTRIBUTE',
-                value: `${whitespace}${attributeName}${spacesBeforeEqual}=`
-            });
-            return;
-        }
-
-        this.tokenStream.push({
-            type: 'HTML_ATTRIBUTE',
-            value: `${whitespace}${attributeName}` // Attribute without value
-        });
-    }
-
-    /**
-     * Reads an HTML attribute value in the input.
-     * @returns The HTML attribute value token.
-     */
-    protected readHtmlAttributeValue(): void {
-        // Skip leading whitespace
-        let start = this.position;
-        while (this.position < this.input.length && /\s/.test(this.input[this.position])) {
-            this.position++;
-        }
-
-        const quote = this.input[this.position];
-        if (quote === '"' || quote === "'") {
-            start = this.position;
-            this.position++; // Skip the opening quote
-            while (this.position < this.input.length && this.input[this.position] !== quote) {
-                this.position++;
+            if (position >= end) {
+                return;
             }
 
-            if (this.position < this.input.length) {
-                this.position++; // Skip the closing quote
+            // Skip whitespace
+            whitespace = '';
+            while (position < end && /\s/.test(this.input[position])) {
+                whitespace += this.input[position++];
             }
 
-            this.currentContext = LexerContext.Tag;
-            this.tokenStream.push({ type: 'HTML_ATTRIBUTE_VALUE', value: this.input.slice(start, this.position) });
-        }
+            if (whitespace.length) {
+                this.tokenStream.push({ type: 'WHITESPACE', value: whitespace });
+            }
 
-        this.currentContext = LexerContext.Tag;
+            if (position >= end) {
+                return;
+            }
+
+            if (this.input[position] !== '=') {
+                continue;
+            }
+
+            this.tokenStream.push({ type: 'OPERATOR_OR_PUNCTUATION', value: '='})
+            position++; // Skip '='
+
+            // Skip whitespace
+            whitespace = '';
+            while (position < end && /\s/.test(this.input[position])) {
+                whitespace += this.input[position++];
+            }
+
+            if (whitespace.length) {
+                this.tokenStream.push({ type: 'WHITESPACE', value: whitespace });
+            }
+
+            if (position >= end) {
+                return;
+            }
+
+            console.log('next char: ', this.input[position]);
+            const valueFirstChar = this.input[position];
+            if (valueFirstChar === '\'' || valueFirstChar === '"') {
+                position++; // Skip over the opening quote.
+
+                let attributeValue = '';
+                while (position < end && this.input[position] != valueFirstChar) {
+                    attributeValue += this.input[position++];
+                }
+
+                if (attributeValue.length) {
+                    this.tokenStream.push({
+                        type: 'HTML_ATTRIBUTE_VALUE',
+                        value: `${valueFirstChar}${attributeValue}${valueFirstChar}` });
+                }
+
+                position++; // Skip over the end quote.
+
+                if (position >= end) {
+                    return;
+                }
+
+                continue;
+            }
+
+            let attributeValue = '';
+            while (position < end && /[\w-]/.test(this.input[position])) {
+                attributeValue += this.input[position++];
+            }
+
+            this.tokenStream.push({ type: 'HTML_ATTRIBUTE_VALUE', value: attributeValue });
+
+            if (position >= end) {
+                return;
+            }
+        }
     }
 
     /**
