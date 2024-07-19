@@ -1,4 +1,4 @@
-import { Lexer, styles } from './Lexer';
+import { Lexer, Token, styles } from './Lexer';
 import { JavaScriptLexer } from './JavaScriptLexer';
 
 styles['HTML_DOCTYPE'] = 'html-doctype';
@@ -11,36 +11,11 @@ styles['TEXT'] = null;
  * Lexer class for HTML, extending the base lexer functionality.
  */
 export class HTMLLexer extends Lexer {
-    protected contextStack: string[];
-    protected jsLexer: JavaScriptLexer | null;
-    protected scriptContentStart: number;
-
-    constructor(input: string) {
-        super(input);
-        this.contextStack = ['html'];
-        this.jsLexer = null;
-        this.scriptContentStart = 0;
-    }
-
     /**
      * Gets the next token from the input.
      * @returns The next token, or null if end of input.
      */
     public override nextToken(): boolean {
-        // If we're parsing JavaScript then do the tokenization via the JavaScript lexer.
-/*        if (this.jsLexer) {
-            const jsToken = this.jsLexer.nextToken();
-            if (jsToken) {
-                return jsToken;
-            }
-
-            this.jsLexer = null;
-            this.contextStack.pop();
-
-            // Handle the remaining content after </script>
-            this.currentContext = LexerContext.None;
-        }
-*/
         if (this.position >= this.input.length) {
             return false;
         }
@@ -58,21 +33,19 @@ export class HTMLLexer extends Lexer {
             return true;
         }
 
-        if (this.contextStack[this.contextStack.length - 1] === 'html') {
-            if (this.input.startsWith('<!DOCTYPE', this.position)) {
-                this.readDoctype();
-                return true;
-            }
+        if (this.input.startsWith('<!DOCTYPE', this.position)) {
+            this.readDoctype();
+            return true;
+        }
 
-            if (ch === '<' && this.input[this.position + 1] === '!') {
-                this.readHtmlComment();
-                return true;
-            }
+        if (ch === '<' && this.input[this.position + 1] === '!') {
+            this.readHtmlComment();
+            return true;
+        }
 
-            if (ch === '<') {
-                this.readHtmlTag();
-                return true;
-            }
+        if (ch === '<') {
+            this.readHtmlTag();
+            return true;
         }
 
         // Handle text content between tags.
@@ -157,12 +130,27 @@ export class HTMLLexer extends Lexer {
         this.readHtmlAttribute(tagNameEnd, tagEnd)
         this.tokenStream.push({ type: 'OPERATOR_OR_PUNCTUATION', value: isEmptyTag ? '/>' : '>' });
 
-//        this.currentContext = LexerContext.Tag;
-//        if (tagName.toLowerCase() === 'script' && !isClosingTag) {
-//            this.scriptContentStart = this.position;
-//            this.contextStack.push('script');
-//        }
+        // Is this a SCRIPT element?  If it is then we need to switch to a JavaScript lexer.
+        if (isCloseTag || tagName.toLowerCase() !== 'script') {
+            return;
+        }
 
+        // We need to find the /SCRIPT tag.
+        let scriptClose: number = this.input.toLowerCase().indexOf('</script', this.position);
+        if (scriptClose === -1) {
+            scriptClose = this.input.length;
+        }
+
+        // Generate a JavaScript lexer to handle this section of the code.
+        const jsLexer = new JavaScriptLexer(this.input.slice(this.position, scriptClose));
+        jsLexer.generateTokens();
+
+        let token: Token | null;
+        while ((token = jsLexer.getToken()) != null) {
+            this.tokenStream.push(token);
+        }
+
+        this.position = scriptClose;
     }
 
     /**
@@ -186,23 +174,6 @@ export class HTMLLexer extends Lexer {
             if (position >= end) {
                 return;
             }
-
-    /*
-            if (this.position >= this.input.length || this.input[this.position] === '>') {
-                this.currentContext = LexerContext.None; // End of tag
-                if (this.input[this.position] === '>') {
-                    this.position++; // Skip '>'
-                    if (this.contextStack[this.contextStack.length - 1] === 'script') {
-                        console.log('JS parse from: ', this.input.slice(this.position));
-                        this.jsLexer = new JavaScriptLexer(this.input.slice(this.position));
-                    }
-
-                    this.tokenStream.push({ type: 'HTML_TAG', value: whitespace + '>' });
-                }
-
-                return;
-            }
-    */
 
             let attributeName = '';
             while (position < end && /[\w-]/.test(this.input[position])) {
