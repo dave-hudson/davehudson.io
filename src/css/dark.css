@@ -67,6 +67,22 @@ hr {
     color: #808080;
 }
 
+.main pre code .html-doctype {
+    color: #808080;
+}
+
+.main pre code .html-tag {
+    color: #ffc0cb;
+}
+
+.main pre code .html-attribute {
+    color: #c0c040;
+}
+
+.main pre code .html-attribute-value {
+    color: #d06060;
+}
+
 .main table th {
     background-color: #444;
     border: 1px solid #777;
