@@ -66,7 +66,6 @@ function experimentSyntaxPythonComponent(): VElement {
 
     contents.mountCallback = () => {
         codeVElement = contents;
-        console.log('mounted');
         if (code.length === 0) {
             loadFile('/experiments/python/test.py', writeCode);
         }
@@ -74,7 +73,6 @@ function experimentSyntaxPythonComponent(): VElement {
 
     contents.unmountCallback = () => {
         codeVElement = null;
-        console.log('unmounted');
     }
 
     return contents;

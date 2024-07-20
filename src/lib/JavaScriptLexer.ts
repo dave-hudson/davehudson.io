@@ -60,7 +60,6 @@ export class JavaScriptLexer extends Lexer {
      * @returns The number token.
      */
     protected readNumber(): void {
-        console.log('read number', this.position, this.input.slice(this.position, this.position + 5));
         let start = this.position;
 
         if (this.input[this.position] === '0') {
@@ -95,7 +94,6 @@ export class JavaScriptLexer extends Lexer {
                 }
             }
         } else {
-            console.log('here: ', this.position, this.input.slice(this.position, this.position + 5));
             while (this.position < this.input.length && /[0-9]/.test(this.input[this.position])) {
                 this.position++;
             }
@@ -123,7 +121,6 @@ export class JavaScriptLexer extends Lexer {
             this.position++;
         }
 
-        console.log('output number', this.input.slice(start, this.position));
         if (this.position == start) debugger;
         this.tokenStream.push({ type: 'NUMBER', value: this.input.slice(start, this.position) });
     }

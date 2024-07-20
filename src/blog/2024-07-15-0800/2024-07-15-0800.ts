@@ -70,7 +70,6 @@ function blogCode0_2024_07_15_0800(): VElement {
 
     contents.mountCallback = () => {
         codeVElement[0] = contents;
-        console.log('mounted');
         if (code[0].length === 0) {
             loadFile(0, '/blog/2024-07-15-0800/2024-07-15-0800-file0.js', writeCode);
         }
@@ -78,7 +77,6 @@ function blogCode0_2024_07_15_0800(): VElement {
 
     contents.unmountCallback = () => {
         codeVElement[0] = null;
-        console.log('unmounted');
     }
 
     return contents;
@@ -92,7 +90,6 @@ function blogCode1_2024_07_15_0800(): VElement {
 
     contents.mountCallback = () => {
         codeVElement[1] = contents;
-        console.log('mounted');
         if (code[1].length === 0) {
             loadFile(1, '/blog/2024-07-15-0800/2024-07-15-0800-file1.js', writeCode);
         }
@@ -100,7 +97,6 @@ function blogCode1_2024_07_15_0800(): VElement {
 
     contents.unmountCallback = () => {
         codeVElement[1] = null;
-        console.log('unmounted');
     }
 
     return contents;

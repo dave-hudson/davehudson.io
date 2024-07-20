@@ -66,7 +66,6 @@ function experimentSyntaxTypeScriptComponent(): VElement {
 
     contents.mountCallback = () => {
         codeVElement = contents;
-        console.log('mounted');
         if (code.length === 0) {
             loadFile('/experiments/typescript/test.ts', writeCode);
         }
@@ -74,7 +73,6 @@ function experimentSyntaxTypeScriptComponent(): VElement {
 
     contents.unmountCallback = () => {
         codeVElement = null;
-        console.log('unmounted');
     }
 
     return contents;
