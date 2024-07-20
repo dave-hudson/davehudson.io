@@ -1,4 +1,4 @@
-import { Lexer } from './Lexer'
+import { Lexer, Token } from './Lexer'
 
 /**
  * Lexer for C code.
@@ -54,6 +54,15 @@ export class CLexer extends Lexer {
         if (ch === '#') {
             this.readPreprocessorDirective();
             return true;
+        }
+
+        if (ch === '(') {
+            const token: Token | null = this.getPrevNonWhitespaceToken(0);
+            if (token?.type === 'IDENTIFIER') {
+                token.type = 'FUNCTION_OR_METHOD';
+            }
+
+            // Fallthrough to reading operator or punctuation.
         }
 
         this.readOperatorOrPunctuation();
