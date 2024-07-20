@@ -36,6 +36,11 @@ export class JavaScriptLexer extends Lexer {
             return true;
         }
 
+        if (ch === '"' || ch === "'") {
+            this.readString(ch);
+            return true;
+        }
+
         if (ch === '/' && this.input[this.position + 1] === '/') {
             this.readComment();
             return true;

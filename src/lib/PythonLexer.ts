@@ -36,6 +36,11 @@ export class PythonLexer extends Lexer {
             return true;
         }
 
+        if (ch === '"' || ch === "'") {
+            this.readString(ch);
+            return true;
+        }
+
         if (ch === '#') {
             this.readComment();
             return true;
@@ -128,7 +133,7 @@ export class PythonLexer extends Lexer {
      */
     protected override readIdentifierOrKeyword(): void {
         let start = this.position;
-        while (this.position < this.input.length && (this.isLetter(this.input[this.position]) || this.input[this.position] === '_')) {
+        while (this.position < this.input.length && (this.isLetterOrDigit(this.input[this.position]) || this.input[this.position] === '_')) {
             this.position++;
         }
 
