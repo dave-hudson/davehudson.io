@@ -13,7 +13,7 @@ export class PythonLexer extends Lexer {
             return false;
         }
 
-        const ch = this.input[this.position];
+        const ch: string = this.input[this.position];
 
         if (ch === '\n') {
             this.position++;
@@ -37,6 +37,13 @@ export class PythonLexer extends Lexer {
         }
 
         if (ch === '"' || ch === "'") {
+            if (((this.position + 2) < this.input.length) &&
+                    this.input[this.position + 1] === ch &&
+                    this.input[this.position + 2] === ch) {
+                this.readDocString(ch);
+                return true;
+            }
+
             this.readString(ch);
             return true;
         }
@@ -153,6 +160,24 @@ export class PythonLexer extends Lexer {
             this.position++;
         }
 
+        this.tokenStream.push({ type: 'COMMENT', value: this.input.slice(start, this.position) });
+    }
+
+    /**
+     * Reads a doc string token.
+     * @returns The doc string token.
+     */
+    protected readDocString(ch: string): void {
+        const start = this.position;
+        this.position += 3; // Skip the opening of the doc string
+        while ((this.position + 2) < this.input.length &&
+                !(this.input[this.position] === ch &&
+                    this.input[this.position + 1] === ch &&
+                    this.input[this.position + 2] === ch)) {
+            this.position++;
+        }
+
+        this.position += 3; // Skip closing of the doc string
         this.tokenStream.push({ type: 'COMMENT', value: this.input.slice(start, this.position) });
     }
 
