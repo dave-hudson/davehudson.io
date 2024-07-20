@@ -64,7 +64,7 @@ export class CLexer extends Lexer {
      * Reads a number in the input.
      * @returns The number token.
      */
-    protected override readNumber(): void {
+    protected readNumber(): void {
         let start = this.position;
         let hasSuffix = false;
 
@@ -127,7 +127,7 @@ export class CLexer extends Lexer {
      * Reads whitespace in the input.
      * @returns The whitespace token.
      */
-    protected override readWhitespace(): void {
+    protected readWhitespace(): void {
         let start = this.position;
         while (this.position < this.input.length && /\s/.test(this.input[this.position])) {
             this.position++;
@@ -140,7 +140,7 @@ export class CLexer extends Lexer {
      * Reads a comment in the input.
      * @returns The comment token.
      */
-    protected override readComment(): void {
+    protected readComment(): void {
         let start = this.position;
         this.position += 2; // Skip "//"
         while (this.position < this.input.length && this.input[this.position] !== '\n') {
@@ -154,7 +154,7 @@ export class CLexer extends Lexer {
      * Reads a block comment in the input.
      * @returns The block comment token.
      */
-    protected override readBlockComment(): void {
+    protected readBlockComment(): void {
         let start = this.position;
         this.position += 2; // Skip "/*"
         while (this.position < this.input.length && !(this.input[this.position - 1] === '*' && this.input[this.position] === '/')) {
@@ -169,7 +169,7 @@ export class CLexer extends Lexer {
      * Reads an identifier or keyword token in C.
      * @returns The identifier or keyword token.
      */
-    protected override readIdentifierOrKeyword(): void {
+    protected readIdentifierOrKeyword(): void {
         const start = this.position;
         while (this.isLetterOrDigit(this.input[this.position]) || this.input[this.position] === '_') {
             this.position++;
@@ -207,7 +207,7 @@ export class CLexer extends Lexer {
      * @param value - The value to check.
      * @returns True if the value is a keyword, false otherwise.
      */
-    protected override isKeyword(value: string): boolean {
+    protected isKeyword(value: string): boolean {
         const keywords = [
             'auto',
             'break',

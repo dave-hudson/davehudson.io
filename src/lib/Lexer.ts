@@ -17,7 +17,7 @@ export const styles: { [key: string]: string | null } = {
 /**
  * Base class for lexers, providing common functionality.
  */
-export class Lexer {
+export abstract class Lexer {
     protected input: string;
     protected position: number;
     protected tokenStream: Token[];
@@ -56,98 +56,7 @@ export class Lexer {
      * Gets the next token from the input.
      * @returns The next token, or null if end of input.
      */
-    public nextToken(): boolean {
-        if (this.position >= this.input.length) {
-            return false;
-        }
-
-        const ch = this.input[this.position];
-
-        if (ch === '\n') {
-            this.position++;
-            this.tokenStream.push({ type: 'WHITESPACE_OR_NEWLINE', value: '\n' });
-            return true;
-        }
-
-        if (/\s/.test(ch)) {
-            this.readWhitespace();
-            return true;
-        }
-
-        if (this.isLetter(ch)) {
-            this.readIdentifierOrKeyword();
-            return true;
-        }
-
-        if (this.isDigit(ch)) {
-            this.readNumber();
-            return true;
-        }
-
-        if (ch === '"' || ch === "'") {
-            this.readString(ch);
-            return true;
-        }
-
-        if (ch === '/' && this.input[this.position + 1] === '/') {
-            this.readComment();
-            return true;
-        }
-
-        if (ch === '/' && this.input[this.position + 1] === '*') {
-            this.readBlockComment();
-            return true;
-        }
-
-        if (ch === '#' || (ch === '/' && this.input[this.position + 1] === '/')) {
-            this.readComment();
-            return true;
-        }
-
-        this.readOperatorOrPunctuation();
-        return true;
-    }
-
-    /**
-     * Reads whitespace in the input.
-     * @returns The whitespace token.
-     */
-    protected readWhitespace(): void {
-        const start = this.position;
-        while (this.position < this.input.length && /\s/.test(this.input[this.position]) && this.input[this.position] !== '\n') {
-            this.position++;
-        }
-
-        this.tokenStream.push({ type: 'WHITESPACE_OR_NEWLINE', value: this.input.slice(start, this.position) });
-    }
-
-    /**
-     * Reads an identifier or keyword token.
-     * @returns The identifier or keyword token.
-     */
-    protected readIdentifierOrKeyword(): void {
-        const start = this.position;
-        while (this.isLetterOrDigit(this.input[this.position])) {
-            this.position++;
-        }
-
-        const value = this.input.slice(start, this.position);
-        const type = this.isKeyword(value) ? 'KEYWORD' : 'IDENTIFIER';
-        this.tokenStream.push({ type, value });
-    }
-
-    /**
-     * Reads a number token.
-     * @returns The number token.
-     */
-    protected readNumber(): void {
-        const start = this.position;
-        while (this.isDigit(this.input[this.position])) {
-            this.position++;
-        }
-
-        this.tokenStream.push({ type: 'NUMBER', value: this.input.slice(start, this.position) });
-    }
+    abstract nextToken(): boolean;
 
     /**
      * Reads a string token.
@@ -167,33 +76,6 @@ export class Lexer {
 
         this.position++; // Skip closing quote
         this.tokenStream.push({ type: 'STRING', value: this.input.slice(start, this.position) });
-    }
-
-    /**
-     * Reads a comment token.
-     * @returns The comment token.
-     */
-    protected readComment(): void {
-        const start = this.position;
-        while (this.position < this.input.length && this.input[this.position] !== '\n') {
-            this.position++;
-        }
-
-        this.tokenStream.push({ type: 'COMMENT', value: this.input.slice(start, this.position) });
-    }
-
-    /**
-     * Reads a block comment token.
-     * @returns The block comment token.
-     */
-    protected readBlockComment(): void {
-        const start = this.position;
-        while (this.position < this.input.length && !(this.input[this.position] === '*' && this.input[this.position + 1] === '/')) {
-            this.position++;
-        }
-
-        this.position += 2; // Skip closing */
-        this.tokenStream.push({ type: 'COMMENT', value: this.input.slice(start, this.position) });
     }
 
     /**
@@ -237,7 +119,5 @@ export class Lexer {
      * @param value - The value to check.
      * @returns True if the value is a keyword, false otherwise.
      */
-    protected isKeyword(value: string): boolean {
-        return false; // To be overridden by subclasses
-    }
+    protected abstract isKeyword(value: string): boolean;
 }

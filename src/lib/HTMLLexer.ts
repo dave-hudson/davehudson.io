@@ -15,7 +15,7 @@ export class HTMLLexer extends Lexer {
      * Gets the next token from the input.
      * @returns The next token, or null if end of input.
      */
-    public override nextToken(): boolean {
+    public nextToken(): boolean {
         if (this.position >= this.input.length) {
             return false;
         }
@@ -51,6 +51,19 @@ export class HTMLLexer extends Lexer {
         // Handle text content between tags.
         this.readText();
         return true;
+    }
+
+    /**
+     * Reads whitespace in the input.
+     * @returns The whitespace token.
+     */
+    protected readWhitespace(): void {
+        const start = this.position;
+        while (this.position < this.input.length && /\s/.test(this.input[this.position]) && this.input[this.position] !== '\n') {
+            this.position++;
+        }
+
+        this.tokenStream.push({ type: 'WHITESPACE_OR_NEWLINE', value: this.input.slice(start, this.position) });
     }
 
     /**
@@ -273,5 +286,9 @@ export class HTMLLexer extends Lexer {
         }
 
         this.tokenStream.push({ type: 'TEXT', value: this.input.slice(start, this.position) });
+    }
+
+    isKeyword(value: string): boolean {
+        return false;
     }
 }
