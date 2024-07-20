@@ -11,8 +11,7 @@ export const styles: { [key: string]: string | null } = {
     COMMENT: 'comment',
     OPERATOR_OR_PUNCTUATION: 'operator',
     PREPROCESSOR: 'preprocessor',
-    WHITESPACE: null,
-    NEWLINE: null,
+    WHITESPACE_OR_NEWLINE: null,
 };
 
 /**
@@ -66,7 +65,7 @@ export class Lexer {
 
         if (ch === '\n') {
             this.position++;
-            this.tokenStream.push({ type: 'NEWLINE', value: '\n' });
+            this.tokenStream.push({ type: 'WHITESPACE_OR_NEWLINE', value: '\n' });
             return true;
         }
 
@@ -119,7 +118,7 @@ export class Lexer {
             this.position++;
         }
 
-        this.tokenStream.push({ type: 'WHITESPACE', value: this.input.slice(start, this.position) });
+        this.tokenStream.push({ type: 'WHITESPACE_OR_NEWLINE', value: this.input.slice(start, this.position) });
     }
 
     /**

@@ -39,40 +39,8 @@ hr {
     background-color: #202020;
 }
 
-.main pre code .keyword {
-    color: #ffc0cb;
-}
-
-.main pre code .identifier {
-    color: #80b0f0;
-}
-
-.main pre code .number {
-    color: #c0c040;
-}
-
-.main pre code .string {
-    color: #d06060;
-}
-
 .main pre code .comment {
     color: #40c040;
-}
-
-.main pre code .operator {
-    color: #e0e0e0;
-}
-
-.main pre code .preprocessor {
-    color: #808080;
-}
-
-.main pre code .html-doctype {
-    color: #808080;
-}
-
-.main pre code .html-tag {
-    color: #ffc0cb;
 }
 
 .main pre code .html-attribute {
@@ -81,6 +49,42 @@ hr {
 
 .main pre code .html-attribute-value {
     color: #d06060;
+}
+
+.main pre code .html-doctype {
+    color: #808080;
+}
+
+.main pre code .html-tag {
+    color: #ffc0eb;
+}
+
+.main pre code .identifier {
+    color: #80b0f0;
+}
+
+.main pre code .keyword {
+    color: #ffc0eb;
+}
+
+.main pre code .number {
+    color: #c0c040;
+}
+
+.main pre code .operator {
+    color: #c0c0c0;
+}
+
+.main pre code .preprocessor {
+    color: #808080;
+}
+
+.main pre code .string {
+    color: #d06060;
+}
+
+.main pre code .text {
+    color: #f0f0f0;
 }
 
 .main table th {

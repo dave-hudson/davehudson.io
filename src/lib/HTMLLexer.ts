@@ -5,7 +5,7 @@ styles['HTML_DOCTYPE'] = 'html-doctype';
 styles['HTML_TAG'] = 'html-tag';
 styles['HTML_ATTRIBUTE'] = 'html-attribute';
 styles['HTML_ATTRIBUTE_VALUE'] = 'html-attribute-value';
-styles['TEXT'] = null;
+styles['TEXT'] = 'text';
 
 /**
  * Lexer class for HTML, extending the base lexer functionality.
@@ -24,7 +24,7 @@ export class HTMLLexer extends Lexer {
 
         if (ch === '\n') {
             this.position++;
-            this.tokenStream.push({ type: 'NEWLINE', value: '\n' });
+            this.tokenStream.push({ type: 'WHITESPACE_OR_NEWLINE', value: '\n' });
             return true;
         }
 
@@ -168,7 +168,7 @@ export class HTMLLexer extends Lexer {
             }
 
             if (whitespace.length) {
-                this.tokenStream.push({ type: 'WHITESPACE', value: whitespace });
+                this.tokenStream.push({ type: 'WHITESPACE_OR_NEWLINE', value: whitespace });
             }
 
             if (position >= end) {
@@ -193,7 +193,7 @@ export class HTMLLexer extends Lexer {
             }
 
             if (whitespace.length) {
-                this.tokenStream.push({ type: 'WHITESPACE', value: whitespace });
+                this.tokenStream.push({ type: 'WHITESPACE_OR_NEWLINE', value: whitespace });
             }
 
             if (position >= end) {
@@ -214,7 +214,7 @@ export class HTMLLexer extends Lexer {
             }
 
             if (whitespace.length) {
-                this.tokenStream.push({ type: 'WHITESPACE', value: whitespace });
+                this.tokenStream.push({ type: 'WHITESPACE_OR_NEWLINE', value: whitespace });
             }
 
             if (position >= end) {

@@ -562,32 +562,8 @@ pre {
     padding: 8px;
 }
 
-.main pre code .keyword {
-    color: #c040c0;
-}
-
-.main pre code .identifier {
-    color: #4058d0;
-}
-
-.main pre code .number {
-    color: #c08a00;
-}
-
-.main pre code .string {
-    color: #f06030;
-}
-
 .main pre code .comment {
     color: #006400;
-}
-
-.main pre code .operator {
-    color: #141414;
-}
-
-.main pre code .preprocessor {
-    color: #a0a0a0;
 }
 
 .main pre code .html-doctype {
@@ -604,6 +580,34 @@ pre {
 
 .main pre code .html-attribute-value {
     color: #f06030;
+}
+
+.main pre code .identifier {
+    color: #4058d0;
+}
+
+.main pre code .keyword {
+    color: #c040c0;
+}
+
+.main pre code .number {
+    color: #c08a00;
+}
+
+.main pre code .operator {
+    color: #404040;
+}
+
+.main pre code .preprocessor {
+    color: #a0a0a0;
+}
+
+.main pre code .string {
+    color: #f06030;
+}
+
+.mainn pre code .text {
+    color: #0e0e0e;
 }
 
 .main table {
