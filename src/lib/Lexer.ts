@@ -6,6 +6,7 @@ export interface Token {
 export const styles: { [key: string]: string | null } = {
     KEYWORD: 'keyword',
     IDENTIFIER: 'identifier',
+    FUNCTION_OR_METHOD: 'function',
     NUMBER: 'number',
     STRING: 'string',
     COMMENT: 'comment',
@@ -21,7 +22,7 @@ export abstract class Lexer {
     protected input: string;
     protected position: number;
     protected tokenStream: Token[];
-    protected tokenIndex;
+    protected tokenIndex : number;
 
     /**
      * Constructs a lexer.
@@ -50,6 +51,36 @@ export abstract class Lexer {
         }
 
         return this.tokenStream[this.tokenIndex++];
+    }
+
+    /**
+     * Fetch a token pushed earlier into the token stream
+     */
+    protected getPrevToken(offset: number): Token | null {
+        if (offset >= this.tokenStream.length) {
+            return null;
+        }
+
+        return this.tokenStream[this.tokenStream.length - offset - 1];
+    }
+
+    /**
+     * Fetch a token pushed earlier into the token stream
+     */
+    protected getPrevNonWhitespaceToken(offset: number): Token | null {
+        let whitespaceCount = 0;
+        for (let i = 0; i < offset; i++) {
+            if (i + whitespaceCount >= this.tokenStream.length) {
+                return null;
+            }
+
+            const token: Token = this.tokenStream[this.tokenStream.length - whitespaceCount - i];
+            if (token.type === 'WHITESPACE_OR_NEWLINE') {
+                whitespaceCount++;
+            }
+        }
+
+        return this.tokenStream[this.tokenStream.length - offset - 1];
     }
 
     /**

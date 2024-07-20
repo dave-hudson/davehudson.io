@@ -1,4 +1,4 @@
-import { Lexer } from './Lexer'
+import { Lexer, Token } from './Lexer'
 
 /**
  * Lexer for JavaScript code.
@@ -49,6 +49,15 @@ export class JavaScriptLexer extends Lexer {
         if (ch === '/' && this.input[this.position + 1] === '*') {
             this.readBlockComment();
             return true;
+        }
+
+        if (ch === '(') {
+            const token: Token | null = this.getPrevNonWhitespaceToken(0);
+            if (token?.type === 'IDENTIFIER') {
+                token.type = 'FUNCTION_OR_METHOD';
+            }
+
+            // Fallthrough to reading operator or punctuation.
         }
 
         this.readOperatorOrPunctuation();
@@ -134,7 +143,7 @@ export class JavaScriptLexer extends Lexer {
      */
     protected readIdentifierOrKeyword(): void {
         let start = this.position;
-        while (this.position < this.input.length && (this.isLetter(this.input[this.position]) || this.input[this.position] === '_')) {
+        while (this.position < this.input.length && (this.isLetterOrDigit(this.input[this.position]) || this.input[this.position] === '_')) {
             this.position++;
         }
 

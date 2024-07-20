@@ -566,6 +566,10 @@ pre {
     color: #006400;
 }
 
+.main pre code .function {
+    color: #b0a050;
+}
+
 .main pre code .html-doctype {
     color: #a0a0a0;
 }
@@ -575,7 +579,7 @@ pre {
 }
 
 .main pre code .html-attribute {
-    color: #c08a00;
+    color: #c06a20;
 }
 
 .main pre code .html-attribute-value {
@@ -591,7 +595,7 @@ pre {
 }
 
 .main pre code .number {
-    color: #c08a00;
+    color: #c06a20;
 }
 
 .main pre code .operator {

@@ -39,12 +39,16 @@ hr {
     background-color: #202020;
 }
 
-.main pre code .comment {
-    color: #40c040;
+.main pre code .function {
+    color: #808040;
+}
+
+.main pre code .function {
+    color: #e0e080;
 }
 
 .main pre code .html-attribute {
-    color: #c0c040;
+    color: #c08040;
 }
 
 .main pre code .html-attribute-value {
@@ -68,7 +72,7 @@ hr {
 }
 
 .main pre code .number {
-    color: #c0c040;
+    color: #c08040;
 }
 
 .main pre code .operator {
