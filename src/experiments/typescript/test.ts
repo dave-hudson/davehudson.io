@@ -537,3 +537,7 @@ export function svg(type: string, attrs?: SVGAttributes, ...childNodes: (VNode |
 
     return v;
 }
+
+function test(): void {
+    console.log(0x34fb3, 23n, 4.4431, 0b001111, 0o37623);
+}

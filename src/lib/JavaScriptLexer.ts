@@ -62,36 +62,26 @@ export class JavaScriptLexer extends Lexer {
     protected readNumber(): void {
         let start = this.position;
 
-        if (this.input[this.position] === '0') {
-            this.position++; // Skip '0'
-            if (this.position < this.input.length) {
-                this.tokenStream.push({ type: 'NUMBER', value: this.input.slice(start, this.position) });
-                return;
+        if ((this.input[this.position] === '0') &&
+                (this.input[this.position + 1] === 'x' || this.input[this.position + 1] === 'X')) {
+            // Hexadecimal literal
+            this.position += 2; // Skip "0x"
+            while (this.position < this.input.length && /[0-9a-fA-F]/.test(this.input[this.position])) {
+                this.position++;
             }
-
-            if (this.input[this.position] === 'x' || this.input[this.position] === 'X') {
-                // Hexadecimal literal
-                this.position++; // Skip "0x"
-                while (this.position < this.input.length && /[0-9a-fA-F]/.test(this.input[this.position])) {
-                    this.position++;
-                }
-            } else if (this.input[this.position] === 'b' || this.input[this.position] === 'B') {
-                // Binary literal
-                this.position++; // Skip "0b"
-                while (this.position < this.input.length && /[01]/.test(this.input[this.position])) {
-                    this.position++;
-                }
-            } else if (this.input[this.position] === 'o' || this.input[this.position] === 'O') {
-                // Octal literal (ES6 syntax)
-                this.position++; // Skip "0o"
-                while (this.position < this.input.length && /[0-7]/.test(this.input[this.position])) {
-                    this.position++;
-                }
-            } else if (/[0-7]/.test(this.input[this.position])) {
-                // Legacy octal literal
-                while (this.position < this.input.length && /[0-7]/.test(this.input[this.position])) {
-                    this.position++;
-                }
+        } else if ((this.input[this.position] === '0') &&
+                (this.input[this.position + 1] === 'b' || this.input[this.position + 1] === 'B')) {
+            // Binary literal
+            this.position += 2; // Skip "0b"
+            while (this.position < this.input.length && /[01]/.test(this.input[this.position])) {
+                this.position++;
+            }
+        } else if ((this.input[this.position] === '0') &&
+                (this.input[this.position + 1] === 'o' || this.input[this.position + 1] === 'O')) {
+            // Octal literal (ES6 syntax)
+            this.position += 2; // Skip "0o"
+            while (this.position < this.input.length && /[0-7]/.test(this.input[this.position])) {
+                this.position++;
             }
         } else {
             while (this.position < this.input.length && /[0-9]/.test(this.input[this.position])) {
