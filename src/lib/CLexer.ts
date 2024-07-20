@@ -15,12 +15,154 @@ export class CLexer extends Lexer {
 
         const ch = this.input[this.position];
 
+        if (ch === '\n') {
+            this.position++;
+            this.tokenStream.push({ type: 'NEWLINE', value: '\n' });
+            return true;
+        }
+
+        if (/\s/.test(ch)) {
+            this.readWhitespace();
+            return true;
+        }
+
+        if (this.isLetter(ch) || ch === '_') {
+            this.readIdentifierOrKeyword();
+            return true;
+        }
+
+        if (this.isDigit(ch) || (ch === '.' && this.isDigit(this.input[this.position + 1]))) {
+            this.readNumber();
+            return true;
+        }
+
+        if (ch === '"' || ch === "'") {
+            this.readString(ch);
+            return true;
+        }
+
+        if (ch === '/' && this.input[this.position + 1] === '/') {
+            this.readComment();
+            return true;
+        }
+
+        if (ch === '/' && this.input[this.position + 1] === '*') {
+            this.readBlockComment();
+            return true;
+        }
+
         if (ch === '#') {
             this.readPreprocessorDirective();
             return true;
         }
 
-        return super.nextToken();
+        this.readOperatorOrPunctuation();
+        return true;
+    }
+
+    /**
+     * Reads a number in the input.
+     * @returns The number token.
+     */
+    protected override readNumber(): void {
+        let start = this.position;
+        let hasSuffix = false;
+
+        if (this.input[this.position] === '0' && (this.input[this.position + 1] === 'x' || this.input[this.position + 1] === 'X')) {
+            this.position += 2; // Skip "0x"
+            while (this.position < this.input.length && /[0-9a-fA-F]/.test(this.input[this.position])) {
+                this.position++;
+            }
+        } else if (this.input[this.position] === '0' && (this.input[this.position + 1] === 'b' || this.input[this.position + 1] === 'B')) {
+            this.position += 2; // Skip "0b"
+            while (this.position < this.input.length && /[01]/.test(this.input[this.position])) {
+                this.position++;
+            }
+        } else {
+            while (this.position < this.input.length && /[0-9]/.test(this.input[this.position])) {
+                this.position++;
+            }
+
+            if (this.position < this.input.length && this.input[this.position] === '.') {
+                this.position++;
+                while (this.position < this.input.length && /[0-9]/.test(this.input[this.position])) {
+                    this.position++;
+                }
+            }
+
+            if (this.position < this.input.length && (this.input[this.position] === 'e' || this.input[this.position] === 'E')) {
+                this.position++;
+                if (this.input[this.position] === '+' || this.input[this.position] === '-') {
+                    this.position++;
+                }
+                while (this.position < this.input.length && /[0-9]/.test(this.input[this.position])) {
+                    this.position++;
+                }
+            }
+        }
+
+        // Handle suffixes
+        const suffixStart = this.position;
+        while (this.position < this.input.length && /[uUlLfF]/.test(this.input[this.position])) {
+            this.position++;
+            hasSuffix = true;
+        }
+
+        // Validate the suffix combination
+        if (hasSuffix) {
+            const suffix = this.input.slice(suffixStart, this.position).toLowerCase();
+            const validIntegerSuffixes = ["u", "ul", "ull", "lu", "llu"];
+            const validFloatSuffixes = ["f", "l"];
+            const isValidIntegerSuffix = validIntegerSuffixes.includes(suffix);
+            const isValidFloatSuffix = validFloatSuffixes.includes(suffix);
+            if (!isValidIntegerSuffix && !isValidFloatSuffix) {
+                this.position = suffixStart; // Invalid suffix, revert position
+            }
+        }
+
+        this.tokenStream.push({ type: 'NUMBER', value: this.input.slice(start, this.position) });
+    }
+
+    /**
+     * Reads whitespace in the input.
+     * @returns The whitespace token.
+     */
+    protected override readWhitespace(): void {
+        let start = this.position;
+        while (this.position < this.input.length && /\s/.test(this.input[this.position])) {
+            this.position++;
+        }
+
+        this.tokenStream.push({ type: 'WHITESPACE_OR_NEWLINE', value: this.input.slice(start, this.position) });
+    }
+
+    /**
+     * Reads a comment in the input.
+     * @returns The comment token.
+     */
+    protected override readComment(): void {
+        let start = this.position;
+        this.position += 2; // Skip "//"
+        while (this.position < this.input.length && this.input[this.position] !== '\n') {
+            this.position++;
+        }
+
+        this.tokenStream.push({ type: 'COMMENT', value: this.input.slice(start, this.position) });
+    }
+
+    /**
+     * Reads a block comment in the input.
+     * @returns The block comment token.
+     */
+    protected override readBlockComment(): void {
+        let start = this.position;
+        this.position += 2; // Skip "/*"
+        while (this.position < this.input.length && !(this.input[this.position - 1] === '*' && this.input[this.position] === '/')) {
+            this.position++;
+        }
+
+        this.position++; // Skip '/'
+        this.tokenStream.push({ type: 'COMMENT', value: this.input.slice(start, this.position) });
     }
 
     /**
@@ -29,7 +171,7 @@ export class CLexer extends Lexer {
      */
     protected override readIdentifierOrKeyword(): void {
         const start = this.position;
-        while (this.isLetterOrDigit(this.input[this.position])) {
+        while (this.isLetterOrDigit(this.input[this.position]) || this.input[this.position] === '_') {
             this.position++;
         }
 
@@ -49,6 +191,15 @@ export class CLexer extends Lexer {
         }
 
         this.tokenStream.push({ type: 'PREPROCESSOR', value: this.input.slice(start, this.position) });
+    }
+
+    /**
+     * Checks if a character is a letter.
+     * @param ch - The character to check.
+     * @returns True if the character is a letter, false otherwise.
+     */
+    protected override isLetter(ch: string): boolean {
+        return /[a-zA-Z]/.test(ch);
     }
 
     /**

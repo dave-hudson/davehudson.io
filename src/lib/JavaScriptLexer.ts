@@ -138,7 +138,7 @@ export class JavaScriptLexer extends Lexer {
             this.position++;
         }
 
-        this.tokenStream.push({ type: 'WHITESPACE', value: this.input.slice(start, this.position) });
+        this.tokenStream.push({ type: 'WHITESPACE_OR_NEWLINE', value: this.input.slice(start, this.position) });
     }
 
     /**
