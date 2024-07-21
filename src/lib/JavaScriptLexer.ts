@@ -144,7 +144,8 @@ export class JavaScriptLexer extends Lexer {
      */
     protected readIdentifierOrKeyword(): void {
         let start = this.position;
-        while (this.position < this.input.length && (this.isLetterOrDigit(this.input[this.position]) || this.input[this.position] === '_')) {
+        while (this.position < this.input.length &&
+                (this.isLetterOrDigit(this.input[this.position]) || this.input[this.position] === '_')) {
             this.position++;
         }
 
@@ -152,7 +153,7 @@ export class JavaScriptLexer extends Lexer {
         const prevToken: Token | null = this.getPrevNonWhitespaceToken(0);
         if (prevToken?.type === 'OPERATOR_OR_PUNCTUATION' && prevToken.value === '.') {
             const prevToken2: Token | null = this.getPrevNonWhitespaceToken(1);
-            if (prevToken2?.type === 'IDENTIFIER' || prevToken2?.type === 'KEYWORD') {
+            if (prevToken2?.type === 'IDENTIFIER' || prevToken2?.type === 'KEYWORD' || prevToken2?.type === 'ELEMENT') {
                 this.tokenStream.push({ type: 'ELEMENT', value });
                 return;
             }
@@ -163,7 +164,6 @@ export class JavaScriptLexer extends Lexer {
             return;
         }
 
-        console.log('written');
         this.tokenStream.push({ type: 'IDENTIFIER', value });
     }
 

@@ -55,11 +55,12 @@ export class PythonLexer extends Lexer {
 
         if (ch === '(') {
             const token: Token | null = this.getPrevNonWhitespaceToken(0);
-            if (token?.type === 'IDENTIFIER') {
+            if (token?.type === 'IDENTIFIER' || token?.type === 'ELEMENT') {
                 token.type = 'FUNCTION_OR_METHOD';
             }
 
-            // Fallthrough to reading operator or punctuation.
+            this.readOperatorOrPunctuation();
+            return true;
         }
 
         this.readOperatorOrPunctuation();
@@ -154,8 +155,21 @@ export class PythonLexer extends Lexer {
         }
 
         const value = this.input.slice(start, this.position);
-        const type = this.isKeyword(value) ? 'KEYWORD' : 'IDENTIFIER';
-        this.tokenStream.push({ type, value });
+        const prevToken: Token | null = this.getPrevNonWhitespaceToken(0);
+        if (prevToken?.type === 'OPERATOR_OR_PUNCTUATION' && prevToken.value === '.') {
+            const prevToken2: Token | null = this.getPrevNonWhitespaceToken(1);
+            if (prevToken2?.type === 'IDENTIFIER' || prevToken2?.type === 'KEYWORD' || prevToken2?.type === 'ELEMENT') {
+                this.tokenStream.push({ type: 'ELEMENT', value });
+                return;
+            }
+        }
+
+        if (this.isKeyword(value)) {
+            this.tokenStream.push({ type: 'KEYWORD', value });
+            return;
+        }
+
+        this.tokenStream.push({ type: 'IDENTIFIER', value });
     }
 
     /**
