@@ -149,22 +149,18 @@ export class JavaScriptLexer extends Lexer {
         }
 
         const value = this.input.slice(start, this.position);
-        if (this.isKeyword(value)) {
-            this.tokenStream.push({ type: 'KEYWORD', value });
-            return;
-        }
-
-        console.log('token: ', value);
         const prevToken: Token | null = this.getPrevNonWhitespaceToken(0);
         if (prevToken?.type === 'OPERATOR_OR_PUNCTUATION' && prevToken.value === '.') {
-            console.log('found dot');
             const prevToken2: Token | null = this.getPrevNonWhitespaceToken(1);
-            console.log(prevToken2);
-            if (prevToken2?.type === 'IDENTIFIER') {
-                console.log('found ident');
+            if (prevToken2?.type === 'IDENTIFIER' || prevToken2?.type === 'KEYWORD') {
                 this.tokenStream.push({ type: 'ELEMENT', value });
                 return;
             }
+        }
+
+        if (this.isKeyword(value)) {
+            this.tokenStream.push({ type: 'KEYWORD', value });
+            return;
         }
 
         console.log('written');
