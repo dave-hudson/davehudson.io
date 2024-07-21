@@ -566,6 +566,10 @@ pre {
     color: #006400;
 }
 
+.main pre code .element {
+    color: #50b0d0;
+}
+
 .main pre code .function {
     color: #b0a050;
 }

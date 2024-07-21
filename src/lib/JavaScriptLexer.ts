@@ -53,11 +53,12 @@ export class JavaScriptLexer extends Lexer {
 
         if (ch === '(') {
             const token: Token | null = this.getPrevNonWhitespaceToken(0);
-            if (token?.type === 'IDENTIFIER') {
+            if (token?.type === 'IDENTIFIER' || token?.type === 'ELEMENT') {
                 token.type = 'FUNCTION_OR_METHOD';
             }
 
-            // Fallthrough to reading operator or punctuation.
+            this.readOperatorOrPunctuation();
+            return true;
         }
 
         this.readOperatorOrPunctuation();
@@ -148,8 +149,26 @@ export class JavaScriptLexer extends Lexer {
         }
 
         const value = this.input.slice(start, this.position);
-        const type = this.isKeyword(value) ? 'KEYWORD' : 'IDENTIFIER';
-        this.tokenStream.push({ type, value });
+        if (this.isKeyword(value)) {
+            this.tokenStream.push({ type: 'KEYWORD', value });
+            return;
+        }
+
+        console.log('token: ', value);
+        const prevToken: Token | null = this.getPrevNonWhitespaceToken(0);
+        if (prevToken?.type === 'OPERATOR_OR_PUNCTUATION' && prevToken.value === '.') {
+            console.log('found dot');
+            const prevToken2: Token | null = this.getPrevNonWhitespaceToken(1);
+            console.log(prevToken2);
+            if (prevToken2?.type === 'IDENTIFIER') {
+                console.log('found ident');
+                this.tokenStream.push({ type: 'ELEMENT', value });
+                return;
+            }
+        }
+
+        console.log('written');
+        this.tokenStream.push({ type: 'IDENTIFIER', value });
     }
 
     /**

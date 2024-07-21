@@ -6,6 +6,7 @@ export interface Token {
 export const styles: { [key: string]: string | null } = {
     KEYWORD: 'keyword',
     IDENTIFIER: 'identifier',
+    ELEMENT: 'element',
     FUNCTION_OR_METHOD: 'function',
     NUMBER: 'number',
     STRING: 'string',
@@ -74,7 +75,7 @@ export abstract class Lexer {
                 return null;
             }
 
-            const token: Token = this.tokenStream[this.tokenStream.length - whitespaceCount - i];
+            const token: Token = this.tokenStream[this.tokenStream.length - whitespaceCount - i - 1];
             if (token.type === 'WHITESPACE_OR_NEWLINE') {
                 whitespaceCount++;
             }

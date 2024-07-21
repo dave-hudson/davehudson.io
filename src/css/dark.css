@@ -39,8 +39,12 @@ hr {
     background-color: #202020;
 }
 
-.main pre code .function {
-    color: #808040;
+.main pre code .comment {
+    color: #80f080;
+}
+
+.main pre code .element {
+    color: #70e0e8;
 }
 
 .main pre code .function {
