@@ -72,13 +72,13 @@ export class HTMLLexer extends Lexer {
      */
     protected readDoctype(): void {
         let start = this.position;
-        this.position += 9; // Skip "<!DOCTYPE"
+        this.position += 9;
         while (this.position < this.input.length && this.input[this.position] !== '>') {
             this.position++;
         }
 
         if (this.position < this.input.length) {
-            this.position++; // Skip '>'
+            this.position++;
         }
 
         this.tokenStream.push({ type: 'HTML_DOCTYPE', value: this.input.slice(start, this.position) });
@@ -90,13 +90,13 @@ export class HTMLLexer extends Lexer {
      */
     protected readHtmlComment(): void {
         let start = this.position;
-        this.position += 4; // Skip "<!--"
+        this.position += 4;
         while (this.position < this.input.length && !(this.input[this.position - 2] === '-' && this.input[this.position - 1] === '-' && this.input[this.position] === '>')) {
             this.position++;
         }
 
         if (this.position < this.input.length) {
-            this.position++; // Skip '>'
+            this.position++;
         }
 
         this.tokenStream.push({ type: 'COMMENT', value: this.input.slice(start, this.position) });
@@ -107,13 +107,13 @@ export class HTMLLexer extends Lexer {
      * @returns The HTML tag token.
      */
     protected readHtmlTag(): void {
-        this.position++; // Skip '<'
+        this.position++;
         let tagName = '';
 
         // Check if this is a closing tag
         const isCloseTag = this.input[this.position] === '/';
         if (isCloseTag) {
-            this.position++; // Skip '/'
+            this.position++;
         }
 
         while (this.position < this.input.length && /[a-zA-Z0-9]/.test(this.input[this.position])) {
@@ -135,7 +135,7 @@ export class HTMLLexer extends Lexer {
         }
 
         if (this.position < this.input.length) {
-            this.position++; // Skip '>'
+            this.position++;
         }
 
         this.tokenStream.push({ type: 'OPERATOR_OR_PUNCTUATION', value: isCloseTag ? '</' : '<' });
@@ -218,7 +218,7 @@ export class HTMLLexer extends Lexer {
             }
 
             this.tokenStream.push({ type: 'OPERATOR_OR_PUNCTUATION', value: '='})
-            position++; // Skip '='
+            position++;
 
             // Skip whitespace
             whitespace = '';
@@ -236,7 +236,7 @@ export class HTMLLexer extends Lexer {
 
             const valueFirstChar = this.input[position];
             if (valueFirstChar === '\'' || valueFirstChar === '"') {
-                position++; // Skip over the opening quote.
+                position++;
 
                 let attributeValue = '';
                 while (position < end && this.input[position] != valueFirstChar) {
@@ -249,7 +249,7 @@ export class HTMLLexer extends Lexer {
                         value: `${valueFirstChar}${attributeValue}${valueFirstChar}` });
                 }
 
-                position++; // Skip over the end quote.
+                position++;
 
                 if (position >= end) {
                     return;

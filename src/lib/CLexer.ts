@@ -78,12 +78,12 @@ export class CLexer extends Lexer {
         let hasSuffix = false;
 
         if (this.input[this.position] === '0' && (this.input[this.position + 1] === 'x' || this.input[this.position + 1] === 'X')) {
-            this.position += 2; // Skip "0x"
+            this.position += 2;
             while (this.position < this.input.length && /[0-9a-fA-F]/.test(this.input[this.position])) {
                 this.position++;
             }
         } else if (this.input[this.position] === '0' && (this.input[this.position + 1] === 'b' || this.input[this.position + 1] === 'B')) {
-            this.position += 2; // Skip "0b"
+            this.position += 2;
             while (this.position < this.input.length && /[01]/.test(this.input[this.position])) {
                 this.position++;
             }
@@ -125,7 +125,7 @@ export class CLexer extends Lexer {
             const isValidIntegerSuffix = validIntegerSuffixes.includes(suffix);
             const isValidFloatSuffix = validFloatSuffixes.includes(suffix);
             if (!isValidIntegerSuffix && !isValidFloatSuffix) {
-                this.position = suffixStart; // Invalid suffix, revert position
+                this.position = suffixStart;
             }
         }
 
@@ -151,7 +151,7 @@ export class CLexer extends Lexer {
      */
     protected readComment(): void {
         let start = this.position;
-        this.position += 2; // Skip "//"
+        this.position += 2;
         while (this.position < this.input.length && this.input[this.position] !== '\n') {
             this.position++;
         }
@@ -165,12 +165,12 @@ export class CLexer extends Lexer {
      */
     protected readBlockComment(): void {
         let start = this.position;
-        this.position += 2; // Skip "/*"
+        this.position += 2;
         while (this.position < this.input.length && !(this.input[this.position - 1] === '*' && this.input[this.position] === '/')) {
             this.position++;
         }
 
-        this.position++; // Skip '/'
+        this.position++;
         this.tokenStream.push({ type: 'COMMENT', value: this.input.slice(start, this.position) });
     }
 

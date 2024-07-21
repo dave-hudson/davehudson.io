@@ -77,7 +77,7 @@ export class PythonLexer extends Lexer {
                 this.position + 1 <= this.input.length &&
                 (this.input[this.position + 1] === 'x' || this.input[this.position + 1] === 'X')) {
             // Hexadecimal literal
-            this.position += 2; // Skip "0x"
+            this.position += 2;
             while (this.position < this.input.length && /[0-9a-fA-F]/.test(this.input[this.position])) {
                 this.position++;
             }
@@ -85,7 +85,7 @@ export class PythonLexer extends Lexer {
                 this.position + 1 <= this.input.length &&
                 (this.input[this.position + 1] === 'b' || this.input[this.position + 1] === 'B')) {
             // Binary literal
-            this.position += 2; // Skip "0b"
+            this.position += 2;
             while (this.position < this.input.length && /[01]/.test(this.input[this.position])) {
                 this.position++;
             }
@@ -93,7 +93,7 @@ export class PythonLexer extends Lexer {
                 this.position + 1 <= this.input.length &&
                 (this.input[this.position + 1] === 'o' || this.input[this.position + 1] === 'O')) {
             // Octal literal
-            this.position += 2; // Skip "0o"
+            this.position += 2;
             while (this.position < this.input.length && /[0-7]/.test(this.input[this.position])) {
                 this.position++;
             }
@@ -178,7 +178,7 @@ export class PythonLexer extends Lexer {
      */
     protected readDocString(ch: string): void {
         const start = this.position;
-        this.position += 3; // Skip the opening of the doc string
+        this.position += 3;
         while ((this.position + 2) < this.input.length &&
                 !(this.input[this.position] === ch &&
                     this.input[this.position + 1] === ch &&
@@ -186,7 +186,7 @@ export class PythonLexer extends Lexer {
             this.position++;
         }
 
-        this.position += 3; // Skip closing of the doc string
+        this.position += 3;
         this.tokenStream.push({ type: 'COMMENT', value: this.input.slice(start, this.position) });
     }
 
