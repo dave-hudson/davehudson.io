@@ -11,10 +11,10 @@ export const styles: { [key: string]: string | null } = {
     NUMBER: 'number',
     STRING: 'string',
     COMMENT: 'comment',
-    OPERATOR_OR_PUNCTUATION: 'operator',
+    OPERATOR: 'operator',
     PREPROCESSOR: 'preprocessor',
     WHITESPACE_OR_NEWLINE: null,
-    ERROR: null
+    ERROR: 'error'
 };
 
 /**
@@ -98,26 +98,17 @@ export abstract class Lexer {
      */
     protected readString(quote: string): void {
         const start = this.position;
-        this.position++; // Skip initial quote
+        this.position++;
         while (this.position < this.input.length && this.input[this.position] !== quote) {
             if (this.input[this.position] === '\\' && this.position + 1 < this.input.length) {
-                this.position++; // Skip escape character
+                this.position++;
             }
 
             this.position++;
         }
 
-        this.position++; // Skip closing quote
+        this.position++;
         this.tokenStream.push({ type: 'STRING', value: this.input.slice(start, this.position) });
-    }
-
-    /**
-     * Reads an operator or punctuation token.
-     * @returns The operator or punctuation token.
-     */
-    protected readOperatorOrPunctuation(): void {
-        const ch = this.input[this.position++];
-        this.tokenStream.push({ type: 'OPERATOR_OR_PUNCTUATION', value: ch });
     }
 
     /**

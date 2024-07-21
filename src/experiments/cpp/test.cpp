@@ -755,3 +755,4 @@ namespace c8 {
     }
 }
 
+auto x = L"fred";

@@ -47,6 +47,10 @@ hr {
     color: #90e0e8;
 }
 
+.main pre code .error {
+    color: #ff0000;
+}
+
 .main pre code .function {
     color: #e0e080;
 }

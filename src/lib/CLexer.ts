@@ -62,11 +62,11 @@ export class CLexer extends Lexer {
                 token.type = 'FUNCTION_OR_METHOD';
             }
 
-            this.readOperatorOrPunctuation();
+            this.readOperator();
             return true;
         }
 
-        this.readOperatorOrPunctuation();
+        this.readOperator();
         return true;
     }
 
@@ -187,7 +187,7 @@ export class CLexer extends Lexer {
 
         const value = this.input.slice(start, this.position);
         const prevToken: Token | null = this.getPrevNonWhitespaceToken(0);
-        if (prevToken?.type === 'OPERATOR_OR_PUNCTUATION' && (prevToken.value === '.' || prevToken.value === '->')) {
+        if (prevToken?.type === 'OPERATOR' && (prevToken.value === '.' || prevToken.value === '->')) {
             const prevToken2: Token | null = this.getPrevNonWhitespaceToken(1);
             if (prevToken2?.type === 'IDENTIFIER' || prevToken2?.type === 'KEYWORD' || prevToken2?.type === 'ELEMENT') {
                 this.tokenStream.push({ type: 'ELEMENT', value });
@@ -220,17 +220,67 @@ export class CLexer extends Lexer {
      * Reads an operator or punctuation token.
      * @returns The operator or punctuation token.
      */
-    protected override readOperatorOrPunctuation(): void {
-        const ch = this.input[this.position++];
-        if (ch === '>') {
-            const prevToken: Token | null = this.getPrevToken(0);
-            if (prevToken?.type === 'OPERATOR_OR_PUNCTUATION' && prevToken.value === '-') {
-                prevToken.value = '->';
+    protected readOperator(): void {
+        const operators = [
+            '>>=',
+            '<<=',
+            '&&=',
+            '||=',
+            '!=',
+            '==',
+            '+=',
+            '-=',
+            '*=',
+            '/=',
+            '%=',
+            '&=',
+            '|=',
+            '^=',
+            '<=',
+            '>=',
+            '&&',
+            '||',
+            '<<',
+            '>>',
+            '++',
+            '--',
+            '->',
+            '+',
+            '-',
+            '*',
+            '/',
+            '%',
+            '&',
+            '~',
+            '!',
+            '|',
+            '^',
+            '=',
+            '<',
+            '>',
+            '(',
+            ')',
+            '{',
+            '}',
+            '[',
+            ']',
+            ';',
+            ':',
+            '?',
+            '.',
+            ','
+        ];
+
+        for (let i = 0; i < operators.length; i++) {
+            if (this.input.startsWith(operators[i], this.position)) {
+                this.position += operators[i].length;
+                this.tokenStream.push({ type: 'OPERATOR', value: operators[i]} );
                 return;
             }
         }
 
-        this.tokenStream.push({ type: 'OPERATOR_OR_PUNCTUATION', value: ch });
+        const ch = this.input[this.position++];
+        this.tokenStream.push({ type: 'ERROR', value: ch });
     }
 
     /**

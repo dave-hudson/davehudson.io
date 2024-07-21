@@ -138,10 +138,10 @@ export class HTMLLexer extends Lexer {
             this.position++;
         }
 
-        this.tokenStream.push({ type: 'OPERATOR_OR_PUNCTUATION', value: isCloseTag ? '</' : '<' });
+        this.tokenStream.push({ type: 'OPERATOR', value: isCloseTag ? '</' : '<' });
         this.tokenStream.push({ type: 'HTML_TAG', value: tagName });
         this.readHtmlAttribute(tagNameEnd, tagEnd)
-        this.tokenStream.push({ type: 'OPERATOR_OR_PUNCTUATION', value: isEmptyTag ? '/>' : '>' });
+        this.tokenStream.push({ type: 'OPERATOR', value: isEmptyTag ? '/>' : '>' });
 
         // Is this a SCRIPT element?  If it is then we need to switch to a JavaScript lexer.
         if (isCloseTag || tagName.toLowerCase() !== 'script') {
@@ -217,7 +217,7 @@ export class HTMLLexer extends Lexer {
                 continue;
             }
 
-            this.tokenStream.push({ type: 'OPERATOR_OR_PUNCTUATION', value: '='})
+            this.tokenStream.push({ type: 'OPERATOR', value: '='})
             position++;
 
             // Skip whitespace

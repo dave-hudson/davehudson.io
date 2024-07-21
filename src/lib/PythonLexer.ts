@@ -59,11 +59,11 @@ export class PythonLexer extends Lexer {
                 token.type = 'FUNCTION_OR_METHOD';
             }
 
-            this.readOperatorOrPunctuation();
+            this.readOperator();
             return true;
         }
 
-        this.readOperatorOrPunctuation();
+        this.readOperator();
         return true;
     }
 
@@ -156,7 +156,7 @@ export class PythonLexer extends Lexer {
 
         const value = this.input.slice(start, this.position);
         const prevToken: Token | null = this.getPrevNonWhitespaceToken(0);
-        if (prevToken?.type === 'OPERATOR_OR_PUNCTUATION' && prevToken.value === '.') {
+        if (prevToken?.type === 'OPERATOR' && prevToken.value === '.') {
             const prevToken2: Token | null = this.getPrevNonWhitespaceToken(1);
             if (prevToken2?.type === 'IDENTIFIER' || prevToken2?.type === 'KEYWORD' || prevToken2?.type === 'ELEMENT') {
                 this.tokenStream.push({ type: 'ELEMENT', value });
@@ -202,6 +202,73 @@ export class PythonLexer extends Lexer {
 
         this.position += 3;
         this.tokenStream.push({ type: 'COMMENT', value: this.input.slice(start, this.position) });
+    }
+
+    /**
+     * Reads an operator or punctuation token.
+     * @returns The operator or punctuation token.
+     */
+    protected readOperator(): void {
+        const operators = [
+            '>>=',
+            '<<=',
+            '**=',
+            '//=',
+            '@=',
+            ':=',
+            '!=',
+            '==',
+            '+=',
+            '-=',
+            '*=',
+            '/=',
+            '%=',
+            '&=',
+            '|=',
+            '^=',
+            '<=',
+            '>=',
+            '<<',
+            '>>',
+            '++',
+            '--',
+            '**',
+            '//',
+            '->',
+            '@',
+            '+',
+            '-',
+            '*',
+            '/',
+            '%',
+            '&',
+            '~',
+            '|',
+            '^',
+            '=',
+            '<',
+            '>',
+            '(',
+            ')',
+            '{',
+            '}',
+            '[',
+            ']',
+            ':',
+            '.',
+            ','
+        ];
+
+        for (let i = 0; i < operators.length; i++) {
+            if (this.input.startsWith(operators[i], this.position)) {
+                this.position += operators[i].length;
+                this.tokenStream.push({ type: 'OPERATOR', value: operators[i]} );
+                return;
+            }
+        }
+
+        const ch = this.input[this.position++];
+        this.tokenStream.push({ type: 'ERROR', value: ch });
     }
 
     /**
