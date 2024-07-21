@@ -563,15 +563,15 @@ pre {
 }
 
 .main pre code .comment {
-    color: #006400;
+    color: #008000;
 }
 
 .main pre code .element {
-    color: #50b0d0;
+    color: #4ca4c0;
 }
 
 .main pre code .function {
-    color: #b0a050;
+    color: #a09040;
 }
 
 .main pre code .html-doctype {
