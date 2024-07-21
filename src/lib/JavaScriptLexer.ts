@@ -36,7 +36,7 @@ export class JavaScriptLexer extends Lexer {
             return true;
         }
 
-        if (ch === '"' || ch === "'") {
+        if (ch === '"' || ch === "'" || ch ==='`') {
             this.readString(ch);
             return true;
         }
@@ -57,11 +57,11 @@ export class JavaScriptLexer extends Lexer {
                 token.type = 'FUNCTION_OR_METHOD';
             }
 
-            this.readOperatorOrPunctuation();
+            this.readOperator();
             return true;
         }
 
-        this.readOperatorOrPunctuation();
+        this.readOperator();
         return true;
     }
 
@@ -194,6 +194,80 @@ export class JavaScriptLexer extends Lexer {
 
         this.position++;
         this.tokenStream.push({ type: 'COMMENT', value: this.input.slice(start, this.position) });
+    }
+
+    /**
+     * Reads an operator or punctuation token.
+     * @returns The operator or punctuation token.
+     */
+    protected readOperator(): void {
+        const operators = [
+            '>>>=',
+            '>>=',
+            '<<=',
+            '&&=',
+            '||=',
+            '??=',
+            '**=',
+            '!==',
+            '===',
+            '>>>',
+            '...',
+            '!=',
+            '==',
+            '+=',
+            '-=',
+            '*=',
+            '/=',
+            '%=',
+            '&=',
+            '|=',
+            '^=',
+            '<=',
+            '>=',
+            '&&',
+            '||',
+            '??',
+            '<<',
+            '>>',
+            '**',
+            '++',
+            '--',
+            '+',
+            '-',
+            '*',
+            '/',
+            '%',
+            '&',
+            '~',
+            '!',
+            '|',
+            '^',
+            '=',
+            '<',
+            '>',
+            '(',
+            ')',
+            '{',
+            '}',
+            '[',
+            ']',
+            ';',
+            ':',
+            '?',
+            ','
+        ];
+
+        for (let i = 0; i < operators.length; i++) {
+            if (this.input.startsWith(operators[i], this.position)) {
+                this.position += operators[i].length;
+                this.tokenStream.push({ type: 'OPERATOR_OR_PUNCTUATION', value: operators[i]} );
+                return;
+            }
+        }
+
+        const ch = this.input[this.position++];
+        this.tokenStream.push({ type: 'ERROR', value: ch });
     }
 
     /**

@@ -14,6 +14,7 @@ export const styles: { [key: string]: string | null } = {
     OPERATOR_OR_PUNCTUATION: 'operator',
     PREPROCESSOR: 'preprocessor',
     WHITESPACE_OR_NEWLINE: null,
+    ERROR: null
 };
 
 /**
