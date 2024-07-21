@@ -137,11 +137,4 @@ export abstract class Lexer {
     protected isLetterOrDigit(ch: string): boolean {
         return this.isLetter(ch) || this.isDigit(ch);
     }
-
-    /**
-     * Determines if a value is a keyword.
-     * @param value - The value to check.
-     * @returns True if the value is a keyword, false otherwise.
-     */
-    protected abstract isKeyword(value: string): boolean;
 }
