@@ -229,7 +229,7 @@ export class JavaScriptLexer extends Lexer {
             }
         }
 
-        // Check if the next characters seem to be valid regexp flags
+        // Check if the next characters seem to be valid regexp flags.
         while (index < this.input.length && 'dgimsuy'.includes(this.input[index])) {
             index++;
         }
