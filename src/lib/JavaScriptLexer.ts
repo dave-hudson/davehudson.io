@@ -203,7 +203,39 @@ export class JavaScriptLexer extends Lexer {
      */
     protected readRegExpOrDivide(): void {
         this.position++;
-        this.tokenStream.push({ type: 'OPERATOR', value: '/' });
+
+        // Look for a potential end of line.  If we find one then this isn't a regexp literal.
+        let index: number = this.position;
+        let escaped: boolean = false;
+        while (index < this.input.length) {
+            const ch = this.input[index++];
+            if (ch === '\n') {
+                this.tokenStream.push({ type: 'OPERATOR', value: '/' });
+                return;
+            }
+
+            if (ch === '\\') {
+                escaped = !escaped;
+                continue;
+            }
+
+            if (escaped) {
+                escaped = false;
+                continue;
+            }
+
+            if (ch === '/') {
+                break;
+            }
+        }
+
+        // Check if the next characters seem to be valid regexp flags
+        while (index < this.input.length && 'dgimsuy'.includes(this.input[index])) {
+            index++;
+        }
+
+        this.tokenStream.push({ type: 'REGEXP', value: this.input.slice(this.position - 1, index) });
+        this.position = index;
     }
 
     /**

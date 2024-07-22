@@ -91,6 +91,10 @@ hr {
     color: #808080;
 }
 
+.main pre code .regexp {
+    color: #c87050;
+}
+
 .main pre code .string {
     color: #d06060;
 }

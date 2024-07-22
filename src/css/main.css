@@ -614,6 +614,10 @@ pre {
     color: #a0a0a0;
 }
 
+.main pre code .regexp {
+    color: #d86628;
+}
+
 .main pre code .string {
     color: #f06030;
 }
