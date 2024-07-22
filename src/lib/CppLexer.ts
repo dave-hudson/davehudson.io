@@ -8,7 +8,6 @@ export class CppLexer extends CLexer {
     /**
      * Reads a string token.
      * @param quote - The quote character used to delimit the string.
-     * @returns The string token.
      */
     protected override readString(quote: string): void {
         const start = this.position;
@@ -35,7 +34,6 @@ export class CppLexer extends CLexer {
 
     /**
      * Reads an operator or punctuation token.
-     * @returns The operator or punctuation token.
      */
     protected override readOperator(): void {
         const operators = [

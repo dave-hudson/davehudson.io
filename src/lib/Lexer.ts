@@ -87,14 +87,13 @@ export abstract class Lexer {
 
     /**
      * Gets the next token from the input.
-     * @returns The next token, or null if end of input.
+     * @returns true if there are any more tokens to process, and false if there are not.
      */
     abstract nextToken(): boolean;
 
     /**
      * Reads a string token.
      * @param quote - The quote character used to delimit the string.
-     * @returns The string token.
      */
     protected readString(quote: string): void {
         const start = this.position;

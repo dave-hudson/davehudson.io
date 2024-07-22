@@ -13,7 +13,7 @@ styles['TEXT'] = 'text';
 export class HTMLLexer extends Lexer {
     /**
      * Gets the next token from the input.
-     * @returns The next token, or null if end of input.
+     * @returns true if there are any more tokens to process, and false if there are not.
      */
     public nextToken(): boolean {
         if (this.position >= this.input.length) {
@@ -55,7 +55,6 @@ export class HTMLLexer extends Lexer {
 
     /**
      * Reads whitespace in the input.
-     * @returns The whitespace token.
      */
     protected readWhitespace(): void {
         const start = this.position;
@@ -68,7 +67,6 @@ export class HTMLLexer extends Lexer {
 
     /**
      * Reads a <!DOCTYPE> declaration in the input.
-     * @returns The doctype token.
      */
     protected readDoctype(): void {
         let start = this.position;
@@ -86,7 +84,6 @@ export class HTMLLexer extends Lexer {
 
     /**
      * Reads an HTML comment in the input.
-     * @returns The HTML comment token.
      */
     protected readHtmlComment(): void {
         let start = this.position;
@@ -104,7 +101,6 @@ export class HTMLLexer extends Lexer {
 
     /**
      * Reads an HTML tag in the input, including attributes.
-     * @returns The HTML tag token.
      */
     protected readHtmlTag(): void {
         this.position++;
@@ -168,7 +164,6 @@ export class HTMLLexer extends Lexer {
 
     /**
      * Reads an HTML attribute in the input.
-     * @returns The HTML attribute token.
      */
     protected readHtmlAttribute(start: number, end: number): void {
         let position = start;
@@ -273,7 +268,6 @@ export class HTMLLexer extends Lexer {
 
     /**
      * Reads text content between HTML tags.
-     * @returns The text token.
      */
     protected readText(): void {
         let start = this.position;

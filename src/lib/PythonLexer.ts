@@ -6,7 +6,7 @@ import { Lexer, Token } from './Lexer'
 export class PythonLexer extends Lexer {
     /**
      * Gets the next token from the input.
-     * @returns The next token, or null if end of input.
+     * @returns true if there are any more tokens to process, and false if there are not.
      */
     public override nextToken(): boolean {
         if (this.position >= this.input.length) {
@@ -69,7 +69,6 @@ export class PythonLexer extends Lexer {
 
     /**
      * Reads a number in the input.
-     * @returns The number token.
      */
     protected readNumber(): void {
         let start = this.position;
@@ -133,7 +132,6 @@ export class PythonLexer extends Lexer {
 
     /**
      * Reads whitespace in the input.
-     * @returns The whitespace token.
      */
     protected readWhitespace(): void {
         let start = this.position;
@@ -146,7 +144,6 @@ export class PythonLexer extends Lexer {
 
     /**
      * Reads an identifier or keyword in the input.
-     * @returns The identifier or keyword token.
      */
     protected readIdentifierOrKeyword(): void {
         let start = this.position;
@@ -174,7 +171,6 @@ export class PythonLexer extends Lexer {
 
     /**
      * Reads a comment in the input.
-     * @returns The comment token.
      */
     protected readComment(): void {
         let start = this.position;
@@ -188,7 +184,6 @@ export class PythonLexer extends Lexer {
 
     /**
      * Reads a doc string token.
-     * @returns The doc string token.
      */
     protected readDocString(ch: string): void {
         const start = this.position;
@@ -206,7 +201,6 @@ export class PythonLexer extends Lexer {
 
     /**
      * Reads an operator or punctuation token.
-     * @returns The operator or punctuation token.
      */
     protected readOperator(): void {
         const operators = [

@@ -1,4 +1,6 @@
-import { Lexer, Token } from './Lexer'
+import { Lexer, Token, styles } from './Lexer'
+
+styles['REGEXP'] = 'regexp';
 
 /**
  * Lexer for JavaScript code.
@@ -6,7 +8,7 @@ import { Lexer, Token } from './Lexer'
 export class JavaScriptLexer extends Lexer {
     /**
      * Gets the next token from the input.
-     * @returns The next token, or null if end of input.
+     * @returns true if there are any more tokens to process, and false if there are not.
      */
     public override nextToken(): boolean {
         if (this.position >= this.input.length) {
@@ -41,13 +43,18 @@ export class JavaScriptLexer extends Lexer {
             return true;
         }
 
-        if (ch === '/' && this.input[this.position + 1] === '/') {
-            this.readComment();
-            return true;
-        }
+        if (ch === '/') {
+            if (this.input[this.position + 1] === '/') {
+                this.readComment();
+                return true;
+            }
 
-        if (ch === '/' && this.input[this.position + 1] === '*') {
-            this.readBlockComment();
+            if (this.input[this.position + 1] === '*') {
+                this.readBlockComment();
+                return true;
+            }
+
+            this.readRegExpOrDivide();
             return true;
         }
 
@@ -67,7 +74,6 @@ export class JavaScriptLexer extends Lexer {
 
     /**
      * Reads a number in the input.
-     * @returns The number token.
      */
     protected readNumber(): void {
         let start = this.position;
@@ -127,7 +133,6 @@ export class JavaScriptLexer extends Lexer {
 
     /**
      * Reads whitespace in the input.
-     * @returns The whitespace token.
      */
     protected readWhitespace(): void {
         let start = this.position;
@@ -140,7 +145,6 @@ export class JavaScriptLexer extends Lexer {
 
     /**
      * Reads an identifier or keyword in the input.
-     * @returns The identifier or keyword token.
      */
     protected readIdentifierOrKeyword(): void {
         let start = this.position;
@@ -151,7 +155,7 @@ export class JavaScriptLexer extends Lexer {
 
         const value = this.input.slice(start, this.position);
         const prevToken: Token | null = this.getPrevNonWhitespaceToken(0);
-        if (prevToken?.type === 'OPERATOR' && prevToken.value === '.') {
+        if (prevToken?.type === 'OPERATOR' && (prevToken.value === '.' || prevToken.value === '?.')) {
             const prevToken2: Token | null = this.getPrevNonWhitespaceToken(1);
             if (prevToken2?.type === 'IDENTIFIER' || prevToken2?.type === 'KEYWORD' || prevToken2?.type === 'ELEMENT') {
                 this.tokenStream.push({ type: 'ELEMENT', value });
@@ -169,7 +173,6 @@ export class JavaScriptLexer extends Lexer {
 
     /**
      * Reads a comment in the input.
-     * @returns The comment token.
      */
     protected readComment(): void {
         let start = this.position;
@@ -183,7 +186,6 @@ export class JavaScriptLexer extends Lexer {
 
     /**
      * Reads a block comment in the input.
-     * @returns The block comment token.
      */
     protected readBlockComment(): void {
         let start = this.position;
@@ -197,8 +199,15 @@ export class JavaScriptLexer extends Lexer {
     }
 
     /**
+     * Read a regular expression literal or divide operator.
+     */
+    protected readRegExpOrDivide(): void {
+        this.position++;
+        this.tokenStream.push({ type: 'OPERATOR', value: '/' });
+    }
+
+    /**
      * Reads an operator or punctuation token.
-     * @returns The operator or punctuation token.
      */
     protected readOperator(): void {
         const operators = [
@@ -228,6 +237,7 @@ export class JavaScriptLexer extends Lexer {
             '&&',
             '||',
             '??',
+            '?.',
             '<<',
             '>>',
             '**',

@@ -6,7 +6,7 @@ import { Lexer, Token } from './Lexer'
 export class CLexer extends Lexer {
     /**
      * Gets the next token from the input.
-     * @returns The next token, or null if end of input.
+     * @returns true if there are any more tokens to process, and false if there are not.
      */
     public override nextToken(): boolean {
         if (this.position >= this.input.length) {
@@ -41,13 +41,18 @@ export class CLexer extends Lexer {
             return true;
         }
 
-        if (ch === '/' && this.input[this.position + 1] === '/') {
-            this.readComment();
-            return true;
-        }
+        if (ch === '/') {
+            if (this.input[this.position + 1] === '/') {
+                this.readComment();
+                return true;
+            }
 
-        if (ch === '/' && this.input[this.position + 1] === '*') {
-            this.readBlockComment();
+            if (this.input[this.position + 1] === '*') {
+                this.readBlockComment();
+                return true;
+            }
+
+            this.readOperator();
             return true;
         }
 
@@ -72,7 +77,6 @@ export class CLexer extends Lexer {
 
     /**
      * Reads a number in the input.
-     * @returns The number token.
      */
     protected readNumber(): void {
         let start = this.position;
@@ -135,7 +139,6 @@ export class CLexer extends Lexer {
 
     /**
      * Reads whitespace in the input.
-     * @returns The whitespace token.
      */
     protected readWhitespace(): void {
         let start = this.position;
@@ -148,7 +151,6 @@ export class CLexer extends Lexer {
 
     /**
      * Reads a comment in the input.
-     * @returns The comment token.
      */
     protected readComment(): void {
         let start = this.position;
@@ -162,7 +164,6 @@ export class CLexer extends Lexer {
 
     /**
      * Reads a block comment in the input.
-     * @returns The block comment token.
      */
     protected readBlockComment(): void {
         let start = this.position;
@@ -177,7 +178,6 @@ export class CLexer extends Lexer {
 
     /**
      * Reads an identifier or keyword token in C.
-     * @returns The identifier or keyword token.
      */
     protected readIdentifierOrKeyword(): void {
         const start = this.position;
@@ -205,7 +205,6 @@ export class CLexer extends Lexer {
 
     /**
      * Reads a preprocessor directive token in C.
-     * @returns The preprocessor directive token.
      */
     protected readPreprocessorDirective(): void {
         const start = this.position;
@@ -218,7 +217,6 @@ export class CLexer extends Lexer {
 
     /**
      * Reads an operator or punctuation token.
-     * @returns The operator or punctuation token.
      */
     protected readOperator(): void {
         const operators = [
