@@ -6,12 +6,68 @@ import { CLexer } from './CLexer'
  */
 export class CppLexer extends CLexer {
     /**
+     * Gets the next token from the input.
+     */
+    public override nextToken(): Token | null {
+        if (this.position >= this.input.length) {
+            return null;
+        }
+
+        const ch = this.input[this.position];
+
+        if (ch === '\n') {
+            this.position++;
+            return { type: 'NEWLINE', value: '\n' };
+        }
+
+        if (/\s/.test(ch)) {
+            return this.readWhitespace();
+        }
+
+        if (ch === '"' || ch === "'" || (ch === 'L' && this.input[this.position + 1] === '"')) {
+            return this.readString(ch);
+        }
+
+        if (this.isLetter(ch) || ch === '_') {
+            return this.readIdentifierOrKeyword();
+        }
+
+        if (this.isDigit(ch) || (ch === '.' && this.isDigit(this.input[this.position + 1]))) {
+            return this.readNumber();
+        }
+
+        if (ch === '/') {
+            if (this.input[this.position + 1] === '/') {
+                return this.readComment();
+            }
+
+            if (this.input[this.position + 1] === '*') {
+                return this.readBlockComment();
+            }
+
+            return this.readOperator();
+        }
+
+        if (ch === '#') {
+            return this.readPreprocessorDirective();
+        }
+
+        return this.readOperator();
+    }
+
+    /**
      * Reads a string token.
      * @param quote - The quote character used to delimit the string.
      */
-    protected override readString(quote: string): void {
+    protected override readString(quote: string): Token {
         const start = this.position;
         this.position++;
+
+        if (quote === 'L') {
+            this.position++;
+            quote = '"';
+        }
+
         while (this.position < this.input.length && this.input[this.position] !== quote) {
             if (this.input[this.position] === '\\' && this.position + 1 < this.input.length) {
                 this.position++;
@@ -21,21 +77,13 @@ export class CppLexer extends CLexer {
         }
 
         this.position++;
-        const str: string = this.input.slice(start, this.position);
-        const token: Token | null = this.getPrevNonWhitespaceToken(0);
-        if (token?.type === 'IDENTIFIER' && token.value === 'L') {
-            token.type = 'STRING';
-            token.value = 'L' + str;
-            return;
-        }
-
-        this.tokenStream.push({ type: 'STRING', value: this.input.slice(start, this.position) });
+        return { type: 'STRING', value: this.input.slice(start, this.position) };
     }
 
     /**
      * Reads an operator or punctuation token.
      */
-    protected override readOperator(): void {
+    protected override readOperator(): Token {
         const operators = [
             '>>=',
             '<<=',
@@ -90,13 +138,12 @@ export class CppLexer extends CLexer {
         for (let i = 0; i < operators.length; i++) {
             if (this.input.startsWith(operators[i], this.position)) {
                 this.position += operators[i].length;
-                this.tokenStream.push({ type: 'OPERATOR', value: operators[i]} );
-                return;
+                return { type: 'OPERATOR', value: operators[i]};
             }
         }
 
         const ch = this.input[this.position++];
-        this.tokenStream.push({ type: 'ERROR', value: ch });
+        return { type: 'ERROR', value: ch };
     }
 
     /**

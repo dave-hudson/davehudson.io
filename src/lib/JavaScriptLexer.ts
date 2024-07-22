@@ -6,76 +6,68 @@ styles['REGEXP'] = 'regexp';
  * Lexer for JavaScript code.
  */
 export class JavaScriptLexer extends Lexer {
+    protected inElement: boolean = false;
+
+    /**
+     * Constructs a lexer.
+     * @param input - The input code to lex.
+     */
+    constructor(input: string) {
+        super(input);
+
+        this.inElement = false;
+    }
+
     /**
      * Gets the next token from the input.
-     * @returns true if there are any more tokens to process, and false if there are not.
      */
-    public override nextToken(): boolean {
+    public override nextToken(): Token | null {
         if (this.position >= this.input.length) {
-            return false;
+            return null;
         }
 
         const ch = this.input[this.position];
 
         if (ch === '\n') {
             this.position++;
-            this.tokenStream.push({ type: 'WHITESPACE_OR_NEWLINE', value: '\n' });
-            return true;
+            return { type: 'WHITESPACE_OR_NEWLINE', value: '\n' };
         }
 
         if (/\s/.test(ch)) {
-            this.readWhitespace();
-            return true;
+            return this.readWhitespace();
         }
 
         if (this.isLetter(ch) || ch === '_') {
-            this.readIdentifierOrKeyword();
-            return true;
+            return this.readIdentifierOrKeyword();
         }
 
         if (this.isDigit(ch) || (ch === '.' && this.isDigit(this.input[this.position + 1]))) {
-            this.readNumber();
-            return true;
+            return this.readNumber();
         }
 
         if (ch === '"' || ch === "'" || ch ==='`') {
-            this.readString(ch);
-            return true;
+            return this.readString(ch);
         }
 
         if (ch === '/') {
             if (this.input[this.position + 1] === '/') {
-                this.readComment();
-                return true;
+                return this.readComment();
             }
 
             if (this.input[this.position + 1] === '*') {
-                this.readBlockComment();
-                return true;
+                return this.readBlockComment();
             }
 
-            this.readRegExpOrDivide();
-            return true;
+            return this.readRegExpOrDivide();
         }
 
-        if (ch === '(') {
-            const token: Token | null = this.getPrevNonWhitespaceToken(0);
-            if (token?.type === 'IDENTIFIER' || token?.type === 'ELEMENT') {
-                token.type = 'FUNCTION_OR_METHOD';
-            }
-
-            this.readOperator();
-            return true;
-        }
-
-        this.readOperator();
-        return true;
+        return this.readOperator();
     }
 
     /**
      * Reads a number in the input.
      */
-    protected readNumber(): void {
+    protected readNumber(): Token {
         let start = this.position;
 
         if ((this.input[this.position] === '0') &&
@@ -128,25 +120,25 @@ export class JavaScriptLexer extends Lexer {
         }
 
         if (this.position == start) debugger;
-        this.tokenStream.push({ type: 'NUMBER', value: this.input.slice(start, this.position) });
+        return { type: 'NUMBER', value: this.input.slice(start, this.position) };
     }
 
     /**
      * Reads whitespace in the input.
      */
-    protected readWhitespace(): void {
+    protected readWhitespace(): Token {
         let start = this.position;
         while (this.position < this.input.length && /\s/.test(this.input[this.position])) {
             this.position++;
         }
 
-        this.tokenStream.push({ type: 'WHITESPACE_OR_NEWLINE', value: this.input.slice(start, this.position) });
+        return { type: 'WHITESPACE_OR_NEWLINE', value: this.input.slice(start, this.position) };
     }
 
     /**
      * Reads an identifier or keyword in the input.
      */
-    protected readIdentifierOrKeyword(): void {
+    protected readIdentifierOrKeyword(): Token {
         let start = this.position;
         while (this.position < this.input.length &&
                 (this.isLetterOrDigit(this.input[this.position]) || this.input[this.position] === '_')) {
@@ -154,40 +146,56 @@ export class JavaScriptLexer extends Lexer {
         }
 
         const value = this.input.slice(start, this.position);
-        const prevToken: Token | null = this.getPrevNonWhitespaceToken(0);
-        if (prevToken?.type === 'OPERATOR' && (prevToken.value === '.' || prevToken.value === '?.')) {
-            const prevToken2: Token | null = this.getPrevNonWhitespaceToken(1);
-            if (prevToken2?.type === 'IDENTIFIER' || prevToken2?.type === 'KEYWORD' || prevToken2?.type === 'ELEMENT') {
-                this.tokenStream.push({ type: 'ELEMENT', value });
-                return;
+        if (this.isKeyword(value)) {
+            this.inElement = false;
+            return { type: 'KEYWORD', value };
+        }
+
+        // Look at the next token.  If it's a '(' operator then we're making a function or method call!
+        const curPos = this.position;
+        const curInElement = this.inElement;
+        const nextToken: Token | null = this.nextSyntaxToken();
+        this.position = curPos;
+        this.inElement = curInElement;
+        let nextInElement = false;
+        if (nextToken?.type === 'OPERATOR') {
+            if (nextToken.value === '(') {
+                this.inElement = false;
+                return { type: 'FUNCTION_OR_METHOD', value };
+            }
+
+            // Is the next token going to be an element?
+            if (nextToken.value === '.' || nextToken.value === '?.') {
+                nextInElement = true;
             }
         }
 
-        if (this.isKeyword(value)) {
-            this.tokenStream.push({ type: 'KEYWORD', value });
-            return;
+        this.inElement = nextInElement;
+
+        if (curInElement) {
+            return { type: 'ELEMENT', value };
         }
 
-        this.tokenStream.push({ type: 'IDENTIFIER', value });
+        return { type: 'IDENTIFIER', value };
     }
 
     /**
      * Reads a comment in the input.
      */
-    protected readComment(): void {
+    protected readComment(): Token {
         let start = this.position;
         this.position += 2; // Skip "//"
         while (this.position < this.input.length && this.input[this.position] !== '\n') {
             this.position++;
         }
 
-        this.tokenStream.push({ type: 'COMMENT', value: this.input.slice(start, this.position) });
+        return { type: 'COMMENT', value: this.input.slice(start, this.position) };
     }
 
     /**
      * Reads a block comment in the input.
      */
-    protected readBlockComment(): void {
+    protected readBlockComment(): Token {
         let start = this.position;
         this.position += 2;
         while (this.position < this.input.length && !(this.input[this.position - 1] === '*' && this.input[this.position] === '/')) {
@@ -195,13 +203,13 @@ export class JavaScriptLexer extends Lexer {
         }
 
         this.position++;
-        this.tokenStream.push({ type: 'COMMENT', value: this.input.slice(start, this.position) });
+        return { type: 'COMMENT', value: this.input.slice(start, this.position) };
     }
 
     /**
      * Read a regular expression literal or divide operator.
      */
-    protected readRegExpOrDivide(): void {
+    protected readRegExpOrDivide(): Token {
         this.position++;
 
         // Look for a potential end of line.  If we find one then this isn't a regexp literal.
@@ -210,8 +218,7 @@ export class JavaScriptLexer extends Lexer {
         while (index < this.input.length) {
             const ch = this.input[index++];
             if (ch === '\n') {
-                this.tokenStream.push({ type: 'OPERATOR', value: '/' });
-                return;
+                return { type: 'OPERATOR', value: '/' };
             }
 
             if (ch === '\\') {
@@ -234,14 +241,15 @@ export class JavaScriptLexer extends Lexer {
             index++;
         }
 
-        this.tokenStream.push({ type: 'REGEXP', value: this.input.slice(this.position - 1, index) });
+        const regexp = this.input.slice(this.position - 1, index);
         this.position = index;
+        return { type: 'REGEXP', value: regexp };
     }
 
     /**
      * Reads an operator or punctuation token.
      */
-    protected readOperator(): void {
+    protected readOperator(): Token {
         const operators = [
             '>>>=',
             '>>=',
@@ -304,13 +312,12 @@ export class JavaScriptLexer extends Lexer {
         for (let i = 0; i < operators.length; i++) {
             if (this.input.startsWith(operators[i], this.position)) {
                 this.position += operators[i].length;
-                this.tokenStream.push({ type: 'OPERATOR', value: operators[i]} );
-                return;
+                return { type: 'OPERATOR', value: operators[i]};
             }
         }
 
         const ch = this.input[this.position++];
-        this.tokenStream.push({ type: 'ERROR', value: ch });
+        return { type: 'ERROR', value: ch };
     }
 
     /**
@@ -370,6 +377,7 @@ export class JavaScriptLexer extends Lexer {
             'native',
             'new',
             'null',
+            'of',
             'package',
             'private',
             'protected',

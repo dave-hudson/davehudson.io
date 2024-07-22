@@ -23,7 +23,6 @@ export const styles: { [key: string]: string | null } = {
 export abstract class Lexer {
     protected input: string;
     protected position: number;
-    protected tokenStream: Token[];
     protected tokenIndex : number;
 
     /**
@@ -33,69 +32,34 @@ export abstract class Lexer {
     constructor(input: string) {
         this.input = input;
         this.position = 0;
-        this.tokenStream = [];
         this.tokenIndex = 0;
-    }
-
-    /**
-     * Generate a list of tokens from the input.
-     */
-    public generateTokens(): void {
-        while (this.nextToken());
-    }
-
-    /**
-     * Get the next token in the token stream.
-     */
-    public getToken(): Token | null {
-        if (this.tokenIndex >= this.tokenStream.length) {
-            return null;
-        }
-
-        return this.tokenStream[this.tokenIndex++];
-    }
-
-    /**
-     * Fetch a token pushed earlier into the token stream
-     */
-    protected getPrevToken(offset: number): Token | null {
-        if (offset >= this.tokenStream.length) {
-            return null;
-        }
-
-        return this.tokenStream[this.tokenStream.length - offset - 1];
-    }
-
-    /**
-     * Fetch a token pushed earlier into the token stream
-     */
-    protected getPrevNonWhitespaceToken(offset: number): Token | null {
-        let whitespaceCount = 0;
-        for (let i = 0; i < offset; i++) {
-            if (i + whitespaceCount >= this.tokenStream.length) {
-                return null;
-            }
-
-            const token: Token = this.tokenStream[this.tokenStream.length - whitespaceCount - i - 1];
-            if (token.type === 'WHITESPACE_OR_NEWLINE') {
-                whitespaceCount++;
-            }
-        }
-
-        return this.tokenStream[this.tokenStream.length - offset - 1];
     }
 
     /**
      * Gets the next token from the input.
      * @returns true if there are any more tokens to process, and false if there are not.
      */
-    abstract nextToken(): boolean;
+    abstract nextToken(): Token | null;
+
+    /**
+     * Get the next syntactic token (not whitespace or comment)
+     */
+    protected nextSyntaxToken() : Token | null {
+        let token: Token | null;
+        while ((token = this.nextToken()) !== null) {
+            if (token.type !== 'COMMENT' && token.type !== 'WHITESPACE_OR_NEWLINE') {
+                return token;
+            }
+        }
+
+        return null;
+    }
 
     /**
      * Reads a string token.
      * @param quote - The quote character used to delimit the string.
      */
-    protected readString(quote: string): void {
+    protected readString(quote: string): Token {
         const start = this.position;
         this.position++;
         while (this.position < this.input.length && this.input[this.position] !== quote) {
@@ -107,7 +71,7 @@ export abstract class Lexer {
         }
 
         this.position++;
-        this.tokenStream.push({ type: 'STRING', value: this.input.slice(start, this.position) });
+        return { type: 'STRING', value: this.input.slice(start, this.position) };
     }
 
     /**

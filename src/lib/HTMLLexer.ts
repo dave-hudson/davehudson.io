@@ -1,5 +1,5 @@
 import { Lexer, Token, styles } from './Lexer';
-import { JavaScriptLexer } from './JavaScriptLexer';
+//import { JavaScriptLexer } from './JavaScriptLexer';
 
 styles['HTML_DOCTYPE'] = 'html-doctype';
 styles['HTML_TAG'] = 'html-tag';
@@ -13,62 +13,55 @@ styles['TEXT'] = 'text';
 export class HTMLLexer extends Lexer {
     /**
      * Gets the next token from the input.
-     * @returns true if there are any more tokens to process, and false if there are not.
      */
-    public nextToken(): boolean {
+    public nextToken(): Token | null {
         if (this.position >= this.input.length) {
-            return false;
+            return null;
         }
 
         const ch = this.input[this.position];
 
         if (ch === '\n') {
             this.position++;
-            this.tokenStream.push({ type: 'WHITESPACE_OR_NEWLINE', value: '\n' });
-            return true;
+            return { type: 'WHITESPACE_OR_NEWLINE', value: '\n' };
         }
 
         if (/\s/.test(ch)) {
-            this.readWhitespace();
-            return true;
+            return this.readWhitespace();
         }
 
         if (this.input.startsWith('<!DOCTYPE', this.position)) {
-            this.readDoctype();
-            return true;
+            return this.readDoctype();
         }
 
         if (ch === '<' && this.input[this.position + 1] === '!') {
-            this.readHtmlComment();
-            return true;
+            return this.readHtmlComment();
         }
 
         if (ch === '<') {
-            this.readHtmlTag();
-            return true;
+            return this.readHtmlTag();
         }
 
         // Handle text content between tags.
-        this.readText();
-        return true;
+        return this.readText();
     }
 
     /**
      * Reads whitespace in the input.
      */
-    protected readWhitespace(): void {
+    protected readWhitespace(): Token {
         const start = this.position;
         while (this.position < this.input.length && /\s/.test(this.input[this.position]) && this.input[this.position] !== '\n') {
             this.position++;
         }
 
-        this.tokenStream.push({ type: 'WHITESPACE_OR_NEWLINE', value: this.input.slice(start, this.position) });
+        return { type: 'WHITESPACE_OR_NEWLINE', value: this.input.slice(start, this.position) };
     }
 
     /**
      * Reads a <!DOCTYPE> declaration in the input.
      */
-    protected readDoctype(): void {
+    protected readDoctype(): Token {
         let start = this.position;
         this.position += 9;
         while (this.position < this.input.length && this.input[this.position] !== '>') {
@@ -79,13 +72,13 @@ export class HTMLLexer extends Lexer {
             this.position++;
         }
 
-        this.tokenStream.push({ type: 'HTML_DOCTYPE', value: this.input.slice(start, this.position) });
+        return { type: 'HTML_DOCTYPE', value: this.input.slice(start, this.position) };
     }
 
     /**
      * Reads an HTML comment in the input.
      */
-    protected readHtmlComment(): void {
+    protected readHtmlComment(): Token {
         let start = this.position;
         this.position += 4;
         while (this.position < this.input.length && !(this.input[this.position - 2] === '-' && this.input[this.position - 1] === '-' && this.input[this.position] === '>')) {
@@ -96,13 +89,13 @@ export class HTMLLexer extends Lexer {
             this.position++;
         }
 
-        this.tokenStream.push({ type: 'COMMENT', value: this.input.slice(start, this.position) });
+        return { type: 'COMMENT', value: this.input.slice(start, this.position) };
     }
 
     /**
      * Reads an HTML tag in the input, including attributes.
      */
-    protected readHtmlTag(): void {
+    protected readHtmlTag(): Token {
         this.position++;
         let tagName = '';
 
@@ -116,13 +109,15 @@ export class HTMLLexer extends Lexer {
             tagName += this.input[this.position++];
         }
 
-        const tagNameEnd = this.position;
+//        const tagNameEnd = this.position;
     
         // Now find the '>'
         while (this.position < this.input.length && this.input[this.position] !== '>') {
             this.position++;
         }
 
+        return { type: 'HTML_TAG', value: '<' + tagName + '>'}
+/*
         // Check if this is an empty tag.
         const isEmptyTag = this.input[this.position - 1] === '/';
         let tagEnd = this.position;
@@ -152,7 +147,6 @@ export class HTMLLexer extends Lexer {
 
         // Generate a JavaScript lexer to handle this section of the code.
         const jsLexer = new JavaScriptLexer(this.input.slice(this.position, scriptClose));
-        jsLexer.generateTokens();
 
         let token: Token | null;
         while ((token = jsLexer.getToken()) != null) {
@@ -160,11 +154,13 @@ export class HTMLLexer extends Lexer {
         }
 
         this.position = scriptClose;
+*/
     }
 
     /**
      * Reads an HTML attribute in the input.
      */
+/*
     protected readHtmlAttribute(start: number, end: number): void {
         let position = start;
 
@@ -265,11 +261,12 @@ export class HTMLLexer extends Lexer {
             }
         }
     }
+*/
 
     /**
      * Reads text content between HTML tags.
      */
-    protected readText(): void {
+    protected readText(): Token {
         let start = this.position;
         while (this.position < this.input.length && this.input[this.position] !== '<') {
             this.position++;
@@ -279,7 +276,7 @@ export class HTMLLexer extends Lexer {
             this.nextToken();
         }
 
-        this.tokenStream.push({ type: 'TEXT', value: this.input.slice(start, this.position) });
+        return { type: 'TEXT', value: this.input.slice(start, this.position) };
     }
 
     isKeyword(value: string): boolean {
