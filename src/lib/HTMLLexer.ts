@@ -1,5 +1,5 @@
 import { Lexer, Token, styles } from './Lexer';
-//import { JavaScriptLexer } from './JavaScriptLexer';
+import { JavaScriptLexer } from './JavaScriptLexer';
 
 styles['HTML_DOCTYPE'] = 'html-doctype';
 styles['HTML_TAG'] = 'html-tag';
@@ -11,10 +11,35 @@ styles['TEXT'] = 'text';
  * Lexer class for HTML, extending the base lexer functionality.
  */
 export class HTMLLexer extends Lexer {
+    protected inTag: boolean;
+    protected tagName: string;
+    protected jsLexer: JavaScriptLexer | null;
+
+    /**
+     * Constructs a lexer.
+     * @param input - The input code to lex.
+     */
+    constructor(input: string) {
+        super(input);
+
+        this.inTag = false;
+        this.tagName = '';
+        this.jsLexer = null;
+    }
+
     /**
      * Gets the next token from the input.
      */
     public nextToken(): Token | null {
+        if (this.jsLexer) {
+            const token = this.jsLexer.nextToken();
+            if (token) {
+                return token;
+            }
+
+            this.jsLexer = null;
+        }
+
         if (this.position >= this.input.length) {
             return null;
         }
@@ -34,12 +59,36 @@ export class HTMLLexer extends Lexer {
             return this.readDoctype();
         }
 
-        if (ch === '<' && this.input[this.position + 1] === '!') {
-            return this.readHtmlComment();
+        if (ch === '<') {
+            if (this.input[this.position + 1] === '!') {
+                return this.readHtmlComment();
+            }
+
+            this.position++;
+            this.inTag = true;
+            return { type: 'OPERATOR', value: '<' };
         }
 
-        if (ch === '<') {
-            return this.readHtmlTag();
+        if (ch === '>') {
+            this.position++;
+            this.inTag = false;
+            return { type: 'OPERATOR', value: '>' };
+        }
+
+        if (this.inTag) {
+            return this.readTag();
+        }
+
+        // Is this a SCRIPT element?  If it is then we need to switch to a JavaScript lexer.
+        if (this.tagName.toLowerCase() === 'script') {
+            // We need to find the /SCRIPT tag.
+            let scriptClose: number = this.input.toLowerCase().indexOf('</script', this.position);
+            if (scriptClose === -1) {
+                scriptClose = this.input.length;
+            }
+
+            this.jsLexer = new JavaScriptLexer(this.input.slice(this.position, scriptClose));
+            this.position = scriptClose;
         }
 
         // Handle text content between tags.
@@ -90,71 +139,6 @@ export class HTMLLexer extends Lexer {
         }
 
         return { type: 'COMMENT', value: this.input.slice(start, this.position) };
-    }
-
-    /**
-     * Reads an HTML tag in the input, including attributes.
-     */
-    protected readHtmlTag(): Token {
-        this.position++;
-        let tagName = '';
-
-        // Check if this is a closing tag
-        const isCloseTag = this.input[this.position] === '/';
-        if (isCloseTag) {
-            this.position++;
-        }
-
-        while (this.position < this.input.length && /[a-zA-Z0-9]/.test(this.input[this.position])) {
-            tagName += this.input[this.position++];
-        }
-
-//        const tagNameEnd = this.position;
-    
-        // Now find the '>'
-        while (this.position < this.input.length && this.input[this.position] !== '>') {
-            this.position++;
-        }
-
-        return { type: 'HTML_TAG', value: '<' + tagName + '>'}
-/*
-        // Check if this is an empty tag.
-        const isEmptyTag = this.input[this.position - 1] === '/';
-        let tagEnd = this.position;
-        if (isEmptyTag) {
-            tagEnd--;
-        }
-
-        if (this.position < this.input.length) {
-            this.position++;
-        }
-
-        this.tokenStream.push({ type: 'OPERATOR', value: isCloseTag ? '</' : '<' });
-        this.tokenStream.push({ type: 'HTML_TAG', value: tagName });
-        this.readHtmlAttribute(tagNameEnd, tagEnd)
-        this.tokenStream.push({ type: 'OPERATOR', value: isEmptyTag ? '/>' : '>' });
-
-        // Is this a SCRIPT element?  If it is then we need to switch to a JavaScript lexer.
-        if (isCloseTag || tagName.toLowerCase() !== 'script') {
-            return;
-        }
-
-        // We need to find the /SCRIPT tag.
-        let scriptClose: number = this.input.toLowerCase().indexOf('</script', this.position);
-        if (scriptClose === -1) {
-            scriptClose = this.input.length;
-        }
-
-        // Generate a JavaScript lexer to handle this section of the code.
-        const jsLexer = new JavaScriptLexer(this.input.slice(this.position, scriptClose));
-
-        let token: Token | null;
-        while ((token = jsLexer.getToken()) != null) {
-            this.tokenStream.push(token);
-        }
-
-        this.position = scriptClose;
-*/
     }
 
     /**
@@ -272,11 +256,30 @@ export class HTMLLexer extends Lexer {
             this.position++;
         }
 
-        if (start === this.position) {
-            this.nextToken();
+        return { type: 'TEXT', value: this.input.slice(start, this.position) };
+    }
+
+    /**§
+     * Reads tag content.
+     */
+    protected readTag(): Token {
+        let start = this.position;
+        this.tagName = '';
+        while (this.position < this.input.length) {
+            const char = this.input[this.position];
+            if (char === ' ' || char === '>') {
+                break;
+            }
+
+            this.position++;
+            this.tagName += char;
         }
 
-        return { type: 'TEXT', value: this.input.slice(start, this.position) };
+        while (this.position < this.input.length && this.input[this.position] !== '>') {
+            this.position++;
+        }
+
+        return { type: 'HTML_TAG', value: this.input.slice(start, this.position) };
     }
 
     isKeyword(value: string): boolean {
