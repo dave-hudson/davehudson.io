@@ -1,11 +1,11 @@
 import { Lexer, Parser, Token, styles } from './Parser';
 import { JavaScriptParser } from './JavaScriptParser';
 
-styles['DOCTYPE'] = 'html-doctype';
-styles['TAG'] = 'html-tag';
 styles['ATTRIBUTE'] = 'html-attribute';
-styles['TEXT'] = 'text';
+styles['DOCTYPE'] = 'html-doctype';
 styles['SCRIPT'] = null;
+styles['TAG'] = 'html-tag';
+styles['TEXT'] = 'text';
 
 /**
  * Lexer class for HTML, extending the base lexer functionality.

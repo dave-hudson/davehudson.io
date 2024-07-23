@@ -4,17 +4,17 @@ export interface Token {
 }
 
 export const styles: { [key: string]: string | null } = {
-    KEYWORD: 'keyword',
-    IDENTIFIER: 'identifier',
-    ELEMENT: 'element',
-    FUNCTION_OR_METHOD: 'function',
-    NUMBER: 'number',
-    STRING: 'string',
     COMMENT: 'comment',
+    ELEMENT: 'element',
+    ERROR: 'error',
+    FUNCTION_OR_METHOD: 'function',
+    IDENTIFIER: 'identifier',
+    KEYWORD: 'keyword',
+    NUMBER: 'number',
     OPERATOR: 'operator',
     PREPROCESSOR: 'preprocessor',
-    WHITESPACE_OR_NEWLINE: null,
-    ERROR: 'error'
+    STRING: 'string',
+    WHITESPACE_OR_NEWLINE: null
 };
 
 /**
