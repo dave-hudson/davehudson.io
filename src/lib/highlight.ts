@@ -13,7 +13,7 @@ export function highlight(code: string, parserClass: new (input: string) => Pars
     const parser = new parserClass(code);
     let token: Token | null;
 
-    while ((token = parser.nextToken()) !== null) {
+    while ((token = parser.getNextToken()) !== null) {
         const style = styles[token.type];
         const codeFragment = h('span', style !== null ? { className: style } : {}, `${token.value}`);
         highlightedCode.push(codeFragment);

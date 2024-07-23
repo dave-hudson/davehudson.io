@@ -19,7 +19,7 @@ export class PythonLexer extends Lexer {
     /**
      * Gets the next token from the input.
      */
-    public override nextToken(): Token | null {
+    public override getNextToken(): Token | null {
         if (this.position >= this.input.length) {
             return null;
         }
@@ -151,10 +151,8 @@ export class PythonLexer extends Lexer {
         }
 
         // Look at the next token.  If it's a '(' operator then we're making a function or method call!
-        const curPos = this.position;
         const curInElement = this.inElement;
-        const nextToken: Token | null = this.nextSyntaxToken();
-        this.position = curPos;
+        const nextToken: Token | null = this.peekNextSyntaxToken();
         this.inElement = curInElement;
         let nextInElement = false;
         if (nextToken?.type === 'OPERATOR') {
@@ -347,11 +345,11 @@ export class PythonParser extends Parser {
      * Gets the next token from the input.
      * @returns true if there are any more tokens to process, and false if there are not.
      */
-    public nextToken(): Token | null {
+    public getNextToken(): Token | null {
         if (!this.lexer) {
             return null;
         }
 
-        return this.lexer.nextToken();
+        return this.lexer.getNextToken();
     }
 }

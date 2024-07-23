@@ -1,4 +1,3 @@
-import { Token } from './Parser'
 import { JavaScriptLexer, JavaScriptParser } from './JavaScriptParser'
 
 /**

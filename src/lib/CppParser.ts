@@ -8,7 +8,7 @@ export class CppLexer extends CLexer {
     /**
      * Gets the next token from the input.
      */
-    public override nextToken(): Token | null {
+    public override getNextToken(): Token | null {
         if (this.position >= this.input.length) {
             return null;
         }
@@ -270,11 +270,11 @@ export class CppParser extends CParser {
      * Gets the next token from the input.
      * @returns true if there are any more tokens to process, and false if there are not.
      */
-    public nextToken(): Token | null {
+    public override getNextToken(): Token | null {
         if (!this.lexer) {
             return null;
         }
 
-        return this.lexer.nextToken();
+        return this.lexer.getNextToken();
     }
 }

@@ -37,19 +37,23 @@ export abstract class Lexer {
      * Gets the next token from the input.
      * @returns true if there are any more tokens to process, and false if there are not.
      */
-    abstract nextToken(): Token | null;
+    abstract getNextToken(): Token | null;
 
     /**
      * Get the next syntactic token (not whitespace or comment)
      */
-    protected nextSyntaxToken() : Token | null {
+    protected peekNextSyntaxToken() : Token | null {
+        const curPos = this.position;
+
         let token: Token | null;
-        while ((token = this.nextToken()) !== null) {
+        while ((token = this.getNextToken()) !== null) {
             if (token.type !== 'COMMENT' && token.type !== 'WHITESPACE_OR_NEWLINE') {
+                this.position = curPos;
                 return token;
             }
         }
 
+        this.position = curPos;
         return null;
     }
 
@@ -118,5 +122,5 @@ export abstract class Parser {
      * Gets the next token from the input.
      * @returns true if there are any more tokens to process, and false if there are not.
      */
-    abstract nextToken(): Token | null;
+    abstract getNextToken(): Token | null;
 }

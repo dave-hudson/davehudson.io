@@ -30,10 +30,10 @@ export class HTMLLexer extends Lexer {
     /**
      * Gets the next token from the input.
      */
-    public nextToken(): Token | null {
+    public getNextToken(): Token | null {
         // If we're using a JavaScript parser than use that until we've completed procesing the JavaScript.
         if (this.jsParser) {
-            const token = this.jsParser.nextToken();
+            const token = this.jsParser.getNextToken();
             if (token) {
                 return token;
             }
@@ -306,11 +306,11 @@ export class HTMLParser extends Parser {
      * Gets the next token from the input.
      * @returns true if there are any more tokens to process, and false if there are not.
      */
-    public nextToken(): Token | null {
+    public getNextToken(): Token | null {
         if (!this.lexer) {
             return null;
         }
 
-        return this.lexer.nextToken();
+        return this.lexer.getNextToken();
     }
 }
