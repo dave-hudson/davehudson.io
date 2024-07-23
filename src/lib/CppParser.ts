@@ -1,10 +1,10 @@
-import { Token } from './Lexer'
-import { CLexer } from './CLexer'
+import { Token } from './Parser'
+import { CParser } from './CParser'
 
 /**
- * Lexer for C++ code.
+ * Parser for C++ code.
  */
-export class CppLexer extends CLexer {
+export class CppParser extends CParser {
     /**
      * Gets the next token from the input.
      */

@@ -18,16 +18,16 @@ export const styles: { [key: string]: string | null } = {
 };
 
 /**
- * Base class for lexers, providing common functionality.
+ * Base class for parsers, providing common functionality.
  */
-export abstract class Lexer {
+export abstract class Parser {
     protected input: string;
     protected position: number;
     protected tokenIndex : number;
 
     /**
-     * Constructs a lexer.
-     * @param input - The input code to lex.
+     * Constructs a parser.
+     * @param input - The input code to parse.
      */
     constructor(input: string) {
         this.input = input;

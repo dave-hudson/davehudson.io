@@ -1,14 +1,14 @@
-import { Lexer, Token } from './Lexer'
+import { Parser, Token } from './Parser'
 
 /**
- * Lexer for Python code.
+ * Parser for Python code.
  */
-export class PythonLexer extends Lexer {
+export class PythonParser extends Parser {
     protected inElement: boolean = false;
 
     /**
-     * Constructs a lexer.
-     * @param input - The input code to lex.
+     * Constructs a parser.
+     * @param input - The input code to parse.
      */
     constructor(input: string) {
         super(input);

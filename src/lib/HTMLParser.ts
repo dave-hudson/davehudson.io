@@ -1,5 +1,5 @@
-import { Lexer, Token, styles } from './Lexer';
-import { JavaScriptLexer } from './JavaScriptLexer';
+import { Parser, Token, styles } from './Parser';
+import { JavaScriptParser } from './JavaScriptParser';
 
 styles['HTML_DOCTYPE'] = 'html-doctype';
 styles['HTML_TAG'] = 'html-tag';
@@ -8,37 +8,37 @@ styles['HTML_ATTRIBUTE_VALUE'] = 'html-attribute-value';
 styles['TEXT'] = 'text';
 
 /**
- * Lexer class for HTML, extending the base lexer functionality.
+ * Parser class for HTML, extending the base parser functionality.
  */
-export class HTMLLexer extends Lexer {
+export class HTMLParser extends Parser {
     protected inTag: boolean;
     protected tagName: string;
-    protected jsLexer: JavaScriptLexer | null;
+    protected jsParser: JavaScriptParser | null;
 
     /**
-     * Constructs a lexer.
-     * @param input - The input code to lex.
+     * Constructs a parser.
+     * @param input - The input code to parse.
      */
     constructor(input: string) {
         super(input);
 
         this.inTag = false;
         this.tagName = '';
-        this.jsLexer = null;
+        this.jsParser = null;
     }
 
     /**
      * Gets the next token from the input.
      */
     public nextToken(): Token | null {
-        // If we're using a JavaScript lexer than use that until we've completed procesing the JavaScript.
-        if (this.jsLexer) {
-            const token = this.jsLexer.nextToken();
+        // If we're using a JavaScript parser than use that until we've completed procesing the JavaScript.
+        if (this.jsParser) {
+            const token = this.jsParser.nextToken();
             if (token) {
                 return token;
             }
 
-            this.jsLexer = null;
+            this.jsParser = null;
         }
 
         if (this.position >= this.input.length) {
@@ -80,7 +80,7 @@ export class HTMLLexer extends Lexer {
             return this.readTag();
         }
 
-        // Is this a SCRIPT element?  If it is then we need to switch to a JavaScript lexer.
+        // Is this a SCRIPT element?  If it is then we need to switch to a JavaScript parser.
         if (this.tagName.toLowerCase() === 'script') {
             // We need to find the /SCRIPT tag.
             let scriptClose: number = this.input.toLowerCase().indexOf('</script', this.position);
@@ -88,7 +88,7 @@ export class HTMLLexer extends Lexer {
                 scriptClose = this.input.length;
             }
 
-            this.jsLexer = new JavaScriptLexer(this.input.slice(this.position, scriptClose));
+            this.jsParser = new JavaScriptParser(this.input.slice(this.position, scriptClose));
             this.position = scriptClose;
         }
 

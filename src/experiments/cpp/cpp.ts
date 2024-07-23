@@ -1,7 +1,7 @@
 import { assertIsVElement, h, updateElement, VElement, VNode } from '../../lib/dvdi';
 import { ExperimentPage } from '../ExperimentPage';
 import { pageHeader, pageFooter } from '../../lib/page';
-import { CppLexer } from '../../lib/CppLexer';
+import { CppParser } from '../../lib/CppParser';
 import { highlight } from '../../lib/highlight'
 import { cloneObject } from '../../lib/cloneObject';
 
@@ -52,7 +52,7 @@ async function loadFile(filePath: string, storeFunction: (content: VElement[]) =
         }
 
         const content = await response.text();
-        storeFunction(highlight(content, CppLexer));
+        storeFunction(highlight(content, CppParser));
     } catch (error) {
         console.error('Error loading file:', error);
     }

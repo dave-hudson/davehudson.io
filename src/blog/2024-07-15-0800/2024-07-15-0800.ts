@@ -1,6 +1,6 @@
 import { assertIsVElement, h, updateElement, VElement, VNode } from '../../lib/dvdi';
 import { BlogPost } from '../BlogPost';
-import { JavaScriptLexer } from '../../lib/JavaScriptLexer';
+import { JavaScriptParser } from '../../lib/JavaScriptParser';
 import { highlight } from '../../lib/highlight'
 import { cloneObject } from '../../lib/cloneObject';
 import { navigateEvent } from '../../app';
@@ -56,7 +56,7 @@ async function loadFile(segment: number, filePath: string, storeFunction: (segme
         }
 
         const content = await response.text();
-        storeFunction(segment, highlight(content, JavaScriptLexer));
+        storeFunction(segment, highlight(content, JavaScriptParser));
     } catch (error) {
         console.error('Error loading file:', error);
     }

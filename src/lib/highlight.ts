@@ -1,19 +1,19 @@
 
 import { h, VElement } from './dvdi';
-import { Token, Lexer, styles } from './Lexer'
+import { Token, Parser, styles } from './Parser'
 
 /**
- * Highlights code using the specified lexer.
+ * Highlights code using the specified parser.
  * @param code - The code to highlight.
- * @param lexerClass - The lexer class to use for tokenizing.
+ * @param parserClass - The parser class to use for tokenizing.
  * @returns The highlighted code as HTML.
  */
-export function highlight(code: string, lexerClass: new (input: string) => Lexer): VElement[] {
+export function highlight(code: string, parserClass: new (input: string) => Parser): VElement[] {
     let highlightedCode: VElement[] = [];
-    const lexer = new lexerClass(code);
+    const parser = new parserClass(code);
     let token: Token | null;
 
-    while ((token = lexer.nextToken()) !== null) {
+    while ((token = parser.nextToken()) !== null) {
         const style = styles[token.type];
         const codeFragment = h('span', style !== null ? { className: style } : {}, `${token.value}`);
         highlightedCode.push(codeFragment);

@@ -1,14 +1,16 @@
-import { Lexer, Token } from './Lexer'
+import { Parser, Token, styles } from './Parser'
+
+styles['REGEXP'] = 'regexp';
 
 /**
- * Lexer for C code.
+ * Parser for JavaScript code.
  */
-export class CLexer extends Lexer {
+export class JavaScriptParser extends Parser {
     protected inElement: boolean = false;
 
     /**
-     * Constructs a lexer.
-     * @param input - The input code to lex.
+     * Constructs a parser.
+     * @param input - The input code to parse.
      */
     constructor(input: string) {
         super(input);
@@ -28,15 +30,11 @@ export class CLexer extends Lexer {
 
         if (ch === '\n') {
             this.position++;
-            return { type: 'NEWLINE', value: '\n' };
+            return { type: 'WHITESPACE_OR_NEWLINE', value: '\n' };
         }
 
         if (/\s/.test(ch)) {
             return this.readWhitespace();
-        }
-
-        if (ch === '"' || ch === "'") {
-            return this.readString(ch);
         }
 
         if (this.isLetter(ch) || ch === '_') {
@@ -45,6 +43,10 @@ export class CLexer extends Lexer {
 
         if (this.isDigit(ch) || (ch === '.' && this.isDigit(this.input[this.position + 1]))) {
             return this.readNumber();
+        }
+
+        if (ch === '"' || ch === "'" || ch ==='`') {
+            return this.readString(ch);
         }
 
         if (ch === '/') {
@@ -56,11 +58,7 @@ export class CLexer extends Lexer {
                 return this.readBlockComment();
             }
 
-            return this.readOperator();
-        }
-
-        if (ch === '#') {
-            return this.readPreprocessorDirective();
+            return this.readRegExpOrDivide();
         }
 
         return this.readOperator();
@@ -71,16 +69,26 @@ export class CLexer extends Lexer {
      */
     protected readNumber(): Token {
         let start = this.position;
-        let hasSuffix = false;
 
-        if (this.input[this.position] === '0' && (this.input[this.position + 1] === 'x' || this.input[this.position + 1] === 'X')) {
+        if ((this.input[this.position] === '0') &&
+                (this.input[this.position + 1] === 'x' || this.input[this.position + 1] === 'X')) {
+            // Hexadecimal literal
             this.position += 2;
             while (this.position < this.input.length && /[0-9a-fA-F]/.test(this.input[this.position])) {
                 this.position++;
             }
-        } else if (this.input[this.position] === '0' && (this.input[this.position + 1] === 'b' || this.input[this.position + 1] === 'B')) {
+        } else if ((this.input[this.position] === '0') &&
+                (this.input[this.position + 1] === 'b' || this.input[this.position + 1] === 'B')) {
+            // Binary literal
             this.position += 2;
             while (this.position < this.input.length && /[01]/.test(this.input[this.position])) {
+                this.position++;
+            }
+        } else if ((this.input[this.position] === '0') &&
+                (this.input[this.position + 1] === 'o' || this.input[this.position + 1] === 'O')) {
+            // Octal literal (ES6 syntax)
+            this.position += 2;
+            while (this.position < this.input.length && /[0-7]/.test(this.input[this.position])) {
                 this.position++;
             }
         } else {
@@ -106,25 +114,12 @@ export class CLexer extends Lexer {
             }
         }
 
-        // Handle suffixes
-        const suffixStart = this.position;
-        while (this.position < this.input.length && /[uUlLfF]/.test(this.input[this.position])) {
+        // Check for BigInt suffix
+        if (this.position < this.input.length && this.input[this.position] === 'n') {
             this.position++;
-            hasSuffix = true;
         }
 
-        // Validate the suffix combination
-        if (hasSuffix) {
-            const suffix = this.input.slice(suffixStart, this.position).toLowerCase();
-            const validIntegerSuffixes = ["u", "ul", "ull", "lu", "llu"];
-            const validFloatSuffixes = ["f", "l"];
-            const isValidIntegerSuffix = validIntegerSuffixes.includes(suffix);
-            const isValidFloatSuffix = validFloatSuffixes.includes(suffix);
-            if (!isValidIntegerSuffix && !isValidFloatSuffix) {
-                this.position = suffixStart;
-            }
-        }
-
+        if (this.position == start) debugger;
         return { type: 'NUMBER', value: this.input.slice(start, this.position) };
     }
 
@@ -141,38 +136,12 @@ export class CLexer extends Lexer {
     }
 
     /**
-     * Reads a comment in the input.
-     */
-    protected readComment(): Token {
-        let start = this.position;
-        this.position += 2;
-        while (this.position < this.input.length && this.input[this.position] !== '\n') {
-            this.position++;
-        }
-
-        return { type: 'COMMENT', value: this.input.slice(start, this.position) };
-    }
-
-    /**
-     * Reads a block comment in the input.
-     */
-    protected readBlockComment(): Token {
-        let start = this.position;
-        this.position += 2;
-        while (this.position < this.input.length && !(this.input[this.position - 1] === '*' && this.input[this.position] === '/')) {
-            this.position++;
-        }
-
-        this.position++;
-        return { type: 'COMMENT', value: this.input.slice(start, this.position) };
-    }
-
-    /**
-     * Reads an identifier or keyword token in C.
+     * Reads an identifier or keyword in the input.
      */
     protected readIdentifierOrKeyword(): Token {
-        const start = this.position;
-        while (this.isLetterOrDigit(this.input[this.position]) || this.input[this.position] === '_') {
+        let start = this.position;
+        while (this.position < this.input.length &&
+                (this.isLetterOrDigit(this.input[this.position]) || this.input[this.position] === '_')) {
             this.position++;
         }
 
@@ -196,7 +165,7 @@ export class CLexer extends Lexer {
             }
 
             // Is the next token going to be an element?
-            if (nextToken.value === '.' || nextToken.value === '->') {
+            if (nextToken.value === '.' || nextToken.value === '?.') {
                 nextInElement = true;
             }
         }
@@ -211,15 +180,70 @@ export class CLexer extends Lexer {
     }
 
     /**
-     * Reads a preprocessor directive token in C.
+     * Reads a comment in the input.
      */
-    protected readPreprocessorDirective(): Token {
-        const start = this.position;
+    protected readComment(): Token {
+        let start = this.position;
+        this.position += 2; // Skip "//"
         while (this.position < this.input.length && this.input[this.position] !== '\n') {
             this.position++;
         }
 
-        return { type: 'PREPROCESSOR', value: this.input.slice(start, this.position) };
+        return { type: 'COMMENT', value: this.input.slice(start, this.position) };
+    }
+
+    /**
+     * Reads a block comment in the input.
+     */
+    protected readBlockComment(): Token {
+        let start = this.position;
+        this.position += 2;
+        while (this.position < this.input.length && !(this.input[this.position - 1] === '*' && this.input[this.position] === '/')) {
+            this.position++;
+        }
+
+        this.position++;
+        return { type: 'COMMENT', value: this.input.slice(start, this.position) };
+    }
+
+    /**
+     * Read a regular expression literal or divide operator.
+     */
+    protected readRegExpOrDivide(): Token {
+        this.position++;
+
+        // Look for a potential end of line.  If we find one then this isn't a regexp literal.
+        let index: number = this.position;
+        let escaped: boolean = false;
+        while (index < this.input.length) {
+            const ch = this.input[index++];
+            if (ch === '\n') {
+                return { type: 'OPERATOR', value: '/' };
+            }
+
+            if (ch === '\\') {
+                escaped = !escaped;
+                continue;
+            }
+
+            if (escaped) {
+                escaped = false;
+                continue;
+            }
+
+            if (ch === '/') {
+                break;
+            }
+        }
+
+        // Check if the next characters seem to be valid regexp flags.
+        while (index < this.input.length && 'dgimsuy'.includes(this.input[index])) {
+            index++;
+        }
+
+        const regexp = this.input.slice(this.position - 1, index);
+        this.position = index;
+        return { type: 'REGEXP', value: regexp };
     }
 
     /**
@@ -227,10 +251,17 @@ export class CLexer extends Lexer {
      */
     protected readOperator(): Token {
         const operators = [
+            '>>>=',
             '>>=',
             '<<=',
             '&&=',
             '||=',
+            '??=',
+            '**=',
+            '!==',
+            '===',
+            '>>>',
+            '...',
             '!=',
             '==',
             '+=',
@@ -245,11 +276,13 @@ export class CLexer extends Lexer {
             '>=',
             '&&',
             '||',
+            '??',
+            '?.',
             '<<',
             '>>',
+            '**',
             '++',
             '--',
-            '->',
             '+',
             '-',
             '*',
@@ -297,49 +330,77 @@ export class CLexer extends Lexer {
     }
 
     /**
-     * Determines if a value is a keyword in C.
+     * Determines if a value is a keyword in JavaScript.
      * @param value - The value to check.
      * @returns True if the value is a keyword, false otherwise.
      */
     protected isKeyword(value: string): boolean {
         const keywords = [
-            'auto',
+            'abstract',
+            'async',
+            'await',
+            'boolean',
             'break',
+            'byte',
             'case',
+            'catch',
             'char',
+            'class',
             'const',
             'continue',
+            'debugger',
             'default',
+            'delete',
             'do',
             'double',
             'else',
             'enum',
-            'extern',
+            'export',
+            'extends',
+            'false',
+            'final',
+            'finally',
             'float',
             'for',
+            'from',
+            'function',
             'goto',
             'if',
-            'inline',
+            'implements',
+            'import',
+            'in',
+            'instanceof',
             'int',
+            'interface',
+            'let',
             'long',
-            'register',
-            'restrict',
+            'native',
+            'new',
+            'null',
+            'of',
+            'package',
+            'private',
+            'protected',
+            'public',
             'return',
             'short',
-            'signed',
-            'sizeof',
             'static',
-            'struct',
+            'super',
             'switch',
-            'typedef',
-            'union',
-            'unsigned',
+            'synchronized',
+            'this',
+            'throw',
+            'throws',
+            'transient',
+            'true',
+            'try',
+            'typeof',
+            'var',
             'void',
             'volatile',
             'while',
-            '_Bool',
-            '_Complex',
-            '_Imaginary'
+            'with',
+            'yield'
         ];
         return keywords.includes(value);
     }

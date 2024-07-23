@@ -1,9 +1,9 @@
-import { JavaScriptLexer } from './JavaScriptLexer'
+import { JavaScriptParser } from './JavaScriptParser'
 
 /**
- * Lexer for TypeScript code.
+ * Parser for TypeScript code.
  */
-export class TypeScriptLexer extends JavaScriptLexer {
+export class TypeScriptParser extends JavaScriptParser {
     /**
      * Determines if a value is a keyword in TypeScript.
      * @param value - The value to check.
