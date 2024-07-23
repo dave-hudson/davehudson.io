@@ -31,6 +31,7 @@ export class HTMLLexer extends Lexer {
      * Gets the next token from the input.
      */
     public nextToken(): Token | null {
+        // If we're using a JavaScript lexer than use that until we've completed procesing the JavaScript.
         if (this.jsLexer) {
             const token = this.jsLexer.nextToken();
             if (token) {
@@ -55,12 +56,12 @@ export class HTMLLexer extends Lexer {
             return this.readWhitespace();
         }
 
-        if (this.input.startsWith('<!DOCTYPE', this.position)) {
-            return this.readDoctype();
-        }
-
         if (ch === '<') {
             if (this.input[this.position + 1] === '!') {
+                if (this.input.startsWith('DOCTYPE', this.position + 2)) {
+                    return this.readDoctype();
+                }
+
                 return this.readHtmlComment();
             }
 
