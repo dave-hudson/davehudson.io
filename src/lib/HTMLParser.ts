@@ -6,6 +6,7 @@ styles['HTML_TAG'] = 'html-tag';
 styles['HTML_ATTRIBUTE'] = 'html-attribute';
 styles['HTML_ATTRIBUTE_VALUE'] = 'html-attribute-value';
 styles['TEXT'] = 'text';
+styles['SCRIPT'] = null;
 
 /**
  * Lexer class for HTML, extending the base lexer functionality.
@@ -13,7 +14,6 @@ styles['TEXT'] = 'text';
 export class HTMLLexer extends Lexer {
     protected inTag: boolean;
     protected tagName: string;
-    protected jsParser: JavaScriptParser | null;
 
     /**
      * Constructs a parser.
@@ -24,23 +24,12 @@ export class HTMLLexer extends Lexer {
 
         this.inTag = false;
         this.tagName = '';
-        this.jsParser = null;
     }
 
     /**
      * Gets the next token from the input.
      */
     public getNextToken(): Token | null {
-        // If we're using a JavaScript parser than use that until we've completed procesing the JavaScript.
-        if (this.jsParser) {
-            const token = this.jsParser.getNextToken();
-            if (token) {
-                return token;
-            }
-
-            this.jsParser = null;
-        }
-
         if (this.position >= this.input.length) {
             return null;
         }
@@ -83,13 +72,14 @@ export class HTMLLexer extends Lexer {
         // Is this a SCRIPT element?  If it is then we need to switch to a JavaScript parser.
         if (this.tagName.toLowerCase() === 'script') {
             // We need to find the /SCRIPT tag.
+            const scriptOpen: number = this.position;
             let scriptClose: number = this.input.toLowerCase().indexOf('</script', this.position);
             if (scriptClose === -1) {
                 scriptClose = this.input.length;
             }
 
-            this.jsParser = new JavaScriptParser(this.input.slice(this.position, scriptClose));
             this.position = scriptClose;
+            return { type: 'SCRIPT', value: this.input.slice(scriptOpen, scriptClose) };
         }
 
         // Handle text content between tags.
@@ -292,6 +282,8 @@ export class HTMLLexer extends Lexer {
  * HTML parser.
  */
 export class HTMLParser extends Parser {
+    protected jsParser: JavaScriptParser | null;
+
     /**
      * Constructs a parser.
      * @param input - The input code to parse.
@@ -300,6 +292,7 @@ export class HTMLParser extends Parser {
         super();
 
         this.lexer = new HTMLLexer(input);
+        this.jsParser = null;
     }
 
     /**
@@ -307,10 +300,37 @@ export class HTMLParser extends Parser {
      * @returns true if there are any more tokens to process, and false if there are not.
      */
     public getNextToken(): Token | null {
+        // If we're using a JavaScript parser than use that until we've completed procesing the JavaScript.
+        if (this.jsParser) {
+            const token = this.jsParser.getNextToken();
+            if (token) {
+                console.log('parse js: ', token.value)
+                return token;
+            }
+
+            this.jsParser = null;
+        }
+
         if (!this.lexer) {
             return null;
         }
 
-        return this.lexer.getNextToken();
+        let token: Token | null = this.lexer.getNextToken();
+        if (!token) {
+            return null;
+        }
+
+        if (token.type === 'SCRIPT') {
+            this.jsParser = new JavaScriptParser(token.value);
+            const jsToken = this.jsParser.getNextToken();
+            console.log('parse js new: ', token.value)
+            if (jsToken) {
+                return jsToken;
+            }
+
+            this.jsParser = null;
+        }
+
+        return token;
     }
 }
