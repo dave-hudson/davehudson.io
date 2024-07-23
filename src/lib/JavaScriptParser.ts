@@ -6,16 +6,12 @@ styles['REGEXP'] = 'regexp';
  * Lexer for JavaScript code.
  */
 export class JavaScriptLexer extends Lexer {
-    protected inElement: boolean = false;
-
     /**
      * Constructs a parser.
      * @param input - The input code to parse.
      */
     constructor(input: string) {
         super(input);
-
-        this.inElement = false;
     }
 
     /**
@@ -147,31 +143,7 @@ export class JavaScriptLexer extends Lexer {
 
         const value = this.input.slice(start, this.position);
         if (this.isKeyword(value)) {
-            this.inElement = false;
             return { type: 'KEYWORD', value };
-        }
-
-        // Look at the next token.  If it's a '(' operator then we're making a function or method call!
-        const curInElement = this.inElement;
-        const nextToken: Token | null = this.peekNextSyntaxToken();
-        this.inElement = curInElement;
-        let nextInElement = false;
-        if (nextToken?.type === 'OPERATOR') {
-            if (nextToken.value === '(') {
-                this.inElement = false;
-                return { type: 'FUNCTION_OR_METHOD', value };
-            }
-
-            // Is the next token going to be an element?
-            if (nextToken.value === '.' || nextToken.value === '?.') {
-                nextInElement = true;
-            }
-        }
-
-        this.inElement = nextInElement;
-
-        if (curInElement) {
-            return { type: 'ELEMENT', value };
         }
 
         return { type: 'IDENTIFIER', value };
@@ -408,6 +380,8 @@ export class JavaScriptLexer extends Lexer {
  * JavaScript parser.
  */
 export class JavaScriptParser extends Parser {
+    protected inElement: boolean = false;
+
     /**
      * Constructs a parser.
      * @param input - The input code to parse.
@@ -416,6 +390,7 @@ export class JavaScriptParser extends Parser {
         super();
 
         this.lexer = new JavaScriptLexer(input);
+        this.inElement = false;
     }
 
     /**
@@ -427,6 +402,38 @@ export class JavaScriptParser extends Parser {
             return null;
         }
 
-        return this.lexer.getNextToken();
+        let token: Token | null = this.lexer.getNextToken();
+        if (!token) {
+            return null;
+        }
+
+        if (token.type !== 'IDENTIFIER') {
+            return token;
+        }
+
+        // Look at the next token.  If it's a '(' operator then we're making a function or method call!
+        const curInElement = this.inElement;
+        const nextToken: Token | null = this.lexer.peekNextSyntaxToken();
+        this.inElement = curInElement;
+        let nextInElement = false;
+        if (nextToken?.type === 'OPERATOR') {
+            if (nextToken.value === '(') {
+                this.inElement = false;
+                return { type: 'FUNCTION_OR_METHOD', value: token.value };
+            }
+
+            // Is the next token going to be an element?
+            if (nextToken.value === '.' || nextToken.value === '?.') {
+                nextInElement = true;
+            }
+        }
+
+        this.inElement = nextInElement;
+
+        if (curInElement) {
+            return { type: 'ELEMENT', value: token.value };
+        }
+
+        return token;
     }
 }

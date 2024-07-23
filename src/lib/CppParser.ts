@@ -265,16 +265,4 @@ export class CppParser extends CParser {
 
         this.lexer = new CppLexer(input);
     }
-
-    /**
-     * Gets the next token from the input.
-     * @returns true if there are any more tokens to process, and false if there are not.
-     */
-    public override getNextToken(): Token | null {
-        if (!this.lexer) {
-            return null;
-        }
-
-        return this.lexer.getNextToken();
-    }
 }

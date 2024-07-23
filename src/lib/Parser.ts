@@ -42,7 +42,7 @@ export abstract class Lexer {
     /**
      * Get the next syntactic token (not whitespace or comment)
      */
-    protected peekNextSyntaxToken() : Token | null {
+    public peekNextSyntaxToken() : Token | null {
         const curPos = this.position;
 
         let token: Token | null;
