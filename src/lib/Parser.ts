@@ -18,21 +18,19 @@ export const styles: { [key: string]: string | null } = {
 };
 
 /**
- * Base class for parsers, providing common functionality.
+ * Base class for lexers, providing common functionality.
  */
-export abstract class Parser {
+export abstract class Lexer {
     protected input: string;
     protected position: number;
-    protected tokenIndex : number;
 
     /**
-     * Constructs a parser.
+     * Constructs a Lexer.
      * @param input - The input code to parse.
      */
     constructor(input: string) {
         this.input = input;
         this.position = 0;
-        this.tokenIndex = 0;
     }
 
     /**
@@ -99,5 +97,32 @@ export abstract class Parser {
      */
     protected isLetterOrDigit(ch: string): boolean {
         return this.isLetter(ch) || this.isDigit(ch);
+    }
+}
+
+/**
+ * Base class for parsers, providing common functionality.
+ */
+export abstract class Parser {
+    protected lexer: Lexer | null;
+
+    /**
+     * Constructs a parser.
+     * @param input - The input code to parse.
+     */
+    constructor() {
+        this.lexer = null;
+    }
+
+    /**
+     * Gets the next token from the input.
+     * @returns true if there are any more tokens to process, and false if there are not.
+     */
+    public nextToken(): Token | null {
+        if (!this.lexer) {
+            return null;
+        }
+
+        return this.lexer.nextToken();
     }
 }

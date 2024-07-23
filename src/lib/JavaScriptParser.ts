@@ -1,11 +1,11 @@
-import { Parser, Token, styles } from './Parser'
+import { Lexer, Parser, Token, styles } from './Parser'
 
 styles['REGEXP'] = 'regexp';
 
 /**
- * Parser for JavaScript code.
+ * Lexer for JavaScript code.
  */
-export class JavaScriptParser extends Parser {
+export class JavaScriptLexer extends Lexer {
     protected inElement: boolean = false;
 
     /**
@@ -403,5 +403,20 @@ export class JavaScriptParser extends Parser {
             'yield'
         ];
         return keywords.includes(value);
+    }
+}
+
+/**
+ * JavaScript parser.
+ */
+export class JavaScriptParser extends Parser {
+    /**
+     * Constructs a parser.
+     * @param input - The input code to parse.
+     */
+    constructor(input: string) {
+        super();
+
+        this.lexer = new JavaScriptLexer(input);
     }
 }

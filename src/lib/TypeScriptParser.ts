@@ -1,9 +1,9 @@
-import { JavaScriptParser } from './JavaScriptParser'
+import { JavaScriptLexer, JavaScriptParser } from './JavaScriptParser'
 
 /**
- * Parser for TypeScript code.
+ * Lexer for TypeScript code.
  */
-export class TypeScriptParser extends JavaScriptParser {
+export class TypeScriptLexer extends JavaScriptLexer {
     /**
      * Determines if a value is a keyword in TypeScript.
      * @param value - The value to check.
@@ -84,5 +84,20 @@ export class TypeScriptParser extends JavaScriptParser {
             'yield'
         ];
         return keywords.includes(value);
+    }
+}
+
+/**
+ * TypeScript parser.
+ */
+export class TypeScriptParser extends JavaScriptParser {
+    /**
+     * Constructs a parser.
+     * @param input - The input code to parse.
+     */
+    constructor(input: string) {
+        super(input);
+
+        this.lexer = new TypeScriptLexer(input);
     }
 }

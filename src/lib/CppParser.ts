@@ -1,10 +1,10 @@
 import { Token } from './Parser'
-import { CParser } from './CParser'
+import { CLexer, CParser } from './CParser'
 
 /**
- * Parser for C++ code.
+ * Lexer for C++ code.
  */
-export class CppParser extends CParser {
+export class CppLexer extends CLexer {
     /**
      * Gets the next token from the input.
      */
@@ -249,5 +249,20 @@ export class CppParser extends CParser {
             'xor_eq'
         ];
         return keywords.includes(value);
+    }
+}
+
+/**
+ * C++ parser.
+ */
+export class CppParser extends CParser {
+    /**
+     * Constructs a parser.
+     * @param input - The input code to parse.
+     */
+    constructor(input: string) {
+        super(input);
+
+        this.lexer = new CppLexer(input);
     }
 }

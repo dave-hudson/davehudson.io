@@ -1,4 +1,4 @@
-import { Parser, Token, styles } from './Parser';
+import { Lexer, Parser, Token, styles } from './Parser';
 import { JavaScriptParser } from './JavaScriptParser';
 
 styles['HTML_DOCTYPE'] = 'html-doctype';
@@ -8,9 +8,9 @@ styles['HTML_ATTRIBUTE_VALUE'] = 'html-attribute-value';
 styles['TEXT'] = 'text';
 
 /**
- * Parser class for HTML, extending the base parser functionality.
+ * Lexer class for HTML, extending the base lexer functionality.
  */
-export class HTMLParser extends Parser {
+export class HTMLLexer extends Lexer {
     protected inTag: boolean;
     protected tagName: string;
     protected jsParser: JavaScriptParser | null;
@@ -285,5 +285,20 @@ export class HTMLParser extends Parser {
 
     isKeyword(value: string): boolean {
         return false;
+    }
+}
+
+/**
+ * HTML parser.
+ */
+export class HTMLParser extends Parser {
+    /**
+     * Constructs a parser.
+     * @param input - The input code to parse.
+     */
+    constructor(input: string) {
+        super();
+
+        this.lexer = new HTMLLexer(input);
     }
 }

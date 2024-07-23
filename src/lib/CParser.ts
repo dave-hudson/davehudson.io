@@ -1,9 +1,9 @@
-import { Parser, Token } from './Parser'
+import { Lexer, Parser, Token } from './Parser'
 
 /**
- * Parser for C code.
+ * Lexer for C code.
  */
-export class CParser extends Parser {
+export class CLexer extends Lexer {
     protected inElement: boolean = false;
 
     /**
@@ -342,5 +342,20 @@ export class CParser extends Parser {
             '_Imaginary'
         ];
         return keywords.includes(value);
+    }
+}
+
+/**
+ * C parser.
+ */
+export class CParser extends Parser {
+    /**
+     * Constructs a parser.
+     * @param input - The input code to parse.
+     */
+    constructor(input: string) {
+        super();
+
+        this.lexer = new CLexer(input);
     }
 }

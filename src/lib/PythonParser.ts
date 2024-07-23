@@ -1,13 +1,13 @@
-import { Parser, Token } from './Parser'
+import { Lexer, Parser, Token } from './Parser'
 
 /**
- * Parser for Python code.
+ * Lexer for Python code.
  */
-export class PythonParser extends Parser {
+export class PythonLexer extends Lexer {
     protected inElement: boolean = false;
 
     /**
-     * Constructs a parser.
+     * Constructs a lexer.
      * @param input - The input code to parse.
      */
     constructor(input: string) {
@@ -326,5 +326,20 @@ export class PythonParser extends Parser {
      */
     protected override isLetter(ch: string): boolean {
         return /[a-zA-Z_]/.test(ch);
+    }
+}
+
+/**
+ * Python parser.
+ */
+export class PythonParser extends Parser {
+    /**
+     * Constructs a parser.
+     * @param input - The input code to parse.
+     */
+    constructor(input: string) {
+        super();
+
+        this.lexer = new PythonLexer(input);
     }
 }
