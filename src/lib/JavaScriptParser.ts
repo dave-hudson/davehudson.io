@@ -419,4 +419,16 @@ export class JavaScriptParser extends Parser {
 
         this.lexer = new JavaScriptLexer(input);
     }
+
+    /**
+     * Gets the next token from the input.
+     * @returns true if there are any more tokens to process, and false if there are not.
+     */
+    public nextToken(): Token | null {
+        if (!this.lexer) {
+            return null;
+        }
+
+        return this.lexer.nextToken();
+    }
 }
