@@ -1,10 +1,9 @@
 import { Lexer, Parser, Token, styles } from './Parser';
 import { JavaScriptParser } from './JavaScriptParser';
 
-styles['HTML_DOCTYPE'] = 'html-doctype';
-styles['HTML_TAG'] = 'html-tag';
-styles['HTML_ATTRIBUTE'] = 'html-attribute';
-styles['HTML_ATTRIBUTE_VALUE'] = 'html-attribute-value';
+styles['DOCTYPE'] = 'html-doctype';
+styles['TAG'] = 'html-tag';
+styles['ATTRIBUTE'] = 'html-attribute';
 styles['TEXT'] = 'text';
 styles['SCRIPT'] = null;
 
@@ -14,6 +13,7 @@ styles['SCRIPT'] = null;
 export class HTMLLexer extends Lexer {
     protected inTag: boolean;
     protected tagName: string;
+    protected seenEquals: boolean;
 
     /**
      * Constructs a parser.
@@ -24,6 +24,7 @@ export class HTMLLexer extends Lexer {
 
         this.inTag = false;
         this.tagName = '';
+        this.seenEquals = false;
     }
 
     /**
@@ -56,6 +57,7 @@ export class HTMLLexer extends Lexer {
 
             this.position++;
             this.inTag = true;
+            this.tagName = '';
             return { type: 'OPERATOR', value: '<' };
         }
 
@@ -112,7 +114,7 @@ export class HTMLLexer extends Lexer {
             this.position++;
         }
 
-        return { type: 'HTML_DOCTYPE', value: this.input.slice(start, this.position) };
+        return { type: 'DOCTYPE', value: this.input.slice(start, this.position) };
     }
 
     /**
@@ -133,110 +135,47 @@ export class HTMLLexer extends Lexer {
     }
 
     /**
-     * Reads an HTML attribute in the input.
+     * Reads a tag or attribute.
      */
-/*
-    protected readHtmlAttribute(start: number, end: number): void {
-        let position = start;
-
-        while (true) {
-            // Skip leading whitespace
-            let whitespace = '';
-            while (position < end && /\s/.test(this.input[position])) {
-                whitespace += this.input[position++];
-            }
-
-            if (whitespace.length) {
-                this.tokenStream.push({ type: 'WHITESPACE_OR_NEWLINE', value: whitespace });
-            }
-
-            if (position >= end) {
-                return;
-            }
-
-            let attributeName = '';
-            while (position < end && /[\w-]/.test(this.input[position])) {
-                attributeName += this.input[position++];
-            }
-
-            this.tokenStream.push({ type: 'HTML_ATTRIBUTE', value: attributeName });
-
-            if (position >= end) {
-                return;
-            }
-
-            // Skip whitespace
-            whitespace = '';
-            while (position < end && /\s/.test(this.input[position])) {
-                whitespace += this.input[position++];
-            }
-
-            if (whitespace.length) {
-                this.tokenStream.push({ type: 'WHITESPACE_OR_NEWLINE', value: whitespace });
-            }
-
-            if (position >= end) {
-                return;
-            }
-
-            if (this.input[position] !== '=') {
-                continue;
-            }
-
-            this.tokenStream.push({ type: 'OPERATOR', value: '='})
-            position++;
-
-            // Skip whitespace
-            whitespace = '';
-            while (position < end && /\s/.test(this.input[position])) {
-                whitespace += this.input[position++];
-            }
-
-            if (whitespace.length) {
-                this.tokenStream.push({ type: 'WHITESPACE_OR_NEWLINE', value: whitespace });
-            }
-
-            if (position >= end) {
-                return;
-            }
-
-            const valueFirstChar = this.input[position];
-            if (valueFirstChar === '\'' || valueFirstChar === '"') {
-                position++;
-
-                let attributeValue = '';
-                while (position < end && this.input[position] != valueFirstChar) {
-                    attributeValue += this.input[position++];
-                }
-
-                if (attributeValue.length) {
-                    this.tokenStream.push({
-                        type: 'HTML_ATTRIBUTE_VALUE',
-                        value: `${valueFirstChar}${attributeValue}${valueFirstChar}` });
-                }
-
-                position++;
-
-                if (position >= end) {
-                    return;
-                }
-
-                continue;
-            }
-
-            let attributeValue = '';
-            while (position < end && /[\w-]/.test(this.input[position])) {
-                attributeValue += this.input[position++];
-            }
-
-            this.tokenStream.push({ type: 'HTML_ATTRIBUTE_VALUE', value: attributeValue });
-
-            if (position >= end) {
-                return;
-            }
+    protected readTagOrAttribute(tokenType: string): Token {
+        const start = this.position;
+        while (this.isLetterOrDigit(this.input[this.position]) ||
+                this.input[this.position] === '_' ||
+                this.input[this.position] === '-' ||
+                this.input[this.position] === '/') {
+            this.position++;
         }
+
+        const value = this.input.slice(start, this.position);
+        return { type: tokenType, value };
     }
-*/
+
+    /**
+     * Reads tag content.
+     */
+    protected readTag(): Token {
+        if (this.tagName === '') {
+            const token: Token = this.readTagOrAttribute('TAG');
+            this.tagName = token.value;
+            return token;
+        }
+
+        const ch = this.input[this.position];
+        if (ch === '=') {
+            this.position++;
+            this.seenEquals = true;
+            return { type: 'OPERATOR', value: '=' };
+        }
+
+        const seenEquals = this.seenEquals;
+        this.seenEquals = false;
+
+        if (ch === '"' || ch === '\'') {
+            return this.readString(ch);
+        }
+
+        return this.readTagOrAttribute(seenEquals ? 'STRING' : 'ATTRIBUTE');
+    }
 
     /**
      * Reads text content between HTML tags.
@@ -248,29 +187,6 @@ export class HTMLLexer extends Lexer {
         }
 
         return { type: 'TEXT', value: this.input.slice(start, this.position) };
-    }
-
-    /**§
-     * Reads tag content.
-     */
-    protected readTag(): Token {
-        let start = this.position;
-        this.tagName = '';
-        while (this.position < this.input.length) {
-            const char = this.input[this.position];
-            if (char === ' ' || char === '>') {
-                break;
-            }
-
-            this.position++;
-            this.tagName += char;
-        }
-
-        while (this.position < this.input.length && this.input[this.position] !== '>') {
-            this.position++;
-        }
-
-        return { type: 'HTML_TAG', value: this.input.slice(start, this.position) };
     }
 
     isKeyword(value: string): boolean {

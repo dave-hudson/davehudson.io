@@ -57,11 +57,7 @@ hr {
 }
 
 .main pre code .html-attribute {
-    color: #c08040;
-}
-
-.main pre code .html-attribute-value {
-    color: #d06060;
+    color: #90e0e8;
 }
 
 .main pre code .html-doctype {

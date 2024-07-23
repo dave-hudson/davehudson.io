@@ -579,20 +579,16 @@ pre {
     color: #a09040;
 }
 
+.main pre code .html-attribute {
+    color: #4ca4c0;
+}
+
 .main pre code .html-doctype {
     color: #a0a0a0;
 }
 
 .main pre code .html-tag {
     color: #c040c0;
-}
-
-.main pre code .html-attribute {
-    color: #c06a20;
-}
-
-.main pre code .html-attribute-value {
-    color: #f06030;
 }
 
 .main pre code .identifier {
