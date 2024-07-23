@@ -220,7 +220,6 @@ export class HTMLParser extends Parser {
         if (this.jsParser) {
             const token = this.jsParser.getNextToken();
             if (token) {
-                console.log('parse js: ', token.value)
                 return token;
             }
 
@@ -239,7 +238,6 @@ export class HTMLParser extends Parser {
         if (token.type === 'SCRIPT') {
             this.jsParser = new JavaScriptParser(token.value);
             const jsToken = this.jsParser.getNextToken();
-            console.log('parse js new: ', token.value)
             if (jsToken) {
                 return jsToken;
             }
