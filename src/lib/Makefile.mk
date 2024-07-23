@@ -5,6 +5,7 @@ TS_FILES += \
 	src/lib/Parser.ts \
 	src/lib/CParser.ts \
 	src/lib/CppParser.ts \
+	src/lib/CSSParser.ts \
 	src/lib/HTMLParser.ts \
 	src/lib/PythonParser.ts \
 	src/lib/JavaScriptParser.ts \

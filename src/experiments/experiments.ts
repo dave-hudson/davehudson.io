@@ -3,6 +3,7 @@ import { pageHeader, pageFooter } from "../lib/page";
 import { navigateEvent, routeDetails } from '../app';
 import { experimentSyntaxC } from './c/c';
 import { experimentSyntaxCpp } from './cpp/cpp';
+import { experimentSyntaxCSS } from './css/css';
 import { experimentSyntaxHTML } from './html/html';
 import { experimentSyntaxJavaScript } from './javascript/javascript';
 import { experimentSyntaxPython } from './python/python';
@@ -13,6 +14,7 @@ import { ExperimentPage } from './ExperimentPage';
 const experimentsContent: ExperimentPage[] = [
     experimentSyntaxC,
     experimentSyntaxCpp,
+    experimentSyntaxCSS,
     experimentSyntaxHTML,
     experimentSyntaxJavaScript,
     experimentSyntaxPython,
@@ -41,6 +43,14 @@ export function experimentsPage(): VNode {
                                 onclick: (e: MouseEvent) => navigateEvent(e, '/experiments/cpp')
                             },
                             'C++'
+                        )
+                    ),
+                     h('li', {},
+                        h('a', {
+                                href: ('/experiments/css'),
+                                onclick: (e: MouseEvent) => navigateEvent(e, '/experiments/css')
+                            },
+                            'CSS'
                         )
                     ),
                     h('li', {},
