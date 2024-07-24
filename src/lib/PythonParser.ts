@@ -24,7 +24,7 @@ export class PythonLexer extends Lexer {
 
         if (ch === '\n') {
             this.position++;
-            return { type: 'NEWLINE', value: '\n' };
+            return { type: 'WHITESPACE_OR_NEWLINE', value: '\n' };
         }
 
         if (/\s/.test(ch)) {

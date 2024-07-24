@@ -24,22 +24,26 @@ export class CLexer extends Lexer {
 
         if (ch === '\n') {
             this.position++;
-            return { type: 'NEWLINE', value: '\n' };
+            return { type: 'WHITESPACE_OR_NEWLINE', value: '\n' };
         }
 
         if (/\s/.test(ch)) {
             return this.readWhitespace();
         }
 
-        if (ch === '"' || ch === "'") {
-            return this.readString(ch);
-        }
-
         if (this.isLetter(ch) || ch === '_') {
             return this.readIdentifierOrKeyword();
         }
 
-        if (this.isDigit(ch) || (ch === '.' && this.isDigit(this.input[this.position + 1]))) {
+        if (this.isDigit(ch)) {
+            return this.readNumber();
+        }
+
+        if (ch === '"' || ch === "'") {
+            return this.readString(ch);
+        }
+
+        if (ch === '.' && this.isDigit(this.input[this.position + 1])) {
             return this.readNumber();
         }
 

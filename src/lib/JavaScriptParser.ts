@@ -37,12 +37,16 @@ export class JavaScriptLexer extends Lexer {
             return this.readIdentifierOrKeyword();
         }
 
-        if (this.isDigit(ch) || (ch === '.' && this.isDigit(this.input[this.position + 1]))) {
+        if (this.isDigit(ch)) {
             return this.readNumber();
         }
 
         if (ch === '"' || ch === "'" || ch ==='`') {
             return this.readString(ch);
+        }
+
+        if (ch === '.' && this.isDigit(this.input[this.position + 1])) {
+            return this.readNumber();
         }
 
         if (ch === '/') {

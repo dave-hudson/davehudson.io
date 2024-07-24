@@ -25,12 +25,20 @@ export class CSSLexer extends Lexer {
             return this.readWhitespace();
         }
 
-        if (ch === '/' && this.input[this.position + 1] === '*') {
-            return this.readComment();
+        if (this.isLetter(ch)) {
+            return this.readIdentifier();
+        }
+
+        if (this.isDigit(ch)) {
+            return this.readNumber();
         }
 
         if (ch === '"' || ch === "'") {
             return this.readString(ch);
+        }
+
+        if (ch === '/' && this.input[this.position + 1] === '*') {
+            return this.readComment();
         }
 
         if (ch === '#') {
@@ -56,14 +64,6 @@ export class CSSLexer extends Lexer {
 
             this.position++;
             return { type: 'OPERATOR', value: ch };
-        }
-
-        if (/[a-zA-Z]/.test(ch)) {
-            return this.readIdentifier();
-        }
-
-        if (/[0-9]/.test(ch)) {
-            return this.readNumber();
         }
 
         if (ch === '@') {
