@@ -23,7 +23,7 @@ function blogArticle_2014_04_03_0000(): VNode[] {
         h('p', {},
             'For Bitcoin the mining rewards seem pretty simple to estimate.  The current (2014-04-03) fixed block reward ' +
             'is 25 BTC and there are a nominal 144 blocks per day.  This yields a nominal 3600 BTC per day. 1 BTC is ' +
-            'currently worth about \$450 (USD) so that\'s \$1.62M being mined per day.  In practice though, this ' +
+            'currently worth about $450 (USD) so that\'s $1.62M being mined per day.  In practice though, this ' +
             'underestimates the mining reward for a couple of reasons:'
         ),
         h('ul', {},
@@ -63,7 +63,7 @@ function blogArticle_2014_04_03_0000(): VNode[] {
             ),
             h('p', {},
                 'For the next few months at least it seems likely that we\'ll see this much larger average block rate so ' +
-                'based on our original \$450 per BTC then we get a fixed reward per day of \$1.92M; this is \$300k per day ' +
+                'based on our original $450 per BTC then we get a fixed reward per day of $1.92M; this is $300k per day ' +
                 'more than we might have guessed.  The downside, of course, is that while there\'s more money being made now, ' +
                 'so the date of the next halving of the reward is moving closer. Instead of being in November 2016 it\'s ' +
                 'already moved to August 2016 and, unless something unexpected happens, will almost certainly happen a month ' +
@@ -115,16 +115,16 @@ function blogArticle_2014_04_03_0000(): VNode[] {
                 'apart a little to make comparisons easier.'
             ),
             h('p', {},
-                'If we consider that a state-of-the-art Bitcoin mining platform can generate a little over 300 MHash/s/\$ ' +
-                'then the current worldwide capacity of 48 PHash/s would require an investment of \$160M.  In practice most of ' +
-                'the hashing capacity is nowhere near as cost effective as 300 MHash/s/\$ so it seems likely that the actual ' +
-                'investment worldwide in the hardware that is currently running has been more like \$300M to \$500M.  Given ' +
+                'If we consider that a state-of-the-art Bitcoin mining platform can generate a little over 300 MHash/s/$ ' +
+                'then the current worldwide capacity of 48 PHash/s would require an investment of $160M.  In practice most of ' +
+                'the hashing capacity is nowhere near as cost effective as 300 MHash/s/$ so it seems likely that the actual ' +
+                'investment worldwide in the hardware that is currently running has been more like $300M to $500M.  Given ' +
                 'that the hashing rates have been increasing so dramatically for more than 12 months it\'s also highly ' +
                 'unlikely that more than a very small fraction of the currently-deployed hardware has been in use for more ' +
                 'than 8 months.'
             ),
             h('p', {},
-                'If we look at the estimated miner\'s reward for the last 8 months it\'s \$514M.  This suggests that a huge ' +
+                'If we look at the estimated miner\'s reward for the last 8 months it\'s $514M.  This suggests that a huge ' +
                 'fraction of the money being made from mining is now also being spent on mining hardware.  Another jump in the ' +
                 'BTC price will help make things more profitable for miners but will probably also just trigger yet more ' +
                 'spending on mining hardware.  It also suggests that the correlation between mining hash rates and the BTC ' +
@@ -135,10 +135,10 @@ function blogArticle_2014_04_03_0000(): VNode[] {
         h('section', {},
             h('h2', {}, 'Limits on hashing?'),
             h('p', {},
-                'The \$514M represents a realistic limit on the hashing rate since no-one can afford to operate at a loss ' +
-                'for long.  Some of that \$514 has to have been used to cover operating costs such as electricity, HVAC, ' +
+                'The $514M represents a realistic limit on the hashing rate since no-one can afford to operate at a loss ' +
+                'for long.  Some of that $514 has to have been used to cover operating costs such as electricity, HVAC, ' +
                 'premises, and some amount of miner\'s profit.  Unless ASIC and mining equipment vendors reduce their prices ' +
-                'significantly then that puts an upper bound of \$514M \* 300 MHash/s/\$; a little over 150 PHash/s.  ' +
+                'significantly then that puts an upper bound of $514M \* 300 MHash/s/$; a little over 150 PHash/s.  ' +
                 'Realistically it\'s probably less than 120 PHash/s and that\'s assuming that everyone was suddenly able to ' +
                 'buy currently-shipping state-of-the-art equipment.'
             ),
