@@ -697,3 +697,12 @@ pre {
 .footer .copyright {
     margin-top: 15px;
 }
+
+[class^="str"] {
+    background: green;
+    color: white;
+}
+
+h2 #this-id .fred {
+    color: blue;
+}

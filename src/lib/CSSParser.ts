@@ -1,12 +1,9 @@
 import { Lexer, Parser, Token, styles } from './Parser'
 
 styles['AT_RULE'] = 'css-at-rule';
+styles['DIMENSION'] = 'number';
+styles['HASH'] = 'identifier';
 styles['HEX'] = 'number';
-styles['PROPERTY'] = 'error';
-styles['PSEUDO'] = 'css-pseudo';
-styles['SELECTOR'] = 'css-selector';
-styles['UNIT'] = 'number';
-styles['VALUE'] = 'number';
 
 /**
  * Lexer for CSS.
@@ -36,57 +33,98 @@ export class CSSLexer extends Lexer {
             return this.readString(ch);
         }
 
-        if (/[a-zA-Z\-]/.test(ch)) {
+        if (ch === '#') {
+            return this.readHexOrId();
+        }
+
+        if (ch === '.') {
+            if (this.isDigit(this.input[this.position + 1])) {
+                return this.readNumber();
+            }
+
             return this.readIdentifier();
         }
 
-        if (ch === '#') {
-            return this.readHex();
+        if (ch === '-') {
+            if (this.isDigit(this.input[this.position + 1])) {
+                return this.readNumber();
+            }
+
+            if (/[a-zA-Z.-]/.test(this.input[this.position + 1])) {
+                return this.readIdentifier();
+            }
+
+            this.position++;
+            return { type: 'OPERATOR', value: ch };
+        }
+
+        if (/[a-zA-Z]/.test(ch)) {
+            return this.readIdentifier();
+        }
+
+        if (/[0-9]/.test(ch)) {
+            return this.readNumber();
         }
 
         if (ch === '@') {
             return this.readAtRule();
         }
 
-        if (ch === ':' ||
-                ch === ';' ||
-                ch === '(' ||
-                ch === ')' ||
-                ch === ',' ||
-                ch === '=' ||
-                ch === '[' ||
-                ch === ']' ||
-                ch === '{' ||
-                ch === '}') {
+        if (ch === '~' || ch === '$' || ch === '^') {
             this.position++;
+            if (this.input[this.position] === '=') {
+                this.position++;
+                return { type: 'OPERATOR', value: ch + '=' };
+            }
+
+            return { type: 'ERROR', value: ch };
+        }
+
+        if (ch === '|' || ch === '*') {
+            this.position++;
+            if (this.input[this.position] === '=') {
+                this.position++;
+                return { type: 'OPERATOR', value: ch + '=' };
+            }
+
             return { type: 'OPERATOR', value: ch };
         }
 
-        if (/[0-9]/.test(ch) || ch === '.') {
-            return this.readNumber();
-        }
-
+        if (ch === ':' ||
+            ch === ';' ||
+            ch === '(' ||
+            ch === ')' ||
+            ch === ',' ||
+            ch === '>' ||
+            ch === '+' ||
+            ch === '=' ||
+            ch === '[' ||
+            ch === ']' ||
+            ch === '{' ||
+            ch === '}') {
         this.position++;
+        return { type: 'OPERATOR', value: ch };
+    }
+
+    this.position++;
         return { type: 'ERROR', value: ch };
     }
 
     private readIdentifier(): Token {
         const start = this.position;
-        while (this.position < this.input.length && /[a-zA-Z0-9\-\_]/.test(this.input[this.position])) {
+        while (this.position < this.input.length && /[a-zA-Z0-9.#\[\]=\-]/.test(this.input[this.position])) {
             this.position++;
         }
 
         const value = this.input.slice(start, this.position);
 
-        if (this.input[this.position] === '{' || this.input[this.position] === ',') {
-            return { type: 'SELECTOR', value };
+        // Peek ahead to determine if this is a selector or a property
+        let nextNonWhitespacePosition = this.position;
+        while (nextNonWhitespacePosition < this.input.length && /\s/.test(this.input[nextNonWhitespacePosition])) {
+            nextNonWhitespacePosition++;
         }
 
-        if (value.startsWith(':')) {
-            return { type: 'PSEUDO', value };
-        }
-
-        return { type: 'PROPERTY', value };
+        return { type: 'IDENTIFIER', value };
     }
 
     private readComment(): Token {
@@ -112,36 +150,52 @@ export class CSSLexer extends Lexer {
 
     private readNumber(): Token {
         const start = this.position;
+        if (this.input[this.position] === '-') {
+            this.position++;
+        }
+
         while (this.position < this.input.length && /[0-9\.]/.test(this.input[this.position])) {
             this.position++;
         }
 
         if (/[a-zA-Z%]/.test(this.input[this.position])) {
-            return this.readUnit(start);
+            return this.readDimension(start);
         }
 
-        return { type: 'VALUE', value: this.input.slice(start, this.position) };
+        return { type: 'NUMBER', value: this.input.slice(start, this.position) };
     }
 
-    private readUnit(start: number): Token {
+    private readDimension(start: number): Token {
         while (this.position < this.input.length && /[a-zA-Z%]/.test(this.input[this.position])) {
             this.position++;
         }
 
-        return { type: 'UNIT', value: this.input.slice(start, this.position) };
+        return { type: 'DIMENSION', value: this.input.slice(start, this.position) };
     }
 
-    private readHex(): Token {
+    private readHexOrId(): Token {
         const start = this.position;
         this.position++;
+
+        // Peek ahead to determine if this is a hex value or an ID
+        const isHex = /[0-9a-fA-F]/.test(this.input[this.position]);
+
         while (this.position < this.input.length && /[0-9a-fA-F]/.test(this.input[this.position])) {
             this.position++;
         }
 
-        return { type: 'HEX', value: this.input.slice(start, this.position) };
+        if (isHex && (this.position - start === 4 || this.position - start === 7)) {
+            return { type: 'HEX', value: this.input.slice(start, this.position) };
+        }
+
+        // If not a valid hex, treat as ID selector
+        while (this.position < this.input.length && /[a-zA-Z0-9._-]/.test(this.input[this.position])) {
+            this.position++;
+        }
+
+        return { type: 'HASH', value: this.input.slice(start, this.position) };
     }
 }
-
 
 /**
  * CSS parser.
