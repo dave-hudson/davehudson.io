@@ -20,7 +20,7 @@ export class CppLexer extends CLexer {
             return { type: 'WHITESPACE_OR_NEWLINE', value: '\n' };
         }
 
-        if (/\s/.test(ch)) {
+        if (this.isWhitespace(ch)) {
             return this.readWhitespace();
         }
 

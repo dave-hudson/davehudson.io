@@ -27,7 +27,7 @@ export class PythonLexer extends Lexer {
             return { type: 'WHITESPACE_OR_NEWLINE', value: '\n' };
         }
 
-        if (/\s/.test(ch)) {
+        if (this.isWhitespace(ch)) {
             return this.readWhitespace();
         }
 
@@ -35,7 +35,7 @@ export class PythonLexer extends Lexer {
             return this.readIdentifierOrKeyword();
         }
 
-        if (this.isDigit(ch) || (ch === '.' && this.isDigit(this.input[this.position + 1]))) {
+        if (this.isDigit(ch)) {
             return this.readNumber();
         }
 
@@ -47,6 +47,10 @@ export class PythonLexer extends Lexer {
             }
 
             return this.readString(ch);
+        }
+
+        if (ch === '.' && this.isDigit(this.input[this.position + 1])) {
+            return this.readNumber();
         }
 
         if (ch === '#') {

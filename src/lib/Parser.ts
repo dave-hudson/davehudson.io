@@ -81,7 +81,7 @@ export abstract class Lexer {
      */
     protected readWhitespace(): Token {
         let start = this.position;
-        while (this.position < this.input.length && /\s/.test(this.input[this.position]) && this.input[this.position] !== '\n') {
+        while (this.position < this.input.length && this.isWhitespace(this.input[this.position])) {
             this.position++;
         }
 
@@ -113,6 +113,28 @@ export abstract class Lexer {
      */
     protected isLetterOrDigit(ch: string): boolean {
         return this.isLetter(ch) || this.isDigit(ch);
+    }
+
+    /**
+     * Determines if a character is a non-newline whitespace.
+     * @param ch - the character to check.
+     * @returns True if the character is a non-newline whitespace character, false otherwise.
+     */
+    protected isWhitespace(ch: string): boolean {
+        return ch === ' ' ||
+            ch === '\t' ||
+            ch === '\n' ||
+            ch === '\r' ||
+            ch === '\v' ||
+            ch === '\f' ||
+            ch === '\u00A0' ||
+            ch === '\u1680' ||
+            (ch >= '\u2000' && ch <= '\u200A') ||
+            ch === '\u2028' ||
+            ch === '\u2029' ||
+            ch === '\u202F' ||
+            ch === '\u205F' ||
+            ch === '\u3000';
     }
 }
 

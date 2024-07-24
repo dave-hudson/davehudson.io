@@ -21,7 +21,7 @@ export class CSSLexer extends Lexer {
             return { type: 'WHITESPACE_OR_NEWLINE', value: '\n' };
         }
 
-        if (/\s/.test(ch)) {
+        if (this.isWhitespace(ch)) {
             return this.readWhitespace();
         }
 
@@ -116,15 +116,7 @@ export class CSSLexer extends Lexer {
             this.position++;
         }
 
-        const value = this.input.slice(start, this.position);
-
-        // Peek ahead to determine if this is a selector or a property
-        let nextNonWhitespacePosition = this.position;
-        while (nextNonWhitespacePosition < this.input.length && /\s/.test(this.input[nextNonWhitespacePosition])) {
-            nextNonWhitespacePosition++;
-        }
-
-        return { type: 'IDENTIFIER', value };
+        return { type: 'IDENTIFIER', value: this.input.slice(start, this.position) };
     }
 
     private readComment(): Token {
