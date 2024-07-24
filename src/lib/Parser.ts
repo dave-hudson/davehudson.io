@@ -10,11 +10,12 @@ export const styles: { [key: string]: string | null } = {
     FUNCTION_OR_METHOD: 'function',
     IDENTIFIER: 'identifier',
     KEYWORD: 'keyword',
+    NEWLINE: null,
     NUMBER: 'number',
     OPERATOR: 'operator',
     PREPROCESSOR: 'preprocessor',
     STRING: 'string',
-    WHITESPACE_OR_NEWLINE: null
+    WHITESPACE: null
 };
 
 /**
@@ -47,7 +48,7 @@ export abstract class Lexer {
 
         let token: Token | null;
         while ((token = this.getNextToken()) !== null) {
-            if (token.type !== 'COMMENT' && token.type !== 'WHITESPACE_OR_NEWLINE') {
+            if (token.type !== 'COMMENT' && token.type !== 'WHITESPACE' && token.type != 'NEWLINE') {
                 this.position = curPos;
                 return token;
             }
@@ -77,6 +78,14 @@ export abstract class Lexer {
     }
 
     /**
+     * Reads a newline in the input.
+     */
+    protected readNewline(): Token {
+        this.position++;
+        return { type: 'NEWLINE', value: '\n' };
+    }
+
+    /**
      * Reads whitespace in the input.
      */
     protected readWhitespace(): Token {
@@ -85,7 +94,7 @@ export abstract class Lexer {
             this.position++;
         }
 
-        return { type: 'WHITESPACE_OR_NEWLINE', value: this.input.slice(start, this.position) };
+        return { type: 'WHITESPACE', value: this.input.slice(start, this.position) };
     }
 
     /**
@@ -94,7 +103,7 @@ export abstract class Lexer {
      * @returns True if the character is a letter, false otherwise.
      */
     protected isLetter(ch: string): boolean {
-        return /[a-zA-Z_$]/.test(ch);
+        return (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z');
     }
 
     /**
@@ -103,7 +112,7 @@ export abstract class Lexer {
      * @returns True if the character is a digit, false otherwise.
      */
     protected isDigit(ch: string): boolean {
-        return /\d/.test(ch);
+        return (ch >= '0' && ch <= '9');
     }
 
     /**

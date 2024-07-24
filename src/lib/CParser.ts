@@ -23,8 +23,7 @@ export class CLexer extends Lexer {
         const ch = this.input[this.position];
 
         if (ch === '\n') {
-            this.position++;
-            return { type: 'WHITESPACE_OR_NEWLINE', value: '\n' };
+            return this.readNewline();
         }
 
         if (this.isWhitespace(ch)) {
@@ -247,15 +246,6 @@ export class CLexer extends Lexer {
 
         const ch = this.input[this.position++];
         return { type: 'ERROR', value: ch };
-    }
-
-    /**
-     * Checks if a character is a letter.
-     * @param ch - The character to check.
-     * @returns True if the character is a letter, false otherwise.
-     */
-    protected override isLetter(ch: string): boolean {
-        return /[a-zA-Z]/.test(ch);
     }
 
     /**

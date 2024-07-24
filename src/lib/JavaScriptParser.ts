@@ -25,15 +25,14 @@ export class JavaScriptLexer extends Lexer {
         const ch = this.input[this.position];
 
         if (ch === '\n') {
-            this.position++;
-            return { type: 'WHITESPACE_OR_NEWLINE', value: '\n' };
+            return this.readNewline();
         }
 
         if (this.isWhitespace(ch)) {
             return this.readWhitespace();
         }
 
-        if (this.isLetter(ch) || ch === '_') {
+        if (this.isLetter(ch) || ch === '_' || ch === '$') {
             return this.readIdentifierOrKeyword();
         }
 
@@ -129,7 +128,9 @@ export class JavaScriptLexer extends Lexer {
     protected readIdentifierOrKeyword(): Token {
         let start = this.position;
         while (this.position < this.input.length &&
-                (this.isLetterOrDigit(this.input[this.position]) || this.input[this.position] === '_')) {
+                (this.isLetterOrDigit(this.input[this.position]) ||
+                    this.input[this.position] === '_' ||
+                    this.input[this.position] === '$')) {
             this.position++;
         }
 
@@ -280,15 +281,6 @@ export class JavaScriptLexer extends Lexer {
 
         const ch = this.input[this.position++];
         return { type: 'ERROR', value: ch };
-    }
-
-    /**
-     * Checks if a character is a letter.
-     * @param ch - The character to check.
-     * @returns True if the character is a letter, false otherwise.
-     */
-    protected override isLetter(ch: string): boolean {
-        return /[a-zA-Z]/.test(ch);
     }
 
     /**

@@ -17,8 +17,7 @@ export class CSSLexer extends Lexer {
         const ch = this.input[this.position];
 
         if (ch === '\n') {
-            this.position++;
-            return { type: 'WHITESPACE_OR_NEWLINE', value: '\n' };
+            return this.readNewline();
         }
 
         if (this.isWhitespace(ch)) {
