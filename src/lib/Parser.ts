@@ -130,20 +130,23 @@ export abstract class Lexer {
      * @returns True if the character is a non-newline whitespace character, false otherwise.
      */
     protected isWhitespace(ch: string): boolean {
+        // We know the characters beyond the normal ASCII range are very unlikely to be hit so
+        // we exclude them with the value check in the middle.
         return ch === ' ' ||
             ch === '\t' ||
             ch === '\n' ||
             ch === '\r' ||
             ch === '\v' ||
             ch === '\f' ||
-            ch === '\u00A0' ||
-            ch === '\u1680' ||
-            (ch >= '\u2000' && ch <= '\u200A') ||
-            ch === '\u2028' ||
-            ch === '\u2029' ||
-            ch === '\u202F' ||
-            ch === '\u205F' ||
-            ch === '\u3000';
+            (ch >= '\u00A0' &&
+                (ch === '\u00A0' ||
+                    ch === '\u1680' ||
+                    (ch >= '\u2000' && ch <= '\u200A') ||
+                    ch === '\u2028' ||
+                    ch === '\u2029' ||
+                    ch === '\u202F' ||
+                    ch === '\u205F' ||
+                    ch === '\u3000'));
     }
 }
 
