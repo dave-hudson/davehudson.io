@@ -89,18 +89,6 @@ export class HTMLLexer extends Lexer {
     }
 
     /**
-     * Reads whitespace in the input.
-     */
-    protected readWhitespace(): Token {
-        const start = this.position;
-        while (this.position < this.input.length && /\s/.test(this.input[this.position]) && this.input[this.position] !== '\n') {
-            this.position++;
-        }
-
-        return { type: 'WHITESPACE_OR_NEWLINE', value: this.input.slice(start, this.position) };
-    }
-
-    /**
      * Reads a <!DOCTYPE> declaration in the input.
      */
     protected readDoctype(): Token {

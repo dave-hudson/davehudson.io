@@ -120,18 +120,6 @@ export class PythonLexer extends Lexer {
     }
 
     /**
-     * Reads whitespace in the input.
-     */
-    protected readWhitespace(): Token {
-        let start = this.position;
-        while (this.position < this.input.length && /\s/.test(this.input[this.position])) {
-            this.position++;
-        }
-
-        return { type: 'WHITESPACE_OR_NEWLINE', value: this.input.slice(start, this.position) };
-    }
-
-    /**
      * Reads an identifier or keyword in the input.
      */
     protected readIdentifierOrKeyword(): Token {

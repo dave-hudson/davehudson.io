@@ -1,13 +1,12 @@
 import { Lexer, Parser, Token, styles } from './Parser'
 
-styles['AT_RULE'] = 'error';
-styles['HEX'] = 'error';
+styles['AT_RULE'] = 'css-at-rule';
+styles['HEX'] = 'number';
 styles['PROPERTY'] = 'error';
-styles['PSEUDO'] = 'error';
-styles['SELECTOR'] = 'error';
-styles['SYMBOL'] = 'error';
-styles['UNIT'] = 'error';
-styles['VALUE'] = 'error';
+styles['PSEUDO'] = 'css-pseudo';
+styles['SELECTOR'] = 'css-selector';
+styles['UNIT'] = 'number';
+styles['VALUE'] = 'number';
 
 /**
  * Lexer for CSS.
@@ -18,53 +17,57 @@ export class CSSLexer extends Lexer {
             return null;
         }
 
-        const char = this.input[this.position];
+        const ch = this.input[this.position];
 
-        if (/\s/.test(char)) {
+        if (ch === '\n') {
             this.position++;
-            return { type: 'WHITESPACE_OR_NEWLINE', value: char };
+            return { type: 'WHITESPACE_OR_NEWLINE', value: '\n' };
         }
 
-        if (char === '/' && this.input[this.position + 1] === '*') {
+        if (/\s/.test(ch)) {
+            return this.readWhitespace();
+        }
+
+        if (ch === '/' && this.input[this.position + 1] === '*') {
             return this.readComment();
         }
 
-        if (char === '"' || char === "'") {
-            return this.readString(char);
+        if (ch === '"' || ch === "'") {
+            return this.readString(ch);
         }
 
-        if (/[a-zA-Z\-]/.test(char)) {
+        if (/[a-zA-Z\-]/.test(ch)) {
             return this.readIdentifier();
         }
 
-        if (char === '#') {
+        if (ch === '#') {
             return this.readHex();
         }
 
-        if (char === '@') {
+        if (ch === '@') {
             return this.readAtRule();
         }
 
-        if (char === ':' ||
-                char === ';' ||
-                char === '(' ||
-                char === ')' ||
-                char === ',' ||
-                char === '=' ||
-                char === '[' ||
-                char === ']' ||
-                char === '{' ||
-                char === '}') {
+        if (ch === ':' ||
+                ch === ';' ||
+                ch === '(' ||
+                ch === ')' ||
+                ch === ',' ||
+                ch === '=' ||
+                ch === '[' ||
+                ch === ']' ||
+                ch === '{' ||
+                ch === '}') {
             this.position++;
-            return { type: 'OPERATOR', value: char };
+            return { type: 'OPERATOR', value: ch };
         }
 
-        if (/[0-9]/.test(char) || char === '.') {
+        if (/[0-9]/.test(ch) || ch === '.') {
             return this.readNumber();
         }
 
         this.position++;
-        return { type: 'ERROR', value: char };
+        return { type: 'ERROR', value: ch };
     }
 
     private readIdentifier(): Token {
@@ -72,6 +75,7 @@ export class CSSLexer extends Lexer {
         while (this.position < this.input.length && /[a-zA-Z0-9\-\_]/.test(this.input[this.position])) {
             this.position++;
         }
+
         const value = this.input.slice(start, this.position);
 
         if (this.input[this.position] === '{' || this.input[this.position] === ',') {
@@ -87,11 +91,12 @@ export class CSSLexer extends Lexer {
 
     private readComment(): Token {
         const start = this.position;
-        this.position += 2; // Skip '/*'
+        this.position += 2;
         while (this.position < this.input.length && !(this.input[this.position] === '*' && this.input[this.position + 1] === '/')) {
             this.position++;
         }
-        this.position += 2; // Skip '*/'
+
+        this.position += 2;
         return { type: 'COMMENT', value: this.input.slice(start, this.position) };
     }
 
@@ -101,6 +106,7 @@ export class CSSLexer extends Lexer {
         while (this.position < this.input.length && /[a-zA-Z\-]/.test(this.input[this.position])) {
             this.position++;
         }
+
         return { type: 'AT_RULE', value: this.input.slice(start, this.position) };
     }
 
@@ -121,15 +127,17 @@ export class CSSLexer extends Lexer {
         while (this.position < this.input.length && /[a-zA-Z%]/.test(this.input[this.position])) {
             this.position++;
         }
+
         return { type: 'UNIT', value: this.input.slice(start, this.position) };
     }
 
     private readHex(): Token {
         const start = this.position;
-        this.position++; // Skip '#'
+        this.position++;
         while (this.position < this.input.length && /[0-9a-fA-F]/.test(this.input[this.position])) {
             this.position++;
         }
+
         return { type: 'HEX', value: this.input.slice(start, this.position) };
     }
 }

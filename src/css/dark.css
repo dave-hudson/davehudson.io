@@ -43,6 +43,18 @@ hr {
     color: #68d068;
 }
 
+.main pre code .css-at-rule {
+    color: #ffc0eb;
+}
+
+.main pre code .css-pseudo {
+    color: #90e0e8;
+}
+
+.main pre code .css-selector {
+    color: #80b0f0;
+}
+
 .main pre code .element {
     color: #90e0e8;
 }

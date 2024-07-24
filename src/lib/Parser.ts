@@ -77,6 +77,18 @@ export abstract class Lexer {
     }
 
     /**
+     * Reads whitespace in the input.
+     */
+    protected readWhitespace(): Token {
+        let start = this.position;
+        while (this.position < this.input.length && /\s/.test(this.input[this.position]) && this.input[this.position] !== '\n') {
+            this.position++;
+        }
+
+        return { type: 'WHITESPACE_OR_NEWLINE', value: this.input.slice(start, this.position) };
+    }
+
+    /**
      * Determines if a character is a letter.
      * @param ch - The character to check.
      * @returns True if the character is a letter, false otherwise.

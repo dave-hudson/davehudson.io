@@ -534,6 +534,18 @@ pre {
     color: #008000;
 }
 
+.main pre code .css-at-rule {
+    color: #c040c0;
+}
+
+.main pre code .css-pseudo {
+    color: #4ca4c0;
+}
+
+.main pre code .css-selector {
+    color: #4058d0;
+}
+
 .main pre code .element {
     color: #4ca4c0;
 }
