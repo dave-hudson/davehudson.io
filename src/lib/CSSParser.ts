@@ -57,7 +57,7 @@ export class CSSLexer extends Lexer {
                 return this.readNumber();
             }
 
-            if (/[a-zA-Z.-]/.test(this.input[this.position + 1])) {
+            if (this.isLetter(this.input[this.position + 1]) || this.input[this.position + 1] === '-') {
                 return this.readIdentifier();
             }
 

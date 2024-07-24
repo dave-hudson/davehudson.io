@@ -90,6 +90,7 @@ export abstract class Lexer {
      */
     protected readWhitespace(): Token {
         let start = this.position;
+        this.position++;
         while (this.position < this.input.length && this.isWhitespace(this.input[this.position])) {
             this.position++;
         }

@@ -159,6 +159,7 @@ export class CLexer extends Lexer {
      */
     protected readIdentifierOrKeyword(): Token {
         const start = this.position;
+        this.position++;
         while (this.isLetterOrDigit(this.input[this.position]) || this.input[this.position] === '_') {
             this.position++;
         }
@@ -176,6 +177,7 @@ export class CLexer extends Lexer {
      */
     protected readPreprocessorDirective(): Token {
         const start = this.position;
+        this.position++;
         while (this.position < this.input.length && this.input[this.position] !== '\n') {
             this.position++;
         }

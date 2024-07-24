@@ -143,6 +143,7 @@ export class HTMLLexer extends Lexer {
      */
     protected readTagOrAttribute(tokenType: string): Token {
         const start = this.position;
+        this.position++;
         while (this.isLetterOrDigit(this.input[this.position]) ||
                 this.input[this.position] === '_' ||
                 this.input[this.position] === '-' ||

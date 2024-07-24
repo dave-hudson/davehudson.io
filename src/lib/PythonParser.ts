@@ -127,6 +127,7 @@ export class PythonLexer extends Lexer {
      */
     protected readIdentifierOrKeyword(): Token {
         let start = this.position;
+        this.position++;
         while (this.position < this.input.length && (this.isLetterOrDigit(this.input[this.position]) || this.input[this.position] === '_')) {
             this.position++;
         }
@@ -144,7 +145,7 @@ export class PythonLexer extends Lexer {
      */
     protected readComment(): Token {
         let start = this.position;
-        this.position++; // Skip "#"
+        this.position++;
         while (this.position < this.input.length && this.input[this.position] !== '\n') {
             this.position++;
         }
