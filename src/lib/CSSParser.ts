@@ -90,22 +90,22 @@ export class CSSLexer extends Lexer {
         }
 
         if (ch === ':' ||
-            ch === ';' ||
-            ch === '(' ||
-            ch === ')' ||
-            ch === ',' ||
-            ch === '>' ||
-            ch === '+' ||
-            ch === '=' ||
-            ch === '[' ||
-            ch === ']' ||
-            ch === '{' ||
-            ch === '}') {
-        this.position++;
-        return { type: 'OPERATOR', value: ch };
-    }
+                ch === ';' ||
+                ch === '(' ||
+                ch === ')' ||
+                ch === ',' ||
+                ch === '>' ||
+                ch === '+' ||
+                ch === '=' ||
+                ch === '[' ||
+                ch === ']' ||
+                ch === '{' ||
+                ch === '}') {
+            this.position++;
+            return { type: 'OPERATOR', value: ch };
+        }
 
-    this.position++;
+        this.position++;
         return { type: 'ERROR', value: ch };
     }
 
@@ -192,8 +192,6 @@ export class CSSLexer extends Lexer {
  * CSS parser.
  */
 export class CSSParser extends Parser {
-    protected inElement: boolean = false;
-
     /**
      * Constructs a parser.
      * @param input - The input code to parse.
@@ -209,11 +207,28 @@ export class CSSParser extends Parser {
      * @returns true if there are any more tokens to process, and false if there are not.
      */
     public getNextToken(): Token | null {
+        console.log('next');
         if (!this.lexer) {
             return null;
         }
 
         let token: Token | null = this.lexer.getNextToken();
+        if (!token) {
+            return null;
+        }
+
+        if (token.type !== 'IDENTIFIER') {
+            return token;
+        }
+
+        // Look at the next token.  If it's a '(' operator then we're making a function or method call!
+        const nextToken: Token | null = this.lexer.peekNextSyntaxToken();
+        if (nextToken?.type === 'OPERATOR') {
+            if (nextToken.value === '(') {
+                return { type: 'FUNCTION_OR_METHOD', value: token.value };
+            }
+        }
+
         return token;
     }
 }
