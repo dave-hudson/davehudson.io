@@ -1,9 +1,11 @@
 import { Lexer, Parser, Token, styles } from './Parser';
+import { CSSParser } from './CSSParser';
 import { JavaScriptParser } from './JavaScriptParser';
 
 styles['ATTRIBUTE'] = 'html-attribute';
 styles['DOCTYPE'] = 'html-doctype';
 styles['SCRIPT'] = null;
+styles['STYLE'] = null;
 styles['TAG'] = 'html-tag';
 styles['TEXT'] = 'text';
 
@@ -71,7 +73,8 @@ export class HTMLLexer extends Lexer {
             return this.readTag();
         }
 
-        // Is this a SCRIPT element?  If it is then we need to switch to a JavaScript parser.
+        // Is this a SCRIPT element?  If it is then we need to capture everything within it so this
+        // can be passed to a JavaScript parser.
         if (this.tagName.toLowerCase() === 'script') {
             // We need to find the /SCRIPT tag.
             const scriptOpen: number = this.position;
@@ -82,6 +85,20 @@ export class HTMLLexer extends Lexer {
 
             this.position = scriptClose;
             return { type: 'SCRIPT', value: this.input.slice(scriptOpen, scriptClose) };
+        }
+
+        // Is this a STYLE element?  If it is then we need to capture everything within it so this
+        // can be passed to a CSS parser.
+        if (this.tagName.toLowerCase() === 'style') {
+            // We need to find the /STYLE tag.
+            const styleOpen: number = this.position;
+            let styleClose: number = this.input.toLowerCase().indexOf('</style', this.position);
+            if (styleClose === -1) {
+                styleClose = this.input.length;
+            }
+
+            this.position = styleClose;
+            return { type: 'STYLE', value: this.input.slice(styleOpen, styleClose) };
         }
 
         // Handle text content between tags.
@@ -187,6 +204,7 @@ export class HTMLLexer extends Lexer {
  */
 export class HTMLParser extends Parser {
     protected jsParser: JavaScriptParser | null;
+    protected cssParser: CSSParser | null;
 
     /**
      * Constructs a parser.
@@ -197,6 +215,7 @@ export class HTMLParser extends Parser {
 
         this.lexer = new HTMLLexer(input);
         this.jsParser = null;
+        this.cssParser = null;
     }
 
     /**
@@ -212,6 +231,16 @@ export class HTMLParser extends Parser {
             }
 
             this.jsParser = null;
+        }
+
+        // If we're using a CSS parser than use that until we've completed procesing the CSS.
+        if (this.cssParser) {
+            const token = this.cssParser.getNextToken();
+            if (token) {
+                return token;
+            }
+
+            this.cssParser = null;
         }
 
         if (!this.lexer) {
@@ -231,6 +260,16 @@ export class HTMLParser extends Parser {
             }
 
             this.jsParser = null;
+        }
+
+        if (token.type === 'STYLE') {
+            this.cssParser = new CSSParser(token.value);
+            const cssToken = this.cssParser.getNextToken();
+            if (cssToken) {
+                return cssToken;
+            }
+
+            this.cssParser = null;
         }
 
         return token;
