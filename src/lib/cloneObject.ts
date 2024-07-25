@@ -22,9 +22,11 @@ export function cloneObject<T>(obj: T, seen = new Map()): T {
     // Add the new object to the seen map
     seen.set(obj, objCopy);
 
-    // Copy properties recursively
+    // Copy properties recursively.  Note this for loop is done explicitly for speed!
     const keys = Object.keys(obj);
-    for (const key of keys) {
+    const keyLength = keys.length;
+    for (let i = 0; i < keyLength; i++) {
+        const key = keys[i];
         (objCopy as any)[key] = cloneObject((obj as any)[key], seen);
     }
 
