@@ -1,6 +1,7 @@
 TS_FILES += \
 	src/lib/cloneObject.ts \
 	src/lib/dvdi.ts \
+	src/lib/highlight.ts \
 	src/lib/icons.ts \
 	src/lib/Parser.ts \
 	src/lib/CParser.ts \
