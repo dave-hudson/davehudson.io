@@ -1,4 +1,4 @@
-export function cloneObject<T>(obj: T, seen = new WeakMap()): T {
+export function cloneObject<T>(obj: T, seen = new Map()): T {
     // Check for null or non-object values
     if (obj === null || typeof obj !== 'object') {
         return obj;
@@ -23,10 +23,9 @@ export function cloneObject<T>(obj: T, seen = new WeakMap()): T {
     seen.set(obj, objCopy);
 
     // Copy properties recursively
-    for (const key in obj) {
-        if (obj.hasOwnProperty(key)) {
-            objCopy[key] = cloneObject((obj as { [key: string]: any })[key], seen);
-        }
+    const keys = Object.keys(obj);
+    for (const key of keys) {
+        (objCopy as any)[key] = cloneObject((obj as any)[key], seen);
     }
 
     return objCopy as T;
