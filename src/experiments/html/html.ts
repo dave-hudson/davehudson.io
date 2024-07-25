@@ -59,10 +59,12 @@ async function loadFile(filePath: string, storeFunction: (content: VElement[]) =
 }
 
 function experimentSyntaxHTMLComponent(): VElement {
-    const cloneCode = cloneObject(code);
-    const contents = h('pre', {},
-        h('code', {}, ...cloneCode)
-    );
+    let contents: VElement;
+    if (code.length === 0) {
+        contents = h('pre', {});
+    } else {
+        contents = h('pre', {}, h('code', {}, ...cloneObject(code)));
+    }
 
     contents.mountCallback = () => {
         codeVElement = contents;
