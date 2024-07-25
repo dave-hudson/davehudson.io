@@ -367,7 +367,7 @@ function unrender(vNode: VNode) {
 }
 
 /*
- * Check if two virtual DOM nodes are different.
+ * Check if two virtual DOM nodes are different enough to replace once with the other.
  */
 function changed(vNode1: VNode, vNode2: VNode): boolean {
     // Are our nodes of different types?
@@ -388,7 +388,11 @@ function changed(vNode1: VNode, vNode2: VNode): boolean {
         return true;
     }
 
-    return vNode1.type !== vNode2.type;
+    if (vNode1.type !== vNode2.type) {
+        return true;
+    }
+
+    return (vNode1.childNodes.length !== vNode2.childNodes.length);
 }
 
 /*
@@ -457,7 +461,7 @@ export function updateElement(parent: HTMLElement, child: Node | null, parentVNo
         return;
     }
 
-    // Our new VDOM node is the same as our old VDOM node we need to scan the children
+    // Our new VDOM node is the essentially the same as our old VDOM node we need to scan the children
     // and update them.  To keep things sane, don't forget we need to record DOM element
     // in the new VDOM node.
     assertIsVElement(oldChildVNode);
@@ -465,21 +469,9 @@ export function updateElement(parent: HTMLElement, child: Node | null, parentVNo
     newChildVNode.domElement = oldChildVNode.domElement;
     updateAttributes(oldChildVNode.domElement as HTMLElement, oldChildVNode.attrs, newChildVNode.attrs);
 
-    // We iterate backwards to remove any nodes to keep the child lists correct.
-    let oldLen = oldChildVNode.childNodes.length;
-    let newLen = newChildVNode.childNodes.length;
-    for (let i = oldLen - 1; i > (newLen - 1); i--) {
-        const nextParent = oldChildVNode.domElement as HTMLElement;
-        updateElement(nextParent, nextParent.childNodes[i], oldChildVNode, oldChildVNode.childNodes[i], null);
-    }
-
-    // We iterate forwards to update and add nodes.  At this point we already know our list of child nodes
-    // cannot be longer than our list of new nodes (although they can be the same length).
-    if (oldLen > newLen) {
-        oldLen = newLen;
-    }
-
-    for (let i = 0; i < oldLen; i++) {
+    // Update our child nodes.
+    let len = oldChildVNode.childNodes.length;
+    for (let i = 0; i < len; i++) {
         const nextParent = oldChildVNode.domElement as HTMLElement;
         updateElement(nextParent,
             nextParent.childNodes[i],
@@ -487,12 +479,6 @@ export function updateElement(parent: HTMLElement, child: Node | null, parentVNo
             oldChildVNode.childNodes[i],
             newChildVNode.childNodes[i]
         );
-    }
-
-    // We iterate forwards to update and add nodes.
-    for (let i = oldLen; i < newLen; i++) {
-        const nextParent = oldChildVNode.domElement as HTMLElement;
-        updateElement(nextParent, nextParent.childNodes[i], oldChildVNode, null, newChildVNode.childNodes[i]);
     }
 }
 
