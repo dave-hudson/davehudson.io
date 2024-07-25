@@ -207,7 +207,6 @@ export class CSSParser extends Parser {
      * @returns true if there are any more tokens to process, and false if there are not.
      */
     public getNextToken(): Token | null {
-        console.log('next');
         if (!this.lexer) {
             return null;
         }
