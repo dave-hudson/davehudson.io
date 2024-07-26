@@ -305,7 +305,6 @@ template {
         url('/fonts/Lalezar-Regular.woff2') format(woff2),
         url('/fonts/Lalezar-Regular.woff') format(woff),
         url('/fonts/Lalezar-Regular.ttf') format(ttf);
-    font-display: swap;
 }
 
 @font-face {
@@ -314,7 +313,6 @@ template {
         url('/fonts/OpenSans-VariableFont.woff2') format(woff2),
         url('/fonts/OpenSans-VariableFont.woff') format(woff),
         url('/fonts/OpenSans-VariableFont.ttf') format(ttf);
-    font-display: swap;
 }
 
 html {
