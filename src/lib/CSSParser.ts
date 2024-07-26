@@ -9,104 +9,82 @@ styles['HEX'] = 'number';
  * Lexer for CSS.
  */
 export class CSSLexer extends Lexer {
-    public getNextToken(): Token | null {
-        if (this.position >= this.input.length) {
-            return null;
-        }
-
-        const ch = this.input[this.position];
-
+    /**
+     * Get the lexing function that matches a given start character
+     * @param ch - The start character
+     * @returns the lexing function
+     */
+    protected getLexingFunction(ch: string): () => Token {
         if (ch === '\n') {
-            return this.readNewline();
+            return this.readNewline.bind(this);
         }
 
         if (this.isWhitespace(ch)) {
-            return this.readWhitespace();
+            return this.readWhitespace.bind(this);
         }
 
         if (this.isLetter(ch)) {
-            return this.readIdentifier();
+            return this.readIdentifier.bind(this);
         }
 
         if (this.isDigit(ch)) {
-            return this.readNumber();
+            return this.readNumber.bind(this);
         }
 
         if (ch === '"' || ch === "'") {
-            return this.readString(ch);
+            return this.readString.bind(this);
         }
 
-        if (ch === '/' && this.input[this.position + 1] === '*') {
-            return this.readComment();
+        if (ch === '/') {
+            return this.readForwardSlash.bind(this);
         }
 
         if (ch === '#') {
-            return this.readHexOrId();
+            return this.readHexOrId.bind(this);
         }
 
         if (ch === '.') {
-            if (this.isDigit(this.input[this.position + 1])) {
-                return this.readNumber();
-            }
-
-            return this.readIdentifier();
+            return this.readDot.bind(this);
         }
 
         if (ch === '-') {
-            if (this.isDigit(this.input[this.position + 1])) {
-                return this.readNumber();
-            }
-
-            if (this.isLetter(this.input[this.position + 1]) || this.input[this.position + 1] === '-') {
-                return this.readIdentifier();
-            }
-
-            this.position++;
-            return { type: 'OPERATOR', value: ch };
+            return this.readMinus.bind(this);
         }
 
         if (ch === '@') {
-            return this.readAtRule();
+            return this.readAtRule.bind(this);
         }
 
-        if (ch === '~' || ch === '$' || ch === '^') {
-            this.position++;
-            if (this.input[this.position] === '=') {
-                this.position++;
-                return { type: 'OPERATOR', value: ch + '=' };
-            }
+        return this.readOperator.bind(this);
+    }
 
-            return { type: 'ERROR', value: ch };
+    private readDot(): Token {
+        if (this.isDigit(this.input[this.position + 1])) {
+            return this.readNumber();
         }
 
-        if (ch === '|' || ch === '*') {
-            this.position++;
-            if (this.input[this.position] === '=') {
-                this.position++;
-                return { type: 'OPERATOR', value: ch + '=' };
-            }
+        return this.readIdentifier();
+    }
 
-            return { type: 'OPERATOR', value: ch };
+    private readForwardSlash(): Token {
+        if (this.input[this.position + 1] === '*') {
+            return this.readComment();
         }
 
-        if (ch === ':' ||
-                ch === ';' ||
-                ch === '(' ||
-                ch === ')' ||
-                ch === ',' ||
-                ch === '>' ||
-                ch === '+' ||
-                ch === '=' ||
-                ch === '[' ||
-                ch === ']' ||
-                ch === '{' ||
-                ch === '}') {
-            this.position++;
-            return { type: 'OPERATOR', value: ch };
+        return this.readOperator();
+    }
+
+    private readMinus(): Token {
+        if (this.isDigit(this.input[this.position + 1])) {
+            return this.readNumber();
+        }
+
+        if (this.isLetter(this.input[this.position + 1]) || this.input[this.position + 1] === '-') {
+            return this.readIdentifier();
         }
 
         this.position++;
-        return { type: 'ERROR', value: ch };
+        return { type: 'OPERATOR', value: this.input[this.position] };
     }
 
     private readIdentifier(): Token {
@@ -185,6 +163,43 @@ export class CSSLexer extends Lexer {
         }
 
         return { type: 'HASH', value: this.input.slice(start, this.position) };
+    }
+
+    /**
+     * Reads an operator or punctuation token.
+     */
+    protected readOperator(): Token {
+        const operators = [
+            '~=',
+            '$=',
+            '^=',
+            '|=',
+            '*=',
+            '+',
+            '*',
+            '|',
+            '=',
+            '>',
+            '(',
+            ')',
+            '{',
+            '}',
+            '[',
+            ']',
+            ';',
+            ':',
+            ','
+        ];
+
+        for (let i = 0; i < operators.length; i++) {
+            if (this.input.startsWith(operators[i], this.position)) {
+                this.position += operators[i].length;
+                return { type: 'OPERATOR', value: operators[i]};
+            }
+        }
+
+        const ch = this.input[this.position++];
+        return { type: 'ERROR', value: ch };
     }
 }
 

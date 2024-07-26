@@ -30,44 +30,52 @@ export class HTMLLexer extends Lexer {
     }
 
     /**
-     * Gets the next token from the input.
+     * Get the lexing function that matches a given start character
+     * @param ch - The start character
+     * @returns the lexing function
      */
-    public getNextToken(): Token | null {
-        if (this.position >= this.input.length) {
-            return null;
-        }
-
-        const ch = this.input[this.position];
-
+    public getLexingFunction(ch: string): () => Token {
         if (ch === '\n') {
-            return this.readNewline();
+            return this.readNewline.bind(this);
         }
 
         if (this.isWhitespace(ch)) {
-            return this.readWhitespace();
+            return this.readWhitespace.bind(this);
         }
 
         if (ch === '<') {
-            if (this.input[this.position + 1] === '!') {
-                if (this.input.startsWith('DOCTYPE', this.position + 2)) {
-                    return this.readDoctype();
-                }
-
-                return this.readHtmlComment();
-            }
-
-            this.position++;
-            this.inTag = true;
-            this.tagName = '';
-            return { type: 'OPERATOR', value: '<' };
+            return this.readOpen.bind(this);
         }
 
         if (ch === '>') {
-            this.position++;
-            this.inTag = false;
-            return { type: 'OPERATOR', value: '>' };
+            return this.readClose.bind(this);
         }
 
+        return this.readDefault.bind(this);
+    }
+
+    protected readOpen(): Token {
+        if (this.input[this.position + 1] === '!') {
+            if (this.input.startsWith('DOCTYPE', this.position + 2)) {
+                return this.readDoctype();
+            }
+
+            return this.readHtmlComment();
+        }
+
+        this.position++;
+        this.inTag = true;
+        this.tagName = '';
+        return { type: 'OPERATOR', value: '<' };
+    }
+
+    protected readClose(): Token {
+        this.position++;
+        this.inTag = false;
+        return { type: 'OPERATOR', value: '>' };
+    }
+
+    protected readDefault(): Token {
         if (this.inTag) {
             return this.readTag();
         }
@@ -176,7 +184,7 @@ export class HTMLLexer extends Lexer {
         this.seenEquals = false;
 
         if (ch === '"' || ch === '\'') {
-            return this.readString(ch);
+            return this.readString();
         }
 
         return this.readTagOrAttribute(seenEquals ? 'STRING' : 'ATTRIBUTE');

@@ -15,49 +15,60 @@ export class JavaScriptLexer extends Lexer {
     }
 
     /**
-     * Gets the next token from the input.
+     * Get the lexing function that matches a given start character
+     * @param ch - The start character
+     * @returns the lexing function
      */
-    public override getNextToken(): Token | null {
-        if (this.position >= this.input.length) {
-            return null;
-        }
-
-        const ch = this.input[this.position];
-
+    protected getLexingFunction(ch: string) : () => Token {
         if (ch === '\n') {
-            return this.readNewline();
+            return this.readNewline.bind(this);
         }
 
         if (this.isWhitespace(ch)) {
-            return this.readWhitespace();
+            return this.readWhitespace.bind(this);
         }
 
         if (this.isLetter(ch) || ch === '_' || ch === '$') {
-            return this.readIdentifierOrKeyword();
+            return this.readIdentifierOrKeyword.bind(this);
         }
 
         if (this.isDigit(ch)) {
-            return this.readNumber();
+            return this.readNumber.bind(this);
         }
 
         if (ch === '"' || ch === "'" || ch ==='`') {
-            return this.readString(ch);
+            return this.readString.bind(this);
         }
 
-        if (ch === '.' && this.isDigit(this.input[this.position + 1])) {
-            return this.readNumber();
+        if (ch === '.') {
+            return this.readDot.bind(this);
         }
 
         if (ch === '/') {
-            if (this.input[this.position + 1] === '/') {
-                return this.readComment();
-            }
+            return this.readForwardSlash.bind(this);
+        }
 
-            if (this.input[this.position + 1] === '*') {
-                return this.readBlockComment();
-            }
+        return this.readOperator.bind(this);
+    }
 
-            return this.readRegExpOrDivide();
+    /*
+     * Read a forward slash.
+     */
+    protected readForwardSlash(): Token {
+        if (this.input[this.position + 1] === '/') {
+            return this.readComment();
+        }
+
+        if (this.input[this.position + 1] === '*') {
+            return this.readBlockComment();
+        }
+
+        return this.readRegExpOrDivide();
+    }
+
+    protected readDot(): Token {
+        if (this.isDigit(this.input[this.position + 1])) {
+            return this.readNumber();
         }
 
         return this.readOperator();

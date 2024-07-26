@@ -13,47 +13,56 @@ export class PythonLexer extends Lexer {
     }
 
     /**
-     * Gets the next token from the input.
+     * Get the lexing function that matches a given start character
+     * @param ch - The start character
+     * @returns the lexing function
      */
-    public override getNextToken(): Token | null {
-        if (this.position >= this.input.length) {
-            return null;
-        }
-
-        const ch: string = this.input[this.position];
-
+    public override getLexingFunction(ch: string): () => Token {
         if (ch === '\n') {
-            return this.readNewline();
+            return this.readNewline.bind(this);
         }
 
         if (this.isWhitespace(ch)) {
-            return this.readWhitespace();
+            return this.readWhitespace.bind(this);
         }
 
         if (this.isLetter(ch) || ch === '_') {
-            return this.readIdentifierOrKeyword();
+            return this.readIdentifierOrKeyword.bind(this);
         }
 
         if (this.isDigit(ch)) {
-            return this.readNumber();
+            return this.readNumber.bind(this);
         }
 
         if (ch === '"' || ch === "'") {
-            if (((this.position + 2) < this.input.length) &&
-                    this.input[this.position + 1] === ch &&
-                    this.input[this.position + 2] === ch) {
-                return this.readDocString(ch);
-            }
-
-            return this.readString(ch);
+            return this.readQuote.bind(this);
         }
 
-        if (ch === '.' && this.isDigit(this.input[this.position + 1])) {
-            return this.readNumber();
+        if (ch === '.') {
+            return this.readDot.bind(this);
         }
 
         if (ch === '#') {
-            return this.readComment();
+            return this.readComment.bind(this);
+        }
+
+        return this.readOperator.bind(this);
+    }
+
+    protected readQuote(): Token {
+        const ch: string = this.input[this.position];
+        if (((this.position + 2) < this.input.length) &&
+                this.input[this.position + 1] === ch &&
+                this.input[this.position + 2] === ch) {
+            return this.readDocString(ch);
+        }
+
+        return this.readString();
+    }
+
+    protected readDot(): Token {
+        if (this.isDigit(this.input[this.position + 1])) {
+            return this.readNumber();
         }
 
         return this.readOperator();

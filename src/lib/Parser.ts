@@ -24,6 +24,7 @@ export const styles: { [key: string]: string | null } = {
 export abstract class Lexer {
     protected input: string;
     protected position: number;
+    lexingFunctions: (() => Token)[];
 
     /**
      * Constructs a Lexer.
@@ -32,13 +33,41 @@ export abstract class Lexer {
     constructor(input: string) {
         this.input = input;
         this.position = 0;
+
+        this.lexingFunctions = new Array(128);
+        for (let i = 0; i < 128; i++) {
+            this.lexingFunctions[i] = this.getLexingFunction(String.fromCharCode(i));
+        }
     }
 
     /**
-     * Gets the next token from the input.
-     * @returns true if there are any more tokens to process, and false if there are not.
+     * Get the lexing function that matches a given start character
+     * @param ch - The start character
+     * @returns the lexing function
      */
-    abstract getNextToken(): Token | null;
+    protected abstract getLexingFunction(ch: string): () => Token;
+
+    /**
+     * Gets the next token from the input.
+     * @returns the next Token available or null if there are no tokens left.
+     */
+    public getNextToken(): Token | null {
+        if (this.position >= this.input.length) {
+            return null;
+        }
+
+        const ch = this.input[this.position];
+        const chVal = ch.charCodeAt(0);
+        let fn;
+
+        if (chVal < 128) {
+            fn = this.lexingFunctions[chVal];
+        } else {
+            fn = this.getLexingFunction(ch)
+        }
+
+        return fn();
+    }
 
     /**
      * Get the next syntactic token (not whitespace or comment)
@@ -62,7 +91,8 @@ export abstract class Lexer {
      * Reads a string token.
      * @param quote - The quote character used to delimit the string.
      */
-    protected readString(quote: string): Token {
+    protected readString(): Token {
+        const quote: string = this.input[this.position];
         const start = this.position;
         this.position++;
         while (this.position < this.input.length && this.input[this.position] !== quote) {

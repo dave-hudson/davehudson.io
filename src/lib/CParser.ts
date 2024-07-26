@@ -13,56 +13,105 @@ export class CLexer extends Lexer {
     }
 
     /**
-     * Gets the next token from the input.
+     * Get the lexing function that matches a given start character
+     * @param ch - The start character
+     * @returns the lexing function
      */
-    public override getNextToken(): Token | null {
-        if (this.position >= this.input.length) {
-            return null;
-        }
-
-        const ch = this.input[this.position];
-
+    protected getLexingFunction(ch: string) : () => Token {
         if (ch === '\n') {
-            return this.readNewline();
+            return this.readNewline.bind(this);
         }
 
         if (this.isWhitespace(ch)) {
-            return this.readWhitespace();
+            return this.readWhitespace.bind(this);
+        }
+
+        if (ch === 'L') {
+            return this.readL.bind(this);
         }
 
         if (this.isLetter(ch) || ch === '_') {
-            return this.readIdentifierOrKeyword();
+            return this.readIdentifierOrKeyword.bind(this);
         }
 
         if (this.isDigit(ch)) {
-            return this.readNumber();
+            return this.readNumber.bind(this);
         }
 
         if (ch === '"' || ch === "'") {
-            return this.readString(ch);
+            return this.readString.bind(this);
         }
 
-        if (ch === '.' && this.isDigit(this.input[this.position + 1])) {
-            return this.readNumber();
+        if (ch === '.') {
+            return this.readDot.bind(this);
         }
 
         if (ch === '/') {
-            if (this.input[this.position + 1] === '/') {
-                return this.readComment();
-            }
-
-            if (this.input[this.position + 1] === '*') {
-                return this.readBlockComment();
-            }
-
-            return this.readOperator();
+            return this.readForwardSlash.bind(this);
         }
 
         if (ch === '#') {
-            return this.readPreprocessorDirective();
+            return this.readPreprocessorDirective.bind(this);
+        }
+
+        return this.readOperator.bind(this);
+    }
+
+    protected readL(): Token {
+        if (this.input[this.position + 1] === '"') {
+            return this.readString();
+        }
+
+        return this.readIdentifierOrKeyword();
+    }
+
+    protected readDot(): Token {
+        if (this.isDigit(this.input[this.position + 1])) {
+            return this.readNumber();
         }
 
         return this.readOperator();
+    }
+
+    /*
+     * Read a forward slash.
+     */
+    protected readForwardSlash(): Token {
+        if (this.input[this.position + 1] === '/') {
+            return this.readComment();
+        }
+
+        if (this.input[this.position + 1] === '*') {
+            return this.readBlockComment();
+        }
+
+        return this.readOperator();
+    }
+
+    /**
+     * Reads a string token.
+     * @param quote - The quote character used to delimit the string.
+     */
+    protected override readString(): Token {
+        let quote: string = this.input[this.position];
+        const start = this.position;
+        this.position++;
+
+        if (quote === 'L') {
+            this.position++;
+            quote = '"';
+        }
+
+        while (this.position < this.input.length && this.input[this.position] !== quote) {
+            if (this.input[this.position] === '\\' && this.position + 1 < this.input.length) {
+                this.position++;
+            }
+
+            this.position++;
+        }
+
+        this.position++;
+        return { type: 'STRING', value: this.input.slice(start, this.position) };
     }
 
     /**
