@@ -138,12 +138,39 @@ export abstract class Lexer {
     }
 
     /**
+     * Determines if a character is an octal digit.
+     * @param ch - The character to check.
+     * @returns True if the character is an octal digit, false otherwise.
+     */
+    protected isOctalDigit(ch: string): boolean {
+        return (ch >= '0' && ch <= '7');
+    }
+
+    /**
+     * Determines if a character is a binary digit.
+     * @param ch - The character to check.
+     * @returns True if the character is a binary digit, false otherwise.
+     */
+    protected isBinaryDigit(ch: string): boolean {
+        return (ch == '0' || ch == '1');
+    }
+
+    /**
      * Determines if a character is a digit.
      * @param ch - The character to check.
      * @returns True if the character is a digit, false otherwise.
      */
     protected isDigit(ch: string): boolean {
         return (ch >= '0' && ch <= '9');
+    }
+
+    /**
+     * Determines if a character is a hexadecimal digit.
+     * @params ch - The character to check.
+     * @returns True if the character is a hexadecimal digit, false otherwise.
+     */
+    protected isHexDigit(ch: string): boolean {
+        return this.isDigit(ch) || (ch >= 'a' && ch <= 'f') || (ch >= 'A' && ch <= 'F');
     }
 
     /**

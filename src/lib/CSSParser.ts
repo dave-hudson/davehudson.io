@@ -83,8 +83,7 @@ export class CSSLexer extends Lexer {
             return this.readIdentifier();
         }
 
-        this.position++;
-        return { type: 'OPERATOR', value: this.input[this.position] };
+        return this.readOperator();
     }
 
     private readIdentifier(): Token {
@@ -147,9 +146,9 @@ export class CSSLexer extends Lexer {
         this.position++;
 
         // Peek ahead to determine if this is a hex value or an ID
-        const isHex = /[0-9a-fA-F]/.test(this.input[this.position]);
+        const isHex = this.isHexDigit(this.input[this.position]);
 
-        while (this.position < this.input.length && /[0-9a-fA-F]/.test(this.input[this.position])) {
+        while (this.position < this.input.length && this.isHexDigit(this.input[this.position])) {
             this.position++;
         }
 
@@ -175,6 +174,7 @@ export class CSSLexer extends Lexer {
             '^=',
             '|=',
             '*=',
+            '-',
             '+',
             '*',
             '|',

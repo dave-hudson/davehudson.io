@@ -121,24 +121,26 @@ export class CLexer extends Lexer {
         let start = this.position;
         let hasSuffix = false;
 
-        if (this.input[this.position] === '0' && (this.input[this.position + 1] === 'x' || this.input[this.position + 1] === 'X')) {
+        if (this.input[this.position] === '0' &&
+                (this.input[this.position + 1] === 'x' || this.input[this.position + 1] === 'X')) {
             this.position += 2;
-            while (this.position < this.input.length && /[0-9a-fA-F]/.test(this.input[this.position])) {
+            while (this.position < this.input.length && this.isHexDigit(this.input[this.position])) {
                 this.position++;
             }
-        } else if (this.input[this.position] === '0' && (this.input[this.position + 1] === 'b' || this.input[this.position + 1] === 'B')) {
+        } else if (this.input[this.position] === '0' &&
+                (this.input[this.position + 1] === 'b' || this.input[this.position + 1] === 'B')) {
             this.position += 2;
-            while (this.position < this.input.length && /[01]/.test(this.input[this.position])) {
+            while (this.position < this.input.length && this.isBinaryDigit(this.input[this.position])) {
                 this.position++;
             }
         } else {
-            while (this.position < this.input.length && /[0-9]/.test(this.input[this.position])) {
+            while (this.position < this.input.length && this.isDigit(this.input[this.position])) {
                 this.position++;
             }
 
             if (this.position < this.input.length && this.input[this.position] === '.') {
                 this.position++;
-                while (this.position < this.input.length && /[0-9]/.test(this.input[this.position])) {
+                while (this.position < this.input.length && this.isDigit(this.input[this.position])) {
                     this.position++;
                 }
             }
@@ -148,7 +150,7 @@ export class CLexer extends Lexer {
                 if (this.input[this.position] === '+' || this.input[this.position] === '-') {
                     this.position++;
                 }
-                while (this.position < this.input.length && /[0-9]/.test(this.input[this.position])) {
+                while (this.position < this.input.length && this.isDigit(this.input[this.position])) {
                     this.position++;
                 }
             }

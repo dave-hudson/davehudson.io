@@ -84,31 +84,31 @@ export class JavaScriptLexer extends Lexer {
                 (this.input[this.position + 1] === 'x' || this.input[this.position + 1] === 'X')) {
             // Hexadecimal literal
             this.position += 2;
-            while (this.position < this.input.length && /[0-9a-fA-F]/.test(this.input[this.position])) {
+            while (this.position < this.input.length && this.isHexDigit(this.input[this.position])) {
                 this.position++;
             }
         } else if ((this.input[this.position] === '0') &&
                 (this.input[this.position + 1] === 'b' || this.input[this.position + 1] === 'B')) {
             // Binary literal
             this.position += 2;
-            while (this.position < this.input.length && /[01]/.test(this.input[this.position])) {
+            while (this.position < this.input.length && this.isBinaryDigit(this.input[this.position])) {
                 this.position++;
             }
         } else if ((this.input[this.position] === '0') &&
                 (this.input[this.position + 1] === 'o' || this.input[this.position + 1] === 'O')) {
             // Octal literal (ES6 syntax)
             this.position += 2;
-            while (this.position < this.input.length && /[0-7]/.test(this.input[this.position])) {
+            while (this.position < this.input.length && this.isOctalDigit(this.input[this.position])) {
                 this.position++;
             }
         } else {
-            while (this.position < this.input.length && /[0-9]/.test(this.input[this.position])) {
+            while (this.position < this.input.length && this.isDigit(this.input[this.position])) {
                 this.position++;
             }
 
             if (this.position < this.input.length && this.input[this.position] === '.') {
                 this.position++;
-                while (this.position < this.input.length && /[0-9]/.test(this.input[this.position])) {
+                while (this.position < this.input.length && this.isDigit(this.input[this.position])) {
                     this.position++;
                 }
             }
@@ -118,7 +118,7 @@ export class JavaScriptLexer extends Lexer {
                 if (this.input[this.position] === '+' || this.input[this.position] === '-') {
                     this.position++;
                 }
-                while (this.position < this.input.length && /[0-9]/.test(this.input[this.position])) {
+                while (this.position < this.input.length && this.isDigit(this.input[this.position])) {
                     this.position++;
                 }
             }
