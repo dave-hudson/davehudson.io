@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import puppeteer from 'puppeteer';
+import puppeteer, { Browser } from 'puppeteer';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import axios from 'axios';
@@ -16,11 +16,11 @@ const parser = new XMLParser();
  * @param {string} url - The URL of the sitemap.
  * @returns {Promise<string>} - The sitemap content.
  */
-async function fetchSitemap(url) {
+async function fetchSitemap(url: string): Promise<string> {
     try {
         const response = await axios.get(url, { maxRedirects: 10 });
         return response.data;
-    } catch (error) {
+    } catch (error: any) {
         console.error(`Failed to fetch sitemap: ${error.message}`);
         process.exit(1);
     }
@@ -29,9 +29,9 @@ async function fetchSitemap(url) {
 /**
  * Parses the sitemap XML content.
  * @param {string} xml - The XML content of the sitemap.
- * @returns {Object} - The parsed sitemap object.
+ * @returns {any} - The parsed sitemap object.
  */
-function parseSitemap(xml) {
+function parseSitemap(xml: string): any {
     return parser.parse(xml);
 }
 
@@ -41,7 +41,7 @@ function parseSitemap(xml) {
  * @param {string} replaceRule - The replace rule in the form "new=old".
  * @returns {string[]} - The list of updated URLs.
  */
-function replaceUrl(urls, replaceRule) {
+function replaceUrl(urls: string[], replaceRule: string): string[] {
     const [newPrefix, oldPrefix] = replaceRule.split('=');
     return urls.map(url => url.replace(oldPrefix, newPrefix));
 }
@@ -52,7 +52,7 @@ function replaceUrl(urls, replaceRule) {
  * @param {string} outputDir - The output directory.
  * @returns {string} - The file path for the rendered page.
  */
-function getFilePath(url, outputDir) {
+function getFilePath(url: string, outputDir: string): string {
     const urlObj = new URL(url);
     let filePath = path.join(outputDir, urlObj.pathname);
 
@@ -72,11 +72,11 @@ function getFilePath(url, outputDir) {
  * @param {string} filePath - The file path to save the content.
  * @param {string} content - The rendered page content.
  */
-async function saveRenderedPage(filePath, content) {
+async function saveRenderedPage(filePath: string, content: string): Promise<void> {
     try {
         await fs.promises.mkdir(path.dirname(filePath), { recursive: true });
         await fs.promises.writeFile(filePath, content);
-    } catch (error) {
+    } catch (error: any) {
         console.error(`Failed to save rendered page: ${error.message}`);
         process.exit(1);
     }
@@ -84,12 +84,12 @@ async function saveRenderedPage(filePath, content) {
 
 /**
  * Renders a page using Puppeteer.
- * @param {object} browser - The Puppeteer browser instance.
+ * @param {Browser} browser - The Puppeteer browser instance.
  * @param {string} url - The URL of the page to render.
  * @param {number} retries - The number of retries for rendering.
  * @returns {Promise<string>} - The rendered page content.
  */
-async function renderPage(browser, url, retries) {
+async function renderPage(browser: Browser, url: string, retries: number): Promise<string> {
     for (let attempt = 0; attempt <= retries; attempt++) {
         let page;
         try {
@@ -97,7 +97,7 @@ async function renderPage(browser, url, retries) {
             await page.goto(url, { waitUntil: 'networkidle2' });
             const content = await page.content();
             return content;
-        } catch (error) {
+        } catch (error: any) {
             console.error(`Failed to render ${url} (attempt ${attempt + 1}): ${error.message}`);
             if (attempt < retries) {
                 const delay = Math.floor(Math.random() * 8000) + 1;
@@ -111,17 +111,18 @@ async function renderPage(browser, url, retries) {
             }
         }
     }
+    throw new Error(`Failed to render ${url} after ${retries + 1} attempts`);
 }
 
 /**
  * Processes the URLs from the sitemap.
  * @param {string[]} urls - The list of URLs.
- * @param {object} browser - The Puppeteer browser instance.
+ * @param {Browser} browser - The Puppeteer browser instance.
  * @param {string} outputDir - The output directory.
  * @param {number} retries - The number of retries for rendering.
  * @param {number} parallelRenders - The number of parallel renders.
  */
-async function processSitemapUrls(urls, browser, outputDir, retries, parallelRenders) {
+async function processSitemapUrls(urls: string[], browser: Browser, outputDir: string, retries: number, parallelRenders: number): Promise<void> {
     const queue = urls.slice();
     const workers = new Array(parallelRenders).fill(null).map(async () => {
         while (queue.length) {
@@ -130,7 +131,7 @@ async function processSitemapUrls(urls, browser, outputDir, retries, parallelRen
             const filePath = getFilePath(url, outputDir);
             try {
                 await fs.promises.rm(filePath, { force: true });
-            } catch (error) {
+            } catch (error: any) {
                 console.error(`Failed to delete old file ${filePath}: ${error.message}`);
                 continue; // Skip rendering if we can't clean up the old file
             }
@@ -138,7 +139,7 @@ async function processSitemapUrls(urls, browser, outputDir, retries, parallelRen
                 const content = await renderPage(browser, url, retries);
                 await saveRenderedPage(filePath, content);
                 console.log(`Rendered: ${url}`);
-            } catch (error) {
+            } catch (error: any) {
                 console.error(`Failed: ${url}: ${error.message}`);
                 process.exit(1);
             }
@@ -152,7 +153,7 @@ async function processSitemapUrls(urls, browser, outputDir, retries, parallelRen
  * @param {string} urlOrFilePath - The URL or file path of the sitemap index.
  * @returns {Promise<string[]>} - A list of URLs found in the sitemap index.
  */
-async function processSitemapIndex(urlOrFilePath) {
+async function processSitemapIndex(urlOrFilePath: string): Promise<string[]> {
     console.log(`Processing sitemap index: ${urlOrFilePath}`);
     let sitemapContent;
     if (urlOrFilePath.startsWith('http')) {
@@ -161,7 +162,7 @@ async function processSitemapIndex(urlOrFilePath) {
         sitemapContent = await fs.promises.readFile(urlOrFilePath, 'utf-8');
     }
     const parsedSitemap = parseSitemap(sitemapContent);
-    let urls = [];
+    let urls: string[] = [];
 
     if (parsedSitemap.sitemapindex && parsedSitemap.sitemapindex.sitemap) {
         for (const sitemap of parsedSitemap.sitemapindex.sitemap) {
@@ -173,7 +174,7 @@ async function processSitemapIndex(urlOrFilePath) {
         const urlEntries = Array.isArray(parsedSitemap.urlset.url)
             ? parsedSitemap.urlset.url
             : [parsedSitemap.urlset.url];
-        urls = urlEntries.map(entry => entry.loc);
+        urls = urlEntries.map((entry: any) => entry.loc);
     }
 
     return urls;
@@ -182,13 +183,13 @@ async function processSitemapIndex(urlOrFilePath) {
 /**
  * Launches the Puppeteer browser with retry logic.
  * @param {number} retries - The number of retries for launching the browser.
- * @returns {Promise<object>} - The Puppeteer browser instance.
+ * @returns {Promise<Browser>} - The Puppeteer browser instance.
  */
-async function launchBrowserWithRetries(retries) {
+async function launchBrowserWithRetries(retries: number): Promise<Browser> {
     for (let attempt = 0; attempt <= retries; attempt++) {
         try {
             return await puppeteer.launch();
-        } catch (error) {
+        } catch (error: any) {
             console.error(`Failed to launch browser (attempt ${attempt + 1}): ${error.message}`);
             if (attempt < retries) {
                 const delay = Math.floor(Math.random() * 8000) + 1;
@@ -198,19 +199,20 @@ async function launchBrowserWithRetries(retries) {
             }
         }
     }
+    throw new Error(`Failed to launch browser after ${retries + 1} attempts`);
 }
 
 /**
  * Closes the Puppeteer browser with retry logic.
- * @param {object} browser - The Puppeteer browser instance.
+ * @param {Browser} browser - The Puppeteer browser instance.
  * @param {number} retries - The number of retries for closing the browser.
  */
-async function closeBrowserWithRetries(browser, retries) {
+async function closeBrowserWithRetries(browser: Browser, retries: number): Promise<void> {
     for (let attempt = 0; attempt <= retries; attempt++) {
         try {
             await browser.close();
             return;
-        } catch (error) {
+        } catch (error: any) {
             console.error(`Failed to close browser (attempt ${attempt + 1}): ${error.message}`);
             if (attempt < retries) {
                 const delay = Math.floor(Math.random() * 8000) + 1;
@@ -220,10 +222,11 @@ async function closeBrowserWithRetries(browser, retries) {
             }
         }
     }
+    throw new Error(`Failed to close browser after ${retries + 1} attempts`);
 }
 
 async function main() {
-    const argv = yargs(hideBin(process.argv))
+    const argv = await yargs(hideBin(process.argv))
         .option('sitemap-file', {
             describe: 'Path to the sitemap file',
             type: 'string',
@@ -257,7 +260,7 @@ async function main() {
         .alias('h', 'help')
         .argv;
 
-    let urls = [];
+    let urls: string[] = [];
     if (argv['sitemap-file']) {
         urls = await processSitemapIndex(argv['sitemap-file']);
     } else if (argv['sitemap-url']) {
@@ -279,3 +282,4 @@ async function main() {
 }
 
 main();
+
