@@ -43,11 +43,13 @@
     },
     "testEnvironment": "jsdom",
     "testMatch": [
-      "**/test/**/*.ts"
+      "**/src/**/*.test.ts"
     ],
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "**/src/**/*.ts"
+      "**/src/**/*.ts",
+      "!**/src/**/test.ts",
+      "!**/src/**/*.test.ts"
     ],
     "coverageDirectory": "coverage",
     "coverageReporters": [
