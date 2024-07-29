@@ -55,7 +55,7 @@ all: $(BUILD_FILES) build/app.js
 .PHONY: prerender
 
 prerender: all
-	node prerender.js --sitemap build/sitemap.xml --replace-url http://localhost:3000=https://davehudson.io --output build -p 64
+	node prerender.js --sitemap-file build/sitemap.xml --replace-url http://localhost:3000=https://davehudson.io --output build
 
 #
 # Rule to build a tarball of the built site.
