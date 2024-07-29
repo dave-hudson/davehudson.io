@@ -52,31 +52,17 @@ all: $(BUILD_FILES) build/app.js
 #
 # Rule to pre-render all the pages of the site.
 #
-.PHONY: prerender
+.PHONY: siterender
 
-prerender.js: prerender.ts
-	tsc \
-		--strict \
-		--target esnext \
-		--module es6 \
-		--esModuleInterop true \
-		--moduleResolution node \
-		--noImplicitOverride \
-		--noImplicitReturns \
-		--noPropertyAccessFromIndexSignature \
-		--noFallthroughCasesInSwitch \
-		--noUnusedLocals \
-		prerender.ts
-
-prerender: all prerender.js
-	node prerender.js --sitemap-file build/sitemap.xml --replace-url http://localhost:3000=https://davehudson.io --output build
+siterender: all ../siterender/siterender.js
+	node ../siterender/siterender.js --sitemap-file build/sitemap.xml --replace-url http://localhost:3000=https://davehudson.io --output build
 
 #
 # Rule to build a tarball of the built site.
 #
 .PHONY: tar
 
-tar: prerender
+tar: siterender
 	tar -czvf davehudson.io.tar.gz -C build .
 
 #
@@ -85,7 +71,7 @@ tar: prerender
 .PHONY: clean 
 
 clean:
-	rm -f $(BUILD_FILES) build/app.js davehudson.io.tar.gz prerender.js
+	rm -f $(BUILD_FILES) build/app.js davehudson.io.tar.gz
 
 .PHONY: realclean
 
