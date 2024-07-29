@@ -54,7 +54,21 @@ all: $(BUILD_FILES) build/app.js
 #
 .PHONY: prerender
 
-prerender: all
+prerender.js: prerender.ts
+	tsc \
+		--strict \
+		--target esnext \
+		--module es6 \
+		--esModuleInterop true \
+		--moduleResolution node \
+		--noImplicitOverride \
+		--noImplicitReturns \
+		--noPropertyAccessFromIndexSignature \
+		--noFallthroughCasesInSwitch \
+		--noUnusedLocals \
+		prerender.ts
+
+prerender: all prerender.js
 	node prerender.js --sitemap-file build/sitemap.xml --replace-url http://localhost:3000=https://davehudson.io --output build
 
 #
@@ -71,7 +85,7 @@ tar: prerender
 .PHONY: clean 
 
 clean:
-	rm -f $(BUILD_FILES) build/app.js davehudson.io.tar.gz
+	rm -f $(BUILD_FILES) build/app.js davehudson.io.tar.gz prerender.js
 
 .PHONY: realclean
 
