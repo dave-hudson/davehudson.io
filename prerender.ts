@@ -94,20 +94,24 @@ async function renderPage(browser: Browser, url: string, retries: number): Promi
         let page;
         try {
             page = await browser.newPage();
-            await page.goto(url, { waitUntil: 'networkidle2' });
+            await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000 });
             const content = await page.content();
             return content;
         } catch (error: any) {
             console.error(`Failed to render ${url} (attempt ${attempt + 1}): ${error.message}`);
             if (attempt < retries) {
                 const delay = Math.floor(Math.random() * 8000) + 1;
-                await new Promise(res => setTimeout(res, delay)); // Wait before retrying
+                await new Promise(res => setTimeout(res, delay));
             } else {
                 throw error;
             }
         } finally {
-            if (page) {
-                await page.close();
+            if (page && !page.isClosed()) {
+                try {
+                    await page.close();
+                } catch (closeError: any) {
+                    console.error(`Failed to close page for ${url}: ${closeError.message}`);
+                }
             }
         }
     }
@@ -133,7 +137,7 @@ async function processSitemapUrls(urls: string[], browser: Browser, outputDir: s
                 await fs.promises.rm(filePath, { force: true });
             } catch (error: any) {
                 console.error(`Failed to delete old file ${filePath}: ${error.message}`);
-                continue; // Skip rendering if we can't clean up the old file
+                continue;
             }
             try {
                 const content = await renderPage(browser, url, retries);
@@ -193,7 +197,7 @@ async function launchBrowserWithRetries(retries: number): Promise<Browser> {
             console.error(`Failed to launch browser (attempt ${attempt + 1}): ${error.message}`);
             if (attempt < retries) {
                 const delay = Math.floor(Math.random() * 8000) + 1;
-                await new Promise(res => setTimeout(res, delay)); // Wait before retrying
+                await new Promise(res => setTimeout(res, delay));
             } else {
                 throw error;
             }
@@ -216,7 +220,7 @@ async function closeBrowserWithRetries(browser: Browser, retries: number): Promi
             console.error(`Failed to close browser (attempt ${attempt + 1}): ${error.message}`);
             if (attempt < retries) {
                 const delay = Math.floor(Math.random() * 8000) + 1;
-                await new Promise(res => setTimeout(res, delay)); // Wait before retrying
+                await new Promise(res => setTimeout(res, delay));
             } else {
                 throw error;
             }
@@ -282,4 +286,3 @@ async function main() {
 }
 
 main();
-
