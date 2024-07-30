@@ -54,8 +54,8 @@ all: $(BUILD_FILES) build/app.js
 #
 .PHONY: siterender
 
-siterender: all ../siterender/siterender.js
-	node ../siterender/siterender.js --sitemap-file build/sitemap.xml --replace-url http://localhost:3000=https://davehudson.io --output build
+siterender: all
+	node ../siterender/build/siterender.mjs --sitemap-file build/sitemap.xml --replace-url http://localhost:3000=https://davehudson.io --output build
 
 #
 # Rule to build a tarball of the built site.

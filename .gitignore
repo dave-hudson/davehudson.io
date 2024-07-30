@@ -4,7 +4,6 @@
 # Ignore build files
 build/
 davehudson.io.tar.gz
-prerender.js
 
 # Ignore coverage files
 coverage/
