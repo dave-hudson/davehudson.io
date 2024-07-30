@@ -23,7 +23,7 @@ build/%: src/%
 
 build/app.js: $(TS_FILES)
 	tsc \
-		-noEmit \
+		--noEmit \
 		--strict \
 		--target es6 \
 		--module es6 \
@@ -36,14 +36,7 @@ build/app.js: $(TS_FILES)
 		--noUnusedLocals \
 		--skipLibCheck \
 		src/app.ts
-	./node_modules/.bin/esbuild \
-		--bundle \
-		--sourcemap \
-		--platform=browser \
-		--outfile=build/app.js \
-		--loader:.ts=ts \
-		--log-level=info \
-		src/app.ts
+	node esbuild.config.js
 
 .PHONY: all
 
