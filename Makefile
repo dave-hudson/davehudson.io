@@ -22,20 +22,7 @@ build/%: src/%
 	echo "Copied $< to $@"
 
 build/app.js: $(TS_FILES)
-	tsc \
-		--noEmit \
-		--strict \
-		--target es6 \
-		--module es6 \
-		--esModuleInterop true \
-		--moduleResolution node \
-		--noImplicitOverride \
-		--noImplicitReturns \
-		--noPropertyAccessFromIndexSignature \
-		--noFallthroughCasesInSwitch \
-		--noUnusedLocals \
-		--skipLibCheck \
-		src/app.ts
+	tsc
 	node esbuild.config.js
 
 .PHONY: all
