@@ -756,3 +756,11 @@ namespace c8 {
 }
 
 auto x = L"fred";
+
+class foo {
+    int x;
+
+    foo() {
+        this.x = 3;
+    }
+}
