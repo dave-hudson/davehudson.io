@@ -63,7 +63,7 @@ export class CppLexer extends CLexer {
         for (let i = 0; i < operators.length; i++) {
             if (this.input.startsWith(operators[i], this.position)) {
                 this.position += operators[i].length;
-                return { type: 'OPERATOR', value: operators[i]};
+                return { type: 'OPERATOR', value: operators[i] };
             }
         }
 
