@@ -4,8 +4,8 @@ export default {
     "^.+\\.tsx?$": 'ts-jest'
   },
   testEnvironment: 'jsdom',
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
-  testMatch: ['**/src/**/*.test.ts', '**/src/**/*.spec.ts'],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
+  testMatch: ['**/src/**/*.test.ts'],
   collectCoverage: true,
   coverageDirectory: 'coverage',
   coverageReporters: ['html', 'text']
