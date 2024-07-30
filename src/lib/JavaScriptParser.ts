@@ -287,7 +287,7 @@ export class JavaScriptLexer extends Lexer {
         for (let i = 0; i < operators.length; i++) {
             if (this.input.startsWith(operators[i], this.position)) {
                 this.position += operators[i].length;
-                return { type: 'OPERATOR', value: operators[i]};
+                return { type: 'OPERATOR', value: operators[i] };
             }
         }
 
@@ -404,7 +404,18 @@ export class JavaScriptParser extends Parser {
         }
 
         if (token.type !== 'IDENTIFIER') {
-            return token;
+            if (token.type === 'OPERATOR' && (token.value !== '.' && token.value !== '?.')) {
+                this.inElement = false;
+                return token;
+            }
+
+            if (token.type !== 'KEYWORD') {
+                return token;
+            }
+
+            if (token.value !== 'this' && !this.inElement) {
+                return token;
+            }
         }
 
         // Look at the next token.  If it's a '(' operator then we're making a function or method call!
