@@ -28,27 +28,6 @@
     "ts-jest": "^29.1.5",
     "typescript": "^5.5.4"
   },
-  "jest": {
-    "preset": "ts-jest",
-    "transform": {
-      "^.+\\.(ts)$": "ts-jest"
-    },
-    "testEnvironment": "jsdom",
-    "testMatch": [
-      "**/src/**/*.test.ts"
-    ],
-    "collectCoverage": true,
-    "collectCoverageFrom": [
-      "**/src/**/*.ts",
-      "!**/src/**/test.ts",
-      "!**/src/**/*.test.ts"
-    ],
-    "coverageDirectory": "coverage",
-    "coverageReporters": [
-      "html",
-      "text"
-    ]
-  },
   "dependencies": {
     "express": "^4.19.2",
     "puppeteer": "^22.13.0"
