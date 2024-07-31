@@ -1,9 +1,9 @@
-import { h, updateElement, VNode } from './lib/dvdi';
-import { aboutPage } from './about/about';
-import { blogPage, blogSummaries, getBlogRoutes } from './blog/blog';
-import { experimentsPage, getExperimentRoutes } from './experiments/experiments';
-import { projectsPage, getProjectRoutes } from './projects/projects';
-import { pageHeader, pageFooter } from "./lib/page";
+import {h, updateElement, VNode} from './lib/dvdi';
+import {aboutPage} from './about/about';
+import {blogPage, blogSummaries, getBlogRoutes} from './blog/blog';
+import {experimentsPage, getExperimentRoutes} from './experiments/experiments';
+import {projectsPage, getProjectRoutes} from './projects/projects';
+import {pageHeader, pageFooter} from "./lib/page";
 
 //const updateQueue = new Set();
 
@@ -28,7 +28,7 @@ import { pageHeader, pageFooter } from "./lib/page";
 function homePage(): VNode {
     return h('div', {},
         pageHeader(),
-        h('main', { className: 'main'},
+        h('main', {className: 'main'},
             h('h1', {}, 'Dreaming in data and code'),
                 h('figure', {},
                 h('img', {
@@ -49,7 +49,7 @@ function homePage(): VNode {
                 h('h2', {}, 'More blog posts'),
                 h('p', {},
                     'You can find older blog posts on this page: ',
-                    h('a', { href: '/blog', onclick: (e: MouseEvent) => navigateEvent(e, '/blog') }, 'Blog')
+                    h('a', {href: '/blog', onclick: (e: MouseEvent) => navigateEvent(e, '/blog')}, 'Blog')
                 )
             ),
         ),
@@ -60,12 +60,12 @@ function homePage(): VNode {
 function notFoundPage(path: string): VNode {
     return h('div', {},
         pageHeader(),
-        h('main', { className: 'main' },
+        h('main', {className: 'main' },
             h('h1', {}, `404: Page "${path}" not found`),
             h('p', {}, 'This is unlikely to be the page you were looking for!'),
             h('p', {},
                 'If you\'ve arrived here via an old link from the hashingit.com blog, please take a look at ',
-                h('a', { href: '/blog', onclick: (e: MouseEvent) => navigateEvent(e, '/blog') }, 'Blog'),
+                h('a', {href: '/blog', onclick: (e: MouseEvent) => navigateEvent(e, '/blog')}, 'Blog'),
                 '.  You should find all the original articles there.'
             )
         ),
@@ -238,7 +238,7 @@ export function navigateEvent(e: MouseEvent, path: string) {
         x: window.scrollX
     }
 
-    window.history.pushState({ scrollPosition }, '', path);
+    window.history.pushState({scrollPosition}, '', path);
     handleLocation();
     window.scrollTo(0, 0);
 }

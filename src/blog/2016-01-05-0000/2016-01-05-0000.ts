@@ -1,6 +1,6 @@
-import { h, VNode } from '../../lib/dvdi';
-import { navigateEvent } from '../../app';
-import { BlogPost } from '../BlogPost'
+import {h, VNode} from '../../lib/dvdi';
+import {navigateEvent} from '../../app';
+import {BlogPost} from '../BlogPost'
 
 function blogOpening_2016_01_05_0000(): VNode[] {
     return [
@@ -25,7 +25,7 @@ function blogArticle_2016_01_05_0000(): VNode[] {
             h('p', {},
                 'The Bitcoin network is secured and processes transactions by mining.  Mining comprises two activities, block ' +
                 'making and hashing.  Block making is generally the preserve of very large miners or mining pool operators (see "',
-                h('a', { href: '/blog/2014-06-30-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-06-30-0000') },
+                h('a', {href: '/blog/2014-06-30-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-06-30-0000')},
                     'The gambler\'s guide to Bitcoin mining'
                 ),
                 '") while hashing is the activity that can be decentralized to many different operators.  For our purposes, ' +
@@ -179,12 +179,12 @@ function blogPostscript_2016_01_05_000(): VNode[] {
             h('h2', {}, 'Related articles'),
             h('ul', {},
                 h('li', {},
-                    h('a', { href: '/blog/2014-06-30-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-06-30-0000') },
+                    h('a', {href: '/blog/2014-06-30-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-06-30-0000')},
                         'The gambler\'s guide to Bitcoin mining (2014-06-30)'
                     )
                 ),
                 h('li', {},
-                    h('a', { href: '/blog/2014-05-20-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-20-0000') },
+                    h('a', {href: '/blog/2014-05-20-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-20-0000')},
                         'Hash rate headaches (2014-05-20)'
                     )
                 )

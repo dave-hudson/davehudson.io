@@ -1,9 +1,9 @@
-import { assertIsVElement, h, updateElement, VElement, VNode } from '../../lib/dvdi';
-import { BlogPost } from '../BlogPost';
-import { JavaScriptParser } from '../../lib/JavaScriptParser';
-import { highlight } from '../../lib/highlight'
-import { cloneObject } from '../../lib/cloneObject';
-import { navigateEvent } from '../../app';
+import {assertIsVElement, h, updateElement, VElement, VNode} from '../../lib/dvdi';
+import {BlogPost} from '../BlogPost';
+import {JavaScriptParser} from '../../lib/JavaScriptParser';
+import {highlight} from '../../lib/highlight'
+import {cloneObject} from '../../lib/cloneObject';
+import {navigateEvent} from '../../app';
 
 const code: VNode[][] = [[], []];
 let codeVElement: (VElement | null)[] = [null, null];
@@ -113,7 +113,7 @@ function blogOpening_2024_07_15_0800(): VElement[] {
         h('p', {},
             'How about a more interesting challenge?  How well can these tools build something new?  I decided to give this ' +
             'a try.  I needed a tool to use with my blog site, ',
-            h('a', { href: '/', onclick: (e: MouseEvent) => navigateEvent(e, '/') }, 'davehudson.io'),
+            h('a', {href: '/', onclick: (e: MouseEvent) => navigateEvent(e, '/')}, 'davehudson.io'),
             '.  How well would ChatGPT be able to help?'
         )
     ]
@@ -171,7 +171,7 @@ function blogArticle_2024_07_15_0800(): VElement[] {
             h('p', {},
                 'Here\'s my initial prompt in a new session:',
             ),
-            h('div', { className: 'pink-note' },
+            h('div', {className: 'pink-note'},
                 h('p', {},
                     'How do I use google chrome to pre-render my single page app website?'
                 )
@@ -179,7 +179,7 @@ function blogArticle_2024_07_15_0800(): VElement[] {
             h('p', {},
                 'And the first reply:',
             ),
-            h('div', { className: 'blue-note' },
+            h('div', {className: 'blue-note'},
                 h('p', {},
                     'Pre-rendering a single-page application (SPA) using Google Chrome involves generating static HTML ' +
                     'content that can be served to search engines and users to improve SEO and performance.  Here are the ' +

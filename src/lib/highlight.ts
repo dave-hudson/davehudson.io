@@ -1,6 +1,6 @@
 
-import { h, VElement } from './dvdi';
-import { Token, Parser, styles } from './Parser'
+import {h, VElement} from './dvdi';
+import {Token, Parser, styles} from './Parser'
 
 /**
  * Highlights code using the specified parser.
@@ -15,7 +15,7 @@ export function highlight(code: string, parserClass: new (input: string) => Pars
 
     while ((token = parser.getNextToken()) !== null) {
         const style = styles[token.type];
-        const codeFragment = h('span', style !== null ? { className: style } : {}, `${token.value}`);
+        const codeFragment = h('span', style !== null ? {className: style} : {}, `${token.value}`);
         highlightedCode.push(codeFragment);
     }
 

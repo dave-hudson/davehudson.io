@@ -1,6 +1,6 @@
-import { h, VNode } from '../../lib/dvdi';
-import { navigateEvent } from '../../app';
-import { BlogPost } from '../BlogPost'
+import {h, VNode} from '../../lib/dvdi';
+import {navigateEvent} from '../../app';
+import {BlogPost} from '../BlogPost'
 
 function blogOpening_2014_06_30_0000(): VNode[] {
     return [
@@ -35,7 +35,7 @@ function blogArticle_2014_06_30_0000(): VNode[] {
             ),
             h('p', {},
                 'Bitcoin mining is highly erratic (see "',
-                h('a', { href: '/blog/2014-05-20-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-20-0000') },
+                h('a', {href: '/blog/2014-05-20-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-20-0000')},
                     'Hash rate headaches'
                 ),
                 '") so it\'s not easy to calculate how our mining will progress so instead I built a Monte Carlo simulator.  The ' +
@@ -153,12 +153,12 @@ function blogPostScript_2014_06_30_0000(): VNode[] {
             h('h2', {}, 'Related articles'),
             h('ul', {},
                 h('li', {},
-                    h('a', { href: '/blog/2014-06-23-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-06-23-0000') },
+                    h('a', {href: '/blog/2014-06-23-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-06-23-0000')},
                         '51% of the network (2014-06-23)'
                     )
                 ),
                 h('li', {},
-                    h('a', { href: '/blog/2014-05-20-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-20-0000') },
+                    h('a', {href: '/blog/2014-05-20-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-20-0000')},
                         'Hash rate headaches (2014-05-20)'
                     )
                 )

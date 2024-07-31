@@ -3,7 +3,7 @@ export interface Token {
     value: string;
 }
 
-export const styles: { [key: string]: string | null } = {
+export const styles: {[key: string]: string | null} = {
     COMMENT: 'comment',
     ELEMENT: 'element',
     ERROR: 'error',
@@ -104,7 +104,7 @@ export abstract class Lexer {
         }
 
         this.position++;
-        return { type: 'STRING', value: this.input.slice(start, this.position) };
+        return {type: 'STRING', value: this.input.slice(start, this.position)};
     }
 
     /**
@@ -112,7 +112,7 @@ export abstract class Lexer {
      */
     protected readNewline(): Token {
         this.position++;
-        return { type: 'NEWLINE', value: '\n' };
+        return {type: 'NEWLINE', value: '\n'};
     }
 
     /**
@@ -125,7 +125,7 @@ export abstract class Lexer {
             this.position++;
         }
 
-        return { type: 'WHITESPACE', value: this.input.slice(start, this.position) };
+        return {type: 'WHITESPACE', value: this.input.slice(start, this.position)};
     }
 
     /**

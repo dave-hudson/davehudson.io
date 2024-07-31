@@ -1,6 +1,6 @@
-import { h, VNode } from '../../lib/dvdi';
-import { navigateEvent } from '../../app';
-import { BlogPost } from '../BlogPost'
+import {h, VNode} from '../../lib/dvdi';
+import {navigateEvent} from '../../app';
+import {BlogPost} from '../BlogPost'
 
 function blogOpening_2014_11_12_0000(): VNode[] {
     return [
@@ -59,7 +59,7 @@ function blogArticle_2014_11_12_0000(): VNode[] {
             h('p', {},
                 'The fee structure means that BTC transfers are incredibly inexpensive for large transactions, but that small ' +
                 'transfers can become much more expensive.  As we\'ve seen before in "',
-                h('a', { href: '/blog/2014-11-02-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-11-02-0000') },
+                h('a', {href: '/blog/2014-11-02-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-11-02-0000')},
                     '7 transactions per second?  Really?'
                 ),
                 '", there\'s actually a hard limit on transaction space and the current mean transaction size limits the network ' +
@@ -218,12 +218,12 @@ function blogPostScript_2014_11_12_0000(): VNode[] {
             h('h2', {}, 'Related articles'),
             h('ul', {},
                 h('li', {},
-                    h('a', { href: '/blog/2014-11-02-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-11-02-0000') },
+                    h('a', {href: '/blog/2014-11-02-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-11-02-0000')},
                         '7 transactions per second?  Really? (2014-11-02)'
                     )
                 ),
                 h('li', {},
-                    h('a', { href: '/blog/2014-04-03-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-04-03-0000') },
+                    h('a', {href: '/blog/2014-04-03-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-04-03-0000')},
                         'The rewards for a Bitcoin miner (2014-04-03'
                     )
                 )

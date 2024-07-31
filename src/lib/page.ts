@@ -1,6 +1,6 @@
-import { h, VElement, VNode } from './dvdi';
-import { navigateEvent } from '../app';
-import { mailIcon, gitHubIcon, linkedInIcon, xIcon, instagramIcon, moonIcon, sunIcon } from './icons';
+import {h, VElement, VNode} from './dvdi';
+import {navigateEvent} from '../app';
+import {mailIcon, gitHubIcon, linkedInIcon, xIcon, instagramIcon, moonIcon, sunIcon} from './icons';
 
 let darkTheme: HTMLLinkElement | null = null;
 let darkModeSun: HTMLElement | null = null;
@@ -18,19 +18,19 @@ function sunMoonIcon(isSun: boolean, clickCallback: (isSun: boolean) => void) {
 }
 
 export function pageHeader(): VNode {
-    const component = () => h('header', { className: 'header' },
-        h('nav', { className: 'site-title' },
-            h('a', { className: 'home-link', href: '/', onclick: (e: MouseEvent) => navigateEvent(e, '/') }, 'davehudson.io'),
-            h('a', { className: 'icon', href: 'https://instagram.com/davehudsonio', target: '_blank', title: 'Instagram' },
+    const component = () => h('header', {className: 'header'},
+        h('nav', {className: 'site-title'},
+            h('a', {className: 'home-link', href: '/', onclick: (e: MouseEvent) => navigateEvent(e, '/')}, 'davehudson.io'),
+            h('a', {className: 'icon', href: 'https://instagram.com/davehudsonio', target: '_blank', title: 'Instagram'},
                 instagramIcon()
             ),
-            h('a', { className: 'icon', href: 'https://x.com/davehudsonio', target: '_blank', title: 'X' },
+            h('a', {className: 'icon', href: 'https://x.com/davehudsonio', target: '_blank', title: 'X'},
                 xIcon()
             ),
-            h('a', { className: 'icon', href: 'https://linkedin.com/in/davejh', target: '_blank', title: 'LinkedIn' },
+            h('a', {className: 'icon', href: 'https://linkedin.com/in/davejh', target: '_blank', title: 'LinkedIn'},
                 linkedInIcon()
             ),
-            h('a', { className: 'icon', href: 'https://github.com/dave-hudson', target: '_blank', title: 'GitHub' },
+            h('a', {className: 'icon', href: 'https://github.com/dave-hudson', target: '_blank', title: 'GitHub'},
                 gitHubIcon()
             ),
             h('a', {
@@ -41,10 +41,10 @@ export function pageHeader(): VNode {
                 mailIcon(),
             )
         ),
-        h('nav', { className: 'site-menu' },
-            h('a', { className: 'menu', href: '/blog', onclick: (e: MouseEvent) => navigateEvent(e, '/blog') }, 'Blog'),
-            h('a', { className: 'menu', href: '/projects', onclick: (e: MouseEvent) => navigateEvent(e, '/projects') }, 'Projects'),
-            h('a', { className: 'menu', href: '/about', onclick: (e: MouseEvent) => navigateEvent(e, '/about') }, 'Me'),
+        h('nav', {className: 'site-menu'},
+            h('a', {className: 'menu', href: '/blog', onclick: (e: MouseEvent) => navigateEvent(e, '/blog')}, 'Blog'),
+            h('a', {className: 'menu', href: '/projects', onclick: (e: MouseEvent) => navigateEvent(e, '/projects')}, 'Projects'),
+            h('a', {className: 'menu', href: '/about', onclick: (e: MouseEvent) => navigateEvent(e, '/about')}, 'Me'),
             sunMoonIcon(false, setDarkTheme),
             sunMoonIcon(true, setDarkTheme)
         )
@@ -121,8 +121,8 @@ export function pageHeader(): VNode {
 }
 
 export function pageFooter(): VNode {
-    return h('footer', { className: 'footer' },
-        h('p', { className: 'copyright' },
+    return h('footer', {className: 'footer'},
+        h('p', {className: 'copyright'},
             '© 2014-2024 David J. Hudson'
         )
     );

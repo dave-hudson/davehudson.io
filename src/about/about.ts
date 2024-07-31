@@ -1,14 +1,14 @@
-import { h, VNode } from '../lib/dvdi';
-import { pageHeader, pageFooter } from "../lib/page";
+import {h, VNode} from '../lib/dvdi';
+import {pageHeader, pageFooter} from "../lib/page";
 
 export function aboutPage(): VNode {
     return h('div', {},
         pageHeader(),
-        h('main', { className: 'main' },
+        h('main', {className: 'main'},
             h('h1', {}, 'About me (Dave Hudson)'),
-            h('p', { className: 'meta'},
+            h('p', {className: 'meta'},
                 'Last updated: ',
-                h('time', { datetime: '2024-05-29T07:45' }, '2024-05-29 07:45')
+                h('time', {datetime: '2024-05-29T07:45'}, '2024-05-29 07:45')
             ),
             h('p', {},
                 'Hello, good morning/afternoon/evening* and welcome! ',
@@ -46,13 +46,13 @@ export function aboutPage(): VNode {
                 h('h2', {}, 'Contact me'),
                 h('p', {},
                     'Please feel free to reach out to me on: ',
-                    h('a', { href: 'mailto:hello@davehudson.io?subject=Email\ about\ davehudson.io' }, 'Email'),
+                    h('a', {href: 'mailto:hello@davehudson.io?subject=Email\ about\ davehudson.io'}, 'Email'),
                     ', ',
-                    h('a', { href: 'http://linkedin.com/in/davejh/', target: '_blank' }, 'LinkedIn'),
+                    h('a', {href: 'http://linkedin.com/in/davejh/', target: '_blank'}, 'LinkedIn'),
                     ', ',
-                    h('a', { href: 'http://x.com/davehudsonio', target: '_blank' }, 'X'),
+                    h('a', {href: 'http://x.com/davehudsonio', target: '_blank'}, 'X'),
                     ', or ',
-                    h('a', { href: 'http://instagram.com/davehudsonio', target: '_blank' }, 'Instagram')
+                    h('a', {href: 'http://instagram.com/davehudsonio', target: '_blank'}, 'Instagram')
                 )
             )
         ),

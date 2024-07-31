@@ -1,4 +1,4 @@
-import { VNode } from '../lib/dvdi'
+import {VNode} from '../lib/dvdi'
 
 export class ExperimentPage {
     hRef: string;

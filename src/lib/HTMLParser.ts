@@ -1,6 +1,6 @@
-import { Lexer, Parser, Token, styles } from './Parser';
-import { CSSParser } from './CSSParser';
-import { JavaScriptParser } from './JavaScriptParser';
+import {Lexer, Parser, Token, styles} from './Parser';
+import {CSSParser} from './CSSParser';
+import {JavaScriptParser} from './JavaScriptParser';
 
 styles['ATTRIBUTE'] = 'html-attribute';
 styles['DOCTYPE'] = 'html-doctype';
@@ -66,13 +66,13 @@ export class HTMLLexer extends Lexer {
         this.position++;
         this.inTag = true;
         this.tagName = '';
-        return { type: 'OPERATOR', value: '<' };
+        return {type: 'OPERATOR', value: '<'};
     }
 
     protected readClose(): Token {
         this.position++;
         this.inTag = false;
-        return { type: 'OPERATOR', value: '>' };
+        return {type: 'OPERATOR', value: '>'};
     }
 
     protected readDefault(): Token {
@@ -91,7 +91,7 @@ export class HTMLLexer extends Lexer {
             }
 
             this.position = scriptClose;
-            return { type: 'SCRIPT', value: this.input.slice(scriptOpen, scriptClose) };
+            return {type: 'SCRIPT', value: this.input.slice(scriptOpen, scriptClose)};
         }
 
         // Is this a STYLE element?  If it is then we need to capture everything within it so this
@@ -105,7 +105,7 @@ export class HTMLLexer extends Lexer {
             }
 
             this.position = styleClose;
-            return { type: 'STYLE', value: this.input.slice(styleOpen, styleClose) };
+            return {type: 'STYLE', value: this.input.slice(styleOpen, styleClose)};
         }
 
         // Handle text content between tags.
@@ -126,7 +126,7 @@ export class HTMLLexer extends Lexer {
             this.position++;
         }
 
-        return { type: 'DOCTYPE', value: this.input.slice(start, this.position) };
+        return {type: 'DOCTYPE', value: this.input.slice(start, this.position)};
     }
 
     /**
@@ -143,7 +143,7 @@ export class HTMLLexer extends Lexer {
             this.position++;
         }
 
-        return { type: 'COMMENT', value: this.input.slice(start, this.position) };
+        return {type: 'COMMENT', value: this.input.slice(start, this.position)};
     }
 
     /**
@@ -160,7 +160,7 @@ export class HTMLLexer extends Lexer {
         }
 
         const value = this.input.slice(start, this.position);
-        return { type: tokenType, value };
+        return {type: tokenType, value};
     }
 
     /**
@@ -177,7 +177,7 @@ export class HTMLLexer extends Lexer {
         if (ch === '=') {
             this.position++;
             this.seenEquals = true;
-            return { type: 'OPERATOR', value: '=' };
+            return {type: 'OPERATOR', value: '='};
         }
 
         const seenEquals = this.seenEquals;
@@ -199,7 +199,7 @@ export class HTMLLexer extends Lexer {
             this.position++;
         }
 
-        return { type: 'TEXT', value: this.input.slice(start, this.position) };
+        return {type: 'TEXT', value: this.input.slice(start, this.position)};
     }
 
     isKeyword(value: string): boolean {

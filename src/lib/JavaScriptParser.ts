@@ -1,4 +1,4 @@
-import { Lexer, Parser, Token, styles } from './Parser'
+import {Lexer, Parser, Token, styles} from './Parser'
 
 styles['REGEXP'] = 'regexp';
 
@@ -129,7 +129,7 @@ export class JavaScriptLexer extends Lexer {
             this.position++;
         }
 
-        return { type: 'NUMBER', value: this.input.slice(start, this.position) };
+        return {type: 'NUMBER', value: this.input.slice(start, this.position)};
     }
 
     /**
@@ -147,10 +147,10 @@ export class JavaScriptLexer extends Lexer {
 
         const value = this.input.slice(start, this.position);
         if (this.isKeyword(value)) {
-            return { type: 'KEYWORD', value };
+            return {type: 'KEYWORD', value};
         }
 
-        return { type: 'IDENTIFIER', value };
+        return {type: 'IDENTIFIER', value};
     }
 
     /**
@@ -163,7 +163,7 @@ export class JavaScriptLexer extends Lexer {
             this.position++;
         }
 
-        return { type: 'COMMENT', value: this.input.slice(start, this.position) };
+        return {type: 'COMMENT', value: this.input.slice(start, this.position)};
     }
 
     /**
@@ -177,7 +177,7 @@ export class JavaScriptLexer extends Lexer {
         }
 
         this.position++;
-        return { type: 'COMMENT', value: this.input.slice(start, this.position) };
+        return {type: 'COMMENT', value: this.input.slice(start, this.position)};
     }
 
     /**
@@ -192,7 +192,7 @@ export class JavaScriptLexer extends Lexer {
         while (index < this.input.length) {
             const ch = this.input[index++];
             if (ch === '\n') {
-                return { type: 'OPERATOR', value: '/' };
+                return {type: 'OPERATOR', value: '/'};
             }
 
             if (ch === '\\') {
@@ -217,7 +217,7 @@ export class JavaScriptLexer extends Lexer {
 
         const regexp = this.input.slice(this.position - 1, index);
         this.position = index;
-        return { type: 'REGEXP', value: regexp };
+        return {type: 'REGEXP', value: regexp};
     }
 
     /**
@@ -286,12 +286,12 @@ export class JavaScriptLexer extends Lexer {
         for (let i = 0; i < operators.length; i++) {
             if (this.input.startsWith(operators[i], this.position)) {
                 this.position += operators[i].length;
-                return { type: 'OPERATOR', value: operators[i] };
+                return {type: 'OPERATOR', value: operators[i]};
             }
         }
 
         const ch = this.input[this.position++];
-        return { type: 'ERROR', value: ch };
+        return {type: 'ERROR', value: ch};
     }
 
     /**
@@ -425,7 +425,7 @@ export class JavaScriptParser extends Parser {
         if (nextToken?.type === 'OPERATOR') {
             if (nextToken.value === '(') {
                 this.inElement = false;
-                return { type: 'FUNCTION_OR_METHOD', value: token.value };
+                return {type: 'FUNCTION_OR_METHOD', value: token.value};
             }
 
             // Is the next token going to be an element?
@@ -437,7 +437,7 @@ export class JavaScriptParser extends Parser {
         this.inElement = nextInElement;
 
         if (curInElement) {
-            return { type: 'ELEMENT', value: token.value };
+            return {type: 'ELEMENT', value: token.value};
         }
 
         return token;

@@ -2,10 +2,10 @@
 
 import fs from 'fs/promises';
 import path from 'path';
-import { URL } from 'url';
+import {URL} from 'url';
 import puppeteer from 'puppeteer';
 import yargs from 'yargs';
-import { hideBin } from 'yargs/helpers';
+import {hideBin} from 'yargs/helpers';
 import os from 'os';
 
 const argv = yargs(hideBin(process.argv))
@@ -30,7 +30,7 @@ const argv = yargs(hideBin(process.argv))
             if (!match) {
                 throw new Error('Invalid format for --replace-url. Expected <new-url-prefix>=<old-url-prefix>');
             }
-            return { newUrl: match[1], oldUrl: match[2] };
+            return {newUrl: match[1], oldUrl: match[2]};
         },
     })
     .option('parallel-renders', {
@@ -73,7 +73,7 @@ async function parseSitemap(sitemapPath) {
 async function createDirectories(outputDir, urlPath) {
     const fullPath = path.join(outputDir, urlPath);
     try {
-        await fs.mkdir(fullPath, { recursive: true });
+        await fs.mkdir(fullPath, {recursive: true});
     } catch (error) {
         console.error(`Failed to create directory for ${urlPath}: ${error.message}`);
         process.exit(1);
@@ -91,7 +91,7 @@ async function renderPage(browser, url, outputPath, retries) {
     const page = await browser.newPage();
     for (let attempt = 1; attempt <= retries; attempt++) {
         try {
-            await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000 });
+            await page.goto(url, {waitUntil: 'networkidle2', timeout: 60000});
             const content = await page.content();
             await fs.writeFile(outputPath, content, 'utf-8');
             console.log(`Rendered: ${url}`);
@@ -155,7 +155,7 @@ async function main() {
     }
 
     try {
-        await fs.mkdir(outputDir, { recursive: true });
+        await fs.mkdir(outputDir, {recursive: true});
     } catch (error) {
         console.error(`Failed to create output directory: ${error.message}`);
         process.exit(1);
@@ -172,7 +172,7 @@ async function main() {
             await createDirectories(outputDir, urlPath);
 
             try {
-                await fs.rm(outputPath, { force: true });
+                await fs.rm(outputPath, {force: true});
             } catch (error) {
                 console.error(`Failed to delete existing file ${outputPath}: ${error.message}`);
                 process.exit(1);

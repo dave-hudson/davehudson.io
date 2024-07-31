@@ -1,6 +1,6 @@
-import { h, VNode } from '../../lib/dvdi';
-import { navigateEvent } from '../../app';
-import { BlogPost } from '../BlogPost'
+import {h, VNode} from '../../lib/dvdi';
+import {navigateEvent} from '../../app';
+import {BlogPost} from '../BlogPost'
 
 function blogOpening_2014_06_05_0000(): VNode[] {
     return [
@@ -29,7 +29,7 @@ function blogArticle_2014_06_05_0000(): VNode[] {
         ),
         h('p', {},
             'The trend of high points in the graph (red line) shows another ',
-            h('a', { href: '/blog/2014-03-09-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-03-09-0000') }, 
+            h('a', {href: '/blog/2014-03-09-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-03-09-0000')}, 
                 'theme park ride'
             ),
             '. Like any good thrill ride we see regular highs and lows; here the peaks are anywhere between 212 days ' +
@@ -52,7 +52,7 @@ function blogPostScript_2014_06_05_0000(): VNode[] {
             h('h2', {}, 'Related articles'),
             h('ul', {},
                 h('li', {},
-                    h('a', { href: '/blog/2014-03-12-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-03-12-0000') },
+                    h('a', {href: '/blog/2014-03-12-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-03-12-0000')},
                         'Strange spikes in the Bitcoin price (2014-03-12)'
                     )
                 )

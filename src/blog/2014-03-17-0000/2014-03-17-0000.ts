@@ -1,6 +1,6 @@
-import { h, VNode } from '../../lib/dvdi';
-import { navigateEvent } from '../../app';
-import { BlogPost } from '../BlogPost'
+import {h, VNode} from '../../lib/dvdi';
+import {navigateEvent} from '../../app';
+import {BlogPost} from '../BlogPost'
 
 function blogOpening_2014_03_17_0000(): VNode[] {
     return [
@@ -52,7 +52,7 @@ function blogArticle_2014_03_17_0000(): VNode[] {
         h('p', {},
             'From mid 2011 to early 2013 the initial euphoria waned, yet that seems a little strange for something ' +
             'that had seen such rapid growth only a short while earlier.  There were the ',
-            h('a', { href: '/blog/2014-03-12-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-03-12-0000') },
+            h('a', {href: '/blog/2014-03-12-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-03-12-0000')},
                 'strange periodic spikes in the Bitcoin price every 7-ish months'
             ),
             ' but neither the price nor the hashing rate really changed that much.  Roll forward to early 2013 though ' +

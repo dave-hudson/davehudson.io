@@ -1,11 +1,11 @@
-import { h, VNode } from '../../lib/dvdi';
-import { pageHeader, pageFooter } from "../../lib/page";
-import { ProjectPage } from '../ProjectPage';
+import {h, VNode} from '../../lib/dvdi';
+import {pageHeader, pageFooter} from "../../lib/page";
+import {ProjectPage} from '../ProjectPage';
 
 export function projectVSTaPage(): VNode {
     return h('div', {},
         pageHeader(),
-        h('main', { className: 'main' },
+        h('main', {className: 'main'},
             h('h1', {}, 'VSTa'),
             h('p', {},
                 'VSTa (short for Valencia\'s Simple Tasker) was a self-hosting microkernel operating system build in the ' +
@@ -20,7 +20,7 @@ export function projectVSTaPage(): VNode {
             ),
             h('p', {},
                 'Andy Valencia (the guy behind the project) has an archive of the code and the mailing lists here: ',
-                h('a', { href: 'https://sources.vsta.org:7100/vsta/index', target: '_blank' },
+                h('a', {href: 'https://sources.vsta.org:7100/vsta/index', target: '_blank'},
                     'https://sources.vsta.org:7100/vsta/index')
             )
         ),

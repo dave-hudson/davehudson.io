@@ -1,6 +1,6 @@
-import { h, VNode } from '../../lib/dvdi';
-import { navigateEvent } from '../../app';
-import { BlogPost } from '../BlogPost'
+import {h, VNode} from '../../lib/dvdi';
+import {navigateEvent} from '../../app';
+import {BlogPost} from '../BlogPost'
 
 function blogOpening_2015_12_19_0000(): VNode[] {
     return [
@@ -94,7 +94,7 @@ function blogArticle_2015_12_19_0000(): VNode[] {
                 'period of 2016 blocks.  If we start out at, say, 300 PH/s but add 0.2% new capacity every day, then after 14 ' +
                 'days (a little more than the 2016 blocks take) we\'d have 308.5 PH/s.  That means that towards the end of the ' +
                 '2016 blocks we\'re actually going to see blocks found more quickly than at the start.  In addition, as we saw in "',
-                h('a', { href: '/blog/2014-06-10-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-06-10-0000') },
+                h('a', {href: '/blog/2014-06-10-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-06-10-0000')},
                     'Lies, damned lies and Bitcoin difficulties'
                 ),
                 '", the nominal hash rate calculated at the end of each difficulty period lags about a week behind the current ' +
@@ -199,7 +199,7 @@ function blogArticle_2015_12_19_0000(): VNode[] {
             h('h2', {}, 'Source code'),
             h('p', {},
                 'The source code for the simulation tool that generated the results for this article can be found on github at: ',
-                h('a', { href: 'https://github.com/dave-hudson/waiting-for-blocks', target: '_blank' },
+                h('a', {href: 'https://github.com/dave-hudson/waiting-for-blocks', target: '_blank'},
                     'https://github.com/dave-hudson/waiting-for-blocks'
                 )
             )
@@ -214,17 +214,17 @@ function blogPostScript_2015_12_19_0000(): VNode[] {
             h('h2', {}, 'Related articles'),
             h('ul', {},
                 h('li', {},
-                    h('a', { href: '/blog/2014-06-10-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-06-10-0000') },
+                    h('a', {href: '/blog/2014-06-10-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-06-10-0000')},
                         'Lies, damned lies and Bitcoin difficulties (2014-06-10)'
                     )
                 ),
                 h('li', {},
-                    h('a', { href: '/blog/2014-05-24-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-24-0000') },
+                    h('a', {href: '/blog/2014-05-24-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-24-0000')},
                         'Reach for the ear defenders (2014-05-24)'
                     )
                 ),
                 h('li', {},
-                    h('a', { href: '/blog/2014-05-20-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-20-0000') },
+                    h('a', {href: '/blog/2014-05-20-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-20-0000')},
                         'Hash rate headaches (2014-05-20)'
                     )
                 )

@@ -325,7 +325,7 @@ function render(vNode: VNode): Node {
     }
 
     assertIsVElement(vNode);
-    const { namespace, type, attrs, childNodes } = vNode;
+    const {namespace, type, attrs, childNodes} = vNode;
     const domElement = document.createElementNS(namespaces[namespace as keyof typeof namespaces], type) as HTMLElement;
     vNode.domElement = domElement;
 
@@ -351,7 +351,7 @@ function unrender(vNode: VNode) {
     }
 
     assertIsVElement(vNode);
-    const { attrs, childNodes, domElement } = vNode;
+    const {attrs, childNodes, domElement} = vNode;
     const len = childNodes.length;
     for (let i = len - 1; i >= 0; i--) {
         const vn = childNodes[i];

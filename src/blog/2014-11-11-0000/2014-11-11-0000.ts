@@ -1,6 +1,6 @@
-import { h, VNode } from '../../lib/dvdi';
-import { navigateEvent } from '../../app';
-import { BlogPost } from '../BlogPost'
+import {h, VNode} from '../../lib/dvdi';
+import {navigateEvent} from '../../app';
+import {BlogPost} from '../BlogPost'
 
 function blogOpening_2014_11_11_0000(): VNode[] {
     return [
@@ -20,7 +20,7 @@ function blogArticle_2014_11_11_0000(): VNode[] {
             h('p', {},
                 'Bitcoin mining (and therefore transaction processing) is what\'s known as a Non-Homogenous (or Inhomogeneous) ' +
                 'Poisson Process.  In the article, "',
-                h('a', { href: '/blog/2014-05-20-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-20-0000') },
+                h('a', {href: '/blog/2014-05-20-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-20-0000')},
                     'Hash rate headaches'
                 ),
                 '" we saw how this actually works and that our nominal 10 minute spacing between Bitcoin blocks isn\'t quite as ' +
@@ -30,7 +30,7 @@ function blogArticle_2014_11_11_0000(): VNode[] {
             ),
             h('p', {},
                 'In the case of Bitcoin the transactions do have some other biases.  We saw in "',
-                h('a', { href: '/blog/2014-11-02-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-11-02-0000') },
+                h('a', {href: '/blog/2014-11-02-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-11-02-0000')},
                     '7 transactions per second?  Really?'
                 ),
                 '" that Sundays are usually quieter than other days, while Bitcoin transactions can also be perturbed by network ' +
@@ -60,7 +60,7 @@ function blogArticle_2014_11_11_0000(): VNode[] {
                 'also ignores network propagation delays (how long it takes for a transaction to be seen by all mining nodes) but ' +
                 'that will really just add a fairly small starting delay of up to a few seconds per transaction and so this is ' +
                 'probably ok too (see: ',
-                h('a', { href: 'http://bitcoinstats.com/network/propagation', target: '_blank' },
+                h('a', {href: 'http://bitcoinstats.com/network/propagation', target: '_blank'},
                     'http://bitcoinstats.com/network/propagation'
                 ),
                 ').  It does mean that the data is probably a little too optimistic about how quickly transactions can be mined.  ' +
@@ -220,7 +220,7 @@ function blogArticle_2014_11_11_0000(): VNode[] {
             h('p', {},
                 'This article was written with the help of data from a C language simulation.  The data was rendered into charts ' +
                 'using Excel.  The source code can be found on github: ',
-                h('a', { href: 'https://github.com/dave-hudson/bitcoin-traffic-bulletin', target: '_blank' },
+                h('a', {href: 'https://github.com/dave-hudson/bitcoin-traffic-bulletin', target: '_blank'},
                     'https://github.com/dave-hudson/bitcoin-traffic-bulletin'
                 )
             )
@@ -235,17 +235,17 @@ function blogPostScript_2014_11_11_0000(): VNode[] {
             h('h2', {}, 'Related articles'),
             h('ul', {},
                 h('li', {},
-                    h('a', { href: '/blog/2014-11-02-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-11-02-0000') },
+                    h('a', {href: '/blog/2014-11-02-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-11-02-0000')},
                         '7 transactions per second?  Really? (2014-11-02)'
                     )
                 ),
                 h('li', {},
-                    h('a', { href: '/blog/2014-06-15-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-06-15-0000') },
+                    h('a', {href: '/blog/2014-06-15-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-06-15-0000')},
                         'Finding 2016 blocks (2014-06-15)'
                     )
                 ),
                 h('li', {},
-                    h('a', { href: '/blog/2014-05-20-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-20-0000') },
+                    h('a', {href: '/blog/2014-05-20-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-20-0000')},
                         'Hash rate headaches (2014-05-20)'
                     )
                 )

@@ -1,5 +1,5 @@
-import { h, VNode } from '../../lib/dvdi';
-import { BlogPost } from '../BlogPost'
+import {h, VNode} from '../../lib/dvdi';
+import {BlogPost} from '../BlogPost'
 
 function blogOpening_2016_02_03_0000(): VNode[] {
     return [
@@ -72,7 +72,7 @@ function blogArticle_2016_02_03_0000(): VNode[] {
                 'doubling.  This is the very same period in which the average per-transaction fee had jumped up.  The spike in ' +
                 'July gives some indication of what happened, however, as this corresponds to the first "Bitcoin flood attack"' +
                 ' (see: ',
-                h('a', { href: 'https://en.bitcoin.it/wiki/July_2015_flood_attack', target: '_blank' }),
+                h('a', {href: 'https://en.bitcoin.it/wiki/July_2015_flood_attack', target: '_blank'}),
                 '). The flooding event caused the network to adjust fees upwards, but thereafter fees steadily declined again ' +
                 'as fee-bearing transactions saw minimal impact on confirmation times.'
             ),

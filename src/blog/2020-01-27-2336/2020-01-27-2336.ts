@@ -1,5 +1,5 @@
-import { h, VNode } from '../../lib/dvdi';
-import { BlogPost } from '../BlogPost'
+import {h, VNode} from '../../lib/dvdi';
+import {BlogPost} from '../BlogPost'
 
 function blogOpening_2020_01_27_2336(): VNode[] {
     return [

@@ -1,4 +1,4 @@
-import { Lexer, Parser, Token, styles } from './Parser'
+import {Lexer, Parser, Token, styles} from './Parser'
 
 styles['AT_RULE'] = 'css-at-rule';
 styles['DIMENSION'] = 'number';
@@ -92,7 +92,7 @@ export class CSSLexer extends Lexer {
             this.position++;
         }
 
-        return { type: 'IDENTIFIER', value: this.input.slice(start, this.position) };
+        return {type: 'IDENTIFIER', value: this.input.slice(start, this.position)};
     }
 
     private readComment(): Token {
@@ -103,7 +103,7 @@ export class CSSLexer extends Lexer {
         }
 
         this.position += 2;
-        return { type: 'COMMENT', value: this.input.slice(start, this.position) };
+        return {type: 'COMMENT', value: this.input.slice(start, this.position)};
     }
 
     private readAtRule(): Token {
@@ -113,7 +113,7 @@ export class CSSLexer extends Lexer {
             this.position++;
         }
 
-        return { type: 'AT_RULE', value: this.input.slice(start, this.position) };
+        return {type: 'AT_RULE', value: this.input.slice(start, this.position)};
     }
 
     private readNumber(): Token {
@@ -130,7 +130,7 @@ export class CSSLexer extends Lexer {
             return this.readDimension(start);
         }
 
-        return { type: 'NUMBER', value: this.input.slice(start, this.position) };
+        return {type: 'NUMBER', value: this.input.slice(start, this.position)};
     }
 
     private readDimension(start: number): Token {
@@ -138,7 +138,7 @@ export class CSSLexer extends Lexer {
             this.position++;
         }
 
-        return { type: 'DIMENSION', value: this.input.slice(start, this.position) };
+        return {type: 'DIMENSION', value: this.input.slice(start, this.position)};
     }
 
     private readHexOrId(): Token {
@@ -153,7 +153,7 @@ export class CSSLexer extends Lexer {
         }
 
         if (isHex && (this.position - start === 4 || this.position - start === 7)) {
-            return { type: 'HEX', value: this.input.slice(start, this.position) };
+            return {type: 'HEX', value: this.input.slice(start, this.position)};
         }
 
         // If not a valid hex, treat as ID selector
@@ -161,7 +161,7 @@ export class CSSLexer extends Lexer {
             this.position++;
         }
 
-        return { type: 'HASH', value: this.input.slice(start, this.position) };
+        return {type: 'HASH', value: this.input.slice(start, this.position)};
     }
 
     /**
@@ -194,12 +194,12 @@ export class CSSLexer extends Lexer {
         for (let i = 0; i < operators.length; i++) {
             if (this.input.startsWith(operators[i], this.position)) {
                 this.position += operators[i].length;
-                return { type: 'OPERATOR', value: operators[i] };
+                return {type: 'OPERATOR', value: operators[i]};
             }
         }
 
         const ch = this.input[this.position++];
-        return { type: 'ERROR', value: ch };
+        return {type: 'ERROR', value: ch};
     }
 }
 
@@ -239,7 +239,7 @@ export class CSSParser extends Parser {
         const nextToken: Token | null = this.lexer.peekNextSyntaxToken();
         if (nextToken?.type === 'OPERATOR') {
             if (nextToken.value === '(') {
-                return { type: 'FUNCTION_OR_METHOD', value: token.value };
+                return {type: 'FUNCTION_OR_METHOD', value: token.value};
             }
         }
 

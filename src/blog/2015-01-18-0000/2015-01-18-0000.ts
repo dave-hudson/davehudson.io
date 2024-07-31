@@ -1,21 +1,21 @@
-import { h, VNode } from '../../lib/dvdi';
-import { navigateEvent } from '../../app';
-import { BlogPost } from '../BlogPost'
+import {h, VNode} from '../../lib/dvdi';
+import {navigateEvent} from '../../app';
+import {BlogPost} from '../BlogPost'
 
 function blogOpening_2015_01_18_0000(): VNode[] {
     return [
         h('p', {},
             'It\'s well described how Bitcoin has a one Megabyte block limit; it\'s defined in the Bitcoin Core source ' +
             'code.  The knowledge of that 1 Mbyte limit has even served in some of my analysis such as "',
-            h('a', { href: '/blog/2014-11-12-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-11-12-0000') },
+            h('a', {href: '/blog/2014-11-12-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-11-12-0000')},
                 'The future of Bitcoin transaction fees?'
             ),
             '", "',
-            h('a', { href: '/blog/2014-11-11-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-11-11-0000') },
+            h('a', {href: '/blog/2014-11-11-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-11-11-0000')},
                 'Bitcoin traffic bulletin'
             ),
             '", and "',
-            h('a', { href: '/blog/2014-11-02-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-11-02-0000') },
+            h('a', {href: '/blog/2014-11-02-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-11-02-0000')},
                 '7 Transactions per second?  Really?'
             ),
             '".  Turns out that I was wrong; in practice this limit is actually quite a lot smaller!'
@@ -29,7 +29,7 @@ function blogArticle_2015_01_18_0000(): VNode[] {
             h('h2', {}, 'A puzzle'),
             h('p', {},
                 'Back in "',
-                h('a', { href: '/blog/2014-11-11-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-11-11-0000') },
+                h('a', {href: '/blog/2014-11-11-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-11-11-0000')},
                     'Bitcoin traffic bulletin'
                 ),
                 '" we saw how first transaction confirmation times were highly dependent on how full mined blocks were.  ' +
@@ -108,7 +108,7 @@ function blogArticle_2015_01_18_0000(): VNode[] {
                 'if the network is heavily loaded then our miner is effectively leaving transactions waiting when they declare a ' +
                 'block "full" at some level below 1M bytes.  Far from the 3.2 transactions per second that we thought the network ' +
                 'could sustain in "',
-                h('a', { href: '/blog/2014-11-02-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-11-02-0000') },
+                h('a', {href: '/blog/2014-11-02-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-11-02-0000')},
                     '7 Transactions per second?  Really?'
                 ),
                 '" every miner imposing a 750k bytes limit would mean the network capacity was actually only 2.4 TPS!'
@@ -239,9 +239,9 @@ function blogArticle_2015_01_18_0000(): VNode[] {
             h('h2', {}, 'Acknowledgments'),
             h('p', {},
                 'Many thanks to ',
-                h('a', { href: 'https://twitter.com/oocBlog', target: '_blank' }, '@oocBlog'),
+                h('a', {href: 'https://twitter.com/oocBlog', target: '_blank'}, '@oocBlog'),
                 ' (author of the ',
-                h('a', { href: 'https://organofcorti.blogspot.com', target: '_blank' }, 'Neighbourhood Pool Watch'),
+                h('a', {href: 'https://organofcorti.blogspot.com', target: '_blank'}, 'Neighbourhood Pool Watch'),
                 ') blog; well worth reading every week).  After I spotted the trends that led me to speculate about block size ' +
                 'limits he generated the raw data that I needed to perform my analysis.'
             )
@@ -253,7 +253,7 @@ function blogArticle_2015_01_18_0000(): VNode[] {
                 'When I came to write this article I also wrote a C++ application that would combine all of the raw data into a ' +
                 'form I could use with Excel to generate the charts.  The source code, and the source CSV data files can be ' +
                 'found on github: ',
-                h('a', { href: 'https://github.com/dave-hudson/the-myth-of-the-megabyte-bitcoin-block', target: '_blank' },
+                h('a', {href: 'https://github.com/dave-hudson/the-myth-of-the-megabyte-bitcoin-block', target: '_blank'},
                     'https://github.com/dave-hudson/the-myth-of-the-megabyte-bitcoin-block'
                 )
             )
@@ -268,17 +268,17 @@ function blogPostScript_2015_01_18_0000(): VNode[] {
             h('h2', {}, 'Related articles'),
             h('ul', {},
                 h('li', {},
-                    h('a', { href: '/blog/2014-11-12-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-11-12-0000') },
+                    h('a', {href: '/blog/2014-11-12-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-11-12-0000')},
                         'The future of Bitcoin transaction fees? (2014-11-12)'
                     )
                 ),
                 h('li', {},
-                    h('a', { href: '/blog/2014-11-11-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-11-11-0000') },
+                    h('a', {href: '/blog/2014-11-11-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-11-11-0000')},
                         'Bitcoin traffic bulletin (2014-11-11)'
                     )
                 ),
                 h('li', {},
-                    h('a', { href: '/blog/2014-11-02-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-11-02-0000') },
+                    h('a', {href: '/blog/2014-11-02-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-11-02-0000')},
                         '7 Transactions per second?  Really? (2014-11-02)'
                     )
                 )

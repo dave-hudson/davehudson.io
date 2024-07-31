@@ -1,9 +1,9 @@
 import puppeteer from 'puppeteer';
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-import { parseStringPromise } from 'xml2js';
+import {fileURLToPath} from 'url';
+import {dirname} from 'path';
+import {parseStringPromise} from 'xml2js';
 
 // Get the current module path
 const __filename = fileURLToPath(import.meta.url);
@@ -40,7 +40,7 @@ const ensureDirectoryExistence = (filePath) => {
         const localUrl = url.replace(/^https?:\/\/[^\/]+/, localBaseUrl);
 
         const page = await browser.newPage();
-        await page.goto(localUrl, { waitUntil: 'networkidle0' });
+        await page.goto(localUrl, {waitUntil: 'networkidle0'});
 
         // Get the content of the page
         const html = await page.content();

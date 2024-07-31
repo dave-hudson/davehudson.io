@@ -1,5 +1,5 @@
-import { Token } from './Parser'
-import { CLexer, CParser } from './CParser'
+import {Token} from './Parser'
+import {CLexer, CParser} from './CParser'
 
 /**
  * Lexer for C++ code.
@@ -63,12 +63,12 @@ export class CppLexer extends CLexer {
         for (let i = 0; i < operators.length; i++) {
             if (this.input.startsWith(operators[i], this.position)) {
                 this.position += operators[i].length;
-                return { type: 'OPERATOR', value: operators[i] };
+                return {type: 'OPERATOR', value: operators[i]};
             }
         }
 
         const ch = this.input[this.position++];
-        return { type: 'ERROR', value: ch };
+        return {type: 'ERROR', value: ch};
     }
 
     /**
@@ -224,7 +224,7 @@ export class CppParser extends CParser {
         if (nextToken?.type === 'OPERATOR') {
             if (nextToken.value === '(') {
                 this.inElement = false;
-                return { type: 'FUNCTION_OR_METHOD', value: token.value };
+                return {type: 'FUNCTION_OR_METHOD', value: token.value};
             }
 
             // Is the next token going to be an element?
@@ -236,7 +236,7 @@ export class CppParser extends CParser {
         this.inElement = nextInElement;
 
         if (curInElement) {
-            return { type: 'ELEMENT', value: token.value };
+            return {type: 'ELEMENT', value: token.value};
         }
 
         return token;

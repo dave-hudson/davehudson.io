@@ -1,4 +1,4 @@
-import { JavaScriptLexer, JavaScriptParser } from './JavaScriptParser'
+import {JavaScriptLexer, JavaScriptParser} from './JavaScriptParser'
 
 /**
  * Lexer for TypeScript code.

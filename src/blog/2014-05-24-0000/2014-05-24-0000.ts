@@ -1,6 +1,6 @@
-import { h, VNode } from '../../lib/dvdi';
-import { navigateEvent } from '../../app';
-import { BlogPost } from '../BlogPost'
+import {h, VNode} from '../../lib/dvdi';
+import {navigateEvent} from '../../app';
+import {BlogPost} from '../BlogPost'
 
 function blogOpening_2014_05_24_0000(): VNode[] {
     return [
@@ -25,7 +25,7 @@ function blogArticle_2014_05_24_0000(): VNode[] {
             h('h2', {}, 'A simple question'),
             h('p', {},
                 'An earlier article, "',
-                h('a', { href: '/blog/2014-05-20-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-20-0000') },
+                h('a', {href: '/blog/2014-05-20-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-20-0000')},
                     'Hash rate headaches'
                 ),
                 '" looked at the statistics associated with Bitcoin mining and how it is a random Poisson Process.  It was ' +
@@ -89,78 +89,78 @@ function blogArticle_2014_05_24_0000(): VNode[] {
             h('table', {},
                 h('thead', {},
                     h('tr', {},
-                        h('th', { align: 'left' }, 'Date'),
-                        h('th', { align: 'right' }, 'Difficulty'),
-                        h('th', { align: 'right' }, 'Change'),
-                        h('th', { align: 'right' }, 'Variance')
+                        h('th', {align: 'left'}, 'Date'),
+                        h('th', {align: 'right'}, 'Difficulty'),
+                        h('th', {align: 'right'}, 'Change'),
+                        h('th', {align: 'right'}, 'Variance')
                     )
                 ),
                 h('tbody', {},
                     h('tr', {},
-                        h('td', { align: 'left' }, '2014-05-24'),
-                        h('td', { align: 'right' }, '10455720138'),
-                        h('td', { align: 'right' }, '18.10%'),
-                        h('td', { align: 'right' }, '1.20%')
+                        h('td', {align: 'left'}, '2014-05-24'),
+                        h('td', {align: 'right'}, '10455720138'),
+                        h('td', {align: 'right'}, '18.10%'),
+                        h('td', {align: 'right'}, '1.20%')
                     ),
                     h('tr', {},
-                        h('td', { align: 'left' }, '2014-05-12'),
-                        h('td', { align: 'right' }, '8853416309'),
-                        h('td', { align: 'right' }, '10.66%'),
-                        h('td', { align: 'right' }, '-6.24%')
+                        h('td', {align: 'left'}, '2014-05-12'),
+                        h('td', {align: 'right'}, '8853416309'),
+                        h('td', {align: 'right'}, '10.66%'),
+                        h('td', {align: 'right'}, '-6.24%')
                     ),
                     h('tr', {},
-                        h('td', { align: 'left' }, '2014-04-29'),
-                        h('td', { align: 'right' }, '8000872136'),
-                        h('td', { align: 'right' }, '14.64%'),
-                        h('td', { align: 'right' }, '-2.26%')
+                        h('td', {align: 'left'}, '2014-04-29'),
+                        h('td', {align: 'right'}, '8000872136'),
+                        h('td', {align: 'right'}, '14.64%'),
+                        h('td', {align: 'right'}, '-2.26%')
                     ),
                     h('tr', {},
-                        h('td', { align: 'left' }, '2014-04-17'),
-                        h('td', { align: 'right' }, '6978842650'),
-                        h('td', { align: 'right' }, '14.04%'),
-                        h('td', { align: 'right' }, '-2.86%')
+                        h('td', {align: 'left'}, '2014-04-17'),
+                        h('td', {align: 'right'}, '6978842650'),
+                        h('td', {align: 'right'}, '14.04%'),
+                        h('td', {align: 'right'}, '-2.86%')
                     ),
                     h('tr', {},
-                        h('td', { align: 'left' }, '2014-04-05'),
-                        h('td', { align: 'right' }, '6119726089'),
-                        h('td', { align: 'right' }, '22.23%'),
-                        h('td', { align: 'right' }, '5.33%')
+                        h('td', {align: 'left'}, '2014-04-05'),
+                        h('td', {align: 'right'}, '6119726089'),
+                        h('td', {align: 'right'}, '22.23%'),
+                        h('td', {align: 'right'}, '5.33%')
                     ),
                     h('tr', {},
-                        h('td', { align: 'left' }, '2014-03-24'),
-                        h('td', { align: 'right' }, '5006860589'),
-                        h('td', { align: 'right' }, '17.80%'),
-                        h('td', { align: 'right' }, '0.90%')
+                        h('td', {align: 'left'}, '2014-03-24'),
+                        h('td', {align: 'right'}, '5006860589'),
+                        h('td', {align: 'right'}, '17.80%'),
+                        h('td', {align: 'right'}, '0.90%')
                     ),
                     h('tr', {},
-                        h('td', { align: 'left' }, '2014-03-13'),
-                        h('td', { align: 'right' }, '4250217920'),
-                        h('td', { align: 'right' }, '11.39%'),
-                        h('td', { align: 'right' }, '-5.21%')
+                        h('td', {align: 'left'}, '2014-03-13'),
+                        h('td', {align: 'right'}, '4250217920'),
+                        h('td', {align: 'right'}, '11.39%'),
+                        h('td', {align: 'right'}, '-5.21%')
                     ),
                     h('tr', {},
-                        h('td', { align: 'left' }, '2014-02-28'),
-                        h('td', { align: 'right' }, '3815723799'),
-                        h('td', { align: 'right' }, '21.92%'),
-                        h('td', { align: 'right' }, '5.02%')
+                        h('td', {align: 'left'}, '2014-02-28'),
+                        h('td', {align: 'right'}, '3815723799'),
+                        h('td', {align: 'right'}, '21.92%'),
+                        h('td', {align: 'right'}, '5.02%')
                     ),
                     h('tr', {},
-                        h('td', { align: 'left' }, '2014-02-17'),
-                        h('td', { align: 'right' }, '3129573175'),
-                        h('td', { align: 'right' }, '19.39%'),
-                        h('td', { align: 'right' }, '2.49%')
+                        h('td', {align: 'left'}, '2014-02-17'),
+                        h('td', {align: 'right'}, '3129573175'),
+                        h('td', {align: 'right'}, '19.39%'),
+                        h('td', {align: 'right'}, '2.49%')
                     ),
                     h('tr', {},
-                        h('td', { align: 'left' }, '2014-02-05'),
-                        h('td', { align: 'right' }, '2621404453'),
-                        h('td', { align: 'right' }, '19.49%'),
-                        h('td', { align: 'right' }, '2.59%')
+                        h('td', {align: 'left'}, '2014-02-05'),
+                        h('td', {align: 'right'}, '2621404453'),
+                        h('td', {align: 'right'}, '19.49%'),
+                        h('td', {align: 'right'}, '2.59%')
                     ),
                     h('tr', {},
-                        h('td', { align: 'left' }, '2014-01-24'),
-                        h('td', { align: 'right' }, '2193847870'),
-                        h('td', { align: 'right' }, '22.59%'),
-                        h('td', { align: 'right' }, '5.69%')
+                        h('td', {align: 'left'}, '2014-01-24'),
+                        h('td', {align: 'right'}, '2193847870'),
+                        h('td', {align: 'right'}, '22.59%'),
+                        h('td', {align: 'right'}, '5.69%')
                     )
                 )
             ),
@@ -199,7 +199,7 @@ function blogPostScript_2014_05_24_0000(): VNode[] {
             h('h2', {}, 'Related articles'),
             h('ul', {},
                 h('li', {},
-                    h('a', { href: '/blog/2014-05-20-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-20-0000') },
+                    h('a', {href: '/blog/2014-05-20-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-20-0000')},
                         'Hash rate headaches (2014-05-20)'
                     )
                 )

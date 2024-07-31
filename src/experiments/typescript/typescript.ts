@@ -1,9 +1,9 @@
-import { assertIsVElement, h, updateElement, VElement, VNode } from '../../lib/dvdi';
-import { ExperimentPage } from '../ExperimentPage';
-import { pageHeader, pageFooter } from '../../lib/page';
-import { TypeScriptParser } from '../../lib/TypeScriptParser';
-import { highlight } from '../../lib/highlight'
-import { cloneObject } from '../../lib/cloneObject';
+import {assertIsVElement, h, updateElement, VElement, VNode} from '../../lib/dvdi';
+import {ExperimentPage} from '../ExperimentPage';
+import {pageHeader, pageFooter} from '../../lib/page';
+import {TypeScriptParser} from '../../lib/TypeScriptParser';
+import {highlight} from '../../lib/highlight'
+import {cloneObject} from '../../lib/cloneObject';
 
 const code: VNode[] = [];
 let codeVElement: (VElement | null) = null;
@@ -83,7 +83,7 @@ function experimentSyntaxTypeScriptComponent(): VElement {
 function experimentSyntaxTypeScriptPage(): VNode {
     return h('div', {},
         pageHeader(),
-        h('main', { className: 'main' },
+        h('main', {className: 'main'},
             h('article', {},
                 h('h1', {}, 'TypeScript syntax example'),
                 experimentSyntaxTypeScriptComponent()

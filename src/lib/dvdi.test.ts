@@ -1,4 +1,4 @@
-import { jest } from '@jest/globals';
+import {jest} from '@jest/globals';
 
 import {
     VElement,
@@ -16,9 +16,9 @@ import {
 
 describe('VNode Class and sub-classes', () => {
     test('constructor initializes properties correctly', () => {
-        const vNode = new VElement('html', 'div', { id: 'test' }, []);
+        const vNode = new VElement('html', 'div', {id: 'test'}, []);
         expect(vNode.type).toBe('div');
-        expect(vNode.attrs).toEqual({ id: 'test' });
+        expect(vNode.attrs).toEqual({id: 'test'});
         expect(vNode.childNodes).toEqual([]);
     });
 
@@ -271,14 +271,14 @@ describe('updateElement function', () => {
 
     test('updateElement adds a node with properties', () => {
         const parent = document.createElement('div');
-        const newVNode = new VElement('html', 'span', { className: 'test', onclick: () => {} }, []);
+        const newVNode = new VElement('html', 'span', {className: 'test', onclick: () => {}}, []);
         updateElement(parent, null, null, null, newVNode);
         expect(parent.childNodes).toContain(newVNode.domElement);
     });
 
     test('updateElement removes a node with properties', () => {
         const parent = document.createElement('div');
-        const newVNode = new VElement('html', 'span', { className: 'test', onclick: () => {} }, []);
+        const newVNode = new VElement('html', 'span', {className: 'test', onclick: () => {}}, []);
         updateElement(parent, null, null, null, newVNode);
         updateElement(parent, parent.childNodes[0], null, newVNode, null);
         expect(parent.childNodes.length).toBe(0);
@@ -286,8 +286,8 @@ describe('updateElement function', () => {
 
     test('updateElement replaces a node with properties', () => {
         const parent = document.createElement('div');
-        const oldVNode = new VElement('html', 'span', { className: 'test', id: 'bob', onclick: () => {} }, []);
-        const newVNode = new VElement('html', 'span', { className: 'test', id: 'fred', onclick: () => {} }, []);
+        const oldVNode = new VElement('html', 'span', {className: 'test', id: 'bob', onclick: () => {}}, []);
+        const newVNode = new VElement('html', 'span', {className: 'test', id: 'fred', onclick: () => {}}, []);
         updateElement(parent, null, null, null, oldVNode);
         updateElement(parent, parent.childNodes[0], null, oldVNode, newVNode);
         expect(Object.keys(newVNode.attrs).length).toBe(3);
@@ -296,8 +296,8 @@ describe('updateElement function', () => {
 
     test('updateElement replaces a node with different properties', () => {
         const parent = document.createElement('div');
-        const oldVNode = new VElement('html', 'span', { className: 'test', style: 'bob', onclick: () => {} }, []);
-        const newVNode = new VElement('html', 'span', { className: 'test', id: 'fred', onclick: () => {} }, []);
+        const oldVNode = new VElement('html', 'span', {className: 'test', style: 'bob', onclick: () => {}}, []);
+        const newVNode = new VElement('html', 'span', {className: 'test', id: 'fred', onclick: () => {}}, []);
         updateElement(parent, null, null, null, oldVNode);
         updateElement(parent, parent.childNodes[0], null, oldVNode, newVNode);
         expect(Object.keys(newVNode.attrs).length).toBe(3);
@@ -306,11 +306,11 @@ describe('updateElement function', () => {
 
     test('updateElement replaces an HTML node with an SVG node', () => {
         const parent = document.createElement('div');
-        const oldVNode = new VElement('html', 'span', { className: 'test', style: 'bob', onclick: () => {} }, []);
+        const oldVNode = new VElement('html', 'span', {className: 'test', style: 'bob', onclick: () => {}}, []);
         const newVNode = new VElement('svg', 'svg', {
                 xmlns: 'http://www.w3.org/2000/svg',
                 'xml:space': 'preserve',
-                onclick: () => { console.log('click'); }
+                onclick: () => {console.log('click');}
             },
             []
         );
@@ -325,11 +325,11 @@ describe('updateElement function', () => {
         const oldVNode = new VElement('svg', 'svg', {
                 xmlns: 'http://www.w3.org/2000/svg',
                 'xml:space': 'preserve',
-                onclick: () => { console.log('click'); }
+                onclick: () => {console.log('click');}
             },
             []
         );
-        const newVNode = new VElement('html', 'span', { className: 'test', style: 'bob', onclick: () => {} }, []);
+        const newVNode = new VElement('html', 'span', {className: 'test', style: 'bob', onclick: () => {}}, []);
         updateElement(parent, null, null, null, oldVNode);
         updateElement(parent, parent.childNodes[0], null, oldVNode, newVNode);
         expect(Object.keys(newVNode.attrs).length).toBe(3);
@@ -382,9 +382,9 @@ describe('updateElement function', () => {
 
 describe('h function', () => {
     test('h creates a virtual DOM element', () => {
-        const vNode = h('div', { id: 'test' }, 'child');
+        const vNode = h('div', {id: 'test'}, 'child');
         expect(vNode.type).toBe('div');
-        expect(vNode.attrs).toEqual({ id: 'test' });
+        expect(vNode.attrs).toEqual({id: 'test'});
         expect(vNode.childNodes[0] instanceof VText);
         expect((vNode.childNodes[0] as VText).text).toBe('child');
     });
@@ -398,9 +398,9 @@ describe('h function', () => {
 
 describe('svg function', () => {
     test('svg creates a virtual DOM element', () => {
-        const vNode = svg('svg', { xmlns: 'http://www.w3.org/2000/svg' }, 'child');
+        const vNode = svg('svg', {xmlns: 'http://www.w3.org/2000/svg'}, 'child');
         expect(vNode.type).toBe('svg');
-        expect(vNode.attrs).toEqual({ xmlns: 'http://www.w3.org/2000/svg' });
+        expect(vNode.attrs).toEqual({xmlns: 'http://www.w3.org/2000/svg'});
         expect(vNode.childNodes[0] instanceof VText);
         expect((vNode.childNodes[0] as VText).text).toBe('child');
     });

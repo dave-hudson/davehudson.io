@@ -1,12 +1,12 @@
-import { h, VNode } from '../../lib/dvdi';
-import { navigateEvent } from '../../app';
-import { BlogPost } from '../BlogPost'
+import {h, VNode} from '../../lib/dvdi';
+import {navigateEvent} from '../../app';
+import {BlogPost} from '../BlogPost'
 
 function blogOpening_2014_12_05_0000(): VNode[] {
     return [
         h('p', {},
             'A few days ago, Ittay Eyal published an intriguing paper, "',
-            h('a', { href: 'http://hackingdistributed.com/2014/12/03/the-miners-dilemma/', target: '_blank' },
+            h('a', {href: 'http://hackingdistributed.com/2014/12/03/the-miners-dilemma/', target: '_blank'},
                 'The Miner\'s Dilemma'
             ),
             '".  It describes an attack where an open mining pool may be attacked using block withholding.  Given that most ' +
@@ -238,7 +238,7 @@ function blogArticle_2014_12_05_0000(): VNode[] {
             h('ul', {},
                 h('li', {},
                     'Small mining pools suffer from significantly worse reward variances as we\'ve seen before in, "',
-                    h('a', { href: '/blog/2014-06-30-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-06-30-0000') },
+                    h('a', {href: '/blog/2014-06-30-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-06-30-0000')},
                         'The gambler\'s guide to Bitcoin mining'
                     ),
                     '"'
@@ -330,7 +330,7 @@ function blogArticle_2014_12_05_0000(): VNode[] {
             h('p', {},
                 'This article was written with the help of data from a C language simulation.  The data was rendered into ' +
                 'charts using Excel.  The source code can be found on github: ',
-                h('a', { href: 'https://github.com/dave-hudson/pool-wars', target: '_blank' },
+                h('a', {href: 'https://github.com/dave-hudson/pool-wars', target: '_blank'},
                     'https://github.com/dave-hudson/pool-wars'
                 )
             )
@@ -345,12 +345,12 @@ function blogPostScript_2014_12_05_0000(): VNode[] {
             h('h2', {}, 'Related articles'),
             h('ul', {},
                 h('li', {},
-                    h('a', { href: '/blog/2014-06-30-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-06-30-0000') },
+                    h('a', {href: '/blog/2014-06-30-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-06-30-0000')},
                         'The gambler\'s guide to Bitcoin mining (2014-06-30)'
                     )
                 ),
                 h('li', {},
-                    h('a', { href: '/blog/2014-04-03-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-04-03-0000') },
+                    h('a', {href: '/blog/2014-04-03-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-04-03-0000')},
                         'The rewards for a Bitcoin miner (2014-04-03)'
                     )
                 )

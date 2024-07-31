@@ -1,16 +1,16 @@
-import { h, VNode } from '../../lib/dvdi';
-import { pageHeader, pageFooter } from "../../lib/page";
-import { ProjectPage } from '../ProjectPage';
+import {h, VNode} from '../../lib/dvdi';
+import {pageHeader, pageFooter} from "../../lib/page";
+import {ProjectPage} from '../ProjectPage';
 
 export function projectGccPage(): VNode {
     return h('div', {},
         pageHeader(),
-        h('main', { className: 'main' },
+        h('main', {className: 'main'},
             h('h1', {}, 'gcc (Ubicom processor backends)'),
             h('p', {},
                 'From 2001 to 2012 I maintained the backends for Ubicom\'s IP2k and Ubicom32 processor family versions of gcc. ' +
                 'I no longer have links for the IP2k version, but the 32-bit Ubicom32 version can be found here: ',
-                h('a', { href: 'https://git.codelinaro.org/clo/external-ubicom/ubicom32-toolchain', target: '_blank' },
+                h('a', {href: 'https://git.codelinaro.org/clo/external-ubicom/ubicom32-toolchain', target: '_blank'},
                     'https://git.codelinaro.org/clo/external-ubicom/ubicom32-toolchain')
             ),
             h('p', {},

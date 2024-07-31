@@ -1,14 +1,14 @@
-import { h, VNode } from '../lib/dvdi';
-import { pageHeader, pageFooter } from "../lib/page";
-import { navigateEvent, routeDetails } from '../app';
-import { ProjectPage } from './ProjectPage';
-import { projectC8 } from './c8/c8';
-import { projectCountdown } from './countdown/countdown';
-import { projectGcc } from './gcc/gcc';
-import { projectLiquorice } from './Liquorice/Liquorice';
-import { projectMkdosfs } from './mkdosfs/mkdosfs';
-import { projectSiterender } from './siterender/siterender';
-import { projectVSTa } from './VSTa/VSTa';
+import {h, VNode} from '../lib/dvdi';
+import {pageHeader, pageFooter} from "../lib/page";
+import {navigateEvent, routeDetails} from '../app';
+import {ProjectPage} from './ProjectPage';
+import {projectC8} from './c8/c8';
+import {projectCountdown} from './countdown/countdown';
+import {projectGcc} from './gcc/gcc';
+import {projectLiquorice} from './Liquorice/Liquorice';
+import {projectMkdosfs} from './mkdosfs/mkdosfs';
+import {projectSiterender} from './siterender/siterender';
+import {projectVSTa} from './VSTa/VSTa';
 
 // Enumerate all the blog content served up here.  Newest content goes at the end.
 const projectsContent: ProjectPage[] = [
@@ -24,11 +24,11 @@ const projectsContent: ProjectPage[] = [
 export function projectsPage(): VNode {
     return h('div', {},
         pageHeader(),
-        h('main', { className: 'main' },
+        h('main', {className: 'main'},
             h('h1', {}, 'Open source projects'),
-            h('p', { className: 'meta'},
+            h('p', {className: 'meta'},
                 'Last updated: ',
-                h('time', { datetime: '2024-07-31T18:00'}, '2024-07-31 18:00')
+                h('time', {datetime: '2024-07-31T18:00'}, '2024-07-31 18:00')
             ),
             h('p', {},
                 'I\'ve been involved in building open source software since the early 90s.  Unfortunately I can\'t find ' +

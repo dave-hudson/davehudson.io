@@ -1,4 +1,4 @@
-import { build } from 'esbuild';
+import {build} from 'esbuild';
 
 build({
   entryPoints: ['src/app.ts'],
@@ -6,7 +6,7 @@ build({
   sourcemap: true,
   platform: 'browser',
   outfile: 'build/app.js',
-  loader: { '.ts': 'ts' },
+  loader: {'.ts': 'ts'},
   logLevel: 'info',
 }).catch(() => process.exit(1));
 

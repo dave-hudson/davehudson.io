@@ -1,6 +1,6 @@
-import { h, VNode} from '../../lib/dvdi';
-import { navigateEvent } from '../../app';
-import { BlogPost } from '../BlogPost'
+import {h, VNode} from '../../lib/dvdi';
+import {navigateEvent} from '../../app';
+import {BlogPost} from '../BlogPost'
 
 function blogOpening_2014_04_28_0000(): VNode[] {
     return [
@@ -41,7 +41,7 @@ function blogArticle_2014_04_28_0000(): VNode[] {
             h('p', {},
                 'If we take our 86 MW number then that equates to 2.06M kWh of electricity per day.  Electricity prices vary ' +
                 'quite a lot based on location but the range is probably as low as \$0.08 all the way through to \$0.50 (see ',
-                h('a', { href: 'http://energyusecalculator.com/global_electricity_prices', target: '_blank' },
+                h('a', {href: 'http://energyusecalculator.com/global_electricity_prices', target: '_blank'},
                     'http://energyusecalculator.com/global_electricity_prices.htm'
                 ),
                 ' but a reasonable working average might be \$0.20.  Commercial users might average a lower raw cost for ' +
@@ -57,7 +57,7 @@ function blogArticle_2014_04_28_0000(): VNode[] {
             h('h2', {}, 'How does this affect peak hashing rates?'),
             h('p', {},
                 'In an earlier article, "',
-                h('a', { href: '/blog/2014-04-03-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-04-03-0000') },
+                h('a', {href: '/blog/2014-04-03-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-04-03-0000')},
                     'The rewards for a Bitcoin miner'
                 ),
                 '", we looked at how hardware costs and mining rewards could put an upper limit on the worldwide hashing ' +
@@ -102,7 +102,7 @@ function blogArticle_2014_04_28_0000(): VNode[] {
             ),
             h('p', {},
                 'In another article, "',
-                h('a', { href: '/blog/2014-03-23-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-03-23-0000') },
+                h('a', {href: '/blog/2014-03-23-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-03-23-0000')},
                     'Where next for Bitcoin mining ASICs?'
                 ),
                 '", some thought was given to how much opportunity there is to see much more efficient hashing hardware.  It ' +
@@ -189,17 +189,17 @@ function blogPostScript_2014_04_28_0000(): VNode[] {
             h('h2', {}, 'Related articles'),
             h('ul', {},
                 h('li', {},
-                    h('a', { href: '/blog/2014-04-03-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-04-03-0000') },
+                    h('a', {href: '/blog/2014-04-03-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-04-03-0000')},
                         'The rewards for a Bitcoin miner (2014-04-03)'
                     )
                 ),
                 h('li', {},
-                    h('a', { href: '/blog/2014-03-23-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-03-23-0000') },
+                    h('a', {href: '/blog/2014-03-23-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-03-23-0000')},
                         'Where next for Bitcoin mining ASICs? (2014-03-23)'
                     )
                 ),
                 h('li', {},
-                    h('a', { href: '/blog/2014-03-09-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-03-09-0000') },
+                    h('a', {href: '/blog/2014-03-09-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-03-09-0000')},
                         'The Bitcoin runaway mine train (2014-03-09)'
                     )
                 )

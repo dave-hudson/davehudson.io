@@ -1,7 +1,7 @@
 import express from 'express'
-import { fileURLToPath } from 'url';
+import {fileURLToPath} from 'url';
 import path from 'path'
-import { existsSync, statSync } from 'fs';
+import {existsSync, statSync} from 'fs';
 const app = express();
 
 // Calculate __dirname based on the current file location

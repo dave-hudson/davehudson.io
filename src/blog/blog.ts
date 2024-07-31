@@ -1,34 +1,34 @@
-import { h, VElement, VNode } from '../lib/dvdi';
-import { pageHeader, pageFooter } from '../lib/page';
-import { navigateEvent, routeDetails } from '../app';
-import { chevronLeftIcon, chevronRightIcon } from '../lib/icons';
-import { blogPost_2014_03_09_0000 } from './2014-03-09-0000/2014-03-09-0000';
-import { blogPost_2014_03_12_0000 } from './2014-03-12-0000/2014-03-12-0000';
-import { blogPost_2014_03_17_0000 } from './2014-03-17-0000/2014-03-17-0000';
-import { blogPost_2014_03_23_0000 } from './2014-03-23-0000/2014-03-23-0000';
-import { blogPost_2014_04_03_0000 } from './2014-04-03-0000/2014-04-03-0000';
-import { blogPost_2014_04_28_0000 } from './2014-04-28-0000/2014-04-28-0000';
-import { blogPost_2014_04_30_0000 } from './2014-04-30-0000/2014-04-30-0000';
-import { blogPost_2014_05_20_0000 } from './2014-05-20-0000/2014-05-20-0000';
-import { blogPost_2014_05_24_0000 } from './2014-05-24-0000/2014-05-24-0000';
-import { blogPost_2014_06_05_0000 } from './2014-06-05-0000/2014-06-05-0000';
-import { blogPost_2014_06_10_0000 } from './2014-06-10-0000/2014-06-10-0000';
-import { blogPost_2014_06_15_0000 } from './2014-06-15-0000/2014-06-15-0000';
-import { blogPost_2014_06_23_0000 } from './2014-06-23-0000/2014-06-23-0000';
-import { blogPost_2014_06_30_0000 } from './2014-06-30-0000/2014-06-30-0000';
-import { blogPost_2014_11_02_0000 } from './2014-11-02-0000/2014-11-02-0000';
-import { blogPost_2014_11_11_0000 } from './2014-11-11-0000/2014-11-11-0000';
-import { blogPost_2014_11_12_0000 } from './2014-11-12-0000/2014-11-12-0000';
-import { blogPost_2014_12_05_0000 } from './2014-12-05-0000/2014-12-05-0000';
-import { blogPost_2015_01_18_0000 } from './2015-01-18-0000/2015-01-18-0000';
-import { blogPost_2015_12_19_0000 } from './2015-12-19-0000/2015-12-19-0000';
-import { blogPost_2015_12_20_0000 } from './2015-12-20-0000/2015-12-20-0000';
-import { blogPost_2016_01_05_0000 } from './2016-01-05-0000/2016-01-05-0000';
-import { blogPost_2016_02_03_0000 } from './2016-02-03-0000/2016-02-03-0000';
-import { blogPost_2017_01_06_1400 } from './2017-01-06-1400/2017-01-06-1400';
-import { blogPost_2020_01_27_2336 } from './2020-01-27-2336/2020-01-27-2336';
-import { blogPost_2024_07_15_0800 } from './2024-07-15-0800/2024-07-15-0800';
-import { BlogPost } from './BlogPost';
+import {h, VElement, VNode} from '../lib/dvdi';
+import {pageHeader, pageFooter} from '../lib/page';
+import {navigateEvent, routeDetails} from '../app';
+import {chevronLeftIcon, chevronRightIcon} from '../lib/icons';
+import {blogPost_2014_03_09_0000} from './2014-03-09-0000/2014-03-09-0000';
+import {blogPost_2014_03_12_0000} from './2014-03-12-0000/2014-03-12-0000';
+import {blogPost_2014_03_17_0000} from './2014-03-17-0000/2014-03-17-0000';
+import {blogPost_2014_03_23_0000} from './2014-03-23-0000/2014-03-23-0000';
+import {blogPost_2014_04_03_0000} from './2014-04-03-0000/2014-04-03-0000';
+import {blogPost_2014_04_28_0000} from './2014-04-28-0000/2014-04-28-0000';
+import {blogPost_2014_04_30_0000} from './2014-04-30-0000/2014-04-30-0000';
+import {blogPost_2014_05_20_0000} from './2014-05-20-0000/2014-05-20-0000';
+import {blogPost_2014_05_24_0000} from './2014-05-24-0000/2014-05-24-0000';
+import {blogPost_2014_06_05_0000} from './2014-06-05-0000/2014-06-05-0000';
+import {blogPost_2014_06_10_0000} from './2014-06-10-0000/2014-06-10-0000';
+import {blogPost_2014_06_15_0000} from './2014-06-15-0000/2014-06-15-0000';
+import {blogPost_2014_06_23_0000} from './2014-06-23-0000/2014-06-23-0000';
+import {blogPost_2014_06_30_0000} from './2014-06-30-0000/2014-06-30-0000';
+import {blogPost_2014_11_02_0000} from './2014-11-02-0000/2014-11-02-0000';
+import {blogPost_2014_11_11_0000} from './2014-11-11-0000/2014-11-11-0000';
+import {blogPost_2014_11_12_0000} from './2014-11-12-0000/2014-11-12-0000';
+import {blogPost_2014_12_05_0000} from './2014-12-05-0000/2014-12-05-0000';
+import {blogPost_2015_01_18_0000} from './2015-01-18-0000/2015-01-18-0000';
+import {blogPost_2015_12_19_0000} from './2015-12-19-0000/2015-12-19-0000';
+import {blogPost_2015_12_20_0000} from './2015-12-20-0000/2015-12-20-0000';
+import {blogPost_2016_01_05_0000} from './2016-01-05-0000/2016-01-05-0000';
+import {blogPost_2016_02_03_0000} from './2016-02-03-0000/2016-02-03-0000';
+import {blogPost_2017_01_06_1400} from './2017-01-06-1400/2017-01-06-1400';
+import {blogPost_2020_01_27_2336} from './2020-01-27-2336/2020-01-27-2336';
+import {blogPost_2024_07_15_0800} from './2024-07-15-0800/2024-07-15-0800';
+import {BlogPost} from './BlogPost';
 
 // Enumerate all the blog content served up here.  Newest content goes at the end.
 const blogContent: BlogPost[] = [
@@ -61,11 +61,11 @@ const blogContent: BlogPost[] = [
 ]
 
 function navPrevNext(prevStr: string | null, prevHRef: string | null, nextStr: string | null, nextHRef: string | null): VNode {
-    return h('nav', { className: 'prev-next'},
+    return h('nav', {className: 'prev-next'},
         h('h2', {}, 'More blog posts'),
-        h('table', { className: 'meta-nav' },
+        h('table', {className: 'meta-nav'},
             h('tr', {},
-                h('td', { className: 'prev' },
+                h('td', {className: 'prev'},
                     !prevStr ? '' : h('a', {
                             className: 'icon',
                             href: (prevHRef as string),
@@ -75,7 +75,7 @@ function navPrevNext(prevStr: string | null, prevHRef: string | null, nextStr: s
                         chevronLeftIcon()
                     )
                 ),
-                h('td', { className: 'prev-text' },
+                h('td', {className: 'prev-text'},
                     !prevStr ? '' : h('a', {
                             href: (prevHRef as string),
                             onclick: (e: MouseEvent) => navigateEvent(e, (prevHRef as string))
@@ -83,7 +83,7 @@ function navPrevNext(prevStr: string | null, prevHRef: string | null, nextStr: s
                         prevStr
                     )
                 ),
-                h('td', { className: 'next-text' },
+                h('td', {className: 'next-text'},
                     !nextStr ? '' : h('a', {
                             href: (nextHRef as string),
                             onclick: (e: MouseEvent) => navigateEvent(e, (nextHRef as string))
@@ -91,7 +91,7 @@ function navPrevNext(prevStr: string | null, prevHRef: string | null, nextStr: s
                         nextStr
                     )
                 ),
-                h('td', { className: 'next' },
+                h('td', {className: 'next'},
                     !nextStr ? '' : h('a', {
                             className: 'icon',
                             href: (nextHRef as string),
@@ -138,12 +138,12 @@ function blogArticlePage(index: number): VNode {
 
     return h('div', {},
         pageHeader(),
-        h('main', { className: 'main' },
+        h('main', {className: 'main'},
             h('article', {},
                 h('h1', {}, thisArticle.title),
-                h('p', { className: 'meta' },
+                h('p', {className: 'meta'},
                     'Published: ',
-                    h('time', { datetime: thisArticle.dateTime }, formattedDate)
+                    h('time', {datetime: thisArticle.dateTime}, formattedDate)
                 ),
                 ...preText,
                 ...thisArticle.openingFunction(),
@@ -157,11 +157,11 @@ function blogArticlePage(index: number): VNode {
 }
 
 function blogLink(href: string, title: string, meta: string) {
-    return h('div', { className: 'blog-post' },
+    return h('div', {className: 'blog-post'},
         h('span', {},
-            h('a', { href: href, onclick: (e: MouseEvent) => navigateEvent(e, href) }, title)
+            h('a', {href: href, onclick: (e: MouseEvent) => navigateEvent(e, href)}, title)
         ),
-        h('span', { className: 'meta' }, meta)
+        h('span', {className: 'meta'}, meta)
     )
 }
 
@@ -173,7 +173,7 @@ export function blogPage() {
 
     // Iterate all the blog content and create year and item enties.
     for (let i = blogContent.length - 1; i >= 0; i--) {
-        const { hRef, title, dateTime } = blogContent[i];
+        const {hRef, title, dateTime} = blogContent[i];
 
         // Parse the ISO 8601 date string into a Date object
         const date = new Date(dateTime);
@@ -201,9 +201,9 @@ export function blogPage() {
     // Return the VDOM for the blog page.
     return h('div', {},
         pageHeader(),
-        h('main', { className: 'main' },
+        h('main', {className: 'main'},
             h('h1', {}, 'Blog posts'),
-            h('div', { className: 'blog-posts' }, ...sections)
+            h('div', {className: 'blog-posts'}, ...sections)
         ),
         pageFooter()
     );
@@ -218,7 +218,7 @@ export function blogSummaries(numEntries: number) {
 
     // Generate a list of HTML elements that match each blog post.
     for (let i = blogContent.length - 1; i >= lastEntry; i--) {
-        const { hRef, title, dateTime, openingFunction } = blogContent[i];
+        const {hRef, title, dateTime, openingFunction} = blogContent[i];
 
         // Parse the ISO 8601 date string into a Date object
         const date = new Date(dateTime);
@@ -230,13 +230,13 @@ export function blogSummaries(numEntries: number) {
         view.push(h('hr', {}));
         view.push(h('section', {},
             h('h2', {},
-                h('a', { href: hRef, onclick: (e: MouseEvent) => navigateEvent(e, hRef) }, title)
+                h('a', {href: hRef, onclick: (e: MouseEvent) => navigateEvent(e, hRef)}, title)
             ),
-            h('p', { className: 'meta' }, 'Published: ', formattedDate),
+            h('p', {className: 'meta'}, 'Published: ', formattedDate),
             ...openingFunction(),
             h('p', {},
                 h('em', {},
-                    h('a', { href: hRef, onclick: (e: MouseEvent) => navigateEvent(e, hRef) }, '[read more]')
+                    h('a', {href: hRef, onclick: (e: MouseEvent) => navigateEvent(e, hRef)}, '[read more]')
                 )
             )
         ));

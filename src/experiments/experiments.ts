@@ -1,14 +1,14 @@
-import { h, VNode } from '../lib/dvdi';
-import { pageHeader, pageFooter } from "../lib/page";
-import { navigateEvent, routeDetails } from '../app';
-import { experimentSyntaxC } from './c/c';
-import { experimentSyntaxCpp } from './cpp/cpp';
-import { experimentSyntaxCSS } from './css/css';
-import { experimentSyntaxHTML } from './html/html';
-import { experimentSyntaxJavaScript } from './javascript/javascript';
-import { experimentSyntaxPython } from './python/python';
-import { experimentSyntaxTypeScript } from './typescript/typescript';
-import { ExperimentPage } from './ExperimentPage';
+import {h, VNode} from '../lib/dvdi';
+import {pageHeader, pageFooter} from "../lib/page";
+import {navigateEvent, routeDetails} from '../app';
+import {experimentSyntaxC} from './c/c';
+import {experimentSyntaxCpp} from './cpp/cpp';
+import {experimentSyntaxCSS} from './css/css';
+import {experimentSyntaxHTML} from './html/html';
+import {experimentSyntaxJavaScript} from './javascript/javascript';
+import {experimentSyntaxPython} from './python/python';
+import {experimentSyntaxTypeScript} from './typescript/typescript';
+import {ExperimentPage} from './ExperimentPage';
 
 // Enumerate all the blog content served up here.  Newest content goes at the end.
 const experimentsContent: ExperimentPage[] = [
@@ -24,7 +24,7 @@ const experimentsContent: ExperimentPage[] = [
 export function experimentsPage(): VNode {
     return h('div', {},
         pageHeader(),
-        h('main', { className: 'main' },
+        h('main', {className: 'main'},
             h('h1', {}, 'Active experiments'),
             h('section', {},
                 h('h2', {}, 'Syntax highlighting'),

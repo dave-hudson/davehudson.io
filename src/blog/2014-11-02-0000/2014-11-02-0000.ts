@@ -1,6 +1,6 @@
-import { h, VNode } from '../../lib/dvdi';
-import { navigateEvent } from '../../app';
-import { BlogPost } from '../BlogPost';
+import {h, VNode} from '../../lib/dvdi';
+import {navigateEvent} from '../../app';
+import {BlogPost} from '../BlogPost';
 
 function blogOpening_2014_11_02_0000(): VNode[] {
     return [
@@ -9,7 +9,7 @@ function blogOpening_2014_11_02_0000(): VNode[] {
             'Bitcoin advocates often worry that this will be a limiting factor when credit card processing networks can ' +
             'handle several orders of magnitude more transactions in the same time, but what are the actual statistics ' +
             'related to Bitcoin transaction processing?  Our Bitcoin ',
-            h('a', { href: '/blog/2014-03-09-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-03-09-0000') },
+            h('a', {href: '/blog/2014-03-09-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-03-09-0000')},
                 'mine train'
             ),
             ' may not be seeing its hashing engines running away quite as much as they were earlier this year, but are we ' +
@@ -179,7 +179,7 @@ function blogArticle_2014_11_02_0000(): VNode[] {
                 'For most engineers this will start to sound alarm bells.  We\'re not talking about the peak usage being 40% on ' +
                 'those days, but the average usage.  Once we start to hit 100% even for relatively short times then that will ' +
                 'start to affect the speed with which transactions find their way into the blockchain, especially as the ',
-                h('a', { href: '/blog/2014-05-20-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-20-0000') },
+                h('a', {href: '/blog/2014-05-20-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-20-0000')},
                     '10 minutes between blocks'
                 ),
                 ' is only a mean, not a guarantee.'
@@ -206,17 +206,17 @@ function blogPostScript_2014_11_02_0000(): VNode[] {
             h('h2', {}, 'Related articles'),
             h('ul', {},
                 h('li', {},
-                    h('a', { href: '/blog/2014-06-15-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-06-15-0000') },
+                    h('a', {href: '/blog/2014-06-15-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-06-15-0000')},
                         'Finding 2016 blocks (2014-06-15)'
                     )
                 ),
                 h('li', {},
-                    h('a', { href: '/blog/2014-05-20-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-20-0000') },
+                    h('a', {href: '/blog/2014-05-20-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-05-20-0000')},
                         'Hash rate headaches (2014-05-20)'
                     )
                 ),
                 h('li', {},
-                    h('a', { href: '/blog/2014-03-09-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-03-09-0000') },
+                    h('a', {href: '/blog/2014-03-09-0000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2014-03-09-0000')},
                         'The Bitcoin runaway mine train (2014-03-09)'
                     )
                 )

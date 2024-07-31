@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { svg, VNode } from './dvdi';
+import {svg, VNode} from './dvdi';
 
 export function chevronLeftIcon(): VNode {
     return svg('svg', {
@@ -35,7 +35,7 @@ export function chevronLeftIcon(): VNode {
             'stroke-linecap': 'round',
             'stroke-linejoin': 'round'
         },
-        svg('polyline', { points: '15 18 9 12 15 6' })
+        svg('polyline', {points: '15 18 9 12 15 6'})
     );
 }
 
@@ -51,7 +51,7 @@ export function chevronRightIcon(): VNode {
             'stroke-linecap': 'round',
             'stroke-linejoin': 'round'
         },
-        svg('polyline', { points: '9 18 15 12 9 6' })
+        svg('polyline', {points: '9 18 15 12 9 6'})
     );
 }
 
@@ -88,9 +88,9 @@ export function instagramIcon(): VNode {
             'stroke-linecap': 'round',
             'stroke-linejoin': 'round'
         },
-        svg('rect', { x: 2, y: 2, width: 20, height: 20, rx: 5, ry: 5 }),
-        svg('path', { d: 'M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z' }),
-        svg('line', { x1: 17.5, y1: 6.5, x2: 17.51, y2: 6.5 })
+        svg('rect', {x: 2, y: 2, width: 20, height: 20, rx: 5, ry: 5}),
+        svg('path', {d: 'M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z'}),
+        svg('line', {x1: 17.5, y1: 6.5, x2: 17.51, y2: 6.5})
     );
 }
 
@@ -106,9 +106,9 @@ export function linkedInIcon(): VNode {
             'stroke-linecap': 'round',
             'stroke-linejoin': 'round'
         },
-        svg('path', { d: 'M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z' }),
-        svg('rect', { x: 2, y: 9, width: 4, height: 12 }),
-        svg('circle', { cx: 4, cy: 4, r: 2 })
+        svg('path', {d: 'M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z'}),
+        svg('rect', {x: 2, y: 9, width: 4, height: 12}),
+        svg('circle', {cx: 4, cy: 4, r: 2})
     );
 }
 
@@ -124,8 +124,8 @@ export function mailIcon(): VNode {
             'stroke-linecap': 'round',
             'stroke-linejoin': 'round'
         },
-        svg('path', { d: 'M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z' }),
-        svg('polyline', { points: '22,6 12,13 2,6' })
+        svg('path', {d: 'M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z'}),
+        svg('polyline', {points: '22,6 12,13 2,6'})
     );
 }
 
@@ -141,7 +141,7 @@ export function moonIcon(): VNode {
             'stroke-linecap': 'round',
             'stroke-linejoin': 'round'
         },
-        svg('path', { d: 'M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z' })
+        svg('path', {d: 'M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z'})
     );
 }
 
@@ -157,15 +157,15 @@ export function sunIcon(): VNode {
             'stroke-linecap': 'round',
             'stroke-linejoin': 'round'
         },
-        svg('circle', { cx: 12, cy: 12, r: 5 }),
-        svg('line', { x1: 12, y1: 1, x2: 12, y2: 3 }),
-        svg('line', { x1: 12, y1: 21, x2: 12, y2: 23 }),
-        svg('line', { x1: 4.22, y1: 4.22, x2: 5.64, y2: 5.64 }),
-        svg('line', { x1: 18.36, y1: 18.36, x2: 19.78, y2: 19.78 }),
-        svg('line', { x1: 1, y1: 12, x2: 3, y2: 12 }),
-        svg('line', { x1: 21, y1: 12, x2: 23, y2: 12 }),
-        svg('line', { x1: 4.22, y1: 19.78, x2: 5.64, y2: 18.36 }),
-        svg('line', { x1: 18.36, y1: 5.64, x2: 19.78, y2: 4.22 })
+        svg('circle', {cx: 12, cy: 12, r: 5}),
+        svg('line', {x1: 12, y1: 1, x2: 12, y2: 3}),
+        svg('line', {x1: 12, y1: 21, x2: 12, y2: 23}),
+        svg('line', {x1: 4.22, y1: 4.22, x2: 5.64, y2: 5.64}),
+        svg('line', {x1: 18.36, y1: 18.36, x2: 19.78, y2: 19.78}),
+        svg('line', {x1: 1, y1: 12, x2: 3, y2: 12}),
+        svg('line', {x1: 21, y1: 12, x2: 23, y2: 12}),
+        svg('line', {x1: 4.22, y1: 19.78, x2: 5.64, y2: 18.36}),
+        svg('line', {x1: 18.36, y1: 5.64, x2: 19.78, y2: 4.22})
     );
 }
 
@@ -181,9 +181,9 @@ export function xIcon(): VNode {
             'stroke-linecap': 'round',
             'stroke-linejoin': 'round'
         },
-        svg('polygon', { points: '21.3,21.1 9.9,2.9 2.7,2.9 14.1,21.1' }),
-        svg('line', { x1: 2.7, y1: 21.1, x2: 9.9, y2: 14.5 }),
-        svg('line', { x1: 14.1, y1: 9.5, x2: 21.3, y2: 2.9 })
+        svg('polygon', {points: '21.3,21.1 9.9,2.9 2.7,2.9 14.1,21.1'}),
+        svg('line', {x1: 2.7, y1: 21.1, x2: 9.9, y2: 14.5}),
+        svg('line', {x1: 14.1, y1: 9.5, x2: 21.3, y2: 2.9})
     );
 }
 
