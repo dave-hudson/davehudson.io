@@ -28,14 +28,15 @@ export function projectsPage(): VNode {
             h('h1', {}, 'Open source projects'),
             h('p', { className: 'meta'},
                 'Last updated: ',
-                h('time', { datetime: '2024-07-31T12:00'}, '2024-07-31 12:00')
+                h('time', { datetime: '2024-07-31T18:00'}, '2024-07-31 18:00')
             ),
             h('p', {},
                 'I\'ve been involved in building open source software since the early 90s.  Unfortunately I can\'t find ' +
                 'links for some of them, but here are ones for which I do.'
             ),
-            h('ul', {},
-                h('li', {}, 
+            h('section', {},
+                h('hr', {}),
+                h('h2', {},
                     h('a', {
                             href: ('/projects/siterender'),
                             onclick: (e: MouseEvent) => navigateEvent(e, '/projects/siterender')
@@ -43,7 +44,13 @@ export function projectsPage(): VNode {
                         'siterender'
                     )
                 ),
-                h('li', {}, 
+                h('p', {},
+                    'Have ChatGPT write a pre-rendering tool for websites!'
+                )
+            ),
+            h('section', {},
+                h('hr', {}),
+                h('h2', {},
                     h('a', {
                             href: ('/projects/countdown'),
                             onclick: (e: MouseEvent) => navigateEvent(e, '/projects/countdown')
@@ -51,7 +58,13 @@ export function projectsPage(): VNode {
                         'countdown'
                     )
                 ),
-                h('li', {}, 
+                h('p', {},
+                    'Find solutions to the "Countdown" numbers game as quickly as possible.'
+                )
+            ),
+            h('section', {},
+                h('hr', {}),
+                h('h2', {},
                     h('a', {
                             href: ('/projects/c8'),
                             onclick: (e: MouseEvent) => navigateEvent(e, '/projects/c8')
@@ -59,7 +72,14 @@ export function projectsPage(): VNode {
                         'c8'
                     )
                 ),
-                h('li', {}, 
+                h('p', {},
+                    'A high performance arbitrary precision natural numbers, integers, and rational numbers library written ' +
+                    'in "modern" C++.'
+                )
+            ),
+            h('section', {},
+                h('hr', {}),
+                h('h2', {},
                     h('a', {
                             href: ('/projects/gcc'),
                             onclick: (e: MouseEvent) => navigateEvent(e, '/projects/gcc')
@@ -67,7 +87,13 @@ export function projectsPage(): VNode {
                         'gcc (Ubicom processor backends)'
                     )
                 ),
-                h('li', {}, 
+                h('p', {},
+                    'gcc backends for Ubicom\'s IP2k and Ubicom32 processor families.'
+                )
+            ),
+            h('section', {},
+                h('hr', {}),
+                h('h2', {},
                     h('a', {
                             href: ('/projects/Liquorice'),
                             onclick: (e: MouseEvent) => navigateEvent(e, '/projects/Liquorice')
@@ -75,7 +101,14 @@ export function projectsPage(): VNode {
                         'Liquorice'
                     )
                 ),
-                h('li', {}, 
+                h('p', {},
+                    'A very small operating system and IPv4 network stack, written entirely from scratch.  It was ' +
+                    'designed to run on 8-bit Atmel AVR and 32-bit x86 processors.'
+                )
+            ),
+            h('section', {},
+                h('hr', {}),
+                h('h2', {},
                     h('a', {
                             href: ('/projects/VSTa'),
                             onclick: (e: MouseEvent) => navigateEvent(e, '/projects/VSTa')
@@ -83,13 +116,22 @@ export function projectsPage(): VNode {
                         'VSTa'
                     )
                 ),
-                h('li', {}, 
+                h('p', {},
+                    'A self-hosting microkernel operating system build in the 1990s.'
+                ),
+            ),
+            h('section', {},
+                h('hr', {}),
+                h('h2', {},
                     h('a', {
                             href: ('/projects/mkdosfs'),
                             onclick: (e: MouseEvent) => navigateEvent(e, '/projects/mkdosfs')
                         },
                         'mkdosfs'
                     )
+                ),
+                h('p', {},
+                    'The Linux mkdosfs command.'
                 )
             )
         ),

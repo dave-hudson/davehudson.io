@@ -6,7 +6,7 @@ export function projectSiterenderPage(): VNode {
     return h('div', {},
         pageHeader(),
         h('main', { className: 'main' },
-            h('h1', {}, 'c8'),
+            h('h1', {}, 'siterender'),
             h('p', {},
                 'siterender is...',
                 h('a', { href: 'https://github.com/dave-hudson/siterender', target: '_blank' },
