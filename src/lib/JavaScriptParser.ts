@@ -129,7 +129,6 @@ export class JavaScriptLexer extends Lexer {
             this.position++;
         }
 
-        if (this.position == start) debugger;
         return { type: 'NUMBER', value: this.input.slice(start, this.position) };
     }
 
