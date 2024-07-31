@@ -2,7 +2,7 @@ import { h, updateElement, VNode } from './lib/dvdi';
 import { aboutPage } from './about/about';
 import { blogPage, blogSummaries, getBlogRoutes } from './blog/blog';
 import { experimentsPage, getExperimentRoutes } from './experiments/experiments';
-import { projectsPage } from './projects/projects';
+import { projectsPage, getProjectRoutes } from './projects/projects';
 import { pageHeader, pageFooter } from "./lib/page";
 
 //const updateQueue = new Set();
@@ -252,6 +252,12 @@ function onDOMContentLoaded(event: Event): void {
     // Add all blog content to the router.
     const blogRoutes = getBlogRoutes();
     blogRoutes.forEach((value, key) => {
+        routes.set(key, value);
+    });
+
+    // Add all project content to the router.
+    const projectRoutes = getProjectRoutes();
+    projectRoutes.forEach((value, key) => {
         routes.set(key, value);
     });
 
