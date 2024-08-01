@@ -9,12 +9,19 @@ export function projectSiterenderPage(): VNode {
             h('h1', {}, 'siterender'),
             h('p', {},
                 'siterender is...',
-                h('a', {href: 'https://github.com/dave-hudson/siterender', target: '_blank'},
-                    'https://github.com/dave-hudson/siterender'
-                ),
             ),
             h('p', {},
                 'blah'
+            ),
+            h('hr', {}),
+            h('section', {},
+                h('h2', {}, 'Source code'),
+                h('p', {},
+                    'The source code can be found on GitHub: ',
+                    h('a', {href: 'https://github.com/dave-hudson/siterender', target: '_blank'},
+                        'https://github.com/dave-hudson/siterender'
+                    )
+                )
             )
         ),
         pageFooter()

@@ -12,13 +12,20 @@ export function projectLiquoricePage(): VNode {
                 'designed to run on 8-bit Atmel AVR and 32-bit x86 processors.'
             ),
             h('p', {},
-                'The project ran through much of 2000, but I stopped working on the public version when I joined Ubicom' +
+                'The project ran through much of 2000, but I stopped working on the public version when I joined Ubicom ' +
                 'at the end of 2000.  The project evolved as a commercial operating system and network stack called ' +
                 'ipOS.  While ipOS started out very similar to Liquorice, it quickly diverged as we simplified concepts ' +
                 'eliminated the software threading, and implemented much better design patterns to support some of the ' +
-                'networking.  Liquorice has some interesting ideas, and is a very small IP stack: ',
-                h('a', {href: 'https://github.com/dave-hudson/liquorice', target: '_blank'},
-                    'https://github.com/dave-hudson/liquorice'
+                'networking.  Liquorice has some interesting ideas, and has a very small IP stack.',
+            ),
+            h('hr', {}),
+            h('section', {},
+                h('h2', {}, 'Source code'),
+                h('p', {},
+                    'The source code can be found on GitHub: ',
+                    h('a', {href: 'https://github.com/dave-hudson/liquorice', target: '_blank'},
+                        'https://github.com/dave-hudson/liquorice'
+                    )
                 )
             )
         ),

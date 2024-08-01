@@ -16,12 +16,18 @@ export function projectVSTaPage(): VNode {
             h('p', {},
                 'It had a services model inspired by Plan 9, and had a largely complete GNU toolchain so it was capable ' +
                 'of building itself.  I was largely active in updating libc, porting tools, writing drivers, and performance ' +
-                'tuning the kernel form 1993 to 1995'
+                'tuning the kernel form 1993 to 1995.'
             ),
-            h('p', {},
-                'Andy Valencia (the guy behind the project) has an archive of the code and the mailing lists here: ',
-                h('a', {href: 'https://sources.vsta.org:7100/vsta/index', target: '_blank'},
-                    'https://sources.vsta.org:7100/vsta/index')
+            h('hr', {}),
+            h('section', {},
+                h('h2', {}, 'Archives'),
+                h('p', {},
+                    'The source code can be found on GitHub: ',
+                    'Andy Valencia (the guy behind the project) has an archive of the code and the mailing lists here: ',
+                    h('a', {href: 'https://sources.vsta.org:7100/vsta/index', target: '_blank'},
+                        'https://sources.vsta.org:7100/vsta/index'
+                    )
+                )
             )
         ),
         pageFooter()
