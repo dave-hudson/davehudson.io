@@ -1,83 +1,7 @@
-import {assertIsVElement, h, updateElement, VElement, VNode, VText} from '../../lib/dvdi';
+import {h, VNode} from '../../lib/dvdi';
 import {pageHeader, pageFooter} from "../../lib/page";
 import {ProjectPage} from '../ProjectPage';
 import {navigateEvent} from '../../app';
-import {cloneObject} from '../../lib/cloneObject';
-
-const code: VNode[] = [];
-let codeVElement: (VElement | null) = null;
-
-/**
- * Callback to write the contents of the file load for the first code fragment.
- * @param content
- */
-function writeCode(content: VNode[]) {
-    code.push(...content);
-    if (codeVElement === null) {
-        return;
-    }
-
-    assertIsVElement(codeVElement);
-    if (codeVElement.parentVNode === null) {
-        return;
-    }
-
-    const parentElem = (codeVElement.parentVNode as VElement).domElement;
-    if (parentElem === null) {
-        return;
-    }
-
-    if (codeVElement.domElement === null) {
-        return;
-    }
-
-    const index = Array.from(parentElem.childNodes).indexOf(codeVElement.domElement);
-    const newVElement = projectSiterenderCodeComponent();
-    newVElement.parentVNode = codeVElement.parentVNode;
-    updateElement(parentElem,
-        parentElem.childNodes[index],
-        codeVElement.parentVNode as VElement,
-        codeVElement,
-        newVElement
-    );
-    codeVElement = newVElement;
-}
-
-async function loadFile(filePath: string, storeFunction: (content: VNode[]) => void) {
-    try {
-        const response = await fetch(filePath);
-        if (!response.ok) {
-            throw new Error(`Failed to fetch file: ${response.statusText}`);
-        }
-
-        const content = await response.text();
-        storeFunction([new VText(content)]);
-    } catch (error) {
-        console.error('Error loading file:', error);
-    }
-}
-
-function projectSiterenderCodeComponent(): VElement {
-    let contents: VElement;
-    if (code.length === 0) {
-        contents = h('pre', {});
-    } else {
-        contents = h('pre', {}, h('code', {}, h('div', {className: 'keyword'}, ...cloneObject(code))));
-    }
-
-    contents.mountCallback = () => {
-        codeVElement = contents;
-        if (code.length === 0) {
-            loadFile('https://raw.githubusercontent.com/dave-hudson/siterender/main/prompt/siterender.prompt', writeCode);
-        }
-    }
-
-    contents.unmountCallback = () => {
-        codeVElement = null;
-    }
-
-    return contents;
-}
 
 export function projectSiterenderPage(): VNode {
     return h('div', {},
@@ -90,9 +14,11 @@ export function projectSiterenderPage(): VNode {
                 'scraping, and ensuring content is pre-rendered for SEO and social media sharing purposes.'
             ),
             h('p', {},
-                'The application is unusual as all the code was "written" by ChatGPT 4o.  See the section "',
-                h('a', {href: '#the-prompt', onclick: (e: MouseEvent) => navigateEvent(e, '/projects/siterender#the-prompt')}, 'The prompt'),
-                '" below.'
+                'The application is unusual as all the code was "written" by ChatGPT 4o.  For more about the concept, please ' +
+                'take a look at: ',
+                h('a', {href: '/blog/2024-08-01-1922', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2024-08-01-1922')},
+                    'ChatGPT: changing the rules of software development (2024-08-01)'),
+                '.'
             ),
             h('section', {},
                 h('h2', {}, 'Features'),
@@ -105,17 +31,6 @@ export function projectSiterenderPage(): VNode {
                     h('li', {}, 'Saves rendered HTML content to specified output directory.'),
                     h('li', {}, 'Retry mechanism for rendering and browser launch/close operations.')
                 )
-            ),
-            h('section', {},
-                h('h2', {id: 'the-prompt'}, 'The prompt'),
-                h('p', {},
-                    'The application is built from a ChatGPT prompt.  This file can be found at: ',
-                    h('a', {href: 'https://github.com/dave-hudson/siterender/blob/main/prompt/siterender.prompt', target: '_blank'},
-                        'https://github.com/dave-hudson/siterender/blob/main/prompt/siterender.prompt'
-                    )
-                ),
-                h('p', {}, 'The current `main` branch prompt is reproduced here:'),
-                projectSiterenderCodeComponent(),
             ),
             h('hr', {}),
             h('section', {},
