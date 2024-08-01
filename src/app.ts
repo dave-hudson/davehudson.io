@@ -240,7 +240,20 @@ export function navigateEvent(e: MouseEvent, path: string) {
 
     window.history.pushState({scrollPosition}, '', path);
     handleLocation();
-    window.scrollTo(0, 0);
+
+    // If we don't have a hash in our URL then scroll to the top of the page.
+    if (!location.hash) {
+        window.scrollTo(0, 0);
+        return;
+    }
+
+    // We do have a hash in our URL, so scroll that into view.:w
+    const targetId = location.hash.substring(1);
+    const targetElement = document.getElementById(targetId);
+
+    if (targetElement) {
+        targetElement.scrollIntoView();
+    }
 }
 
 /**
