@@ -92,6 +92,33 @@ export function projectSiterenderPage(): VNode {
                 )
             ),
             h('section', {},
+                h('h2', {}, 'Examples'),
+                h('p', {}, 'Render from a Sitemap URL:'),
+                h('pre', {},
+                    h('code', {},
+                        'node siterender.js --sitemap-url https://example.com/sitemap.xml --output ./output'
+                    )
+                ),
+                h('p', {}, 'Render from a Local Sitemap File:'),
+                h('pre', {},
+                    h('code', {},
+                        'node siterender.js --sitemap-file ./sitemap.xml --output ./output'
+                    )
+                ),
+                h('p', {}, 'Replace URL Prefix:'),
+                h('pre', {},
+                    h('code', {},
+                        'node siterender.js --sitemap-url https://example.com/sitemap.xml --replace-url "https://newdomain.com=https://olddomain.com" --output ./output'
+                    )
+                ),
+                h('p', {}, 'Specify Parallel Renders and Max Retries:'),
+                h('pre', {},
+                    h('code', {},
+                        'node siterender.js --sitemap-url https://example.com/sitemap.xml --output ./output --parallel-renders 4 --max-retries 5'
+                    )
+                )
+            ),
+            h('section', {},
                 h('h2', {}, 'How it works'),
                 h('ol', {},
                     h('li', {},
