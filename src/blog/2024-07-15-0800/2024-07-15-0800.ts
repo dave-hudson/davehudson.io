@@ -63,10 +63,12 @@ async function loadFile(segment: number, filePath: string, storeFunction: (segme
 }
 
 function blogCode0_2024_07_15_0800(): VElement {
-    const cloneCode = cloneObject(code[0]);
-    const contents = h('pre', {},
-        h('code', {}, ...cloneCode)
-    );
+    let contents: VElement;
+    if (code[0].length === 0) {
+        contents = h('pre', {});
+    } else {
+        contents = h('pre', {}, h('code', {}, ...cloneObject(code[0])));
+    }
 
     contents.mountCallback = () => {
         codeVElement[0] = contents;
@@ -83,10 +85,12 @@ function blogCode0_2024_07_15_0800(): VElement {
 }
 
 function blogCode1_2024_07_15_0800(): VElement {
-    const cloneCode = cloneObject(code[1]);
-    const contents = h('pre', {},
-        h('code', {}, ...cloneCode)
-    );
+    let contents: VElement;
+    if (code[1].length === 0) {
+        contents = h('pre', {});
+    } else {
+        contents = h('pre', {}, h('code', {}, ...cloneObject(code[1])));
+    }
 
     contents.mountCallback = () => {
         codeVElement[1] = contents;
