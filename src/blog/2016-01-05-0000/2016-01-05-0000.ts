@@ -172,7 +172,7 @@ function blogArticle_2016_01_05_0000(): VNode[] {
     ];
 }
 
-function blogPostscript_2016_01_05_000(): VNode[] {
+function blogPostscript_2016_01_05_0000(): VNode[] {
     return [
         h('hr', {}),
         h('section', {},
@@ -203,5 +203,5 @@ export const blogPost_2016_01_05_0000 = new BlogPost(
     null,
     blogOpening_2016_01_05_0000,
     blogArticle_2016_01_05_0000,
-    blogPostscript_2016_01_05_000
+    blogPostscript_2016_01_05_0000
 );
