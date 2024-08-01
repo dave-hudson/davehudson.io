@@ -34,6 +34,8 @@ export function projectGccPage(): VNode {
 }
 
 export const projectGcc = new ProjectPage(
+    'gcc (Ubicom processor backends)',
     '/projects/gcc',
+    'Backends for Ubicom\'s IP2k and Ubicom32 processor family versions of gcc.',
     projectGccPage
 );

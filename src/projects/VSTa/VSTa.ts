@@ -35,6 +35,8 @@ export function projectVSTaPage(): VNode {
 }
 
 export const projectVSTa = new ProjectPage(
+    'VSTa',
     '/projects/VSTa',
+    'VSTa was a self-hosting microkernel operating system build in the 1990s.  Written in C.',
     projectVSTaPage
 );

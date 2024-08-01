@@ -36,6 +36,8 @@ export function projectCountdownPage(): VNode {
 }
 
 export const projectCountdown = new ProjectPage(
+    'countdown',
     '/projects/countdown',
+    'Identify solutions to the "Countdown" numbers game as quickly as possible.  Written in C++.',
     projectCountdownPage
 );

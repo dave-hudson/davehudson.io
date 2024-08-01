@@ -44,6 +44,9 @@ export function projectC8Page(): VNode {
 }
 
 export const projectC8 = new ProjectPage(
+    'c8',
     '/projects/c8',
+    'c8 is a high performance arbitrary precision natural numbers, integers, and rational numbers library written ' +
+    'in "modern" C++.',
     projectC8Page
 );

@@ -27,6 +27,8 @@ export function projectMkdosfsPage(): VNode {
 }
 
 export const projectMkdosfs = new ProjectPage(
+    'mkdosfs',
     '/projects/mkdosfs',
+    'The Linux mkdosfs command.  Written in C.',
     projectMkdosfsPage
 );

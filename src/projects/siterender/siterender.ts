@@ -133,6 +133,9 @@ export function projectSiterenderPage(): VNode {
 }
 
 export const projectSiterender = new ProjectPage(
+    'siterender',
     '/projects/siterender',
+    'siterender renders web pages listed in a sitemap and saves the rendered HTML content locally.  ' +
+    'Written in TypeScript via a ChatGPT prompt!',
     projectSiterenderPage
 );

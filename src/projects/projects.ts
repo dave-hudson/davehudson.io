@@ -145,9 +145,9 @@ export function getProjectRoutes() {
 
     for (let i = 0; i < projectsContent.length; i++) {
         projectRoutes.set(projectsContent[i].hRef, {
-            title: 'Open source projects',
+            title: projectsContent[i].title,
             render: projectsContent[i].pageFunction,
-            description: 'Open source projects',
+            description: projectsContent[i].description,
             imageURL: 'https://davehudson.io/about/dave.html',
             pageType: 'website'
         });
