@@ -71,7 +71,7 @@ function blogCode0_2024_07_15_0800(): VElement {
     contents.mountCallback = () => {
         codeVElement[0] = contents;
         if (code[0].length === 0) {
-            loadFile(0, '/blog/2024-07-15-0800/2024-07-15-0800-file0.js', writeCode);
+            loadFile(0, '/blog/2024-07-15-0800/code0.js', writeCode);
         }
     }
 
@@ -91,7 +91,7 @@ function blogCode1_2024_07_15_0800(): VElement {
     contents.mountCallback = () => {
         codeVElement[1] = contents;
         if (code[1].length === 0) {
-            loadFile(1, '/blog/2024-07-15-0800/2024-07-15-0800-file1.js', writeCode);
+            loadFile(1, '/blog/2024-07-15-0800/code1.js', writeCode);
         }
     }
 
@@ -123,7 +123,7 @@ function blogArticle_2024_07_15_0800(): VElement[] {
     return [
         h('section', {},
             h('img', {
-                src: '/blog/2024-07-15-0800/2024-07-15-0800-image.webp',
+                src: '/blog/2024-07-15-0800/tool-builds-tools.webp',
                 alt: 'Image of a spanner in a workshop building another spanner',
                 width: 1792,
                 height: 1024
@@ -275,7 +275,7 @@ export const blogPost_2024_07_15_0800 = new BlogPost(
     '/blog/2024-07-15-0800',
     'ChatGPT 4o is pretty amazing, but how good is it at building non-trivial software?' +
     'Here\'s how it did when I had it help build a website pre-rendering tool',
-    '/blog/2024-07-15-0800/2024-07-15-0800-image.webp',
+    '/blog/2024-07-15-0800/tool-builds-tools.webp',
     null,
     blogOpening_2024_07_15_0800,
     blogArticle_2024_07_15_0800,
