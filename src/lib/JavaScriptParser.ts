@@ -48,6 +48,10 @@ export class JavaScriptLexer extends Lexer {
             return this.readForwardSlash.bind(this);
         }
 
+        if (ch == '#') {
+            return this.readHash.bind(this);
+        }
+
         return this.readOperator.bind(this);
     }
 
@@ -72,6 +76,25 @@ export class JavaScriptLexer extends Lexer {
         }
 
         return this.readOperator();
+    }
+
+    protected readHash(): Token {
+        if (this.input[this.position + 1] == '!') {
+            return this.readHashBang();
+        }
+
+        this.position++;
+        return {type: 'ERROR', value: '#'};
+    }
+
+    protected readHashBang(): Token {
+        let start = this.position;
+        this.position += 2;
+        while (this.position < this.input.length && this.input[this.position] !== '\n') {
+            this.position++;
+        }
+
+        return {type: 'PREPROCESSOR', value: this.input.slice(start, this.position)};
     }
 
     /**
