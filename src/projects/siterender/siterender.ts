@@ -1,6 +1,7 @@
 import {assertIsVElement, h, updateElement, VElement, VNode, VText} from '../../lib/dvdi';
 import {pageHeader, pageFooter} from "../../lib/page";
 import {ProjectPage} from '../ProjectPage';
+import {navigateEvent} from '../../app';
 import {cloneObject} from '../../lib/cloneObject';
 
 const code: VNode[] = [];
@@ -51,7 +52,6 @@ async function loadFile(filePath: string, storeFunction: (content: VNode[]) => v
 
         const content = await response.text();
         storeFunction([new VText(content)]);
-        console.log(content)
     } catch (error) {
         console.error('Error loading file:', error);
     }
@@ -62,7 +62,7 @@ function projectSiterenderCodeComponent(): VElement {
     if (code.length === 0) {
         contents = h('pre', {});
     } else {
-        contents = h('pre', {}, h('code', {}, ...cloneObject(code)));
+        contents = h('pre', {}, h('code', {}, h('div', {className: 'keyword'}, ...cloneObject(code))));
     }
 
     contents.mountCallback = () => {
@@ -90,7 +90,9 @@ export function projectSiterenderPage(): VNode {
                 'scraping, and ensuring content is pre-rendered for SEO and social media sharing purposes.'
             ),
             h('p', {},
-                'The application is unusual as all the code was "written" by ChatGPT 4o.  See the section on "The prompt" below.'
+                'The application is unusual as all the code was "written" by ChatGPT 4o.  See the section "',
+                h('a', {href: '#the-prompt', onclick: (e: MouseEvent) => navigateEvent(e, '/projects/siterender#the-prompt')}, 'The prompt'),
+                '" below.'
             ),
             h('section', {},
                 h('h2', {}, 'Features'),
@@ -105,9 +107,9 @@ export function projectSiterenderPage(): VNode {
                 )
             ),
             h('section', {},
-                h('h2', {}, 'The prompt'),
+                h('h2', {id: 'the-prompt'}, 'The prompt'),
                 h('p', {},
-                    'The application is built from a ChatGPT prompt.  This file can be found at:',
+                    'The application is built from a ChatGPT prompt.  This file can be found at: ',
                     h('a', {href: 'https://github.com/dave-hudson/siterender/blob/main/prompt/siterender.prompt', target: '_blank'},
                         'https://github.com/dave-hudson/siterender/blob/main/prompt/siterender.prompt'
                     )
