@@ -1,6 +1,11 @@
 .DEFAULT_GOAL := all
 
 #
+# Define variable for OS detection.
+#
+UNAME := $(shell uname -s)
+
+#
 # Collect the list of source files.
 #
 FILES :=
@@ -43,6 +48,9 @@ siterender: all
 .PHONY: tar
 
 tar: siterender
+ifeq ($(UNAME), Darwin)
+	xattr -rc build
+endif
 	tar -czvf davehudson.io.tar.gz -C build .
 
 #
