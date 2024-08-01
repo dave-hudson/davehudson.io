@@ -40,8 +40,7 @@ function homePage(): VNode {
             ),
             h('p', {},
                 'A few inconvenient laws of physics aside, if we can imagine something, then we can probably build it as software.  ' +
-                'This site is where I (Dave) write about things I find interesting in the world of software development - dreams ' +
-                'in data and code.'
+                'This site is where I (Dave) write about things I find interesting in the world - dreams in data and code.'
             ),
             ...blogSummaries(7),
             h('hr', {}),
