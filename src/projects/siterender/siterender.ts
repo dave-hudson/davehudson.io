@@ -63,35 +63,35 @@ export function projectSiterenderPage(): VNode {
                 h('ul', {},
                     h('li', {},
                         h('code', {}, '--sitemap-file <path>'),
-                        ' : Path to the local sitemap file (conflicts with ',
+                        ' - Path to the local sitemap file (conflicts with ',
                         h('code', {}, '--sitemap-url'),
                         ')'
                     ),
                     h('li', {},
                         h('code', {}, '--sitemap-url <url>'),
-                        ' : URL of the sitemap file (conflicts with ',
+                        ' - URL of the sitemap file (conflicts with ',
                         h('code', {}, '--sitemap-file'),
                         ')'
                     ),
                     h('li', {},
                         h('code', {}, '--replace-url <new=old>'),
-                        ' : Replace URL prefixes in the form "new=old"'
+                        ' - Replace URL prefixes in the form "new=old"'
                     ),
                     h('li', {},
                         h('code', {}, '--output <path>'),
-                        ' : Output directory (required)'
+                        ' - Output directory (required)'
                     ),
                     h('li', {},
                         h('code', {}, '--parallel-renders <number>'),
-                        ' : Number of parallel renders (default is the number of CPU cores)'
+                        ' - Number of parallel renders (default is the number of CPU cores)'
                     ),
                     h('li', {},
                         h('code', {}, '--max-retries <number>'),
-                        ' : Max retries for rendering a page (default is 3)'
+                        ' - Max retries for rendering a page (default is 3)'
                     ),
                     h('li', {},
                         h('code', {}, '-h, --help'),
-                        ' : Show this message'
+                        ' - Show this message'
                     )
                 )
             ),
