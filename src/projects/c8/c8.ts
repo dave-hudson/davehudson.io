@@ -28,7 +28,6 @@ export function projectC8Page(): VNode {
                     )
                 )
             ),
-            h('hr', {}),
             h('section', {},
                 h('h2', {}, 'Source code'),
                 h('p', {},

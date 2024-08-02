@@ -11,7 +11,6 @@ export function projectMkdosfsPage(): VNode {
                 'I wrote the first 2 versions of mkdosfs back in 1993 and 1994.  Eventually other maintainers folded this ' +
                 'into the dosfstools repo, and can be found in the git repo (my original notes are in the change logs).',
             ),
-            h('hr', {}),
             h('section', {},
                 h('h2', {}, 'Source code'),
                 h('p', {},

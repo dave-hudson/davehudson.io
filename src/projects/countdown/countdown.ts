@@ -20,7 +20,6 @@ export function projectCountdownPage(): VNode {
                 'I wrote this one in C++ and spent a few hours coming up with ways to shrink the problem search space.  ' +
                 'It\'s pretty quick but I never attempted to tune it to the instruction level!'
             ),
-            h('hr', {}),
             h('section', {},
                 h('h2', {}, 'Source code'),
                 h('p', {},

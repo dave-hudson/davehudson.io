@@ -145,19 +145,50 @@ export function projectSiterenderPage(): VNode {
                 )
             ),
             h('section', {},
+                h('h2', {}, 'Building the software'),
+                h('p', {},
+                    'The software is built using ',
+                    h('code', {}, 'make'),
+                    '.  Yes, this is a little unusual for the JavaScript world, but it\'s not going to change!'
+                ),
+                h('p', {},
+                    'To build:'
+                ),
+                h('pre', {},
+                    h('code', {},
+                        'make'
+                    )
+                )
+            ),
+            h('section', {},
+                h('h2', {}, 'Testing'),
+                h('p', {},
+                    'The core logic of application is supported by tests, implemented using Jest.'
+                ),
+                h('p', {},
+                    'To run the tests:'
+                ),
+                h('pre', {},
+                    h('code', {},
+                        'make test'
+                    )
+                )
+            ),
+            h('section', {},
                 h('h2', {}, 'License'),
                 h('p', {}, 'The software is released under a BSD 3-Clause license.')
             ),
             h('section', {},
                 h('h2', {}, 'Contributing'),
                 h('p', {},
-                    'The aim of the project is to see how far we can go with having ChatGPT build the software.  ' +
+                    'The aim of the project is to see how far we can go with having ChatGPT build the software.'
+                ),
+                h('p', {},
                     'Please feel free to submit PRs against the prompt, or to suggest prompts that will generate a code ' +
-                    'change you might like to see.  While you can submit PRs against the code, these won\'t be merged, but ' +
-                    'can serve to improve the prompt that allows the code to be evolved.'
+                    'change you might like to see.  While you can submit PRs against the code, these won\'t be merged ' +
+                    'directly, but can serve to improve the prompt that allows the code to be evolved.'
                 )
             ),
-            h('hr', {}),
             h('section', {},
                 h('h2', {}, 'Source code'),
                 h('p', {},

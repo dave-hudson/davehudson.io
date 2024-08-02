@@ -18,7 +18,6 @@ export function projectVSTaPage(): VNode {
                 'of building itself.  I was largely active in updating libc, porting tools, writing drivers, and performance ' +
                 'tuning the kernel form 1993 to 1995.'
             ),
-            h('hr', {}),
             h('section', {},
                 h('h2', {}, 'Archives'),
                 h('p', {},

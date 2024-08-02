@@ -18,7 +18,6 @@ export function projectGccPage(): VNode {
                 'memory-to-memory architecture where many instructions could include 2 memory references in a single 32-bit ' +
                 'RISC instruction.'
             ),
-            h('hr', {}),
             h('section', {},
                 h('h2', {}, 'Source code'),
                 h('p', {},

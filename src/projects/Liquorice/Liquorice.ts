@@ -18,7 +18,6 @@ export function projectLiquoricePage(): VNode {
                 'eliminated the software threading, and implemented much better design patterns to support some of the ' +
                 'networking.  Liquorice has some interesting ideas, and has a very small IP stack.',
             ),
-            h('hr', {}),
             h('section', {},
                 h('h2', {}, 'Source code'),
                 h('p', {},
