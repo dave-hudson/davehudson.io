@@ -595,11 +595,11 @@ pre {
 }
 
 .main pre code .string {
-    color: #f06030;
+    color: #c04848;
 }
 
-.mainn pre code .text {
-    color: #0e0e0e;
+.main pre code .text {
+    color: #141414;
 }
 
 .main table {
