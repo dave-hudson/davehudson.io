@@ -47,7 +47,7 @@ export function projectC8Page(): VNode {
             h('section', {},
                 h('h2', {}, 'Implementation'),
                 h('p', {},
-                    'The code is written in "modern" C++, and relies of features found in C++14 and later.'
+                    'The code is written in modern C++, and relies of features found in C++14 and later.'
                 )
             ),
             h('section', {},
