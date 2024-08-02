@@ -16,8 +16,8 @@ export function projectSiterenderPage(): VNode {
             h('p', {},
                 'The application is unusual as all the code was "written" by ChatGPT 4o.  For more about the concept, please ' +
                 'take a look at: ',
-                h('a', {href: '/blog/2024-08-01-1922', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2024-08-01-1922')},
-                    'ChatGPT: changing the rules of software development (2024-08-01)'),
+                h('a', {href: '/blog/2024-08-03-1000', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2024-08-03-1000')},
+                    'ChatGPT: changing the rules of software development (2024-08-03)'),
                 '.'
             ),
             h('section', {},
