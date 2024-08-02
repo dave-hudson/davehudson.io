@@ -34,7 +34,6 @@ export function projectsPage(): VNode {
                 'I\'ve been involved in building open source software since the early 90s.  Unfortunately I can\'t find ' +
                 'links for some of them, but here are ones for which I do.'
             ),
-            h('hr', {}),
             h('section', {},
                 h('h2', {},
                     h('a', {
@@ -48,7 +47,6 @@ export function projectsPage(): VNode {
                     'Have ChatGPT write a pre-rendering tool for websites!'
                 )
             ),
-            h('hr', {}),
             h('section', {},
                 h('h2', {},
                     h('a', {
@@ -62,7 +60,6 @@ export function projectsPage(): VNode {
                     'Find solutions to the "Countdown" numbers game as quickly as possible.'
                 )
             ),
-            h('hr', {}),
             h('section', {},
                 h('h2', {},
                     h('a', {
@@ -77,7 +74,6 @@ export function projectsPage(): VNode {
                     'in "modern" C++.'
                 )
             ),
-            h('hr', {}),
             h('section', {},
                 h('h2', {},
                     h('a', {
@@ -91,7 +87,6 @@ export function projectsPage(): VNode {
                     'gcc backends for Ubicom\'s IP2k and Ubicom32 processor families.'
                 )
             ),
-            h('hr', {}),
             h('section', {},
                 h('h2', {},
                     h('a', {
@@ -106,7 +101,6 @@ export function projectsPage(): VNode {
                     'designed to run on 8-bit Atmel AVR and 32-bit x86 processors.'
                 )
             ),
-            h('hr', {}),
             h('section', {},
                 h('h2', {},
                     h('a', {
@@ -120,7 +114,6 @@ export function projectsPage(): VNode {
                     'A self-hosting microkernel operating system built in the 1990s.'
                 ),
             ),
-            h('hr', {}),
             h('section', {},
                 h('h2', {},
                     h('a', {
