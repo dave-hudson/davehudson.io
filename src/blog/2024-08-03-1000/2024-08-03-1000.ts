@@ -8,9 +8,9 @@ import {navigateEvent} from '../../app';
 const code: VNode[][] = [[], [], []];
 let codeVElement: (VElement | null)[] = [null, null, null];
 const codeFunction: (() => VElement)[] = [
-    blogPrompt_2024_08_01_1922,
-    blogSiterenderTS_2024_08_01_1922,
-    blogLogicTS_2024_08_01_1922
+    blogPrompt_2024_08_03_1000,
+    blogSiterenderTS_2024_08_03_1000,
+    blogLogicTS_2024_08_03_1000
 ];
 
 /**
@@ -70,18 +70,18 @@ async function loadFile(segment: number, filePath: string, storeFunction: (segme
     }
 }
 
-function blogPrompt_2024_08_01_1922(): VElement {
+function blogPrompt_2024_08_03_1000(): VElement {
     let contents: VElement;
     if (code[0].length === 0) {
         contents = h('pre', {});
     } else {
-        contents = h('pre', {}, h('code', {}, h('div', {className: 'keyword'}, ...cloneObject(code[0]))));
+        contents = h('pre', {}, h('code', {}, h('div', {className: 'text'}, ...cloneObject(code[0]))));
     }
 
     contents.mountCallback = () => {
         codeVElement[0] = contents;
         if (code[0].length === 0) {
-            loadFile(0, '/blog/2024-08-01-1922/prompt.txt', writeCode);
+            loadFile(0, '/blog/2024-08-03-1000/prompt.txt', writeCode);
         }
     }
 
@@ -92,7 +92,7 @@ function blogPrompt_2024_08_01_1922(): VElement {
     return contents;
 }
 
-function blogSiterenderTS_2024_08_01_1922(): VElement {
+function blogSiterenderTS_2024_08_03_1000(): VElement {
     let contents: VElement;
     if (code[1].length === 0) {
         contents = h('pre', {});
@@ -103,7 +103,7 @@ function blogSiterenderTS_2024_08_01_1922(): VElement {
     contents.mountCallback = () => {
         codeVElement[1] = contents;
         if (code[1].length === 0) {
-            loadFile(1, '/blog/2024-08-01-1922/siterender.ts', writeCode);
+            loadFile(1, '/blog/2024-08-03-1000/siterender.ts', writeCode);
         }
     }
 
@@ -114,7 +114,7 @@ function blogSiterenderTS_2024_08_01_1922(): VElement {
     return contents;
 }
 
-function blogLogicTS_2024_08_01_1922(): VElement {
+function blogLogicTS_2024_08_03_1000(): VElement {
     let contents: VElement;
     if (code[2].length === 0) {
         contents = h('pre', {});
@@ -125,7 +125,7 @@ function blogLogicTS_2024_08_01_1922(): VElement {
     contents.mountCallback = () => {
         codeVElement[2] = contents;
         if (code[2].length === 0) {
-            loadFile(2, '/blog/2024-08-01-1922/logic.ts', writeCode);
+            loadFile(2, '/blog/2024-08-03-1000/logic.ts', writeCode);
         }
     }
 
@@ -136,7 +136,7 @@ function blogLogicTS_2024_08_01_1922(): VElement {
     return contents;
 }
 
-function blogOpening_2024_08_01_1922(): VElement[] {
+function blogOpening_2024_08_03_1000(): VElement[] {
     return [
         h('p', {},
             'In my previous blog post, ',
@@ -148,11 +148,11 @@ function blogOpening_2024_08_01_1922(): VElement[] {
     ]
 }
 
-function blogArticle_2024_08_01_1922(): VElement[] {
+function blogArticle_2024_08_03_1000(): VElement[] {
     return [
         h('section', {},
             h('img', {
-                src: '/blog/2024-08-01-1922/robot.webp',
+                src: '/blog/2024-08-03-1000/robot.webp',
                 alt: 'Image of a robot writing software',
                 width: 1024,
                 height: 585
@@ -173,14 +173,14 @@ function blogArticle_2024_08_01_1922(): VElement[] {
         ),
         h('section', {},
             h('h2', {}, 'The application prompt'),
-            blogPrompt_2024_08_01_1922(),
+            blogPrompt_2024_08_03_1000(),
         ),
         h('section', {},
             h('h2', {}, 'The application code'),
-            h('p', {}, 'prerender.ts'),
-            blogSiterenderTS_2024_08_01_1922(),
-            h('p', {}, 'logic.ts'),
-            blogLogicTS_2024_08_01_1922(),
+            h('h3', {}, 'prerender.ts'),
+            blogSiterenderTS_2024_08_03_1000(),
+            h('h3', {}, 'logic.ts'),
+            blogLogicTS_2024_08_03_1000(),
         ),
         h('hr', {}),
         h('section', {},
@@ -196,7 +196,7 @@ function blogArticle_2024_08_01_1922(): VElement[] {
     ];
 }
 
-function blogPostscript_2024_08_01_1922(): VNode[] {
+function blogPostscript_2024_08_03_1000(): VNode[] {
     return [
         h('hr', {}),
         h('section', {},
@@ -212,15 +212,15 @@ function blogPostscript_2024_08_01_1922(): VNode[] {
     ];
 }
 
-export const blogPost_2024_08_01_1922 = new BlogPost(
+export const blogPost_2024_08_03_1000 = new BlogPost(
     'Innovating software development with ChatGPT',
-    '2024-08-01T19:22',
-    '/blog/2024-08-01-1922',
+    '2024-08-03T10:00',
+    '/blog/2024-08-03-1000',
     'Large language models are set to give us many new ways to build software.  Let\'s look at one such way to use ChatGPT ' +
     'to do something innovative!',
-    '/blog/2024-08-01-1922/robot.webp',
+    '/blog/2024-08-03-1000/robot.webp',
     null,
-    blogOpening_2024_08_01_1922,
-    blogArticle_2024_08_01_1922,
-    blogPostscript_2024_08_01_1922
+    blogOpening_2024_08_03_1000,
+    blogArticle_2024_08_03_1000,
+    blogPostscript_2024_08_03_1000
 );
