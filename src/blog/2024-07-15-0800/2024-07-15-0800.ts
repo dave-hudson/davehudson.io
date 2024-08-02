@@ -143,7 +143,9 @@ function blogArticle_2024_07_15_0800(): VElement[] {
                 'Most software takes the form of tooling.  It\'s intended to be created once and used many times.  We could ' +
                 'almost say software engineering is the pursuit of finding ways to build ever better, more reliable, and less ' +
                 'expensive tools.',
-            ),
+            )
+        ),
+        h('section', {},
             h('h2', {}, 'The problem statement'),
             h('p', {},
                 'I’ve been rebuilding my blog site (formerly hashingit.com), and this time I decided to do it from first ' +
@@ -155,6 +157,8 @@ function blogArticle_2024_07_15_0800(): VElement[] {
                 'I\'d like people to find things I write, and potentially share them, I needed to come up with a way to ' +
                 'serve up initial static versions of any page on the site before the TypeScript code could take over.',
             ),
+        ),
+        h('section', {},
             h('h2', {}, 'First steps'),
             h('p', {},
                 'As I’ve increasingly done for the last 6 months I asked my sidekick, ChatGPT, how to solve this problem.  It ' +
@@ -171,6 +175,8 @@ function blogArticle_2024_07_15_0800(): VElement[] {
                 'intuition was I could do something local, fast, and free (except for my time).  Being able to work offline ' +
                 'was a bonus because I spend a lot of time on trains and planes and Internet access is awful on both.',
             ),
+        ),
+        h('section', {},
             h('h2', {}, '30 minutes and code'),
             h('p', {},
                 'Here\'s my initial prompt in a new session:',
@@ -225,6 +231,8 @@ function blogArticle_2024_07_15_0800(): VElement[] {
                 h('code', {}, 'sitemap.xml'),
                 ' file to find the correct URL to render.',
             ),
+        ),
+        h('section', {},
             h('h2', {}, 'Let\'s make this more interesting!'),
             h('p', {},
                 'We could almost declare victory at this point.  To render 29 pages took 47 seconds on my M1 MacBook Air.'
@@ -241,6 +249,8 @@ function blogArticle_2024_07_15_0800(): VElement[] {
             h('p', {},
                 'Total elapsed time - about 2 hours.'
             ),
+        ),
+        h('section', {},
             h('h2', {}, 'A sign of things to come'),
             h('p', {},
                 'Just like a human engineer, ChatGPT made mistakes.  It needed dialogue and questioning to keep it on the ' +
