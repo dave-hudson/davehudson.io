@@ -33,6 +33,10 @@ export function projectSiterenderPage(): VNode {
                 )
             ),
             h('section', {},
+                h('h2', {}, 'License'),
+                h('p', {}, 'The software is released under a BSD 3-Clause license.')
+            ),
+            h('section', {},
                 h('h2', {}, 'Installation'),
                 h('p', {},
                     'Before using siterender, ensure you have Node.js installed.  You can install the dependencies by running:'
@@ -173,10 +177,6 @@ export function projectSiterenderPage(): VNode {
                         'make test'
                     )
                 )
-            ),
-            h('section', {},
-                h('h2', {}, 'License'),
-                h('p', {}, 'The software is released under a BSD 3-Clause license.')
             ),
             h('section', {},
                 h('h2', {}, 'Contributing'),
