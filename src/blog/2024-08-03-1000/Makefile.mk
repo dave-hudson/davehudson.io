@@ -1,4 +1,5 @@
 FILES += \
+	src/blog/2024-08-03-1000/orig-prompt.txt \
 	src/blog/2024-08-03-1000/prompt.txt \
 	src/blog/2024-08-03-1000/siterender.ts \
 	src/blog/2024-08-03-1000/logic.ts \

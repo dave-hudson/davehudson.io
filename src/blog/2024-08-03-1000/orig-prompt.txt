@@ -1,0 +1,63 @@
+You're a JavaScript engineer.
+
+I have a single page application website and want to pre-render all the pages so I can allow the website to be
+crawled by spiders that cannot render JavaScript.
+
+I need you to build me a node.js tool that will pre-render of all the pages using a headless Google Chrome browser.
+
+The tool should be set up to run as a script that automatically invokes node.
+
+node.js has been configured to use ES6 modules.
+
+The pages to be pre-rendered are all being served by a webserver.
+
+The webserver serves up a sitemap.xml file from the site's root directory and this will give a list of all the pages that
+need to be pre-rendered.
+
+The URLs inside the sitemap.xml file will refer to the protocol and hostname "https://davehudson.io" but I need you to
+provide an option to replace this with another hostname that can be passed to the tool via a command line parameter.
+For example if the sitemap says the URL is "https://davehudson.io/about" and I tell the tool to use "http://localhost:3000"
+then the tool will download the page from "http://localhost:3000/about".  The command line parameter should be
+"--replace-hostname".
+
+The output of the pre-rendering operation will be placed in a directory passed on the command line to the tool.  This
+command line argument should not need an option flag.
+
+The path of the saved pre-rendered files should match the pathame of the URL that was rendered as a directory prefix,
+with the output being written as a file named "index.html".  Thus "https://davehudson/blog/post" should result in the
+file "blog/post/index.html" being written.
+
+Before any attempt to pre-render a page is started, any previous version of the output file must be deleted to prevent
+the webserver from serving up an old version of the page from being served up to the renderer.
+
+The tool needs to be fast, so it must parallelise the rendering operations.  By default the number of parallel tasks
+should match the number of CPU cores available, but there must be an optional command line parameter "--parallel-renders"
+to choose some other maximum number.
+
+As each page completes being pre-rendered then the next page should be rendered until there are no pages left to render.
+The tool should start pre-rendering the next available page as soon as any previous one has completed rendering.
+
+As requests to the webserver may intermittently fail then the tool must be able to attempt to retry rendering of any page
+up to 3 times.  The value of 3 must be able to be changed via an optional command line parameter "--max-retries"
+
+If any render operation fails then the tool should exit with an error status that can be used to stop a makefile from
+continuing operations.  If all renders succeed then the exit code should not stop progress in the makefile.
+
+All functions in the tool source code should be commented with jsdoc annotations.
+
+By default the tool should emit a console message of the form "Pre-rendering: <url>" where <url> is the URL being
+pre-rendered.
+
+If any page fails to pre-render then the tool should emit a console message of the form "Failed: <status>: <url>", where
+<status> is some status indication showing what went wrong, and <url> being the URL that failed to pre-render.
+
+If the user attempts to invoke the tool with invalid command line parameters the tool should emit a console message
+showing the correct usage.
+
+There should be an optional command line parameter "-h" that will output a list of valid command line parameters and
+their arguments.  If the -h option is passed then the tool should ignore all other command line options, display this list
+and exit.
+
+The output source code should use 4 spaces for indentation.
+
+Please carefully check that all of the above are addressed in the code you generate.
