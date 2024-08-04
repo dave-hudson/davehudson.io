@@ -163,16 +163,17 @@ function blogOpening_2024_08_03_1000(): VElement[] {
     return [
         h('p', {},
             'For the last few months I\'ve been trying out some new ideas to see how we might be able to innovate ' +
-            'software development using Large Language Models (LLMs).'
+            'software development using Large Language Models (LLMs).  This article introduces a new idea, Maximal ' +
+            'Instruction Prompting (MIP) as a strategy for a new way of doing software development with LLMs.'
         ),
         h('p', {},
-            'This blog post discusses some of the approaches I\'ve been evaluating in the last few weeks.  While I ' +
-            'can\'t claim these are unique, I believe they offer a glimpse of how LLMs can radically change large scale ' +
-            'software development.'
+            'I\'ve used this approach for a couple of different projects, and the concept continues to evolve with ' +
+            'each new use, but even in its early stages I\'ve been seeing striking results, so I wanted to publish ' +
+            'something now.'
         ),
         h('p', {},
-            'Also, I\'m an engineer, not an evangelist, so I\'m focused on practical benefits.  As a couple of my more ' +
-            'commercially minded friends would say, "show us the money!"  I have some thoughts on that here too.'
+            'I\'m an engineer, not an AI evangelist, so my approach is focused on practical benefits.  As a couple of ' +
+            'my more commercially minded friends would say, "show us the money!"'
         ),
     ]
 }
@@ -186,33 +187,110 @@ function blogArticle_2024_08_03_1000(): VElement[] {
                 width: 1024,
                 height: 585
             }),
-            h('h2', {}, 'A heading'),
+            h('h2', {}, 'Motivating thoughts'),
             h('p', {},
-                'blah...',
-                h('p', {},
-                    'In my previous blog post, ',
-                    h('a', {href: '/blog/2024-07-15-0800', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2024-07-15-0800')},
-                        'Can my tools build tools?  Pre-rendering web pages with help from ChatGPT (2024-07-15)'
-                    ),
-                    ', I looked at using ChatGPT to build the core of a new tool.  These initial results were very exciting as ' +
-                    'they offered a hint of what might be possible.'
+                'To understand my approach, let me start with some motivating thoughts.'
+            ),
+            h('p', {},
+                'Great software transcends the code itself.  While code is undeniably important, it is ultimately an ' +
+                'expression of higher-level ideas.  Throughout the history of computing, we\'ve continually sought better ' +
+                'and more reliable methods to create increasingly complex software.  The weakest link in this chain has ' +
+                'always been the human element of translating high-level ideas into working implementations.  The move ' +
+                'towards ever higher-level programming languages has been to reduce human effort, as people get tired, ' +
+                'get distracted, get stressed, and make mistakes.'
+            ),
+            h('p', {},
+                'Labeling LLMs as "artificial intelligence" can be misleading.  They are extraordinary tools, but they ' +
+                'may be more accurately described as intelligence augmentation systems.  The true innovation stems from the ' +
+                'people utilizing them, although LLMs excel at executing well-structured ideas.  This highlights a ' +
+                'significant challenge: crafting well-structured ideas is more difficult than it seems.'
+            ),
+            h('p', {},
+                'Most current uses of LLMs to build software have focused on an interactive dialogue between a developer ' +
+                'and the LLM.  This approach can be incredibly effective.  For example in: ',
+                h('a', {href: '/blog/2024-07-15-0800', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2024-07-15-0800')},
+                    'Can my tools build tools?  Pre-rendering web pages with help from ChatGPT (2024-07-15)'
                 ),
-                h('p', {},
-                    'I\'ve been very interested in code generation techniques for most of my career, and for many years I developed ' +
-                    'production C and C++ compiler backends.  During that time I learned that optimizing code generation requires ' +
-                    'a lot of discipline and patience.  Not every approach wins, most wins are small, and sometimes doing the right ' +
-                    'thing generates worse results in some test cases, but compound all those small improvements and the effect ' +
-                    'is huge.  A hundred 1% improvements results in a 2.7x gain.'
-                ),
+                ', I was able to build new software far faster than I would have done previosly.  I\'ve used this approach to ' +
+                'develop the core of several other software components, including the syntax highlighting engine used in both ' +
+                'that, and this article.  However, this is a new field and it\'s very unlikely we\'ve discovered the best ' +
+                'ways to make use of them yet.'
+            ),
+            h('p', {},
+                'Finally, I\'ve been very interested in code generation techniques for most of my career, and for many years ' +
+                'I developed production C and C++ compiler backends.  During that time I learned that optimizing code ' +
+                'generation requires a lot of discipline and patience.  Most wins are very small, and sometimes doing the ' +
+                'right thing generates worse results in some test cases because secondary effects sometimes swamp the ' +
+                'primary one.  Nevertheless, accumulate all those small improvements and the effect is huge.  A hundred 1% ' +
+                'improvements results in a 2.7x gain overall.  Importantly, that 2.7x gain is a gain to every application ' +
+                'that uses the compiler so the payback is immense.'
             )
         ),
         h('section', {},
-            h('h2', {}, 'A quick aside'),
+            h('h2', {}, 'The challenge'),
+            h('p', {},
+                'Bringing these thoughts together, I posed the following challenge:'
+            ),
+            h('ol', {},
+                h('li', {},
+                    'How might we more effectively use LLMs to elevate the work of people involved in software developoment?'
+                ),
+                h('li', {},
+                    'How can we combine elements of different skills, such as product design, software implementation, and ' +
+                    'testing, so the new strategy can support more than just the work done by developers?'
+                ),
+                h('li', {},
+                    'What previously impractical things might become practical now?'
+                )
+            ),
+            h('p', {},
+                'We\'ll start with the first two and come back to the third later'
+            ),
+        ),
+        h('section', {},
+            h('h2', {}, 'More effective use of LLMs'),
+            h('p', {},
+                'Interactive engagement with LLMs is one of their greatest strengths, but it can also lead to losing focus ' +
+                'on specific outcomes, resulting in unnecessary detours (yak shaving).  LLMs excel at holding conversations, ' +
+                'seducing us into being sidetracked.  We can spend hours discussing minor details while ignoring substantive ' +
+                'issues that might render those other conversations irrelevant (bikeshedding).'
+            ),
+            h('p', {},
+                'In traditional software development, whether through a designer\'s informal approach or an ' +
+                'enterprise-level process involving product managers or product owners, there is always a clear outcome ' +
+                'driving the development process. However, an LLM has no understanding of our goals until we explicitly ' +
+                'communicate them.'
+            ),
+            h('p', {},
+                'This ambiguity can lead LLMs down hallucinatory rabbit holes, as they try to fill the void with creative, ' +
+                'but sometimes irrelevant, content.  If we\'re asking the LLM to help build something it was specifically ' +
+                'trained on, it might stay on track, but how often do we want to create an exact clone of existing software?'
+            ),
+            h('p', {},
+                'To avoid this, we should craft a long-form description of our goals.  By capturing detailed requirements, ' +
+                'we can present them to the LLM, providing it with a much clearer picture of what we want to achieve.'
+            )
+        ),
+        h('section', {},
+            h('h2', {}, 'Combing different skills'),
+            h('p', {},
+                'While it\'s possible to focus solely on the technical side of software development, it\'s crucial for our ' +
+                'LLM to understand other important motivations.  Incorporating distinct skills and perspectives can provide ' +
+                'insights that lead to interesting and unexpected directions in the final design.'
+            ),
+            h('p', {},
+                'Consider a requirement for testing, for instance.  We might emphasize the need for our software to support ' +
+                '90%+ automated test coverage.  This requirement could lead to an implementation that allows for easier ' +
+                'mocking.  Without explicitly stating this, our LLM might take a different approach.  Similarly, providing ' +
+                'examples of specific user journeys or behavioral requirements can guide the LLM towards unique and ' +
+                'innovative solutions.'
+            )
         ),
         h('section', {},
             h('h2', {}, 'Another heading'),
             h('p', {},
                 'blan..',
+                'rubber ducking!'
             )
         ),
         h('section', {},
@@ -258,11 +336,11 @@ function blogPostscript_2024_08_03_1000(): VNode[] {
 }
 
 export const blogPost_2024_08_03_1000 = new BlogPost(
-    'Innovating software development with ChatGPT',
+    'Maximal Instruction Prompting: a strategy for software development',
     '2024-08-03T10:00',
     '/blog/2024-08-03-1000',
-    'Large language models are set to give us many new ways to build software.  Let\'s look at one such way to use ChatGPT ' +
-    'to do something innovative!',
+    'Introducing the concept of Maximial Instruction Prompting (MIP) as a strategy for software development with' +
+    'large language models (LLMs)',
     '/blog/2024-08-03-1000/robot.webp',
     null,
     blogOpening_2024_08_03_1000,
