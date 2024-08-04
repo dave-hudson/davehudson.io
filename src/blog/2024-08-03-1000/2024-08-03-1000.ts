@@ -192,7 +192,7 @@ function blogArticle_2024_08_03_1000(): VElement[] {
                 'To understand my approach, let me start with some motivating thoughts.'
             ),
             h('p', {},
-                'Great software transcends the code itself.  While code is undeniably important, it is ultimately an ' +
+                'Great software is far more than the code itself.  While code is undeniably important, it\'s ultimately an ' +
                 'expression of higher-level ideas.  Throughout the history of computing, we\'ve continually sought better ' +
                 'and more reliable methods to create increasingly complex software.  The weakest link in this chain has ' +
                 'always been the human element of translating high-level ideas into working implementations.  The move ' +
@@ -207,11 +207,11 @@ function blogArticle_2024_08_03_1000(): VElement[] {
             ),
             h('p', {},
                 'Most current uses of LLMs to build software have focused on an interactive dialogue between a developer ' +
-                'and the LLM.  This approach can be incredibly effective.  For example in: ',
+                'and the LLM.  This approach can be incredibly effective.  For example in "',
                 h('a', {href: '/blog/2024-07-15-0800', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2024-07-15-0800')},
                     'Can my tools build tools?  Pre-rendering web pages with help from ChatGPT (2024-07-15)'
                 ),
-                ', I was able to build new software far faster than I would have done previosly.  I\'ve used this approach to ' +
+                '", I was able to build new software far faster than I would have done previosly.  I\'ve used this approach to ' +
                 'develop the core of several other software components, including the syntax highlighting engine used in both ' +
                 'that, and this article.  However, this is a new field and it\'s very unlikely we\'ve discovered the best ' +
                 'ways to make use of them yet.'
@@ -227,28 +227,10 @@ function blogArticle_2024_08_03_1000(): VElement[] {
             )
         ),
         h('section', {},
-            h('h2', {}, 'The challenge'),
+            h('h2', {}, 'Use LLMs more effectively'),
             h('p', {},
-                'Bringing these thoughts together, I posed the following challenge:'
+                'How might we more effectively use LLMs to elevate the work of people involved in software developoment?'
             ),
-            h('ol', {},
-                h('li', {},
-                    'How might we more effectively use LLMs to elevate the work of people involved in software developoment?'
-                ),
-                h('li', {},
-                    'How can we combine elements of different skills, such as product design, software implementation, and ' +
-                    'testing, so the new strategy can support more than just the work done by developers?'
-                ),
-                h('li', {},
-                    'What previously impractical things might become practical now?'
-                )
-            ),
-            h('p', {},
-                'We\'ll start with the first two and come back to the third later'
-            ),
-        ),
-        h('section', {},
-            h('h2', {}, 'More effective use of LLMs'),
             h('p', {},
                 'Interactive engagement with LLMs is one of their greatest strengths, but it can also lead to losing focus ' +
                 'on specific outcomes, resulting in unnecessary detours (yak shaving).  LLMs excel at holding conversations, ' +
@@ -272,7 +254,11 @@ function blogArticle_2024_08_03_1000(): VElement[] {
             )
         ),
         h('section', {},
-            h('h2', {}, 'Combing different skills'),
+            h('h2', {}, 'Combine elements from different skills'),
+            h('p', {},
+                'How can we combine elements of different skills, such as product design, software implementation, and ' +
+                'testing, so the new strategy can support more than just the work done by developers?'
+            ),
             h('p', {},
                 'While it\'s possible to focus solely on the technical side of software development, it\'s crucial for our ' +
                 'LLM to understand other important motivations.  Incorporating distinct skills and perspectives can provide ' +
@@ -284,18 +270,75 @@ function blogArticle_2024_08_03_1000(): VElement[] {
                 'mocking.  Without explicitly stating this, our LLM might take a different approach.  Similarly, providing ' +
                 'examples of specific user journeys or behavioral requirements can guide the LLM towards unique and ' +
                 'innovative solutions.'
+            ),
+            h('p', {},
+                'In typical enterprise software development, such aspects are captured as user stories and acceptance ' +
+                'criteria since this helps human development teams build software correctly.  By taking a similar ' +
+                'approach we can help inform our LLM of these important details.'
+            )
+        ),
+        h('section', {},
+            h('h2', {}, 'Apply MECE principles'),
+            h('p', {},
+                'blah mutually exclusive, collectively exhaustive..'
+            )
+        ),
+        h('section', {},
+            h('h2', {}, 'An example'),
+            h('p', {},
+                'Let\'s consider an example!  In "',
+                h('a', {href: '/blog/2024-07-15-0800', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2024-07-15-0800')},
+                    'Can my tools build tools?'
+                ),
+                '", I posed a problem of building a pre-rendering application.  Let\'s expand that into a full application ' +
+                'called "siterender".'
+            ),
+            h('p', {},
+                'As we\'re looking to improve on our previous results, let\'s define that want a much richer set of features ' +
+                'than the original tool:'
+            ),
+            h('ul', {},
+                h('li', {}, 'Fetches and parses sitemaps.'),
+                h('li', {}, 'Can Replace URL prefixes based on specified rules.'),
+                h('li', {}, 'Renders pages in parallel using Puppeteer.'),
+                h('li', {}, 'Parallelizes rendering operations for maximum speed/throughput.'),
+                h('li', {}, 'Saves rendered HTML content to specified output directory.'),
+                h('li', {}, 'Retry mechanism for rendering and browser launch/close operations.'),
+                h('li', {}, 'Supports command line options to configure operations.')
+            ),
+            h('p', {},
+                'My first attempt at a comprehensive prompt is shown below.  Don\'t worry about this one too much as the ' +
+                'finished form is very different.'
+            ),
+            blogOrigPrompt_2024_08_03_1000(),
+            h('p', {},
+                'By iterating on this initial prompt, sometimes myself, and sometimes through dialogue with ChatGPT, I was ' +
+                'able to make it progressively better.  To make this more interesting I did most of the iteration work ' +
+                'using temporary chats that don\'t impact my other sessions with ChatGPT.'
+            ),
+            h('p', {},
+                'The most impactful change was to alter the first line to this:'
+            ),
+            h('div', {className: 'green-note'},
+                h('p', {},
+                    'The following is a prouduct requirement.  Please check the details and confirm if there are any areas ' +
+                    'that are ambigous or unclear.  If there are then please detail them and suggest improvements'
+                )
             )
         ),
         h('section', {},
             h('h2', {}, 'Another heading'),
             h('p', {},
-                'blan..',
+                'blah..',
+                'MECE principle',
                 'rubber ducking!'
+            ),
+            h('p', {},
+                'What previously impractical things might become practical now?'
             )
         ),
         h('section', {},
             h('h2', {}, 'The application prompt'),
-            blogOrigPrompt_2024_08_03_1000(),
             blogPrompt_2024_08_03_1000()
         ),
         h('section', {},
@@ -308,6 +351,10 @@ function blogArticle_2024_08_03_1000(): VElement[] {
         h('hr', {}),
         h('section', {},
             h('h2', {}, 'Project site'),
+            h('p', {},
+                'I decided to make the siterender application into a separate project, so if you\'re interested you can ' +
+                'follow and help shape its evolution.'
+            ),
             h('p', {},
                 'The project site for siterender can be found here: ',
                 h('a', {href: '/projects/siterender', onclick: (e: MouseEvent) => navigateEvent(e, '/projects/siterender')},

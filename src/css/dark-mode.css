@@ -36,7 +36,7 @@ hr {
 }
 
 .main pre {
-    background-color: #1c1c1c;
+    background-color: #080808;
 }
 
 .main pre code .comment {
@@ -109,7 +109,7 @@ hr {
 }
 
 .main pre code .text {
-    color: #b0b0b0;
+    color: #60b860;
 }
 
 .main table th {
@@ -121,14 +121,9 @@ hr {
     border: 1px solid #777;
 }
 
-.main .pink-note {
-    background-color: #1c1c1c;
-    color: #ffc0cb;
-}
-
-.main .blue-note {
-    background-color: #1c1c1c;
-    color: #80b0f0;
+.main .green-note {
+    background-color: #080808;
+    color: #60b860;
 }
 
 .main .blog-posts .blog-post .meta {

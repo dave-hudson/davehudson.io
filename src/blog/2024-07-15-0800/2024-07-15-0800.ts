@@ -181,7 +181,7 @@ function blogArticle_2024_07_15_0800(): VElement[] {
             h('p', {},
                 'Here\'s my initial prompt in a new session:',
             ),
-            h('div', {className: 'pink-note'},
+            h('div', {className: 'green-note'},
                 h('p', {},
                     'How do I use google chrome to pre-render my single page app website?'
                 )
@@ -189,7 +189,7 @@ function blogArticle_2024_07_15_0800(): VElement[] {
             h('p', {},
                 'And the first reply:',
             ),
-            h('div', {className: 'blue-note'},
+            h('div', {className: 'green-note'},
                 h('p', {},
                     'Pre-rendering a single-page application (SPA) using Google Chrome involves generating static HTML ' +
                     'content that can be served to search engines and users to improve SEO and performance.  Here are the ' +

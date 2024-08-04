@@ -24,7 +24,7 @@ export function projectSiterenderPage(): VNode {
                 h('h2', {}, 'Features'),
                 h('ul', {},
                     h('li', {}, 'Fetches and parses sitemaps from URLs or local files.'),
-                    h('li', {}, 'Supports nested sitemaps.'),
+                    h('li', {}, 'Supports sitemaps and sitemap indexes (nested sitemaps).'),
                     h('li', {}, 'Replaces URL prefixes based on specified rules.'),
                     h('li', {}, 'Renders pages in parallel using Puppeteer.'),
                     h('li', {}, 'Parallelizes rendering operations for maximum speed/throughput.'),

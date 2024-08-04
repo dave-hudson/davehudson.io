@@ -599,7 +599,7 @@ pre {
 }
 
 .main pre code .text {
-    color: #141414;
+    color: #008000;
 }
 
 .main table {
@@ -620,15 +620,9 @@ pre {
     border: 1px solid #777;
 }
 
-.main .pink-note {
+.main .green-note {
     background-color: #ececec;
-    color: #c040c0;
-    padding: 1px 8px;
-}
-
-.main .blue-note {
-    background-color: #ececec;
-    color: #4058d0;
+    color: #008000;
     padding: 1px 8px;
 }
 
