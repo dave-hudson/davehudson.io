@@ -139,9 +139,9 @@ function blogLogicTS_2024_08_03_1000(): VElement {
 function blogOpening_2024_08_03_1000(): VElement[] {
     return [
         h('p', {},
-            'For the last few months I\'ve been trying out some new ideas to see how we might be able to innovate ' +
+            'For the last few months, I\'ve been trying out some new ideas to see how we might innovate ' +
             'software development using Large Language Models (LLMs).  This article introduces a new idea, Maximal ' +
-            'Instruction Prompting (MIP) as a strategy for a new way of doing software development with LLMs.'
+            'Instruction Prompting (MIP) as a strategy for doing software development with LLMs.'
         ),
         h('p', {},
             'I\'ve used this approach for a couple of different projects, and the concept continues to evolve with ' +
@@ -168,8 +168,8 @@ function blogArticle_2024_08_03_1000(): VElement[] {
             h('h2', {}, 'The MIP strategy'),
             h('p', {},
                 'LLMs are incredible tools.  Like all tools, though, getting good results with them requires us to use ' +
-                'them in the right way.  The idea behind Maximal Instruction Prompting (MIP) is to offer an effective way to ' +
-                'use LLMs to support software development.'
+                'them in the right way.  The idea behind Maximal Instruction Prompting (MIP) is to provide a more effective ' +
+                'way to use LLMs for software development.'
             ),
             h('p', {},
                 'The MIP approach is based on observation of practical problems in using LLMs when they\'re applied to ' +
@@ -178,7 +178,7 @@ function blogArticle_2024_08_03_1000(): VElement[] {
             ),
             h('h3', {}, 'Summary of MIP'),
             h('p', {},
-                'MIP can be summarised as an approach for providing detailed requirements to an LLM to allow it to produce ' +
+                'MIP can be summarised as an approach for providing detailed requirements to an LLM, enabling it to produce ' +
                 'more complex output.  These are the core ideas:'
             ),
             h('ul', {},
@@ -216,7 +216,7 @@ function blogArticle_2024_08_03_1000(): VElement[] {
                     'those sorts of major changes.'
                 ),
                 h('li', {},
-                    'A MIP captures what our software is, so this means the LLM can also use that to help create tests and ' +
+                    'A MIP captures what our software is, which means the LLM can also use that to help create tests and ' +
                     'user documentation.  [Aside: both of these are areas I will be looking into over the coming months]'
                 ),
                 h('li', {},
@@ -233,8 +233,8 @@ function blogArticle_2024_08_03_1000(): VElement[] {
             ),
             h('h3', {}, 'Limitations of MIP'),
             h('p', {},
-                'All ideas have some limitations, so we should discuss them too.  At worst, MIP suffers from ' +
-                'similar to existing approaches with LLMs, but in most cases MIP provides partial mitigation for each one:'
+                'All ideas have some limitations, so we should discuss them too.  At worst, MIP suffers from similar' +
+                'problems as existing approaches, but in most cases MIP provides partial mitigation:'
             ),
             h('ul', {},
                 h('li', {},
@@ -254,7 +254,7 @@ function blogArticle_2024_08_03_1000(): VElement[] {
                     'the conversation forward much more rapidly and while maintaining a clear focus on an outcome.'
                 ),
                 h('li', {},
-                    'There is a limit to the complexity of the pronpt we can provide, but this same limit applies to ' +
+                    'There is a limit to the complexity of the prompt we can provide, but this same limit applies to ' +
                     'dialogue-based approaches.  Our LLM has a limited context window so this approach only works if we ' +
                     'can keep our working data set inside that.  For more complex software this means we need to break ' +
                     'things into smaller components, however the approach described should still work, but we\'ll ' +
@@ -308,7 +308,7 @@ function blogArticle_2024_08_03_1000(): VElement[] {
             h('section', {},
                 h('h3', {}, 'Consider all relevant skills and perspectives'),
                 h('p', {}, 
-                    'In conventional software developement we recognize the value of many different skills and perspectives.  ' +
+                    'In conventional software developement, we recognize the value of many different skills and perspectives.  ' +
                     'We require product definition and vision aligned to commercial goals.  We need developers expert in all ' +
                     'relevant technologies.  We need to plan for testing.  We may need experts in UX and UI, security, ' +
                     'operational deployment, etc.  Each of these roles provides more of the detail of what we\'re looking to ' +
@@ -363,7 +363,7 @@ function blogArticle_2024_08_03_1000(): VElement[] {
                     )
                 ),
                 h('p', {},
-                    'By carefully enumerating requirements we provide clarify not only to any LLM, but we also make it ' +
+                    'By carefully enumerating requirements, we provide clarify not only to any LLM but also make it ' +
                     'far easier for our human designers to understand the detail of the software they\'re shaping.'
                 )
             ),
@@ -378,7 +378,7 @@ function blogArticle_2024_08_03_1000(): VElement[] {
                     'These examples do not replace the requirements, but serve to add clarity around them.'
                 ),
                 h('p', {},
-                    'This approach also works for LLMs.  By providing examples of use, an LLM is more readily able to check ' +
+                    'This approach also works for LLMs.  By providing examples of use, an LLM is more readily able to verify ' +
                     'that any software it produces meets the expectation of whoever provided the prompt.'
                 )
             ),
@@ -408,71 +408,75 @@ function blogArticle_2024_08_03_1000(): VElement[] {
                 h('li', {}, 'Saves rendered HTML content to specified output directory.'),
                 h('li', {}, 'Retry mechanism for rendering and browser launch/close operations.')
             ),
-            h('h3', {}, 'The MIP'),
-            h('p', {},
-                'You can find ',
-                h('a', {href: '#the-mip', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2024-08-03-1000#the-mip')},
-                    'the MIP'
+            h('section', {},
+                h('h3', {}, 'The MIP'),
+                h('p', {},
+                    'You can find ',
+                    h('a', {href: '#the-mip', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2024-08-03-1000#the-mip')},
+                        'the MIP'
+                    ),
+                    ' at the end of the article.  The prompt is 77 lines long, but some of those lines are quite long.  This ' +
+                    'isn\'t ideal but works for now.'
                 ),
-                ' at the end of the article.  The prompt is 77 lines long, but some of those lines are quite long.  This ' +
-                'isn\'t ideal but works for now.'
-            ),
-            h('p', {},
-                'The prompt is broken into a series of sections, each with a distinct set of requirements that ' +
-                'describe our desired application behaviour.  This prompt was itself iterated from a much earlier form and ' +
-                'involved having ChatGPT 4o reformat it, and make suggestions about ambiguity or overlaps.'
-            ),
-            h('p', {},
-                'Earlier versions of the prompt were used to build fully working implementations, but this is the first ' +
-                'version that was implemented in TypeScript.  Most earlier implementations were implemented in JavaScript, ' +
-                'but one edition also built a Python version - they Python one was 20% slower, however!'
-            ),
-            h('h3', {}, 'The implementation'),
-            h('p', {},
-                'The output ',
-                h('a', {href: '#the-code', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2024-08-03-1000#the-code')},
-                    'TypeScript source code'
+                h('p', {},
+                    'The prompt is broken into a series of sections, each with a distinct set of requirements that ' +
+                    'describe our desired application behaviour.  This prompt was itself iterated from a much earlier form and ' +
+                    'involved having ChatGPT 4o reformat it, and make suggestions about ambiguity or overlaps.'
                 ),
-                ' appears at the end of this article.  There are over 300 lines of code split across two files.'
-            ),
-            h('p', {},
-                'As noted in the section on limitations, ChatGPT didn\'t produce a working version of this software first ' +
-                'time, but it did do so with one of the earlier JavaScript editions.  To mitigate this, I asked it ' +
-                'how it implemented each feature in an interactive dialogue.  Where necessary, this led to it ' +
-                'changing its implementation to conform with the requirements.'
-            ),
-            h('p', {},
-                'The total interactive time required to the published output was around 90 minutes, although that included ' +
-                'about 30 minutes of testing.  The prompt was evolved over a few weeks.  While not part of the prompt ' +
-                'provided here, a further interactive session lasting 3 hours resulted in a test program that provides > 90% ' +
-                'test coverage for the ',
-                h('code', {}, 'logic.ts'),
-                ' file, including test error handling and retry logic.  A future version of the prompt will be updated to ' +
-                'include that testability requirement.  The approach taken during the 3 hours was to "pair program" with the ' +
-                'LLM, letting it have the keyboard.'
-            ),
-            h('p', {},
-                'The general quality of the code is high.  I\'m not a fan of it using a global variable for the XML parser ' +
-                'in ',
-                h('code', {}, 'logic.ts'),
-                ', but this can be refined later.  The implementation is robust and testable.  If network connections are ' +
-                'removed then the retry logic keeps going and will recover if the network comes back up.  Similarly if number ' +
-                'of parallel rendering tasks is set to 8x the number of CPUs, we see a lot of timeouts and retries as Chrome ' +
-                'can\'t keep up, but the application completes its task quickly.'
-            ),
-        ),
-        h('section', {},
-            h('h2', {}, 'Project site'),
-            h('p', {},
-                'I decided to make the siterender application into a separate project, so if you\'re interested you can ' +
-                'follow and help shape its evolution.'
-            ),
-            h('p', {},
-                'The project site for siterender can be found here: ',
-                h('a', {href: '/projects/siterender', onclick: (e: MouseEvent) => navigateEvent(e, '/projects/siterender')},
-                    'siterender'
+                h('p', {},
+                    'Earlier versions of the prompt were used to build fully working implementations, but this is the first ' +
+                    'version that was implemented in TypeScript.  Most earlier implementations were built using JavaScript, ' +
+                    'but one edition was built using Python. The Python version was 20% slower, however!'
                 ),
-                '.  The site has links to the source code, and notes about how to contribute if you\'re interested.'
+            ),
+            h('section', {},
+                h('h3', {}, 'The implementation'),
+                h('p', {},
+                    'The output ',
+                    h('a', {href: '#the-code', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2024-08-03-1000#the-code')},
+                        'TypeScript source code'
+                    ),
+                    ' appears at the end of this article.  There are over 300 lines of code split across two files.'
+                ),
+                h('p', {},
+                    'As noted in the section on limitations, ChatGPT didn\'t produce a working version of this software first ' +
+                    'time, but it did do so with one of the earlier JavaScript editions.  To mitigate this, I asked it ' +
+                    'how it implemented each feature in an interactive dialogue.  Where necessary, this led to it ' +
+                    'changing its implementation to conform with the requirements.'
+                ),
+                h('p', {},
+                    'The total interactive time required to the published output was around 90 minutes, although that included ' +
+                    'about 30 minutes of testing.  The prompt was evolved over a few weeks.  While not part of the prompt ' +
+                    'provided here, a further interactive session lasting 3 hours resulted in a test program that provides > 90% ' +
+                    'test coverage for the ',
+                    h('code', {}, 'logic.ts'),
+                    ' file, including test error handling and retry logic.  A future version of the prompt will be updated to ' +
+                    'include that testability requirement.  The approach taken during the 3 hours was to "pair program" with the ' +
+                    'LLM, letting it have the keyboard.'
+                ),
+                h('p', {},
+                    'The general quality of the code is high.  I\'m not a fan of it using a global variable for the XML parser ' +
+                    'in ',
+                    h('code', {}, 'logic.ts'),
+                    ', but this can be refined later.  The implementation is robust and testable.  If network connections are ' +
+                    'removed then the retry logic keeps going and will recover if the network comes back up.  Similarly if number ' +
+                    'of parallel rendering tasks is set to 8x the number of CPUs, we see a lot of timeouts and retries as Chrome ' +
+                    'can\'t keep up, but the application completes its task quickly.'
+                )
+            ),
+            h('section', {},
+                h('h3', {}, 'Project site'),
+                h('p', {},
+                    'I decided to make the siterender application into a separate project, so if you\'re interested you can ' +
+                    'follow and help shape its evolution.'
+                ),
+                h('p', {},
+                    'The project site for siterender can be found here: ',
+                    h('a', {href: '/projects/siterender', onclick: (e: MouseEvent) => navigateEvent(e, '/projects/siterender')},
+                        'siterender'
+                    ),
+                    '.  The site has links to the source code, and notes about how to contribute if you\'re interested.'
+                ),
             ),
         ),
         h('section', {},
@@ -482,7 +486,7 @@ function blogArticle_2024_08_03_1000(): VElement[] {
                 'to build software with ChatGPT.'
             ),
             h('p', {},
-                'Why not give his a try yourself?  If you do then I\'m curious to hear your experiences!'
+                'Why not give his a try yourself?  If you do, I\'m curious to hear your experiences!'
             )
         ),
         h('section', {},
