@@ -291,8 +291,8 @@ function blogArticle_2024_08_03_1000(): VElement[] {
                     'void with creative, irrelevant, or plain wrong, content.'
                 ),
                 h('p', {},
-                    'We might dismiss the use of LLMs as a result.  Still, in conventional software development, we know that ' +
-                    'once more than a single developer is working on a software design, we need to spend time ensuring our ' +
+                    'As a result, we might dismiss the use of LLMs.  Still, in conventional software development, we know that ' +
+                    'once more than a single developer is working on a software design, we need to ensure our ' +
                     'team maintains a shared view of what will be built.  With an LLM, we must recognize that we always ' +
                     'have at least two team members.'
                 ),
@@ -361,7 +361,7 @@ function blogArticle_2024_08_03_1000(): VElement[] {
                     )
                 ),
                 h('p', {},
-                    'By carefully enumerating requirements, we provide clarify not only for any LLM but also make it ' +
+                    'By carefully enumerating requirements, we provide clarity not only for any LLM but also make it ' +
                     'far easier for our human designers to understand the details of the software they\'re shaping.'
                 )
             ),
