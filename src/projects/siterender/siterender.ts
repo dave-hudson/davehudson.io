@@ -28,7 +28,7 @@ export function projectSiterenderPage(): VNode {
                     h('li', {}, 'Replaces URL prefixes based on specified rules.'),
                     h('li', {}, 'Renders pages in parallel using Puppeteer.'),
                     h('li', {}, 'Parallelizes rendering operations for maximum speed/throughput.'),
-                    h('li', {}, 'Saves rendered HTML content to specified output directory.'),
+                    h('li', {}, 'Saves rendered HTML content to a specified output directory.'),
                     h('li', {}, 'Retry mechanism for rendering and browser launch/close operations.')
                 )
             ),

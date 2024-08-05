@@ -139,17 +139,17 @@ function blogLogicTS_2024_08_03_1000(): VElement {
 function blogOpening_2024_08_03_1000(): VElement[] {
     return [
         h('p', {},
-            'For the last few months, I\'ve been trying out some new ideas to see how we might innovate ' +
-            'software development using Large Language Models (LLMs).  This article introduces a new idea, Maximal ' +
-            'Instruction Prompting (MIP) as a strategy for doing software development with LLMs.'
+            'I\'ve been trying new ideas to see how we might innovate ' +
+            'software development using Large Language Models (LLMs).  This article introduces a new concept, Maximal ' +
+            'Instruction Prompting (MIP), as a strategy for software development with LLMs.'
         ),
         h('p', {},
-            'I\'ve used this approach for a couple of different projects, and the concept continues to evolve with ' +
-            'each new use, but even in these early stages I\'ve been seeing striking results.'
+            'I\'ve used this approach for several projects, and the concept continues to evolve with ' +
+            'each new use.  However, even in these early stages, I\'ve seen striking results.'
         ),
         h('p', {},
-            'This article describes the MIP strategy, the benefits it can offer, some more detailed explanations, ' +
-            'and ends with an example of an application built this way.'
+            'This article describes the MIP strategy and the benefits it can offer.  It provides more detailed ' +
+            'explanations and ends with an example of an application built this way.'
         )
     ]
 }
@@ -172,9 +172,8 @@ function blogArticle_2024_08_03_1000(): VElement[] {
                 'way to use LLMs for software development.'
             ),
             h('p', {},
-                'The MIP approach is based on observation of practical problems in using LLMs when they\'re applied to ' +
-                'software development.  Most current uses take the form of a smart sidekick for a developer, but we should ' +
-                'be able to do far more.'
+                'The MIP strategy comes from observing practical problems using LLMs in software development.  Most ' +
+                'LLMs are used like a developer\'s sidekick, but we should be able to do far more.'
             ),
             h('h3', {}, 'Summary of MIP'),
             h('p', {},
@@ -189,7 +188,7 @@ function blogArticle_2024_08_03_1000(): VElement[] {
                     'Consider all relevant skills and perspectives.'
                 ),
                 h('li', {},
-                    'Describe all requirements comprehensively, and exactly once.'
+                    'Describe all requirements comprehensively and exactly once.'
                 ),
                 h('li', {},
                     'Use examples that offer clarity for requirements.'
@@ -197,67 +196,66 @@ function blogArticle_2024_08_03_1000(): VElement[] {
             ),
             h('h3', {}, 'Advantages of MIP'),
             h('p', {},
-                'As a couple of my more commercially minded friends might say, "show us the money!"  For MIP to be useful it ' +
-                'must offer significant practical advantages over alternatives.  Here are some that are already clear:'
+                'As a couple of my more commercially minded friends might say, "Show us the money!"  MIP must offer ' +
+                'significant practical advantages over alternatives for it to be helpful.  Here are some that are already clear:'
             ),
             h('ul', {},
                 h('li', {},
-                    'It captures the detailed requirements for our software.  Importantly, a MIP always describes what ' +
-                    'the software is and does, rather than how we\'d like to evolve it, making it easy for everyone to ' +
+                    'It captures the detailed requirements for our software.  Notably, a MIP always describes what ' +
+                    'the software is and does rather than how we\'d like to evolve it, making it easy for everyone to ' +
                     'understand.  Most software development focuses on evolution and thus quickly becomes defined by the ' +
                     'implementation rather than the intended design.'
                 ),
                 h('li', {}, 
-                    'It focuses on eliminating ambiguity so an LLM can generate software that will meet those requirements.'
+                    'It focuses on eliminating ambiguity so an LLM can generate software that meets those requirements.'
                 ),
                 h('li', {},
-                    'In focusing on what the software is, it becomes easy to try out variations.  Small changes in ' +
-                    'requirements might naturally lead to large changes in implementation, and this allows an LLM to make ' +
-                    'those sorts of major changes.'
+                    'Focusing on the software\'s characteristics makes it easy to try out variations.  Small changes in ' +
+                    'requirements might lead to significant changes in implementation, and the MIP approach allows us to ' +
+                    'have an LLM to make those sorts of changes quickly.'
                 ),
                 h('li', {},
                     'A MIP captures what our software is, which means the LLM can also use that to help create tests and ' +
                     'user documentation.  [Aside: both of these are areas I will be looking into over the coming months]'
                 ),
                 h('li', {},
-                    'By shifting the focus away from how the software is implemented we make it far easier to change ' +
-                    'technologies and implementations.  We might prototype in one language and then build production ' +
+                    'This shift from how software is built to what it is, makes it easy to change technologies and ' +
+                    'implementations.  For example, we might prototype in one language and then create a production ' +
                     'implementation in another!'
                 ),
                 h('li', {},
-                    'By making it inexpensive to build multiple versions of software to meet the same requirement we may ' +
-                    'be able to build more reliable software system.  For example, we could imagine building multiple ' +
-                    'versions of some library function to prevent downstream developers from inadvertently using unintended ' +
-                    'implementation details.'
+                    'We can build more reliable systems because MIP makes building multiple versions of the same software ' +
+                    'inexpensive.  For example, we could imagine building various versions of some library function to ' +
+                    'prevent downstream developers from inadvertently using unintended implementation details.'
                 )
             ),
             h('h3', {}, 'Limitations of MIP'),
             h('p', {},
-                'All ideas have some limitations, so we should discuss them too.  At worst, MIP suffers from similar' +
-                'problems as existing approaches, but in most cases MIP provides partial mitigation:'
+                'All ideas have some limitations, so we should discuss them too.  At worst, MIP suffers from similar ' +
+                'problems as existing approaches, but in most cases, MIP provides partial mitigation:'
             ),
             h('ul', {},
                 h('li', {},
-                    'This approach helps to mitigate the problem of LLMs hallucinating, but it doesn\'t eliminate it.  LLMs ' +
-                    'are designed to create random and surprising outputs sometimes and if these occur in the wrong place ' +
-                    'we might get faulty software.  However, with this strategy, we quickly build different versions of ' +
-                    'software in response to a single clear requirement.  This makes it very inexpensive to discard broken ' +
-                    'versions, and we may gain more insights into missing requirements as a result.'
+                    'This approach helps mitigate the problem of LLMs hallucinating, but it doesn\'t eliminate it.  LLMs ' +
+                    'intentionally create random and surprising outputs at times.  If these occur in the wrong place, ' +
+                    'we might get faulty software.  However this strategy allows us to quickly build different ' +
+                    'software implementations in response to our well-defined requirements.  It is inexpensive ' +
+                    'to discard broken versions, and we may gain more insights into missing requirements.'
                 ),
                 h('li', {},
-                    'Even when given clear and specific instructions an LLM is likely to "forget" about some of them.  This ' +
-                    'can be mitigated by using the explicit requirements to ask the LLM to demonstrate how it met each ' +
-                    'one.  This involves an iterative dialogue, but allows the LLM to rapidly correct its own mistakes.'
+                    'Even when given clear and specific instructions, an LLM will often ignore some.  We ' +
+                    'can mitigate this by using the explicit requirements to ask the LLM to demonstrate how it met each ' +
+                    'one.  We must solve this with an iterative dialogue, but the LLM can rapidly correct its mistakes.'
                 ),
                 h('li', {},
-                    'More generally, this approach does not eliminate the need for a dialogue with the LLM, it just moves ' +
-                    'the conversation forward much more rapidly and while maintaining a clear focus on an outcome.'
+                    'This approach does not eliminate the need for a dialogue with the LLM, but it does move ' +
+                    'the conversation forward much more rapidly while maintaining a clear focus on an outcome.'
                 ),
                 h('li', {},
-                    'There is a limit to the complexity of the prompt we can provide, but this same limit applies to ' +
+                    'The complexity of the prompt we can provide is limited, but the same limit applies to ' +
                     'dialogue-based approaches.  Our LLM has a limited context window so this approach only works if we ' +
-                    'can keep our working data set inside that.  For more complex software this means we need to break ' +
-                    'things into smaller components, however the approach described should still work, but we\'ll ' +
+                    'can keep our working data set inside that.  For more complex software, we will need to break ' +
+                    'things into smaller components.  The approach described should still work, but we\'ll ' +
                     'need to build each component separately.'
                 )
             ),
@@ -267,17 +265,17 @@ function blogArticle_2024_08_03_1000(): VElement[] {
             h('section', {},
                 h('h3', {}, 'Describe all the requirements'),
                 h('p', {},
-                    'Like most tools, LLMs are inherently passive, doing nothing until put into action by people.  When we wish ' +
+                    'Like most tools, LLMs are inherently passive, doing nothing until we set them into action.  When we wish ' +
                     'to use them to help us build software, this prompting invariably ends up in an interactive dialogue ' +
                     'between a designer and an LLM where the designer guides the LLM on what they wish to see.  This approach ' +
                     'can be highly effective.'
                 ),
                 h('p', {},
-                    'For example in "',
+                    'For example, in "',
                     h('a', {href: '/blog/2024-07-15-0800', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2024-07-15-0800')},
                         'Can my tools build tools?  Pre-rendering web pages with help from ChatGPT'
                     ),
-                    '", I was able to use an interactive approach to build new software far faster than I would have done ' +
+                    '", I used an interactive approach to build new software far faster than I would have done ' +
                     'previously.  I\'ve used this approach to develop the core of several other software components, including ' +
                     'the syntax highlighting engine used in both that, and this article.'
                 ),
@@ -285,62 +283,62 @@ function blogArticle_2024_08_03_1000(): VElement[] {
                     'While interactive engagement with LLMs is one of their greatest strengths, this has a dark side.  ' +
                     'LLMs excel at holding conversations, and we can be seduced into spending hours ' +
                     'discussing minor details while ignoring substantive issues that might render those other conversations ' +
-                    'irrelevant (yak shaving and bikeshedding as a service unless we\'re very careful).'
+                    'irrelevant (yak shaving and bikeshedding as a service).'
                 ),
                 h('p', {},
-                    'Another person might stop and ask questions during a conversation, but an LLM won\'t do this unless ' +
-                    'asked.  Ambiguity can also lead an LLM to descend into hallucinatory rabbit holes, as it tries to fill any ' +
+                    'Another person might stop and ask questions during a conversation, but an LLM will only do this if ' +
+                    'asked.  Ambiguity can also lead an LLM to descend into hallucinatory rabbit holes as it tries to fill any ' +
                     'void with creative, irrelevant, or plain wrong, content.'
                 ),
                 h('p', {},
                     'We might dismiss the use of LLMs as a result, but in conventional software development, we know that ' +
-                    'once there is more than a single developer working on a software design we need to spend time ensuring our ' +
-                    'team maintains a shared view of what is to be built.  With an LLM we need to recognize we always have at ' +
-                    'least 2 team members.'
+                    'once more than a single developer is working on a software design, we need to spend time ensuring our ' +
+                    'team maintains a shared view of what is to be built.  With an LLM, we need to recognize that we always ' +
+                    'have at least two team members.'
                 ),
                 h('p', {},
                     'As with an all-human team, we can help maintain alignment by crafting a long-form description of our ' +
-                    'goals.  We can present detailed written requirements to the LLM, giving it with a much clearer picture of ' +
-                    'what we want it to achieve.  This won\'t completely prevent an LLM wandering off track at times, but if ' +
-                    'it does, this also gives us a way to bring it back to where we want.'
+                    'goals.  We can present detailed written requirements to the LLM, giving it a clearer picture of ' +
+                    'what we want it to achieve.  While this will only partially prevent an LLM from wandering off track, ' +
+                    'if it does, this gives us a way to bring it back to where we want it.'
                 )
             ),
             h('section', {},
                 h('h3', {}, 'Consider all relevant skills and perspectives'),
                 h('p', {}, 
-                    'In conventional software developement, we recognize the value of many different skills and perspectives.  ' +
-                    'We require product definition and vision aligned to commercial goals.  We need developers expert in all ' +
-                    'relevant technologies.  We need to plan for testing.  We may need experts in UX and UI, security, ' +
-                    'operational deployment, etc.  Each of these roles provides more of the detail of what we\'re looking to ' +
-                    'build.'
+                    'In conventional software development, we recognize the value of many different skills and perspectives.  ' +
+                    'We require product definition and vision aligned with commercial goals.  We need developers who are ' +
+                    'experts in all relevant technologies.  We need to plan for testing.  We may need experts in UX and UI, ' +
+                    'security, operational deployment, etc.  Each of these roles can provide more detail about what we\'re ' +
+                    'looking to build.'
                 ),
                 h('p', {},
-                    'With an LLM we\'re looking to outsource the implementation of some or all of these elements, so we need ' +
+                    'With an LLM, we\'re looking to outsource the implementation of some or all of these elements, so we need ' +
                     'to give our LLM a clear understanding of each one.  Even if we want the LLM to focus solely on the coding ' +
-                    'element of software development, it\'s crucial for our LLM to understand other important motivations.'
+                    'aspect of software development, it\'s crucial for our LLM to understand these other motivations.'
                 ),
                 h('p', {},
                     'Consider a testability requirement, for instance.  We might emphasize the need for our software to ' +
                     'support 90%+ automated test coverage.  This requirement could lead to an implementation that allows for ' +
-                    'easier mocking.  Without explicitly stating this, our LLM might take a different approach.  Similarly, ' +
-                    'providing examples of specific user journeys or behavioral requirements can guide the LLM towards unique ' +
-                    'and innovative solutions.'
+                    'easier mocking.  We need to explicitly state this to avoid our LLM taking a different approach.  ' +
+                    'Similarly, providing examples of specific user journeys or behavioural requirements can guide the LLM ' +
+                    'towards unique and innovative solutions.'
                 ),
                 h('p', {},
-                    'Importantly, the expertise of software engineers is not eliminated.  Decisions around technology choices, ' +
-                    'and implementation strategies can be captured as requirements too.'
+                    'Notably, the expertise of software engineers has not been eliminated.  Decisions around technology ' +
+                    'choices and implementation strategies can be captured as requirements too.'
                 )
             ),
             h('section', {},
                 h('h3', {}, 'Describe all requirements comprehensively, and exactly once'),
                 h('p', {},
                     'Within human software development teams, one of the major causes of confusion and error is a misalignment ' +
-                    'of expectations about the way the software should work.  Often this arises from overlapping requirements ' +
-                    'that are either ambiguous or, even worse, contradictory.'
+                    'of expectations about the way the software should work.  Often, this arises from requirements ' +
+                    'that are overlapping, ambiguous or, even worse, contradictory.'
                 ),
                 h('p', {},
                     'If such things confuse humans, we can expect them to confuse LLMs too.  Unlike humans, however, LLMs ' +
-                    'won\'t tell us they\'re confused, they\'ll simply do unexpected things.  While not without some ' +
+                    'won\'t tell us they\'re confused.  Instead, they\'ll do unexpected things.  While not without some ' +
                     'criticism,  we can take inspiration from Barbara Minto\'s MECE (mutually exclusive, collectively ' +
                     'exhaustive) principle.'
                 ),
@@ -352,13 +350,13 @@ function blogArticle_2024_08_03_1000(): VElement[] {
                         h('em', {},
                             'Mutually exclusive'
                         ),
-                        ': the members of the list should exclude each other, i.e. be distinct from each other.'
+                        ': the list\'s members should exclude each other, i.e. be distinct from each other.'
                     ),
                     h('li', {},
                         h('em', {},
                             'Collectively exhaustive'
                         ),
-                        ': the members of the list should exhaust the relevant field, i.e. contain everything that belongs on ' +
+                        ': the list\'s members should exhaust the relevant field, i.e. contain everything that belongs on ' +
                         'the list.'
                     )
                 ),
@@ -378,7 +376,7 @@ function blogArticle_2024_08_03_1000(): VElement[] {
                     'These examples do not replace the requirements, but serve to add clarity around them.'
                 ),
                 h('p', {},
-                    'This approach also works for LLMs.  By providing examples of use, an LLM is more readily able to verify ' +
+                    'This approach also works for LLMs.  By providing examples of use, an LLM can more readily verify ' +
                     'that any software it produces meets the expectation of whoever provided the prompt.'
                 )
             ),
@@ -393,11 +391,8 @@ function blogArticle_2024_08_03_1000(): VElement[] {
                 h('a', {href: '/blog/2024-07-15-0800', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2024-07-15-0800')},
                     'Can my tools build tools?'
                 ),
-                '", I posed a problem of building a pre-rendering application.  Let\'s expand that into a full application ' +
-                'called "siterender".'
-            ),
-            h('p', {},
-                'This has a much richer set of features than the original tool:'
+                '", I posed the problem of building a pre-rendering application.  Let\'s expand that into a complete ' +
+                'application called "siterender" and define a richer set of features than the original:'
             ),
             h('ul', {},
                 h('li', {}, 'Fetches and parses sitemaps from URLs or local files.'),
@@ -405,23 +400,22 @@ function blogArticle_2024_08_03_1000(): VElement[] {
                 h('li', {}, 'Replaces URL prefixes based on specified rules.'),
                 h('li', {}, 'Renders pages in parallel using Puppeteer.'),
                 h('li', {}, 'Parallelizes rendering operations for maximum speed/throughput.'),
-                h('li', {}, 'Saves rendered HTML content to specified output directory.'),
+                h('li', {}, 'Saves rendered HTML content to a specified output directory.'),
                 h('li', {}, 'Retry mechanism for rendering and browser launch/close operations.')
             ),
             h('section', {},
                 h('h3', {}, 'The MIP'),
                 h('p', {},
-                    'You can find ',
                     h('a', {href: '#the-mip', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2024-08-03-1000#the-mip')},
-                        'the MIP'
+                        'The MIP'
                     ),
-                    ' at the end of the article.  The prompt is 77 lines long, but some of those lines are quite long.  This ' +
-                    'isn\'t ideal but works for now.'
+                    ' is at the end of the article.  The prompt is 77 lines, but some of those lines are pretty long.  This ' +
+                    'isn\'t ideal, but it works for now.'
                 ),
                 h('p', {},
-                    'The prompt is broken into a series of sections, each with a distinct set of requirements that ' +
-                    'describe our desired application behaviour.  This prompt was itself iterated from a much earlier form and ' +
-                    'involved having ChatGPT 4o reformat it, and make suggestions about ambiguity or overlaps.'
+                    'The prompt is divided into sections, each with a distinct set of requirements that ' +
+                    'describe our desired application behaviour.  This prompt was itself iterated from a much earlier form, ' +
+                    'which involved having ChatGPT 4o reformat it and make suggestions about ambiguity or overlaps.'
                 ),
                 h('p', {},
                     'Earlier versions of the prompt were used to build fully working implementations, but this is the first ' +
@@ -436,57 +430,57 @@ function blogArticle_2024_08_03_1000(): VElement[] {
                     h('a', {href: '#the-code', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2024-08-03-1000#the-code')},
                         'TypeScript source code'
                     ),
-                    ' appears at the end of this article.  There are over 300 lines of code split across two files.'
+                    ' appears at the end of this article.  It consists of over 300 lines of code split across two files.'
                 ),
                 h('p', {},
-                    'As noted in the section on limitations, ChatGPT didn\'t produce a working version of this software first ' +
-                    'time, but it did do so with one of the earlier JavaScript editions.  To mitigate this, I asked it ' +
-                    'how it implemented each feature in an interactive dialogue.  Where necessary, this led to it ' +
-                    'changing its implementation to conform with the requirements.'
+                    'As noted in the section on limitations, ChatGPT didn\'t produce a working version of this software the ' +
+                    'first time but did so with one of the earlier JavaScript editions.  To mitigate this, I asked it ' +
+                    'how it implemented each feature in an interactive dialogue.  Where necessary, it ' +
+                    'changed its implementation to conform with the requirements.'
                 ),
                 h('p', {},
-                    'The total interactive time required to the published output was around 90 minutes, although that included ' +
-                    'about 30 minutes of testing.  The prompt was evolved over a few weeks.  While not part of the prompt ' +
-                    'provided here, a further interactive session lasting 3 hours resulted in a test program that provides > 90% ' +
-                    'test coverage for the ',
+                    'The total interactive time required to reach the published output was around 90 minutes, although that ' +
+                    'included about 30 minutes of testing.  The prompt was evolved over a few weeks.  While not part of the ' +
+                    'prompt provided here, a further interactive session lasting 3 hours resulted in a test program that ' +
+                    'provides > 90% test coverage for the ',
                     h('code', {}, 'logic.ts'),
                     ' file, including test error handling and retry logic.  A future version of the prompt will be updated to ' +
-                    'include that testability requirement.  The approach taken during the 3 hours was to "pair program" with the ' +
+                    'include that testability requirement.  During the 3 hours, the approach was to "pair program" with the ' +
                     'LLM, letting it have the keyboard.'
                 ),
                 h('p', {},
-                    'The general quality of the code is high.  I\'m not a fan of it using a global variable for the XML parser ' +
-                    'in ',
+                    'The general quality of the code is high.  I\'m not too fond of the use of a global variable for the XML ' +
+                    'parser in ',
                     h('code', {}, 'logic.ts'),
-                    ', but this can be refined later.  The implementation is robust and testable.  If network connections are ' +
-                    'removed then the retry logic keeps going and will recover if the network comes back up.  Similarly if number ' +
-                    'of parallel rendering tasks is set to 8x the number of CPUs, we see a lot of timeouts and retries as Chrome ' +
+                    ', but we can refine this later.  The implementation is robust and testable.  If we disconnect the network, ' +
+                    'the retry logic keeps going and will recover if the network comes back up.  Similarly, if we set the number ' +
+                    'of parallel rendering tasks to 8x the number of CPUs, we see a lot of timeouts and retries as Chrome ' +
                     'can\'t keep up, but the application completes its task quickly.'
                 )
             ),
             h('section', {},
                 h('h3', {}, 'Project site'),
                 h('p', {},
-                    'I decided to make the siterender application into a separate project, so if you\'re interested you can ' +
-                    'follow and help shape its evolution.'
+                    'I decided to make the siterender application a distinct project so you can follow and help shape its ' +
+                    'evolution.'
                 ),
                 h('p', {},
-                    'The project site for siterender can be found here: ',
+                    'The project site for siterender is here: ',
                     h('a', {href: '/projects/siterender', onclick: (e: MouseEvent) => navigateEvent(e, '/projects/siterender')},
                         'siterender'
                     ),
-                    '.  The site has links to the source code, and notes about how to contribute if you\'re interested.'
+                    '.  The site has links to the source code and notes about how to contribute if you\'re interested.'
                 ),
             ),
         ),
         h('section', {},
             h('h2', {}, 'Conclusion'),
             h('p', {},
-                'I\'ve introduced the concept of a Maximal Instruction Prompt (MIP), and how I\'ve been using this approach ' +
-                'to build software with ChatGPT.'
+                'I\'ve introduced the concept of a Maximal Instruction Prompt (MIP) and explained how I\'ve been using this ' +
+                'approach to build software with ChatGPT.'
             ),
             h('p', {},
-                'Why not give his a try yourself?  If you do, I\'m curious to hear your experiences!'
+                'Why not give this a try yourself?  If you do, I\'m curious to hear about your experiences!'
             )
         ),
         h('section', {},
