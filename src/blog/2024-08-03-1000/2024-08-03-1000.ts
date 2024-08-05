@@ -361,7 +361,7 @@ function blogArticle_2024_08_03_1000(): VElement[] {
                     )
                 ),
                 h('p', {},
-                    'By carefully enumerating requirements, we provide clarity not only for any LLM but also make it ' +
+                    'By carefully enumerating requirements, we provide clarity for any LLM and make it ' +
                     'far easier for our human designers to understand the details of the software they\'re shaping.'
                 )
             ),
