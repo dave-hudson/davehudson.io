@@ -231,7 +231,8 @@ function handleLocation(scrollX: number, scrollY: number) {
 
     setTimeout(() => {
         const id = location.hash.substring(1);
-        console.log('id', id)
+
+        // Do we have a hash in our URL?  If not scroll to our requested position and finish.
         if (id === '') {
             window.scrollTo(scrollX, scrollY);
             return;
