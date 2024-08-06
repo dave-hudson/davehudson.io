@@ -194,7 +194,7 @@ function handleTwitterMetadata(pageInfo: routeDetails) {
 /**
  * Handle navigation to a new route.
  */
-function handleLocation() {
+function handleLocation(scrollX: number, scrollY: number) {
     let path = window.location.pathname;
 
     console.log(`Navigating to ${path}`)
@@ -228,6 +228,25 @@ function handleLocation() {
     handleTwitterMetadata(pageInfo);
 
     console.log(`Navigated to ${path}`)
+
+    setTimeout(() => {
+        const id = location.hash.substring(1);
+        console.log('id', id)
+        if (id === '') {
+            window.scrollTo(scrollX, scrollY);
+            return;
+        }
+
+        // We do have a hash in our URL, so scroll that into view.
+        const targetElement = document.getElementById(id);
+
+        if (targetElement) {
+            targetElement.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    }, 50);
 }
 
 export function navigateEvent(e: MouseEvent, path: string) {
@@ -238,21 +257,7 @@ export function navigateEvent(e: MouseEvent, path: string) {
     }
 
     window.history.pushState({scrollPosition}, '', path);
-    handleLocation();
-
-    // If we don't have a hash in our URL then scroll to the top of the page.
-    if (!location.hash) {
-        window.scrollTo(0, 0);
-        return;
-    }
-
-    // We do have a hash in our URL, so scroll that into view.:w
-    const targetId = location.hash.substring(1);
-    const targetElement = document.getElementById(targetId);
-
-    if (targetElement) {
-        targetElement.scrollIntoView();
-    }
+    handleLocation(0, 0);
 }
 
 /**
@@ -281,13 +286,16 @@ function onDOMContentLoaded(event: Event): void {
 
     // Set up the navigation for stepping backwards.
     window.onpopstate = (e) => {
-        handleLocation();
-        if (!e.state) {
-            window.scrollTo(0, 0);
-        } else {
+        let scrollX: number = 0;
+        let scrollY: number = 0;
+
+        if (e.state) {
             const scrollPosition = e.state.scrollPosition;
-            window.scrollTo(scrollPosition.x, scrollPosition.y);
+            scrollX = scrollPosition.x;
+            scrollY = scrollPosition.y;
         }
+
+        handleLocation(scrollX, scrollY);
     };
 
     // Look to see if our app HTML element has children.  If it does then it means we've loaded a pre-rendered version of the
@@ -300,7 +308,7 @@ function onDOMContentLoaded(event: Event): void {
         }
     }
 
-    handleLocation();
+    handleLocation(0, 0);
 }
 
 document.addEventListener('DOMContentLoaded', onDOMContentLoaded);

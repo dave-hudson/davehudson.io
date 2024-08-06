@@ -319,7 +319,6 @@ html {
     margin-left: calc(100vw - 100%);
     margin-right: 0;
     text-size-adjust: 100%;
-    scroll-behavior: smooth;
 }
 
 body {
