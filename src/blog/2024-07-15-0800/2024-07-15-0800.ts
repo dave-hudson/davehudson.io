@@ -223,7 +223,10 @@ function blogArticle_2024_07_15_0800(): VElement[] {
                 'The chat went on for about half an hour with me asking questions and suggesting things I\'d like to see, ' +
                 'and with ChatGPT writing all the code.  We ended up with this version:',
             ),
-            blogCode0_2024_07_15_0800(),
+            h('figure', {},
+                blogCode0_2024_07_15_0800(),
+                h('figcaption', {}, 'Initial software developed using ChatGPT 4o')
+            ),
             h('p', {},
                 'It has a few rather quirky features because I wanted to render my site using a local ',
                 h('code', {}, 'express.js'),
@@ -241,7 +244,10 @@ function blogArticle_2024_07_15_0800(): VElement[] {
                 'I\'m fairly impatient though, and hate waiting for builds.  So, I upped the ante a little and asked for ' +
                 'a parallelized version.  A little back and forth and we ended up with this:'
             ),
-            blogCode1_2024_07_15_0800(),
+            h('figure', {},
+                blogCode1_2024_07_15_0800(),
+                h('figcaption', {}, 'Final software developed using ChatGPT 4o')
+            ),
             h('p', {},
                 'This one could complete in about 12 seconds.  Now we were getting close to what I wanted!  A manual tweak ' +
                 'to run 16 in parallel and rendering was just under 6 seconds.  I\'ll take that as a huge win!'
