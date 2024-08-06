@@ -173,7 +173,7 @@ function blogArticle_2024_08_03_1000(): VElement[] {
             ),
             h('p', {},
                 'The MIP strategy comes from observing practical problems using LLMs in software development.  Most ' +
-                'developers us LLMs to accelerate coding tasks, but we should be able to do far more.'
+                'developers use LLMs to accelerate coding tasks, but we should be able to do far more.'
             ),
             h('h3', {}, 'Summary of MIP'),
             h('p', {},
@@ -191,7 +191,7 @@ function blogArticle_2024_08_03_1000(): VElement[] {
                     'Describe all requirements comprehensively and exactly once.'
                 ),
                 h('li', {},
-                    'Use examples that offer clarity for requirements.'
+                    'Use examples that clarify requirements.'
                 )
             ),
             h('h3', {}, 'Advantages of MIP'),
@@ -248,15 +248,14 @@ function blogArticle_2024_08_03_1000(): VElement[] {
                     'one.  We must solve this with an iterative dialogue, but the LLM can rapidly correct its mistakes.'
                 ),
                 h('li', {},
-                    'This approach does not eliminate the need for a dialogue with the LLM, but it does move ' +
-                    'the conversation forward much more rapidly while maintaining a clear focus on an outcome.'
+                    'This approach does not eliminate the need for a dialogue with the LLM but moves ' +
+                    'the conversation forward quickly while maintaining a clear focus on an outcome.'
                 ),
                 h('li', {},
                     'The complexity of the prompt we can provide is limited, but the same limit applies to ' +
                     'dialogue-based approaches.  Our LLM has a limited context window, so this approach only works if we ' +
-                    'can keep our working data set inside that.  For more complex software, we will need to break ' +
-                    'things into smaller components.  The approach described should still work, but we must ' +
-                    'build each component separately.'
+                    'can keep our working data set inside that.  The approach described should still work for larger software ' +
+                    'designs, but we must break this into smaller components and build each separately.'
                 )
             ),
         ),
@@ -277,7 +276,7 @@ function blogArticle_2024_08_03_1000(): VElement[] {
                     ),
                     '", I used an interactive approach to build new software far faster than I would have done ' +
                     'previously.  I\'ve used this approach to develop the core of several other software components, including ' +
-                    'the syntax highlighting engine used in both that, and this article.'
+                    'the syntax highlighting engine used in both that and this article.'
                 ),
                 h('p', {},
                     'While interactive engagement with LLMs is one of their greatest strengths, this has a dark side.  ' +
@@ -288,12 +287,12 @@ function blogArticle_2024_08_03_1000(): VElement[] {
                 h('p', {},
                     'Another person might stop and ask questions during a conversation, but an LLM will only do this if ' +
                     'asked.  Ambiguity can also lead an LLM to descend into hallucinatory rabbit holes as it tries to fill any ' +
-                    'void with creative, irrelevant, or plain wrong, content.'
+                    'void with creative, irrelevant, or plain wrong content.'
                 ),
                 h('p', {},
                     'As a result, we might dismiss the use of LLMs.  Still, in conventional software development, we know that ' +
-                    'once more than a single developer is working on a software design, we need to ensure our ' +
-                    'team maintains a shared view of what will be built.  With an LLM, we must recognize that we always ' +
+                    'once more than a single developer is working on a software design, we must ensure our ' +
+                    'team maintains a shared view of what they will build.  With an LLM, we must recognize that we always ' +
                     'have at least two team members.'
                 ),
                 h('p', {},
@@ -325,16 +324,17 @@ function blogArticle_2024_08_03_1000(): VElement[] {
                     'towards unique and innovative solutions.'
                 ),
                 h('p', {},
-                    'Notably, we have not eliminated the need for software engineering expertise.  Decisions around technology ' +
-                    'choices and implementation strategies can also be captured as requirements.'
+                    'While our LLM may do most of the coding, we still need software engineering expertise.  We use this ' +
+                    'skill to provide an expert review of the LLM\'s output and to capture decisions about technology ' +
+                    'choices and implementation strategies as requirements.'
                 )
             ),
             h('section', {},
                 h('h3', {}, 'Describe all requirements comprehensively, and exactly once'),
                 h('p', {},
-                    'One of the major causes of confusion and error within human software development teams is a misalignment ' +
+                    'A significant cause of confusion and error within human software development teams is a misalignment ' +
                     'of expectations about how software should work.  Often, this arises from requirements ' +
-                    'that are overlapping, ambiguous, or, even worse, contradictory.'
+                    'that overlap, are ambiguous, or, even worse, are contradictory.'
                 ),
                 h('p', {},
                     'If such things confuse humans, we can expect them to confuse LLMs too.  Unlike humans, however, LLMs ' +
@@ -361,19 +361,19 @@ function blogArticle_2024_08_03_1000(): VElement[] {
                     )
                 ),
                 h('p', {},
-                    'By carefully enumerating requirements, we provide clarity for any LLM and make it ' +
+                    'By carefully enumerating requirements, we give our LLM clarity and make it ' +
                     'far easier for our human designers to understand the details of the software they\'re shaping.'
                 )
             ),
             h('section', {},
-                h('h3', {}, 'Use examples that offer clarity for requirements'),
+                h('h3', {}, 'Use examples that clarity requirements'),
                 h('p', {},
                     'A conventional approach to software product development is to provide "acceptance criteria".  Often, ' +
                     'these are specific examples of how the completed software should behave.  Such examples allow developers ' +
                     'and testers to check their understanding of how the finished software should operate.'
                 ),
                 h('p', {},
-                    'These examples do not replace the requirements but add clarity around them.'
+                    'These examples do not replace the requirements but clarify them.'
                 ),
                 h('p', {},
                     'This approach also works for LLMs.  By providing examples of use, an LLM can more readily verify ' +
@@ -413,14 +413,14 @@ function blogArticle_2024_08_03_1000(): VElement[] {
                     'isn\'t ideal, but it works for now.'
                 ),
                 h('p', {},
-                    'The prompt is divided into sections, each with a distinct set of requirements that ' +
-                    'describe our desired application behaviour.  This prompt was itself iterated from a much earlier form, ' +
+                    'I divided the prompt into sections, each with a distinct set of requirements that ' +
+                    'describe our desired application behaviour.  I also iterated the prompt from a much earlier form, ' +
                     'which involved having ChatGPT 4o reformat it and suggest improvements to remove ambiguity or overlaps.'
                 ),
                 h('p', {},
                     'I used earlier versions of the prompt to build fully working implementations, but this is the first ' +
-                    'version that was implemented in TypeScript.  Most earlier implementations used JavaScript, ' +
-                    'but one edition was built using Python. The Python version was 20% slower, however!'
+                    'version directly implemented in TypeScript.  Most earlier implementations used JavaScript, ' +
+                    'but I had ChatGPT build one using Python. The Python version was 20% slower, however!'
                 ),
             ),
             h('section', {},
@@ -439,9 +439,9 @@ function blogArticle_2024_08_03_1000(): VElement[] {
                     'changed its implementation to conform with the requirements.'
                 ),
                 h('p', {},
-                    'The total interactive time required to reach the published output was around 90 minutes, which ' +
-                    'included about 30 minutes of testing.  The prompt was evolved over a few weeks.  While not part of the ' +
-                    'prompt provided here, a further interactive session lasting 3 hours resulted in a test program that ' +
+                    'The total interactive time required to reach the published output was around 90 minutes, which included ' +
+                    'about 30 minutes of testing.  I evolved this version of the prompt over a few weeks.  While not part of ' +
+                    'the prompt provided here, a further interactive session lasting 3 hours resulted in a test program that ' +
                     'provides > 90% test coverage for the ',
                     h('code', {}, 'logic.ts'),
                     ' file, including test error handling and retry logic.  A future version of the prompt will be updated to ' +
