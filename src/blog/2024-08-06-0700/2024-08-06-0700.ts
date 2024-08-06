@@ -8,9 +8,9 @@ import {navigateEvent} from '../../app';
 const code: VNode[][] = [[], [], []];
 let codeVElement: (VElement | null)[] = [null, null, null];
 const codeFunction: (() => VElement)[] = [
-    blogPrompt_2024_08_03_1000,
-    blogSiterenderTS_2024_08_03_1000,
-    blogLogicTS_2024_08_03_1000
+    blogPrompt_2024_08_06_0700,
+    blogSiterenderTS_2024_08_06_0700,
+    blogLogicTS_2024_08_06_0700
 ];
 
 /**
@@ -70,7 +70,7 @@ async function loadFile(segment: number, filePath: string, storeFunction: (segme
     }
 }
 
-function blogPrompt_2024_08_03_1000(): VElement {
+function blogPrompt_2024_08_06_0700(): VElement {
     let contents: VElement;
     if (code[0].length === 0) {
         contents = h('pre', {});
@@ -81,7 +81,7 @@ function blogPrompt_2024_08_03_1000(): VElement {
     contents.mountCallback = () => {
         codeVElement[0] = contents;
         if (code[0].length === 0) {
-            loadFile(0, '/blog/2024-08-03-1000/prompt.txt', writeCode);
+            loadFile(0, '/blog/2024-08-06-0700/prompt.txt', writeCode);
         }
     }
 
@@ -92,7 +92,7 @@ function blogPrompt_2024_08_03_1000(): VElement {
     return contents;
 }
 
-function blogSiterenderTS_2024_08_03_1000(): VElement {
+function blogSiterenderTS_2024_08_06_0700(): VElement {
     let contents: VElement;
     if (code[1].length === 0) {
         contents = h('pre', {});
@@ -103,7 +103,7 @@ function blogSiterenderTS_2024_08_03_1000(): VElement {
     contents.mountCallback = () => {
         codeVElement[1] = contents;
         if (code[1].length === 0) {
-            loadFile(1, '/blog/2024-08-03-1000/siterender.ts', writeCode);
+            loadFile(1, '/blog/2024-08-06-0700/siterender.ts', writeCode);
         }
     }
 
@@ -114,7 +114,7 @@ function blogSiterenderTS_2024_08_03_1000(): VElement {
     return contents;
 }
 
-function blogLogicTS_2024_08_03_1000(): VElement {
+function blogLogicTS_2024_08_06_0700(): VElement {
     let contents: VElement;
     if (code[2].length === 0) {
         contents = h('pre', {});
@@ -125,7 +125,7 @@ function blogLogicTS_2024_08_03_1000(): VElement {
     contents.mountCallback = () => {
         codeVElement[2] = contents;
         if (code[2].length === 0) {
-            loadFile(2, '/blog/2024-08-03-1000/logic.ts', writeCode);
+            loadFile(2, '/blog/2024-08-06-0700/logic.ts', writeCode);
         }
     }
 
@@ -136,7 +136,7 @@ function blogLogicTS_2024_08_03_1000(): VElement {
     return contents;
 }
 
-function blogOpening_2024_08_03_1000(): VElement[] {
+function blogOpening_2024_08_06_0700(): VElement[] {
     return [
         h('p', {},
             'I\'ve been trying new ideas to see how we might innovate ' +
@@ -154,11 +154,11 @@ function blogOpening_2024_08_03_1000(): VElement[] {
     ]
 }
 
-function blogArticle_2024_08_03_1000(): VElement[] {
+function blogArticle_2024_08_06_0700(): VElement[] {
     return [
         h('section', {},
             h('img', {
-                src: '/blog/2024-08-03-1000/robot.webp',
+                src: '/blog/2024-08-06-0700/robot.webp',
                 alt: 'Image of a robot writing software',
                 width: 1024,
                 height: 585
@@ -167,28 +167,31 @@ function blogArticle_2024_08_03_1000(): VElement[] {
         h('section', {},
             h('h2', {}, 'The MIP strategy'),
             h('p', {},
-                'LLMs are incredible tools.  Like all tools, though, getting good results with them requires us to use ' +
+                'LLMs are incredible tools.  Like all tools, though, getting good results requires us to use ' +
                 'them in the right way.  The idea behind Maximal Instruction Prompting (MIP) is to provide a more effective ' +
                 'way to use LLMs for software development.'
             ),
             h('p', {},
-                'The MIP strategy comes from observing practical problems using LLMs in software development.  Most ' +
+                'The MIP strategy comes from observing problems using LLMs in software development.  Most ' +
                 'developers use LLMs to accelerate coding tasks, but we should be able to do far more.'
             ),
             h('h3', {}, 'Summary of MIP'),
             h('p', {},
-                'MIP can be summarised as an approach for providing detailed requirements to an LLM, enabling it to produce ' +
-                'more complex output.  These are the core ideas:'
+                'MIP is an approach for capturing detailed natural language requirements to let an LLM build matching ' +
+                'software source code.'
+            ),
+            h('p', {},
+                'These are the core ideas:'
             ),
             h('ul', {},
                 h('li', {},
                     'Describe all the requirements that our software must meet.'
                 ),
                 h('li', {},
-                    'Consider all relevant skills and perspectives.'
+                    'Capture inputs from all perspectives.'
                 ),
                 h('li', {},
-                    'Describe all requirements comprehensively and exactly once.'
+                    'Describe all requirements comprehensively, and exactly once.'
                 ),
                 h('li', {},
                     'Use examples that clarify requirements.'
@@ -196,26 +199,29 @@ function blogArticle_2024_08_03_1000(): VElement[] {
             ),
             h('h3', {}, 'Advantages of MIP'),
             h('p', {},
-                'As a couple of my more commercially minded friends might say, "Show us the money!"  MIP must offer ' +
-                'significant practical advantages over alternatives for it to be helpful.  Here are some that are already clear:'
+                'For MIP to be valuable, it must offer significant practical advantages over any alternatives.  As a couple ' +
+                'of my more commercially minded friends might say, "Show us the money!"'
+            ),
+            h('p', {},
+                'Here are some advantages that are already clear:'
             ),
             h('ul', {},
                 h('li', {},
-                    'It captures the detailed requirements for our software.  Notably, a MIP always describes what ' +
+                    'It captures the detailed requirements for our software.  Notably, MIP always describes what ' +
                     'the software is and does rather than how we\'d like to evolve it, making it easy for everyone to ' +
-                    'understand.  Most software development focuses on evolution and thus quickly becomes defined by the ' +
+                    'understand.  Most software development focuses on evolution and rapidly becomes defined by the ' +
                     'implementation rather than the intended design.'
                 ),
                 h('li', {}, 
-                    'It focuses on eliminating ambiguity so an LLM can generate software that meets those requirements.'
+                    'It focuses on clarity so an LLM can generate software that meets those requirements.'
                 ),
                 h('li', {},
                     'Focusing on the software\'s characteristics makes it easy to try out variations.  Small changes in ' +
-                    'requirements might lead to significant changes in implementation, and the MIP approach allows us to ' +
+                    'requirements might lead to significant changes in implementation.  The MIP approach allows us to ' +
                     'have an LLM to make those sorts of changes quickly.'
                 ),
                 h('li', {},
-                    'A MIP captures what our software is, which means the LLM can also use that to help create tests and ' +
+                    'As MIP captures what our software is, an LLM can also use that to help create tests and ' +
                     'user documentation.  [Aside: both of these are areas I will be looking into over the coming months]'
                 ),
                 h('li', {},
@@ -231,31 +237,31 @@ function blogArticle_2024_08_03_1000(): VElement[] {
             ),
             h('h3', {}, 'Limitations of MIP'),
             h('p', {},
-                'All ideas have some limitations, so we should discuss them too.  At worst, MIP suffers from similar ' +
-                'problems as existing approaches, but in most cases, MIP provides partial mitigation:'
+                'All ideas have some limitations, so we should discuss them too.  As it leverages LLMs, MIP suffers from ' +
+                'some of the same underlying problems.  However, MIP does provide partial mitigations:'
             ),
             h('ul', {},
                 h('li', {},
-                    'This approach helps mitigate the problem of LLMs hallucinating, but it doesn\'t eliminate it.  LLMs ' +
-                    'intentionally create random and surprising outputs at times.  If these occur in the wrong place, ' +
-                    'we might get faulty software.  However, this strategy allows us to quickly build different ' +
-                    'software implementations in response to our well-defined requirements.  Discarding broken versions ' +
-                    'is inexpensive, and we may gain more insights into missing requirements.'
+                    'LLMs intentionally create random and surprising outputs at times.  This probabilistic approach is a ' +
+                    'strength in many instances but also causes LLMs to hallucinate.  If these occur in the wrong place, ' +
+                    'we might get faulty software.  MIP makes it easy for us to build different software implementations should' +
+                    'should this happen, and discarding broken versions is inexpensive.  So, while MIP doesn\'t eliminate ' +
+                    'the problem of LLMs hallucinating, it can reduce the impact.'
                 ),
                 h('li', {},
-                    'Even when given clear and specific instructions, an LLM will often ignore some.  We ' +
-                    'can mitigate this by using the explicit requirements to ask the LLM to demonstrate how it met each ' +
+                    'Even when given clear and specific instructions, an LLM will often ignore some.  We can mitigate' +
+                    'this by walking through the explicit requirements to ask the LLM to demonstrate how it met each ' +
                     'one.  We must solve this with an iterative dialogue, but the LLM can rapidly correct its mistakes.'
                 ),
                 h('li', {},
-                    'This approach does not eliminate the need for a dialogue with the LLM but moves ' +
-                    'the conversation forward quickly while maintaining a clear focus on an outcome.'
+                    'This approach does not eliminate the need for a dialogue with the LLM but advances ' +
+                    'the conversation quickly while maintaining a clear focus on an outcome.'
                 ),
                 h('li', {},
-                    'The complexity of the prompt we can provide is limited, but the same limit applies to ' +
-                    'dialogue-based approaches.  Our LLM has a limited context window, so this approach only works if we ' +
-                    'can keep our working data set inside that.  The approach described should still work for larger software ' +
-                    'designs, but we must break this into smaller components and build each separately.'
+                    'The complexity of any prompt has the same limits as dialogue-based approaches.  LLMs have a ' +
+                    'limited context window, so this approach only works if we can keep our working data set inside ' +
+                    'that.  The approach described can still work for larger software designs, but we must break ' +
+                    'this into smaller components and build each separately.'
                 )
             ),
         ),
@@ -265,9 +271,7 @@ function blogArticle_2024_08_03_1000(): VElement[] {
                 h('h3', {}, 'Describe all the requirements'),
                 h('p', {},
                     'Like most tools, LLMs are inherently passive, doing nothing until we set them into action.  When we wish ' +
-                    'to use them to help us build software, this prompting invariably ends up in an interactive dialogue ' +
-                    'between a designer and an LLM where the designer guides the LLM on what they wish to see.  This approach ' +
-                    'can be highly effective.'
+                    'to use them to help us build software, a designer uses prompts to guide the LLM on what they want to see.'
                 ),
                 h('p', {},
                     'For example, in "',
@@ -279,31 +283,32 @@ function blogArticle_2024_08_03_1000(): VElement[] {
                     'the syntax highlighting engine used in both that and this article.'
                 ),
                 h('p', {},
-                    'While interactive engagement with LLMs is one of their greatest strengths, this has a dark side.  ' +
+                    'While interactive engagement with LLMs is one of their greatest strengths, it has a dark side.  ' +
                     'LLMs excel at holding conversations, and we can be seduced into spending hours ' +
                     'discussing minor details while ignoring substantive issues that might render those other conversations ' +
-                    'irrelevant (yak shaving and bikeshedding as a service).'
+                    'irrelevant (bikeshedding-as-a-service).  While a human counterpart might attempt to pull the ' +
+                    'discussion back on track, an LLM will not.'
                 ),
                 h('p', {},
-                    'Another person might stop and ask questions during a conversation, but an LLM will only do this if ' +
-                    'asked.  Ambiguity can also lead an LLM to descend into hallucinatory rabbit holes as it tries to fill any ' +
-                    'void with creative, irrelevant, or plain wrong content.'
+                    'A human might also ask questions during a conversation, seeking to better understand some ' +
+                    'task, but an LLM will only do this if asked.  Ambiguity offers an LLM yet more scope to descend into ' +
+                    'hallucinatory rabbit holes as it tries to fill any void with creative, irrelevant, or plain wrong ' +
+                    'content.'
                 ),
                 h('p', {},
-                    'As a result, we might dismiss the use of LLMs.  Still, in conventional software development, we know that ' +
-                    'once more than a single developer is working on a software design, we must ensure our ' +
-                    'team maintains a shared view of what they will build.  With an LLM, we must recognize that we always ' +
-                    'have at least two team members.'
+                    '"LLMs are useless", we might cry.  Still, in conventional software development, we know that ' +
+                    'once two or more people are working on a software design, we must plan to collaborate.  Our ' +
+                    'team must maintain a clear and shared view of what they will build.  With an LLM, we must recognize that ' +
+                    'we always have at least two team members.'
                 ),
                 h('p', {},
-                    'As with an all-human team, we can help maintain alignment by crafting a long-form description of our ' +
-                    'goals.  We can present detailed written requirements to the LLM, giving it a clearer picture of ' +
-                    'what we want it to achieve.  While this will only partially prevent an LLM from wandering off track, ' +
-                    'if it does, this gives us a way to bring it back to where we want it.'
+                    'As with an all-human team, we can maintain alignment by crafting a long-form description of our ' +
+                    'goals.  The same works with an LLM.  We can present detailed written requirements to the LLM, giving ' +
+                    'it a clearer picture of what we want it to achieve.'
                 )
             ),
             h('section', {},
-                h('h3', {}, 'Consider all relevant skills and perspectives'),
+                h('h3', {}, 'Capture inputs from all perspectives'),
                 h('p', {}, 
                     'In conventional software development, we recognize the value of many different skills and perspectives.  ' +
                     'We require product definition and vision aligned with commercial goals.  We need developers who are ' +
@@ -324,9 +329,9 @@ function blogArticle_2024_08_03_1000(): VElement[] {
                     'towards unique and innovative solutions.'
                 ),
                 h('p', {},
-                    'While our LLM may do most of the coding, we still need software engineering expertise.  We use this ' +
-                    'skill to provide an expert review of the LLM\'s output and to capture decisions about technology ' +
-                    'choices and implementation strategies as requirements.'
+                    'It is worth noting that even though our LLM may do most of the coding, we still need considerable ' +
+                    'software engineering expertise.  In addition to providing an expert review of an LLM\'s output, we ' +
+                    'must capture important technology choices and implementation strategies as requirements.'
                 )
             ),
             h('section', {},
@@ -338,8 +343,8 @@ function blogArticle_2024_08_03_1000(): VElement[] {
                 ),
                 h('p', {},
                     'If such things confuse humans, we can expect them to confuse LLMs too.  Unlike humans, however, LLMs ' +
-                    'won\'t tell us they\'re confused.  Instead, they\'ll do unexpected things.  While not without some ' +
-                    'criticism,  we can take inspiration from Barbara Minto\'s MECE (mutually exclusive, collectively ' +
+                    'won\'t tell us they\'re confused.  Instead, they\'ll do unexpected things.  To help address this ' +
+                    'we can take inspiration from Barbara Minto\'s MECE (mutually exclusive, collectively ' +
                     'exhaustive) principle.'
                 ),
                 h('p', {},
@@ -366,9 +371,9 @@ function blogArticle_2024_08_03_1000(): VElement[] {
                 )
             ),
             h('section', {},
-                h('h3', {}, 'Use examples that clarity requirements'),
+                h('h3', {}, 'Use examples that clarify requirements'),
                 h('p', {},
-                    'A conventional approach to software product development is to provide "acceptance criteria".  Often, ' +
+                    'A conventional approach in software product development is to provide "acceptance criteria".  Often, ' +
                     'these are specific examples of how the completed software should behave.  Such examples allow developers ' +
                     'and testers to check their understanding of how the finished software should operate.'
                 ),
@@ -403,31 +408,37 @@ function blogArticle_2024_08_03_1000(): VElement[] {
                 h('li', {}, 'Saves rendered HTML content to a specified output directory.'),
                 h('li', {}, 'Retry mechanism for rendering and browser launch/close operations.')
             ),
+            h('p', {},
+                'We take these requirements and expand them to cover all aspects of how we expect the application to ' +
+                'behave.  We then try to group them, provide an exhaustive list, and try to ensure they don\'t contradict ' +
+                'each other.'
+            ),
             h('section', {},
-                h('h3', {}, 'The MIP'),
+                h('h3', {}, 'The prompt'),
                 h('p', {},
-                    h('a', {href: '#the-mip', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2024-08-03-1000#the-mip')},
-                        'The MIP'
-                    ),
-                    ' is at the end of the article.  The prompt is 77 lines, but some are pretty long.  This format ' +
-                    'isn\'t ideal, but it works for now.'
+                    'The MIP-style prompt is 77 lines, but some are long.  I plan to improve on this text format but it ' +
+                    'works for now.'
                 ),
                 h('p', {},
                     'I divided the prompt into sections, each with a distinct set of requirements that ' +
-                    'describe our desired application behaviour.  I also iterated the prompt from a much earlier form, ' +
-                    'which involved having ChatGPT 4o reformat it and suggest improvements to remove ambiguity or overlaps.'
+                    'describe our desired application behaviour.  I iterated this prompt from a much earlier form ' +
+                    'and had ChatGPT 4o help reformat it and suggest improvements to remove ambiguity or overlaps.'
                 ),
                 h('p', {},
                     'I used earlier versions of the prompt to build fully working implementations, but this is the first ' +
-                    'version directly implemented in TypeScript.  Most earlier implementations used JavaScript, ' +
+                    'version directly targeting TypeScript.  Most earlier implementations used JavaScript, ' +
                     'but I had ChatGPT build one using Python. The Python version was 20% slower, however!'
                 ),
+                h('figure', {},
+                    blogPrompt_2024_08_06_0700(),
+                    h('figcaption', {}, 'The MIP-style prompt for siterender')
+                )
             ),
             h('section', {},
                 h('h3', {}, 'The implementation'),
                 h('p', {},
                     'The output ',
-                    h('a', {href: '#the-code', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2024-08-03-1000#the-code')},
+                    h('a', {href: '#the-code', onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2024-08-06-0700#the-code')},
                         'TypeScript source code'
                     ),
                     ' appears at the end of this article.  It consists of over 300 lines of code split across two files.'
@@ -484,18 +495,25 @@ function blogArticle_2024_08_03_1000(): VElement[] {
             )
         ),
         h('section', {},
-            h('h2', {}, 'The MIP and the code'),
-            h('h3', {id: 'the-mip'}, 'The MIP'),
-            blogPrompt_2024_08_03_1000(),
-            h('h3', {id: 'the-code'}, 'prerender.ts'),
-            blogSiterenderTS_2024_08_03_1000(),
-            h('h3', {}, 'logic.ts'),
-            blogLogicTS_2024_08_03_1000(),
+            h('h2', {id: 'the-code'}, 'The code'),
+            h('p', {},
+                'ChatGPT 4o generated the following source files as a result of the MIP-style prompt.  While some ' +
+                'interactive work was required, the only direct human intervention was to slightly adjust the whitespacing ' +
+                'to improve readability.'
+            ),
+            h('figure', {},
+                blogSiterenderTS_2024_08_06_0700(),
+                h('figcaption', {}, 'siterender\'s prerender.ts source code generated by ChatGPT 4o')
+            ),
+            h('figure', {},
+                blogLogicTS_2024_08_06_0700(),
+                h('figcaption', {}, 'siterender\'s logic.ts source code generated by ChatGPT 4o')
+            )
         ),
     ];
 }
 
-function blogPostscript_2024_08_03_1000(): VNode[] {
+function blogPostscript_2024_08_06_0700(): VNode[] {
     return [
         h('hr', {}),
         h('section', {},
@@ -511,15 +529,15 @@ function blogPostscript_2024_08_03_1000(): VNode[] {
     ];
 }
 
-export const blogPost_2024_08_03_1000 = new BlogPost(
+export const blogPost_2024_08_06_0700 = new BlogPost(
     'Maximal Instruction Prompting: a strategy for software development with LLMs',
-    '2024-08-03T10:00',
-    '/blog/2024-08-03-1000',
+    '2024-08-06T07:00',
+    '/blog/2024-08-06-0700',
     'Introducing the concept of Maximial Instruction Prompting (MIP) as a strategy for software development with' +
     'large language models (LLMs)',
-    '/blog/2024-08-03-1000/robot.webp',
+    '/blog/2024-08-06-0700/robot.webp',
     null,
-    blogOpening_2024_08_03_1000,
-    blogArticle_2024_08_03_1000,
-    blogPostscript_2024_08_03_1000
+    blogOpening_2024_08_06_0700,
+    blogArticle_2024_08_06_0700,
+    blogPostscript_2024_08_06_0700
 );
