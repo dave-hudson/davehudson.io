@@ -217,8 +217,8 @@ function blogArticle_2024_08_06_0700(): VElement[] {
                 ),
                 h('li', {},
                     'Focusing on the software\'s characteristics makes it easy to try out variations.  Small changes in ' +
-                    'requirements might lead to significant changes in implementation.  The MIP approach allows us to ' +
-                    'have an LLM to make those sorts of changes quickly.'
+                    'requirements might lead to significant changes in implementation.  The MIP approach allows ' +
+                    'an LLM to make these sorts of changes quickly.'
                 ),
                 h('li', {},
                     'As MIP captures what our software is, an LLM can also use that to help create tests and ' +
@@ -244,12 +244,12 @@ function blogArticle_2024_08_06_0700(): VElement[] {
                 h('li', {},
                     'LLMs intentionally create random and surprising outputs at times.  This probabilistic approach is a ' +
                     'strength in many instances but also causes LLMs to hallucinate.  If these occur in the wrong place, ' +
-                    'we might get faulty software.  MIP makes it easy for us to build different software implementations should' +
+                    'we might get faulty software.  MIP makes it easy for us to build different software implementations ' +
                     'should this happen, and discarding broken versions is inexpensive.  So, while MIP doesn\'t eliminate ' +
                     'the problem of LLMs hallucinating, it can reduce the impact.'
                 ),
                 h('li', {},
-                    'Even when given clear and specific instructions, an LLM will often ignore some.  We can mitigate' +
+                    'Even when given clear and specific instructions, an LLM will often ignore some.  We can mitigate ' +
                     'this by walking through the explicit requirements to ask the LLM to demonstrate how it met each ' +
                     'one.  We must solve this with an iterative dialogue, but the LLM can rapidly correct its mistakes.'
                 ),
@@ -258,7 +258,7 @@ function blogArticle_2024_08_06_0700(): VElement[] {
                     'the conversation quickly while maintaining a clear focus on an outcome.'
                 ),
                 h('li', {},
-                    'The complexity of any prompt has the same limits as dialogue-based approaches.  LLMs have a ' +
+                    'Any prompt\'s complexity has the same limits as dialogue-based approaches.  LLMs have a ' +
                     'limited context window, so this approach only works if we can keep our working data set inside ' +
                     'that.  The approach described can still work for larger software designs, but we must break ' +
                     'this into smaller components and build each separately.'
@@ -290,7 +290,7 @@ function blogArticle_2024_08_06_0700(): VElement[] {
                     'discussion back on track, an LLM will not.'
                 ),
                 h('p', {},
-                    'A human might also ask questions during a conversation, seeking to better understand some ' +
+                    'A human might also ask questions during a conversation to better understand some ' +
                     'task, but an LLM will only do this if asked.  Ambiguity offers an LLM yet more scope to descend into ' +
                     'hallucinatory rabbit holes as it tries to fill any void with creative, irrelevant, or plain wrong ' +
                     'content.'
@@ -343,7 +343,7 @@ function blogArticle_2024_08_06_0700(): VElement[] {
                 ),
                 h('p', {},
                     'If such things confuse humans, we can expect them to confuse LLMs too.  Unlike humans, however, LLMs ' +
-                    'won\'t tell us they\'re confused.  Instead, they\'ll do unexpected things.  To help address this ' +
+                    'won\'t tell us they\'re confused.  Instead, they\'ll do unexpected things.  To address this, ' +
                     'we can take inspiration from Barbara Minto\'s MECE (mutually exclusive, collectively ' +
                     'exhaustive) principle.'
                 ),
@@ -373,8 +373,8 @@ function blogArticle_2024_08_06_0700(): VElement[] {
             h('section', {},
                 h('h3', {}, 'Use examples that clarify requirements'),
                 h('p', {},
-                    'A conventional approach in software product development is to provide "acceptance criteria".  Often, ' +
-                    'these are specific examples of how the completed software should behave.  Such examples allow developers ' +
+                    'A conventional approach in software product development is to provide "acceptance criteria".  ' +
+                    'These are specific examples of how the completed software should behave.  Such examples allow developers ' +
                     'and testers to check their understanding of how the finished software should operate.'
                 ),
                 h('p', {},
@@ -409,14 +409,14 @@ function blogArticle_2024_08_06_0700(): VElement[] {
                 h('li', {}, 'Retry mechanism for rendering and browser launch/close operations.')
             ),
             h('p', {},
-                'We take these requirements and expand them to cover all aspects of how we expect the application to ' +
-                'behave.  We then try to group them, provide an exhaustive list, and try to ensure they don\'t contradict ' +
+                'We expand these requirements to cover all aspects of how we expect the application to ' +
+                'behave.  We then try to group them, provide an exhaustive list, and work to ensure they don\'t contradict ' +
                 'each other.'
             ),
             h('section', {},
                 h('h3', {}, 'The prompt'),
                 h('p', {},
-                    'The MIP-style prompt is 77 lines, but some are long.  I plan to improve on this text format but it ' +
+                    'The MIP-style prompt is 77 lines, but some are long.  I plan to improve from this text format, but it ' +
                     'works for now.'
                 ),
                 h('p', {},
