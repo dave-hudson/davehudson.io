@@ -145,7 +145,7 @@ function blogOpening_2024_08_03_1000(): VElement[] {
         ),
         h('p', {},
             'I\'ve used this approach for several projects, and the concept continues to evolve with ' +
-            'each new use.  However, even in these early stages, I\'ve seen striking results.'
+            'each new use.  However, even in these early stages, I\'ve seen great results.'
         ),
         h('p', {},
             'This article describes the MIP strategy and the benefits it can offer.  It provides more detailed ' +
@@ -173,7 +173,7 @@ function blogArticle_2024_08_03_1000(): VElement[] {
             ),
             h('p', {},
                 'The MIP strategy comes from observing practical problems using LLMs in software development.  Most ' +
-                'LLMs are used like a developer\'s sidekick, but we should be able to do far more.'
+                'developers us LLMs to accelerate coding tasks, but we should be able to do far more.'
             ),
             h('h3', {}, 'Summary of MIP'),
             h('p', {},
@@ -219,7 +219,7 @@ function blogArticle_2024_08_03_1000(): VElement[] {
                     'user documentation.  [Aside: both of these are areas I will be looking into over the coming months]'
                 ),
                 h('li', {},
-                    'This shift from how software is built to what it is, makes it easy to change technologies and ' +
+                    'By shifting to the automated building of software, we can easily change technologies and ' +
                     'implementations.  For example, we might prototype in one language and then create a production ' +
                     'implementation in another!'
                 ),
