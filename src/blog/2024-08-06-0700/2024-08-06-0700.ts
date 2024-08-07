@@ -157,14 +157,6 @@ function blogOpening_2024_08_06_0700(): VElement[] {
 function blogArticle_2024_08_06_0700(): VElement[] {
     return [
         h('section', {},
-            h('img', {
-                src: '/blog/2024-08-06-0700/robot.webp',
-                alt: 'Image of a robot writing software',
-                width: 1024,
-                height: 585
-            }),
-        ),
-        h('section', {},
             h('h2', {}, 'The MIP strategy'),
             h('p', {},
                 'LLMs are incredible tools.  Like all tools, though, getting good results requires us to use ' +
@@ -543,7 +535,7 @@ export const blogPost_2024_08_06_0700 = new BlogPost(
     '/blog/2024-08-06-0700',
     'Introducing the concept of Maximial Instruction Prompting (MIP) as a strategy for software development with' +
     'large language models (LLMs)',
-    '/blog/2024-08-06-0700/robot.webp',
+    '/blog/2024-08-06-0700/dave.png',
     null,
     blogOpening_2024_08_06_0700,
     blogArticle_2024_08_06_0700,
