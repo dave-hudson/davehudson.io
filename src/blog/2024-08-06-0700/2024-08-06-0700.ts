@@ -245,8 +245,7 @@ function blogArticle_2024_08_06_0700(): VElement[] {
             h('section', {},
                 h('h3', {}, 'Limitations of MIP'),
                 h('p', {},
-                    'All ideas have some limitations, so we should discuss them too.  As it leverages LLMs, MIP suffers from ' +
-                    'some of the same underlying problems.  However, MIP does provide partial mitigations:'
+                    'MIP cannot solve all the problems with LLMs but does provide some mitigations:'
                 ),
                 h('ul', {},
                     h('li', {},
