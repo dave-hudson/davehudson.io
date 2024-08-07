@@ -194,7 +194,7 @@ function handleTwitterMetadata(pageInfo: routeDetails) {
 /**
  * Handle navigation to a new route.
  */
-function handleLocation(scrollX: number, scrollY: number) {
+function handleLocation() {
     let path = window.location.pathname;
 
     console.log(`Navigating to ${path}`)
@@ -228,13 +228,13 @@ function handleLocation(scrollX: number, scrollY: number) {
     handleTwitterMetadata(pageInfo);
 
     console.log(`Navigated to ${path}`)
+}
 
+function scrollPage(x: number, y: number, id: string) {
     setTimeout(() => {
-        const id = location.hash.substring(1);
-
         // Do we have a hash in our URL?  If not scroll to our requested position and finish.
         if (id === '') {
-            window.scrollTo(scrollX, scrollY);
+            window.scrollTo(x, y);
             return;
         }
 
@@ -252,13 +252,14 @@ function handleLocation(scrollX: number, scrollY: number) {
 
 export function navigateEvent(e: MouseEvent, path: string) {
     e.preventDefault();
-    const scrollPosition = {
-        y: window.scrollY,
-        x: window.scrollX
-    }
 
-    window.history.pushState({scrollPosition}, '', path);
-    handleLocation(0, 0);
+    // Update our history to record our current scroll position.
+    window.history.replaceState({scrollPosition: {x: window.scrollX, y: window.scrollY}}, '', window.location.href);
+
+    // Update our history to reflect our new position!
+    window.history.pushState({scrollPosition: {x: 0, y: 0}}, '', path);
+    handleLocation();
+    scrollPage(0, 0, location.hash.substring(1));
 }
 
 /**
@@ -285,6 +286,11 @@ function onDOMContentLoaded(event: Event): void {
         routes.set(key, value);
     });
 
+    // Set scrollRestoration to manual.
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
+
     // Set up the navigation for stepping backwards.
     window.onpopstate = (e) => {
         let scrollX: number = 0;
@@ -296,7 +302,8 @@ function onDOMContentLoaded(event: Event): void {
             scrollY = scrollPosition.y;
         }
 
-        handleLocation(scrollX, scrollY);
+        handleLocation();
+        scrollPage(scrollX, scrollY, '');
     };
 
     // Look to see if our app HTML element has children.  If it does then it means we've loaded a pre-rendered version of the
@@ -309,7 +316,8 @@ function onDOMContentLoaded(event: Event): void {
         }
     }
 
-    handleLocation(0, 0);
+    handleLocation();
+    scrollPage(0, 0, '');
 }
 
 document.addEventListener('DOMContentLoaded', onDOMContentLoaded);
