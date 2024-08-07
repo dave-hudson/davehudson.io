@@ -230,36 +230,55 @@ function handleLocation() {
     console.log(`Navigated to ${path}`)
 }
 
-function scrollPage(x: number, y: number, id: string) {
+function scrollPage(x: number, y: number) {
     setTimeout(() => {
-        // Do we have a hash in our URL?  If not scroll to our requested position and finish.
-        if (id === '') {
-            window.scrollTo(x, y);
-            return;
-        }
-
-        // We do have a hash in our URL, so scroll that into view.
-        const targetElement = document.getElementById(id);
-
-        if (targetElement) {
-            targetElement.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
+        window.scrollTo(x, y);
     }, 50);
 }
 
 export function navigateEvent(e: MouseEvent, path: string) {
     e.preventDefault();
 
-    // Update our history to record our current scroll position.
-    window.history.replaceState({scrollPosition: {x: window.scrollX, y: window.scrollY}}, '', window.location.href);
-
     // Update our history to reflect our new position!
     window.history.pushState({scrollPosition: {x: 0, y: 0}}, '', path);
     handleLocation();
-    scrollPage(0, 0, location.hash.substring(1));
+
+    const id = location.hash.substring(1);
+    if (id === '') {
+        window.scrollTo(0, 0);
+        return;
+    }
+
+    setTimeout(() => {
+        // We have a hash in our URL, so scroll that into view.
+        const targetElement = document.getElementById(id);
+
+        if (targetElement) {
+            const yPos = targetElement.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo(0, yPos);
+        }
+    }, 50);
+}
+
+/**
+ * Creates a debounced function that delays the invocation of the provided function
+ * until after the specified wait time has elapsed since the last time the debounced
+ * function was invoked. This can be useful for limiting the rate at which a function
+ * is executed, such as in response to user input or other events.
+ *
+ * @template T - The type of the function to debounce.
+ * @param {T} func - The function to debounce.
+ * @param {number} wait - The number of milliseconds to wait before invoking the function
+ *                        after the last invocation.
+ * @returns {(...args: Parameters<T>) => void} - Returns the debounced version of the provided function.
+ */
+function debounce<T extends (...args: any[]) => void>(func: T, wait: number): (...args: Parameters<T>) => void {
+    let timeout: ReturnType<typeof setTimeout>;
+
+    return function(this: any, ...args: Parameters<T>) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), wait);
+    };
 }
 
 /**
@@ -291,7 +310,7 @@ function onDOMContentLoaded(event: Event): void {
         history.scrollRestoration = 'manual';
     }
 
-    // Set up the navigation for stepping backwards.
+    // Set up the navigation for stepping backward or forward.
     window.onpopstate = (e) => {
         let scrollX: number = 0;
         let scrollY: number = 0;
@@ -303,8 +322,14 @@ function onDOMContentLoaded(event: Event): void {
         }
 
         handleLocation();
-        scrollPage(scrollX, scrollY, '');
+        scrollPage(scrollX, scrollY);
     };
+
+    // Set up listener for scroll events.  When the user scrolls we want to updat the scroll positions in the history
+    // so forward and backward operations behave intuitively.  Note we debounce this to prevent spamming the history state.
+    window.onscroll = debounce(() => {
+        window.history.replaceState({scrollPosition: {x: window.scrollX, y: window.scrollY}}, '', window.location.href);
+    }, 50);
 
     // Look to see if our app HTML element has children.  If it does then it means we've loaded a pre-rendered version of the
     // HTML, in which case we want to remove this content so the VDOM takes control properly.
@@ -317,7 +342,10 @@ function onDOMContentLoaded(event: Event): void {
     }
 
     handleLocation();
-    scrollPage(0, 0, '');
+    scrollPage(0, 0);
+
+    // Update our history to record our current scroll position.
+    window.history.replaceState({scrollPosition: {x: 0, y: 0}}, '', window.location.href);
 }
 
 document.addEventListener('DOMContentLoaded', onDOMContentLoaded);
