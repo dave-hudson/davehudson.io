@@ -296,8 +296,8 @@ function blogArticle_2024_08_06_0700(): VElement[] {
                     'content.'
                 ),
                 h('p', {},
-                    '"LLMs are useless", we might cry.  Still, in conventional software development, we know that ' +
-                    'once two or more people are working on a software design, we must plan to collaborate.  Our ' +
+                    '"LLMs are useless", we might cry.  Still, we know that once we have ' +
+                    'two or more people working on a software design, we must plan to collaborate.  Our ' +
                     'team must maintain a clear and shared view of what they will build.  With an LLM, we must recognize that ' +
                     'we always have at least two team members.'
                 ),
