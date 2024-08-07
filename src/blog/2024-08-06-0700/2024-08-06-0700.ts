@@ -175,95 +175,104 @@ function blogArticle_2024_08_06_0700(): VElement[] {
                 'The MIP strategy comes from observing problems using LLMs in software development.  Most ' +
                 'developers use LLMs to accelerate coding tasks, but we should be able to do far more.'
             ),
-            h('h3', {}, 'Summary of MIP'),
-            h('p', {},
-                'MIP is an approach for capturing detailed natural language requirements to let an LLM build matching ' +
-                'software source code.'
-            ),
-            h('p', {},
-                'These are the core ideas:'
-            ),
-            h('ul', {},
-                h('li', {},
-                    'Describe all the requirements that our software must meet.'
+            h('section', {},
+                h('h3', {}, 'Summary of MIP'),
+                h('p', {},
+                    'MIP is an approach for capturing detailed natural language requirements to let an LLM build matching ' +
+                    'software source code.'
                 ),
-                h('li', {},
-                    'Capture inputs from all perspectives.'
+                h('p', {},
+                    'These are the core ideas:'
                 ),
-                h('li', {},
-                    'Describe all requirements comprehensively, and exactly once.'
+                h('ul', {},
+                    h('li', {},
+                        'Describe all the requirements that our software must meet.'
+                    ),
+                    h('li', {},
+                        'Capture inputs from all perspectives.'
+                    ),
+                    h('li', {},
+                        'Describe all requirements comprehensively, and exactly once.'
+                    ),
+                    h('li', {},
+                        'Use examples that clarify requirements.'
+                    )
                 ),
-                h('li', {},
-                    'Use examples that clarify requirements.'
+                h('p', {},
+                    'None of these are new ideas, but we can combine them to great effect.'
                 )
             ),
-            h('h3', {}, 'Advantages of MIP'),
-            h('p', {},
-                'For MIP to be valuable, it must offer significant practical advantages over any alternatives.  As a couple ' +
-                'of my more commercially minded friends might say, "Show us the money!"'
-            ),
-            h('p', {},
-                'Here are some advantages that are already clear:'
-            ),
-            h('ul', {},
-                h('li', {},
-                    'It captures the detailed requirements for our software.  Notably, MIP always describes what ' +
-                    'the software is and does rather than how we\'d like to evolve it, making it easy for everyone to ' +
-                    'understand.  Most software development focuses on evolution and rapidly becomes defined by the ' +
-                    'implementation rather than the intended design.'
+            h('section', {},
+                h('h3', {}, 'Advantages of MIP'),
+                h('p', {},
+                    'For MIP to be valuable, it must offer significant practical advantages over any alternatives.  As a couple ' +
+                    'of my more commercially minded friends might say, "Show us the money!"'
                 ),
-                h('li', {}, 
-                    'It focuses on clarity so an LLM can generate software that meets those requirements.'
+                h('p', {},
+                    'Here are some advantages that are already clear:'
                 ),
-                h('li', {},
-                    'Focusing on the software\'s characteristics makes it easy to try out variations.  Small changes in ' +
-                    'requirements might lead to significant changes in implementation.  The MIP approach allows ' +
-                    'an LLM to make these sorts of changes quickly.'
-                ),
-                h('li', {},
-                    'As MIP captures what our software is, an LLM can also use that to help create tests and ' +
-                    'user documentation.  [Aside: both of these are areas I will be looking into over the coming months]'
-                ),
-                h('li', {},
-                    'By shifting to the automated building of software, we can easily change technologies and ' +
-                    'implementations.  For example, we might prototype in one language and then create a production ' +
-                    'implementation in another!'
-                ),
-                h('li', {},
-                    'We can build more reliable systems because MIP makes building multiple versions of the same software ' +
-                    'inexpensive.  For example, we could imagine building various versions of some library function to ' +
-                    'prevent downstream developers from inadvertently using unintended implementation details.'
+                h('ul', {},
+                    h('li', {},
+                        'It captures the detailed requirements for our software.  Notably, MIP always describes what ' +
+                        'the software is and does rather than how we\'d like to evolve it, making it easy for everyone to ' +
+                        'understand.  Most software development focuses on evolution and rapidly becomes defined by the ' +
+                        'implementation rather than the intended design.'
+                    ),
+                    h('li', {}, 
+                        'It focuses on clarity so an LLM can generate software that meets those requirements.'
+                    ),
+                    h('li', {},
+                        'Focusing on the software\'s characteristics makes it easy to try out variations.  Small changes in ' +
+                        'requirements might lead to significant changes in implementation.  The MIP approach allows ' +
+                        'an LLM to make these sorts of changes quickly.'
+                    ),
+                    h('li', {},
+                        'As MIP captures what our software is, an LLM can also use that to help create tests and ' +
+                        'user documentation.  [Aside: both of these are areas I will be looking into over the coming months]'
+                    ),
+                    h('li', {},
+                        'By shifting to the automated building of software, we can easily change technologies and ' +
+                        'implementations.  For example, we might prototype in one language and then create a production ' +
+                        'implementation in another!'
+                    ),
+                    h('li', {},
+                        'We can build more reliable systems because MIP makes building multiple versions of the same software ' +
+                        'inexpensive.  For example, we could imagine building various versions of some library function to ' +
+                        'prevent downstream developers from inadvertently using unintended implementation details.'
+                    )
                 )
             ),
-            h('h3', {}, 'Limitations of MIP'),
-            h('p', {},
-                'All ideas have some limitations, so we should discuss them too.  As it leverages LLMs, MIP suffers from ' +
-                'some of the same underlying problems.  However, MIP does provide partial mitigations:'
-            ),
-            h('ul', {},
-                h('li', {},
-                    'LLMs intentionally create random and surprising outputs at times.  This probabilistic approach is a ' +
-                    'strength in many instances but also causes LLMs to hallucinate.  If these occur in the wrong place, ' +
-                    'we might get faulty software.  MIP makes it easy for us to build different software implementations ' +
-                    'should this happen, and discarding broken versions is inexpensive.  So, while MIP doesn\'t eliminate ' +
-                    'the problem of LLMs hallucinating, it can reduce the impact.'
+            h('section', {},
+                h('h3', {}, 'Limitations of MIP'),
+                h('p', {},
+                    'All ideas have some limitations, so we should discuss them too.  As it leverages LLMs, MIP suffers from ' +
+                    'some of the same underlying problems.  However, MIP does provide partial mitigations:'
                 ),
-                h('li', {},
-                    'Even when given clear and specific instructions, an LLM will often ignore some.  We can mitigate ' +
-                    'this by walking through the explicit requirements to ask the LLM to demonstrate how it met each ' +
-                    'one.  We must solve this with an iterative dialogue, but the LLM can rapidly correct its mistakes.'
-                ),
-                h('li', {},
-                    'This approach does not eliminate the need for a dialogue with the LLM but advances ' +
-                    'the conversation quickly while maintaining a clear focus on an outcome.'
-                ),
-                h('li', {},
-                    'Any prompt\'s complexity has the same limits as dialogue-based approaches.  LLMs have a ' +
-                    'limited context window, so this approach only works if we can keep our working data set inside ' +
-                    'that.  The approach described can still work for larger software designs, but we must break ' +
-                    'this into smaller components and build each separately.'
+                h('ul', {},
+                    h('li', {},
+                        'LLMs intentionally create random and surprising outputs at times.  This probabilistic approach is a ' +
+                        'strength in many instances but also causes LLMs to hallucinate.  If these occur in the wrong place, ' +
+                        'we might get faulty software.  MIP makes it easy for us to build different software implementations ' +
+                        'should this happen, and discarding broken versions is inexpensive.  So, while MIP doesn\'t eliminate ' +
+                        'the problem of LLMs hallucinating, it can reduce the impact.'
+                    ),
+                    h('li', {},
+                        'Even when given clear and specific instructions, an LLM will often ignore some.  We can mitigate ' +
+                        'this by walking through the explicit requirements to ask the LLM to demonstrate how it met each ' +
+                        'one.  We must solve this with an iterative dialogue, but the LLM can rapidly correct its mistakes.'
+                    ),
+                    h('li', {},
+                        'This approach does not eliminate the need for a dialogue with the LLM but advances ' +
+                        'the conversation quickly while maintaining a clear focus on an outcome.'
+                    ),
+                    h('li', {},
+                        'Any prompt\'s complexity has the same limits as dialogue-based approaches.  LLMs have a ' +
+                        'limited context window, so this approach only works if we can keep our working data set inside ' +
+                        'that.  The approach described can still work for larger software designs, but we must break ' +
+                        'this into smaller components and build each separately.'
+                    )
                 )
-            ),
+            )
         ),
         h('section', {},
             h('h2', {}, 'MIP in detail'),
