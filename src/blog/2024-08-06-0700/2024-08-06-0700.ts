@@ -199,7 +199,7 @@ function blogArticle_2024_08_06_0700(): VElement[] {
                     )
                 ),
                 h('p', {},
-                    'None of these are new ideas, but we can combine them to great effect.'
+                    'None of these are new but we can combine them to great effect.'
                 )
             ),
             h('section', {},
