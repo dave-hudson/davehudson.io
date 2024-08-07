@@ -209,34 +209,34 @@ function blogArticle_2024_08_06_0700(): VElement[] {
                     'of my more commercially minded friends might say, "Show us the money!"'
                 ),
                 h('p', {},
-                    'Here are some advantages that are already clear:'
+                    'Here are some advantages:'
                 ),
                 h('ul', {},
                     h('li', {},
-                        'It captures the detailed requirements for our software.  Notably, MIP always describes what ' +
-                        'the software is and does rather than how we\'d like to evolve it, making it easy for everyone to ' +
-                        'understand.  Most software development focuses on evolution and rapidly becomes defined by the ' +
-                        'implementation rather than the intended design.'
+                        'MIP describes the software\'s functionality rather than how we\'d like to evolve it.  This ' +
+                        'makes it easy for an LLM and a human design team to ' +
+                        'understand.  Most software development methodologies focus on evolution and any resulting software ' +
+                        'rapidly becomes defined by the implementation rather than the intended design.'
                     ),
                     h('li', {}, 
                         'It focuses on clarity so an LLM can generate software that meets those requirements.'
                     ),
                     h('li', {},
-                        'Focusing on the software\'s characteristics makes it easy to try out variations.  Small changes in ' +
-                        'requirements might lead to significant changes in implementation.  The MIP approach allows ' +
-                        'an LLM to make these sorts of changes quickly.'
+                        'It makes it easy to try out new ideas and variations.  Even small changes in ' +
+                        'requirements might lead to significant changes in implementation, but the MIP approach allows ' +
+                        'an LLM to make these sorts of changes quickly and cheaply.'
                     ),
                     h('li', {},
-                        'As MIP captures what our software is, an LLM can also use that to help create tests and ' +
+                        'An LLM can leverage a MIP description to help create tests and ' +
                         'user documentation.  [Aside: both of these are areas I will be looking into over the coming months]'
                     ),
                     h('li', {},
-                        'By shifting to the automated building of software, we can easily change technologies and ' +
+                        'Automated building of software makes it easy to change technologies and ' +
                         'implementations.  For example, we might prototype in one language and then create a production ' +
                         'implementation in another!'
                     ),
                     h('li', {},
-                        'We can build more reliable systems because MIP makes building multiple versions of the same software ' +
+                        'We can build more robust systems because MIP makes building multiple versions of the same software ' +
                         'inexpensive.  For example, we could imagine building various versions of some library function to ' +
                         'prevent downstream developers from inadvertently using unintended implementation details.'
                     )
