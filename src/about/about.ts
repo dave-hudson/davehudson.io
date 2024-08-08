@@ -5,7 +5,7 @@ export function aboutPage(): VNode {
     return h('div', {},
         pageHeader(),
         h('main', {className: 'main'},
-            h('h1', {}, 'About me (Dave Hudson)'),
+            h('h1', {}, 'About me (Dave Hudson) and this site'),
             h('p', {className: 'meta'},
                 'Last updated: ',
                 h('time', {datetime: '2024-05-29T07:45'}, '2024-05-29 07:45')
@@ -41,6 +41,24 @@ export function aboutPage(): VNode {
                 'That journey has led me all over the world and I\'ve had the privilege of collaborating with some ' +
                 'amazing people.  I live in North Wales (UK), but for 17 years I “commuted” to Northern California. ' +
                 'Now my travels tend to take me to London (UK) and Abu Dhabi (UAE).'
+            ),
+            h('section', {},
+                h('h2', {}, 'About this site'),
+                h('p', {},
+                    'This site hosts my personal blog and links to projects I\'ve been involved with.  It is not ' +
+                    'affiliated with my employeer.  To use a common disclaimer, all opinions are my own.'
+                ),
+                h('p', {},
+                    'From time-to-time, I may also use it to showcase new ideas or concepts.'
+                )
+            ),
+            h('section', {},
+                h('h2', {}, 'Privacy'),
+                h('p', {},
+                    'The site does not make use of cookies (which is why you don\'t get asked about them).  The back-end ' +
+                    'server does collect logs for up to 28 days, to let me understand how the site is behaving and ' +
+                    'which pages are generating interest.'
+                )
             ),
             h('section', {},
                 h('h2', {}, 'Contact me'),

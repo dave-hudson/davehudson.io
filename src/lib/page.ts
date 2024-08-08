@@ -44,7 +44,7 @@ export function pageHeader(): VNode {
         h('nav', {className: 'site-menu'},
             h('a', {className: 'menu', href: '/blog', onclick: (e: MouseEvent) => navigateEvent(e, '/blog')}, 'Blog'),
             h('a', {className: 'menu', href: '/projects', onclick: (e: MouseEvent) => navigateEvent(e, '/projects')}, 'Projects'),
-            h('a', {className: 'menu', href: '/about', onclick: (e: MouseEvent) => navigateEvent(e, '/about')}, 'Me'),
+            h('a', {className: 'menu', href: '/about', onclick: (e: MouseEvent) => navigateEvent(e, '/about')}, 'About'),
             sunMoonIcon(false, setDarkTheme),
             sunMoonIcon(true, setDarkTheme)
         )
