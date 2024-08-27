@@ -126,10 +126,28 @@ describe('VNode Type Guards', () => {
 });
 
 describe('updateElement function', () => {
+    beforeEach(() => {
+        jest.useFakeTimers();
+        jest.spyOn(window, 'requestAnimationFrame').mockImplementation((cb) => {
+            cb(0);
+            return 1;
+        });
+    });
+
+    afterEach(() => {
+        jest.clearAllTimers();
+        jest.restoreAllMocks();
+    });
+
     test('updateElement adds a new node', () => {
         const parent = document.createElement('div');
         const newVNode = new VElement('html', 'span', {}, []);
+
         updateElement(parent, null, null, null, newVNode);
+
+        // Fast-forward and exhaust only currently pending timers
+        jest.runAllTimers();
+
         expect(parent.childNodes).toContain(newVNode.domElement);
     });
 
@@ -138,6 +156,9 @@ describe('updateElement function', () => {
         const parentVNode = new VElement('html', 'div');
         const newVNode = new VElement('html', 'span', {}, []);
         updateElement(parent, null, parentVNode, null, newVNode);
+
+        jest.runAllTimers();
+
         expect(parent.childNodes).toContain(newVNode.domElement);
     });
 
@@ -145,16 +166,26 @@ describe('updateElement function', () => {
         const parent = document.createElement('div');
         const oldVNode = new VElement('html', 'span', {}, []);
         updateElement(parent, null, null, null, oldVNode);
+        jest.runAllTimers();
+
         updateElement(parent, parent.childNodes[0], null, oldVNode, null);
+
+        jest.runAllTimers();
+
         expect(parent.childNodes).not.toContain(oldVNode.domElement);
     });
 
-    test('updateElement removes and old node from a parent node', () => {
+    test('updateElement removes an old node from a parent node', () => {
         const parent = document.createElement('div');
         const parentVNode = new VElement('html', 'div');
         const newVNode = new VElement('html', 'span', {}, []);
         updateElement(parent, null, parentVNode, null, newVNode);
+        jest.runAllTimers();
+
         updateElement(parent, parent.childNodes[0], parentVNode, newVNode, null);
+
+        jest.runAllTimers();
+
         expect(parent.childNodes).not.toContain(newVNode.domElement);
     });
 
@@ -163,7 +194,12 @@ describe('updateElement function', () => {
         const oldVNode = new VElement('html', 'span', {}, []);
         const newVNode = new VElement('html', 'p', {}, []);
         updateElement(parent, null, null, null, oldVNode);
+        jest.runAllTimers();
+
         updateElement(parent, parent.childNodes[0], null, oldVNode, newVNode);
+
+        jest.runAllTimers();
+
         expect(parent.childNodes.length).toBe(1);
         expect(parent.childNodes).toContain(newVNode.domElement);
     });
@@ -174,7 +210,12 @@ describe('updateElement function', () => {
         const oldVNode = new VElement('html', 'span', {}, []);
         const newVNode = new VElement('html', 'p', {}, []);
         updateElement(parent, null, parentVNode, null, oldVNode);
+        jest.runAllTimers();
+
         updateElement(parent, parent.childNodes[0], parentVNode, oldVNode, newVNode);
+
+        jest.runAllTimers();
+
         expect(parent.childNodes.length).toBe(1);
         expect(parent.childNodes).toContain(newVNode.domElement);
     });
@@ -184,7 +225,12 @@ describe('updateElement function', () => {
         const oldVNode = new VElement('html', 'span', {}, []);
         const newVNode = new VText('george');
         updateElement(parent, null, null, null, oldVNode);
+        jest.runAllTimers();
+
         updateElement(parent, parent.childNodes[0], null, oldVNode, newVNode);
+
+        jest.runAllTimers();
+
         expect(parent.childNodes.length).toBe(1);
         expect(parent.childNodes[0].textContent).toBe('george');
     });
@@ -194,7 +240,12 @@ describe('updateElement function', () => {
         const oldVNode = new VText('fred');
         const newVNode = new VElement('html', 'span', {}, []);
         updateElement(parent, null, null, null, oldVNode);
+        jest.runAllTimers();
+
         updateElement(parent, parent.childNodes[0], null, oldVNode, newVNode);
+
+        jest.runAllTimers();
+
         expect(parent.childNodes.length).toBe(1);
         expect(parent.childNodes).toContain(newVNode.domElement);
     });
@@ -204,7 +255,12 @@ describe('updateElement function', () => {
         const oldVNode = new VText('fred');
         const newVNode = new VText('george');
         updateElement(parent, null, null, null, oldVNode);
+        jest.runAllTimers();
+
         updateElement(parent, parent.childNodes[0], null, oldVNode, newVNode);
+
+        jest.runAllTimers();
+
         expect(parent.childNodes.length).toBe(1);
         expect(parent.childNodes[0].textContent).toBe('george');
     });
@@ -214,7 +270,12 @@ describe('updateElement function', () => {
         const oldVNode = new VText('fred');
         const newVNode = new VText('fred');
         updateElement(parent, null, null, null, oldVNode);
+        jest.runAllTimers();
+
         updateElement(parent, parent.childNodes[0], null, oldVNode, newVNode);
+
+        jest.runAllTimers();
+
         expect(parent.childNodes.length).toBe(1);
         expect(parent.childNodes[0].textContent).toBe('fred');
     });
@@ -224,7 +285,12 @@ describe('updateElement function', () => {
         const oldVNode = h('span', {}, h('p', {}, 'old text'));
         const newVNode = h('span', {}, h('p', {}, 'new text'));
         updateElement(parent, null, null, null, oldVNode);
+        jest.runAllTimers();
+
         updateElement(parent, parent.childNodes[0], null, oldVNode, newVNode);
+
+        jest.runAllTimers();
+
         expect(parent.childNodes.length).toBe(1);
         expect(parent.childNodes).toContain(newVNode.domElement);
     });
@@ -234,7 +300,12 @@ describe('updateElement function', () => {
         const oldVNode = h('span', {}, h('p', {}, 'old text'));
         const newVNode = h('span', {}, h('p', {}, 'new text'), h('h2', {}, 'heading 2'), h('h3', {}, 'heading 3'));
         updateElement(parent, null, null, null, oldVNode);
+        jest.runAllTimers();
+
         updateElement(parent, parent.childNodes[0], null, oldVNode, newVNode);
+
+        jest.runAllTimers();
+
         expect(parent.childNodes.length).toBe(1);
         expect(parent.childNodes).toContain(newVNode.domElement);
     });
@@ -244,7 +315,12 @@ describe('updateElement function', () => {
         const oldVNode = h('span', {}, h('p', {}, 'old text'), h('h2', {}, 'heading 2'), h('h3', {}, 'heading 3'));
         const newVNode = h('span', {}, h('p', {}, 'new text'));
         updateElement(parent, null, null, null, oldVNode);
+        jest.runAllTimers();
+
         updateElement(parent, parent.childNodes[0], null, oldVNode, newVNode);
+
+        jest.runAllTimers();
+
         expect(parent.childNodes.length).toBe(1);
         expect(parent.childNodes).toContain(newVNode.domElement);
     });
@@ -254,7 +330,12 @@ describe('updateElement function', () => {
         const oldVNode = svg('span', {}, svg('p', {}, 'old text'));
         const newVNode = svg('span', {}, svg('p', {}, 'new text'), h('h2', {}, 'heading 2'), h('h3', {}, 'heading 3'));
         updateElement(parent, null, null, null, oldVNode);
+        jest.runAllTimers();
+
         updateElement(parent, parent.childNodes[0], null, oldVNode, newVNode);
+
+        jest.runAllTimers();
+
         expect(parent.childNodes.length).toBe(1);
         expect(parent.childNodes).toContain(newVNode.domElement);
     });
@@ -264,7 +345,12 @@ describe('updateElement function', () => {
         const oldVNode = svg('span', {}, svg('p', {}, 'old text'), h('h2', {}, 'heading 2'), h('h3', {}, 'heading 3'));
         const newVNode = svg('span', {}, svg('p', {}, 'new text'));
         updateElement(parent, null, null, null, oldVNode);
+        jest.runAllTimers();
+
         updateElement(parent, parent.childNodes[0], null, oldVNode, newVNode);
+
+        jest.runAllTimers();
+
         expect(parent.childNodes.length).toBe(1);
         expect(parent.childNodes).toContain(newVNode.domElement);
     });
@@ -273,6 +359,8 @@ describe('updateElement function', () => {
         const parent = document.createElement('div');
         const newVNode = new VElement('html', 'span', {className: 'test', onclick: () => {}}, []);
         updateElement(parent, null, null, null, newVNode);
+        jest.runAllTimers();
+
         expect(parent.childNodes).toContain(newVNode.domElement);
     });
 
@@ -280,7 +368,11 @@ describe('updateElement function', () => {
         const parent = document.createElement('div');
         const newVNode = new VElement('html', 'span', {className: 'test', onclick: () => {}}, []);
         updateElement(parent, null, null, null, newVNode);
+        jest.runAllTimers();
+
         updateElement(parent, parent.childNodes[0], null, newVNode, null);
+        jest.runAllTimers();
+
         expect(parent.childNodes.length).toBe(0);
     });
 
@@ -289,7 +381,11 @@ describe('updateElement function', () => {
         const oldVNode = new VElement('html', 'span', {className: 'test', id: 'bob', onclick: () => {}}, []);
         const newVNode = new VElement('html', 'span', {className: 'test', id: 'fred', onclick: () => {}}, []);
         updateElement(parent, null, null, null, oldVNode);
+        jest.runAllTimers();
+
         updateElement(parent, parent.childNodes[0], null, oldVNode, newVNode);
+        jest.runAllTimers();
+
         expect(Object.keys(newVNode.attrs).length).toBe(3);
         expect(newVNode.attrs['id']).toBe('fred');
     });
@@ -299,7 +395,11 @@ describe('updateElement function', () => {
         const oldVNode = new VElement('html', 'span', {className: 'test', style: 'bob', onclick: () => {}}, []);
         const newVNode = new VElement('html', 'span', {className: 'test', id: 'fred', onclick: () => {}}, []);
         updateElement(parent, null, null, null, oldVNode);
+        jest.runAllTimers();
+
         updateElement(parent, parent.childNodes[0], null, oldVNode, newVNode);
+        jest.runAllTimers();
+
         expect(Object.keys(newVNode.attrs).length).toBe(3);
         expect(newVNode.attrs['id']).toBe('fred');
     });
@@ -315,7 +415,11 @@ describe('updateElement function', () => {
             []
         );
         updateElement(parent, null, null, null, oldVNode);
+        jest.runAllTimers();
+
         updateElement(parent, parent.childNodes[0], null, oldVNode, newVNode);
+        jest.runAllTimers();
+
         expect(Object.keys(newVNode.attrs).length).toBe(3);
         expect(newVNode.attrs['xmlns']).toBe('http://www.w3.org/2000/svg');
     });
@@ -331,7 +435,11 @@ describe('updateElement function', () => {
         );
         const newVNode = new VElement('html', 'span', {className: 'test', style: 'bob', onclick: () => {}}, []);
         updateElement(parent, null, null, null, oldVNode);
+        jest.runAllTimers();
+
         updateElement(parent, parent.childNodes[0], null, oldVNode, newVNode);
+        jest.runAllTimers();
+
         expect(Object.keys(newVNode.attrs).length).toBe(3);
         expect(newVNode.attrs['style']).toBe('bob');
     });
@@ -353,6 +461,9 @@ describe('updateElement function', () => {
         const parent = document.createElement('div');
         const newVNode = TestComponent();
         updateElement(parent, null, null, null, newVNode);
+
+        jest.runAllTimers();  // Ensure the deferred update is processed
+
         expect((newVNode as VElement).mountCallback).toHaveBeenCalled();
         expect(parent.childNodes).toContain((newVNode as VElement).domElement);
     });
@@ -374,7 +485,11 @@ describe('updateElement function', () => {
         const parent = document.createElement('div');
         const newVNode = TestComponent();
         updateElement(parent, null, null, null, newVNode);
+        jest.runAllTimers();
+
         updateElement(parent, parent.childNodes[0], null, newVNode, null);
+        jest.runAllTimers();
+
         expect((newVNode as VElement).unmountCallback).toHaveBeenCalled();
         expect(parent.childNodes.length).toBe(0);
     });

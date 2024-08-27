@@ -72,12 +72,14 @@ interface SVGAttributes {
  */
 export class VNode {
     parentVNode: VNode | null;
+    isMounted: boolean;
 
     /**
      * Create a VNode node.
      */
     constructor() {
         this.parentVNode = null;
+        this.isMounted = false;
     }
 }
 
@@ -87,7 +89,7 @@ export class VNode {
  * This function throws an error if the provided parameter is not an instance of VNode,
  * ensuring that it can be safely treated as a VNode in subsequent code.
  *
- * @param {V} any - The parameter to check.
+ * @param {any} v - The parameter to check.
  * @throws {Error} Throws an error if the parameter is not a VNode.
  */
 export function assertIsVNode(v: any): asserts v is VNode {
@@ -146,7 +148,6 @@ export class VElement extends VNode {
     attrs: Attributes;
     childNodes: VNode[];
     domElement: HTMLElement | null;
-    isMounted: boolean;
     mountCallback: (() => void) | null;
     unmountCallback: (() => void) | null;
 
@@ -165,7 +166,6 @@ export class VElement extends VNode {
         this.attrs = attrs;
         this.childNodes = childNodes;
         this.domElement = null;
-        this.isMounted = false;
         this.mountCallback = null;
         this.unmountCallback = null;
     }
@@ -226,6 +226,31 @@ export function isVElement(vNode: VNode): vNode is VElement {
 export function assertIsVElement(vNode: VNode): asserts vNode is VElement {
     if (!(vNode instanceof VElement)) {
         throw new Error(`Not a VElement ${vNode}`);
+    }
+}
+
+/*
+ * Queue to store the updates that need to be applied to the DOM.
+ */
+const updateQueue: (() => void)[] = [];
+
+/*
+ * Function to flush all queued updates in a single step.
+ */
+function flushUpdates() {
+    while (updateQueue.length) {
+        const update = updateQueue.shift();
+        if (update) update();
+    }
+}
+
+/*
+ * Function to schedule an update to be executed in the next animation frame.
+ */
+function scheduleUpdate(update: () => void) {
+    updateQueue.push(update);
+    if (updateQueue.length == 1) {
+        requestAnimationFrame(flushUpdates);
     }
 }
 
@@ -326,7 +351,10 @@ function render(vNode: VNode): Node {
 
     assertIsVElement(vNode);
     const {namespace, type, attrs, childNodes} = vNode;
-    const domElement = document.createElementNS(namespaces[namespace as keyof typeof namespaces], type) as HTMLElement;
+    const domElement = document.createElementNS(
+        namespaces[namespace as keyof typeof namespaces],
+        type
+    ) as HTMLElement;
     vNode.domElement = domElement;
 
     for (const key in attrs) {
@@ -367,7 +395,7 @@ function unrender(vNode: VNode) {
 }
 
 /*
- * Check if two virtual DOM nodes are different enough to replace once with the other.
+ * Check if two virtual DOM nodes are different enough to replace one with the other.
  */
 function changed(vNode1: VNode, vNode2: VNode): boolean {
     // Are our nodes of different types?
@@ -377,7 +405,7 @@ function changed(vNode1: VNode, vNode2: VNode): boolean {
 
     // Do we have 2 strings?  If we do then just compare them
     if (isVText(vNode1)) {
-        assertIsVText(vNode2)
+        assertIsVText(vNode2);
         return vNode1.text !== vNode2.text;
     }
 
@@ -417,27 +445,37 @@ function updateAttributes(domElement: HTMLElement, oldAttrs: Attributes, newAttr
 /*
  * Update a DOM element based on differences between virtual DOM nodes.
  */
-export function updateElement(parent: HTMLElement, child: Node | null, parentVNode: VElement | null, oldChildVNode: VNode | null, newChildVNode: VNode | null) {
+export function updateElement(
+    parent: HTMLElement,
+    child: Node | null,
+    parentVNode: VElement | null,
+    oldChildVNode: VNode | null,
+    newChildVNode: VNode | null
+) {
     // Did we add a new node?
     if ((oldChildVNode === null) && (newChildVNode !== null)) {
         if (parentVNode) {
             parentVNode.appendChild(newChildVNode);
         }
 
-        parent.appendChild(render(newChildVNode));
-        mountVNode(newChildVNode);
+        scheduleUpdate(() => {
+            parent.appendChild(render(newChildVNode));
+            mountVNode(newChildVNode);
+        });
         return;
     }
 
     // Did we remove an old node?
     if ((oldChildVNode !== null) && (newChildVNode === null)) {
-        unmountVNode(oldChildVNode);
-        unrender(oldChildVNode);
-        if (parentVNode) {
-            parentVNode.removeChild(oldChildVNode);
-        }
+        scheduleUpdate(() => {
+            unmountVNode(oldChildVNode);
+            unrender(oldChildVNode);
+            if (parentVNode) {
+                parentVNode.removeChild(oldChildVNode);
+            }
 
-        parent.removeChild(child as Node);
+            parent.removeChild(child as Node);
+        });
         return;
     }
 
@@ -445,14 +483,16 @@ export function updateElement(parent: HTMLElement, child: Node | null, parentVNo
     assertIsVNode(oldChildVNode);
     assertIsVNode(newChildVNode);
     if (changed(oldChildVNode, newChildVNode)) {
-        unmountVNode(oldChildVNode);
-        unrender(oldChildVNode);
-        if (parentVNode) {
-            parentVNode.replaceChild(newChildVNode, oldChildVNode);
-        }
+        scheduleUpdate(() => {
+            unmountVNode(oldChildVNode);
+            unrender(oldChildVNode);
+            if (parentVNode) {
+                parentVNode.replaceChild(newChildVNode, oldChildVNode);
+            }
 
-        parent.replaceChild(render(newChildVNode), child as Node);
-        mountVNode(newChildVNode);
+            parent.replaceChild(render(newChildVNode), child as Node);
+            mountVNode(newChildVNode);
+        });
         return;
     }
 
@@ -461,15 +501,15 @@ export function updateElement(parent: HTMLElement, child: Node | null, parentVNo
         return;
     }
 
-    // Our new VDOM node is the essentially the same as our old VDOM node we need to scan the children
-    // and update them.  To keep things sane, don't forget we need to record DOM element
-    // in the new VDOM node.
+    // Update our child nodes.
     assertIsVElement(oldChildVNode);
     assertIsVElement(newChildVNode);
     newChildVNode.domElement = oldChildVNode.domElement;
-    updateAttributes(oldChildVNode.domElement as HTMLElement, oldChildVNode.attrs, newChildVNode.attrs);
 
-    // Update our child nodes.
+    scheduleUpdate(() => {
+        updateAttributes(oldChildVNode.domElement as HTMLElement, oldChildVNode.attrs, newChildVNode.attrs);
+    });
+
     let len = oldChildVNode.childNodes.length;
     for (let i = 0; i < len; i++) {
         const nextParent = oldChildVNode.domElement as HTMLElement;
