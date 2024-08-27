@@ -5,26 +5,6 @@ import {experimentsPage, getExperimentRoutes} from './experiments/experiments';
 import {projectsPage, getProjectRoutes} from './projects/projects';
 import {pageHeader, pageFooter} from "./lib/page";
 
-//const updateQueue = new Set();
-
-/*
- * Enqueues updates and executes them in a batch using requestAnimationFrame.
- */
-//function enqueueVNodeUpdate(update) {
-//    updateQueue.add(update);
-//    if (updateQueue.size === 1) {
-//        requestAnimationFrame(runVNodeUpdates);
-//    }
-//}
-
-/*
- * Runs all updates that have been enqueued.
- */
-//function runVNodeUpdates() {
-//    updateQueue.forEach(update => update());
-//    updateQueue.clear();
-//}
-
 function homePage(): VNode {
     return h('div', {},
         pageHeader(),
