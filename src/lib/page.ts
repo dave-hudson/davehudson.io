@@ -1,6 +1,6 @@
 import {h, VElement, VNode} from './dvdi';
 import {navigateEvent} from '../app';
-import {mailIcon, gitHubIcon, linkedInIcon, xIcon, instagramIcon, moonIcon, sunIcon} from './icons';
+import {mailIcon, gitHubIcon, linkedInIcon, xIcon, moonIcon, sunIcon} from './icons';
 
 let darkTheme: HTMLLinkElement | null = null;
 let darkModeSun: HTMLElement | null = null;
@@ -21,9 +21,6 @@ export function pageHeader(): VNode {
     const component = () => h('header', {className: 'header'},
         h('nav', {className: 'site-title'},
             h('a', {className: 'home-link', href: '/', onclick: (e: MouseEvent) => navigateEvent(e, '/')}, 'davehudson.io'),
-            h('a', {className: 'icon', href: 'https://instagram.com/davehudsonio', target: '_blank', title: 'Instagram'},
-                instagramIcon()
-            ),
             h('a', {className: 'icon', href: 'https://x.com/davehudsonio', target: '_blank', title: 'X'},
                 xIcon()
             ),

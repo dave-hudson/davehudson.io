@@ -9,21 +9,8 @@ function homePage(): VNode {
     return h('div', {},
         pageHeader(),
         h('main', {className: 'main'},
-            h('h1', {}, 'Dreaming in data and code'),
-                h('figure', {},
-                h('img', {
-                    src: '/dream-data-code.webp',
-                    alt: 'Conceptual image of dreaming in data and code',
-                    width: 800,
-                    height: 286
-                }),
-            ),
-            h('p', {},
-                'A few inconvenient laws of physics aside, if we can imagine something, then we can probably build it as software.  ' +
-                'This site is where I (Dave) write about things I find interesting in the world - dreams in data and code.'
-            ),
-            ...blogSummaries(7),
-            h('hr', {}),
+            h('h1', {}, 'Latest blog posts'),
+            ...blogSummaries(5),
             h('section', {},
                 h('h2', {}, 'More blog posts'),
                 h('p', {},

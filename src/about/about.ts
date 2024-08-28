@@ -8,7 +8,7 @@ export function aboutPage(): VNode {
             h('h1', {}, 'About me (Dave Hudson) and this site'),
             h('p', {className: 'meta'},
                 'Last updated: ',
-                h('time', {datetime: '2024-05-29T07:45'}, '2024-05-29 07:45')
+                h('time', {datetime: '2024-08-28T21:32'}, '2024-08-28 21:32')
             ),
             h('p', {},
                 'Hello, good morning/afternoon/evening* and welcome! ',
@@ -67,10 +67,8 @@ export function aboutPage(): VNode {
                     h('a', {href: 'mailto:hello@davehudson.io?subject=Email\ about\ davehudson.io'}, 'Email'),
                     ', ',
                     h('a', {href: 'http://linkedin.com/in/davejh/', target: '_blank'}, 'LinkedIn'),
-                    ', ',
-                    h('a', {href: 'http://x.com/davehudsonio', target: '_blank'}, 'X'),
                     ', or ',
-                    h('a', {href: 'http://instagram.com/davehudsonio', target: '_blank'}, 'Instagram')
+                    h('a', {href: 'http://x.com/davehudsonio', target: '_blank'}, 'X')
                 )
             )
         ),

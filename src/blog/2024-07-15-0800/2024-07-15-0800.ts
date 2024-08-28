@@ -126,12 +126,6 @@ function blogOpening_2024_07_15_0800(): VElement[] {
 function blogArticle_2024_07_15_0800(): VElement[] {
     return [
         h('section', {},
-            h('img', {
-                src: '/blog/2024-07-15-0800/tool-builds-tools.webp',
-                alt: 'Image of a spanner in a workshop building another spanner',
-                width: 1792,
-                height: 1024
-            }),
             h('h2', {}, 'A quick aside'),
             h('p', {},
                 'Humans have a long history of building tools.  About 2.6 million years ago, in the early Stone Age, our ' +
@@ -295,7 +289,7 @@ export const blogPost_2024_07_15_0800 = new BlogPost(
     '/blog/2024-07-15-0800',
     'ChatGPT 4o is pretty amazing, but how good is it at building non-trivial software?' +
     'Here\'s how it did when I had it help build a website pre-rendering tool',
-    '/blog/2024-07-15-0800/tool-builds-tools.webp',
+    null,
     null,
     blogOpening_2024_07_15_0800,
     blogArticle_2024_07_15_0800,
