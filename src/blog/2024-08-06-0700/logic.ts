@@ -46,9 +46,9 @@ async function getUrls(argv: Args): Promise<string[]> {
     const sitemapContent = argv.sitemapFile
         ? await fs.promises.readFile(argv.sitemapFile, 'utf8')
         : await fetchSitemap(argv.sitemapUrl!);
-    
+
     const sitemap = parser.parse(sitemapContent);
-    
+
     if (sitemap.sitemapindex) {
         console.log('Processing sitemap index');
         const sitemaps = Array.isArray(sitemap.sitemapindex.sitemap)
@@ -205,7 +205,7 @@ export async function renderPage(browser: Browser, url: string, outputDir: strin
 
         await ensureDirectoryExistence(filePath);
         await deletePreviousFile(filePath);
-        
+
         await page.goto(url, {waitUntil: 'networkidle2'});
 
         const content = await page.content();

@@ -1,6 +1,6 @@
 
 import {h, VElement} from './dvdi';
-import {Token, Parser, styles} from './Parser'
+import {Token, Parser, styles} from './syntax/Parser'
 
 /**
  * Highlights code using the specified parser.

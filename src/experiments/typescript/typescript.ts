@@ -1,7 +1,7 @@
 import {assertIsVElement, h, updateElement, VElement, VNode} from '../../lib/dvdi';
 import {ExperimentPage} from '../ExperimentPage';
 import {pageHeader, pageFooter} from '../../lib/page';
-import {TypeScriptParser} from '../../lib/TypeScriptParser';
+import {TypeScriptParser} from '../../lib/syntax/TypeScriptParser';
 import {highlight} from '../../lib/highlight'
 import {cloneObject} from '../../lib/cloneObject';
 

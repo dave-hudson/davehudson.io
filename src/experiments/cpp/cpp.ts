@@ -1,7 +1,7 @@
 import {assertIsVElement, h, updateElement, VElement, VNode} from '../../lib/dvdi';
 import {ExperimentPage} from '../ExperimentPage';
 import {pageHeader, pageFooter} from '../../lib/page';
-import {CppParser} from '../../lib/CppParser';
+import {CppParser} from '../../lib/syntax/CppParser';
 import {highlight} from '../../lib/highlight'
 import {cloneObject} from '../../lib/cloneObject';
 
