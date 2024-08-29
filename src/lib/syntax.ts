@@ -1,0 +1,7 @@
+export * from './syntax/CParser'
+export * from './syntax/CppParser'
+export * from './syntax/CSSParser'
+export * from './syntax/HTMLParser'
+export * from './syntax/JavaScriptParser'
+export * from './syntax/PythonParser'
+export * from './syntax/TypeScriptParser'
