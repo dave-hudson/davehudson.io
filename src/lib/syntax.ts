@@ -1,3 +1,5 @@
+export * from './syntax/Lexer'
+export * from './syntax/Parser'
 export * from './syntax/CParser'
 export * from './syntax/CppParser'
 export * from './syntax/CSSParser'

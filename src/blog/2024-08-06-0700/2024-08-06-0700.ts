@@ -1,6 +1,6 @@
 import {assertIsVElement, h, updateElement, VElement, VNode, VText} from '../../lib/dvdi';
 import {BlogPost} from '../BlogPost';
-import {TypeScriptParser} from '../../lib/syntax/TypeScriptParser';
+import {TypeScriptParser} from '../../lib/syntax';
 import {highlight} from '../../lib/highlight'
 import {cloneObject} from '../../lib/cloneObject';
 import {navigateEvent} from '../../app';
