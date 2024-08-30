@@ -9,6 +9,8 @@ TS_FILES += \
 	src/lib/syntax/CSSParser.ts \
 	src/lib/syntax/HTMLLexer.ts \
 	src/lib/syntax/HTMLParser.ts \
+	src/lib/syntax/MetaphorLexer.ts \
+	src/lib/syntax/MetaphorParser.ts \
 	src/lib/syntax/PythonLexer.ts \
 	src/lib/syntax/PythonParser.ts \
 	src/lib/syntax/JavaScriptLexer.ts \

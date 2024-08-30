@@ -75,7 +75,7 @@ function blogPrompt_2024_08_06_0700(): VElement {
     if (code[0].length === 0) {
         contents = h('pre', {});
     } else {
-        contents = h('pre', {}, h('code', {}, h('span', {className: 'text'}, ...cloneObject(code[0]))));
+        contents = h('pre', {}, h('code', {}, h('span', {className: 'blocktext'}, ...cloneObject(code[0]))));
     }
 
     contents.mountCallback = () => {

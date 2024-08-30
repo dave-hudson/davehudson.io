@@ -6,6 +6,7 @@ import {experimentSyntaxCpp} from './cpp/cpp';
 import {experimentSyntaxCSS} from './css/css';
 import {experimentSyntaxHTML} from './html/html';
 import {experimentSyntaxJavaScript} from './javascript/javascript';
+import {experimentSyntaxMetaphor} from './metaphor/metaphor';
 import {experimentSyntaxPython} from './python/python';
 import {experimentSyntaxTypeScript} from './typescript/typescript';
 import {ExperimentPage} from './ExperimentPage';
@@ -17,6 +18,7 @@ const experimentsContent: ExperimentPage[] = [
     experimentSyntaxCSS,
     experimentSyntaxHTML,
     experimentSyntaxJavaScript,
+    experimentSyntaxMetaphor,
     experimentSyntaxPython,
     experimentSyntaxTypeScript
 ];
@@ -67,6 +69,14 @@ export function experimentsPage(): VNode {
                                 onclick: (e: MouseEvent) => navigateEvent(e, '/experiments/javascript')
                             },
                             'JavaScript'
+                        )
+                    ),
+                    h('li', {},
+                        h('a', {
+                                href: ('/experiments/metaphor'),
+                                onclick: (e: MouseEvent) => navigateEvent(e, '/experiments/metaphor')
+                            },
+                            'Metaphor'
                         )
                     ),
                     h('li', {},

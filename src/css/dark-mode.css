@@ -39,6 +39,10 @@ hr {
     background-color: #080808;
 }
 
+.main pre code .blocktext {
+    color: #60b860;
+}
+
 .main pre code .comment {
     color: #68d068;
 }
@@ -66,6 +70,10 @@ hr {
 
 .main pre code .function {
     color: #e0e080;
+}
+
+.main pre code .heading {
+    color: #f06060;
 }
 
 .main pre code .html-attribute {
@@ -109,7 +117,7 @@ hr {
 }
 
 .main pre code .text {
-    color: #60b860;
+    color: #d0d0d0;
 }
 
 .main table th {

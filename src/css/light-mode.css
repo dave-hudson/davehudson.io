@@ -49,9 +49,6 @@ pre {
     font-size: 1em; /* 2 */
 }
 
-/* Text-level semantics
-   ========================================================================== */
-
 /**
  * Remove the gray background on active links in IE 10.
  */
@@ -264,9 +261,6 @@ textarea {
     -webkit-appearance: button; /* 1 */
     font: inherit; /* 2 */
 }
-
-/* Interactive
-   ========================================================================== */
 
 /*
  * Add the correct display in Edge, IE 10+, and Firefox.
@@ -538,6 +532,10 @@ pre {
     padding: 8px;
 }
 
+.main pre code .blocktext {
+    color: #008000;
+}
+
 .main pre code .comment {
     color: #008000;
 }
@@ -565,6 +563,10 @@ pre {
 
 .main pre code .function {
     color: #a09040;
+}
+
+.main pre code .heading {
+    color: #c04848;
 }
 
 .main pre code .html-attribute {
@@ -608,7 +610,7 @@ pre {
 }
 
 .main pre code .text {
-    color: #008000;
+    color: #141414;
 }
 
 .main table {
