@@ -24,7 +24,9 @@ export const styles: {[key: string]: string | null} = {
 export abstract class Lexer {
     protected input: string;
     protected position: number;
-    lexingFunctions: (() => Token)[];
+    protected tokens: Token[];
+    protected nextToken: number;
+    protected lexingFunctions: (() => Token)[];
 
     /**
      * Constructs a Lexer.
@@ -33,11 +35,15 @@ export abstract class Lexer {
     constructor(input: string) {
         this.input = input;
         this.position = 0;
+        this.tokens = [];
+        this.nextToken = 0;
 
         this.lexingFunctions = new Array(128);
         for (let i = 0; i < 128; i++) {
             this.lexingFunctions[i] = this.getLexingFunction(String.fromCharCode(i));
         }
+
+        this.lexTokens();
     }
 
     /**
@@ -48,25 +54,37 @@ export abstract class Lexer {
     protected abstract getLexingFunction(ch: string): () => Token;
 
     /**
+     * Lex the tokens in the input
+     */
+    /**
+     * Lex all the tokens in the input
+     */
+    protected lexTokens(): void {
+        while (this.position < this.input.length) {
+            const ch = this.input[this.position];
+            const chVal = ch.charCodeAt(0);
+            let fn;
+
+            if (chVal < 128) {
+                fn = this.lexingFunctions[chVal];
+            } else {
+                fn = this.getLexingFunction(ch)
+            }
+
+            this.tokens.push(fn());
+        }
+    }
+
+    /**
      * Gets the next token from the input.
      * @returns the next Token available or null if there are no tokens left.
      */
     public getNextToken(): Token | null {
-        if (this.position >= this.input.length) {
+        if (this.nextToken >= this.tokens.length) {
             return null;
         }
 
-        const ch = this.input[this.position];
-        const chVal = ch.charCodeAt(0);
-        let fn;
-
-        if (chVal < 128) {
-            fn = this.lexingFunctions[chVal];
-        } else {
-            fn = this.getLexingFunction(ch)
-        }
-
-        return fn();
+        return this.tokens[this.nextToken++];
     }
 
     /**
