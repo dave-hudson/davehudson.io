@@ -6,7 +6,7 @@ import {CLexer} from './CLexer'
  * C parser.
  */
 export class CParser extends Parser {
-    protected inElement: boolean = false;
+    protected inElement: boolean;
 
     /**
      * Constructs a parser.

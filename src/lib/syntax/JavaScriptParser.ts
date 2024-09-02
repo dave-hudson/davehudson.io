@@ -6,7 +6,7 @@ import {JavaScriptLexer} from './JavaScriptLexer'
  * JavaScript parser.
  */
 export class JavaScriptParser extends Parser {
-    protected inElement: boolean = false;
+    protected inElement: boolean;
 
     /**
      * Constructs a parser.

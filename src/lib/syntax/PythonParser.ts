@@ -6,7 +6,7 @@ import {Parser} from './Parser'
  * Python parser.
  */
 export class PythonParser extends Parser {
-    protected inElement: boolean = false;
+    protected inElement: boolean;
 
     /**
      * Constructs a parser.
