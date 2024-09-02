@@ -1,4 +1,4 @@
-import {Lexer, Token, styles} from './Lexer'
+import {Lexer, styles} from './Lexer'
 
 styles['AT_RULE'] = 'css-at-rule';
 styles['DIMENSION'] = 'number';
@@ -14,7 +14,7 @@ export class CSSLexer extends Lexer {
      * @param ch - The start character
      * @returns the lexing function
      */
-    protected getLexingFunction(ch: string): () => Token {
+    protected getLexingFunction(ch: string): () => void {
         if (ch === '\n') {
             return this.readNewline.bind(this);
         }
@@ -58,44 +58,48 @@ export class CSSLexer extends Lexer {
         return this.readOperator.bind(this);
     }
 
-    private readDot(): Token {
+    private readDot(): void {
         if (this.isDigit(this.input[this.position + 1])) {
-            return this.readNumber();
+            this.readNumber();
+            return;
         }
 
-        return this.readIdentifier();
+        this.readIdentifier();
     }
 
-    private readForwardSlash(): Token {
+    private readForwardSlash(): void {
         if (this.input[this.position + 1] === '*') {
-            return this.readComment();
+            this.readComment();
+            return
         }
 
-        return this.readOperator();
+        this.readOperator();
     }
 
-    private readMinus(): Token {
+    private readMinus(): void {
         if (this.isDigit(this.input[this.position + 1])) {
-            return this.readNumber();
+            this.readNumber();
+            return;
         }
 
         if (this.isLetter(this.input[this.position + 1]) || this.input[this.position + 1] === '-') {
-            return this.readIdentifier();
+            this.readIdentifier();
+            return;
         }
 
-        return this.readOperator();
+        this.readOperator();
     }
 
-    private readIdentifier(): Token {
+    private readIdentifier(): void {
         const start = this.position;
         while (this.position < this.input.length && /[a-zA-Z0-9.#\[\]=\-]/.test(this.input[this.position])) {
             this.position++;
         }
 
-        return {type: 'IDENTIFIER', value: this.input.slice(start, this.position)};
+        this.tokens.push({type: 'IDENTIFIER', value: this.input.slice(start, this.position)});
     }
 
-    private readComment(): Token {
+    private readComment(): void {
         const start = this.position;
         this.position += 2;
         while (this.position < this.input.length && !(this.input[this.position] === '*' && this.input[this.position + 1] === '/')) {
@@ -103,20 +107,20 @@ export class CSSLexer extends Lexer {
         }
 
         this.position += 2;
-        return {type: 'COMMENT', value: this.input.slice(start, this.position)};
+        this.tokens.push({type: 'COMMENT', value: this.input.slice(start, this.position)});
     }
 
-    private readAtRule(): Token {
+    private readAtRule(): void {
         const start = this.position;
         this.position++;
         while (this.position < this.input.length && /[a-zA-Z\-]/.test(this.input[this.position])) {
             this.position++;
         }
 
-        return {type: 'AT_RULE', value: this.input.slice(start, this.position)};
+        this.tokens.push({type: 'AT_RULE', value: this.input.slice(start, this.position)});
     }
 
-    private readNumber(): Token {
+    private readNumber(): void {
         const start = this.position;
         if (this.input[this.position] === '-') {
             this.position++;
@@ -127,21 +131,22 @@ export class CSSLexer extends Lexer {
         }
 
         if (/[a-zA-Z%]/.test(this.input[this.position])) {
-            return this.readDimension(start);
+            this.readDimension(start);
+            return;
         }
 
-        return {type: 'NUMBER', value: this.input.slice(start, this.position)};
+        this.tokens.push({type: 'NUMBER', value: this.input.slice(start, this.position)});
     }
 
-    private readDimension(start: number): Token {
+    private readDimension(start: number): void {
         while (this.position < this.input.length && /[a-zA-Z%]/.test(this.input[this.position])) {
             this.position++;
         }
 
-        return {type: 'DIMENSION', value: this.input.slice(start, this.position)};
+        this.tokens.push({type: 'DIMENSION', value: this.input.slice(start, this.position)});
     }
 
-    private readHexOrId(): Token {
+    private readHexOrId(): void {
         const start = this.position;
         this.position++;
 
@@ -153,7 +158,8 @@ export class CSSLexer extends Lexer {
         }
 
         if (isHex && (this.position - start === 4 || this.position - start === 7)) {
-            return {type: 'HEX', value: this.input.slice(start, this.position)};
+            this.tokens.push({type: 'HEX', value: this.input.slice(start, this.position)});
+            return;
         }
 
         // If not a valid hex, treat as ID selector
@@ -161,13 +167,13 @@ export class CSSLexer extends Lexer {
             this.position++;
         }
 
-        return {type: 'HASH', value: this.input.slice(start, this.position)};
+        this.tokens.push({type: 'HASH', value: this.input.slice(start, this.position)});
     }
 
     /**
      * Reads an operator or punctuation token.
      */
-    protected readOperator(): Token {
+    protected readOperator(): void {
         const operators = [
             '~=',
             '$=',
@@ -194,11 +200,12 @@ export class CSSLexer extends Lexer {
         for (let i = 0; i < operators.length; i++) {
             if (this.input.startsWith(operators[i], this.position)) {
                 this.position += operators[i].length;
-                return {type: 'OPERATOR', value: operators[i]};
+                this.tokens.push({type: 'OPERATOR', value: operators[i]});
+                return;
             }
         }
 
         const ch = this.input[this.position++];
-        return {type: 'ERROR', value: ch};
+        this.tokens.push({type: 'ERROR', value: ch});
     }
 }

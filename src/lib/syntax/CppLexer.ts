@@ -1,4 +1,3 @@
-import {Token} from './Lexer'
 import {CLexer} from './CLexer'
 
 /**
@@ -8,7 +7,7 @@ export class CppLexer extends CLexer {
     /**
      * Reads an operator or punctuation token.
      */
-    protected override readOperator(): Token {
+    protected override readOperator(): void {
         const operators = [
             '>>=',
             '<<=',
@@ -63,12 +62,13 @@ export class CppLexer extends CLexer {
         for (let i = 0; i < operators.length; i++) {
             if (this.input.startsWith(operators[i], this.position)) {
                 this.position += operators[i].length;
-                return {type: 'OPERATOR', value: operators[i]};
+                this.tokens.push({type: 'OPERATOR', value: operators[i]});
+                return;
             }
         }
 
         const ch = this.input[this.position++];
-        return {type: 'ERROR', value: ch};
+        this.tokens.push({type: 'ERROR', value: ch});
     }
 
     /**

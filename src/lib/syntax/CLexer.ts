@@ -1,4 +1,4 @@
-import {Lexer, Token} from './Lexer'
+import {Lexer} from './Lexer'
 
 /**
  * Lexer for C code.
@@ -17,7 +17,7 @@ export class CLexer extends Lexer {
      * @param ch - The start character
      * @returns the lexing function
      */
-    protected getLexingFunction(ch: string) : () => Token {
+    protected getLexingFunction(ch: string) : () => void {
         if (ch === '\n') {
             return this.readNewline.bind(this);
         }
@@ -57,42 +57,46 @@ export class CLexer extends Lexer {
         return this.readOperator.bind(this);
     }
 
-    protected readL(): Token {
+    protected readL(): void {
         if (this.input[this.position + 1] === '"') {
-            return this.readString();
+            this.readString();
+            return;
         }
 
-        return this.readIdentifierOrKeyword();
+        this.readIdentifierOrKeyword();
     }
 
-    protected readDot(): Token {
+    protected readDot(): void {
         if (this.isDigit(this.input[this.position + 1])) {
-            return this.readNumber();
+            this.readNumber();
+            return;
         }
 
-        return this.readOperator();
+        this.readOperator();
     }
 
     /*
      * Read a forward slash.
      */
-    protected readForwardSlash(): Token {
+    protected readForwardSlash(): void {
         if (this.input[this.position + 1] === '/') {
-            return this.readComment();
+            this.readComment();
+            return;
         }
 
         if (this.input[this.position + 1] === '*') {
-            return this.readBlockComment();
+            this.readBlockComment();
+            return;
         }
 
-        return this.readOperator();
+        this.readOperator();
     }
 
     /**
      * Reads a string token.
      * @param quote - The quote character used to delimit the string.
      */
-    protected override readString(): Token {
+    protected override readString(): void {
         let quote: string = this.input[this.position];
         const start = this.position;
         this.position++;
@@ -111,13 +115,13 @@ export class CLexer extends Lexer {
         }
 
         this.position++;
-        return {type: 'STRING', value: this.input.slice(start, this.position)};
+        this.tokens.push({type: 'STRING', value: this.input.slice(start, this.position)});
     }
 
     /**
      * Reads a number in the input.
      */
-    protected readNumber(): Token {
+    protected readNumber(): void {
         let start = this.position;
         let hasSuffix = false;
 
@@ -175,26 +179,26 @@ export class CLexer extends Lexer {
             }
         }
 
-        return {type: 'NUMBER', value: this.input.slice(start, this.position)};
+        this.tokens.push({type: 'NUMBER', value: this.input.slice(start, this.position)});
     }
 
     /**
      * Reads a comment in the input.
      */
-    protected readComment(): Token {
+    protected readComment(): void {
         let start = this.position;
         this.position += 2;
         while (this.position < this.input.length && this.input[this.position] !== '\n') {
             this.position++;
         }
 
-        return {type: 'COMMENT', value: this.input.slice(start, this.position)};
+        this.tokens.push({type: 'COMMENT', value: this.input.slice(start, this.position)});
     }
 
     /**
      * Reads a block comment in the input.
      */
-    protected readBlockComment(): Token {
+    protected readBlockComment(): void {
         let start = this.position;
         this.position += 2;
         while (this.position < this.input.length && !(this.input[this.position - 1] === '*' && this.input[this.position] === '/')) {
@@ -202,13 +206,13 @@ export class CLexer extends Lexer {
         }
 
         this.position++;
-        return {type: 'COMMENT', value: this.input.slice(start, this.position)};
+        this.tokens.push({type: 'COMMENT', value: this.input.slice(start, this.position)});
     }
 
     /**
      * Reads an identifier or keyword token in C.
      */
-    protected readIdentifierOrKeyword(): Token {
+    protected readIdentifierOrKeyword(): void {
         const start = this.position;
         this.position++;
         while (this.isLetterOrDigit(this.input[this.position]) || this.input[this.position] === '_') {
@@ -217,29 +221,30 @@ export class CLexer extends Lexer {
 
         const value = this.input.slice(start, this.position);
         if (this.isKeyword(value)) {
-            return {type: 'KEYWORD', value};
+            this.tokens.push({type: 'KEYWORD', value});
+            return;
         }
 
-        return {type: 'IDENTIFIER', value};
+        this.tokens.push({type: 'IDENTIFIER', value});
     }
 
     /**
      * Reads a preprocessor directive token in C.
      */
-    protected readPreprocessorDirective(): Token {
+    protected readPreprocessorDirective(): void {
         const start = this.position;
         this.position++;
         while (this.position < this.input.length && this.input[this.position] !== '\n') {
             this.position++;
         }
 
-        return {type: 'PREPROCESSOR', value: this.input.slice(start, this.position)};
+        this.tokens.push({type: 'PREPROCESSOR', value: this.input.slice(start, this.position)});
     }
 
     /**
      * Reads an operator or punctuation token.
      */
-    protected readOperator(): Token {
+    protected readOperator(): void {
         const operators = [
             '>>=',
             '<<=',
@@ -293,12 +298,13 @@ export class CLexer extends Lexer {
         for (let i = 0; i < operators.length; i++) {
             if (this.input.startsWith(operators[i], this.position)) {
                 this.position += operators[i].length;
-                return {type: 'OPERATOR', value: operators[i]};
+                this.tokens.push({type: 'OPERATOR', value: operators[i]});
+                return;
             }
         }
 
         const ch = this.input[this.position++];
-        return {type: 'ERROR', value: ch};
+        this.tokens.push({type: 'ERROR', value: ch});
     }
 
     /**

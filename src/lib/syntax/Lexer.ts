@@ -26,7 +26,7 @@ export abstract class Lexer {
     protected position: number;
     protected tokens: Token[];
     protected nextToken: number;
-    protected lexingFunctions: (() => Token)[];
+    protected lexingFunctions: (() => void)[];
 
     /**
      * Constructs a Lexer.
@@ -51,7 +51,7 @@ export abstract class Lexer {
      * @param ch - The start character
      * @returns the lexing function
      */
-    protected abstract getLexingFunction(ch: string): () => Token;
+    protected abstract getLexingFunction(ch: string): () => void;
 
     /**
      * Lex the tokens in the input
@@ -71,7 +71,7 @@ export abstract class Lexer {
                 fn = this.getLexingFunction(ch)
             }
 
-            this.tokens.push(fn());
+            fn();
         }
     }
 
@@ -91,17 +91,17 @@ export abstract class Lexer {
      * Get the next syntactic token (not whitespace or comment)
      */
     public peekNextSyntaxToken() : Token | null {
-        const curPos = this.position;
+        const curToken = this.nextToken;
 
         let token: Token | null;
         while ((token = this.getNextToken()) !== null) {
             if (token.type !== 'COMMENT' && token.type !== 'WHITESPACE' && token.type != 'NEWLINE') {
-                this.position = curPos;
+                this.nextToken = curToken;
                 return token;
             }
         }
 
-        this.position = curPos;
+        this.nextToken = curToken;
         return null;
     }
 
@@ -109,7 +109,7 @@ export abstract class Lexer {
      * Reads a string token.
      * @param quote - The quote character used to delimit the string.
      */
-    protected readString(): Token {
+    protected readString(): void {
         const quote: string = this.input[this.position];
         const start = this.position;
         this.position++;
@@ -122,28 +122,28 @@ export abstract class Lexer {
         }
 
         this.position++;
-        return {type: 'STRING', value: this.input.slice(start, this.position)};
+        this.tokens.push({type: 'STRING', value: this.input.slice(start, this.position)});
     }
 
     /**
      * Reads a newline in the input.
      */
-    protected readNewline(): Token {
+    protected readNewline(): void {
         this.position++;
-        return {type: 'NEWLINE', value: '\n'};
+        this.tokens.push({type: 'NEWLINE', value: '\n'});
     }
 
     /**
      * Reads whitespace in the input.
      */
-    protected readWhitespace(): Token {
+    protected readWhitespace(): void {
         let start = this.position;
         this.position++;
         while (this.position < this.input.length && this.isWhitespace(this.input[this.position])) {
             this.position++;
         }
 
-        return {type: 'WHITESPACE', value: this.input.slice(start, this.position)};
+        this.tokens.push({type: 'WHITESPACE', value: this.input.slice(start, this.position)});
     }
 
     /**

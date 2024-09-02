@@ -32,7 +32,7 @@ export class HTMLLexer extends Lexer {
      * @param ch - The start character
      * @returns the lexing function
      */
-    public getLexingFunction(ch: string): () => Token {
+    public getLexingFunction(ch: string): () => void {
         if (ch === '\n') {
             return this.readNewline.bind(this);
         }
@@ -52,7 +52,7 @@ export class HTMLLexer extends Lexer {
         return this.readDefault.bind(this);
     }
 
-    protected readOpen(): Token {
+    protected readOpen(): void {
         if (this.input[this.position + 1] === '!') {
             if (this.input.startsWith('DOCTYPE', this.position + 2)) {
                 return this.readDoctype();
@@ -64,16 +64,16 @@ export class HTMLLexer extends Lexer {
         this.position++;
         this.inTag = true;
         this.tagName = '';
-        return {type: 'OPERATOR', value: '<'};
+        this.tokens.push({type: 'OPERATOR', value: '<'});
     }
 
-    protected readClose(): Token {
+    protected readClose(): void {
         this.position++;
         this.inTag = false;
-        return {type: 'OPERATOR', value: '>'};
+        this.tokens.push({type: 'OPERATOR', value: '>'});
     }
 
-    protected readDefault(): Token {
+    protected readDefault(): void {
         if (this.inTag) {
             return this.readTag();
         }
@@ -89,7 +89,8 @@ export class HTMLLexer extends Lexer {
             }
 
             this.position = scriptClose;
-            return {type: 'SCRIPT', value: this.input.slice(scriptOpen, scriptClose)};
+            this.tokens.push({type: 'SCRIPT', value: this.input.slice(scriptOpen, scriptClose)});
+            return;
         }
 
         // Is this a STYLE element?  If it is then we need to capture everything within it so this
@@ -103,17 +104,18 @@ export class HTMLLexer extends Lexer {
             }
 
             this.position = styleClose;
-            return {type: 'STYLE', value: this.input.slice(styleOpen, styleClose)};
+            this.tokens.push({type: 'STYLE', value: this.input.slice(styleOpen, styleClose)});
+            return;
         }
 
         // Handle text content between tags.
-        return this.readText();
+        this.readText();
     }
 
     /**
      * Reads a <!DOCTYPE> declaration in the input.
      */
-    protected readDoctype(): Token {
+    protected readDoctype(): void {
         let start = this.position;
         this.position += 9;
         while (this.position < this.input.length && this.input[this.position] !== '>') {
@@ -124,13 +126,13 @@ export class HTMLLexer extends Lexer {
             this.position++;
         }
 
-        return {type: 'DOCTYPE', value: this.input.slice(start, this.position)};
+        this.tokens.push({type: 'DOCTYPE', value: this.input.slice(start, this.position)});
     }
 
     /**
      * Reads an HTML comment in the input.
      */
-    protected readHtmlComment(): Token {
+    protected readHtmlComment(): void {
         let start = this.position;
         this.position += 4;
         while (this.position < this.input.length && !(this.input[this.position - 2] === '-' && this.input[this.position - 1] === '-' && this.input[this.position] === '>')) {
@@ -141,7 +143,7 @@ export class HTMLLexer extends Lexer {
             this.position++;
         }
 
-        return {type: 'COMMENT', value: this.input.slice(start, this.position)};
+        this.tokens.push({type: 'COMMENT', value: this.input.slice(start, this.position)});
     }
 
     /**
@@ -164,40 +166,43 @@ export class HTMLLexer extends Lexer {
     /**
      * Reads tag content.
      */
-    protected readTag(): Token {
+    protected readTag(): void {
         if (this.tagName === '') {
             const token: Token = this.readTagOrAttribute('TAG');
             this.tagName = token.value;
-            return token;
+            this.tokens.push(token);
+            return;
         }
 
         const ch = this.input[this.position];
         if (ch === '=') {
             this.position++;
             this.seenEquals = true;
-            return {type: 'OPERATOR', value: '='};
+            this.tokens.push({type: 'OPERATOR', value: '='});
+            return;
         }
 
         const seenEquals = this.seenEquals;
         this.seenEquals = false;
 
         if (ch === '"' || ch === '\'') {
-            return this.readString();
+            this.readString();
+            return;
         }
 
-        return this.readTagOrAttribute(seenEquals ? 'STRING' : 'ATTRIBUTE');
+        this.tokens.push(this.readTagOrAttribute(seenEquals ? 'STRING' : 'ATTRIBUTE'));
     }
 
     /**
      * Reads text content between HTML tags.
      */
-    protected readText(): Token {
+    protected readText(): void {
         let start = this.position;
         while (this.position < this.input.length && this.input[this.position] !== '<') {
             this.position++;
         }
 
-        return {type: 'TEXT', value: this.input.slice(start, this.position)};
+        this.tokens.push({type: 'TEXT', value: this.input.slice(start, this.position)});
     }
 
     isKeyword(value: string): boolean {

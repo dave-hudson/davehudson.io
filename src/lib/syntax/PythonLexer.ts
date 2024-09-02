@@ -1,4 +1,4 @@
-import {Lexer, Token} from './Lexer'
+import {Lexer} from './Lexer'
 
 /**
  * Lexer for Python code.
@@ -17,7 +17,7 @@ export class PythonLexer extends Lexer {
      * @param ch - The start character
      * @returns the lexing function
      */
-    public override getLexingFunction(ch: string): () => Token {
+    public override getLexingFunction(ch: string): () => void {
         if (ch === '\n') {
             return this.readNewline.bind(this);
         }
@@ -49,29 +49,31 @@ export class PythonLexer extends Lexer {
         return this.readOperator.bind(this);
     }
 
-    protected readQuote(): Token {
+    protected readQuote(): void {
         const ch: string = this.input[this.position];
         if (((this.position + 2) < this.input.length) &&
                 this.input[this.position + 1] === ch &&
                 this.input[this.position + 2] === ch) {
-            return this.readDocString(ch);
+            this.readDocString(ch);
+            return;
         }
 
-        return this.readString();
+        this.readString();
     }
 
-    protected readDot(): Token {
+    protected readDot(): void {
         if (this.isDigit(this.input[this.position + 1])) {
-            return this.readNumber();
+            this.readNumber();
+            return;
         }
 
-        return this.readOperator();
+        this.readOperator();
     }
 
     /**
      * Reads a number in the input.
      */
-    protected readNumber(): Token {
+    protected readNumber(): void {
         let start = this.position;
 
         if (this.input[this.position] === '0' &&
@@ -125,13 +127,13 @@ export class PythonLexer extends Lexer {
             this.position++;
         }
 
-        return {type: 'NUMBER', value: this.input.slice(start, this.position)};
+        this.tokens.push({type: 'NUMBER', value: this.input.slice(start, this.position)});
     }
 
     /**
      * Reads an identifier or keyword in the input.
      */
-    protected readIdentifierOrKeyword(): Token {
+    protected readIdentifierOrKeyword(): void {
         let start = this.position;
         this.position++;
         while (this.position < this.input.length && (this.isLetterOrDigit(this.input[this.position]) || this.input[this.position] === '_')) {
@@ -140,29 +142,30 @@ export class PythonLexer extends Lexer {
 
         const value = this.input.slice(start, this.position);
         if (this.isKeyword(value)) {
-            return {type: 'KEYWORD', value};
+            this.tokens.push({type: 'KEYWORD', value});
+            return;
         }
 
-        return {type: 'IDENTIFIER', value};
+        this.tokens.push({type: 'IDENTIFIER', value});
     }
 
     /**
      * Reads a comment in the input.
      */
-    protected readComment(): Token {
+    protected readComment(): void {
         let start = this.position;
         this.position++;
         while (this.position < this.input.length && this.input[this.position] !== '\n') {
             this.position++;
         }
 
-        return {type: 'COMMENT', value: this.input.slice(start, this.position)};
+        this.tokens.push({type: 'COMMENT', value: this.input.slice(start, this.position)});
     }
 
     /**
      * Reads a doc string token.
      */
-    protected readDocString(ch: string): Token {
+    protected readDocString(ch: string): void {
         const start = this.position;
         this.position += 3;
         while ((this.position + 2) < this.input.length &&
@@ -173,13 +176,13 @@ export class PythonLexer extends Lexer {
         }
 
         this.position += 3;
-        return {type: 'COMMENT', value: this.input.slice(start, this.position)};
+        this.tokens.push({type: 'COMMENT', value: this.input.slice(start, this.position)});
     }
 
     /**
      * Reads an operator or punctuation token.
      */
-    protected readOperator(): Token {
+    protected readOperator(): void {
         const operators = [
             '>>=',
             '<<=',
@@ -233,12 +236,13 @@ export class PythonLexer extends Lexer {
         for (let i = 0; i < operators.length; i++) {
             if (this.input.startsWith(operators[i], this.position)) {
                 this.position += operators[i].length;
-                return {type: 'OPERATOR', value: operators[i]};
+                this.tokens.push({type: 'OPERATOR', value: operators[i]});
+                return;
             }
         }
 
         const ch = this.input[this.position++];
-        return {type: 'ERROR', value: ch};
+        this.tokens.push({type: 'ERROR', value: ch});
     }
 
     /**

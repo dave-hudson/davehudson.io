@@ -1,4 +1,4 @@
-import {Lexer, Token, styles} from './Lexer'
+import {Lexer, styles} from './Lexer'
 
 styles['HEADING'] = 'heading';
 
@@ -23,7 +23,7 @@ export class MetaphorLexer extends Lexer {
      * @param ch - The start character
      * @returns the lexing function
      */
-    protected getLexingFunction(ch: string): () => Token {
+    protected getLexingFunction(ch: string): () => void {
         if (ch === '\n') {
             return this.readNewline.bind(this);
         }
@@ -39,7 +39,7 @@ export class MetaphorLexer extends Lexer {
         return this.readTextOrKeyword.bind(this);
     }
 
-    private readTextOrKeyword(): Token {
+    private readTextOrKeyword(): void {
         const start = this.position;
 
         while (this.position < this.input.length) {
@@ -61,34 +61,35 @@ export class MetaphorLexer extends Lexer {
                 const str = this.input.slice(start, this.position);
                 if (this.isKeyword(str)) {
                     this.seenKeyword = true;
-                    return {type: 'KEYWORD', value: str};
+                    this.tokens.push({type: 'KEYWORD', value: str});
+                    return;
                 }
             }
         }
 
-        return {type: (this.seenKeyword === true) ? 'HEADING' : 'TEXT', value: this.input.slice(start, this.position)};
+        this.tokens.push({type: (this.seenKeyword === true) ? 'HEADING' : 'TEXT', value: this.input.slice(start, this.position)});
     }
 
     /**
      * Reads a newline in the input.
      */
-    protected override readNewline(): Token {
+    protected override readNewline(): void {
         this.position++;
         this.seenKeyword = false;
-        return {type: 'NEWLINE', value: '\n'};
+        this.tokens.push({type: 'NEWLINE', value: '\n'});
     }
 
     /**
      * Reads a comment in the input.
      */
-    private readComment(): Token {
+    private readComment(): void {
         const start = this.position;
         this.position++;
         while (this.position < this.input.length && this.input[this.position] !== '\n') {
             this.position++;
         }
 
-        return {type: 'COMMENT', value: this.input.slice(start, this.position)};
+        this.tokens.push({type: 'COMMENT', value: this.input.slice(start, this.position)});
     }
 
     /**

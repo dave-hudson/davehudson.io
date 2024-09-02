@@ -1,4 +1,4 @@
-import {Lexer, Token, styles} from './Lexer'
+import {Lexer, styles} from './Lexer'
 
 styles['REGEXP'] = 'regexp';
 
@@ -19,7 +19,7 @@ export class JavaScriptLexer extends Lexer {
      * @param ch - The start character
      * @returns the lexing function
      */
-    protected getLexingFunction(ch: string) : () => Token {
+    protected getLexingFunction(ch: string) : () => void {
         if (ch === '\n') {
             return this.readNewline.bind(this);
         }
@@ -58,49 +58,53 @@ export class JavaScriptLexer extends Lexer {
     /*
      * Read a forward slash.
      */
-    protected readForwardSlash(): Token {
+    protected readForwardSlash(): void {
         if (this.input[this.position + 1] === '/') {
-            return this.readComment();
+            this.readComment();
+            return;
         }
 
         if (this.input[this.position + 1] === '*') {
-            return this.readBlockComment();
+            this.readBlockComment();
+            return;
         }
 
-        return this.readRegExpOrDivide();
+        this.readRegExpOrDivide();
     }
 
-    protected readDot(): Token {
+    protected readDot(): void {
         if (this.isDigit(this.input[this.position + 1])) {
-            return this.readNumber();
+            this.readNumber();
+            return;
         }
 
-        return this.readOperator();
+        this.readOperator();
     }
 
-    protected readHash(): Token {
+    protected readHash(): void {
         if (this.input[this.position + 1] == '!') {
-            return this.readHashBang();
+            this.readHashBang();
+            return;
         }
 
         this.position++;
-        return {type: 'ERROR', value: '#'};
+        this.tokens.push({type: 'ERROR', value: '#'});
     }
 
-    protected readHashBang(): Token {
+    protected readHashBang(): void {
         let start = this.position;
         this.position += 2;
         while (this.position < this.input.length && this.input[this.position] !== '\n') {
             this.position++;
         }
 
-        return {type: 'PREPROCESSOR', value: this.input.slice(start, this.position)};
+        this.tokens.push({type: 'PREPROCESSOR', value: this.input.slice(start, this.position)});
     }
 
     /**
      * Reads a number in the input.
      */
-    protected readNumber(): Token {
+    protected readNumber(): void {
         let start = this.position;
 
         if ((this.input[this.position] === '0') &&
@@ -152,13 +156,13 @@ export class JavaScriptLexer extends Lexer {
             this.position++;
         }
 
-        return {type: 'NUMBER', value: this.input.slice(start, this.position)};
+        this.tokens.push({type: 'NUMBER', value: this.input.slice(start, this.position)});
     }
 
     /**
      * Reads an identifier or keyword in the input.
      */
-    protected readIdentifierOrKeyword(): Token {
+    protected readIdentifierOrKeyword(): void {
         let start = this.position;
         this.position++;
         while (this.position < this.input.length &&
@@ -170,29 +174,30 @@ export class JavaScriptLexer extends Lexer {
 
         const value = this.input.slice(start, this.position);
         if (this.isKeyword(value)) {
-            return {type: 'KEYWORD', value};
+            this.tokens.push({type: 'KEYWORD', value});
+            return;
         }
 
-        return {type: 'IDENTIFIER', value};
+        this.tokens.push({type: 'IDENTIFIER', value});
     }
 
     /**
      * Reads a comment in the input.
      */
-    protected readComment(): Token {
+    protected readComment(): void {
         let start = this.position;
         this.position += 2;
         while (this.position < this.input.length && this.input[this.position] !== '\n') {
             this.position++;
         }
 
-        return {type: 'COMMENT', value: this.input.slice(start, this.position)};
+        this.tokens.push({type: 'COMMENT', value: this.input.slice(start, this.position)});
     }
 
     /**
      * Reads a block comment in the input.
      */
-    protected readBlockComment(): Token {
+    protected readBlockComment(): void {
         let start = this.position;
         this.position += 2;
         while (this.position < this.input.length && !(this.input[this.position - 1] === '*' && this.input[this.position] === '/')) {
@@ -200,13 +205,13 @@ export class JavaScriptLexer extends Lexer {
         }
 
         this.position++;
-        return {type: 'COMMENT', value: this.input.slice(start, this.position)};
+        this.tokens.push({type: 'COMMENT', value: this.input.slice(start, this.position)});
     }
 
     /**
      * Read a regular expression literal or divide operator.
      */
-    protected readRegExpOrDivide(): Token {
+    protected readRegExpOrDivide(): void {
         this.position++;
 
         // Look for a potential end of line.  If we find one then this isn't a regexp literal.
@@ -215,7 +220,8 @@ export class JavaScriptLexer extends Lexer {
         while (index < this.input.length) {
             const ch = this.input[index++];
             if (ch === '\n') {
-                return {type: 'OPERATOR', value: '/'};
+                this.tokens.push({type: 'OPERATOR', value: '/'});
+                return;
             }
 
             if (ch === '\\') {
@@ -240,13 +246,13 @@ export class JavaScriptLexer extends Lexer {
 
         const regexp = this.input.slice(this.position - 1, index);
         this.position = index;
-        return {type: 'REGEXP', value: regexp};
+        this.tokens.push({type: 'REGEXP', value: regexp});
     }
 
     /**
      * Reads an operator or punctuation token.
      */
-    protected readOperator(): Token {
+    protected readOperator(): void {
         const operators = [
             '>>>=',
             '>>=',
@@ -309,12 +315,13 @@ export class JavaScriptLexer extends Lexer {
         for (let i = 0; i < operators.length; i++) {
             if (this.input.startsWith(operators[i], this.position)) {
                 this.position += operators[i].length;
-                return {type: 'OPERATOR', value: operators[i]};
+                this.tokens.push({type: 'OPERATOR', value: operators[i]});
+                return;
             }
         }
 
         const ch = this.input[this.position++];
-        return {type: 'ERROR', value: ch};
+        this.tokens.push({type: 'ERROR', value: ch});
     }
 
     /**
