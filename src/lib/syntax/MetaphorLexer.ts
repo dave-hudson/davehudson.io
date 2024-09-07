@@ -101,7 +101,7 @@ export class MetaphorLexer extends Lexer {
         const keywords = [
             'Embed:',
             'Example:',
-            'Inject:',
+            'Import:',
             'Scope:',
             'Target:'
         ];
