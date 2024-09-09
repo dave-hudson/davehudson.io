@@ -111,7 +111,7 @@ export function getExperimentRoutes() {
             title: 'Experimental content',
             render: experimentsContent[i].pageFunction,
             description: 'Experimental content',
-            imageURL: 'https://davehudson.io/about/dave.html',
+            imageURL: 'https://davehudson.io/about/dave.jpg',
             pageType: 'website'
         });
     }

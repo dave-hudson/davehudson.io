@@ -141,7 +141,7 @@ export function getProjectRoutes() {
             title: projectsContent[i].title,
             render: projectsContent[i].pageFunction,
             description: projectsContent[i].description,
-            imageURL: 'https://davehudson.io/about/dave.html',
+            imageURL: 'https://davehudson.io/about/dave.jpg',
             pageType: 'website'
         });
     }
