@@ -1,0 +1,1011 @@
+{
+  "quizTitle": "Comprehensive Quiz",
+  "questions": [
+    {
+      "questionId": 1,
+      "questionText": "Which planet is known as the Red Planet?",
+      "questionType": "single",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "Earth",
+          "isCorrect": false
+        },
+        {
+          "optionId": "b",
+          "optionText": "Mars",
+          "isCorrect": true
+        },
+        {
+          "optionId": "c",
+          "optionText": "Jupiter",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "questionId": 2,
+      "questionText": "Which of the following are continents?",
+      "questionType": "multiple",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "Asia",
+          "isCorrect": true
+        },
+        {
+          "optionId": "b",
+          "optionText": "Africa",
+          "isCorrect": true
+        },
+        {
+          "optionId": "c",
+          "optionText": "Europe",
+          "isCorrect": true
+        },
+        {
+          "optionId": "d",
+          "optionText": "Greenland",
+          "isCorrect": false
+        },
+        {
+          "optionId": "e",
+          "optionText": "Australia",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "questionId": 3,
+      "questionText": "What is the chemical symbol for Gold?",
+      "questionType": "single",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "Au",
+          "isCorrect": true
+        },
+        {
+          "optionId": "b",
+          "optionText": "Ag",
+          "isCorrect": false
+        },
+        {
+          "optionId": "c",
+          "optionText": "Fe",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "questionId": 4,
+      "questionText": "Which countries are part of the United Kingdom?",
+      "questionType": "multiple",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "England",
+          "isCorrect": true
+        },
+        {
+          "optionId": "b",
+          "optionText": "Scotland",
+          "isCorrect": true
+        },
+        {
+          "optionId": "c",
+          "optionText": "Wales",
+          "isCorrect": true
+        },
+        {
+          "optionId": "d",
+          "optionText": "Ireland",
+          "isCorrect": false
+        },
+        {
+          "optionId": "e",
+          "optionText": "Northern Ireland",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "questionId": 5,
+      "questionText": "Who wrote 'Romeo and Juliet'?",
+      "questionType": "single",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "William Shakespeare",
+          "isCorrect": true
+        },
+        {
+          "optionId": "b",
+          "optionText": "Charles Dickens",
+          "isCorrect": false
+        },
+        {
+          "optionId": "c",
+          "optionText": "Jane Austen",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "questionId": 6,
+      "questionText": "Select the programming languages.",
+      "questionType": "multiple",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "Python",
+          "isCorrect": true
+        },
+        {
+          "optionId": "b",
+          "optionText": "Spanish",
+          "isCorrect": false
+        },
+        {
+          "optionId": "c",
+          "optionText": "JavaScript",
+          "isCorrect": true
+        },
+        {
+          "optionId": "d",
+          "optionText": "HTML",
+          "isCorrect": true
+        },
+        {
+          "optionId": "e",
+          "optionText": "CSS",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "questionId": 7,
+      "questionText": "What is the largest ocean on Earth?",
+      "questionType": "single",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "Atlantic Ocean",
+          "isCorrect": false
+        },
+        {
+          "optionId": "b",
+          "optionText": "Pacific Ocean",
+          "isCorrect": true
+        },
+        {
+          "optionId": "c",
+          "optionText": "Indian Ocean",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "questionId": 8,
+      "questionText": "Which elements are noble gases?",
+      "questionType": "multiple",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "Helium",
+          "isCorrect": true
+        },
+        {
+          "optionId": "b",
+          "optionText": "Oxygen",
+          "isCorrect": false
+        },
+        {
+          "optionId": "c",
+          "optionText": "Neon",
+          "isCorrect": true
+        },
+        {
+          "optionId": "d",
+          "optionText": "Hydrogen",
+          "isCorrect": false
+        },
+        {
+          "optionId": "e",
+          "optionText": "Argon",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "questionId": 9,
+      "questionText": "Who painted the Mona Lisa?",
+      "questionType": "single",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "Vincent van Gogh",
+          "isCorrect": false
+        },
+        {
+          "optionId": "b",
+          "optionText": "Pablo Picasso",
+          "isCorrect": false
+        },
+        {
+          "optionId": "c",
+          "optionText": "Leonardo da Vinci",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "questionId": 10,
+      "questionText": "Select the countries located in Africa.",
+      "questionType": "multiple",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "Nigeria",
+          "isCorrect": true
+        },
+        {
+          "optionId": "b",
+          "optionText": "Egypt",
+          "isCorrect": true
+        },
+        {
+          "optionId": "c",
+          "optionText": "Brazil",
+          "isCorrect": false
+        },
+        {
+          "optionId": "d",
+          "optionText": "Kenya",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "questionId": 11,
+      "questionText": "What is H2O commonly known as?",
+      "questionType": "single",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "Oxygen",
+          "isCorrect": false
+        },
+        {
+          "optionId": "b",
+          "optionText": "Hydrogen",
+          "isCorrect": false
+        },
+        {
+          "optionId": "c",
+          "optionText": "Water",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "questionId": 12,
+      "questionText": "Which numbers are prime?",
+      "questionType": "multiple",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "2",
+          "isCorrect": true
+        },
+        {
+          "optionId": "b",
+          "optionText": "3",
+          "isCorrect": true
+        },
+        {
+          "optionId": "c",
+          "optionText": "4",
+          "isCorrect": false
+        },
+        {
+          "optionId": "d",
+          "optionText": "5",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "questionId": 13,
+      "questionText": "Who is known as the father of computers?",
+      "questionType": "single",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "Alan Turing",
+          "isCorrect": false
+        },
+        {
+          "optionId": "b",
+          "optionText": "Charles Babbage",
+          "isCorrect": true
+        },
+        {
+          "optionId": "c",
+          "optionText": "Bill Gates",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "questionId": 14,
+      "questionText": "Select the mammals from the list.",
+      "questionType": "multiple",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "Shark",
+          "isCorrect": false
+        },
+        {
+          "optionId": "b",
+          "optionText": "Dolphin",
+          "isCorrect": true
+        },
+        {
+          "optionId": "c",
+          "optionText": "Eagle",
+          "isCorrect": false
+        },
+        {
+          "optionId": "d",
+          "optionText": "Elephant",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "questionId": 15,
+      "questionText": "What is the largest planet in our solar system?",
+      "questionType": "single",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "Saturn",
+          "isCorrect": false
+        },
+        {
+          "optionId": "b",
+          "optionText": "Jupiter",
+          "isCorrect": true
+        },
+        {
+          "optionId": "c",
+          "optionText": "Neptune",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "questionId": 16,
+      "questionText": "Which of the following are web browsers?",
+      "questionType": "multiple",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "Google Chrome",
+          "isCorrect": true
+        },
+        {
+          "optionId": "b",
+          "optionText": "Mozilla Firefox",
+          "isCorrect": true
+        },
+        {
+          "optionId": "c",
+          "optionText": "Microsoft Word",
+          "isCorrect": false
+        },
+        {
+          "optionId": "d",
+          "optionText": "Safari",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "questionId": 17,
+      "questionText": "Who wrote the theory of relativity?",
+      "questionType": "single",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "Isaac Newton",
+          "isCorrect": false
+        },
+        {
+          "optionId": "b",
+          "optionText": "Albert Einstein",
+          "isCorrect": true
+        },
+        {
+          "optionId": "c",
+          "optionText": "Nikola Tesla",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "questionId": 18,
+      "questionText": "Select the fruits from the following options.",
+      "questionType": "multiple",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "Apple",
+          "isCorrect": true
+        },
+        {
+          "optionId": "b",
+          "optionText": "Carrot",
+          "isCorrect": false
+        },
+        {
+          "optionId": "c",
+          "optionText": "Banana",
+          "isCorrect": true
+        },
+        {
+          "optionId": "d",
+          "optionText": "Broccoli",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "questionId": 19,
+      "questionText": "What is the freezing point of water in Celsius?",
+      "questionType": "single",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "0°C",
+          "isCorrect": true
+        },
+        {
+          "optionId": "b",
+          "optionText": "32°C",
+          "isCorrect": false
+        },
+        {
+          "optionId": "c",
+          "optionText": "100°C",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "questionId": 20,
+      "questionText": "Which are programming paradigms?",
+      "questionType": "multiple",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "Object-Oriented",
+          "isCorrect": true
+        },
+        {
+          "optionId": "b",
+          "optionText": "Functional",
+          "isCorrect": true
+        },
+        {
+          "optionId": "c",
+          "optionText": "Procedural",
+          "isCorrect": true
+        },
+        {
+          "optionId": "d",
+          "optionText": "Vegetarian",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "questionId": 21,
+      "questionText": "Who discovered penicillin?",
+      "questionType": "single",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "Alexander Fleming",
+          "isCorrect": true
+        },
+        {
+          "optionId": "b",
+          "optionText": "Marie Curie",
+          "isCorrect": false
+        },
+        {
+          "optionId": "c",
+          "optionText": "Louis Pasteur",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "questionId": 22,
+      "questionText": "Select the renewable energy sources.",
+      "questionType": "multiple",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "Solar",
+          "isCorrect": true
+        },
+        {
+          "optionId": "b",
+          "optionText": "Wind",
+          "isCorrect": true
+        },
+        {
+          "optionId": "c",
+          "optionText": "Coal",
+          "isCorrect": false
+        },
+        {
+          "optionId": "d",
+          "optionText": "Hydro",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "questionId": 23,
+      "questionText": "What is the capital city of Australia?",
+      "questionType": "single",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "Sydney",
+          "isCorrect": false
+        },
+        {
+          "optionId": "b",
+          "optionText": "Melbourne",
+          "isCorrect": false
+        },
+        {
+          "optionId": "c",
+          "optionText": "Canberra",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "questionId": 24,
+      "questionText": "Which animals are reptiles?",
+      "questionType": "multiple",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "Snake",
+          "isCorrect": true
+        },
+        {
+          "optionId": "b",
+          "optionText": "Frog",
+          "isCorrect": false
+        },
+        {
+          "optionId": "c",
+          "optionText": "Turtle",
+          "isCorrect": true
+        },
+        {
+          "optionId": "d",
+          "optionText": "Kangaroo",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "questionId": 25,
+      "questionText": "What does DNA stand for?",
+      "questionType": "single",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "Deoxyribonucleic Acid",
+          "isCorrect": true
+        },
+        {
+          "optionId": "b",
+          "optionText": "Dinucleotide Acid",
+          "isCorrect": false
+        },
+        {
+          "optionId": "c",
+          "optionText": "Deoxynucleic Acid",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "questionId": 26,
+      "questionText": "Select the types of clouds.",
+      "questionType": "multiple",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "Cirrus",
+          "isCorrect": true
+        },
+        {
+          "optionId": "b",
+          "optionText": "Cumulus",
+          "isCorrect": true
+        },
+        {
+          "optionId": "c",
+          "optionText": "Nimbus",
+          "isCorrect": true
+        },
+        {
+          "optionId": "d",
+          "optionText": "Stratus",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "questionId": 27,
+      "questionText": "Who is the author of '1984'?",
+      "questionType": "single",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "George Orwell",
+          "isCorrect": true
+        },
+        {
+          "optionId": "b",
+          "optionText": "Aldous Huxley",
+          "isCorrect": false
+        },
+        {
+          "optionId": "c",
+          "optionText": "F. Scott Fitzgerald",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "questionId": 28,
+      "questionText": "Which elements are metals?",
+      "questionType": "multiple",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "Iron",
+          "isCorrect": true
+        },
+        {
+          "optionId": "b",
+          "optionText": "Helium",
+          "isCorrect": false
+        },
+        {
+          "optionId": "c",
+          "optionText": "Copper",
+          "isCorrect": true
+        },
+        {
+          "optionId": "d",
+          "optionText": "Gold",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "questionId": 29,
+      "questionText": "What is the smallest prime number?",
+      "questionType": "single",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "1",
+          "isCorrect": false
+        },
+        {
+          "optionId": "b",
+          "optionText": "2",
+          "isCorrect": true
+        },
+        {
+          "optionId": "c",
+          "optionText": "3",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "questionId": 30,
+      "questionText": "Select the operating systems.",
+      "questionType": "multiple",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "Windows",
+          "isCorrect": true
+        },
+        {
+          "optionId": "b",
+          "optionText": "Linux",
+          "isCorrect": true
+        },
+        {
+          "optionId": "c",
+          "optionText": "Photoshop",
+          "isCorrect": false
+        },
+        {
+          "optionId": "d",
+          "optionText": "macOS",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "questionId": 31,
+      "questionText": "Which city hosted the 2016 Summer Olympics?",
+      "questionType": "single",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "Tokyo",
+          "isCorrect": false
+        },
+        {
+          "optionId": "b",
+          "optionText": "Rio de Janeiro",
+          "isCorrect": true
+        },
+        {
+          "optionId": "c",
+          "optionText": "London",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "questionId": 32,
+      "questionText": "Select the planets in our solar system.",
+      "questionType": "multiple",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "Mercury",
+          "isCorrect": true
+        },
+        {
+          "optionId": "b",
+          "optionText": "Venus",
+          "isCorrect": true
+        },
+        {
+          "optionId": "c",
+          "optionText": "Pluto",
+          "isCorrect": false
+        },
+        {
+          "optionId": "d",
+          "optionText": "Mars",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "questionId": 33,
+      "questionText": "What is the powerhouse of the cell?",
+      "questionType": "single",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "Nucleus",
+          "isCorrect": false
+        },
+        {
+          "optionId": "b",
+          "optionText": "Mitochondria",
+          "isCorrect": true
+        },
+        {
+          "optionId": "c",
+          "optionText": "Ribosome",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "questionId": 34,
+      "questionText": "Which of the following are types of triangles?",
+      "questionType": "multiple",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "Equilateral",
+          "isCorrect": true
+        },
+        {
+          "optionId": "b",
+          "optionText": "Isosceles",
+          "isCorrect": true
+        },
+        {
+          "optionId": "c",
+          "optionText": "Scalene",
+          "isCorrect": true
+        },
+        {
+          "optionId": "d",
+          "optionText": "Quadrilateral",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "questionId": 35,
+      "questionText": "Who developed the theory of evolution by natural selection?",
+      "questionType": "single",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "Gregor Mendel",
+          "isCorrect": false
+        },
+        {
+          "optionId": "b",
+          "optionText": "Charles Darwin",
+          "isCorrect": true
+        },
+        {
+          "optionId": "c",
+          "optionText": "Jean-Baptiste Lamarck",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "questionId": 36,
+      "questionText": "Select the fundamental forces in physics.",
+      "questionType": "multiple",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "Gravity",
+          "isCorrect": true
+        },
+        {
+          "optionId": "b",
+          "optionText": "Electromagnetism",
+          "isCorrect": true
+        },
+        {
+          "optionId": "c",
+          "optionText": "Friction",
+          "isCorrect": false
+        },
+        {
+          "optionId": "d",
+          "optionText": "Strong Nuclear Force",
+          "isCorrect": true
+        },
+        {
+          "optionId": "e",
+          "optionText": "Weak Nuclear Force",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "questionId": 37,
+      "questionText": "What is the capital of Japan?",
+      "questionType": "single",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "Kyoto",
+          "isCorrect": false
+        },
+        {
+          "optionId": "b",
+          "optionText": "Tokyo",
+          "isCorrect": true
+        },
+        {
+          "optionId": "c",
+          "optionText": "Osaka",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "questionId": 38,
+      "questionText": "Which are types of rock?",
+      "questionType": "multiple",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "Igneous",
+          "isCorrect": true
+        },
+        {
+          "optionId": "b",
+          "optionText": "Sedimentary",
+          "isCorrect": true
+        },
+        {
+          "optionId": "c",
+          "optionText": "Metamorphic",
+          "isCorrect": true
+        },
+        {
+          "optionId": "d",
+          "optionText": "Obsidian",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "questionId": 39,
+      "questionText": "What is the boiling point of water at sea level in Celsius?",
+      "questionType": "single",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "0°C",
+          "isCorrect": false
+        },
+        {
+          "optionId": "b",
+          "optionText": "100°C",
+          "isCorrect": true
+        },
+        {
+          "optionId": "c",
+          "optionText": "50°C",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "questionId": 40,
+      "questionText": "Select the components of a computer.",
+      "questionType": "multiple",
+      "options": [
+        {
+          "optionId": "a",
+          "optionText": "CPU",
+          "isCorrect": true
+        },
+        {
+          "optionId": "b",
+          "optionText": "RAM",
+          "isCorrect": true
+        },
+        {
+          "optionId": "c",
+          "optionText": "GPU",
+          "isCorrect": true
+        },
+        {
+          "optionId": "d",
+          "optionText": "USB",
+          "isCorrect": false
+        }
+      ]
+    }
+  ]
+}
+

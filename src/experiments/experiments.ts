@@ -1,6 +1,7 @@
 import {h, VNode} from '../lib/dvdi';
 import {pageHeader, pageFooter} from "../lib/page";
 import {navigateEvent, routeDetails} from '../app';
+import {experimentQuiz} from './quiz/quiz';
 import {experimentSyntaxC} from './c/c';
 import {experimentSyntaxCpp} from './cpp/cpp';
 import {experimentSyntaxCSS} from './css/css';
@@ -13,6 +14,7 @@ import {ExperimentPage} from './ExperimentPage';
 
 // Enumerate all the blog content served up here.  Newest content goes at the end.
 const experimentsContent: ExperimentPage[] = [
+    experimentQuiz,
     experimentSyntaxC,
     experimentSyntaxCpp,
     experimentSyntaxCSS,
@@ -29,6 +31,17 @@ export function experimentsPage(): VNode {
         h('main', {className: 'main'},
             h('h1', {}, 'Active experiments'),
             h('section', {},
+                h('h2', {}, 'Quiz'),
+                h('ul', {},
+                    h('li', {},
+                        h('a', {
+                                href: ('/experiments/quiz'),
+                                onclick: (e: MouseEvent) => navigateEvent(e, '/experiments/quiz')
+                            },
+                            'Quiz'
+                        )
+                    ),
+                ),
                 h('h2', {}, 'Syntax highlighting'),
                 h('ul', {},
                     h('li', {},
