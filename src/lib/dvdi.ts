@@ -26,16 +26,22 @@ interface HTMLAttributes {
     'aria-label'?: string;
     className?: string;
     datetime?: string;
+    disabled?: boolean;
     height?: number | string;
     href?: string;
     id?: string;
+    name?: string;
     src?: string;
+    type?: string;
     target?: string;
     title?: string;
+    value?: string;
     width?: number | string;
 
     // Event attributes.
+    onchange?: (event: Event) => void;
     onclick?: (event: MouseEvent) => void;
+    onsubmit?: (event: SubmitEvent) => void;
 }
 
 /**
