@@ -28,6 +28,7 @@ interface HTMLAttributes {
     datetime?: string;
     disabled?: boolean;
     height?: number | string;
+    hidden?: boolean;
     href?: string;
     id?: string;
     name?: string;
@@ -445,6 +446,22 @@ function updateAttributes(domElement: HTMLElement, oldAttrs: Attributes, newAttr
         if (!(key in oldAttrs) || (oldAttrs[key] !== newAttrs[key])) {
             newAttribute(domElement, key, newAttrs[key]);
         }
+    }
+
+    // Reset the properties of the DOM element to defaults.
+    if (domElement.tagName === 'INPUT') {
+        const inputElement = domElement as HTMLInputElement;
+        if (inputElement.type === 'checkbox' || inputElement.type === 'radio') {
+            inputElement.checked = inputElement.defaultChecked;
+        } else {
+            inputElement.value = inputElement.defaultValue;
+        }
+    } else if (domElement.tagName === 'TEXTAREA') {
+        const textAreaElement = domElement as HTMLTextAreaElement;
+        textAreaElement.value = textAreaElement.defaultValue;
+    } else if (domElement.tagName === 'SELECT') {
+        const selectElement = domElement as HTMLSelectElement;
+        selectElement.selectedIndex = selectElement.options.selectedIndex;
     }
 }
 
