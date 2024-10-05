@@ -701,6 +701,45 @@ pre {
     max-height: 15px;
 }
 
+.main .question {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.main .question .result {
+    margin-left: 15px;
+    vertical-align: middle;
+}
+
+.main .question label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.main .question input[type="checkbox"],
+.main .question input[type="radio"] {
+    margin-right: 10px;
+}
+
+.main .question p {
+    display: inline-block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-right: 5px;
+}
+
+.main .question .correct {
+    color: green;
+}
+
+.main .question .incorrect {
+    color: red;
+}
+
+.main .submit {
+    margin-top: 15px;
+}
+
 .footer {
     text-align: right;
     font-size: 0.75rem;
