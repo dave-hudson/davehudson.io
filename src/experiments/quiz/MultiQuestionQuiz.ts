@@ -6,7 +6,7 @@
 
 type QuestionType = 'single' | 'multiple';
 
-interface Option {
+export interface Option {
     optionId: string;
     optionText: string;
     isCorrect: boolean;
@@ -126,7 +126,6 @@ export class MultiQuestionQuiz {
             .map((opt) => opt.optionId)
             .sort();
 
-        console.log(`eval: ${correctOptionIds}`)
         const selectedIdsSorted = [...selectedOptionIds].sort();
 
         return (
