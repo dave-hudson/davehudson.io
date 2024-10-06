@@ -706,11 +706,6 @@ pre {
     margin-bottom: 15px;
 }
 
-.main .question .result {
-    margin-left: 15px;
-    vertical-align: middle;
-}
-
 .main .question label {
     display: block;
     margin-bottom: 5px;
@@ -729,10 +724,12 @@ pre {
 }
 
 .main .question .correct {
+    font-weight: bold;
     color: green;
 }
 
 .main .question .incorrect {
+    font-weight: bold;
     color: red;
 }
 

@@ -152,15 +152,19 @@ function experimentQuizComponent(): VElement {
         let rowIndex = 0;
 
         for (const question of currentQuestions) {
-            const questionElem = h('p', {}, question.questionText);
-            const correctResultElem = h('span', {
-                className: 'result correct',
-                ...((!resultsVisible || !results[rowIndex]) && {hidden: true}),
-            }, '\u2714')
-            const incorrectResultElem = h('span', {
-                className: 'result incorrect',
-                ...((!resultsVisible || results[rowIndex]) && {hidden: true}),
-            }, '\u274c')
+            let questionText = question.questionText;
+            let questionClass = '';
+            if (resultsVisible) {
+                if (results[rowIndex]) {
+                    questionText += ' \u2713';
+                    questionClass = 'correct';
+                } else {
+                    questionText += ' \u2718';
+                    questionClass = 'incorrect';
+                }
+            }
+
+            const questionElem = h('p', {className: questionClass}, questionText);
             let answerElements: VElement[] = []
             let row = rowIndex;
 
@@ -182,7 +186,7 @@ function experimentQuizComponent(): VElement {
             }
 
             const questionDiv = h('div', {className: 'question'},
-                questionElem, correctResultElem, incorrectResultElem, ...answerElements
+                questionElem, ...answerElements
             );
             questionElements.push(questionDiv);
             rowIndex++;
