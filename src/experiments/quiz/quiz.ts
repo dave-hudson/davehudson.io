@@ -3,7 +3,7 @@ import {ExperimentPage} from '../ExperimentPage';
 import {pageHeader, pageFooter} from '../../lib/page';
 import {MultiQuestionQuiz, Question, Option} from './MultiQuestionQuiz';
 
-const numQuestions = 3;
+const numQuestions = 10;
 const quiz = new MultiQuestionQuiz;
 let quizVElement: (VElement | null) = null;
 let quizLoaded = false;
@@ -211,7 +211,9 @@ function experimentQuizComponent(): VElement {
 
     contents.mountCallback = () => {
         quizVElement = contents;
-        loadFile('/experiments/quiz/questions.json');
+        if (!quizLoaded) {
+            loadFile('/experiments/quiz/questions.json');
+        }
     }
 
     contents.unmountCallback = () => {
