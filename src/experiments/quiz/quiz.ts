@@ -175,17 +175,18 @@ function experimentQuizComponent(
 
             let colIndex = 0;
             for (const answer of question.options) {
-                const answerElem = h('label', {},
-                    h('input', {
-                        'type': question.questionType === 'single' ? 'radio' : 'checkbox',
-                        'name': 'question' + question.questionId,
-                        'value': answer.optionId,
-                        ...(checkedAnswers[row][colIndex] && {checked: true}),
-                        ...(resultsVisible && {disabled: true}),
-                        'onchange': (e: Event) => answerChanged(e, row, question, answer)
-                    }),
-                    answer.optionText
-                );
+                const answerElem =
+                    h('label', {},
+                        h('input', {
+                            'type': question.questionType === 'single' ? 'radio' : 'checkbox',
+                            'name': 'question' + question.questionId,
+                            'value': answer.optionId,
+                            ...(checkedAnswers[row][colIndex] && {checked: true}),
+                            ...(resultsVisible && {disabled: true}),
+                            'onchange': (e: Event) => answerChanged(e, row, question, answer)
+                        }),
+                        answer.optionText
+                    );
                 answerElements.push(answerElem);
                 colIndex++;
             }
@@ -197,25 +198,26 @@ function experimentQuizComponent(
             rowIndex++;
         }
 
-        contents = h('div', {},
-            ...questionElements,
-            h('button', {
-                className: 'submit',
-                ...(resultsVisible && {hidden: true}),
-                ...(!allAnswered && {disabled: true}),
-                onclick: (e: Event) => checkSubmit()
-            }, 'Submit'),
-            h('h3', {
-                ...(!resultsVisible && {hidden: true}),
-            }, `You scored ${totalCorrect} out of ${numQuestions}`),
-            h('button', {
-                ...((!resultsVisible || noMoreQuestions) && {hidden: true}),
-                onclick: (e: Event) => tryAgainButton()
-            }, 'Try Again!'),
-            h('h3', {
-                ...(!noMoreQuestions && {hidden: true})
-            }, 'No more questions - please refresh the page to try again')
-        );
+        contents =
+            h('div', {},
+                ...questionElements,
+                h('button', {
+                    className: 'submit',
+                    ...(resultsVisible && {hidden: true}),
+                    ...(!allAnswered && {disabled: true}),
+                    onclick: (e: Event) => checkSubmit()
+                }, 'Submit'),
+                h('h3', {
+                    ...(!resultsVisible && {hidden: true}),
+                }, `You scored ${totalCorrect} out of ${numQuestions}`),
+                h('button', {
+                    ...((!resultsVisible || noMoreQuestions) && {hidden: true}),
+                    onclick: (e: Event) => tryAgainButton()
+                }, 'Try Again!'),
+                h('h3', {
+                    ...(!noMoreQuestions && {hidden: true})
+                }, 'No more questions - please refresh the page to try again')
+            );
     }
 
     contents.mountCallback = () => {

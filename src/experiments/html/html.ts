@@ -61,9 +61,10 @@ function experimentSyntaxHTMLComponent(): VElement {
     if (code.length === 0) {
         contents = h('pre', {});
     } else {
-        contents = h('pre', {},
-            h('code', {}, ...cloneObject(code))
-        );
+        contents =
+            h('pre', {},
+                h('code', {}, ...cloneObject(code))
+            );
     }
 
     contents.mountCallback = () => {
