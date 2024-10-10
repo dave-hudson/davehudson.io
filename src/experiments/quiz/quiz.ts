@@ -6,15 +6,15 @@ import {MultiQuestionQuiz, Question, Option} from './MultiQuestionQuiz';
 const numQuestions = 10;
 const quiz = new MultiQuestionQuiz;
 let quizVElement: (VElement | null) = null;
-let quizLoaded = false;
-let currentQuestions: Question[] = [];
-let previousQuestions: number[] = [];
-let allAnswered: boolean = false;
-let resultsVisible: boolean = false;
-let totalCorrect: number = 0;
-let results = new Array(numQuestions).fill(false);
-let checkedAnswers: boolean[][];
-let noMoreQuestions = false;
+let _quizLoaded = false;
+let _currentQuestions: Question[] = [];
+let _previousQuestions: number[] = [];
+let _allAnswered: boolean = false;
+let _resultsVisible: boolean = false;
+let _totalCorrect: number = 0;
+let _results = new Array(numQuestions).fill(false);
+let _checkedAnswers: boolean[][];
+let _noMoreQuestions = false;
 
 function update() {
     if (quizVElement === null) {
@@ -36,33 +36,34 @@ function update() {
     }
 
     const index = Array.from(parentElem.childNodes).indexOf(quizVElement.domElement);
-    const newVElement = experimentQuizComponent();
+    const newVElement = experimentQuizComponent(
+        _quizLoaded, _currentQuestions, _allAnswered, _resultsVisible,
+        _results, _totalCorrect, _checkedAnswers, _noMoreQuestions
+    );
     newVElement.parentVNode = quizVElement.parentVNode;
-    updateElement(parentElem,
-        parentElem.childNodes[index],
-        quizVElement.parentVNode as VElement,
-        quizVElement,
-        newVElement
+    updateElement(
+        parentElem, parentElem.childNodes[index], quizVElement.parentVNode as VElement,
+        quizVElement, newVElement
     );
     quizVElement = newVElement;
 }
 
 function newQuiz() {
     try {
-        currentQuestions = quiz.getQuestions(numQuestions, previousQuestions);
+        _currentQuestions = quiz.getQuestions(numQuestions, _previousQuestions);
     } catch (error) {
-        noMoreQuestions = true;
+        _noMoreQuestions = true;
     }
 
-    currentQuestions.forEach((question: Question) => {
-        previousQuestions.push(question.questionId);
+    _currentQuestions.forEach((question: Question) => {
+        _previousQuestions.push(question.questionId);
     });
 
-    allAnswered = false;
-    resultsVisible = false;
-    totalCorrect = 0;
-    results = new Array(numQuestions).fill(false);
-    checkedAnswers = Array.from({length: numQuestions}, () => Array(8).fill(false));
+    _allAnswered = false;
+    _resultsVisible = false;
+    _totalCorrect = 0;
+    _results = new Array(numQuestions).fill(false);
+    _checkedAnswers = Array.from({length: numQuestions}, () => Array(8).fill(false));
 
     update();
 }
@@ -76,7 +77,7 @@ async function loadFile(filePath: string) {
 
         const quiz_file = await response.text();
         quiz.loadQuestions(quiz_file);
-        quizLoaded = true;
+        _quizLoaded = true;
         newQuiz();
     } catch (error) {
         console.error('Error loading file:', error);
@@ -84,13 +85,13 @@ async function loadFile(filePath: string) {
 }
 
 function checkSubmit() {
-    resultsVisible = true;
+    _resultsVisible = true;
 
     // Loop through each question
-    totalCorrect = 0;
+    _totalCorrect = 0;
     let index = 0;
-    currentQuestions.forEach(question => {
-        let answerRow = checkedAnswers[index];
+    _currentQuestions.forEach(question => {
+        let answerRow = _checkedAnswers[index];
         let selected = []
         for (let col = 0; col < question.options.length; col++) {
             if (answerRow[col]) {
@@ -100,10 +101,10 @@ function checkSubmit() {
 
         const isCorrect = quiz.evaluateAnswers(question.questionId, selected);
         if (isCorrect) {
-            totalCorrect++;
+            _totalCorrect++;
         }
 
-        results[index++] = isCorrect;
+        _results[index++] = isCorrect;
     });
 
     update();
@@ -113,7 +114,7 @@ function answerChanged(event: Event, index: number, question: Question, answer: 
     event.preventDefault();
 
     const checked = (event.target as HTMLInputElement).checked
-    const row = checkedAnswers[index];
+    const row = _checkedAnswers[index];
 
     if (question.questionType === 'single') {
         for (let i = 0; i < question.options.length; i++) {
@@ -128,11 +129,11 @@ function answerChanged(event: Event, index: number, question: Question, answer: 
     }
 
     // Now check if we have enough answers to enable to submit button.
-    allAnswered = true;
-    checkedAnswers.forEach(row => {
+    _allAnswered = true;
+    _checkedAnswers.forEach(row => {
         const hasAnswer = Array.from(row).some(check => check === true);
         if (!hasAnswer) {
-            allAnswered = false;
+            _allAnswered = false;
         }
     });
 
@@ -143,7 +144,11 @@ function tryAgainButton() {
     newQuiz();
 }
 
-function experimentQuizComponent(): VElement {
+function experimentQuizComponent(
+        quizLoaded: boolean, currentQuestions: Question[],
+        allAnswered: boolean, resultsVisible: boolean,
+        results: boolean[], totalCorrect: number,
+        checkedAnswers: boolean[][], noMoreQuestions: boolean): VElement {
     let contents: VElement
     if (!quizLoaded) {
         contents = h('div', {});
@@ -233,7 +238,10 @@ function experimentQuizPage(): VNode {
         h('main', {className: 'main'},
             h('article', {},
                 h('h1', {}, 'Quiz'),
-                experimentQuizComponent()
+                experimentQuizComponent(
+                    _quizLoaded, _currentQuestions, _allAnswered, _resultsVisible,
+                    _results, _totalCorrect, _checkedAnswers, _noMoreQuestions
+                )
             ),
         ),
         pageFooter()
