@@ -35,11 +35,9 @@ function writeCode(content: VElement[]) {
     const index = Array.from(parentElem.childNodes).indexOf(codeVElement.domElement);
     const newVElement = experimentSyntaxHTMLComponent();
     newVElement.parentVNode = codeVElement.parentVNode;
-    updateElement(parentElem,
-        parentElem.childNodes[index],
-        codeVElement.parentVNode as VElement,
-        codeVElement,
-        newVElement
+    updateElement(
+        parentElem, parentElem.childNodes[index], codeVElement.parentVNode as VElement,
+        codeVElement, newVElement
     );
     codeVElement = newVElement;
 }
@@ -63,7 +61,9 @@ function experimentSyntaxHTMLComponent(): VElement {
     if (code.length === 0) {
         contents = h('pre', {});
     } else {
-        contents = h('pre', {}, h('code', {}, ...cloneObject(code)));
+        contents = h('pre', {},
+            h('code', {}, ...cloneObject(code))
+        );
     }
 
     contents.mountCallback = () => {
