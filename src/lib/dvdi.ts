@@ -42,6 +42,7 @@ interface HTMLAttributes {
     // Event attributes.
     onchange?: (event: Event) => void;
     onclick?: (event: MouseEvent) => void;
+    onresize?: (event: UIEvent) => void;
     onsubmit?: (event: SubmitEvent) => void;
 }
 
@@ -54,8 +55,10 @@ interface SVGAttributes {
     cy?: number;
     d?: string;
     fill?: string;
+    'fill-opacity'?: number;
     height?: number;
     points?: string;
+    preserveAspectRatio?: string;
     r?: number;
     rx?: number;
     ry?: number;
@@ -63,15 +66,19 @@ interface SVGAttributes {
     'stroke-linecap'?: string;
     'stroke-linejoin'?: string;
     'stroke-width'?: number;
+    transform?: string;
+    version?: string;
     viewBox?: string;
     width?: number;
     x?: number;
     x1?: number;
     x2?: number;
+    xmlns?: string;
+    'xmlns:xlink'?: string;
     y?: number;
     y1?: number;
     y2?: number;
-    xmlns?: string;
+    zoomAndPan?: string;
 }
 
 /**
@@ -256,6 +263,13 @@ function flushUpdates() {
  */
 function scheduleUpdate(update: () => void) {
     updateQueue.push(update);
+
+    // If the page is hidden then don't attempt to schedule an update.
+    if (document.hidden) {
+        flushUpdates();
+        return;
+    }
+
     if (updateQueue.length == 1) {
         requestAnimationFrame(flushUpdates);
     }
