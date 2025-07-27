@@ -4,7 +4,7 @@ Role:
 Context:
     This mindspace is for my blog site: davehudson.io
 
-    The source files are in the src directory, and the blog posts are in src/blog.
+¥    The source files are in the src directory, and the blog posts are in src/blog.
 
 Action:
     I have several blog posts that were written using almost the same blog post structure that I would like

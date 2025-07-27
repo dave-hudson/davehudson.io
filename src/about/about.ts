@@ -29,7 +29,7 @@ export function aboutPage(): VNode {
                 'I\'ve been playing with computers and writing software since I was 9 which is way more years than ' +
                 'I care to think about. In that time I\'ve had the pleasure of working on everything from massive scale ' +
                 'embedded systems (IoT before anyone called it that) to mainframes, and now to decentralised systems. ' +
-                'Along the way, I stopped to build operating systems, network stacks, compilers, and blockchains/DLTs. ' +
+                'Along the way, I built operating systems, network stacks, compilers, and blockchains/distributed ledgers. ' +
                 'For a while I also helped design CPU instruction sets.'
             ),
             h('p', {},
