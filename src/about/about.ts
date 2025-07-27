@@ -20,22 +20,20 @@ export function aboutPage(): VNode {
             ),
             h('figure', {},
                 h('img', {
-                    src: '/about/dave.jpg',
+                    src: '/about/dave.webp',
                     alt: 'Me (apparently always pictured with a drink!)',
-                    width: 539,
-                    height: 509
-                }),
-                h('figcaption', {}, 'Me (apparently always pictured with a drink!)')
+                    width: 600
+                })
             ),
             h('p', {},
                 'I\'ve been playing with computers and writing software since I was 9 which is way more years than ' +
                 'I care to think about. In that time I\'ve had the pleasure of working on everything from massive scale ' +
                 'embedded systems (IoT before anyone called it that) to mainframes, and now to decentralised systems. ' +
-                'Along the way, I stopped to build operating systems, network stacks, compilers. For a while I also ' +
-                'helped design CPU instruction sets.'
+                'Along the way, I stopped to build operating systems, network stacks, compilers, and blockchains/DLTs. ' +
+                'For a while I also helped design CPU instruction sets.'
             ),
             h('p', {},
-                'Lately I\'ve been building blockchain and distributed ledger systems.'
+                'Lately I\'ve been working with AI, looking at what it takes to build an AI operating system.'
             ),
             h('p', {},
                 'That journey has led me all over the world and I\'ve had the privilege of collaborating with some ' +
@@ -47,9 +45,6 @@ export function aboutPage(): VNode {
                 h('p', {},
                     'This site hosts my personal blog and links to projects I\'ve been involved with.  It is not ' +
                     'affiliated with my employeer.  To use a common disclaimer, all opinions are my own.'
-                ),
-                h('p', {},
-                    'From time-to-time, I may also use it to showcase new ideas or concepts.'
                 )
             ),
             h('section', {},

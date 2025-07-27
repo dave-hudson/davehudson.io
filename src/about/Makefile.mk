@@ -1,3 +1,3 @@
-FILES += src/about/dave.jpg
+FILES += src/about/dave.webp
 
 TS_FILES += src/about/about.ts
