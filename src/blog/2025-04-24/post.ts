@@ -298,26 +298,6 @@ function blogArticle_2025_04_24(): VElement[] {
                     height: 'auto'
                 })
             )
-        ),
-        h('section', {},
-            h('h2', {}, 'What do you want to build?'),
-            h('p', {},
-                'We\'ve seen how ',
-                h('code', {}, 'm6rc'),
-                ' within the Humbug system shell can now enable you to build a whole series of new AI-powered tools. ' +
-                'Couple this with the ability to now embed elements from previous conversations as well as other ' +
-                'documents and source code and the possibilities are amazing.'
-            ),
-            h('p', {},
-                'We\'re excited to see what you will be able to build!'
-            ),
-            h('p', {},
-                'If you want to share your ideas, join us on ',
-                h('a', {href: 'https://discord.gg/GZhJ7ZtgwN', target: '_blank'}, 'Discord'),
-                '!  For help with Metaphor and Humbug, check out our ',
-                h('a', {href: 'https://youtube.com/@m6rai', target: '_blank'}, 'YouTube'),
-                ' channel.'
-            )
         )
     ];
 }

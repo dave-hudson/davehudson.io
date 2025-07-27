@@ -96,17 +96,6 @@ function blogArticle_2025_06_01(): VElement[] {
                 'This example demonstrates how Metaphor and Humbug can work together to produce substantial, high-quality code with ' +
                 'AI assistance. The ability to generate comprehensive test suites quickly and reliably is a significant productivity ' +
                 'multiplier for any development team.'
-            ),
-            h('p', {},
-                'If you\'re interested in trying this approach yourself, check out our ',
-                h('a', {
-                    href: 'https://github.com/m6r-ai/getting-started-with-metaphor',
-                    target: '_blank',
-                    title: 'Getting started with Metaphor guide'
-                }, 'getting started guide'),
-                ' and join us on ',
-                h('a', {href: 'https://discord.gg/GZhJ7ZtgwN', target: '_blank'}, 'Discord'),
-                ' to share your experiences and learn from others in the community.'
             )
         )
     ];
