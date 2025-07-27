@@ -12,7 +12,17 @@ a:hover {
 }
 
 blockquote {
-    border-color: #ddd;
+    border-left: 1px solid #808080;
+    color: #808080;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #ffe0a0;
 }
 
 hr {
@@ -40,7 +50,7 @@ hr {
 }
 
 .main pre code .blocktext {
-    color: #60b860;
+    color: #b8b8b8;
 }
 
 .main pre code .comment {

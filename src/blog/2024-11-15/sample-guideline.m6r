@@ -1,0 +1,47 @@
+Context: Generic code review guidelines
+    Here are a series of guidelines I would like you to consider when you're reviewing software.
+
+    Context: Architecture and design
+        The software should follow SOLID principles:
+
+        - Single Responsibility Principle: Each class/function does one thing well.
+        - Open/Closed Principle: Open for extension, closed for modification.
+        - Liskov Substitution Principle: Derived classes must be substitutable for base classes.
+        - Interface Segregation: Keep interfaces small and focused.
+        - Dependency Inversion: Depend on abstractions, not concrete implementations.
+
+        In addition, the software should:
+
+        - Use composition over inheritance when possible.
+        - Keep coupling low between modules
+        - Make dependencies explicit (avoid hidden side effects)
+        - Use dependency injection for better testing and flexibility
+        - DRY (Don't Repeat Yourself): Eliminate code duplication by abstracting common functionality.
+        - KISS (Keep It Simple, Stupid): Strive for simplicity in design and implementation.
+        - YAGNI (You Aren't Gonna Need It): Avoid adding functionality until it is necessary.
+
+    Context: Security Best Practices
+        The software should:
+
+        - Sanitize all user inputs.
+        - Use secure defaults.
+        - Never store sensitive data in code.
+        - Use environment variables or command line parameters for configuration.
+        - Implement proper error handling and logging.
+        - Use latest versions of dependencies.
+        - Follow principle of least privilege.
+        - Validate all external data.
+        - Implement proper authentication and authorization mechanisms.
+        - Review dependencies to address known vulnerabilities.
+        - Encrypt sensitive data at rest and in transit.
+        - Apply input validation on both client and server sides.
+
+    Context: Error handling
+        The software handles error conditions well:
+
+        - Detect and handle all exception or failure conditions.
+        - Provide meaningful error messages.
+        - Log errors appropriately.
+        - Handle resources properly.
+        - Fail fast and explicitly.
+        ...

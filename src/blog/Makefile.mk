@@ -25,6 +25,14 @@ include src/blog/2017-01-06/Makefile.mk
 include src/blog/2020-01-27/Makefile.mk
 include src/blog/2024-07-15/Makefile.mk
 include src/blog/2024-08-06/Makefile.mk
+include src/blog/2024-11-01/Makefile.mk
+include src/blog/2024-11-06/Makefile.mk
+include src/blog/2024-11-15/Makefile.mk
+include src/blog/2025-03-20/Makefile.mk
+include src/blog/2025-03-28/Makefile.mk
+include src/blog/2025-04-04/Makefile.mk
+include src/blog/2025-04-24/Makefile.mk
+include src/blog/2025-06-01/Makefile.mk
 
 TS_FILES += \
 	src/blog/BlogPost.ts \

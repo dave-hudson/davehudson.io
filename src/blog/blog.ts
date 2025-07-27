@@ -29,6 +29,14 @@ import {blogPost_2017_01_06} from './2017-01-06/post';
 import {blogPost_2020_01_27} from './2020-01-27/post';
 import {blogPost_2024_07_15} from './2024-07-15/post';
 import {blogPost_2024_08_06} from './2024-08-06/post';
+import {blogPost_2024_11_01} from './2024-11-01/post';
+import {blogPost_2024_11_06} from './2024-11-06/post';
+import {blogPost_2024_11_15} from './2024-11-15/post';
+import {blogPost_2025_03_20} from './2025-03-20/post';
+import {blogPost_2025_03_28} from './2025-03-28/post';
+import {blogPost_2025_04_04} from './2025-04-04/post';
+import {blogPost_2025_04_24} from './2025-04-24/post';
+import {blogPost_2025_06_01} from './2025-06-01/post';
 import {BlogPost} from './BlogPost';
 
 // Enumerate all the blog content served up here.  Newest content goes at the end.
@@ -59,7 +67,15 @@ const blogContent: BlogPost[] = [
     blogPost_2017_01_06,
     blogPost_2020_01_27,
     blogPost_2024_07_15,
-    blogPost_2024_08_06
+    blogPost_2024_08_06,
+    blogPost_2024_11_01,
+    blogPost_2024_11_06,
+    blogPost_2024_11_15,
+    blogPost_2025_03_20,
+    blogPost_2025_03_28,
+    blogPost_2025_04_04,
+    blogPost_2025_04_24,
+    blogPost_2025_06_01
 ]
 
 function navPrevNext(prevStr: string | null, prevHRef: string | null, nextStr: string | null, nextHRef: string | null): VNode {

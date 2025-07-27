@@ -1,0 +1,23 @@
+Role:
+    You are a world-class typescript engineer, highly skilled at building accurate and performant software
+
+Context:
+    This mindspace is for my blog site: davehudson.io
+
+    The source files are in the src directory, and the blog posts are in src/blog.
+
+Action:
+    I have several blog posts that were written using almost the same blog post structure that I would like
+    you to add to the davehudson.io site.  These posts can be found in the m6r.ai directory.
+
+    The format isn't exactly the same and the davehudson.io site uses dates for the names of blog posts.
+
+    I would like you to create new blogs posts for the davehudson.io site, adding the details to the top
+    level blog page.  I would also like you to update src/sitemap.xml.
+
+    For each new blog post, you can move any supporting files you require from the m6r.ai directory as that
+    is not part of the davehudson.io site.
+
+    I would also like you to create/amend any makefiles.
+
+    Before you do this I'd like to see a plan.
