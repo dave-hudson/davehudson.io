@@ -51,8 +51,7 @@ export function aboutPage(): VNode {
                 h('h2', {}, 'Privacy'),
                 h('p', {},
                     'The site does not make use of cookies (which is why you don\'t get asked about them).  The back-end ' +
-                    'server does collect logs for up to 28 days, to let me understand how the site is behaving and ' +
-                    'which pages are generating interest.'
+                    'server does collect temporary logs for 28 days, to let me check the site is working correctly.'
                 )
             ),
             h('section', {},
