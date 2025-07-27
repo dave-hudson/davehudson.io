@@ -99,11 +99,11 @@ export class MetaphorLexer extends Lexer {
      */
     protected isKeyword(value: string): boolean {
         const keywords = [
+            'Action:',
+            'Context:',
             'Embed:',
-            'Example:',
             'Import:',
-            'Scope:',
-            'Target:'
+            'Role:'
         ];
         return keywords.includes(value);
     }
