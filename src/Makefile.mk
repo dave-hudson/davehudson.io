@@ -1,7 +1,6 @@
 include src/about/Makefile.mk
 include src/blog/Makefile.mk
 include src/css/Makefile.mk
-include src/experiments/Makefile.mk
 include src/fonts/Makefile.mk
 include src/icons/Makefile.mk
 include src/lib/Makefile.mk

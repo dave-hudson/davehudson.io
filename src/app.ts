@@ -1,7 +1,6 @@
 import {h, updateElement, VNode} from './lib/dvdi';
 import {aboutPage} from './about/about';
 import {blogPage, blogSummaries, getBlogRoutes} from './blog/blog';
-import {experimentsPage, getExperimentRoutes} from './experiments/experiments';
 import {projectsPage, getProjectRoutes} from './projects/projects';
 import {pageHeader, pageFooter} from "./lib/page";
 
@@ -80,13 +79,6 @@ let routes: Map<string, routeDetails> = new Map([
             'of the page.',
         imageURL: 'https://davehudson.io/about/dave.jpg',
         pageType: 'website'
-    }],
-    ['/experiments', {
-        title: 'Experiments',
-        render: experimentsPage,
-        description: 'This page indexed all the experiment pages on this site.',
-        imageURL: 'https://davehudson.io/about/dave.jpg',
-        pageType: 'website'
     }]
 ]);
 
@@ -101,6 +93,11 @@ function handleMetadata(pageInfo: routeDetails) {
     const metaDescription: HTMLMetaElement | null = document.querySelector('meta[name="description"]');
     if (metaDescription !== null) {
         metaDescription.content = pageInfo.description;
+    }
+
+    const linkDescription: HTMLLinkElement | null = document.querySelector('link[rel="canonical"]');
+    if (linkDescription !== null) {
+        linkDescription.href = 'https://davehudson.io' + window.location.pathname;
     }
 }
 
@@ -190,6 +187,9 @@ function handleLocation() {
     updateElement((appElement as HTMLElement), null, null, rootVNode, newVNode);
     rootVNode = newVNode;
 
+    // Update the document title
+    document.title = `${pageInfo.title} - davehudson.io`;
+
     handleMetadata(pageInfo);
     handleOGMetadata(pageInfo);
     handleTwitterMetadata(pageInfo);
@@ -263,12 +263,6 @@ function onDOMContentLoaded(event: Event): void {
     // Add all project content to the router.
     const projectRoutes = getProjectRoutes();
     projectRoutes.forEach((value, key) => {
-        routes.set(key, value);
-    });
-
-    // Add all experiments content to the router.
-    const experimentRoutes = getExperimentRoutes();
-    experimentRoutes.forEach((value, key) => {
         routes.set(key, value);
     });
 
