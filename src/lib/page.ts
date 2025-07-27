@@ -120,7 +120,7 @@ export function pageHeader(): VNode {
 export function pageFooter(): VNode {
     return h('footer', {className: 'footer'},
         h('p', {className: 'copyright'},
-            '© 2014-2024 David J. Hudson'
+            '© 2014-2025 David J. Hudson'
         )
     );
 }
