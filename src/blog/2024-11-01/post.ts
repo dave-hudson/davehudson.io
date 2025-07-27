@@ -103,23 +103,10 @@ function blogArticle_2024_11_01(): VElement[] {
                 h('a', {
                         href: 'https://github.com/m6r-ai/m6rc',
                         target: '_blank',
-                        title: 'M6RC git repository on GitHub'
+                        title: 'm6rc git repository on GitHub'
                     },
                     'github.com/m6r-ai/m6rc'
                 )
-            ),
-            h('p', {},
-                'There\'s also a discussion forum over on Google Groups: ',
-                h('a', {
-                        href: 'https://groups.google.com/g/metaphor-language',
-                        target: '_blank',
-                        title: 'metaphor-language discussion group'
-                    },
-                    'groups.google.com/g/metaphor-language'
-                )
-            ),
-            h('p', {},
-                'I look forward to seeing what you can build with Metaphor!'
             ),
             h('figure', {},
                 h('img', {
