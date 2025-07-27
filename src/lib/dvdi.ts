@@ -23,6 +23,8 @@ interface HTMLAttributes {
     // Data attributes.
     align?: string;
     alt?: string;
+    'aria-expanded'?: string;
+    'aria-hidden'?: string;
     'aria-label'?: string;
     className?: string;
     datetime?: string;
@@ -32,7 +34,10 @@ interface HTMLAttributes {
     href?: string;
     id?: string;
     name?: string;
+    role?: string;
     src?: string;
+    style?: string;
+    tabIndex?: number;
     type?: string;
     target?: string;
     title?: string;
@@ -42,6 +47,9 @@ interface HTMLAttributes {
     // Event attributes.
     onchange?: (event: Event) => void;
     onclick?: (event: MouseEvent) => void;
+    onkeydown?: (event: KeyboardEvent) => void;
+    onmouseenter?: (event: MouseEvent) => void;
+    onmouseleave?: (event: MouseEvent) => void;
     onresize?: (event: UIEvent) => void;
     onsubmit?: (event: SubmitEvent) => void;
 }
