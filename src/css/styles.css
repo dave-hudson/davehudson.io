@@ -671,18 +671,21 @@ pre {
 
 .app .header .container {
     display: flex;
-    line-height: 0;
+    line-height: 1; /* Fixed: Set explicit line-height for consistent vertical alignment */
     justify-content: space-between;
     align-items: center;
     max-width: 1024px;
     margin: 0 auto;
     padding: 0 20px;
+    height: 64px; /* Fixed: Explicit height to ensure proper centering */
     overflow: visible;
 }
 
 .app .header .container .logo {
     transition: transform 0.5s ease-in-out;
     transform-origin: left top;
+    display: flex; /* Fixed: Ensure logo content is properly aligned */
+    align-items: center;
 }
 
 .app .header .container .logo.enlarged {
@@ -694,6 +697,8 @@ pre {
 .app .header .container .logo a {
     color: var(--header-text-color);
     text-decoration: none;
+    display: flex; /* Fixed: Ensure link content is properly aligned */
+    align-items: center;
 }
 
 .app .header .container .logo a:hover {
@@ -705,6 +710,7 @@ pre {
     font-family: 'Lalezar', sans-serif;
     font-size: 1.5rem;
     font-weight: 400;
+    line-height: 1; /* Fixed: Consistent line-height for text alignment */
 }
 
 .app .header .container .menu {
@@ -718,12 +724,14 @@ pre {
     color: var(--header-text-color);
     display: flex;
     align-items: center;
+    line-height: 1; /* Fixed: Consistent line-height for menu items */
 }
 
 .app .header .container .menu a {
     border: none;
     margin-left: 20px;
     color: var(--header-text-color);
+    line-height: 1; /* Fixed: Consistent line-height for menu links */
 }
 
 .app .header .container .menu a:hover {
@@ -741,6 +749,7 @@ pre {
     align-items: center;
     justify-content: center;
     color: var(--header-text-color);
+    line-height: 1; /* Fixed: Consistent line-height for theme toggle */
 }
 
 .app .header .container .menu .theme-toggle:hover {
@@ -794,6 +803,11 @@ pre {
     flex-direction: column;
     min-width: 0;
     overflow-x: hidden;
+}
+
+/* Fixed: Reduced paragraph spacing by 20% (to 80% of original) */
+.app .main .content .container p {
+    margin: 0.8em 0; /* Reduced from browser default of 1em to 0.8em */
 }
 
 .app .main .content .container a {
@@ -1086,4 +1100,3 @@ pre {
 .app .main .content .container .submit {
     margin-top: 15px;
 }
-

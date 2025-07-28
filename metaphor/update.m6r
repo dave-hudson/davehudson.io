@@ -6,17 +6,15 @@ Context:
 
     The source files are in the src directory
 
-    I have a copy of the source code for another site that is largely based on the same tech stack for the site
-    m6r.ai.  The sources for this site are at m6r.ai/src
-
 Action:
-    The m6r.ai site uses a container structure and has vdom components in a components directory.  The m6r.ai
-    site has a fixed header, a footer with social links in it, and hero on each page.  I would like to apply the
-    same design to the davehudson.io site.
+    There are a couple of problems with the current site.
 
-    Unlike m6r.ai I don't need the hamburger menu for mobile because I only have a few top-level pages, but
-    other than this I would like to retain the other visual elements.  I would like to retain the dark/light
-    model selection, but this can sit to the right of the "about" menu item in the header.
+    1. The spacing between paragraphs in the main text is too large.  I'd like to take it down to 80% of what
+       it is now.
+
+    2. The header appears to misalign the text.  Instead of the text appearing in the middle of the header bar
+       it is all aligned to the top of the bar (with no padding/marging).  It shoudl be vertically
+       centered.
 
     Please propose a design that will do this.
 
