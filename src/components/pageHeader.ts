@@ -21,7 +21,7 @@ export function pageHeader(): VNode {
     // Create header element
     const headerElement = h('header', {className: 'header'},
         h('div', {className: 'container'},
-            h('nav', {className: 'logo enlarged'},
+            h('nav', {className: 'logo'},
                 h('a', {href: '/', onclick: (e: MouseEvent) => navigateEvent(e, '/')},
                     daveHudsonLogo()
                 ),
@@ -76,18 +76,6 @@ export function pageHeader(): VNode {
         }
     }
 
-    // Handle scroll to resize logo
-    const handleScroll = () => {
-        const logoElement = document.querySelector('.app .header .container .logo');
-        if (logoElement) {
-            if (window.scrollY > 10) {
-                logoElement.classList.remove('enlarged');
-            } else {
-                logoElement.classList.add('enlarged');
-            }
-        }
-    };
-
     // Set up and clean up event listeners when the component mounts/unmounts
     (headerElement as VElement).mountCallback = () => {
         darkModeSun = document.getElementById('dark-mode-sun');
@@ -116,15 +104,6 @@ export function pageHeader(): VNode {
                 }
             });
         }
-
-        window.addEventListener('scroll', handleScroll);
-
-        // Call once to set initial state based on scroll position
-        handleScroll();
-    };
-
-    (headerElement as VElement).unmountCallback = () => {
-        window.removeEventListener('scroll', handleScroll);
     };
 
     return headerElement;

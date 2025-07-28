@@ -318,10 +318,10 @@ template {
     --footer-color: #555;
 
     /* Header/Footer colors */
-    --header-bg-color: #204080;
-    --header-text-color: #f8f8f8;
-    --hero-bg-color: #183060;
-    --hero-text-color: #f8f8f8;
+    --header-bg-color: #e0e0e0;
+    --header-text-color: #333333;
+    --hero-bg-color: #d0d0d0;
+    --hero-text-color: #333333;
 
     /* Syntax highlighting - light theme */
     --syntax-blocktext: #141414;
@@ -367,11 +367,11 @@ template {
         --green-note-color: #60b860;
         --footer-color: #aaa;
 
-        /* Header/Footer colors - dark theme */
-        --header-bg-color: #2c2c90;
-        --header-text-color: #f8f8f8;
-        --hero-bg-color: #181860;
-        --hero-text-color: #f8f8f8;
+        /* Header/Footer colors */
+        --header-bg-color: #2a2a2a;
+        --header-text-color: #e0e0e0;
+        --hero-bg-color: #343434;
+        --hero-text-color: #e0e0e0;
 
         /* Syntax highlighting - dark theme */
         --syntax-blocktext: #b8b8b8;
@@ -417,11 +417,11 @@ template {
     --green-note-color: #008000;
     --footer-color: #555;
 
-    /* Header/Footer colors - light theme */
-    --header-bg-color: #204080;
-    --header-text-color: #f8f8f8;
-    --hero-bg-color: #183060;
-    --hero-text-color: #f8f8f8;
+    /* Header/Footer colors */
+    --header-bg-color: #e0e0e0;
+    --header-text-color: #333333;
+    --hero-bg-color: #d0d0d0;
+    --hero-text-color: #333333;
 
     /* Syntax highlighting - light theme */
     --syntax-blocktext: #141414;
@@ -467,10 +467,10 @@ template {
     --footer-color: #aaa;
 
     /* Header/Footer colors - dark theme */
-    --header-bg-color: #2c2c90;
-    --header-text-color: #f8f8f8;
-    --hero-bg-color: #181860;
-    --hero-text-color: #f8f8f8;
+    --header-bg-color: #2a2a2a;
+    --header-text-color: #e0e0e0;
+    --hero-bg-color: #343434;
+    --hero-text-color: #e0e0e0;
 
     /* Syntax highlighting - dark theme */
     --syntax-blocktext: #b8b8b8;
@@ -682,16 +682,8 @@ pre {
 }
 
 .app .header .container .logo {
-    transition: transform 0.5s ease-in-out;
-    transform-origin: left top;
     display: flex; /* Fixed: Ensure logo content is properly aligned */
     align-items: center;
-}
-
-.app .header .container .logo.enlarged {
-    transform: scale(1.66);
-    transition: transform 0.5s ease-in-out;
-    transform-origin: left top;
 }
 
 .app .header .container .logo a {
@@ -708,9 +700,9 @@ pre {
 
 .app .header .container .logo .logo-text {
     font-family: 'Lalezar', sans-serif;
-    font-size: 1.5rem;
+    font-size: 2.4rem;
     font-weight: 400;
-    line-height: 1; /* Fixed: Consistent line-height for text alignment */
+    align-items: center;
 }
 
 .app .header .container .menu {
@@ -732,6 +724,7 @@ pre {
     margin-left: 20px;
     color: var(--header-text-color);
     line-height: 1; /* Fixed: Consistent line-height for menu links */
+    font-size: 1rem; /* Explicit font size for menu items */
 }
 
 .app .header .container .menu a:hover {
