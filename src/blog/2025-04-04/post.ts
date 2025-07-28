@@ -237,9 +237,7 @@ function blogArticle_2025_04_04(): VElement[] {
             h('figure', {},
                 h('img', {
                     src: '/blog/2025-04-04/context.webp',
-                    alt: 'An example of context described in Metaphor.',
-                    width: '90%',
-                    height: 'auto'
+                    alt: 'An example of context described in Metaphor.'
                 })
              )
         )
