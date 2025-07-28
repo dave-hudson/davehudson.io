@@ -954,8 +954,7 @@ pre {
 }
 
 .app .main .content .container .prev-next {
-    margin: 1rem 0 0 0;
-    border-top: 1px solid var(--border-color);
+    margin: 0;
 }
 
 .app .main .content .container .prev-next table {

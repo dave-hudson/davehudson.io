@@ -169,6 +169,7 @@ function blogArticlePage(index: number): VNode {
                         ...thisArticle.articleFunction()
                     ),
                     ...postText,
+                    h('hr', {}),
                     navPrevNext(prevTitle, prevHRef, nextTitle, nextHRef),
                 )
             )
