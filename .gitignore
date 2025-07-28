@@ -2,20 +2,20 @@
 *~
 
 # Ignore build files
-build/
+/build
 davehudson.io.tar.gz
 
 # Ignore coverage files
-coverage/
+/coverage
 
 # Ignore node modules
-node_modules/
+/node_modules
 package-lock.json
 
 # Ignore Mac system files
 .DS_Store
 
 # Humbug files
-conversations/
-metaphor/
-.humbug/
+/conversations
+/metaphor
+/.humbug

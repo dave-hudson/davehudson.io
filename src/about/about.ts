@@ -8,7 +8,7 @@ export function aboutPage(): VNode {
             h('h1', {}, 'About me (Dave Hudson) and this site'),
             h('p', {className: 'meta'},
                 'Last updated: ',
-                h('time', {datetime: '2024-08-28T21:32'}, '2024-08-28 21:32')
+                h('time', {datetime: '2025-07-28'}, '2025-07-28')
             ),
             h('p', {},
                 'Hello, good morning/afternoon/evening* and welcome! ',

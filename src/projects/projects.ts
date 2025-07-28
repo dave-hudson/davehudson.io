@@ -5,17 +5,21 @@ import {ProjectPage} from './ProjectPage';
 import {projectC8} from './c8/c8';
 import {projectCountdown} from './countdown/countdown';
 import {projectGcc} from './gcc/gcc';
-import {projectLiquorice} from './Liquorice/Liquorice';
+import {projectHumbug} from './humbug/humbug';
+import {projectLiquorice} from './liquorice/liquorice';
+import {projectMetaphor} from './metaphor/metaphor';
 import {projectMkdosfs} from './mkdosfs/mkdosfs';
 import {projectSiterender} from './siterender/siterender';
-import {projectVSTa} from './VSTa/VSTa';
+import {projectVSTa} from './vsta/vsta';
 
 // Enumerate all the blog content served up here.  Newest content goes at the end.
 const projectsContent: ProjectPage[] = [
     projectC8,
     projectCountdown,
     projectGcc,
+    projectHumbug,
     projectLiquorice,
+    projectMetaphor,
     projectMkdosfs,
     projectSiterender,
     projectVSTa
@@ -28,11 +32,37 @@ export function projectsPage(): VNode {
             h('h1', {}, 'Open source projects'),
             h('p', {className: 'meta'},
                 'Last updated: ',
-                h('time', {datetime: '2024-07-31T18:00'}, '2024-07-31 18:00')
+                h('time', {datetime: '2025-07-28'}, '2025-07-28')
             ),
             h('p', {},
                 'I\'ve been involved in building open source software since the early 90s.  Unfortunately I can\'t find ' +
-                'links for some of them, but here are ones for which I do.'
+                'links for some of them, but here are ones for which I do.  The most recent ones are at the top.'
+            ),
+            h('section', {},
+                h('h2', {},
+                    h('a', {
+                            href: ('/projects/humbug'),
+                            onclick: (e: MouseEvent) => navigateEvent(e, '/projects/humbug')
+                        },
+                        'Humbug'
+                    )
+                ),
+                h('p', {},
+                    'Humbug is an operating system for human/AI collaboration.'
+                )
+            ),
+            h('section', {},
+                h('h2', {},
+                    h('a', {
+                            href: ('/projects/metaphor'),
+                            onclick: (e: MouseEvent) => navigateEvent(e, '/projects/metaphor')
+                        },
+                        'Metaphor'
+                    )
+                ),
+                h('p', {},
+                    'Metaphor is an AI prompt creation language.'
+                )
             ),
             h('section', {},
                 h('h2', {},
@@ -91,7 +121,7 @@ export function projectsPage(): VNode {
                 h('h2', {},
                     h('a', {
                             href: ('/projects/Liquorice'),
-                            onclick: (e: MouseEvent) => navigateEvent(e, '/projects/Liquorice')
+                            onclick: (e: MouseEvent) => navigateEvent(e, '/projects/liquorice')
                         },
                         'Liquorice'
                     )
@@ -104,8 +134,8 @@ export function projectsPage(): VNode {
             h('section', {},
                 h('h2', {},
                     h('a', {
-                            href: ('/projects/VSTa'),
-                            onclick: (e: MouseEvent) => navigateEvent(e, '/projects/VSTa')
+                            href: ('/projects/vsta'),
+                            onclick: (e: MouseEvent) => navigateEvent(e, '/projects/vsta')
                         },
                         'VSTa'
                     )
