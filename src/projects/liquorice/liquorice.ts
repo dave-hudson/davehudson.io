@@ -34,7 +34,7 @@ export function projectLiquoricePage(): VNode {
 
 export const projectLiquorice = new ProjectPage(
     'Liquorice',
-    '/projects/Liquorice',
+    '/projects/liquorice',
     'A very small operating system and IPv4 network stack, designed to run on 8-bit Atmel AVR and ' +
     '32-bit x86 processors.  Written in C',
     projectLiquoricePage
