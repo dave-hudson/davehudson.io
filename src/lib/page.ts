@@ -2,7 +2,6 @@ import {h, VElement, VNode} from './dvdi';
 import {navigateEvent} from '../app';
 import {mailIcon, gitHubIcon, linkedInIcon, xIcon, moonIcon, sunIcon} from './icons';
 
-let darkTheme: HTMLLinkElement | null = null;
 let darkModeSun: HTMLElement | null = null;
 let darkModeMoon: HTMLElement | null = null;
 
@@ -50,6 +49,8 @@ export function pageHeader(): VNode {
     const windowMedia = window.matchMedia('(prefers-color-scheme: dark)');
 
     function setDarkTheme(dark: boolean) {
+        const htmlElement = document.documentElement;
+        
         if (dark === true) {
             if (darkModeSun) {
                 darkModeSun.style.display = '';
@@ -59,9 +60,7 @@ export function pageHeader(): VNode {
                 darkModeMoon.style.display = 'none';
             }
 
-            if (darkTheme) {
-                darkTheme.removeAttribute('disabled');
-            }
+            htmlElement.setAttribute('data-theme', 'dark');
 
             if (windowMedia.matches) {
                 localStorage.removeItem('darkTheme');
@@ -77,9 +76,7 @@ export function pageHeader(): VNode {
                 darkModeMoon.style.display = '';
             }
 
-            if (darkTheme) {
-                darkTheme.setAttribute('disabled', 'true');
-            }
+            htmlElement.setAttribute('data-theme', 'light');
 
             if (!windowMedia.matches) {
                 localStorage.removeItem('darkTheme');
@@ -91,7 +88,6 @@ export function pageHeader(): VNode {
 
     let vNode = component();
     (vNode as VElement).mountCallback = () => {
-        darkTheme = document.getElementById('dark-mode-theme') as HTMLLinkElement;
         darkModeSun = document.getElementById('dark-mode-sun');
         darkModeMoon = document.getElementById('dark-mode-moon');
 
@@ -105,11 +101,17 @@ export function pageHeader(): VNode {
 
         if (windowMedia.addEventListener) {
             windowMedia.addEventListener('change', () => {
-                setDarkTheme(windowMedia.matches);
+                let localDarkTheme = localStorage.getItem('darkTheme');
+                if (localDarkTheme === null) {
+                    setDarkTheme(windowMedia.matches);
+                }
             });
         } else if (windowMedia.addListener) {
             windowMedia.addListener(() => {
-                setDarkTheme(windowMedia.matches);
+                let localDarkTheme = localStorage.getItem('darkTheme');
+                if (localDarkTheme === null) {
+                    setDarkTheme(windowMedia.matches);
+                }
             });
         }
     };
