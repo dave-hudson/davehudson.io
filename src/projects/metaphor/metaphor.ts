@@ -13,14 +13,74 @@ export function projectMetaphorPage(): VNode {
             h('div', {className: 'content'},
                 h('div', {className: 'container'},
                     h('p', {},
-                        'TBD.'
+                        'Metaphor is an AI prompt creation language designed to help users generate high-quality prompts for a ' +
+                        'wide range of AI models.'
+                    ),
+                    h('p', {},
+                        'It has a simple declarative syntax that allows users to define roles, context, and actions in a ' +
+                        'structured way. As with programming languages, Metaphor files can be included in other files, ' +
+                        'allowing for modular and reusable prompt definitions.'
+                    ),
+                    h('section', {},
+                        h('h2', {}, 'Metaphor and Humbug'),
+                        h('p', {},
+                            'Metaphor has been used extensively in the development of ',
+                            h('a', {href: '/projects/humbug'},
+                                'Humbug'
+                            ),
+                            '. Humbug is an experimental human/AI operating system.'
+                        )
+                    ),
+                    h('section', {},
+                        h('h2', {}, 'Blog posts'),
+                        h('p', {},
+                            'I have written a few blog posts about Metaphor, which you can read here:'
+                        ),
+                        h('ul', {},
+                            h('li', {},
+                                h('a', {href: '/blog/2025-06-01'},
+                                    'Writing tests with Metaphor (2025-06-01)'
+                                )
+                            ),
+                            h('li', {},
+                                h('a', {href: '/blog/2025-04-24'},
+                                    'Introducing Metaphor commands (2025-04-24)'
+                                )
+                            ),
+                            h('li', {},
+                                h('a', {href: '/blog/2025-04-04'},
+                                    'The importance of context in AI-assisted coding (2025-04-04)'
+                                )
+                            ),
+                            h('li', {},
+                                h('a', {href: '/blog/2024-11-15'},
+                                    'Commit-critic: An AI-powered, AI-built code review tool (2024-11-15)'
+                                )
+                            ),
+                            h('li', {},
+                                h('a', {href: '/blog/2024-11-06'},
+                                    'Code reviews using Metaphor (2024-11-06)'
+                                )
+                            ),
+                            h('li', {},
+                                h('a', {href: '/blog/2024-11-01'},
+                                    'Introducing Metaphor: An AI-first software development language (2024-11-01)'
+                                )
+                            )
+                        )
                     ),
                     h('section', {},
                         h('h2', {}, 'Source code'),
                         h('p', {},
-                            'The source code can be found on GitHub: ',
-                            h('a', {href: 'https://github.com/m6r-ai/metaphor', target: '_blank'},
-                                'https://github.com/m6r-ai/metaphor'
+                            'A tutorial for using Metaphor can be found on GitHub: ',
+                            h('a', {href: 'https://github.com/m6r-ai/getting-started-with-metaphor', target: '_blank'},
+                                'https://github.com/m6r-ai/getting-started-with-metaphor'
+                            )
+                        ),
+                        h('p', {},
+                            'The source code for the stand-alone Metaphor prompt compiler can be found on GitHub: ',
+                            h('a', {href: 'https://github.com/m6r-ai/m6rc', target: '_blank'},
+                                'https://github.com/m6r-ai/m6rc'
                             )
                         )
                     )

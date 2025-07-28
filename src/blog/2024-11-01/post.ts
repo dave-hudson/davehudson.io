@@ -122,10 +122,10 @@ function blogArticle_2024_11_01(): VElement[] {
 }
 
 export const blogPost_2024_11_01 = new BlogPost(
-    'Introducing Metaphor: An AI-First software development language',
+    'Introducing Metaphor: An AI-first software development language',
     '2024-11-01',
     '/blog/2024-11-01',
-    'Introducing Metaphor: An AI-First software development language.',
+    'Introducing Metaphor: An AI-first software development language.',
     '/blog/2024-11-01/metaphor-whiteboard.webp',
     null,
     blogOpening_2024_11_01,
