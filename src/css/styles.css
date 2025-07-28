@@ -695,11 +695,9 @@ pre {
 }
 
 .app .header .container .logo .logo-component {
-    height: 64px;
     display: flex;
-    align-items: center;
     justify-content: flex-start;
-    margin-top: 6px;
+    margin-top: 7px;
 }
 
 .app .header .container .logo .logo-text {
@@ -933,17 +931,28 @@ pre {
 }
 
 .app .main .content .container .blog-posts .blog-post {
-    display: table;
+    display: list-item;
+    list-style-type: disc;
+}
+
+.app .main .content .container .blog-posts .blog-post .blog-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
     width: 100%;
 }
 
-.app .main .content .container .blog-posts .blog-post .meta {
-    display: table-cell;
-    text-align: right;
-    font-size: 0.725rem;
-    margin-left: 5px;
+.app .main .content .container .blog-posts .blog-post .blog-content > span:first-child {
+    flex: 1;
+}
+
+.app .main .content .container .blog-posts .blog-post .blog-content .meta {
+    font-size: 0.85rem;
+    margin: 0.225rem 1rem 0 5px;
     min-width: 80px;
     color: var(--meta-color);
+    flex-shrink: 0;
+    text-align: right;
 }
 
 .app .main .content .container .meta {

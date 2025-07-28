@@ -179,11 +179,13 @@ function blogArticlePage(index: number): VNode {
 }
 
 function blogLink(href: string, title: string, meta: string) {
-    return h('div', {className: 'blog-post'},
-        h('span', {},
-            h('a', {href: href, onclick: (e: MouseEvent) => navigateEvent(e, href)}, title)
-        ),
-        h('span', {className: 'meta'}, meta)
+    return h('li', {className: 'blog-post'},
+        h('div', {className: 'blog-content'},
+            h('span', {},
+                h('a', {href: href, onclick: (e: MouseEvent) => navigateEvent(e, href)}, title)
+            ),
+            h('span', {className: 'meta'}, meta)
+        )
     )
 }
 
@@ -191,6 +193,7 @@ function blogLink(href: string, title: string, meta: string) {
 export function blogPage() {
     let pageView: VNode[] = [];
     let yearSection: (VNode | null) = null;
+    let listSection: (VNode | null) = null;
     let headlineYear: number = 0;
 
     // Iterate all the blog content and create year and item enties.
@@ -210,12 +213,14 @@ export function blogPage() {
             }
 
             headlineYear = year;
+            listSection = h('ul', {className: 'blog-posts'});
             yearSection = h('section', {},
-                h('h2', {}, `${year}`)
+                h('h2', {}, `${year}`),
+                listSection
             )
         }
 
-        (yearSection as VElement).appendChild(blogLink(hRef, title, formattedDate));
+        (listSection as VElement).appendChild(blogLink(hRef, title, formattedDate));
     }
 
     const sections = [...pageView, (yearSection as VNode)];
@@ -266,8 +271,7 @@ export function blogSummaries(numEntries: number) {
                 h('em', {},
                     h('a', {href: hRef, onclick: (e: MouseEvent) => navigateEvent(e, hRef)}, '[read more]')
                 )
-            ),
-            h('hr', {})
+            )
         ));
     }
 

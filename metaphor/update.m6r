@@ -7,14 +7,10 @@ Context:
     The source files are in the src directory
 
 Action:
-    There are a couple of problems with the current site.
+    I want to change the behaviour of the site.  In src/blog there is code to handle blog posts and the CSS
+    is in src/css.  I currently have code in blog.ts that create a list for each blog post in a year, but
+    I don't have a bullet symbol on the list items.
 
-    1. The logo text is not vertically centered in the header.  It appears to have the bottom of the text
-       aligned to the same baseline as the menu text, but as it's in a larger font this isn't what I want.
-
-    2. I'd like to remove the "last updated" data and display from the pages and the CSS.
-
-    3. On the blog summary page the bottom of the text in the main container is too close to the footer.
-       The about and projects page have the right amount of spacing, however.
+    I would like you to add that missing bullet.
 
     Please propose a design that will solve these problems.  Before you code anything, I'd like to see a plan.
