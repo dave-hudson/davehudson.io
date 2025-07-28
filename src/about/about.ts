@@ -43,15 +43,23 @@ export function aboutPage(): VNode {
                     h('section', {},
                         h('h2', {}, 'About this site'),
                         h('p', {},
-                            'This site hosts my personal blog and links to projects I\'ve been involved with.  It is not ' +
-                            'affiliated with my employeer.  To use a common disclaimer, all opinions are my own.'
+                            'This site hosts my personal blog and links to open source, public, projects I\'ve been involved ' +
+                            'with.  Any opinions expressed are solely my own.'
                         )
                     ),
                     h('section', {},
                         h('h2', {}, 'Privacy'),
                         h('p', {},
                             'The site does not make use of cookies (which is why you don\'t get asked about them).  The back-end ' +
-                            'server does collect temporary logs for 28 days, to let me check the site is working correctly.'
+                            'server does collect temporary logs for 28 days so I can check the site is working correctly.'
+                        )
+                    ),
+                    h('section', {},
+                        h('h2', {}, 'Third party links and advertising'),
+                        h('p', {},
+                            'This site does not host any advertising.  If I include a link to anything, it\'s because I think it\'s ' +
+                            'interesting or useful.  If there are any ads there, it\'s the linked article that I think is ' +
+                            'interesting, not any advert.'
                         )
                     ),
                     h('section', {},
