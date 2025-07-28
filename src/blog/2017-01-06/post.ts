@@ -179,7 +179,7 @@ function blogArticle_2017_01_06(): VNode[] {
             h('p', {},
                 'With Bitcoin, the block size has seen miners incentivized to restrict block expansion to maximize mining ' +
                 'rewards, while the ',
-                h('a', {href: 'https://www.coindesk.com/understanding-dao-hack-journalists', target: '_blank'}, 'DAO hack'),
+                h('a', {href: 'https://www.coindesk.com/learn/understanding-the-dao-attack', target: '_blank'}, 'DAO hack'),
                 ' incentivized users to want their coins back.'
             ),
             h('p', {},
