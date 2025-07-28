@@ -10,10 +10,6 @@ export function aboutPage(): VNode {
             }),
             h('div', {className: 'content'},
                 h('div', {className: 'container'},
-                    h('p', {className: 'meta'},
-                        'Last updated: ',
-                        h('time', {datetime: '2025-07-28'}, '2025-07-28')
-                    ),
                     h('p', {},
                         'Hello, good morning/afternoon/evening* and welcome! ',
                         h('em', {}, '(*please delete as appropriate)')

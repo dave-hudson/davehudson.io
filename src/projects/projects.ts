@@ -35,10 +35,6 @@ export function projectsPage(): VNode {
             }),
             h('div', {className: 'content'},
                 h('div', {className: 'container'},
-                    h('p', {className: 'meta'},
-                        'Last updated: ',
-                        h('time', {datetime: '2025-07-28'}, '2025-07-28')
-                    ),
                     h('p', {},
                         'I\'ve been involved in building open source software since the early 90s.  Unfortunately I can\'t find ' +
                         'links for some of them, but here are ones for which I do.  The most recent ones are at the top.'

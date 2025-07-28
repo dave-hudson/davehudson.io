@@ -321,7 +321,7 @@ template {
     --header-bg-color: #e0e0e0;
     --header-text-color: #333333;
     --hero-bg-color: #d0d0d0;
-    --hero-text-color: #333333;
+    --hero-text-color: #204080;
 
     /* Syntax highlighting - light theme */
     --syntax-blocktext: #141414;
@@ -371,7 +371,7 @@ template {
         --header-bg-color: #2a2a2a;
         --header-text-color: #e0e0e0;
         --hero-bg-color: #343434;
-        --hero-text-color: #e0e0e0;
+        --hero-text-color: #ffe0a0;
 
         /* Syntax highlighting - dark theme */
         --syntax-blocktext: #b8b8b8;
@@ -421,7 +421,7 @@ template {
     --header-bg-color: #e0e0e0;
     --header-text-color: #333333;
     --hero-bg-color: #d0d0d0;
-    --hero-text-color: #333333;
+    --hero-text-color: #204080;
 
     /* Syntax highlighting - light theme */
     --syntax-blocktext: #141414;
@@ -470,7 +470,7 @@ template {
     --header-bg-color: #2a2a2a;
     --header-text-color: #e0e0e0;
     --hero-bg-color: #343434;
-    --hero-text-color: #e0e0e0;
+    --hero-text-color: #ffe0a0;
 
     /* Syntax highlighting - dark theme */
     --syntax-blocktext: #b8b8b8;
@@ -698,11 +698,18 @@ pre {
     text-decoration: none;
 }
 
+.app .header .container .logo .logo-component {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 6px;
+}
+
 .app .header .container .logo .logo-text {
     font-family: 'Lalezar', sans-serif;
-    font-size: 2.4rem;
+    font-size: 1.4rem;
     font-weight: 400;
-    align-items: center;
 }
 
 .app .header .container .menu {
@@ -721,7 +728,7 @@ pre {
 
 .app .header .container .menu a {
     border: none;
-    margin-left: 20px;
+    margin-left: 15px;
     color: var(--header-text-color);
     line-height: 1; /* Fixed: Consistent line-height for menu links */
     font-size: 1rem; /* Explicit font size for menu items */
@@ -737,7 +744,7 @@ pre {
     border: none;
     cursor: pointer;
     padding: 0;
-    margin-left: 20px;
+    margin-left: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -762,10 +769,10 @@ pre {
 }
 
 .app .main .hero {
-    padding: 4rem 0 4rem 0;
+    padding: 3rem 0 3rem 0;
     margin: 0;
     background-color: var(--hero-bg-color);
-    color: var(--hero-text-color);
+    color: var(--text-color);
 }
 
 .app .main .hero .container {
@@ -783,15 +790,15 @@ pre {
 }
 
 .app .main .hero .container p {
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     margin-bottom: 0;
-    font-size: 1.6rem;
+    font-size: 1rem;
 }
 
 .app .main .content .container {
     max-width: 1024px;
-    margin: 1.5rem auto 1.5rem auto;
-    padding: 0 20px;
+    margin: 1.5rem auto 2.5rem auto; /* Fixed: Increased bottom margin for better spacing */
+    padding: 0 20px 1rem 20px; /* Fixed: Added bottom padding for consistent spacing */
     display: flex;
     flex-direction: column;
     min-width: 0;
