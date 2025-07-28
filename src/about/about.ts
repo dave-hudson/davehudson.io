@@ -21,14 +21,14 @@ export function aboutPage(): VNode {
             h('figure', {},
                 h('img', {
                     src: '/about/dave.webp',
-                    alt: 'Me (apparently always pictured with a drink!)',
+                    alt: 'Me',
                     width: 600
                 })
             ),
             h('p', {},
                 'I\'ve been playing with computers and writing software since I was 9 which is way more years than ' +
-                'I care to think about. In that time I\'ve had the pleasure of working on everything from massive scale ' +
-                'embedded systems (IoT before anyone called it that) to mainframes, and now to decentralised systems. ' +
+                'I care to think about. In that time I\'ve been lucky enough to work on everything from massive scale ' +
+                'embedded systems (IoT before anyone called it that) to mainframes, and decentralised systems. ' +
                 'Along the way, I built operating systems, network stacks, compilers, and blockchains/distributed ledgers. ' +
                 'For a while I also helped design CPU instruction sets.'
             ),
