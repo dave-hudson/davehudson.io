@@ -215,11 +215,11 @@ function blogArticle_2025_04_04(): VElement[] {
                 'relied on Metaphor and the Metaphor prompt compiler to capture and provide context to the AIs. You ' +
                 'can find out more about Metaphor at ',
                 h('a', {
-                    href: 'https://m6r.ai/metaphor',
+                    href: 'https://davehudson.io/projects/metaphor',
                     target: '_blank',
                     title: 'Learn more about Metaphor'
-                }, 'https://m6r.ai/metaphor'),
-                ' (it\'s free and open source).'
+                }, 'https://davehudson.io/projects/metaphor'),
+                '.'
             ),
             h('p', {},
                 'I anticipate there will be developers reading this who may be inclined to say "that\'s great, but won\'t this take ' +
@@ -238,7 +238,7 @@ function blogArticle_2025_04_04(): VElement[] {
                 h('img', {
                     src: '/blog/2025-04-04/context.webp',
                     alt: 'An example of context described in Metaphor.',
-                    width: 1024,
+                    width: '90%',
                     height: 'auto'
                 })
              )

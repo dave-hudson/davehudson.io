@@ -63,7 +63,7 @@ function blogArticle_2025_03_28(): VElement[] {
                 h('img', {
                     src: '/blog/2025-03-28/gemini.webp',
                     alt: 'Gemini offers thoughts on the design of Humbug.',
-                    width: 1024,
+                    width: '90%',
                     height: 'auto'
                 })
             )

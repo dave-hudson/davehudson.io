@@ -10,17 +10,38 @@ function homePage(): VNode {
         h('main', {className: 'main'},
             hero({
                 title: 'Dreaming in data and code',
-                subtitle: 'Welcome to Dave Hudson\'s blog site about software development and engineering'
+                subtitle: 'Welcome to Dave Hudson\'s blog and project site'
             }),
             h('div', {className: 'content'},
                 h('div', {className: 'container'},
-                    h('h2', {}, 'Latest blog posts'),
+                    h('h1', {}, 'Current projects'),
+                    h('section', {},
+                        h('h2', {},
+                            h('a', {href: '/projects/humbug', onclick: (e: MouseEvent) => navigateEvent(e, '/projects/humbug')}, 'Humbug')
+                        ),
+                        h('p', {},
+                            'Humbug is a project that explores building an operating system for human/AI collaboration.'
+                        )
+                    ),
+                    h('section', {},
+                        h('h2', {},
+                            h('a', {href: '/projects/metaphor', onclick: (e: MouseEvent) => navigateEvent(e, '/projects/metaphor')}, 'Metaphor')
+                        ),
+                        h('p', {},
+                            'Metaphor is an AI prompt creation language that lets you build AI applications using a simple, ' +
+                            'declarative, syntax.  ',
+                            h('a', {href: '/projects/humbug', onclick: (e: MouseEvent) => navigateEvent(e, '/projects/humbug')}, 'Humbug'),
+                            ' both includes Metaphor support (compiler and syntax highlighting), but was also built using it.'
+                        )
+                    ),
+                    h('h1', {}, 'Latest blog posts'),
                     ...blogSummaries(5),
                     h('section', {},
-                        h('h2', {}, 'More blog posts'),
+                        h('h1', {}, 'More blog posts'),
                         h('p', {},
-                            'You can find older blog posts on this page: ',
-                            h('a', {href: '/blog', onclick: (e: MouseEvent) => navigateEvent(e, '/blog')}, 'Blog')
+                            'Find all my ',
+                            h('a', {href: '/blog', onclick: (e: MouseEvent) => navigateEvent(e, '/blog')}, 'blog posts'),
+                            ' in the blog section.'
                         )
                     ),
                 )
@@ -67,7 +88,7 @@ let routes: Map<string, routeDetails> = new Map([
     ['', {
         title: 'Dreaming in data and code',
         render: homePage,
-        description: 'davehudson.io is Dave Hudson\'s blog site.  Dave discusses things he finds interesting in the ' +
+        description: 'davehudson.io is Dave Hudson\'s blog and project site.  Dave discusses things he finds interesting in the ' +
             'world of software development - dreams in data and code!',
         imageURL: 'https://davehudson.io/dream-data-code.webp',
         pageType: 'website'
@@ -89,8 +110,7 @@ let routes: Map<string, routeDetails> = new Map([
     ['/blog', {
         title: 'Blog posts',
         render: blogPage,
-        description: 'This page indexes all Dave\'s blog posts, presented in date order with the most recent posts at the top ' +
-            'of the page.',
+        description: 'This page indexes all Dave\'s blog posts, presented in date order.',
         imageURL: 'https://davehudson.io/about/dave.jpg',
         pageType: 'website'
     }]

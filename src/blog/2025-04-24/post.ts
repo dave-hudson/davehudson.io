@@ -293,9 +293,7 @@ function blogArticle_2025_04_24(): VElement[] {
             h('figure', {},
                 h('img', {
                     src: '/blog/2025-04-24/introspection-screenshot.webp',
-                    alt: 'Screenshot of codestral reviewing a Metaphor conversation',
-                    width: 1024,
-                    height: 'auto'
+                    alt: 'Screenshot of codestral reviewing a Metaphor conversation'
                 })
             )
         )
