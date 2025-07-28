@@ -2,36 +2,50 @@ import {h, updateElement, VNode} from './lib/dvdi';
 import {aboutPage} from './about/about';
 import {blogPage, blogSummaries, getBlogRoutes} from './blog/blog';
 import {projectsPage, getProjectRoutes} from './projects/projects';
-import {pageHeader, pageFooter} from "./lib/page";
+import {pageHeader, pageFooter, hero} from "./lib/page";
 
 function homePage(): VNode {
-    return h('div', {},
+    return h('div', {className: 'app'},
         pageHeader(),
         h('main', {className: 'main'},
-            h('h1', {}, 'Latest blog posts'),
-            ...blogSummaries(5),
-            h('section', {},
-                h('h2', {}, 'More blog posts'),
-                h('p', {},
-                    'You can find older blog posts on this page: ',
-                    h('a', {href: '/blog', onclick: (e: MouseEvent) => navigateEvent(e, '/blog')}, 'Blog')
+            hero({
+                title: 'Dreaming in data and code',
+                subtitle: 'Welcome to Dave Hudson\'s blog site about software development and engineering'
+            }),
+            h('div', {className: 'content'},
+                h('div', {className: 'container'},
+                    h('h2', {}, 'Latest blog posts'),
+                    ...blogSummaries(5),
+                    h('section', {},
+                        h('h2', {}, 'More blog posts'),
+                        h('p', {},
+                            'You can find older blog posts on this page: ',
+                            h('a', {href: '/blog', onclick: (e: MouseEvent) => navigateEvent(e, '/blog')}, 'Blog')
+                        )
+                    ),
                 )
-            ),
+            )
         ),
         pageFooter()
     );
 }
 
 function notFoundPage(path: string): VNode {
-    return h('div', {},
+    return h('div', {className: 'app'},
         pageHeader(),
-        h('main', {className: 'main' },
-            h('h1', {}, `404: Page "${path}" not found`),
-            h('p', {}, 'This is unlikely to be the page you were looking for!'),
-            h('p', {},
-                'If you\'ve arrived here via an old link from the hashingit.com blog, please take a look at ',
-                h('a', {href: '/blog', onclick: (e: MouseEvent) => navigateEvent(e, '/blog')}, 'Blog'),
-                '.  You should find all the original articles there.'
+        h('main', {className: 'main'},
+            hero({
+                title: `404: Page "${path}" not found`,
+                subtitle: 'This is unlikely to be the page you were looking for!'
+            }),
+            h('div', {className: 'content'},
+                h('div', {className: 'container'},
+                    h('p', {},
+                        'If you\'ve arrived here via an old link from the hashingit.com blog, please take a look at ',
+                        h('a', {href: '/blog', onclick: (e: MouseEvent) => navigateEvent(e, '/blog')}, 'Blog'),
+                        '.  You should find all the original articles there.'
+                    )
+                )
             )
         ),
         pageFooter()

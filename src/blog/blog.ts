@@ -1,5 +1,5 @@
 import {h, VElement, VNode} from '../lib/dvdi';
-import {pageHeader, pageFooter} from '../lib/page';
+import {pageHeader, pageFooter, hero} from '../lib/page';
 import {navigateEvent, routeDetails} from '../app';
 import {chevronLeftIcon, chevronRightIcon} from '../lib/icons';
 import {blogPost_2014_03_09} from './2014-03-09/post';
@@ -154,21 +154,24 @@ function blogArticlePage(index: number): VNode {
         formattedDate += ` ${hours}:${minutes}`
     }
 
-    return h('div', {},
+    return h('div', {className: 'app'},
         pageHeader(),
         h('main', {className: 'main'},
-            h('article', {},
-                h('h1', {}, thisArticle.title),
-                h('p', {className: 'meta'},
-                    'Published: ',
-                    h('time', {datetime: thisArticle.dateTime}, formattedDate)
-                ),
-                ...preText,
-                ...thisArticle.openingFunction(),
-                ...thisArticle.articleFunction()
-            ),
-            ...postText,
-            navPrevNext(prevTitle, prevHRef, nextTitle, nextHRef),
+            hero({
+                title: thisArticle.title,
+                subtitle: `Published: ${formattedDate}`
+            }),
+            h('div', {className: 'content'},
+                h('div', {className: 'container'},
+                    h('article', {},
+                        ...preText,
+                        ...thisArticle.openingFunction(),
+                        ...thisArticle.articleFunction()
+                    ),
+                    ...postText,
+                    navPrevNext(prevTitle, prevHRef, nextTitle, nextHRef),
+                )
+            )
         ),
         pageFooter()
     );
@@ -217,11 +220,18 @@ export function blogPage() {
     const sections = [...pageView, (yearSection as VNode)];
 
     // Return the VDOM for the blog page.
-    return h('div', {},
+    return h('div', {className: 'app'},
         pageHeader(),
         h('main', {className: 'main'},
-            h('h1', {}, 'Blog posts'),
-            h('div', {className: 'blog-posts'}, ...sections)
+            hero({
+                title: 'Blog posts',
+                subtitle: 'All blog posts indexed by year, with the most recent at the top'
+            }),
+            h('div', {className: 'content'},
+                h('div', {className: 'container'},
+                    h('div', {className: 'blog-posts'}, ...sections)
+                )
+            )
         ),
         pageFooter()
     );
