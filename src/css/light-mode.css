@@ -664,6 +664,7 @@ pre {
     font-size: 0.725rem;
     color: #a55;
     margin-left: 5px;
+    min-width: 80px;
 }
 
 .main .prev-next {
