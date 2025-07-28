@@ -667,25 +667,25 @@ pre {
 
 .app .header .container {
     display: flex;
-    line-height: 1; /* Fixed: Set explicit line-height for consistent vertical alignment */
+    line-height: 1;
     justify-content: space-between;
     align-items: center;
     max-width: 1024px;
     margin: 0 auto;
     padding: 0 20px;
-    height: 64px; /* Fixed: Explicit height to ensure proper centering */
+    height: 64px;
     overflow: visible;
 }
 
 .app .header .container .logo {
-    display: flex; /* Fixed: Ensure logo content is properly aligned */
+    display: flex;
     align-items: center;
 }
 
 .app .header .container .logo a {
     color: var(--header-text-color);
     text-decoration: none;
-    display: flex; /* Fixed: Ensure link content is properly aligned */
+    display: flex;
     align-items: center;
 }
 
@@ -719,15 +719,15 @@ pre {
     color: var(--header-text-color);
     display: flex;
     align-items: center;
-    line-height: 1; /* Fixed: Consistent line-height for menu items */
+    line-height: 1;
 }
 
 .app .header .container .menu a {
     border: none;
     margin-left: 15px;
     color: var(--header-text-color);
-    line-height: 1; /* Fixed: Consistent line-height for menu links */
-    font-size: 1rem; /* Explicit font size for menu items */
+    line-height: 1;
+    font-size: 1rem;
 }
 
 .app .header .container .menu a:hover {
@@ -745,7 +745,7 @@ pre {
     align-items: center;
     justify-content: center;
     color: var(--header-text-color);
-    line-height: 1; /* Fixed: Consistent line-height for theme toggle */
+    line-height: 1;
 }
 
 .app .header .container .menu .theme-toggle:hover {
@@ -793,15 +793,14 @@ pre {
 
 .app .main .content .container {
     max-width: 1024px;
-    margin: 1.5rem auto 2.5rem auto; /* Fixed: Increased bottom margin for better spacing */
-    padding: 0 20px 1rem 20px; /* Fixed: Added bottom padding for consistent spacing */
+    margin: 1.5rem auto 2.5rem auto;
+    padding: 0 20px 0 20px;
     display: flex;
     flex-direction: column;
     min-width: 0;
     overflow-x: hidden;
 }
 
-/* Fixed: Reduced paragraph spacing by 20% (to 80% of original) */
 .app .main .content .container p {
     margin: 0.8em 0; /* Reduced from browser default of 1em to 0.8em */
 }
@@ -955,7 +954,7 @@ pre {
 }
 
 .app .main .content .container .prev-next {
-    margin: 1rem 0 1rem 0;
+    margin: 1rem 0 0 0;
     border-top: 1px solid var(--border-color);
 }
 
