@@ -665,7 +665,6 @@ pre {
 .app .header .container .logo a {
     color: var(--header-text-color);
     text-decoration: none;
-    display: flex;
     align-items: center;
 }
 
@@ -675,8 +674,6 @@ pre {
 }
 
 .app .header .container .logo .logo-component {
-    display: flex;
-    justify-content: flex-start;
     margin-top: 7px;
 }
 
@@ -719,8 +716,6 @@ pre {
     cursor: pointer;
     padding: 0;
     margin-left: 15px;
-    display: flex;
-    align-items: center;
     justify-content: center;
     color: var(--header-text-color);
     line-height: 1;
@@ -1046,40 +1041,4 @@ pre {
     background-color: var(--green-note-bg);
     color: var(--green-note-color);
     padding: 1px 8px;
-}
-
-.app .main .content .container .question {
-    position: relative;
-    margin-bottom: 15px;
-}
-
-.app .main .content .container .question label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.app .main .content .container .question input[type="checkbox"],
-.app .main .content .container .question input[type="radio"] {
-    margin-right: 10px;
-}
-
-.app .main .content .container .question p {
-    display: inline-block;
-    font-weight: bold;
-    margin-bottom: 5px;
-    margin-right: 5px;
-}
-
-.app .main .content .container .question .correct {
-    font-weight: bold;
-    color: green;
-}
-
-.app .main .content .container .question .incorrect {
-    font-weight: bold;
-    color: red;
-}
-
-.app .main .content .container .submit {
-    margin-top: 15px;
 }

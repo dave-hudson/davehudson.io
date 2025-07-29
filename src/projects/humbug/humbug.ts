@@ -16,6 +16,19 @@ export function projectHumbugPage(): VNode {
                         'Humbug is a project that explores building a secure and reliable operating system for human/AI ' +
                         'collaboration.'
                     ),
+                    h('p', {},
+                        'Traditional operating systems are designed to securely use and share hardware resources.  The best ones attempt ' +
+                        'to protect users from buggy and malicious software.  The weakest link in this security chain is the human user, ' +
+                        'who can be tricked into running unsafe software or leaking access to sensitive data.'
+                    ),
+                    h('p', {},
+                        'The introduction of AI suddenly makes this a lot more complicated.  Our default model of the last few decades was ' +
+                        'an unpredictable human interacting with what should be a predictable system.  With AI participant our unpredictable ' +
+                        'human is suddenly dealing with an equally unpredictable AI too.'
+                    ),
+                    h('p', {},
+                        'We need to rethink our approach to security, privacy, and trust.'
+                    ),
                     h('section', {},
                         h('h2', {}, 'Background'),
                         h('p', {},
@@ -23,13 +36,6 @@ export function projectHumbugPage(): VNode {
                             'but has since evolved into a more general purpose platform.  "Traditional" operating systems I\'ve ' +
                             'worked on, or designed, were able to draw on significant research from the 70s, 80s, and 90s, but ' +
                             'AI changes the game.'
-                        ),
-                        h('p', {},
-                            'As soon as we start to consider an AI participant, we are dealing with a computational entity that ' +
-                            'is no longer deterministic.  It can do incredible things we couldn\'t have imagined before, but this ' +
-                            'also means we now have a component that is capable of doing the same silly or dangerous things a ' +
-                            'human could do.  These are the same things a traditional OS attempts to mitigate.  This means we need ' +
-                            'to rethink how we approach security, privacy, and trust.'
                         ),
                         h('p', {},
                             'You can find out more about the project on GitHub: ',
