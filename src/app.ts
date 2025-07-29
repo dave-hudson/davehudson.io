@@ -9,7 +9,7 @@ function homePage(): VNode {
         pageHeader(),
         h('main', {className: 'main'},
             hero({
-                title: 'Dreaming in data and code',
+                title: 'davehudson.io',
                 subtitle: 'Welcome to Dave Hudson\'s blog and project site'
             }),
             h('div', {className: 'content'},
@@ -110,8 +110,8 @@ let routes: Map<string, routeDetails> = new Map([
         title: 'Dreaming in data and code',
         render: homePage,
         description: 'davehudson.io is Dave Hudson\'s blog and project site.  Dave discusses things he finds interesting in the ' +
-            'world of software development - dreams in data and code!',
-        imageURL: 'https://davehudson.io/dream-data-code.webp',
+            'world of software development.',
+        imageURL: 'https://davehudson.io/about/dave.jpg',
         pageType: 'website'
     }],
     ['/about', {

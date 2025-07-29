@@ -8,7 +8,6 @@ include src/manifest/Makefile.mk
 include src/projects/Makefile.mk
 
 FILES += \
-	src/dream-data-code.webp \
 	src/spa.html \
 	src/robots.txt \
 	src/sitemap.xml
