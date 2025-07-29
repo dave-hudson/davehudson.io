@@ -20,7 +20,20 @@ function homePage(): VNode {
                             h('a', {href: '/projects/humbug', onclick: (e: MouseEvent) => navigateEvent(e, '/projects/humbug')}, 'Humbug')
                         ),
                         h('p', {},
-                            'Humbug is a project that explores building an operating system for human/AI collaboration.'
+                            'Humbug is a project that explores building a secure and reliable operating system for human/AI ' +
+                            'collaboration.'
+                        ),
+                        h('p', {},
+                            'As soon as we start to consider an AI participant, we are dealing with a computational entity that ' +
+                            'is no longer deterministic.  It can do incredible things we couldn\'t have imagined before, but this ' +
+                            'also means we now have a component that is capable of doing the same silly or dangerous things a ' +
+                            'human could do.  These are the same things a traditional OS attempts to mitigate.  This means we need ' +
+                            'to rethink how we approach security, privacy, and trust.'
+                        ),
+                        h('p', {},
+                            h('em', {},
+                                h('a', {href: '/projects/humbug', onclick: (e: MouseEvent) => navigateEvent(e, '/projects/humbug')}, '[find out more]')
+                            )
                         )
                     ),
                     h('section', {},
@@ -28,10 +41,18 @@ function homePage(): VNode {
                             h('a', {href: '/projects/metaphor', onclick: (e: MouseEvent) => navigateEvent(e, '/projects/metaphor')}, 'Metaphor')
                         ),
                         h('p', {},
-                            'Metaphor is an AI prompt creation language that lets you build AI applications using a simple, ' +
-                            'declarative, syntax.  ',
-                            h('a', {href: '/projects/humbug', onclick: (e: MouseEvent) => navigateEvent(e, '/projects/humbug')}, 'Humbug'),
-                            ' both includes Metaphor support (compiler and syntax highlighting), but was also built using it.'
+                            'Metaphor is an AI prompt creation language designed to help users generate high-quality prompts for a ' +
+                            'wide range of AI models.'
+                        ),
+                        h('p', {},
+                            'It has a simple declarative syntax that allows users to define roles, context, and actions in a ' +
+                            'structured way. As with programming languages, Metaphor files can be included in other files, ' +
+                            'allowing for modular and reusable prompt definitions.'
+                        ),
+                        h('p', {},
+                            h('em', {},
+                                h('a', {href: '/projects/metaphor', onclick: (e: MouseEvent) => navigateEvent(e, '/projects/metaphor')}, '[find out more]')
+                            )
                         )
                     ),
                     h('h1', {}, 'Latest blog posts'),

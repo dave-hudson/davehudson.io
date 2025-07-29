@@ -13,8 +13,8 @@ export function projectHumbugPage(): VNode {
             h('div', {className: 'content'},
                 h('div', {className: 'container'},
                     h('p', {},
-                        'Humbug is an operating system designed to facilitate secure and seamless collaboration between ' +
-                        'humans and AIs.'
+                        'Humbug is a project that explores building a secure and reliable operating system for human/AI ' +
+                        'collaboration.'
                     ),
                     h('section', {},
                         h('h2', {}, 'Background'),
