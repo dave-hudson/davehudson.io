@@ -9,68 +9,69 @@ function homePage(): VNode {
         pageHeader(),
         h('main', {className: 'main'},
             hero({
-                title: 'davehudson.io',
-                subtitle: 'Welcome to Dave Hudson\'s blog and project site'
+                title: 'Dave Hudson\'s blog and project site'
             }),
             h('div', {className: 'content'},
                 h('div', {className: 'container'},
-                    h('h1', {}, 'Current projects'),
-                    h('section', {},
-                        h('h2', {},
-                            h('a', {href: '/projects/humbug', onclick: (e: MouseEvent) => navigateEvent(e, '/projects/humbug')}, 'Humbug')
+                    h('main', {},
+                        h('h1', {}, 'Current projects'),
+                        h('article', {},
+                            h('h2', {},
+                                h('a', {href: '/projects/humbug', onclick: (e: MouseEvent) => navigateEvent(e, '/projects/humbug')}, 'Humbug')
+                            ),
+                            h('p', {},
+                                'Humbug is a project that explores building a secure and reliable operating system for human/AI ' +
+                                'collaboration.'
+                            ),
+                            h('p', {},
+                                'Traditional operating systems are designed to securely use and share hardware resources.  The best ones attempt ' +
+                                'to protect users from buggy and malicious software.  The weakest link in this security chain is the human user, ' +
+                                'who can be tricked into running unsafe software or leaking access to sensitive data.'
+                            ),
+                            h('p', {},
+                                'The introduction of AI suddenly makes this a lot more complicated.  Our default model of the last few decades was ' +
+                                'an unpredictable human interacting with what should be a predictable system.  With AI participant our unpredictable ' +
+                                'human is suddenly dealing with an equally unpredictable AI too.'
+                            ),
+                            h('p', {},
+                                'We need to rethink our approach to security, privacy, and trust.'
+                            ),
+                            h('p', {},
+                                h('em', {},
+                                    h('a', {href: '/projects/humbug', onclick: (e: MouseEvent) => navigateEvent(e, '/projects/humbug')}, '[find out more]')
+                                )
+                            )
                         ),
-                        h('p', {},
-                            'Humbug is a project that explores building a secure and reliable operating system for human/AI ' +
-                            'collaboration.'
+                        h('article', {},
+                            h('h2', {},
+                                h('a', {href: '/projects/metaphor', onclick: (e: MouseEvent) => navigateEvent(e, '/projects/metaphor')}, 'Metaphor')
+                            ),
+                            h('p', {},
+                                'Metaphor is an AI prompt creation language designed to help users generate high-quality prompts for a ' +
+                                'wide range of AI models.'
+                            ),
+                            h('p', {},
+                                'It has a simple declarative syntax that allows users to define roles, context, and actions in a ' +
+                                'structured way. As with programming languages, Metaphor files can be included in other files, ' +
+                                'allowing for modular and reusable prompt definitions.'
+                            ),
+                            h('p', {},
+                                h('em', {},
+                                    h('a', {href: '/projects/metaphor', onclick: (e: MouseEvent) => navigateEvent(e, '/projects/metaphor')}, '[find out more]')
+                                )
+                            )
                         ),
-                        h('p', {},
-                            'Traditional operating systems are designed to securely use and share hardware resources.  The best ones attempt ' +
-                            'to protect users from buggy and malicious software.  The weakest link in this security chain is the human user, ' +
-                            'who can be tricked into running unsafe software or leaking access to sensitive data.'
-                        ),
-                        h('p', {},
-                            'The introduction of AI suddenly makes this a lot more complicated.  Our default model of the last few decades was ' +
-                            'an unpredictable human interacting with what should be a predictable system.  With AI participant our unpredictable ' +
-                            'human is suddenly dealing with an equally unpredictable AI too.'
-                        ),
-                        h('p', {},
-                            'We need to rethink our approach to security, privacy, and trust.'
-                        ),
-                        h('p', {},
-                            h('em', {},
-                                h('a', {href: '/projects/humbug', onclick: (e: MouseEvent) => navigateEvent(e, '/projects/humbug')}, '[find out more]')
+                        h('h1', {}, 'Latest blog posts'),
+                        ...blogSummaries(5),
+                        h('article', {},
+                            h('h1', {}, 'More blog posts'),
+                            h('p', {},
+                                'Find all my ',
+                                h('a', {href: '/blog', onclick: (e: MouseEvent) => navigateEvent(e, '/blog')}, 'blog posts'),
+                                ' in the blog section.'
                             )
                         )
-                    ),
-                    h('section', {},
-                        h('h2', {},
-                            h('a', {href: '/projects/metaphor', onclick: (e: MouseEvent) => navigateEvent(e, '/projects/metaphor')}, 'Metaphor')
-                        ),
-                        h('p', {},
-                            'Metaphor is an AI prompt creation language designed to help users generate high-quality prompts for a ' +
-                            'wide range of AI models.'
-                        ),
-                        h('p', {},
-                            'It has a simple declarative syntax that allows users to define roles, context, and actions in a ' +
-                            'structured way. As with programming languages, Metaphor files can be included in other files, ' +
-                            'allowing for modular and reusable prompt definitions.'
-                        ),
-                        h('p', {},
-                            h('em', {},
-                                h('a', {href: '/projects/metaphor', onclick: (e: MouseEvent) => navigateEvent(e, '/projects/metaphor')}, '[find out more]')
-                            )
-                        )
-                    ),
-                    h('h1', {}, 'Latest blog posts'),
-                    ...blogSummaries(5),
-                    h('section', {},
-                        h('h1', {}, 'More blog posts'),
-                        h('p', {},
-                            'Find all my ',
-                            h('a', {href: '/blog', onclick: (e: MouseEvent) => navigateEvent(e, '/blog')}, 'blog posts'),
-                            ' in the blog section.'
-                        )
-                    ),
+                    )
                 )
             )
         ),

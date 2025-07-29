@@ -231,7 +231,6 @@ export function blogPage() {
         h('main', {className: 'main'},
             hero({
                 title: 'Blog posts',
-                subtitle: 'All blog posts indexed by year, with the most recent at the top'
             }),
             h('div', {className: 'content'},
                 h('div', {className: 'container'},
@@ -261,7 +260,7 @@ export function blogSummaries(numEntries: number) {
         const day = String(date.getDate()).padStart(2, '0');
         const formattedDate = `${year}-${month}-${day}`
 
-        view.push(h('section', {},
+        view.push(h('article', {},
             h('h2', {},
                 h('a', {href: hRef, onclick: (e: MouseEvent) => navigateEvent(e, hRef)}, title)
             ),
