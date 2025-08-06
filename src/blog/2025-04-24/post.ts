@@ -235,7 +235,7 @@ function blogArticle_2025_04_24(): VElement[] {
         h('section', {},
             h('h2', {}, 'Revisiting commit-critic'),
             h('p', {},
-                'Last year we introduced an example of a Metaphor-powered tool, ',
+                'Last year I introduced an example of a Metaphor-powered tool, ',
                 h('a', {
                         href: '/blog/2024-11-15',
                         onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2024-11-15')
