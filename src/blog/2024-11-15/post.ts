@@ -104,7 +104,6 @@ function blogArticle_2024_11_15(): VElement[] {
                 'the future. Similarly, some of these may not be universally accepted.  I\'m hoping the tool\'s users will ' +
                 'help with this!'
             ),
-            // Replaced ~40 lines of boilerplate with 4 lines!
             CodeFragment.create({
                 file: '/blog/2024-11-15/sample-guideline.m6r',
                 language: 'Metaphor',
@@ -148,7 +147,6 @@ function blogArticle_2024_11_15(): VElement[] {
                 'Importantly, we\'re describing what we want the tool to do - i.e. the business logic.  We\'re not ' +
                 'describing the code!'
             ),
-            // Replaced ~40 lines of boilerplate with 4 lines!
             CodeFragment.create({
                 file: '/blog/2024-11-15/commit-critic.m6r',
                 language: 'Metaphor',
@@ -160,7 +158,6 @@ function blogArticle_2024_11_15(): VElement[] {
             h('p', {},
                 'We can compile this into a prompt ready to hand to our LLM:'
             ),
-            // Inline code example
             CodeFragment.create({
                 code: 'm6rc commit-critic.m6r -o out.lcp',
                 language: 'Text'
@@ -168,7 +165,6 @@ function blogArticle_2024_11_15(): VElement[] {
             h('p', {},
                 'In this instance I handed the task to Claude 3.5 Sonnet:'
             ),
-            // Replaced ~40 lines of boilerplate with 4 lines!
             CodeFragment.create({
                 file: '/blog/2024-11-15/commit_critic.py',
                 language: 'Python',
@@ -180,7 +176,6 @@ function blogArticle_2024_11_15(): VElement[] {
             h('p', {},
                 'commit-critic needs a little extra python packaging to run as a stand-along application, but we can test it:'
             ),
-            // Another inline code example
             CodeFragment.create({
                 code: 'python3 commit-critic.py -g <review-dir-path> -o out.lcp <file-to-test>',
                 language: 'Text'

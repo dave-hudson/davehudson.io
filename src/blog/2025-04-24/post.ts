@@ -66,9 +66,10 @@ function blogArticle_2025_04_24(): VElement[] {
                 h('code', {}, 'm6rc'),
                 '. That may sound a little odd, so here\'s an example:'
             ),
-            h('pre', {},
-                h('code', {}, 'm6rc script.m6r -m gpt-4.1 cat.m6r dog.md')
-            ),
+            CodeFragment.create({
+                code: 'm6rc script.m6r -m gpt-4.1 cat.m6r dog.md',
+                language: 'Text',
+            }),
             h('p', {},
                 'Positional arguments are the ones that don\'t have option flags (things starting with a ',
                 h('code', {}, '-'),
