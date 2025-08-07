@@ -4,8 +4,8 @@ import {NotesPost} from '../NotesPost';
 function notesOpening_2025_08_07(): VElement[] {
     return [
         h('p', {},
-            'Today marks the beginning of my daily research notes. This section will serve as a journal of my ongoing ' +
-            'research, thoughts, and discoveries in software development, AI, and system design.'
+            'I\'m starting a new open source research notes area for this site. This section will serve as a journal of my ' +
+            'ongoing research, thoughts, and discoveries in software development, AI, and system design.'
         ),
         h('p', {},
             'The goal is to capture insights, document experiments, and track the evolution of ideas as they develop. ' +
@@ -17,43 +17,25 @@ function notesOpening_2025_08_07(): VElement[] {
 function notesArticle_2025_08_07(): VElement[] {
     return [
         h('section', {},
-            h('h2', {}, 'Setting up the Notes Section'),
+            h('h2', {}, 'Setting up the "Notes" section'),
             h('p', {},
-                'I\'ve been working on adding a new "Notes" section to my blog site. The idea is to have a place for ' +
-                'more frequent, informal updates about my research and development work.'
+                'Adding notes to the site requires some interesting structural changes.  The old text logo is too big to ' +
+                'allow a new top-level section, so moving to using an image instead.  I don\'t want to add a hamburger ' +
+                'menu for mobile unless I really need one.'
             ),
             h('p', {},
-                'The technical implementation involved:'
+                'As with most development work now, the initial work was done by AI (Claude Sonnet 4) using a Metaphor ' +
+                'prompt.  This turned into quite a complex implementation with Claude doing 12 distinct steps to complete the ' +
+                'task.  This was also done using a non-thinking version of Sonnet, which yet again demonstrates how the ' +
+                'non-thinking/non-reasoning AI models tend to be able to do quite complex sequences of work just by virtue ' +
+                'of each new tool-use triggering the LLM to respond to the newly-presented context.'
             ),
-            h('ul', {},
-                h('li', {}, 'Creating a new notes directory structure mirroring the blog system'),
-                h('li', {}, 'Duplicating the blog functionality to allow independent evolution'),
-                h('li', {}, 'Adding Notes as the first navigation item'),
-                h('li', {}, 'Replacing the text logo with the site icon')
-            )
-        ),
-        h('section', {},
-            h('h2', {}, 'Research Focus Areas'),
             h('p', {},
-                'My current research is primarily focused on several key areas:'
+                'It continues to feel like the thinking/reasoning models are simply leveraging this same latent ability.'
             ),
-            h('ul', {},
-                h('li', {},
-                    h('strong', {}, 'Human-AI Collaboration: '),
-                    'Exploring how humans and AI can work together effectively, particularly in software development contexts.'
-                ),
-                h('li', {},
-                    h('strong', {}, 'System Security: '),
-                    'Investigating new approaches to security in systems that include both human and AI participants.'
-                ),
-                h('li', {},
-                    h('strong', {}, 'Prompt Engineering: '),
-                    'Developing structured approaches to AI prompt creation, including the Metaphor language.'
-                ),
-                h('li', {},
-                    h('strong', {}, 'Operating System Design: '),
-                    'Working on Humbug, an OS designed for secure human-AI collaboration.'
-                )
+            h('p', {},
+                'Once I\'d looked at the updates I rearranged some of the site structure so things consistently flowed ' +
+                'from projects -> blog -> notes.  This just feels more natural.'
             )
         )
     ];
@@ -63,7 +45,7 @@ export const notesPost_2025_08_07 = new NotesPost(
     'Starting the research notes',
     '2025-08-07',
     '/notes/2025-08-07',
-    'The first entry in my research notes, documenting the setup of this notes section and outlining current research focus areas.',
+    'The first entry in my new research notes, documenting the setup of this notes section and outlining current research focus areas.',
     null,
     null,
     notesOpening_2025_08_07,
