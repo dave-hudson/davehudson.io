@@ -1,110 +1,7 @@
-import {assertIsVElement, h, updateElement, VElement, VNode} from '../../lib/dvdi';
+import {h, VElement} from '../../lib/dvdi';
 import {BlogPost} from '../BlogPost';
-import {JavaScriptParser} from '../../lib/syntax';
-import {highlight} from '../../lib/highlight'
-import {cloneObject} from '../../lib/cloneObject';
+import {CodeFragment} from '../../lib/code-fragments';
 import {navigateEvent} from '../../app';
-
-const code: VNode[][] = [[], []];
-let codeVElement: (VElement | null)[] = [null, null];
-const codeFunction: (() => VElement)[] = [
-    blogCode0_2024_07_15,
-    blogCode1_2024_07_15
-];
-
-/**
- * Callback to write the contents of the file load for the first code fragment.
- * @param content
- */
-function writeCode(segment: number, content: VElement[]) {
-    code[segment].push(...content);
-    if (codeVElement[segment] === null) {
-        return;
-    }
-
-    assertIsVElement(codeVElement[segment]);
-    if (codeVElement[segment].parentVNode === null) {
-        return;
-    }
-
-    const parentElem = (codeVElement[segment].parentVNode as VElement).domElement;
-    if (parentElem === null) {
-        return;
-    }
-
-    if (codeVElement[segment].domElement === null) {
-        return;
-    }
-
-    const index = Array.from(parentElem.childNodes).indexOf(codeVElement[segment].domElement);
-    const newVElement = codeFunction[segment]();
-    newVElement.parentVNode = codeVElement[segment].parentVNode;
-    updateElement(parentElem,
-        parentElem.childNodes[index],
-        codeVElement[segment].parentVNode as VElement,
-        codeVElement[segment],
-        newVElement
-    );
-    codeVElement[segment] = newVElement;
-}
-
-async function loadFile(segment: number, filePath: string, storeFunction: (segment: number, content: VElement[]) => void) {
-    try {
-        const response = await fetch(filePath);
-        if (!response.ok) {
-            throw new Error(`Failed to fetch file: ${response.statusText}`);
-        }
-
-        const content = await response.text();
-        storeFunction(segment, highlight(content, JavaScriptParser));
-    } catch (error) {
-        console.error('Error loading file:', error);
-    }
-}
-
-function blogCode0_2024_07_15(): VElement {
-    let contents: VElement;
-    if (code[0].length === 0) {
-        contents = h('pre', {});
-    } else {
-        contents = h('pre', {}, h('code', {}, ...cloneObject(code[0])));
-    }
-
-    contents.mountCallback = () => {
-        codeVElement[0] = contents;
-        if (code[0].length === 0) {
-            loadFile(0, '/blog/2024-07-15/code0.js', writeCode);
-        }
-    }
-
-    contents.unmountCallback = () => {
-        codeVElement[0] = null;
-    }
-
-    return contents;
-}
-
-function blogCode1_2024_07_15(): VElement {
-    let contents: VElement;
-    if (code[1].length === 0) {
-        contents = h('pre', {});
-    } else {
-        contents = h('pre', {}, h('code', {}, ...cloneObject(code[1])));
-    }
-
-    contents.mountCallback = () => {
-        codeVElement[1] = contents;
-        if (code[1].length === 0) {
-            loadFile(1, '/blog/2024-07-15/code1.js', writeCode);
-        }
-    }
-
-    contents.unmountCallback = () => {
-        codeVElement[1] = null;
-    }
-
-    return contents;
-}
 
 function blogOpening_2024_07_15(): VElement[] {
     return [
@@ -142,7 +39,7 @@ function blogArticle_2024_07_15(): VElement[] {
         h('section', {},
             h('h2', {}, 'The problem statement'),
             h('p', {},
-                'I’ve been rebuilding my blog site (formerly hashingit.com), and this time I decided to do it from first ' +
+                'I\'ve been rebuilding my blog site (formerly hashingit.com), and this time I decided to do it from first ' +
                 'principles.  I like to do slightly mad low-level things sometimes!',
             ),
             h('p', {},
@@ -155,14 +52,14 @@ function blogArticle_2024_07_15(): VElement[] {
         h('section', {},
             h('h2', {}, 'First steps'),
             h('p', {},
-                'As I’ve increasingly done for the last 6 months I asked my sidekick, ChatGPT, how to solve this problem.  It ' +
+                'As I\'ve increasingly done for the last 6 months I asked my sidekick, ChatGPT, how to solve this problem.  It ' +
                 'suggested I needed to pre-render these pages.',
             ),
             h('p', {},
                 'It also recommended I should follow the crowd and serve up the pre-rendered pages to crawlers and bots but ' +
                 'serve the dynamic version to humans.  While apparently common practice, that seemed a bit clunky, so I ' +
                 'decided I\'d serve the static version to everyone but then let the dynamic code take over after that first ' +
-                'page load thus any first page is the only page you “load”).',
+                'page load thus any first page is the only page you "load").',
             ),
             h('p', {},
                 'It next, helpfully, identified some projects or commercial services that might do what I needed, but my ' +
@@ -217,10 +114,12 @@ function blogArticle_2024_07_15(): VElement[] {
                 'The chat went on for about half an hour with me asking questions and suggesting things I\'d like to see, ' +
                 'and with ChatGPT writing all the code.  We ended up with this version:',
             ),
-            h('figure', {},
-                blogCode0_2024_07_15(),
-                h('figcaption', {}, 'Initial software developed using ChatGPT 4o')
-            ),
+            // This replaces ~40 lines of boilerplate with just 4 lines!
+            CodeFragment.create({
+                file: '/blog/2024-07-15/code0.js',
+                language: 'javascript',
+                caption: 'Initial software developed using ChatGPT 4o'
+            }),
             h('p', {},
                 'It has a few rather quirky features because I wanted to render my site using a local ',
                 h('code', {}, 'express.js'),
@@ -238,10 +137,12 @@ function blogArticle_2024_07_15(): VElement[] {
                 'I\'m fairly impatient though, and hate waiting for builds.  So, I upped the ante a little and asked for ' +
                 'a parallelized version.  A little back and forth and we ended up with this:'
             ),
-            h('figure', {},
-                blogCode1_2024_07_15(),
-                h('figcaption', {}, 'Final software developed using ChatGPT 4o')
-            ),
+            // This replaces another ~40 lines of boilerplate with just 4 lines!
+            CodeFragment.create({
+                file: '/blog/2024-07-15/code1.js',
+                language: 'javascript',
+                caption: 'Final software developed using ChatGPT 4o'
+            }),
             h('p', {},
                 'This one could complete in about 12 seconds.  Now we were getting close to what I wanted!  A manual tweak ' +
                 'to run 16 in parallel and rendering was just under 6 seconds.  I\'ll take that as a huge win!'
@@ -273,8 +174,8 @@ function blogArticle_2024_07_15(): VElement[] {
                 'generators, and it\'s very clear we\'re somewhere we\'ve not been before.'
             ),
             h('p', {},
-                'I read Fred Brooks\', “The Mythical Man Month” almost 30 years ago.  “No Silver Bullet - Essence and ' +
-                'Accident in Software Engineering” was the chapter that has resonated with me for all that time.  It ' +
+                'I read Fred Brooks\', "The Mythical Man Month" almost 30 years ago.  "No Silver Bullet - Essence and ' +
+                'Accident in Software Engineering" was the chapter that has resonated with me for all that time.  It ' +
                 'posed that in the 10 years after it was written there wouldn\'t be a single technology that would give ' +
                 'a 10x improvement.  That has remained true for almost 50 years.  I have a feeling that 10x barrier may ' +
                 'finally be about to break.'

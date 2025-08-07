@@ -1,140 +1,7 @@
-import {assertIsVElement, h, updateElement, VNode, VElement} from '../../lib/dvdi';
+import {h, VElement} from '../../lib/dvdi';
 import {BlogPost} from '../BlogPost';
-import {MetaphorParser, PythonParser} from '../../lib/syntax';
-import {highlight} from '../../lib/highlight'
-import {cloneObject} from '../../lib/cloneObject';
+import {CodeFragment} from '../../lib/code-fragments';
 import {navigateEvent} from '../../app';
-
-const code: VNode[][] = [[], [], []];
-let codeVElement: (VElement | null)[] = [null, null, null];
-const codeFunction: (() => VElement)[] = [
-    blogArticle_2024_11_15_Prompt,
-    blogArticle_2024_11_15_Guidelines,
-    blogArticle_2024_11_15_Code
-];
-
-/**
- * Callback to write the contents of the file load for the first code fragment.
- * @param content
- */
-function writeCode(segment: number, content: VNode[]) {
-    code[segment].push(...content);
-    if (codeVElement[segment] === null) {
-        return;
-    }
-
-    assertIsVElement(codeVElement[segment]);
-    if (codeVElement[segment].parentVNode === null) {
-        return;
-    }
-
-    const parentElem = (codeVElement[segment].parentVNode as VElement).domElement;
-    if (parentElem === null) {
-        return;
-    }
-
-    if (codeVElement[segment].domElement === null) {
-        return;
-    }
-
-    const index = Array.from(parentElem.childNodes).indexOf(codeVElement[segment].domElement);
-    const newVElement = codeFunction[segment]();
-    newVElement.parentVNode = codeVElement[segment].parentVNode;
-    updateElement(parentElem,
-        parentElem.childNodes[index],
-        codeVElement[segment].parentVNode as VElement,
-        codeVElement[segment],
-        newVElement
-    );
-    codeVElement[segment] = newVElement;
-}
-
-async function loadFile(segment: number, filePath: string, storeFunction: (segment: number, content: VNode[]) => void) {
-    try {
-        const response = await fetch(filePath);
-        if (!response.ok) {
-            throw new Error(`Failed to fetch file: ${response.statusText}`);
-        }
-
-        const content = await response.text();
-        let formattedContent: VNode[];
-        if (filePath.endsWith('.py')) {
-            formattedContent = highlight(content, PythonParser);
-        } else {
-            formattedContent = highlight(content, MetaphorParser);
-        }
-
-        storeFunction(segment, formattedContent);
-    } catch (error) {
-        console.error('Error loading file:', error);
-    }
-}
-
-function blogArticle_2024_11_15_Prompt(): VElement {
-    let contents: VElement;
-    if (code[0].length === 0) {
-        contents = h('pre', {});
-    } else {
-        contents = h('pre', {}, h('code', {}, h('span', {className: 'blocktext'}, ...cloneObject(code[0]))));
-    }
-
-    contents.mountCallback = () => {
-        codeVElement[0] = contents;
-        if (code[0].length === 0) {
-            loadFile(0, '/blog/2024-11-15/commit-critic.m6r', writeCode);
-        }
-    }
-
-    contents.unmountCallback = () => {
-        codeVElement[0] = null;
-    }
-
-    return contents;
-}
-
-function blogArticle_2024_11_15_Guidelines(): VElement {
-    let contents: VElement;
-    if (code[1].length === 0) {
-        contents = h('pre', {});
-    } else {
-        contents = h('pre', {}, h('code', {}, ...cloneObject(code[1])));
-    }
-
-    contents.mountCallback = () => {
-        codeVElement[1] = contents;
-        if (code[1].length === 0) {
-            loadFile(1, '/blog/2024-11-15/sample-guideline.m6r', writeCode);
-        }
-    }
-
-    contents.unmountCallback = () => {
-        codeVElement[1] = null;
-    }
-
-    return contents;
-}
-
-function blogArticle_2024_11_15_Code(): VElement {
-    let contents: VElement;
-    if (code[2].length === 0) {
-        contents = h('pre', {});
-    } else {
-        contents = h('pre', {}, h('code', {}, ...cloneObject(code[2])));
-    }
-
-    contents.mountCallback = () => {
-        codeVElement[2] = contents;
-        if (code[2].length === 0) {
-            loadFile(2, '/blog/2024-11-15/commit_critic.py', writeCode);
-        }
-    }
-
-    contents.unmountCallback = () => {
-        codeVElement[2] = null;
-    }
-
-    return contents;
-}
 
 function blogOpening_2024_11_15(): VElement[] {
     return [
@@ -237,10 +104,12 @@ function blogArticle_2024_11_15(): VElement[] {
                 'the future. Similarly, some of these may not be universally accepted.  I\'m hoping the tool\'s users will ' +
                 'help with this!'
             ),
-            h('figure', {},
-                blogArticle_2024_11_15_Guidelines(),
-                h('figcaption', {}, 'Fragment of a guideline file')
-            )
+            // Replaced ~40 lines of boilerplate with 4 lines!
+            CodeFragment.create({
+                file: '/blog/2024-11-15/sample-guideline.m6r',
+                language: 'metaphor',
+                caption: 'Fragment of a guideline file'
+            })
         ),
         h('section', {},
             h('h2', {}, 'Building commit-critic'),
@@ -279,39 +148,44 @@ function blogArticle_2024_11_15(): VElement[] {
                 'Importantly, we\'re describing what we want the tool to do - i.e. the business logic.  We\'re not ' +
                 'describing the code!'
             ),
-            h('figure', {},
-                blogArticle_2024_11_15_Prompt(),
-                h('figcaption', {}, 'The v0.1 commit-critic "source" file')
-            )
+            // Replaced ~40 lines of boilerplate with 4 lines!
+            CodeFragment.create({
+                file: '/blog/2024-11-15/commit-critic.m6r',
+                language: 'metaphor',
+                caption: 'The v0.1 commit-critic "source" file',
+                className: 'blocktext'
+            })
         ),
         h('section', {},
             h('h2', {}, 'Generating the executable code'),
             h('p', {},
                 'We can compile this into a prompt ready to hand to our LLM:'
             ),
-            h('pre', {},
-                h('code', {},
-                    'm6rc commit-critic.m6r -o out.lcp'
-                )
-            ),
+            // Inline code example
+            CodeFragment.create({
+                code: 'm6rc commit-critic.m6r -o out.lcp',
+                language: 'bash'
+            }),
             h('p', {},
                 'In this instance I handed the task to Claude 3.5 Sonnet:'
             ),
-            h('figure', {},
-                blogArticle_2024_11_15_Code(),
-                h('figcaption', {}, 'The v0.1 commit-critic application code')
-            )
+            // Replaced ~40 lines of boilerplate with 4 lines!
+            CodeFragment.create({
+                file: '/blog/2024-11-15/commit_critic.py',
+                language: 'python',
+                caption: 'The v0.1 commit-critic application code'
+            })
         ),
         h('section', {},
             h('h2', {}, 'Testing the output'),
             h('p', {},
                 'commit-critic needs a little extra python packaging to run as a stand-along application, but we can test it:'
             ),
-            h('pre', {},
-                h('code', {},
-                    'python3 commit-critic.py -g <review-dir-path> -o out.lcp <file-to-test>'
-                )
-            ),
+            // Another inline code example
+            CodeFragment.create({
+                code: 'python3 commit-critic.py -g <review-dir-path> -o out.lcp <file-to-test>',
+                language: 'bash'
+            }),
             h('p', {},
                 'The following is a fragment of the output from ChatGPT 4o when I asked it to review part of a virtual DOM ' +
                 'implementation I build a few months ago.  As you can see, it produces a series of recommendations, and ' +

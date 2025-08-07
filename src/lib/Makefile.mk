@@ -1,4 +1,5 @@
 include src/lib/syntax/Makefile.mk
+include src/lib/code-fragments/Makefile.mk
 
 TS_FILES += \
 	src/lib/cloneObject.ts \
