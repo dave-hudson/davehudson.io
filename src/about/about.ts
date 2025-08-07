@@ -44,8 +44,14 @@ export function aboutPage(): VNode {
                         h('section', {},
                             h('h2', {}, 'About this site'),
                             h('p', {},
-                                'This site hosts my personal blog and links to open source, public, projects I\'ve been involved ' +
-                                'with.  Any opinions expressed are solely my own.'
+                                'This site hosts information about open source projects I\'ve been involved with, my blog, and my open ' +
+                                'source research notes.'
+                            ),
+                        ),
+                        h('section', {},
+                            h('h2', {}, 'Disclaimer'),
+                            h('p', {},
+                                'Any opinions expressed are solely my own.'
                             )
                         ),
                         h('section', {},

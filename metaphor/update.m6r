@@ -7,10 +7,13 @@ Context:
     The source files are in the src directory
 
 Action:
-    I want to change the behaviour of the site.  In src/blog there is code to handle blog posts and the CSS
-    is in src/css.  I currently have code in blog.ts that create a list for each blog post in a year, but
-    I don't have a bullet symbol on the list items.
+    The current design of my blog site uses the text "davehudson.io" in the top left corner.  I would like to
+    replace this with the icon src/icons/android-chrome-192x192.png.
 
-    I would like you to add that missing bullet.
+    I am also going to add a new top-level section to the site.  This will be "Notes" and will appear first,
+    before "Blog".  The Notes section will be a daily journal of my research notes.  To start with it will
+    look the same as the blog section, but this will diverge over time so I want to copy the blog code and
+    have an identical duplicate where "blog" is replaced with "notes".  I also want an initial notes post
+    creating for today (2025-08-07).
 
     Please propose a design that will solve these problems.  Before you code anything, I'd like to see a plan.

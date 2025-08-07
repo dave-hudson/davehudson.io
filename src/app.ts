@@ -1,6 +1,7 @@
 import {h, updateElement, VNode} from './lib/dvdi';
 import {aboutPage} from './about/about';
 import {blogPage, blogSummaries, getBlogRoutes} from './blog/blog';
+import {notesPage, notesSummaries, getNotesRoutes} from './notes/notes';
 import {projectsPage, getProjectRoutes} from './projects/projects';
 import {pageHeader, pageFooter, hero} from "./lib/page";
 
@@ -9,7 +10,7 @@ function homePage(): VNode {
         pageHeader(),
         h('main', {className: 'main'},
             hero({
-                title: 'Dave Hudson\'s blog and project site'
+                title: 'Dave Hudson\'s projects, blog, and notes'
             }),
             h('div', {className: 'content'},
                 h('div', {className: 'container'},
@@ -61,14 +62,34 @@ function homePage(): VNode {
                                 )
                             )
                         ),
+                        h('article', {},
+                            h('h1', {}, 'More projects'),
+                            h('p', {},
+                                'Find all my earlier projects in the ',
+                                h('a', {href: '/projects', onclick: (e: MouseEvent) => navigateEvent(e, '/projects')}, 'projects'),
+                                ' section.'
+                            )
+                        ),
+                        h('hr', {}),
                         h('h1', {}, 'Latest blog posts'),
                         ...blogSummaries(5),
                         h('article', {},
                             h('h1', {}, 'More blog posts'),
                             h('p', {},
-                                'Find all my ',
-                                h('a', {href: '/blog', onclick: (e: MouseEvent) => navigateEvent(e, '/blog')}, 'blog posts'),
-                                ' in the blog section.'
+                                'Find all my blog posts in the ',
+                                h('a', {href: '/blog', onclick: (e: MouseEvent) => navigateEvent(e, '/blog')}, 'blog'),
+                                ' section.'
+                            )
+                        ),
+                        h('hr', {}),
+                        h('h1', {}, 'Latest open source research notes'),
+                        ...notesSummaries(3),
+                        h('article', {},
+                            h('h1', {}, 'More open source research notes'),
+                            h('p', {},
+                                'Find all my open source research notes in the ',
+                                h('a', {href: '/notes', onclick: (e: MouseEvent) => navigateEvent(e, '/notes')}, 'notes'),
+                                ' section.'
                             )
                         )
                     )
@@ -114,10 +135,9 @@ export interface routeDetails {
 
 let routes: Map<string, routeDetails> = new Map([
     ['', {
-        title: 'Dave Hudson\'s blog and project site',
+        title: 'Dave Hudson\'s projects, blog, and notes site',
         render: homePage,
-        description: 'davehudson.io is Dave Hudson\'s blog and project site.  Dave discusses things he finds interesting in the ' +
-            'world of software development.',
+        description: 'davehudson.io is Dave Hudson\'s projects, blog, and notes site.',
         imageURL: 'https://davehudson.io/about/dave.jpg',
         pageType: 'website'
     }],
@@ -128,17 +148,24 @@ let routes: Map<string, routeDetails> = new Map([
         imageURL: 'https://davehudson.io/about/dave.jpg',
         pageType: 'profile'
     }],
-    ['/projects', {
-        title: 'Open source projects',
-        render: projectsPage,
-        description: 'A quick summary of the open source projects that Dave has developed or contributed to.',
-        imageURL: 'https://davehudson.io/about/dave.jpg',
-        pageType: 'website'
-    }],
     ['/blog', {
         title: 'Blog posts',
         render: blogPage,
         description: 'This page indexes all Dave\'s blog posts, presented in date order.',
+        imageURL: 'https://davehudson.io/about/dave.jpg',
+        pageType: 'website'
+    }],
+    ['/notes', {
+        title: 'Research notes',
+        render: notesPage,
+        description: 'This page indexes all Dave\'s research notes, presented in date order.',
+        imageURL: 'https://davehudson.io/about/dave.jpg',
+        pageType: 'website'
+    }],
+    ['/projects', {
+        title: 'Open source projects',
+        render: projectsPage,
+        description: 'A quick summary of the open source projects that Dave has developed or contributed to.',
         imageURL: 'https://davehudson.io/about/dave.jpg',
         pageType: 'website'
     }]
@@ -316,6 +343,12 @@ function debounce<T extends (...args: any[]) => void>(func: T, wait: number): (.
  * @param event - the DOMContentLoaded event.
  */
 function onDOMContentLoaded(event: Event): void {
+    // Add all notes content to the router.
+    const notesRoutes = getNotesRoutes();
+    notesRoutes.forEach((value, key) => {
+        routes.set(key, value);
+    });
+
     // Add all blog content to the router.
     const blogRoutes = getBlogRoutes();
     blogRoutes.forEach((value, key) => {

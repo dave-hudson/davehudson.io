@@ -300,11 +300,11 @@ template {
  */
 :root {
     /* Light theme colors */
-    --bg-color: #f4f4f4;
+    --bg-color: #ececec;
     --text-color: #0c0c0c;
     --heading-color: #204080;
-    --link-color: #5060e0;
-    --link-hover-color: #ff748c;
+    --link-color: #806830;
+    --link-hover-color: #f0748c;
     --meta-color: #a55;
     --blockquote-color: #808080;
     --border-color: #bbb;
@@ -315,10 +315,9 @@ template {
     --table-border-color: #777;
     --green-note-bg: #ececec;
     --green-note-color: #008000;
-    --footer-color: #555;
-    --header-bg-color: #e0e0e0;
+    --header-bg-color: #dcdcdc;
     --header-text-color: #333333;
-    --hero-bg-color: #d0d0d0;
+    --hero-bg-color: #c8c8c8;
     --hero-text-color: #204080;
     --syntax-blocktext: #141414;
     --syntax-comment: #008000;
@@ -361,7 +360,6 @@ template {
         --table-border-color: #777;
         --green-note-bg: #080808;
         --green-note-color: #60b860;
-        --footer-color: #aaa;
         --header-bg-color: #2a2a2a;
         --header-text-color: #e0e0e0;
         --hero-bg-color: #343434;
@@ -392,11 +390,11 @@ template {
 
 /* Manual theme override - light */
 [data-theme="light"] {
-    --bg-color: #f4f4f4;
+    --bg-color: #ececec;
     --text-color: #0c0c0c;
     --heading-color: #204080;
-    --link-color: #5060e0;
-    --link-hover-color: #ff748c;
+    --link-color: #806830;
+    --link-hover-color: #f0748c;
     --meta-color: #a55;
     --blockquote-color: #808080;
     --border-color: #bbb;
@@ -407,10 +405,9 @@ template {
     --table-border-color: #777;
     --green-note-bg: #ececec;
     --green-note-color: #008000;
-    --footer-color: #555;
-    --header-bg-color: #e0e0e0;
+    --header-bg-color: #dcdcdc;
     --header-text-color: #333333;
-    --hero-bg-color: #d0d0d0;
+    --hero-bg-color: #c8c8c8;
     --hero-text-color: #204080;
     --syntax-blocktext: #141414;
     --syntax-comment: #008000;
@@ -452,7 +449,6 @@ template {
     --table-border-color: #777;
     --green-note-bg: #080808;
     --green-note-color: #60b860;
-    --footer-color: #aaa;
     --header-bg-color: #2a2a2a;
     --header-text-color: #e0e0e0;
     --hero-bg-color: #343434;
@@ -664,12 +660,15 @@ pre {
 .app .header .container .logo {
     display: flex;
     align-items: center;
+    height: 100%;
 }
 
 .app .header .container .logo a {
     color: var(--header-text-color);
     text-decoration: none;
     align-items: center;
+    height: 100%;
+    display: flex;
 }
 
 .app .header .container .logo a:hover {
@@ -678,7 +677,18 @@ pre {
 }
 
 .app .header .container .logo .logo-component {
-    margin-top: 7px;
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0;
+}
+
+.app .header .container .logo .logo-icon {
+    height: 64px;
+    width: 64px;
+    margin: 0;
+    display: block;
 }
 
 .app .header .container .logo .logo-text {

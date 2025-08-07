@@ -27,8 +27,9 @@ export function pageHeader(): VNode {
                 ),
             ),
             h('nav', {className: 'menu'},
-                h('a', {href: '/blog', onclick: (e: MouseEvent) => navigateEvent(e, '/blog')}, 'Blog'),
                 h('a', {href: '/projects', onclick: (e: MouseEvent) => navigateEvent(e, '/projects')}, 'Projects'),
+                h('a', {href: '/blog', onclick: (e: MouseEvent) => navigateEvent(e, '/blog')}, 'Blog'),
+                h('a', {href: '/notes', onclick: (e: MouseEvent) => navigateEvent(e, '/notes')}, 'Notes'),
                 h('a', {href: '/about', onclick: (e: MouseEvent) => navigateEvent(e, '/about')}, 'About'),
                 sunMoonIcon(false, setDarkTheme),
                 sunMoonIcon(true, setDarkTheme)
