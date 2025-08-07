@@ -117,7 +117,7 @@ function blogArticle_2024_07_15(): VElement[] {
             // This replaces ~40 lines of boilerplate with just 4 lines!
             CodeFragment.create({
                 file: '/blog/2024-07-15/code0.js',
-                language: 'javascript',
+                language: 'JavaScript',
                 caption: 'Initial software developed using ChatGPT 4o'
             }),
             h('p', {},
@@ -140,7 +140,7 @@ function blogArticle_2024_07_15(): VElement[] {
             // This replaces another ~40 lines of boilerplate with just 4 lines!
             CodeFragment.create({
                 file: '/blog/2024-07-15/code1.js',
-                language: 'javascript',
+                language: 'JavaScript',
                 caption: 'Final software developed using ChatGPT 4o'
             }),
             h('p', {},

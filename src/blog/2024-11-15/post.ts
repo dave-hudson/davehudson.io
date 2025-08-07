@@ -107,7 +107,7 @@ function blogArticle_2024_11_15(): VElement[] {
             // Replaced ~40 lines of boilerplate with 4 lines!
             CodeFragment.create({
                 file: '/blog/2024-11-15/sample-guideline.m6r',
-                language: 'metaphor',
+                language: 'Metaphor',
                 caption: 'Fragment of a guideline file'
             })
         ),
@@ -151,7 +151,7 @@ function blogArticle_2024_11_15(): VElement[] {
             // Replaced ~40 lines of boilerplate with 4 lines!
             CodeFragment.create({
                 file: '/blog/2024-11-15/commit-critic.m6r',
-                language: 'metaphor',
+                language: 'Metaphor',
                 caption: 'The v0.1 commit-critic "source" file',
                 className: 'blocktext'
             })

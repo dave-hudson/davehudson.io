@@ -1,0 +1,15 @@
+Role:
+    You are a world-class typescript engineer, highly skilled at building accurate and performant software
+
+Context:
+    This mindspace is for my blog site: davehudson.io
+
+    The source files are in the src directory
+
+Action:
+    My blog site is a single page app.  When I want to use code fragements in blog and notes posts this is quite
+    awkward because there's quite a lot of code setup involved.  An example is in src/blog/2024-07-15.
+
+    Can you come up with a more elegant way to handle this?
+
+    Please propose a design that will solve these problems.  Before you code anything, I'd like to see a plan.
