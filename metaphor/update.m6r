@@ -7,9 +7,12 @@ Context:
     The source files are in the src directory
 
 Action:
-    My blog site is a single page app.  When I want to use code fragements in blog and notes posts this is quite
-    awkward because there's quite a lot of code setup involved.  An example is in src/blog/2024-07-15.
+    The code has a series of parsers for handling different programming languages, but doesn't have anything
+    that does a dummy parse for plain text files.
 
-    Can you come up with a more elegant way to handle this?
+    The parser code is in src/lib/syntax
+
+    I want you to create a TextParser class that simply returns each line of a file as a single "TEXT" token.
+    As this is a trivial class I don't want you to bother creating a TextLexer.
 
     Please propose a design that will solve these problems.  Before you code anything, I'd like to see a plan.

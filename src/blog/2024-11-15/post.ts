@@ -153,7 +153,6 @@ function blogArticle_2024_11_15(): VElement[] {
                 file: '/blog/2024-11-15/commit-critic.m6r',
                 language: 'Metaphor',
                 caption: 'The v0.1 commit-critic "source" file',
-                className: 'blocktext'
             })
         ),
         h('section', {},
@@ -164,7 +163,7 @@ function blogArticle_2024_11_15(): VElement[] {
             // Inline code example
             CodeFragment.create({
                 code: 'm6rc commit-critic.m6r -o out.lcp',
-                language: 'bash'
+                language: 'Text'
             }),
             h('p', {},
                 'In this instance I handed the task to Claude 3.5 Sonnet:'
@@ -172,7 +171,7 @@ function blogArticle_2024_11_15(): VElement[] {
             // Replaced ~40 lines of boilerplate with 4 lines!
             CodeFragment.create({
                 file: '/blog/2024-11-15/commit_critic.py',
-                language: 'python',
+                language: 'Python',
                 caption: 'The v0.1 commit-critic application code'
             })
         ),
@@ -184,7 +183,7 @@ function blogArticle_2024_11_15(): VElement[] {
             // Another inline code example
             CodeFragment.create({
                 code: 'python3 commit-critic.py -g <review-dir-path> -o out.lcp <file-to-test>',
-                language: 'bash'
+                language: 'Text'
             }),
             h('p', {},
                 'The following is a fragment of the output from ChatGPT 4o when I asked it to review part of a virtual DOM ' +

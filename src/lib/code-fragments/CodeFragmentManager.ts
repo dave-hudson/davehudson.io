@@ -1,7 +1,7 @@
 import {VNode} from '../dvdi';
 import {highlight} from '../highlight';
 import {
-    CParser, CppParser, CSSParser, HTMLParser, JavaScriptParser, TypeScriptParser, PythonParser, MetaphorParser, Parser
+    CParser, CppParser, CSSParser, HTMLParser, JavaScriptParser, TypeScriptParser, PythonParser, MetaphorParser, TextParser, Parser
 } from '../syntax';
 
 /**
@@ -54,7 +54,7 @@ export class CodeFragmentManager {
             case 'css':
                 return CSSParser;
 
-            case 'HTML':
+            case 'html':
                 return HTMLParser;
 
             case 'javascript':
@@ -66,11 +66,14 @@ export class CodeFragmentManager {
             case 'python':
                 return PythonParser;
 
+            case 'text':
+                return TextParser;
+
             case 'typescript':
                 return TypeScriptParser;
 
             default:
-                return JavaScriptParser; // Default fallback
+                return TextParser;
         }
     }
 
@@ -83,10 +86,10 @@ export class CodeFragmentManager {
 
         if (cached) {
             if (cached.content.length > 0) {
-                return cached.content; // Already loaded, return content
+                return cached.content;
             }
             if (cached.loadPromise) {
-                return await cached.loadPromise; // ✅ FIXED: Await the promise
+                return await cached.loadPromise;
             }
         }
 
@@ -95,10 +98,10 @@ export class CodeFragmentManager {
 
         try {
             const content = await loadPromise;
-            this.cache.set(cacheKey, { content }); // Cache the result
+            this.cache.set(cacheKey, { content });
             return content;
         } catch (error) {
-            this.cache.delete(cacheKey); // Clear failed attempt
+            this.cache.delete(cacheKey);
             throw error;
         }
     }

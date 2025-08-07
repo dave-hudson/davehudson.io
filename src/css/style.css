@@ -319,7 +319,6 @@ template {
     --header-text-color: #333333;
     --hero-bg-color: #c8c8c8;
     --hero-text-color: #204080;
-    --syntax-blocktext: #141414;
     --syntax-comment: #008000;
     --syntax-css-at-rule: #c040c0;
     --syntax-css-pseudo: #4ca4c0;
@@ -364,7 +363,6 @@ template {
         --header-text-color: #e0e0e0;
         --hero-bg-color: #343434;
         --hero-text-color: #ffe0a0;
-        --syntax-blocktext: #b8b8b8;
         --syntax-comment: #68d068;
         --syntax-css-at-rule: #ffc0eb;
         --syntax-css-pseudo: #90e0e8;
@@ -409,7 +407,6 @@ template {
     --header-text-color: #333333;
     --hero-bg-color: #c8c8c8;
     --hero-text-color: #204080;
-    --syntax-blocktext: #141414;
     --syntax-comment: #008000;
     --syntax-css-at-rule: #c040c0;
     --syntax-css-pseudo: #4ca4c0;
@@ -453,7 +450,6 @@ template {
     --header-text-color: #e0e0e0;
     --hero-bg-color: #343434;
     --hero-text-color: #ffe0a0;
-    --syntax-blocktext: #b8b8b8;
     --syntax-comment: #68d068;
     --syntax-css-at-rule: #ffc0eb;
     --syntax-css-pseudo: #90e0e8;
@@ -812,10 +808,6 @@ pre {
     overflow-x: auto;
     line-height: 1.2;
     max-width: 100%;
-}
-
-.app .main .content .container pre code .blocktext {
-    color: var(--syntax-blocktext);
 }
 
 .app .main .content .container pre code .comment {

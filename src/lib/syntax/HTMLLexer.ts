@@ -5,7 +5,6 @@ styles['DOCTYPE'] = 'html-doctype';
 styles['SCRIPT'] = null;
 styles['STYLE'] = null;
 styles['TAG'] = 'html-tag';
-styles['TEXT'] = 'text';
 
 /**
  * Lexer class for HTML, extending the base lexer functionality.

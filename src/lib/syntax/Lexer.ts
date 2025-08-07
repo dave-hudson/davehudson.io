@@ -15,6 +15,7 @@ export const styles: {[key: string]: string | null} = {
     OPERATOR: 'operator',
     PREPROCESSOR: 'preprocessor',
     STRING: 'string',
+    TEXT: 'text',
     WHITESPACE: null
 };
 
