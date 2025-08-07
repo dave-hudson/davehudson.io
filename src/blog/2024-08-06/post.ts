@@ -1,140 +1,7 @@
-import {assertIsVElement, h, updateElement, VElement, VNode, VText} from '../../lib/dvdi';
+import {h, VElement, VNode} from '../../lib/dvdi';
 import {BlogPost} from '../BlogPost';
-import {TypeScriptParser} from '../../lib/syntax';
-import {highlight} from '../../lib/highlight'
-import {cloneObject} from '../../lib/cloneObject';
+import {CodeFragment} from '../../lib/code-fragments';
 import {navigateEvent} from '../../app';
-
-const code: VNode[][] = [[], [], []];
-let codeVElement: (VElement | null)[] = [null, null, null];
-const codeFunction: (() => VElement)[] = [
-    blogPrompt_2024_08_06,
-    blogSiterenderTS_2024_08_06,
-    blogLogicTS_2024_08_06
-];
-
-/**
- * Callback to write the contents of the file load for the first code fragment.
- * @param content
- */
-function writeCode(segment: number, content: VNode[]) {
-    code[segment].push(...content);
-    if (codeVElement[segment] === null) {
-        return;
-    }
-
-    assertIsVElement(codeVElement[segment]);
-    if (codeVElement[segment].parentVNode === null) {
-        return;
-    }
-
-    const parentElem = (codeVElement[segment].parentVNode as VElement).domElement;
-    if (parentElem === null) {
-        return;
-    }
-
-    if (codeVElement[segment].domElement === null) {
-        return;
-    }
-
-    const index = Array.from(parentElem.childNodes).indexOf(codeVElement[segment].domElement);
-    const newVElement = codeFunction[segment]();
-    newVElement.parentVNode = codeVElement[segment].parentVNode;
-    updateElement(parentElem,
-        parentElem.childNodes[index],
-        codeVElement[segment].parentVNode as VElement,
-        codeVElement[segment],
-        newVElement
-    );
-    codeVElement[segment] = newVElement;
-}
-
-async function loadFile(segment: number, filePath: string, storeFunction: (segment: number, content: VNode[]) => void) {
-    try {
-        const response = await fetch(filePath);
-        if (!response.ok) {
-            throw new Error(`Failed to fetch file: ${response.statusText}`);
-        }
-
-        const content = await response.text();
-        let formattedContent: VNode[];
-        if (filePath.endsWith('.ts')) {
-            formattedContent = highlight(content, TypeScriptParser);
-        } else {
-            formattedContent = [new VText(content)];
-        }
-
-        storeFunction(segment, formattedContent);
-    } catch (error) {
-        console.error('Error loading file:', error);
-    }
-}
-
-function blogPrompt_2024_08_06(): VElement {
-    let contents: VElement;
-    if (code[0].length === 0) {
-        contents = h('pre', {});
-    } else {
-        contents = h('pre', {}, h('code', {}, h('span', {className: 'blocktext'}, ...cloneObject(code[0]))));
-    }
-
-    contents.mountCallback = () => {
-        codeVElement[0] = contents;
-        if (code[0].length === 0) {
-            loadFile(0, '/blog/2024-08-06/prompt.txt', writeCode);
-        }
-    }
-
-    contents.unmountCallback = () => {
-        codeVElement[0] = null;
-    }
-
-    return contents;
-}
-
-function blogSiterenderTS_2024_08_06(): VElement {
-    let contents: VElement;
-    if (code[1].length === 0) {
-        contents = h('pre', {});
-    } else {
-        contents = h('pre', {}, h('code', {}, ...cloneObject(code[1])));
-    }
-
-    contents.mountCallback = () => {
-        codeVElement[1] = contents;
-        if (code[1].length === 0) {
-            loadFile(1, '/blog/2024-08-06/siterender.ts', writeCode);
-        }
-    }
-
-    contents.unmountCallback = () => {
-        codeVElement[1] = null;
-    }
-
-    return contents;
-}
-
-function blogLogicTS_2024_08_06(): VElement {
-    let contents: VElement;
-    if (code[2].length === 0) {
-        contents = h('pre', {});
-    } else {
-        contents = h('pre', {}, h('code', {}, ...cloneObject(code[2])));
-    }
-
-    contents.mountCallback = () => {
-        codeVElement[2] = contents;
-        if (code[2].length === 0) {
-            loadFile(2, '/blog/2024-08-06/logic.ts', writeCode);
-        }
-    }
-
-    contents.unmountCallback = () => {
-        codeVElement[2] = null;
-    }
-
-    return contents;
-}
 
 function blogOpening_2024_08_06(): VElement[] {
     return [
@@ -429,10 +296,12 @@ function blogArticle_2024_08_06(): VElement[] {
                     'version directly targeting TypeScript.  Most earlier implementations used JavaScript, ' +
                     'but I had ChatGPT build one using Python. The Python version was 20% slower, however!'
                 ),
-                h('figure', {},
-                    blogPrompt_2024_08_06(),
-                    h('figcaption', {}, 'The MIP-style prompt for siterender')
-                )
+                // Replaced ~40 lines of boilerplate with 4 lines!
+                CodeFragment.create({
+                    file: '/blog/2024-08-06/prompt.txt',
+                    language: 'Text',
+                    caption: 'The MIP-style prompt for siterender'
+                })
             ),
             h('section', {},
                 h('h3', {}, 'The implementation'),
@@ -501,14 +370,18 @@ function blogArticle_2024_08_06(): VElement[] {
                 'interactive work was required, the only direct human intervention was to slightly adjust the whitespacing ' +
                 'to improve readability.'
             ),
-            h('figure', {},
-                blogSiterenderTS_2024_08_06(),
-                h('figcaption', {}, 'siterender\'s prerender.ts source code generated by ChatGPT 4o')
-            ),
-            h('figure', {},
-                blogLogicTS_2024_08_06(),
-                h('figcaption', {}, 'siterender\'s logic.ts source code generated by ChatGPT 4o')
-            )
+            // Replaced ~40 lines of boilerplate with 4 lines!
+            CodeFragment.create({
+                file: '/blog/2024-08-06/siterender.ts',
+                language: 'TypeScript',
+                caption: 'siterender\'s prerender.ts source code generated by ChatGPT 4o'
+            }),
+            // Replaced ~40 lines of boilerplate with 4 lines!
+            CodeFragment.create({
+                file: '/blog/2024-08-06/logic.ts',
+                language: 'TypeScript',
+                caption: 'siterender\'s logic.ts source code generated by ChatGPT 4o'
+            })
         ),
     ];
 }

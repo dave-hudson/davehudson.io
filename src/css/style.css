@@ -983,12 +983,6 @@ pre {
     opacity: 0.6;
 }
 
-.app .main .content .container .green-note {
-    background-color: var(--green-note-bg);
-    color: var(--green-note-color);
-    padding: 1px 8px;
-}
-
 .app .main .content .container .meta {
     font-size: 0.85rem;
     margin-top: 0.4rem;

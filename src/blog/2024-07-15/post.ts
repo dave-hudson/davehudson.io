@@ -72,41 +72,28 @@ function blogArticle_2024_07_15(): VElement[] {
             h('p', {},
                 'Here\'s my initial prompt in a new session:',
             ),
-            h('div', {className: 'green-note'},
-                h('p', {},
-                    'How do I use google chrome to pre-render my single page app website?'
-                )
-            ),
+            // Replaced green-note div with CodeFragment
+            CodeFragment.create({
+                code: 'How do I use google chrome to pre-render my single page app website?',
+                language: 'Text'
+            }),
             h('p', {},
                 'And the first reply:',
             ),
-            h('div', {className: 'green-note'},
-                h('p', {},
-                    'Pre-rendering a single-page application (SPA) using Google Chrome involves generating static HTML ' +
-                    'content that can be served to search engines and users to improve SEO and performance.  Here are the ' +
-                    'steps to pre-render your SPA:'
-                ),
-                h('p', {},
-                    '1. Use a Pre-rendering Service'
-                ),
-                h('p', {},
-                    'Pre-rendering services can handle the task for you.  These services visit your SPA, render it using ' +
-                    'a headless browser, and save the resulting HTML.  Popular services include Prerender.io, Rendertron, ' +
-                    'and others.'
-                ),
-                h('p', {},
-                    '2. Use Headless Chrome with Puppeteer'
-                ),
-                h('p', {},
-                    'Puppeteer is a Node.js library which provides a high-level API to control Chrome or Chromium over the ' +
-                    'DevTools Protocol.  Here\'s a basic example of using Puppeteer to pre-render your SPA:'
-                ),
-                h('p', {},
-                    h('em', {},
-                        '...goes on to give some code fragments.'
-                    )
-                )
-            ),
+            // Replaced green-note div with CodeFragment
+            CodeFragment.create({
+                code: 'Pre-rendering a single-page application (SPA) using Google Chrome involves generating static HTML\n' +
+                    'content that can be served to search engines and users to improve SEO and performance. Here are the steps\n' +
+                    'to pre-render your SPA:\n\n' +
+                    '1. Use a Pre-rendering Service\n\n' +
+                    'Pre-rendering services can handle the task for you. These services visit your SPA, render it using a\n' +
+                    'headless browser, and save the resulting HTML. Popular services include Prerender.io, Rendertron, and others.\n\n' +
+                    '2. Use Headless Chrome with Puppeteer\n\n' +
+                    'Puppeteer is a Node.js library which provides a high-level API to control Chrome or Chromium over the DevTools\n' +
+                    'Protocol. Here\'s a basic example of using Puppeteer to pre-render your SPA:\n\n' +
+                    '...goes on to give some code fragments.',
+                language: 'Text'
+            }),
             h('p', {},
                 'I like to build things - option 2 was the only way to go!',
             ),

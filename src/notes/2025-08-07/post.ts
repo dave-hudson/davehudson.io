@@ -37,7 +37,7 @@ function notesArticle_2025_08_07(): VElement[] {
             CodeFragment.create({
                 file: '/notes/2025-08-07/update1.m6r',
                 language: 'Metaphor',
-                caption: 'Metaphor code to update the site structure',
+                caption: 'Metaphor prompt to update the site structure',
             }),
             h('p', {},
                 'Once I\'d looked at the updates I rearranged some of the site structure so things consistently flowed ' +
@@ -58,7 +58,7 @@ function notesArticle_2025_08_07(): VElement[] {
             CodeFragment.create({
                 file: '/notes/2025-08-07/update2.m6r',
                 language: 'Metaphor',
-                caption: 'Metaphor code to update the site structure',
+                caption: 'Metaphor prompt to update the site structure',
             }),
             h('p', {},
                 'Claude ended up doing 11 tool calls to come up with a design concept.  It didn\'t work first time as it ' +
@@ -74,11 +74,37 @@ function notesArticle_2025_08_07(): VElement[] {
                 'The new code fragment implementation is dramatically better and saves a huge amount of boilerplate code. ' +
                 'It also supports inline code fragments, which is a nice bonus.  Updating blog entries is now much easier.' +
                 'The new implementation has 329 lines of code, but reduced each code fragment to 6 lines of code instead of ' +
-                'about 60!'
+                'about 40!'
             ),
             h('p', {},
                 'The whole process took about 2 hours, hugely simplifies the blog posts, and has nicer styling too.'
             )
+        ),
+        h('section', {},
+            h('h2', {}, 'Adding a "text" syntax highlighter'),
+            h('p', {},
+                'The blog site syntax highlighter had support for a number of languages, but not one for raw text.  Added this ' +
+                'with a one-shot prompt to Claude:'
+            ),
+            CodeFragment.create({
+                file: '/notes/2025-08-07/update3.m6r',
+                language: 'Metaphor',
+                caption: 'Metaphor prompt to add text syntax highlighting',
+            }),
+            h('p', {},
+                'Fixed up a few uses of this and deleted some now-unecessary CSS.'
+            )
+        ),
+        h('section', {},
+            h('h2', {}, 'Updating all blog posts to use the new code formatting'),
+            h('p', {},
+                'Updated the 2 remaining blog posts::'
+            ),
+            CodeFragment.create({
+                file: '/notes/2025-08-07/update4.m6r',
+                language: 'Metaphor',
+                caption: 'Metaphor prompt to update all blog posts',
+            })
         )
     ];
 }

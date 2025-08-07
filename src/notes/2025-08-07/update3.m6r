@@ -1,0 +1,18 @@
+Role:
+    You are a world-class typescript engineer, highly skilled at building accurate and performant software
+
+Context:
+    This mindspace is for my blog site: davehudson.io
+
+    The source files are in the src directory
+
+Action:
+    The code has a series of parsers for handling different programming languages, but doesn't have anything
+    that does a dummy parse for plain text files.
+
+    The parser code is in src/lib/syntax
+
+    I want you to create a TextParser class that simply returns each line of a file as a single "TEXT" token.
+    As this is a trivial class I don't want you to bother creating a TextLexer.
+
+    Please propose a design that will solve these problems.  Before you code anything, I'd like to see a plan.

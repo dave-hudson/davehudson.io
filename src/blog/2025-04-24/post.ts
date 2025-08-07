@@ -1,122 +1,7 @@
-import {assertIsVElement, h, updateElement, VNode, VElement} from '../../lib/dvdi';
+import {h, VElement} from '../../lib/dvdi';
 import {BlogPost} from '../BlogPost';
-import {MetaphorParser} from '../../lib/syntax';
-import {highlight} from '../../lib/highlight';
-import {cloneObject} from '../../lib/cloneObject';
+import {CodeFragment} from '../../lib/code-fragments';
 import {navigateEvent} from '../../app';
-
-const code: VNode[][] = [[], []];
-let codeVElement: (VElement | null)[] = [null, null];
-const codeFunction: (() => VElement)[] = [
-    blogArticle_2025_04_24_ReviewCritic,
-    blogArticle_2025_04_24_Introspection
-];
-
-/**
- * Callback to write the contents of the file load for code fragments.
- * @param segment - The segment index to update
- * @param content - The content to write
- */
-function writeCode(segment: number, content: VNode[]) {
-    code[segment].push(...content);
-    if (codeVElement[segment] === null) {
-        return;
-    }
-
-    assertIsVElement(codeVElement[segment]);
-    if (codeVElement[segment].parentVNode === null) {
-        return;
-    }
-
-    const parentElem = (codeVElement[segment].parentVNode as VElement).domElement;
-    if (parentElem === null) {
-        return;
-    }
-
-    if (codeVElement[segment].domElement === null) {
-        return;
-    }
-
-    const index = Array.from(parentElem.childNodes).indexOf(codeVElement[segment].domElement);
-    const newVElement = codeFunction[segment]();
-    newVElement.parentVNode = codeVElement[segment].parentVNode;
-    updateElement(parentElem,
-        parentElem.childNodes[index],
-        codeVElement[segment].parentVNode as VElement,
-        codeVElement[segment],
-        newVElement
-    );
-    codeVElement[segment] = newVElement;
-}
-
-/**
- * Load Metaphor code file and prepare for highlighting
- */
-async function loadFile(segment: number, filePath: string, storeFunction: (segment: number, content: VNode[]) => void) {
-    try {
-        const response = await fetch(filePath);
-        if (!response.ok) {
-            throw new Error(`Failed to fetch file: ${response.statusText}`);
-        }
-
-        const content = await response.text();
-        const formattedContent = highlight(content, MetaphorParser);
-
-        storeFunction(segment, formattedContent);
-    } catch (error) {
-        console.error('Error loading file:', error);
-    }
-}
-
-/**
- * Function to handle the first Metaphor code block (commit-critic)
- */
-function blogArticle_2025_04_24_ReviewCritic(): VElement {
-    let contents: VElement;
-    if (code[0].length === 0) {
-        contents = h('pre', {});
-    } else {
-        contents = h('pre', {}, h('code', {}, ...cloneObject(code[0])));
-    }
-
-    contents.mountCallback = () => {
-        codeVElement[0] = contents;
-        if (code[0].length === 0) {
-            loadFile(0, '/blog/2025-04-24/commit-critic.m6r', writeCode);
-        }
-    }
-
-    contents.unmountCallback = () => {
-        codeVElement[0] = null;
-    }
-
-    return contents;
-}
-
-/**
- * Function to handle the second Metaphor code block (introspection)
- */
-function blogArticle_2025_04_24_Introspection(): VElement {
-    let contents: VElement;
-    if (code[1].length === 0) {
-        contents = h('pre', {});
-    } else {
-        contents = h('pre', {}, h('code', {}, ...cloneObject(code[1])));
-    }
-
-    contents.mountCallback = () => {
-        codeVElement[1] = contents;
-        if (code[1].length === 0) {
-            loadFile(1, '/blog/2025-04-24/introspection.m6r', writeCode);
-        }
-    }
-
-    contents.unmountCallback = () => {
-        codeVElement[1] = null;
-    }
-
-    return contents;
-}
 
 function blogOpening_2025_04_24(): VElement[] {
     return [
@@ -250,10 +135,12 @@ function blogArticle_2025_04_24(): VElement[] {
             h('p', {},
                 'Here\'s what a pure Metaphor version looks like:'
             ),
-            h('figure', {},
-                blogArticle_2025_04_24_ReviewCritic(),
-                h('figcaption', {}, 'Metaphor code for the new commit-critic implementation')
-            ),
+            // Replaced ~40 lines of boilerplate with 4 lines!
+            CodeFragment.create({
+                file: '/blog/2025-04-24/commit-critic.m6r',
+                language: 'Metaphor',
+                caption: 'Metaphor code for the new commit-critic implementation'
+            }),
             h('p', {},
                 'If you\'re a keen observer, you may notice this has an enhancement on the original tool.  ' +
                 'This version ranks the importance of any issues it identifies to help you judge how serious ' +
@@ -282,10 +169,12 @@ function blogArticle_2025_04_24(): VElement[] {
                 'The approach outlined here took about 5 minutes to write, so it\'s not refined, but you can see ' +
                 'the potential!'
             ),
-            h('figure', {},
-                blogArticle_2025_04_24_Introspection(),
-                h('figcaption', {}, 'Metaphor code for the AI introspection tool')
-            ),
+            // Replaced ~40 lines of boilerplate with 4 lines!
+            CodeFragment.create({
+                file: '/blog/2025-04-24/introspection.m6r',
+                language: 'Metaphor',
+                caption: 'Metaphor code for the AI introspection tool'
+            }),
             h('p', {},
                 'Here\'s a screenshot of codestral (one of the Mistral models) reviewing a design change Metaphor ' +
                 'conversation I had with Claude Sonnet 3.7 about an aspect of the system shell design from a few days ago!'
