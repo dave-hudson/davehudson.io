@@ -45,28 +45,28 @@ export class CodeFragmentManager {
      */
     private getParserForLanguage(language: string): new (input: string) => Parser {
         switch (language.toLowerCase()) {
-            case 'C':
+            case 'c':
                 return CParser;
 
-            case 'C++':
+            case 'c++':
                 return CppParser;
 
-            case 'CSS':
+            case 'css':
                 return CSSParser;
 
             case 'HTML':
                 return HTMLParser;
 
-            case 'JavaScript':
+            case 'javascript':
                 return JavaScriptParser;
 
-            case 'Metaphor':
+            case 'metaphor':
                 return MetaphorParser;
 
-            case 'Python':
+            case 'python':
                 return PythonParser;
 
-            case 'TypeScript':
+            case 'typescript':
                 return TypeScriptParser;
 
             default:

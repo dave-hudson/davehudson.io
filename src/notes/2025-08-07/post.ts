@@ -1,3 +1,4 @@
+import { CodeFragment } from '../../lib/code-fragments';
 import {h, VElement} from '../../lib/dvdi';
 import {NotesPost} from '../NotesPost';
 
@@ -33,9 +34,50 @@ function notesArticle_2025_08_07(): VElement[] {
             h('p', {},
                 'It continues to feel like the thinking/reasoning models are simply leveraging this same latent ability.'
             ),
+            CodeFragment.create({
+                file: '/notes/2025-08-07/update1.m6r',
+                language: 'Metaphor',
+                caption: 'Metaphor code to update the site structure',
+            }),
             h('p', {},
                 'Once I\'d looked at the updates I rearranged some of the site structure so things consistently flowed ' +
                 'from projects -> blog -> notes.  This just feels more natural.'
+            )
+        ),
+        h('section', {},
+            h('h2', {}, 'Improving code rendering'),
+            h('p', {},
+                'This site uses a custom virtual DOM implementation (DVDI) to render the site.  This makes it easy for me ' +
+                'to maintain as it doesn\'t need a ridiculously large framework to run.  The VDOM supports components, but ' +
+                'it had a pretty clunky implementation for code fragments.'
+            ),
+            h('p', {},
+                'I figured it was time to improve this so I set Claude Sonnet 4 the task of improving things.  Here\'s the ' +
+                'ridiculously vague Metaphor prompt I used:'
+            ),
+            CodeFragment.create({
+                file: '/notes/2025-08-07/update2.m6r',
+                language: 'Metaphor',
+                caption: 'Metaphor code to update the site structure',
+            }),
+            h('p', {},
+                'Claude ended up doing 11 tool calls to come up with a design concept.  It didn\'t work first time as it ' +
+                'didn\'t read the DVDI code and guessed at its behaviour from what it had seen.  Once I had it read the ' +
+                'code it fixed the 2 issues it spotted and everything "just worked".  Fortunately I recognised a method ' +
+                'hallucination must have been because it hadn\'t read the relevant code.'
+            ),
+            h('p', {},
+                'It does feel like there\'s a need to update the Metaphor prompt preamble to tell the LLM to carefully check ' +
+                'the code it\'s working with rather than trying to infer how it works.'
+            ),
+            h('p', {},
+                'The new code fragment implementation is dramatically better and saves a huge amount of boilerplate code. ' +
+                'It also supports inline code fragments, which is a nice bonus.  Updating blog entries is now much easier.' +
+                'The new implementation has 329 lines of code, but reduced each code fragment to 6 lines of code instead of ' +
+                'about 60!'
+            ),
+            h('p', {},
+                'The whole process took about 2 hours, hugely simplifies the blog posts, and has nicer styling too.'
             )
         )
     ];
