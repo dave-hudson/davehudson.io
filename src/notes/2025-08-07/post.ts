@@ -98,13 +98,58 @@ function notesArticle_2025_08_07(): VElement[] {
         h('section', {},
             h('h2', {}, 'Updating all blog posts to use the new code formatting'),
             h('p', {},
-                'Updated the 2 remaining blog posts::'
+                'Updated the 2 remaining blog posts:'
             ),
             CodeFragment.create({
                 file: '/notes/2025-08-07/update4.m6r',
                 language: 'Metaphor',
                 caption: 'Metaphor prompt to update all blog posts',
             })
+        ),
+        h('section', {},
+            h('h2', {}, 'Wrapping up'),
+            h('p', {},
+                'Diff stats for the day!'
+            ),
+            CodeFragment.create({
+                code: 'metaphor/update.m6r                           |  14 +++--\n' +
+                    'src/Makefile.mk                               |   4 +-\n' +
+                    'src/about/about.ts                            |  10 +++-\n' +
+                    'src/app.ts                                    |  61 ++++++++++++++++-----\n' +
+                    'src/blog/2024-07-15/post.ts                   | 190 +++++++++++++--------------------------------------------------\n' +
+                    'src/blog/2024-08-06/post.ts                   | 169 +++++++-------------------------------------------------\n' +
+                    'src/blog/2024-11-15/post.ts                   | 184 +++++++++----------------------------------------------------\n' +
+                    'src/blog/2025-04-24/post.ts                   | 148 +++++++------------------------------------------\n' +
+                    'src/components/Makefile.mk                    |  10 +---\n' +
+                    'src/components/daveHudsonLogo.ts              |  10 +++-\n' +
+                    'src/components/pageHeader.ts                  |   3 +-\n' +
+                    'src/css/style.css                             | 110 ++++++++++++++++++++++++++-----------\n' +
+                    'src/lib/Makefile.mk                           |   1 +\n' +
+                    'src/lib/code-fragments/CodeFragment.ts        | 161 +++++++++++++++++++++++++++++++++++++++++++++++++++++\n' +
+                    'src/lib/code-fragments/CodeFragmentManager.ts | 164 ++++++++++++++++++++++++++++++++++++++++++++++++++++++\n' +
+                    'src/lib/code-fragments/Makefile.mk            |   4 ++\n' +
+                    'src/lib/code-fragments/index.ts               |  10 ++++\n' +
+                    'src/lib/syntax.ts                             |   1 +\n' +
+                    'src/lib/syntax/HTMLLexer.ts                   |   1 -\n' +
+                    'src/lib/syntax/Lexer.ts                       |   1 +\n' +
+                    'src/lib/syntax/TextParser.ts                  |  78 ++++++++++++++++++++++++++\n' +
+                    'src/notes/2025-08-07/Makefile.mk              |   8 +++\n' +
+                    'src/notes/2025-08-07/post.ts                  | 122 +++++++++++++++++++++++++++++++++++++++++\n' +
+                    'src/notes/2025-08-07/update1.m6r              |  19 +++++++\n' +
+                    'src/notes/2025-08-07/update2.m6r              |  15 +++++\n' +
+                    'src/notes/2025-08-07/update3.m6r              |  18 ++++++\n' +
+                    'src/notes/2025-08-07/update4.m6r              |  18 ++++++\n' +
+                    'src/notes/Makefile.mk                         |   1 +\n' +
+                    'src/notes/NotesPost.ts                        |  35 ++++++++++++\n' +
+                    'src/notes/notes.ts                            | 234 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n' +
+                    'src/sitemap.xml                               |   6 ++\n' +
+                    '31 files changed, 1156 insertions(+), 654 deletions(-)\n',
+                language: 'text',
+                caption: 'Diff stats for the day'
+            }),
+            h('p', {},
+                'That\'s a pretty good amount of work for about 7 hours, including minor manual tweaks, reviewing and testing!'
+            )
         )
     ];
 }
