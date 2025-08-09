@@ -45,13 +45,26 @@ siterender: all
 #
 # Rule to build a tarball of the built site.
 #
-.PHONY: tar
-
-tar: siterender
+davehudson.io.tar.gz: siterender
 ifeq ($(UNAME), Darwin)
 	xattr -rc build
+	chmod -R g+r,o+r build
 endif
 	tar -czvf davehudson.io.tar.gz -C build .
+
+#
+# Rule to build a tarball of the built site.
+#
+.PHONY: tar
+tar: davehudson.io.tar.gz
+
+#
+# Rule to copy a tarball to the davehudson.io site.
+#
+.PHONY: install
+
+install: davehudson.io.tar.gz
+	scp davehudson.io.tar.gz root@davehudson.io:/
 
 #
 # Rules to clean up after builds.
