@@ -138,35 +138,35 @@ let routes: Map<string, routeDetails> = new Map([
         title: 'Dave Hudson\'s projects, blog, and notes site',
         render: homePage,
         description: 'davehudson.io is Dave Hudson\'s projects, blog, and notes site.',
-        imageURL: 'https://davehudson.io/about/dave.jpg',
+        imageURL: 'https://davehudson.io/about/dave.webp',
         pageType: 'website'
     }],
     ['/about', {
         title: 'About me (Dave Hudson)',
         render: aboutPage,
         description: 'An brief introduction to Dave Hudson, what the site is about, and how to contact him.',
-        imageURL: 'https://davehudson.io/about/dave.jpg',
+        imageURL: 'https://davehudson.io/about/dave.webp',
         pageType: 'profile'
     }],
     ['/blog', {
         title: 'Blog posts',
         render: blogPage,
         description: 'This page indexes all Dave\'s blog posts, presented in date order.',
-        imageURL: 'https://davehudson.io/about/dave.jpg',
+        imageURL: 'https://davehudson.io/about/dave.webp',
         pageType: 'website'
     }],
     ['/notes', {
         title: 'Research notes',
         render: notesPage,
         description: 'This page indexes all Dave\'s research notes, presented in date order.',
-        imageURL: 'https://davehudson.io/about/dave.jpg',
+        imageURL: 'https://davehudson.io/about/dave.webp',
         pageType: 'website'
     }],
     ['/projects', {
         title: 'Open source projects',
         render: projectsPage,
         description: 'A quick summary of the open source projects that Dave has developed or contributed to.',
-        imageURL: 'https://davehudson.io/about/dave.jpg',
+        imageURL: 'https://davehudson.io/about/dave.webp',
         pageType: 'website'
     }]
 ]);
@@ -261,7 +261,7 @@ function handleLocation() {
         title: '404 - Not found',
         render: () => notFoundPage(path),
         description: '',
-        imageURL: 'https://davehudson.io/about/dave.jpg',
+        imageURL: 'https://davehudson.io/about/dave.webp',
         pageType: 'website'
     };
 

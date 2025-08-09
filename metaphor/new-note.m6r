@@ -10,7 +10,9 @@ Action:
     src/notes directory.  You will need to update the src/notes/Makefile.mk, src/notes/notes.ts, and
     sitemap.xml files.  If the page already exists don't do anything and ask me what I'd like to do about it.
 
-    The content of the new notes page is given here:
+    The content of the notes page is in the file temp/note/note.md
 
-    Embed: $1
-
+    You need to copy any files in the temp/note directory that are referenced in the note.md file into the new
+    note directory and you need to ensure those files are also added to the FILES make variable in the
+    Makefile.mk file you create for the new page.  If a file is referenced as source code then you should
+    include that as a code block in the blog post too.

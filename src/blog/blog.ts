@@ -286,7 +286,7 @@ export function getBlogRoutes() {
     for (let i = 0; i < blogContent.length; i++) {
         let img = blogContent[i].imageURL;
         if (img === null) {
-            img = '/about/dave.jpg';
+            img = '/about/dave.webp';
         }
 
         const imgURL = 'https://davehudson.io' + img;
