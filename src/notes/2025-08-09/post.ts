@@ -102,7 +102,7 @@ function notesArticle_2025_08_09(): VElement[] {
 }
 
 export const notesPost_2025_08_09 = new NotesPost(
-    '2025-08-09: Notes, blog posts, and Ollama\'s gpt-oss:20b',
+    '2025-08-09: Notes, blog posts, and Ollama\'s gpt-oss',
     '2025-08-09',
     '/notes/2025-08-09',
     '2025-08-09: Experimenting with LLMs creating blog posts and notes pages, and testing Ollama\'s impressive new gpt-oss models.',
