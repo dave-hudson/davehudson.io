@@ -46,7 +46,7 @@ function notesArticle_2025_08_09(): VElement[] {
                 'on the ollama.com website.'
             ),
             h('p', {},
-                'It wasn\'t obvious what endpoint I should be using for this.  The docs are pretty vague!  It turns out we need to use ' +
+                'It wasn\'t obvious what endpoint I should be using for this.  The docs are pretty vague!  It turns out we need to use ',
                 h('code', {}, 'https://ollama.com/api/chat'),
                 '.'
             ),
