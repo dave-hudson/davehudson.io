@@ -189,7 +189,9 @@ function blogArticle_2025_08_09(): VElement[] {
             h('h2', {}, 'Wrapping up'),
             h('p', {},
                 'Only time will tell if this approach works well or not. I\'m hopeful, however, that if I\'m not doing exactly ' +
-                'this in a few months then it will be something derived from it.'
+                'this in a few months then it will be something derived from it.  The first two notes are now available at: ',
+                h('a', {href: '/notes'}, 'notes'),
+                '.'
             ),
             h('p', {},
                 'You might ask why I\'m suddenly so keen to be sharing my research notes this way, but that\'s a story for next time!'

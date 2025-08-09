@@ -23,10 +23,10 @@ function notesArticle_2025_08_08(): VElement[] {
                 'use it and that\'s goint to cause friction for a lot of users.  It also insists on using "thinking" and that ' +
                 'makes it slow.  My usual test of "check file <x> and tell me how long ago it was last modified" requires ' +
                 '3 tool calls and takes Claude Sonnet about 10-15 seconds.  With GPT-5-nano this was 19 seconds, GPT-5-mini took ' +
-                '69 seconds, while GPT-5 took 76 seconds!'
+                '69 seconds, while GPT-5 took 76 seconds!  This might be teething issues, but it\'s not a great start.'
             ),
             h('p', {},
-                'The model also rejectst temperature settings so it\'s not possible to dial back creativity for deterministic ' +
+                'The model also rejects temperature settings so it\'s not possible to dial back creativity for deterministic ' +
                 'tasks. Pretty sure this will break a lot of other people\'s workflows.'
             )
         ),
