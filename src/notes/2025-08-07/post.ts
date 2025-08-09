@@ -155,10 +155,10 @@ function notesArticle_2025_08_07(): VElement[] {
 }
 
 export const notesPost_2025_08_07 = new NotesPost(
-    'Starting the research notes',
+    '2025-08-07: Starting my research notes',
     '2025-08-07',
     '/notes/2025-08-07',
-    'The first entry in my new research notes, documenting the setup of this notes section and outlining current research focus areas.',
+    '2025-08-07: The first entry in my new research notes.',
     null,
     null,
     notesOpening_2025_08_07,
