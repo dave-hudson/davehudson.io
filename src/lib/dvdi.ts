@@ -34,6 +34,7 @@ interface HTMLAttributes {
     href?: string;
     id?: string;
     name?: string;
+    rel?: string;
     role?: string;
     src?: string;
     style?: string;

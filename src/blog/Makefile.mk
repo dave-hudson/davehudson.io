@@ -33,6 +33,7 @@ include src/blog/2025-03-28/Makefile.mk
 include src/blog/2025-04-04/Makefile.mk
 include src/blog/2025-04-24/Makefile.mk
 include src/blog/2025-06-01/Makefile.mk
+include src/blog/2025-08-09/Makefile.mk
 
 TS_FILES += \
 	src/blog/BlogPost.ts \

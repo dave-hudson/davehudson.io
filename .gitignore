@@ -19,4 +19,5 @@ package-lock.json
 # Humbug files
 /conversations
 /.humbug
+/temp
 
