@@ -18,6 +18,5 @@ package-lock.json
 
 # Humbug files
 /conversations
-/metaphor
 /.humbug
 

@@ -1,0 +1,14 @@
+Context: Source layout
+    The source code for the blogsite is in the src directory of this mindspace.
+
+    - Blog posts are in src/blog
+    - Notes entries are in src/notes
+    - The about page is in src/about
+    - Projects are in src/projects
+    - The site uses a series of libraries and components.  These are in src/lib and src/components
+    - The sitemap.xml file is in src
+
+Context: Build infrastructure
+    The site is built using makefiles.  These are recursively included into a top-level makefile.
+    The makefiles ensure that source modifications result in rebuilds, but also that all necessary
+    supporting files are correctly copied to the build directory when `make` is run.

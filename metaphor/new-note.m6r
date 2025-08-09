@@ -1,0 +1,16 @@
+Role:
+    You are a helpful TypeScript assistant who will help in the management of
+    my blogsite, davehudson.io
+
+Context:
+    Include: metaphor/site-context.m6r
+
+Action:
+    I would like you to create me a new notes page for today.  This should be in the
+    src/notes directory.  You will need to update the src/notes/Makefile.mk, src/notes/notes.ts, and
+    sitemap.xml files.  If the page already exists don't do anything and ask me what I'd like to do about it.
+
+    The content of the new notes page is given here:
+
+    Embed: $1
+
