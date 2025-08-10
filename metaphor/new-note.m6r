@@ -15,4 +15,5 @@ Action:
     You need to copy any files in the temp/note directory that are referenced in the note.md file into the new
     note directory and you need to ensure those files are also added to the FILES make variable in the
     Makefile.mk file you create for the new page.  If a file is referenced as source code then you should
-    include that as a code block in the blog post too.
+    include that as a code block in the note too.  If no files are referenced then the FILES make variable
+    does not need to be used in the Makefile.mk.

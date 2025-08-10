@@ -10,7 +10,10 @@ Action:
     src/blog directory.  You will need to update the src/blog/Makefile.mk, src/blog/blog.ts, and
     sitemap.xml files.  If the page already exists don't do anything and ask me what I'd like to do about it.
 
-    The content of the new notes page is given here:
+    The content of the blog post is in the file temp/blog/post.md
 
-    Embed: $1
-
+    You need to copy any files in the temp/blog directory that are referenced in the post.md file into the new
+    note directory and you need to ensure those files are also added to the FILES make variable in the
+    Makefile.mk file you create for the new page.  If a file is referenced as source code then you should
+    include that as a code block in the post too.  If no files are referenced then the FILES make variable
+    does not need to be used in the Makefile.mk.
