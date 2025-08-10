@@ -33,6 +33,10 @@ function notesArticle_2025_08_10(): VElement[] {
             h('h2', {}, 'A path to an AI operating system'),
             h('p', {},
                 'Started writing about what I want from an AI operating system. This is the future of what I\'m planning for Humbug.'
+            ),
+            h('figure', {},
+                h('img', {src: '/notes/2025-08-10/ai-os-notes.jpeg', alt: 'AI OS Notes'}),
+                h('figcaption', {}, 'Notes on the AI operating system vision')
             )
         )
     ];
