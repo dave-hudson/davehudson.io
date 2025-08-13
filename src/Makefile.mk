@@ -10,6 +10,7 @@ include src/notes/Makefile.mk
 include src/projects/Makefile.mk
 
 FILES += \
+	src/ed47ed196d2645a3ace5016b63fa0f76.txt \
 	src/spa.html \
 	src/robots.txt \
 	src/sitemap.xml
