@@ -1,4 +1,4 @@
-import { CodeFragment } from '../../lib/code-fragments';
+import {CodeFragment} from '../../lib/code-fragments';
 import {h, VElement} from '../../lib/dvdi';
 import {NotesPost} from '../NotesPost';
 

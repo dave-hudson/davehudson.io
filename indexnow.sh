@@ -1,6 +1,6 @@
 #!/bin/sh
 
-curl -X POST https://api.indexnow.org/IndexNow \
+curl -X POST https://api.indexnow.org/indexnow \
   -i \
   -H "Content-Type: application/json; charset=utf-8" \
   -d '{
