@@ -17,3 +17,6 @@ Action:
     Makefile.mk file you create for the new page.  If a file is referenced as source code then you should
     include that as a code block in the post too.  If no files are referenced then the FILES make variable
     does not need to be used in the Makefile.mk.
+
+    If you need to add code fragments or code files, use the CodeFragment component to do this.  Do not use
+    `pre` blocks, because CodeFragment can do syntax highlighting and has nicer formatting.

@@ -10,8 +10,8 @@ function sunMoonIcon(isSun: boolean, clickCallback: (isSun: boolean) => void) {
     return h('button', {
             className: 'icon theme-toggle',
             id: isSun ? 'dark-mode-sun' : 'dark-mode-moon',
-            'aria-label': isSun ? 'Light mode' : 'Dark mode',
-            onclick: () => clickCallback(!isSun)
+            'aria-label': isSun ? 'Switch to dark mode' : 'Switch to light mode',
+            onclick: () => clickCallback(isSun)
         },
         isSun ? sunIcon() : moonIcon()
     );
@@ -43,12 +43,13 @@ export function pageHeader(): VNode {
         const htmlElement = document.documentElement;
         
         if (dark === true) {
+            // Dark mode: show moon icon, hide sun icon
             if (darkModeSun) {
-                darkModeSun.style.display = '';
+                darkModeSun.style.display = 'none';
             }
 
             if (darkModeMoon) {
-                darkModeMoon.style.display = 'none';
+                darkModeMoon.style.display = '';
             }
 
             htmlElement.setAttribute('data-theme', 'dark');
@@ -59,12 +60,13 @@ export function pageHeader(): VNode {
                 localStorage.setItem('darkTheme', 'dark');
             }
         } else {
+            // Light mode: show sun icon, hide moon icon
             if (darkModeSun) {
-                darkModeSun.style.display = 'none';
+                darkModeSun.style.display = '';
             }
 
             if (darkModeMoon) {
-                darkModeMoon.style.display = '';
+                darkModeMoon.style.display = 'none';
             }
 
             htmlElement.setAttribute('data-theme', 'light');
