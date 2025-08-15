@@ -121,7 +121,7 @@ export function projectsPage(): VNode {
                         h('section', {},
                             h('h2', {},
                                 h('a', {
-                                        href: ('/projects/Liquorice'),
+                                        href: ('/projects/liquorice'),
                                         onclick: (e: MouseEvent) => navigateEvent(e, '/projects/liquorice')
                                     },
                                     'Liquorice'

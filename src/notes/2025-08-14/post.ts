@@ -94,7 +94,7 @@ function notesArticle_2025_08_14(): VElement[] {
 }
 
 export const notesPost_2025_08_14 = new NotesPost(
-    '2025-08-14: Humbug development',
+    '2025-08-14: Improving Humbug mindspace views',
     '2025-08-14',
     '/notes/2025-08-14',
     '2025-08-14: Notes on Humbug development including extending the mindspace view with expandable sections and profiling performance bottlenecks in the file view.',
