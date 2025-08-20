@@ -53,8 +53,8 @@ function blogArticle_2025_06_01(): VElement[] {
             ),
             h('figure', {},
                 h('div', {
-                    style: 'position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000;'
-                },
+                        style: 'position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%;'
+                    },
                     h('iframe', {
                         src: 'https://www.youtube.com/embed/Q0BGCs_4flk',
                         style: 'position: absolute; top: 0; left: 0; width: 100%; height: 100%;',
