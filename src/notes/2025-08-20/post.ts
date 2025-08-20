@@ -108,7 +108,7 @@ function notesArticle_2025_08_20(): VElement[] {
                 'from the context menu but aren\'t the default, since no files would naturally default to a wiki view being their primary ' +
                 'interaction.'
             ),
-            h('h3', {}, '`delegate_ai` tool changes'),
+            h('h3', {}, 'delegate_ai tool changes'),
             h('p', {},
                 'The ', h('code', {}, 'delegate_ai'), ' tool has a revised description. This should make it much more effective and avoid some weird problems ' +
                 'where one child AI would often spawn another.'
