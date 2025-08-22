@@ -30,6 +30,14 @@ export function projectHumbugPage(): VNode {
                         h('p', {},
                             'We need to rethink our approach to security, privacy, and trust.'
                         ),
+                        h('figure', {},
+                            h('img', {
+                                    src: '/projects/humbug/v0.22-demo.gif',
+                                    alt: 'A quick demo of Humbug v0.22'
+                                }
+                            ),
+                            h('figcaption', {}, 'A quick demo of Humbug v0.22')
+                        ),
                         h('section', {},
                             h('h2', {}, 'Background'),
                             h('p', {},
@@ -39,12 +47,29 @@ export function projectHumbugPage(): VNode {
                                 'AI changes the game.'
                             ),
                             h('p', {},
+                                'The blog post, "',
+                                h('a', {href: '/blog/2025-08-11', target: '_blank'},
+                                    'A path to an AI operating system'
+                                ),
+                                '" outlines some of my thoughts on why AI changes many long-standing assumptions.'
+                            )
+                        ),
+                        h('section', {},
+                            h('h2', {}, 'More information'),
+                            h('p', {},
                                 'You can find out more about the project on GitHub: ',
                                 h('a', {href: 'https://github.com/m6r-ai/humbug', target: '_blank'},
                                     'https://github.com/m6r-ai/humbug'
                                 ),
                                 '.'
                             ),
+                            h('p', {},
+                                'This site also hosts more information in the ',
+                                h('a', {href: '/blog'}, 'blog'),
+                                ' area.  I also started keeping design notes in the ',
+                                h('a', {href: '/notes'}, 'notes'),
+                                ' section.'
+                            )
                         ),
                         h('section', {},
                             h('h2', {}, 'Source code and binaries'),
@@ -55,7 +80,7 @@ export function projectHumbugPage(): VNode {
                                 )
                             ),
                             h('p', {},
-                                'MacOS binaries for the latest release can be found on the GitHub releases page: ',
+                                'MacOS binaries for each release can be found on the GitHub releases page: ',
                                 h('a', {href: 'https://github.com/m6r-ai/humbug/releases', target: '_blank'},
                                     'https://github.com/m6r-ai/humbug/releases'
                                 ),
