@@ -19,4 +19,5 @@ Action:
     does not need to be used in the Makefile.mk.
 
     If you need to add code fragments or code files, use the CodeFragment component to do this.  Do not use
-    `pre` blocks, because CodeFragment can do syntax highlighting and has nicer formatting.
+    `pre` blocks, because CodeFragment can do syntax highlighting and has nicer formatting.  Don't include
+    any components you don't need.
