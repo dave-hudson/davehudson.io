@@ -35,8 +35,9 @@ function notesArticle_2025_09_11(): VElement[] {
                 'but Claude did correctly narrow down where the change was needed.'
             ),
             h('p', {},
-                'In the end we added code to interpret ', h('code', {}, '\\uXXXX'), ' as a control character as long as the XXXX was less than 0x20 ' +
-                '(i.e. non printable). I also updated the tool description to tell it to use this format for control characters.'
+                'In the end, Claude and I added code to interpret ', h('code', {}, '\\uXXXX'), ' as a control character as long as the XXXX ' +
+                'was less than 0x20 (i.e. non printable). I also updated the tool description to tell it to use this format for control ' +
+                'characters.'
             )
         ),
         h('section', {},
