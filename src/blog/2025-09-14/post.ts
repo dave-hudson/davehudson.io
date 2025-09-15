@@ -117,7 +117,7 @@ function blogArticle_2025_09_14(): VElement[] {
                 h('img', {
                     src: '/blog/2025-09-14/terminal.webp',
                     alt: 'Example of a Humbug terminal showing a command line interface',
-                    style: 'max-width: 100%; height: auto;'
+                    style: 'width: 100%; height: auto;'
                 }),
                 h('figcaption', {},
                     'An example of a Humbug terminal'
@@ -168,7 +168,7 @@ function blogArticle_2025_09_14(): VElement[] {
                 h('img', {
                     src: '/blog/2025-09-14/conversation.webp',
                     alt: 'Example of a Humbug conversation showing an AI chat interface',
-                    style: 'max-width: 100%; height: auto;'
+                    style: 'width: 100%; height: auto;'
                 }),
                 h('figcaption', {},
                     'An example of a Humbug conversation'
@@ -288,7 +288,7 @@ function blogArticle_2025_09_14(): VElement[] {
                 h('img', {
                     src: '/blog/2025-09-14/recipe1.webp',
                     alt: 'Screenshot showing the start of the conversation with Claude about designing the agentic terminal',
-                    style: 'max-width: 100%; height: auto;'
+                    style: 'width: 100%; height: auto;'
                 }),
                 h('figcaption', {},
                     'The start of the conversation'
@@ -302,7 +302,7 @@ function blogArticle_2025_09_14(): VElement[] {
                 h('img', {
                     src: '/blog/2025-09-14/recipe2.webp',
                     alt: 'Screenshot showing me clarifying the requirements with Claude',
-                    style: 'max-width: 100%; height: auto;'
+                    style: 'width: 100%; height: auto;'
                 }),
                 h('figcaption', {},
                     'Me clarifying things'
@@ -328,7 +328,7 @@ function blogArticle_2025_09_14(): VElement[] {
                 h('img', {
                     src: '/blog/2025-09-14/recipe3.webp',
                     alt: 'Screenshot showing Claude asking for clarification on implementation details',
-                    style: 'max-width: 100%; height: auto;'
+                    style: 'width: 100%; height: auto;'
                 }),
                 h('figcaption', {},
                     'Claude asking for clarification on a few points'
@@ -386,7 +386,7 @@ function blogArticle_2025_09_14(): VElement[] {
                 h('img', {
                     src: '/blog/2025-09-14/fix.jpeg',
                     alt: 'Screenshot showing Claude fixing its own code after running mypy',
-                    style: 'max-width: 100%; height: auto;'
+                    style: 'width: 100%; height: auto;'
                 }),
                 h('figcaption', {},
                     'Claude fixing its own code'
@@ -495,34 +495,46 @@ function blogArticle_2025_09_14(): VElement[] {
             h('h2', {}, 'Here\'s what I hope you take away from this'),
             h('ul', {},
                 h('li', {},
-                    'Starting with conversation is way more effective than starting with code. This lets you and the LLM explore a problem ' +
-                    'and get clarity before the implementation gets in the way.'
+                    h('p', {},
+                        'Starting with conversation is way more effective than starting with code. This lets you and the LLM explore a problem ' +
+                        'and get clarity before the implementation gets in the way.'
+                    )
                 ),
                 h('li', {},
-                    'Architecture matters. If you don\'t understand the code you can\'t engage in these sorts of discussions. Engineering ' +
-                    'is a discipline that allows a shared understanding between humans and LLMs. If a design is cluttered and confused then ' +
-                    'that understanding will not emerge.'
+                    h('p', {},
+                        'Architecture matters. If you don\'t understand the code you can\'t engage in these sorts of discussions. Engineering ' +
+                        'is a discipline that allows a shared understanding between humans and LLMs. If a design is cluttered and confused then ' +
+                        'that understanding will not emerge.'
+                    )
                 ),
                 h('li', {},
-                    'As the joke goes, "there are 2 hard problems in computers: cache invalidation, naming things, and off by one errors". ' +
-                    'Naming really does matter though. LLMs will use names as hints, just as humans do. LLMs may run on the same hardware ' +
-                    'as compilers and interpreters, but they don\'t act like them!'
+                    h('p', {},
+                        'As the joke goes, "there are 2 hard problems in computers: cache invalidation, naming things, and off by one errors". ' +
+                        'Naming really does matter though. LLMs will use names as hints, just as humans do. LLMs may run on the same hardware ' +
+                        'as compilers and interpreters, but they don\'t act like them!'
+                    )
                 ),
                 h('li', {},
-                    'Beware unexpected interactions. If descriptions are ambiguous then we can see what look like innocuous statements in ' +
-                    'one part of a context window having unexpected impacts in another part.'
+                    h('p', {},
+                        'Beware unexpected interactions. If descriptions are ambiguous then we can see what look like innocuous statements in ' +
+                        'one part of a context window having unexpected impacts in another part.'
+                    )
                 ),
                 h('li', {},
-                    'Agentic systems are pretty cool but need a different thought process to conventional software. They\'re very tricky ' +
-                    'to build, however, because they\'re not predictable in a way we\'re used to seeing with computers in the past. Getting ' +
-                    'them to do things consistently is like working with people. Some people may "get" something immediately, others may need it ' +
-                    'explaining a different way.'
+                    h('p', {},
+                        'Agentic systems are pretty cool but need a different thought process to conventional software. They\'re very tricky ' +
+                        'to build, however, because they\'re not predictable in a way we\'re used to seeing with computers in the past. Getting ' +
+                        'them to do things consistently is like working with people. Some people may "get" something immediately, others may need it ' +
+                        'explaining a different way.'
+                    )
                 ),
                 h('li', {},
-                    'LLMs can compress the time to build a body of code very significantly. The work I got done in 30 minutes would probably ' +
-                    'have taken me a day or more by hand, but once we got into the subtle issues my LLMs just become a sounding board, ' +
-                    'albeit one that can look things up for me very quickly. Achieving polished results may well become the new limiting ' +
-                    'step in software development because we\'ve not accelerated that part very much yet.'
+                    h('p', {},
+                        'LLMs can compress the time to build a body of code very significantly. The work I got done in 30 minutes would probably ' +
+                        'have taken me a day or more by hand, but once we got into the subtle issues my LLMs just become a sounding board, ' +
+                        'albeit one that can look things up for me very quickly. Achieving polished results may well become the new limiting ' +
+                        'step in software development because we\'ve not accelerated that part very much yet.'
+                    )
                 )
             ),
             h('p', {},
