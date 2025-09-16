@@ -202,35 +202,10 @@ function blogArticle_2025_09_14(): VElement[] {
                 'to do something the tool will not support (e.g. writing outside a project mindspace) then it will be auto-rejected. For ' +
                 'anything else it will ask the user via a callback into the GUI.'
             ),
-            h('section', {},
-                h('h3', {}, '<An aside about tools>'),
-                h('p', {},
-                    'Humbug\'s tools are all built-in. It doesn\'t currently support something like MCP. At some point I will probably add MCP ' +
-                    'support, but not until I solve an interesting problem.'
-                ),
-                h('p', {},
-                    'All tools follow a similar pattern. They all describe what they do, and the arguments an LLM needs to pass to use them. ' +
-                    'All this information is provided behind the scenes in the prompt to the LLM when you submit a message, but this means that ' +
-                    'information is in the context the LLM is processing. What this does mean, however, is tool descriptions in one tool can ' +
-                    'end up confusing an LLM about the behaviour of other tools if we\'re not very careful. That confusion won\'t affect all ' +
-                    'models the same way either.'
-                ),
-                h('p', {},
-                    'A good example of this is while I was testing the agentic terminal yesterday to get it to control ',
-                    h('code', {}, 'vi'),
-                    ' interactively, ' +
-                    'Claude Sonnet 4 understood it could do this, but gpt-oss:120b was convinced it couldn\'t because an unrelated tool ' +
-                    '(the filesystem tool) mentioned a sandbox.'
-                ),
-                h('p', {},
-                    'I suspect some of the problems reported about some uses of MCP are down to this same combinatorial problem.'
-                ),
-                h('h3', {}, '</An aside about tools>'),
-            ),
             h('p', {},
-                'Humbug already had tools that give LLMs some control over the GUI. The original "system" tool let it open different types ' +
-                'of tabs, move them, and close them. This was a fun trick as you\'d sometime see an LLM open an editor tab to show you ' +
-                'something it had just written. Importantly, however, this meant there was already a tool that could create terminals ' +
+                'Humbug already had tools to give LLMs some control over the GUI. The original "system" tool let it open different types ' +
+                'of tabs, move them, and close them. This was a fun trick, and you\'d sometimes see an LLM open an editor tab to show you ' +
+                'something it had just written. This did mean, however, there was already a tool that could create terminals ' +
                 'and get a unique identifier for each one.'
             ),
             h('p', {},
@@ -433,7 +408,14 @@ function blogArticle_2025_09_14(): VElement[] {
                 ' went a long way to improving things.'
             ),
             h('p', {},
-                'I wouldn\'t say the agentic terminal is perfect yet, but it now seems to work pretty well!'
+                'A variant on this theme was gpt-oss:120b was convinced it couldn\'t use the terminal interactively because an unrelated tool ' +
+                '(the filesystem tool) mentioned a sandbox.  It took this to mean everything was sandboxed, so I had to update the filesystem ' +
+                'tool description to make the type of sandboxing clearer.'
+            ),
+            h('p', {},
+                'I\'ve always erred on the side of making Humbug\'s tools small and orthogonal to try to avoid LLMs becoming confused about ' +
+                'which one to use, but this is more art than science. I suspect some problems I\'ve seen reported with MCP (in other tools) ' +
+                'may be down to this same type of combinatorial problem.'
             )
         ),
         h('section', {},
@@ -510,8 +492,8 @@ function blogArticle_2025_09_14(): VElement[] {
                 h('li', {},
                     h('p', {},
                         'As the joke goes, "there are 2 hard problems in computers: cache invalidation, naming things, and off by one errors". ' +
-                        'Naming really does matter though. LLMs will use names as hints, just as humans do. LLMs may run on the same hardware ' +
-                        'as compilers and interpreters, but they don\'t act like them!'
+                        'Naming really does matter though. LLMs are not like compilers and interpreters, and will use names as hints, just as humans ' +
+                        'do.'
                     )
                 ),
                 h('li', {},
@@ -522,8 +504,8 @@ function blogArticle_2025_09_14(): VElement[] {
                 ),
                 h('li', {},
                     h('p', {},
-                        'Agentic systems are pretty cool but need a different thought process to conventional software. They\'re very tricky ' +
-                        'to build, however, because they\'re not predictable in a way we\'re used to seeing with computers in the past. Getting ' +
+                        'Agentic systems are pretty cool but need a different thought process to conventional software. They\'re a little tricky ' +
+                        'to build because they\'re not predictable in a way we\'re used to seeing with computers in the past. Getting ' +
                         'them to do things consistently is like working with people. Some people may "get" something immediately, others may need it ' +
                         'explaining a different way.'
                     )
@@ -536,6 +518,9 @@ function blogArticle_2025_09_14(): VElement[] {
                         'step in software development because we\'ve not accelerated that part very much yet.'
                     )
                 )
+            ),
+            h('p', {},
+                'I wouldn\'t say the agentic terminal is perfect yet, but it now seems to work pretty well!'
             ),
             h('p', {},
                 'If you\'re interested in the design, why not take a look. The ',
