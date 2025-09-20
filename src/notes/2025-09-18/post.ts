@@ -72,7 +72,7 @@ function notesArticle_2025_09_18(): VElement[] {
 }
 
 export const notesPost_2025_09_18 = new NotesPost(
-    '2025-09-18: Daily notes and polishing v0.26',
+    '2025-09-18: Daily notes and more AIFPL',
     '2025-09-18',
     '/notes/2025-09-18',
     'Daily notes and more AIFPL',
