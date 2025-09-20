@@ -4,7 +4,7 @@ import {NotesPost} from '../NotesPost';
 function notesOpening_2025_09_18(): VElement[] {
     return [
         h('p', {},
-            'Daily notes and polishing v0.26'
+            'Daily notes and more AIFPL'
         )
     ];
 }
@@ -75,7 +75,7 @@ export const notesPost_2025_09_18 = new NotesPost(
     '2025-09-18: Daily notes and polishing v0.26',
     '2025-09-18',
     '/notes/2025-09-18',
-    'Daily notes and polishing v0.26',
+    'Daily notes and more AIFPL',
     null,
     null,
     notesOpening_2025_09_18,
