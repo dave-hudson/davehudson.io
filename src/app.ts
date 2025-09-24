@@ -46,6 +46,22 @@ function homePage(): VNode {
                             ),
                             h('article', {},
                                 h('h2', {},
+                                    h('a', {href: '/projects/aifpl', onclick: (e: MouseEvent) => navigateEvent(e, '/projects/aifpl')}, 'AIFPL')
+                                ),
+                                h('p', {},
+                                    'AIFPL is a pure functional, higher-order, programming language designed for use by AIs.'
+                                ),
+                                h('p', {},
+                                    'Inspired by Lisp, AIFPL is designed to offer LLMs a powerful programming model that can be safely used unsupervised.'
+                                ),
+                                h('p', {},
+                                    h('em', {},
+                                        h('a', {href: '/projects/aifpl', onclick: (e: MouseEvent) => navigateEvent(e, '/projects/aifpl')}, '[find out more]')
+                                    )
+                                )
+                            ),
+                            h('article', {},
+                                h('h2', {},
                                     h('a', {href: '/projects/metaphor', onclick: (e: MouseEvent) => navigateEvent(e, '/projects/metaphor')}, 'Metaphor')
                                 ),
                                 h('p', {},

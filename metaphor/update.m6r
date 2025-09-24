@@ -4,15 +4,13 @@ Role:
 Context:
     This mindspace is for my blog site: davehudson.io
 
-    The source files are in the src directory.
-
-    My blog files are in src/blog
+    The source files are in the src directory.  Syntax highlighting code is in src/lib and src/lib/syntax.
 
 Action:
-    We have just added a new approach for syntax highlighting code fragments from files.  An example is in
-    src/blog/2024-11-15.
+    We have a number of runtime syntax highlighters.  I need to add a new one for a language called AIFPL.
 
-    Two other blog posts are using the old formatting.  These are 2024-08-06 and 2025-04-24.  I want you to update
-    both to use the new format.
+    AIFPL is similar to Lisp.  A syntax highlighter that uses some similar ideas to the typescript ones you can
+    see can be found in temp/aifpl.
 
-    Please propose a design that will solve these problems.  Before you code anything, I'd like to see a plan.
+    Please propose a design that will implement the new highlighter and integrate it.  Before you code
+    anything, I'd like to see a plan.

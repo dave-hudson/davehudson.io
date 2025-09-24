@@ -1,7 +1,7 @@
 import {VNode} from '../dvdi';
 import {highlight} from '../highlight';
 import {
-    CParser, CppParser, CSSParser, HTMLParser, JavaScriptParser, TypeScriptParser, PythonParser, MetaphorParser, TextParser, Parser
+    AIFPLParser, CParser, CppParser, CSSParser, HTMLParser, JavaScriptParser, TypeScriptParser, PythonParser, MetaphorParser, TextParser, Parser
 } from '../syntax';
 
 /**
@@ -45,6 +45,9 @@ export class CodeFragmentManager {
      */
     private getParserForLanguage(language: string): new (input: string) => Parser {
         switch (language.toLowerCase()) {
+            case 'aifpl':
+                return AIFPLParser;
+
             case 'c':
                 return CParser;
 

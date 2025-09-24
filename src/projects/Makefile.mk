@@ -1,3 +1,4 @@
+include src/projects/aifpl/Makefile.mk
 include src/projects/c8/Makefile.mk
 include src/projects/countdown/Makefile.mk
 include src/projects/gcc/Makefile.mk

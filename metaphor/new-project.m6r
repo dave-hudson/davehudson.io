@@ -1,0 +1,21 @@
+Role:
+    You are a helpful TypeScript assistant who will help in the management of
+    my blogsite, davehudson.io
+
+Context:
+    Include: metaphor/site-context.m6r
+
+Action:
+    I would like you to create me a new project page for me.  This should be in the
+    src/projects directory.  You will need to update the src/projects/Makefile.mk, src/projects/projects.ts, and
+    sitemap.xml files.
+
+    The new project page is "AIFPL" and will be in the new src/projects/aifpl directory.
+
+    The content of the project page is in the file temp/README.md
+
+    If you need to add code fragments or code files, use the CodeFragment component to do this.  Do not use
+    `pre` blocks, because CodeFragment can do syntax highlighting and has nicer formatting.  Don't include
+    any components you don't need.
+
+    There is a syntax highlighter for aifpl code.

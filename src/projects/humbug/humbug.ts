@@ -55,6 +55,20 @@ export function projectHumbugPage(): VNode {
                             )
                         ),
                         h('section', {},
+                            h('h2', {}, 'Related projects'),
+                            h('p', {},
+                                'Humbug incorporates several other projects I\'m working on, including:',
+                            ),
+                            h('ul', {},
+                                h('li', {},
+                                    h('a', {href: '/projects/aifpl', target: '_blank'}, 'AIFPL')
+                                ),
+                                h('li', {},
+                                    h('a', {href: '/projects/metaphor', target: '_blank'}, 'Metaphor')
+                                )
+                            )
+                        ),
+                        h('section', {},
                             h('h2', {}, 'More information'),
                             h('p', {},
                                 'You can find out more about the project on GitHub: ',
@@ -66,7 +80,7 @@ export function projectHumbugPage(): VNode {
                             h('p', {},
                                 'This site also hosts more information in the ',
                                 h('a', {href: '/blog'}, 'blog'),
-                                ' area.  I also started keeping design notes in the ',
+                                ' area.  You can also find design notes published since early August 2025 in the ',
                                 h('a', {href: '/notes'}, 'notes'),
                                 ' section.'
                             )

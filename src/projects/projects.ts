@@ -2,6 +2,7 @@ import {h, VNode} from '../lib/dvdi';
 import {pageHeader, pageFooter, hero} from "../lib/page";
 import {navigateEvent, routeDetails} from '../app';
 import {ProjectPage} from './ProjectPage';
+import {projectAIFPL} from './aifpl/aifpl';
 import {projectC8} from './c8/c8';
 import {projectCountdown} from './countdown/countdown';
 import {projectGcc} from './gcc/gcc';
@@ -14,6 +15,7 @@ import {projectVSTa} from './vsta/vsta';
 
 // Enumerate all the blog content served up here.  Newest content goes at the end.
 const projectsContent: ProjectPage[] = [
+    projectAIFPL,
     projectC8,
     projectCountdown,
     projectGcc,
@@ -50,6 +52,19 @@ export function projectsPage(): VNode {
                             ),
                             h('p', {},
                                 'Humbug is an operating system for human/AI collaboration.'
+                            )
+                        ),
+                        h('section', {},
+                            h('h2', {},
+                                h('a', {
+                                        href: ('/projects/aifpl'),
+                                        onclick: (e: MouseEvent) => navigateEvent(e, '/projects/aifpl')
+                                    },
+                                    'AIFPL'
+                                )
+                            ),
+                            h('p', {},
+                                'A Lisp-inspired functional programming language designed specifically for AI use.'
                             )
                         ),
                         h('section', {},
