@@ -1,6 +1,7 @@
 import {h, updateElement, VNode} from './lib/dvdi';
 import {aboutPage} from './about/about';
 import {blogPage, blogSummaries, getBlogRoutes} from './blog/blog';
+import {m6rPage} from './m6r/m6r';
 import {notesPage, notesSummaries, getNotesRoutes} from './notes/notes';
 import {projectsPage, getProjectRoutes} from './projects/projects';
 import {pageHeader, pageFooter, hero} from "./lib/page";
@@ -190,6 +191,13 @@ let routes: Map<string, routeDetails> = new Map([
         description: 'A quick summary of the open source projects that Dave has developed or contributed to.',
         imageURL: 'https://davehudson.io/about/dave.webp',
         pageType: 'website'
+    }],
+    ['/m6r', {
+        title: 'M6R - Thank you for your support',
+        render: m6rPage,
+        description: 'M6R closure announcement and thanks to the community for their support of Humbug, Metaphor, and AIFPL.',
+        imageURL: 'https://davehudson.io/m6r/m6r-512x512.svg',
+        pageType: 'article'
     }]
 ]);
 

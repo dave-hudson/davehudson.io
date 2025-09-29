@@ -5,6 +5,7 @@ include src/css/Makefile.mk
 include src/fonts/Makefile.mk
 include src/icons/Makefile.mk
 include src/lib/Makefile.mk
+include src/m6r/Makefile.mk
 include src/manifest/Makefile.mk
 include src/notes/Makefile.mk
 include src/projects/Makefile.mk
