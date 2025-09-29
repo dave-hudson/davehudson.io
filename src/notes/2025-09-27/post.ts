@@ -54,7 +54,7 @@ function notesArticle_2025_09_27(): VElement[] {
 }
 
 export const notesPost_2025_09_27 = new NotesPost(
-    '2025-09-27: Ensuring AIFPL',
+    '2025-09-27: Ensuring AIFPL is robust',
     '2025-09-27',
     '/notes/2025-09-27',
     'Improving AIFPL test coverage and reflecting on architectural thinking in LLMs',
