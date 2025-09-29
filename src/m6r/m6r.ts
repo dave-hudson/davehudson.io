@@ -7,6 +7,7 @@ export function m6rPage(): VNode {
         h('main', {className: 'main'},
             hero({
                 title: 'M6R - "so long, and thanks for all the fish!"',
+                subtitle: 'Published: 2025-09-29'
             }),
             h('div', {className: 'content'},
                 h('div', {className: 'container'},
@@ -69,9 +70,8 @@ export function m6rPage(): VNode {
                             'feedback has been invaluable, and I hope you will still continue to support the now pure open-source Humbug, ' +
                             'Metaphor, AIFPL, and whatever else happens next.'
                         ),
-                        h('p', {},
-                            'Dave'
-                        )
+                        h('br', {}),
+                        h('p', {}, 'Dave')
                     )
                 )
             )
