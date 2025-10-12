@@ -16,7 +16,7 @@ export function projectAIFPLPage(): VNode {
                     h('article', {},
                         h('p', {},
                             'AIFPL is possibly one of the first programming languages designed specifically for use by an LLM rather than a human. ' +
-                            'It\'s a Lisp-inspired higher-order pure functional language, making a conscious decision to forgo regular I/O operations ' +
+                            'It\'s a Lisp-inspired, higher-order, pure functional language, making a conscious decision to forgo regular I/O operations ' +
                             'to ensure it is always safe for an AI to use, without having to worry about potential security problems.'
                         ),
                         h('p', {},
@@ -72,6 +72,26 @@ export function projectAIFPLPage(): VNode {
                                 h('li', {}, h('strong', {}, 'Booleans'), ': #t and #f with no automatic conversion'),
                                 h('li', {}, h('strong', {}, 'Lists'), ': Heterogeneous collections supporting any element type'),
                                 h('li', {}, h('strong', {}, 'Functions'), ': First-class lambda functions with lexical scoping')
+                            )
+                        ),
+                        h('section', {},
+                            h('h2', {}, 'Implementation'),
+                            h('p', {},
+                                'AIFPL has been implemented with the following considerations:'
+                            ),
+                            h('ul', {},
+                                h('li', {}, h('strong', {}, 'Written in Python'), ': Easy to read and modify, with no external dependencies'),
+                                h('li', {}, h('strong', {}, 'Correct by design'),
+                                    ': AIs will rely on this language to implement ad-hoc sequences of logic, so correctness is paramount'
+                                ),
+                                h('li', {}, h('strong', {}, 'Thoroughly tested'),
+                                    ': To help ensure correctness, AIFPL has extensive unit tests.  These cover 100% of all statements ' +
+                                    'and branches in the codebase'
+                                ),
+                                h('li', {}, h('strong', {}, 'Performance'),
+                                    ': Performance is not the primary goal.  The interpreter is reasonably efficient, but optimization work ' +
+                                    'is being deferred until more data on usage emerges.'
+                                )
                             )
                         ),
                         h('section', {},

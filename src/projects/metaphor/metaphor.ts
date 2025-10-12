@@ -22,6 +22,11 @@ export function projectMetaphorPage(): VNode {
                             'structured way. As with programming languages, Metaphor files can be included in other files, ' +
                             'allowing for modular and reusable prompt definitions.'
                         ),
+                        h('p', {},
+                            'Metaphor emphasizes the importance of context.  By providing precise context it allows users to generate prompts that focus ' +
+                            'an AI\'s attention on the specific relevant information, rather than drawing on its entire training corpus.  This ' +
+                            'dramatically reduces the chances of hallucinations and makes it much easier to get consistent results.'
+                        ),
                         h('section', {},
                             h('h2', {}, 'Metaphor and Humbug'),
                             h('p', {},

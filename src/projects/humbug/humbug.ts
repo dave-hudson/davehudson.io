@@ -55,6 +55,32 @@ export function projectHumbugPage(): VNode {
                             )
                         ),
                         h('section', {},
+                            h('h2', {}, 'Design philosophy'),
+                            h('p', {},
+                                'Humbug is designed to offer AIs a first class experience, while still catering to the needs of human users.  The UI ' +
+                                'is designed to allow both humans and AIs to interact with it, allowing for a more collaborative experience.'
+                            ),
+                            h('p', {},
+                                'As current LLMs are still prone to making serious mistakes, Humbug is designed to operate with a human in the loop.  ' +
+                                'Wherever potentially dangerous operations are performed, the human is consulted for approval, and the tool calling ' +
+                                'approvals cannot be bypassed.'
+                            ),
+                            h('p', {},
+                                'For example, an AI may read a file, but cannot write to it without human approval.  An AI may read a terminal window, ' +
+                                'but cannot type into it without human approval.'
+                            ),
+                            h('p', {},
+                                'A key aspect of this type of system is the ability for the AI to make use of tools.  Humbug\'s tool system is designed to ' +
+                                'provdide a range of orthogonal tools that can be combined to perform complex tasks.  Tools are designed with composability ' +
+                                'in mind, allowing AIs to build complex workflows from simple building blocks.'
+                            ),
+                            h('p', {},
+                                'A major expression of this concept is AIFPL (AI Functional Programming Language).  AIFPL is a pure, higher-order, ' +
+                                'functional programming language designed specifically for AIs to use to perform algorithmic tasks.  As it is side-effect ' +
+                                'free, it is safe for an AI to use without human supervision.'
+                            )
+                        ),
+                        h('section', {},
                             h('h2', {}, 'Related projects'),
                             h('p', {},
                                 'Humbug incorporates several other projects I\'m working on, including:',
