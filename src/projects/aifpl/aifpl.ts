@@ -88,9 +88,12 @@ export function projectAIFPLPage(): VNode {
                                     ': To help ensure correctness, AIFPL has extensive unit tests.  These cover 100% of all statements ' +
                                     'and branches in the codebase'
                                 ),
-                                h('li', {}, h('strong', {}, 'Performance'),
-                                    ': Performance is not the primary goal.  The interpreter is reasonably efficient, but optimization work ' +
-                                    'is being deferred until more data on usage emerges.'
+                                h('li', {}, h('strong', {}, 'Optimization'),
+                                    ': Performance is not the primary goal.  Optimization work is being deferred until more data on usage emerges.'
+                                ),
+                                h('li', {}, h('strong', {}, 'Runtime error handling'),
+                                    ': AIFPL provides detailed error messages with position information to help diagnose issues.  This is ' +
+                                    'especially important when AIs are generating code on the fly.'
                                 )
                             )
                         ),
