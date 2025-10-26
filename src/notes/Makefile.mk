@@ -30,3 +30,4 @@ include src/notes/2025-09-25/Makefile.mk
 include src/notes/2025-09-27/Makefile.mk
 include src/notes/2025-10-07/Makefile.mk
 include src/notes/2025-10-19/Makefile.mk
+include src/notes/2025-10-26/Makefile.mk
