@@ -24,12 +24,15 @@ export function projectAIFPLPage(): VNode {
                             'software development.'
                         ),
                         h('p', {},
+                            'The language was designed from scratch, so while it draws a lot of inspiration from Lisp, it also has some key differences.'
+                        ),
+                        h('p', {},
                             'The code is currently integrated within ',
                             h('a', {href: '/projects/humbug'}, 'Humbug'),
                             ' but is designed to stand alone. It is implemented in Python, but has no dependencies other than the Python standard library.'
                         ),
                         h('section', {},
-                            h('h2', {}, 'Design Principles'),
+                            h('h2', {}, 'Architecture and design principles'),
                             h('ol', {},
                                 h('li', {}, h('strong', {}, 'Pure List Representation'), ': Everything is data, following traditional Lisp philosophy'),
                                 h('li', {}, h('strong', {}, 'Functional Programming'), ': First-class functions, immutable data, no side effects'),
@@ -38,31 +41,18 @@ export function projectAIFPLPage(): VNode {
                                 h('li', {}, h('strong', {}, 'Type Safety'), ': Comprehensive type hints and strict type checking'),
                                 h('li', {}, h('strong', {}, 'Error Handling'), ': Detailed error messages with position information'),
                                 h('li', {}, h('strong', {}, 'Performance'), ': Efficient evaluation with automatic optimizations'),
-                                h('li', {}, h('strong', {}, 'LISP Compatibility'), ': Following traditional LISP semantics where applicable'),
+                                h('li', {}, h('strong', {}, 'Lists not cons cells'), ': Lists are first-class citizens, and there is no separate cons cell type'),
+                                h('li', {}, h('strong', {}, 'Lisp Compatibility'), ': Following traditional Lisp semantics where applicable'),
                                 h('li', {}, h('strong', {}, 'Lazy Evaluation'), ': Conditionals and boolean operators use lazy evaluation'),
                                 h('li', {}, h('strong', {}, 'Independence'), ': No dependencies on external packages'),
                                 h('li', {}, h('strong', {}, 'Simplicity'), ': Direct S-expression evaluation without over-engineering'),
                                 h('li', {}, h('strong', {}, 'Homoiconicity'), ': Code and data use identical representations'),
+                                h('li', {}, h('strong', {}, 'No special AST nodes'), ': Lambda expressions, let expressions, and function calls are all just lists'),
                                 h('li', {}, h('strong', {}, 'Syntactic Sugar'), ': Single quote shortcut provides convenient syntax while maintaining pure list representation')
                             )
                         ),
                         h('section', {},
-                            h('h2', {}, 'Architecture'),
-                            h('p', {},
-                                'AIFPL uses a ',
-                                h('strong', {}, 'pure list representation'),
-                                ' for all code, following traditional Lisp philosophy:'
-                            ),
-                            h('ul', {},
-                                h('li', {}, h('strong', {}, 'Everything is data'), ': Code and data have identical representation (AIFPLValue objects)'),
-                                h('li', {}, h('strong', {}, 'No special AST nodes'), ': Lambda expressions, let expressions, and function calls are all just lists'),
-                                h('li', {}, h('strong', {}, 'Homoiconic'), ': The same data structures represent both code and data'),
-                                h('li', {}, h('strong', {}, 'Simple and consistent'), ': One unified representation for all expressions'),
-                                h('li', {}, h('strong', {}, 'Traditional Lisp semantics'), ': Everything is data, following Lisp philosophy')
-                            )
-                        ),
-                        h('section', {},
-                            h('h2', {}, 'Type System'),
+                            h('h2', {}, 'Type system'),
                             h('p', {},
                                 'AIFPL has a strict type system with the following types:'
                             ),
@@ -98,8 +88,8 @@ export function projectAIFPLPage(): VNode {
                             )
                         ),
                         h('section', {},
-                            h('h2', {}, 'Basic Examples'),
-                            h('h3', {}, 'Arithmetic Operations'),
+                            h('h2', {}, 'Basic examples'),
+                            h('h3', {}, 'Arithmetic operations'),
                             CodeFragment.create({
                                 code: `; Basic arithmetic
 (+ 1 2 3)                             ; → 6
@@ -112,7 +102,7 @@ export function projectAIFPLPage(): VNode {
                                 language: 'aifpl',
                                 caption: 'Basic arithmetic operations'
                             }),
-                            h('h3', {}, 'Quote - Data Literals and Code as Data'),
+                            h('h3', {}, 'Quote - data literals and code as data'),
                             CodeFragment.create({
                                 code: `; Without quote - expression gets evaluated
 (+ 1 2 3)                             ; → 6
@@ -130,7 +120,7 @@ export function projectAIFPLPage(): VNode {
                                 language: 'aifpl',
                                 caption: 'Quote special form for data literals'
                             }),
-                            h('h3', {}, 'Lambda Functions'),
+                            h('h3', {}, 'Lambda functions'),
                             CodeFragment.create({
                                 code: `; Simple lambda functions
 ((lambda (x) (* x x)) 5)              ; → 25
@@ -151,7 +141,7 @@ export function projectAIFPLPage(): VNode {
                                 caption: 'Lambda expressions and closures'
                             }),
 
-                            h('h3', {}, 'List Operations'),
+                            h('h3', {}, 'List operations'),
                             CodeFragment.create({
                                 code: `; List construction and manipulation
 (list 1 2 3)                          ; → (1 2 3)
@@ -172,7 +162,7 @@ export function projectAIFPLPage(): VNode {
                                 caption: 'List operations and utilities'
                             }),
 
-                            h('h3', {}, 'Higher-Order Functions'),
+                            h('h3', {}, 'Higher-order functions'),
                             CodeFragment.create({
                                 code: `; Map - transform each element
 (map (lambda (x) (* x 2)) (list 1 2 3 4))   ; → (2 4 6 8)
@@ -198,7 +188,7 @@ export function projectAIFPLPage(): VNode {
                             })
                         ),
                         h('section', {},
-                            h('h3', {}, 'Type Predicates'),
+                            h('h3', {}, 'Type predicates'),
                             CodeFragment.create({
                                 code: `; Basic type checking
 (number? 42)                          ; → #t
@@ -225,7 +215,7 @@ export function projectAIFPLPage(): VNode {
                             })
                         ),
                         h('section', {},
-                            h('h2', {}, 'String Operations'),
+                            h('h2', {}, 'String operations'),
                             CodeFragment.create({
                                 code: `; String construction and manipulation
 (string-append "hello" " " "world")   ; → "hello world"
@@ -257,7 +247,7 @@ export function projectAIFPLPage(): VNode {
                             })
                         ),
                         h('section', {},
-                            h('h2', {}, 'Complex Numbers'),
+                            h('h2', {}, 'Complex numbers'),
                             CodeFragment.create({
                                 code: `; Complex number construction
 (complex 3 4)                         ; → (3+4j)
@@ -282,7 +272,7 @@ export function projectAIFPLPage(): VNode {
                             })
                         ),
                         h('section', {},
-                            h('h2', {}, 'Symbolic Programming with Quote'),
+                            h('h2', {}, 'Symbolic programming with quote'),
                             CodeFragment.create({
                                 code: `; Manipulate code structure
 (let ((expr '(+ a b c)))
@@ -314,9 +304,9 @@ export function projectAIFPLPage(): VNode {
                         ),
 
                         h('section', {},
-                            h('h2', {}, 'Advanced Features'),
-                            
-                            h('h3', {}, 'Tail Call Optimization'),
+                            h('h2', {}, 'Advanced features'),
+
+                            h('h3', {}, 'Tail call optimization'),
                             h('p', {},
                                 'AIFPL automatically optimizes tail calls to prevent stack overflow in recursive functions:'
                             ),
@@ -338,7 +328,7 @@ export function projectAIFPLPage(): VNode {
                                 caption: 'Tail call optimization for recursive functions'
                             }),
 
-                            h('h3', {}, 'Functional Data Processing'),
+                            h('h3', {}, 'Functional data processing'),
                             CodeFragment.create({
                                 code: `; Multi-step data processing pipeline
 (let ((numbers (range 1 21)))
@@ -366,7 +356,7 @@ export function projectAIFPLPage(): VNode {
                             })
                         ),
                         h('section', {},
-                            h('h2', {}, 'More Information'),
+                            h('h2', {}, 'More information'),
                             h('p', {},
                                 'AIFPL is currently integrated within the ',
                                 h('a', {href: '/projects/humbug'}, 'Humbug'),
