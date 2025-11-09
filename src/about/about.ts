@@ -38,8 +38,7 @@ export function aboutPage(): VNode {
                         ),
                         h('p', {},
                             'That journey has led me all over the world and I\'ve had the privilege of collaborating with some ' +
-                            'amazing people.  I live in North Wales (UK), but for 17 years I "commuted" to Northern California. ' +
-                            'Now my travels tend to take me to London (UK) and Abu Dhabi (UAE).'
+                            'amazing people.  I now live in Abu Dhabi (UAE), although you\'ll occasionally find me in North Wales (UK).'
                         ),
                         h('section', {},
                             h('h2', {}, 'About this site'),
@@ -57,7 +56,7 @@ export function aboutPage(): VNode {
                         h('section', {},
                             h('h2', {}, 'Privacy'),
                             h('p', {},
-                                'The site does not make use of cookies (which is why you don\'t get asked about them).  The back-end ' +
+                                'The site does not use cookies (which is why you don\'t get asked about them).  The back-end ' +
                                 'server does collect temporary logs for 28 days so I can check the site is working correctly.'
                             )
                         ),
