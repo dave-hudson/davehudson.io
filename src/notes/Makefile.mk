@@ -35,3 +35,4 @@ include src/notes/2025-11-05/Makefile.mk
 include src/notes/2025-11-07/Makefile.mk
 include src/notes/2025-11-08/Makefile.mk
 include src/notes/2025-11-09/Makefile.mk
+include src/notes/2025-11-14/Makefile.mk
