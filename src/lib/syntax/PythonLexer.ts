@@ -230,7 +230,8 @@ export class PythonLexer extends Lexer {
             ']',
             ':',
             '.',
-            ','
+            ',',
+            '\\'
         ];
 
         for (let i = 0; i < operators.length; i++) {

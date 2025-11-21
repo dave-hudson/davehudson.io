@@ -25,16 +25,16 @@ function notesArticle_2025_11_21(): VElement[] {
             ),
             CodeFragment.create({
                 language: 'python',
-                code: `        # Build description from operations
-        base_description = (
-            "The system tool let's you (the AI) control the application user interface for the user.\\n" \\
-            "The user interface is organized into columns, each containing tabs\\n\\n" \\
+                code: `# Build description from operations
+base_description = (
+    "The system tool let's you (the AI) control the application user interface for the user.\\n" \\
+    "The user interface is organized into columns, each containing tabs\\n\\n" \\
 
-            "You MUST adhere to the following RULES:\\n" \\
-            "- You MUST ONLY use editor_search to find starting or ending line/column numbers in editor tabs\\n" \\
-            "- You MUST NOT use editor_read_lines to find line/column numbers\\n"
-            "- If you attempt to use editor_delete_lines immediately after calling editor_read_lines this will be rejected"
-        )`
+    "You MUST adhere to the following RULES:\\n" \\
+    "- You MUST ONLY use editor_search to find starting or ending line/column numbers in editor tabs\\n" \\
+    "- You MUST NOT use editor_read_lines to find line/column numbers\\n"
+    "- If you attempt to use editor_delete_lines immediately after calling editor_read_lines this will be rejected"
+)`
             }),
             h('p', {},
                 'That seems pretty explicit, right? You must use ', h('code', {}, 'editor_search'), ' to work out line numbers and you must not use ', h('code', {}, 'editor_read_lines'), '.'
@@ -68,18 +68,18 @@ function notesArticle_2025_11_21(): VElement[] {
             ),
             CodeFragment.create({
                 language: 'python',
-                code: `            content = editor_tab.get_text_range(start_line, end_line)`
+                code: `content = editor_tab.get_text_range(start_line, end_line)`
             }),
             h('p', {},
-                'became this:'
+                'It became this:'
             ),
             CodeFragment.create({
                 language: 'python',
-                code: `            content = editor_tab.get_text_range(start_line, end_line)
-            context_object = {}
-            content_lines = content.splitlines()
-            for line_num, line_text in enumerate(content_lines):
-                context_object[line_num + start_line if start_line is not None else line_num + 1] = line_text`
+                code: `content = editor_tab.get_text_range(start_line, end_line)
+context_object = {}
+content_lines = content.splitlines()
+for line_num, line_text in enumerate(content_lines):
+    context_object[line_num + start_line if start_line is not None else line_num + 1] = line_text`
             }),
             h('p', {},
                 'The idea was instead of returning a string full of newlines, I\'d split the lines into a JSON structure of this form:'
