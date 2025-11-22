@@ -5,7 +5,7 @@ import {CodeFragment} from '../../lib/code-fragments/CodeFragment';
 function notesOpening_2025_11_21(): VElement[] {
     return [
         h('p', {},
-            'Sometimes LLMs are incredibly frustrating. They are amazing engines, but there are some problems it\'s impossible to get them to solve in a reliable way.'
+            'Sometimes LLMs are incredibly frustrating. They are amazing engines, but there are some problems it\'s impossible to get them to do straightforward things reliably.'
         )
     ];
 }
