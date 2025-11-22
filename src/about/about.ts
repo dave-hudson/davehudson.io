@@ -1,5 +1,6 @@
 import {h, VNode} from '../lib/dvdi';
 import {pageHeader, pageFooter, hero} from "../lib/page";
+import {navigateEvent} from '../app';
 
 export function aboutPage(): VNode {
     return h('div', {className: 'app'},
@@ -28,24 +29,50 @@ export function aboutPage(): VNode {
                         ),
                         h('p', {},
                             'I\'ve been playing with computers and writing software since I was 9 which is way more years than ' +
-                            'I care to think about. In that time I\'ve been lucky enough to work on everything from massive scale ' +
-                            'embedded systems (IoT before anyone called it that) to mainframes, and decentralised systems. ' +
-                            'Along the way, I built operating systems, network stacks, compilers, and blockchains/distributed ledgers. ' +
-                            'For a while I also helped design CPU instruction sets.'
-                        ),
-                        h('p', {},
-                            'Lately I\'ve been working with AI, looking at what it takes to build an AI operating system.'
+                            'I care to think about. In that time I\'ve been lucky enough to work on almost everything from tiny ' +
+                            'embedded systems to mainframes, and from simple stand-alone devices to vast distributed or decentralised ' +
+                            'systems. Along the way, I built operating systems, network stacks, compilers, and blockchains/distributed ' +
+                            'ledgers. For a while I also helped design CPU instruction sets.'
                         ),
                         h('p', {},
                             'That journey has led me all over the world and I\'ve had the privilege of collaborating with some ' +
-                            'amazing people.  I now live in Abu Dhabi (UAE), although you\'ll occasionally find me in North Wales (UK).'
+                            'amazing people.  I now live in Abu Dhabi (UAE), although you\'ll occasionally still find me in North Wales (UK).'
                         ),
                         h('section', {},
-                            h('h2', {}, 'About this site'),
+                            h('h2', {}, 'What is this site?'),
                             h('p', {},
                                 'This site hosts information about open source projects I\'ve been involved with, my blog, and my open ' +
                                 'source research notes.'
                             ),
+                            h('p', {},
+                                'Lately my open source work has focused on AI, looking at what it takes to build an AI operating system.'
+                            )
+                        ),
+                        h('section', {},
+                            h('h2', {}, 'Design philosophy'),
+                            h('p', {},
+                                'Over the years I have used a lot of different frameworks to host my blog site.  This one is very ' +
+                                'different.  Early in my experiments using ChatGPT to help me write code, I decided to build my own ' +
+                                'virtual DOM library so I could understand how single page applications (SPAs) work.  Over time that ' +
+                                'library has evolved into a simple component framework.  This site is built using that framework, ' +
+                                'with no third party dependencies apart from the nginx web server that serves the static files.'
+                            ),
+                            h('p', {},
+                                'While pure HTML sites are all the rage, this site has exactly 37 lines of HTML!  Everything else is ' +
+                                'generated using TypeScript.  The SPA is very fast to try to give a great user experience.'
+                            ),
+                            h('p', {},
+                                'One problem with SPAs is search engine optimisation (SEO) as they really can\'t do much with ' +
+                                'JavaScript.  To help with that I wrote a pre-rendering tool called ',
+                                h('a', {
+                                        href: ('/projects/siterender'),
+                                        onclick: (e: MouseEvent) => navigateEvent(e, '/projects/siterender')
+                                    },
+                                    'siterender'
+                                ),
+                                '.  It ensures that whatever page you first hit has been pre-rendered to give a full HTML page, but ' +
+                                'subsequent navigation is super fast as it\'s all done in the browser.'
+                            )
                         ),
                         h('section', {},
                             h('h2', {}, 'Disclaimer'),
