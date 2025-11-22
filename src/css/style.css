@@ -340,6 +340,7 @@ template {
     --syntax-html-doctype: #a0a0a0;
     --syntax-html-tag: #c040c0;
     --syntax-identifier: #4058d0;
+    --syntax-key: #a0a000;
     --syntax-keyword: #c040c0;
     --syntax-number: #c06a20;
     --syntax-operator: #404040;
@@ -385,6 +386,7 @@ template {
         --syntax-html-doctype: #808080;
         --syntax-html-tag: #ffc0eb;
         --syntax-identifier: #80b0f0;
+        --syntax-key: #e0e080;
         --syntax-keyword: #ffc0eb;
         --syntax-number: #c08040;
         --syntax-operator: #c0c0c0;
@@ -430,6 +432,7 @@ template {
     --syntax-html-doctype: #a0a0a0;
     --syntax-html-tag: #c040c0;
     --syntax-identifier: #4058d0;
+    --syntax-key: #a0a000;
     --syntax-keyword: #c040c0;
     --syntax-number: #c06a20;
     --syntax-operator: #404040;
@@ -474,6 +477,7 @@ template {
     --syntax-html-doctype: #808080;
     --syntax-html-tag: #ffc0eb;
     --syntax-identifier: #80b0f0;
+    --syntax-key: #e0e080;
     --syntax-keyword: #ffc0eb;
     --syntax-number: #c08040;
     --syntax-operator: #c0c0c0;
@@ -872,6 +876,10 @@ pre {
 
 .app .main .content .container pre code .identifier {
     color: var(--syntax-identifier);
+}
+
+.app .main .content .container pre code .json-key {
+    color: var(--syntax-key);
 }
 
 .app .main .content .container pre code .keyword {

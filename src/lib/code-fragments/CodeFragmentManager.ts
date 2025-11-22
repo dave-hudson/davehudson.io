@@ -1,7 +1,7 @@
 import {VNode} from '../dvdi';
 import {highlight} from '../highlight';
 import {
-    AIFPLParser, CParser, CppParser, CSSParser, HTMLParser, JavaScriptParser, TypeScriptParser, PythonParser, MetaphorParser, TextParser, Parser
+    AIFPLParser, CParser, CppParser, CSSParser, HTMLParser, JavaScriptParser, JSONParser, TypeScriptParser, PythonParser, MetaphorParser, TextParser, Parser
 } from '../syntax';
 
 /**
@@ -62,6 +62,9 @@ export class CodeFragmentManager {
 
             case 'javascript':
                 return JavaScriptParser;
+
+            case 'json':
+                return JSONParser;
 
             case 'metaphor':
                 return MetaphorParser;

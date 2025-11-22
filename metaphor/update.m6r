@@ -7,10 +7,10 @@ Context:
     The source files are in the src directory.  Syntax highlighting code is in src/lib and src/lib/syntax.
 
 Action:
-    We have a number of runtime syntax highlighters.  I need to add a new one for a language called AIFPL.
+    We have a number of runtime syntax highlighters.  I need to add a new one for JSON.
 
-    AIFPL is similar to Lisp.  A syntax highlighter that uses some similar ideas to the typescript ones you can
-    see can be found in temp/aifpl.
+    I wrote a JSON syntax highlighter in python using a similar sort of style to the typescript ones. You can
+    find the code in temp/json_syntax.py and temp/json_parser.py
 
     Please propose a design that will implement the new highlighter and integrate it.  Before you code
     anything, I'd like to see a plan.

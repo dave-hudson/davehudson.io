@@ -9,6 +9,7 @@ export const styles: {[key: string]: string | null} = {
     ERROR: 'error',
     FUNCTION_OR_METHOD: 'function',
     IDENTIFIER: 'identifier',
+    JSON_KEY: 'json-key',
     KEYWORD: 'keyword',
     NEWLINE: null,
     NUMBER: 'number',
