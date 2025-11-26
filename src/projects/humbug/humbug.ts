@@ -67,7 +67,12 @@ export function projectHumbugPage(): VNode {
                             ),
                             h('p', {},
                                 'For example, an AI may read a file, but cannot write to it without human approval.  An AI may read a terminal window, ' +
-                                'but cannot type into it without human approval.'
+                                'but cannot type into it without human agreeing.  As AI may edit a file in an editor window, but cannot save it without ' +
+                                'a human saying it\'s ok.'
+                            )
+                        ),
+                        h('section', {},
+                            h('h2', {}, 'Tool system'
                             ),
                             h('p', {},
                                 'A key aspect of this type of system is the ability for the AI to make use of tools.  Humbug\'s tool system is designed to ' +
@@ -78,6 +83,13 @@ export function projectHumbugPage(): VNode {
                                 'A major expression of this concept is AIFPL (AI Functional Programming Language).  AIFPL is a pure, higher-order, ' +
                                 'functional programming language designed specifically for AIs to use to perform algorithmic tasks.  As it is side-effect ' +
                                 'free, it is safe for an AI to use without human supervision.'
+                            ),
+                            h('p', {},
+                                'The tool system has taken a pragmatic approach.  Rather than trying to build a perfect system from the ground up, ' +
+                                'Humbug has been built iteratively.  New tools have been added as needed to support specific use cases, many of which ' +
+                                'have related to building the next parts of Humbug itself.  The aim is that new tools should demonstrably ' +
+                                'accelerate real problems.  It also means that some tools have already come and gone, ' +
+                                'with newer and better tools superseding them.'
                             )
                         ),
                         h('section', {},
