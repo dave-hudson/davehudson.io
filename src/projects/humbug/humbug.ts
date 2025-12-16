@@ -58,7 +58,9 @@ export function projectHumbugPage(): VNode {
                             h('h2', {}, 'Design philosophy'),
                             h('p', {},
                                 'Humbug is designed to offer AIs a first class experience, while still catering to the needs of human users.  The UI ' +
-                                'is designed to allow both humans and AIs to interact with it, allowing for a more collaborative experience.'
+                                'is designed to allow both humans and AIs to interact with it, allowing for a more collaborative experience.  As a ' +
+                                'principle, anything major operation a human can do, an AI should be able to do something equivalent, giving AIs a ' +
+                                'way to make collaborative work a two way experience.'
                             ),
                             h('p', {},
                                 'As current LLMs are still prone to making serious mistakes, Humbug is designed to operate with a human in the loop.  ' +
@@ -69,6 +71,30 @@ export function projectHumbugPage(): VNode {
                                 'For example, an AI may read a file, but cannot write to it without human approval.  An AI may read a terminal window, ' +
                                 'but cannot type into it without human agreeing.  As AI may edit a file in an editor window, but cannot save it without ' +
                                 'a human saying it\'s ok.'
+                            )
+                        ),
+                        h('section', {},
+                            h('h2', {}, 'The Humbug way of working'),
+                            h('p', {},
+                                'Humbug is designed around the idea that AIs and humans need to work together to achieve complex goals. Part of this, ' +
+                                'however, is to recognise that AIs and humans have different strengths and weaknesses, but that this is really no ' +
+                                'different to human teams that have diverse strengths and weaknesses.'
+                            ),
+                            h('p', {},
+                                'Humans are good at understanding context, driving goals, making high-level decisions, and providing creative input. ' +
+                                'AIs have incredible amounts of knowledge and an ability to process information and context orders of magnitude faster. ' +
+                                'AIs can synthesize contextual information and execute on it way faster than humans, so conversations are the focal ' +
+                                'point for collaboration.'
+                            ),
+                            h('p', {},
+                                'Just like human teams, almost everything starts with a conversation. For example you can ask an AI to solve a problem ' +
+                                'but ask it to explain how it will solve it first. Review the plan, ask questions, make suggestions, and then let the AI ' +
+                                'get on with it at speeds no human can even start to emulate.'
+                            ),
+                            h('p', {},
+                                'You don\'t step away from the process though. Almost any interesting problem will quickly lead to the AI either ' +
+                                'asking for your feedback, or for you to review and approve its work. You can explore options, ask for changes, ask ' +
+                                'for explanations, and move on to whatever comes next.'
                             )
                         ),
                         h('section', {},
@@ -90,6 +116,42 @@ export function projectHumbugPage(): VNode {
                                 'have related to building the next parts of Humbug itself.  The aim is that new tools should demonstrably ' +
                                 'accelerate real problems.  It also means that some tools have already come and gone, ' +
                                 'with newer and better tools superseding them.'
+                            ),
+                            h('p', {},
+                                'Humbug\'s current tools are:'
+                            ),
+                            h('ul', {},
+                                h('li', {}, h('strong', {}, 'AIFPL:'), ' For running AIFPL code'),
+                                h('li', {}, h('strong', {}, 'File System:'), ' For reading and writing files and directories'),
+                                h('li', {}, h('strong', {}, 'Clock:'), ' For getting the time, setting alarms, and setting timers'),
+                                h('li', {}, h('strong', {}, 'System:'), ' For interacting with the system UI tabs'),
+                                h('li', {}, h('strong', {}, 'Delegate AI:'), ' For delegating tasks to child AIs'),
+                                h('li', {}, h('strong', {}, 'Conversation:'), ' For interacting with conversational AIs in UI tabs'),
+                                h('li', {}, h('strong', {}, 'Terminal:'), ' For interacting with terminal sessions in UI tabs'),
+                                h('li', {}, h('strong', {}, 'Editor:'), ' For editing text files in UI tabs'),
+                                h('li', {}, h('strong', {}, 'Preview:'), ' For previewing content in UI tabs'),
+                                h('li', {}, h('strong', {}, 'Log:'), ' For interacting with system log messages in UI tabs'),
+                            ),
+                            h('p', {},
+                                'Notably, many of these are designed to let the AI share the UI with a human user. The AI can see what ' +
+                                'the human sees, and can control all the same things a human can control.'
+                            )
+                        ),
+                        h('section', {},
+                            h('h2', {}, 'AI backends'),
+                            h('p', {},
+                                'AI models are emerging at an incredible rate.  Humbug is designed to be able to make use of a variety of different AI backends, ' +
+                                'allowing users to choose the best model for their needs.  Humbug currently supports the following AI backends:'
+                            ),
+                            h('ul', {},
+                                h('li', {}, h('strong', {}, 'Anthropic:'), ' Support for Claude in all its variants'),
+                                h('li', {}, h('strong', {}, 'Deepseek:'), ' Support for Deepseek models'),
+                                h('li', {}, h('strong', {}, 'Google:'), ' Support for Gemini models'),
+                                h('li', {}, h('strong', {}, 'Mistral AI:'), ' Support for Mistral models'),
+                                h('li', {}, h('strong', {}, 'Ollama:'), ' Support for a huge number of open weight models'),
+                                h('li', {}, h('strong', {}, 'OpenAI:'), ' Support ChatGPT models'),
+                                h('li', {}, h('strong', {}, 'xAI:'), ' Support Grok models'),
+                                h('li', {}, h('strong', {}, 'Zai:'), ' Support for GLM models')
                             )
                         ),
                         h('section', {},
