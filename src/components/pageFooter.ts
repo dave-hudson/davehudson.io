@@ -5,7 +5,7 @@ export function pageFooter(): VNode {
     return h('footer', {className: 'footer'},
         h('div', {className: 'container'},
             h('div', {className: 'copyright'},
-                '© 2014-2025 David J. Hudson'
+                '© 2014-2026 David J. Hudson'
             ),
             h('nav', {className: 'social'},
                 h('a', {className: 'icon', href: 'https://x.com/davehudsonio', target: '_blank', title: 'X'},
