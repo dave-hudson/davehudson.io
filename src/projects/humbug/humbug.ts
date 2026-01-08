@@ -148,10 +148,29 @@ export function projectHumbugPage(): VNode {
                                 h('li', {}, h('strong', {}, 'Deepseek:'), ' Support for Deepseek models'),
                                 h('li', {}, h('strong', {}, 'Google:'), ' Support for Gemini models'),
                                 h('li', {}, h('strong', {}, 'Mistral AI:'), ' Support for Mistral models'),
-                                h('li', {}, h('strong', {}, 'Ollama:'), ' Support for a huge number of open weight models'),
+                                h('li', {}, h('strong', {}, 'Ollama:'), ' Support for a open weight models'),
                                 h('li', {}, h('strong', {}, 'OpenAI:'), ' Support ChatGPT models'),
+                                h('li', {}, h('strong', {}, 'vLLM:'), ' Support for open weight models'),
                                 h('li', {}, h('strong', {}, 'xAI:'), ' Support Grok models'),
                                 h('li', {}, h('strong', {}, 'Zai:'), ' Support for GLM models')
+                            )
+                        ),
+                        h('section', {},
+                            h('h2', {}, 'Project status'),
+                            h('p', {},
+                                'Humbug is under active development.  At the time of writing this (2026-01-08), the current version is v37.  The first version, ' +
+                                'v0.1 was released in January 2025.  Releases happen every week or two.'
+                            ),
+                            h('p', {},
+                                'One of the more interesting aspects of Humbug is that it is largely built using itself.  New features are often prototyped ' +
+                                'by AI models inside Humbug, allowing both me and the AIs to dogfood the experience and identify issues early.'
+                            ),
+                            h('p', {},
+                                'You can find the full change log on GitHub: ',
+                                h('a', {href: 'https://github.com/m6r-ai/humbug/blob/main/CHANGELOG.md', target: '_blank'},
+                                    'CHANGELOG.md'
+                                ),
+                                '.'
                             )
                         ),
                         h('section', {},
