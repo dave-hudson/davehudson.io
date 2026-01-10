@@ -217,6 +217,94 @@ export function projectAIFPLPage(): VNode {
                             })
                         ),
                         h('section', {},
+                            h('h2', {}, 'String operations'),
+                            CodeFragment.create({
+                                code: `; String construction and manipulation
+(string-append "hello" " " "world")   ; → "hello world"
+(string-length "hello")               ; → 5
+(string-upcase "hello")               ; → "HELLO"
+(string-downcase "HELLO")             ; → "hello"
+
+; String searching and testing
+(string-contains? "hello world" "world")  ; → #t
+(string-prefix? "hello" "he")             ; → #t
+(string-suffix? "hello" "lo")             ; → #t
+
+; String-list conversion
+(string->list "hello")                ; → ("h" "e" "l" "l" "o")
+(list->string (list "h" "i"))         ; → "hi"
+
+; String splitting and joining
+(string-split "name,age,city" ",")    ; → ("name" "age" "city")
+(string-join (list "hello" "world") " ")  ; → "hello world"
+
+; Advanced text processing
+(let ((clean-and-format (lambda (text)
+                          (let ((trimmed (string-trim text))
+                                (normalized (string-replace trimmed "  " " ")))
+                            (string-upcase normalized)))))
+  (clean-and-format "  hello    world  "))  ; → "HELLO  WORLD"`,
+                                language: 'aifpl',
+                                caption: 'Comprehensive string operations'
+                            })
+                        ),
+                        h('section', {},
+                            h('h2', {}, 'Complex numbers'),
+                            CodeFragment.create({
+                                code: `; Complex number construction
+(complex 3 4)                         ; → (3+4j)
+(+ 1 (* 2 j))                         ; → (1+2j)
+
+; Extract real and imaginary parts
+(real (complex 3 4))                  ; → 3
+(imag (complex 3 4))                  ; → 4
+
+; Works with all numeric types
+(real 42)                             ; → 42
+(imag 42)                             ; → 0
+(real 3.14)                           ; → 3.14
+(imag j)                              ; → 1
+
+; Complex arithmetic
+(+ (complex 1 2) (complex 3 4))       ; → (4+6j)
+(* j j)                               ; → -1
+(sqrt -1)                             ; → j`,
+                                language: 'aifpl',
+                                caption: 'Complex number operations'
+                            })
+                        ),
+                        h('section', {},
+                            h('h2', {}, 'Symbolic programming with quote'),
+                            CodeFragment.create({
+                                code: `; Manipulate code structure
+(let ((expr '(+ a b c)))
+  (first expr))                       ; → + (the operator symbol)
+
+; Build expressions programmatically
+(let ((op '+)
+      (args '(1 2 3)))
+  (cons op args))                     ; → (+ 1 2 3)
+
+; Template-based code generation
+(let ((make-adder (lambda (n)
+                    (list 'lambda 
+                         '(x) 
+                         (list '+ 'x n)))))
+  (make-adder 5))                     ; → (lambda (x) (+ x 5))
+
+; Code transformation
+(let ((transform-ops (lambda (expr)
+                       (if (list? expr)
+                           (map transform-ops expr)
+                           (if (= expr '+)
+                               '*
+                               expr)))))
+  (transform-ops '(+ 1 (+ 2 3))))     ; → (* 1 (* 2 3))`,
+                                language: 'aifpl',
+                                caption: 'Code as data - symbolic programming patterns'
+                            })
+                        ),
+                        h('section', {},
                             h('h2', {}, 'Association lists (alists)'),
                             h('p', {},
                                 'Alists provide efficient immutable key-value mappings, ideal for structured data processing:'
@@ -345,95 +433,6 @@ export function projectAIFPLPage(): VNode {
                                 caption: 'Advanced pattern matching with alists and nested patterns'
                             })
                         ),
-                        h('section', {},
-                            h('h2', {}, 'String operations'),
-                            CodeFragment.create({
-                                code: `; String construction and manipulation
-(string-append "hello" " " "world")   ; → "hello world"
-(string-length "hello")               ; → 5
-(string-upcase "hello")               ; → "HELLO"
-(string-downcase "HELLO")             ; → "hello"
-
-; String searching and testing
-(string-contains? "hello world" "world")  ; → #t
-(string-prefix? "hello" "he")             ; → #t
-(string-suffix? "hello" "lo")             ; → #t
-
-; String-list conversion
-(string->list "hello")                ; → ("h" "e" "l" "l" "o")
-(list->string (list "h" "i"))         ; → "hi"
-
-; String splitting and joining
-(string-split "name,age,city" ",")    ; → ("name" "age" "city")
-(string-join (list "hello" "world") " ")  ; → "hello world"
-
-; Advanced text processing
-(let ((clean-and-format (lambda (text)
-                          (let ((trimmed (string-trim text))
-                                (normalized (string-replace trimmed "  " " ")))
-                            (string-upcase normalized)))))
-  (clean-and-format "  hello    world  "))  ; → "HELLO  WORLD"`,
-                                language: 'aifpl',
-                                caption: 'Comprehensive string operations'
-                            })
-                        ),
-                        h('section', {},
-                            h('h2', {}, 'Complex numbers'),
-                            CodeFragment.create({
-                                code: `; Complex number construction
-(complex 3 4)                         ; → (3+4j)
-(+ 1 (* 2 j))                         ; → (1+2j)
-
-; Extract real and imaginary parts
-(real (complex 3 4))                  ; → 3
-(imag (complex 3 4))                  ; → 4
-
-; Works with all numeric types
-(real 42)                             ; → 42
-(imag 42)                             ; → 0
-(real 3.14)                           ; → 3.14
-(imag j)                              ; → 1
-
-; Complex arithmetic
-(+ (complex 1 2) (complex 3 4))       ; → (4+6j)
-(* j j)                               ; → -1
-(sqrt -1)                             ; → j`,
-                                language: 'aifpl',
-                                caption: 'Complex number operations'
-                            })
-                        ),
-                        h('section', {},
-                            h('h2', {}, 'Symbolic programming with quote'),
-                            CodeFragment.create({
-                                code: `; Manipulate code structure
-(let ((expr '(+ a b c)))
-  (first expr))                       ; → + (the operator symbol)
-
-; Build expressions programmatically
-(let ((op '+)
-      (args '(1 2 3)))
-  (cons op args))                     ; → (+ 1 2 3)
-
-; Template-based code generation
-(let ((make-adder (lambda (n)
-                    (list 'lambda 
-                         '(x) 
-                         (list '+ 'x n)))))
-  (make-adder 5))                     ; → (lambda (x) (+ x 5))
-
-; Code transformation
-(let ((transform-ops (lambda (expr)
-                       (if (list? expr)
-                           (map transform-ops expr)
-                           (if (= expr '+)
-                               '*
-                               expr)))))
-  (transform-ops '(+ 1 (+ 2 3))))     ; → (* 1 (* 2 3))`,
-                                language: 'aifpl',
-                                caption: 'Code as data - symbolic programming patterns'
-                            })
-                        ),
-
                         h('section', {},
                             h('h2', {}, 'Advanced features'),
 
