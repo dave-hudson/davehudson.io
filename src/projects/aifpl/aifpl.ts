@@ -61,6 +61,7 @@ export function projectAIFPLPage(): VNode {
                                 h('li', {}, h('strong', {}, 'Strings'), ': UTF-8 strings with no automatic conversion'),
                                 h('li', {}, h('strong', {}, 'Booleans'), ': #t and #f with no automatic conversion'),
                                 h('li', {}, h('strong', {}, 'Lists'), ': Heterogeneous collections supporting any element type'),
+                                h('li', {}, h('strong', {}, 'Alists'), ': Immutable key-value mappings with O(1) lookup performance'),
                                 h('li', {}, h('strong', {}, 'Functions'), ': First-class lambda functions with lexical scoping')
                             )
                         ),
@@ -195,6 +196,7 @@ export function projectAIFPLPage(): VNode {
 (string? "hello")                     ; → #t
 (boolean? #t)                         ; → #t
 (list? (list 1 2 3))                  ; → #t
+(alist? (alist ("key" "value")))      ; → #t
 (function? (lambda (x) (* x 2)))      ; → #t
 
 ; Specific numeric type checking
@@ -212,6 +214,135 @@ export function projectAIFPLPage(): VNode {
   (map safe-process (list 5 "hello" #t)))  ; → (25 "HELLO" "unknown type")`,
                                 language: 'aifpl',
                                 caption: 'Type predicates and type-safe programming'
+                            })
+                        ),
+                        h('section', {},
+                            h('h2', {}, 'Association lists (alists)'),
+                            h('p', {},
+                                'Alists provide efficient immutable key-value mappings, ideal for structured data processing:'
+                            ),
+                            CodeFragment.create({
+                                code: `; Construction - alist is a special form that evaluates elements
+(alist ("name" "Alice") ("age" 30) ("city" "NYC"))
+
+; Access with default values
+(let ((user (alist ("name" "Bob") ("id" 123))))
+  (list (alist-get user "name")           ; → "Bob"
+        (alist-get user "email" "N/A")))  ; → "N/A" (default)
+
+; Modification (returns new alist)
+(let ((data (alist ("x" 1) ("y" 2))))
+  (let ((updated (alist-set data "z" 3))
+        (removed (alist-remove data "x")))
+    (list updated removed)))              ; → New alists with changes
+
+; Query operations
+(let ((config (alist ("debug" #t) ("port" 8080))))
+  (list (alist-has? config "debug")       ; → #t
+        (alist-keys config)                ; → ("debug" "port")
+        (alist-values config)))            ; → (#t 8080)
+
+; Merge alists (second wins on conflicts)
+(let ((defaults (alist ("timeout" 30) ("retries" 3)))
+      (custom (alist ("timeout" 60))))
+  (alist-merge defaults custom))          ; → timeout is 60, retries is 3`,
+                                language: 'aifpl',
+                                caption: 'Basic alist operations'
+                            }),
+                            CodeFragment.create({
+                                code: `; Nested alists for structured data
+(let ((user (alist 
+               ("name" "Alice")
+               ("contact" (alist 
+                           ("email" "alice@example.com")
+                           ("phone" "555-1234")))
+               ("preferences" (alist 
+                              ("theme" "dark")
+                              ("notifications" #t))))))
+  (alist-get (alist-get user "contact") "email"))  ; → "alice@example.com"
+
+; Processing alist data with functional operations
+(let ((users (list 
+               (alist ("name" "Alice") ("age" 30))
+               (alist ("name" "Bob") ("age" 25))
+               (alist ("name" "Charlie") ("age" 35)))))
+  (let ((names (map (lambda (u) (alist-get u "name")) users))
+        (adults (filter (lambda (u) (>= (alist-get u "age") 30)) users)))
+    (list names (length adults))))        ; → (("Alice" "Bob" "Charlie") 2)
+
+; Type checking and pattern matching
+(let ((process (lambda (data)
+                 (if (alist? data)
+                     (alist-keys data)
+                     "not an alist"))))
+  (list (process (alist ("a" 1))) (process (list 1 2))))  ; → (("a") "not an alist")`,
+                                language: 'aifpl',
+                                caption: 'Advanced alist usage patterns'
+                            })
+                        ),
+                        h('section', {},
+                            h('h2', {}, 'Pattern matching'),
+                            h('p', {},
+                                'AIFPL provides powerful pattern matching with the match expression for declarative control flow:'
+                            ),
+                            CodeFragment.create({
+                                code: `; Basic literal pattern matching
+(match 42
+  (42 "found answer")
+  (0 "zero")
+  (_ "other"))                        ; → "found answer"
+
+; Type-based patterns with variable binding
+(match "hello"
+  ((number? n) (* n 2))
+  ((string? s) (string-upcase s))
+  (_ "unknown"))                      ; → "HELLO"
+
+; List destructuring patterns
+(match (list 1 2 3)
+  (() "empty")
+  ((x) "singleton")
+  ((a b c) (+ a b c))
+  (_ "other"))                        ; → 6
+
+; List head/tail patterns
+(match (list 1 2 3 4)
+  ((head . tail) 
+    (list head (length tail))))       ; → (1 3)`,
+                                language: 'aifpl',
+                                caption: 'Pattern matching basics'
+                            }),
+                            CodeFragment.create({
+                                code: `; Nested pattern matching
+(match (list 5 "hello")
+  (((number? x) (string? y)) 
+    (list (* x 2) (string-upcase y)))
+  (_ "no match"))                     ; → (10 "HELLO")
+
+; Pattern matching with alists
+(match (alist ("type" "user") ("name" "Alice"))
+  ((alist? a) (alist-get a "name"))
+  (_ "not an alist"))                 ; → "Alice"
+
+; Complex data processing with patterns
+(let ((process-data (lambda (data)
+                      (match data
+                        (42 "answer")
+                        ((number? n) (if (> n 0) "positive" "non-positive"))
+                        ((string? s) (string-length s))
+                        ((list? lst) (length lst))
+                        ((alist? a) (alist-keys a))
+                        (_ "unknown"))))
+      (test-data (list 42 -5 "hello" (list 1 2 3) (alist ("x" 1)))))
+  (map process-data test-data))       ; → ("answer" "non-positive" 5 3 ("x"))
+
+; First match wins - order matters
+(match 10
+  ((number? n) "any number")
+  (10 "ten specifically")
+  (_ "other"))                        ; → "any number" (first pattern matches)`,
+                                language: 'aifpl',
+                                caption: 'Advanced pattern matching with alists and nested patterns'
                             })
                         ),
                         h('section', {},
