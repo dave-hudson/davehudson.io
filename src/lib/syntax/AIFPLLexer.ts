@@ -196,9 +196,9 @@ export class AIFPLLexer extends Lexer {
             return;
         }
 
-        // Standalone dot is an error in AIFPL
+        // Standalone dot is an operator in AIFPL
         this.position++;
-        this.tokens.push({type: 'ERROR', value: '.'});
+        this.tokens.push({type: 'OPERATOR', value: '.'});
     }
 
     /**

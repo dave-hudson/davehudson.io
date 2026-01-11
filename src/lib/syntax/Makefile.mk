@@ -1,6 +1,8 @@
 TS_FILES += \
 	src/lib/syntax/Lexer.ts \
 	src/lib/syntax/Parser.ts \
+	src/lib/syntax/AIFPLLexer.ts \
+	src/lib/syntax/AIFPLParser.ts \
 	src/lib/syntax/CLexer.ts \
 	src/lib/syntax/CParser.ts \
 	src/lib/syntax/CppLexer.ts \
