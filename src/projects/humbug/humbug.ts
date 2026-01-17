@@ -95,6 +95,10 @@ export function projectHumbugPage(): VNode {
                                 'You don\'t step away from the process though. Almost any interesting problem will quickly lead to the AI either ' +
                                 'asking for your feedback, or for you to review and approve its work. You can explore options, ask for changes, ask ' +
                                 'for explanations, and move on to whatever comes next.'
+                            ),
+                            h('p', {},
+                                'Humbug has been built using this same conversational approach.  As of v38, some of the conversations that have helped shape ' +
+                                'its development are now available in the git repository.'
                             )
                         ),
                         h('section', {},
