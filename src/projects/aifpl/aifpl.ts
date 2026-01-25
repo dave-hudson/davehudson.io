@@ -196,7 +196,7 @@ export function projectAIFPLPage(): VNode {
 (string? "hello")                       ; → #t
 (boolean? #t)                           ; → #t
 (list? (list 1 2 3))                    ; → #t
-(alist? (alist (list ("key" "value")))) ; → #t
+(alist? (alist (list "key" "value"))) ; → #t
 (function? (lambda (x) (* x 2)))        ; → #t
 
 ; Specific numeric type checking
@@ -311,28 +311,28 @@ export function projectAIFPLPage(): VNode {
                             ),
                             CodeFragment.create({
                                 code: `; Construction - alist is a special form that evaluates elements
-(alist (list ("name" "Alice")) (list ("age" 30)) (list ("city" "NYC")))
+(alist (list "name" "Alice") (list "age" 30) (list "city" "NYC"))
 
 ; Access with default values
-(let ((user (alist (list ("name" "Bob")) (list ("id" 123)))))
+(let ((user (alist (list "name" "Bob") (list "id" 123))))
   (list (alist-get user "name")           ; → "Bob"
         (alist-get user "email" "N/A")))  ; → "N/A" (default)
 
 ; Modification (returns new alist)
-(let ((data (alist (list ("x" 1)) (list ("y" 2)))))
+(let ((data (alist (list "x" 1) (list "y" 2))))
   (let ((updated (alist-set data "z" 3))
         (removed (alist-remove data "x")))
     (list updated removed)))              ; → New alists with changes
 
 ; Query operations
-(let ((config (alist (list ("debug" #t)) (list ("port" 8080)))))
+(let ((config (alist (list "debug" #t) (list "port" 8080))))
   (list (alist-has? config "debug")       ; → #t
         (alist-keys config)               ; → ("debug" "port")
         (alist-values config)))           ; → (#t 8080)
 
 ; Merge alists (second wins on conflicts)
-(let ((defaults (alist (list ("timeout" 30)) (list ("retries" 3))))
-      (custom (alist (list ("timeout" 60)))))
+(let ((defaults (alist (list "timeout" 30) (list "retries" 3)))
+      (custom (alist (list "timeout" 60))))
   (alist-merge defaults custom))          ; → timeout is 60, retries is 3`,
                                 language: 'aifpl',
                                 caption: 'Basic alist operations'
@@ -342,18 +342,18 @@ export function projectAIFPLPage(): VNode {
 (let ((user (alist 
                ("name" "Alice")
                ("contact" (alist 
-                           (list ("email" "alice@example.com"))
-                           (list ("phone" "555-1234"))))
+                           (list "email" "alice@example.com")
+                           (list "phone" "555-1234")))
                ("preferences" (alist 
-                              (list ("theme" "dark"))
-                              (list ("notifications" #t)))))))
+                              (list "theme" "dark")
+                              (list "notifications" #t)))))
   (alist-get (alist-get user "contact") "email"))  ; → "alice@example.com"
 
 ; Processing alist data with functional operations
 (let ((users (list 
-               (alist (list ("name" "Alice")) (list ("age" 30)))
-               (alist (list ("name" "Bob")) (list ("age" 25)))
-               (alist (list ("name" "Charlie")) (list ("age" 35))))))
+               (alist (list "name" "Alice") (list "age" 30))
+               (alist (list "name" "Bob") (list "age" 25))
+               (alist (list "name" "Charlie") (list "age" 35))))
   (let ((names (map (lambda (u) (alist-get u "name")) users))
         (adults (filter (lambda (u) (>= (alist-get u "age") 30)) users)))
     (list names (length adults))))        ; → (("Alice" "Bob" "Charlie") 2)
@@ -363,7 +363,7 @@ export function projectAIFPLPage(): VNode {
                  (if (alist? data)
                      (alist-keys data)
                      "not an alist"))))
-  (list (process (alist (list ("a" 1)))) (process (list 1 2))))  ; → (("a") "not an alist")`,
+  (list (process (alist (list "a" 1))) (process (list 1 2))))  ; → (("a") "not an alist")`,
                                 language: 'aifpl',
                                 caption: 'Advanced alist usage patterns'
                             })
@@ -408,7 +408,7 @@ export function projectAIFPLPage(): VNode {
   (_ "no match"))                     ; → (10 "HELLO")
 
 ; Pattern matching with alists
-(match (alist ("type" "user") ("name" "Alice"))
+(match (alist (list "type" "user") (list "name" "Alice"))
   ((alist? a) (alist-get a "name"))
   (_ "not an alist"))                 ; → "Alice"
 
@@ -421,7 +421,7 @@ export function projectAIFPLPage(): VNode {
                         ((list? lst) (length lst))
                         ((alist? a) (alist-keys a))
                         (_ "unknown"))))
-      (test-data (list 42 -5 "hello" (list 1 2 3) (alist ("x" 1)))))
+      (test-data (list 42 -5 "hello" (list 1 2 3) (alist (list "x" 1)))))
   (map process-data test-data))       ; → ("answer" "non-positive" 5 3 ("x"))
 
 ; First match wins - order matters
