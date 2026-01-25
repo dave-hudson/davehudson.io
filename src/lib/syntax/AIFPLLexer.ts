@@ -301,21 +301,7 @@ export class AIFPLLexer extends Lexer {
     protected isSpecialForm(value: string): boolean {
         const specialForms = new Set([
             // Core special forms
-            'and', 'or', 'not', 'if', 'let', 'lambda', 'quote',
-            // Built-in functions commonly treated as keywords
-            'list', 'cons', 'append', 'first', 'rest', 'last',
-            'map', 'filter', 'fold', 'range', 'find', 'any?', 'all?',
-            // Math functions
-            'sin', 'cos', 'tan', 'log', 'exp', 'sqrt', 'abs',
-            'min', 'max', 'pow', 'round', 'floor', 'ceil',
-            // String functions  
-            'string-append', 'string-length', 'string-ref', 'substring',
-            'string-upcase', 'string-downcase', 'string-trim',
-            // Type predicates
-            'number?', 'integer?', 'float?', 'complex?', 'string?', 
-            'boolean?', 'list?', 'function?', 'null?',
-            // Constants
-            'pi', 'e', 'j', 'true', 'false'
+            'and', 'or', 'if', 'let', 'lambda', 'quote', 'match'
         ]);
         
         return specialForms.has(value.toLowerCase());
