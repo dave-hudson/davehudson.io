@@ -301,7 +301,7 @@ export class AIFPLLexer extends Lexer {
     protected isSpecialForm(value: string): boolean {
         const specialForms = new Set([
             // Core special forms
-            'and', 'or', 'if', 'let', 'lambda', 'quote', 'match'
+            'and', 'or', 'if', 'let', 'letrec', 'lambda', 'quote', 'match'
         ]);
         
         return specialForms.has(value.toLowerCase());

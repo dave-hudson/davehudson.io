@@ -8,6 +8,7 @@ include src/lib/Makefile.mk
 include src/m6r/Makefile.mk
 include src/manifest/Makefile.mk
 include src/notes/Makefile.mk
+include src/papers/Makefile.mk
 include src/projects/Makefile.mk
 
 FILES += \
