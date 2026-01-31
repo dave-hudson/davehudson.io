@@ -56,6 +56,7 @@ import {notesPost_2026_01_16} from './2026-01-16/post';
 import {notesPost_2026_01_17} from './2026-01-17/post';
 import {notesPost_2026_01_28} from './2026-01-28/post';
 import {notesPost_2026_01_30} from './2026-01-30/post';
+import {notesPost_2026_01_31} from './2026-01-31/post';
 import {NotesPost} from './NotesPost';
 
 // Enumerate all the notes content served up here.  Newest content goes at the end.
@@ -113,7 +114,8 @@ const notesContent: NotesPost[] = [
     notesPost_2026_01_16,
     notesPost_2026_01_17,
     notesPost_2026_01_28,
-    notesPost_2026_01_30
+    notesPost_2026_01_30,
+    notesPost_2026_01_31
 ]
 
 function navPrevNext(prevStr: string | null, prevHRef: string | null, nextStr: string | null, nextHRef: string | null): VNode {
