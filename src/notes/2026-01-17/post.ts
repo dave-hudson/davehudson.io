@@ -25,7 +25,7 @@ function notesArticle_2026_01_17(): VElement[] {
         h('section', {},
             h('h2', {}, 'Humbug v38'),
             h('p', {},
-                'New features:'
+                h('strong', {},'New features:')
             ),
             h('ul', {},
                 h('li', {}, 'Added an XML syntax highlighter.'),
@@ -61,7 +61,7 @@ function notesArticle_2026_01_17(): VElement[] {
                 )
             ),
             h('p', {},
-                'Bug fixes:'
+                h('strong', {},'Bug fixes:')
             ),
             h('ul', {},
                 h('li', {}, 'Fixed some lexing problems in the HTML syntax highlighter.'),
@@ -94,7 +94,7 @@ function notesArticle_2026_01_17(): VElement[] {
                 )
             ),
             h('p', {},
-                'Internal structure changes:'
+                h('strong', {},'Internal structure changes:')
             ),
             h('ul', {},
                 h('li', {}, 'Added pytest tests for the HTML syntax highlighter.'),
