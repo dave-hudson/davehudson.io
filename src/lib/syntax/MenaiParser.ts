@@ -1,22 +1,22 @@
 import {Token} from './Lexer'
 import {Parser} from './Parser'
-import {AIFPLLexer} from './AIFPLLexer'
+import {MenaiLexer} from './MenaiLexer'
 
 /**
- * Parser for AIFPL (AI Functional Programming Language) code.
+ * Parser for Menai (AI functional programming language) code.
  * 
- * This parser processes tokens from the AIFPL lexer and provides
+ * This parser processes tokens from the Menai lexer and provides
  * basic semantic analysis for better syntax highlighting, such as
  * distinguishing between function calls and regular identifiers.
  */
-export class AIFPLParser extends Parser {
+export class MenaiParser extends Parser {
     /**
-     * Constructs an AIFPL parser.
+     * Constructs an Menai parser.
      * @param input - The input code to parse.
      */
     constructor(input: string) {
         super();
-        this.lexer = new AIFPLLexer(input);
+        this.lexer = new MenaiLexer(input);
     }
 
     /**

@@ -1,13 +1,13 @@
 import {Lexer, styles} from './Lexer'
 
-// Add new token styles for AIFPL-specific tokens
+// Add new token styles for Menai-specific tokens
 styles['BOOLEAN'] = 'boolean';
 styles['QUOTE'] = 'operator';
 
 /**
- * Lexer for AIFPL (AI Functional Programming Language) code.
+ * Lexer for Menai (AI functional programming language) code.
  * 
- * AIFPL is a LISP-like language with S-expressions, supporting:
+ * Menai is a LISP-like language with S-expressions, supporting:
  * - Parentheses for expressions: (+ 1 2 3)
  * - Quote for literals: '(a b c)
  * - Numbers: integers, decimals, scientific, complex, based (#b, #o, #d, #x)
@@ -16,9 +16,9 @@ styles['QUOTE'] = 'operator';
  * - Semicolon comments
  * - Rich identifier syntax with special characters
  */
-export class AIFPLLexer extends Lexer {
+export class MenaiLexer extends Lexer {
     /**
-     * Constructs an AIFPL lexer.
+     * Constructs an Menai lexer.
      * @param input - The input code to parse.
      */
     constructor(input: string) {
@@ -149,7 +149,7 @@ export class AIFPLLexer extends Lexer {
 
     /**
      * Read an identifier token.
-     * In AIFPL, identifiers can contain letters, digits, and many special characters.
+     * In Menai, identifiers can contain letters, digits, and many special characters.
      * They cannot start with a digit and are case-insensitive for keywords.
      */
     protected readIdentifier(): void {
@@ -196,7 +196,7 @@ export class AIFPLLexer extends Lexer {
             return;
         }
 
-        // Standalone dot is an operator in AIFPL
+        // Standalone dot is an operator in Menai
         this.position++;
         this.tokens.push({type: 'OPERATOR', value: '.'});
     }
@@ -294,7 +294,7 @@ export class AIFPLLexer extends Lexer {
     }
 
     /**
-     * Check if a given value is an AIFPL special form (keyword).
+     * Check if a given value is an Menai special form (keyword).
      * @param value - The string to check
      * @returns True if the value is a special form, false otherwise
      */

@@ -813,7 +813,7 @@ pre {
 
 .app .main .content .container code {
     font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
-    font-size: 13px;
+    font-size: 14px;
     color: var(--code-color);
 }
 
