@@ -11,7 +11,7 @@ styles['QUOTE'] = 'operator';
  * - Parentheses for expressions: (+ 1 2 3)
  * - Quote for literals: '(a b c)
  * - Numbers: integers, decimals, scientific, complex, based (#b, #o, #d, #x)
- * - Booleans: #t, #f
+ * - Booleans: #t, #f, and the None literal #none
  * - Strings with escape sequences
  * - Semicolon comments
  * - Rich identifier syntax with special characters
@@ -93,6 +93,16 @@ export class MenaiLexer extends Lexer {
         // Handle booleans
         if (ch === 't' || ch === 'f') {
             this.position += 2;
+            this.tokens.push({
+                type: 'BOOLEAN',
+                value: this.input.slice(start, this.position)
+            });
+            return;
+        }
+
+        // Handle #none
+        if (ch === 'n' && this.input.slice(this.position + 1, this.position + 5).toLowerCase() === 'none') {
+            this.position += 5;
             this.tokens.push({
                 type: 'BOOLEAN',
                 value: this.input.slice(start, this.position)

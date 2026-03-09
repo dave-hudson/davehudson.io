@@ -4,6 +4,7 @@ include src/projects/countdown/Makefile.mk
 include src/projects/gcc/Makefile.mk
 include src/projects/humbug/Makefile.mk
 include src/projects/liquorice/Makefile.mk
+include src/projects/menai/Makefile.mk
 include src/projects/metaphor/Makefile.mk
 include src/projects/mkdosfs/Makefile.mk
 include src/projects/siterender/Makefile.mk

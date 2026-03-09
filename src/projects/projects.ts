@@ -8,6 +8,7 @@ import {projectCountdown} from './countdown/countdown';
 import {projectGcc} from './gcc/gcc';
 import {projectHumbug} from './humbug/humbug';
 import {projectLiquorice} from './liquorice/liquorice';
+import {projectMenai} from './menai/menai';
 import {projectMetaphor} from './metaphor/metaphor';
 import {projectMkdosfs} from './mkdosfs/mkdosfs';
 import {projectSiterender} from './siterender/siterender';
@@ -21,6 +22,7 @@ const projectsContent: ProjectPage[] = [
     projectGcc,
     projectHumbug,
     projectLiquorice,
+    projectMenai,
     projectMetaphor,
     projectMkdosfs,
     projectSiterender,
@@ -57,14 +59,20 @@ export function projectsPage(): VNode {
                         h('section', {},
                             h('h2', {},
                                 h('a', {
-                                        href: ('/projects/aifpl'),
-                                        onclick: (e: MouseEvent) => navigateEvent(e, '/projects/aifpl')
+                                        href: ('/projects/menai'),
+                                        onclick: (e: MouseEvent) => navigateEvent(e, '/projects/menai')
                                     },
-                                    'AIFPL'
+                                    'Menai'
                                 )
                             ),
                             h('p', {},
-                                'A Lisp-inspired functional programming language designed specifically for AI use.'
+                                'Menai is a compiled, pure functional programming language designed specifically for AI use, featuring ' +
+                                'an optimizing compiler and infinite-register virtual machine.  Being side-effect-free, the language is ' +
+                                'designed to be safe for AIs to use without requiring user authorizations.  Its functional design also makes ' +
+                                'it ideal for composing complex operations out of simpler ones; a common pattern in AI use.'
+                            ),
+                            h('p', {},
+                                'The language was originally called AIFPL (AI Functional Programming Language)'
                             )
                         ),
                         h('section', {},
