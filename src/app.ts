@@ -47,17 +47,18 @@ function homePage(): VNode {
                             ),
                             h('article', {},
                                 h('h2', {},
-                                    h('a', {href: '/projects/aifpl', onclick: (e: MouseEvent) => navigateEvent(e, '/projects/aifpl')}, 'AIFPL')
+                                    h('a', {href: '/projects/menai', onclick: (e: MouseEvent) => navigateEvent(e, '/projects/menai')}, 'Menai')
                                 ),
                                 h('p', {},
-                                    'AIFPL is a pure functional, higher-order, programming language designed for use by AIs.'
+                                    'Menai is a compiled, pure functional programming language designed specifically for use by an LLM rather than a human.'
                                 ),
                                 h('p', {},
-                                    'Inspired by Lisp, AIFPL is designed to offer LLMs a powerful programming model that can be safely used unsupervised.'
+                                    'Inspired by Lisp, Menai is designed to offer LLMs a powerful, sandboxed programming model that can be safely ' +
+                                    'used without supervision.  It features a custom optimizing compiler and an infinite-register virtual machine.'
                                 ),
                                 h('p', {},
                                     h('em', {},
-                                        h('a', {href: '/projects/aifpl', onclick: (e: MouseEvent) => navigateEvent(e, '/projects/aifpl')}, '[find out more]')
+                                        h('a', {href: '/projects/menai', onclick: (e: MouseEvent) => navigateEvent(e, '/projects/menai')}, '[find out more]')
                                     )
                                 )
                             ),
