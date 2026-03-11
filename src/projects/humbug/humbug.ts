@@ -110,7 +110,7 @@ export function projectHumbugPage(): VNode {
                                 'in mind, allowing AIs to build complex workflows from simple building blocks.'
                             ),
                             h('p', {},
-                                'A major expression of this concept is AIFPL (AI Functional Programming Language).  AIFPL is a pure, higher-order, ' +
+                                'A major expression of this concept is Menai.  Menai is a pure, higher-order, ' +
                                 'functional programming language designed specifically for AIs to use to perform algorithmic tasks.  As it is side-effect ' +
                                 'free, it is safe for an AI to use without human supervision.'
                             ),
@@ -125,7 +125,7 @@ export function projectHumbugPage(): VNode {
                                 'Humbug\'s current tools are:'
                             ),
                             h('ul', {},
-                                h('li', {}, h('strong', {}, 'AIFPL:'), ' For running AIFPL code'),
+                                h('li', {}, h('strong', {}, 'Menai:'), ' For running Menai code'),
                                 h('li', {}, h('strong', {}, 'File System:'), ' For reading and writing files and directories'),
                                 h('li', {}, h('strong', {}, 'Clock:'), ' For getting the time, setting alarms, and setting timers'),
                                 h('li', {}, h('strong', {}, 'System:'), ' For interacting with the system UI tabs'),
@@ -184,7 +184,7 @@ export function projectHumbugPage(): VNode {
                             ),
                             h('ul', {},
                                 h('li', {},
-                                    h('a', {href: '/projects/aifpl', target: '_blank'}, 'AIFPL')
+                                    h('a', {href: '/projects/menai', target: '_blank'}, 'Menai')
                                 ),
                                 h('li', {},
                                     h('a', {href: '/projects/metaphor', target: '_blank'}, 'Metaphor')
