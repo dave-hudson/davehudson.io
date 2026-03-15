@@ -75,6 +75,10 @@ export function projectMenaiPage(): VNode {
                                 '. Unlike stack-based VMs, each temporary value is assigned its own virtual register, which ' +
                                 'simplifies code generation and makes many optimization passes more straightforward. The VM ' +
                                 'executes the bytecode produced by the compiler directly.'
+                            ),
+                            h('p', {},
+                                'The reference VM is written in Python.  It is highly tuned, but limited by the speed of the ' +
+                                'Python interpreter and runtime.  An experimental Cython VM also exists and is used on MacOS.'
                             )
                         ),
                         h('section', {},
@@ -91,7 +95,7 @@ export function projectMenaiPage(): VNode {
                                 h('li', {}, h('strong', {}, 'Rich error messages'), ': Detailed diagnostics with position information, critical when AIs generate code on the fly'),
                                 h('li', {}, h('strong', {}, 'Module system'), ': Files can be imported as modules, cached after first load'),
                                 h('li', {}, h('strong', {}, 'Independence'), ': No dependencies on external packages'),
-                                h('li', {}, h('strong', {}, 'Thoroughly tested'), ': Extensive unit tests covering 100% of statements and branches')
+                                h('li', {}, h('strong', {}, 'Thoroughly tested'), ': Extensive unit tests.')
                             )
                         ),
                         h('section', {},
@@ -114,13 +118,13 @@ export function projectMenaiPage(): VNode {
                                     ' — an explicit absence-of-value type, distinct from ', h('code', {}, '#f')),
                                 h('li', {}, h('strong', {}, 'List'), ': Heterogeneous, ordered collections'),
                                 h('li', {}, h('strong', {}, 'Dict'), ': Immutable key-value mappings with O(1) lookup, maintaining insertion order'),
+                                h('li', {}, h('strong', {}, 'Set'), ': Immutable unordered collections of unique hashable values with O(1) membership testing'),
                                 h('li', {}, h('strong', {}, 'Symbol'), ': Produced by ', h('code', {}, 'quote'), '; used for symbolic programming'),
                                 h('li', {}, h('strong', {}, 'Function'), ': First-class lambda functions with lexical scoping')
                             )
                         ),
                         h('section', {},
-                            h('h2', {}, 'Basic examples'),
-                            h('h3', {}, 'Arithmetic'),
+                            h('h2', {}, 'Arithmetic'),
                             h('p', {},
                                 'All arithmetic operators are type-specific. There is no generic ', h('code', {}, '+'), ' or ', h('code', {}, '*'), '.'
                             ),
@@ -148,8 +152,10 @@ export function projectMenaiPage(): VNode {
 (integer->complex 3 4)                ; → 3+4j`,
                                 language: 'menai',
                                 caption: 'Type-specific arithmetic operators'
-                            }),
-                            h('h3', {}, 'Comparisons'),
+                            })
+                        ),
+                        h('section', {},
+                            h('h2', {}, 'Comparisons'),
                             h('p', {},
                                 'Comparison operators are also type-specific:'
                             ),
@@ -172,8 +178,10 @@ export function projectMenaiPage(): VNode {
 (boolean-not #f)                      ; → #t`,
                                 language: 'menai',
                                 caption: 'Type-specific comparison operators'
-                            }),
-                            h('h3', {}, 'Lambda functions'),
+                            })
+                        ),
+                        h('section', {},
+                            h('h2', {}, 'Lambda functions'),
                             CodeFragment.create({
                                 code: `; Simple lambda
 ((lambda (x) (integer* x x)) 5)       ; → 25
@@ -210,6 +218,39 @@ export function projectMenaiPage(): VNode {
   (fact 10))                          ; → 3628800`,
                                 language: 'menai',
                                 caption: 'let, let*, and letrec bindings'
+                            })
+                        ),
+                        h('section', {},
+                            h('h2', {}, 'Strings'),
+                            CodeFragment.create({
+                                code: `; Construction and manipulation
+(string-concat "hello" " " "world")   ; → "hello world"
+(string-length "hello")               ; → 5
+(string-upcase "hello")               ; → "HELLO"
+(string-downcase "HELLO")             ; → "hello"
+(string-ref "hello" 1)                ; → "e"
+(string-slice "hello" 1 4)            ; → "ell"
+(string-trim "  hello  ")             ; → "hello"
+(string-replace "banana" "a" "o")     ; → "bonono"
+
+; Search
+(string-prefix? "hello" "he")         ; → #t
+(string-suffix? "hello" "lo")         ; → #t
+(string-index "hello" "l")            ; → 2
+(string-index "hello" "z")            ; → #none  not found
+
+; Conversion
+(string->number "42")                 ; → 42
+(string->number "3.14")               ; → 3.14
+(string->number "hello")              ; → #none
+(string->integer "ff" 16)             ; → 255
+(integer->string 255 16)              ; → "ff"
+
+; Split and join
+(string->list "a,b,c" ",")            ; → ("a" "b" "c")
+(list->string (list "a" "b" "c") ",") ; → "a,b,c"`,
+                                language: 'menai',
+                                caption: 'String operations'
                             })
                         ),
                         h('section', {},
@@ -322,6 +363,55 @@ export function projectMenaiPage(): VNode {
                             })
                         ),
                         h('section', {},
+                            h('h2', {}, 'Sets'),
+                            h('p', {},
+                                'Sets are immutable, unordered collections of unique hashable values with O(1) membership ' +
+                                'testing. Valid element types are integers, floats, complex numbers, strings, booleans, ' +
+                                'and symbols — lists, dicts, functions, and ', h('code', {}, '#none'),
+                                ' are not hashable and cannot be stored in a set.'
+                            ),
+                            CodeFragment.create({
+                                code: `; Construction — duplicates are silently dropped
+(set 1 2 3)                           ; → #{1 2 3}
+(set 1 2 2 3 3)                       ; → #{1 2 3}
+(set)                                 ; → #{}  empty set
+
+; Membership and size
+(set-member? (set 1 2 3) 2)           ; → #t
+(set-member? (set 1 2 3) 99)          ; → #f
+(set-length (set 1 2 3))              ; → 3
+
+; Functional update (returns a new set — pure)
+(set-add (set 1 2) 3)                 ; → #{1 2 3}
+(set-remove (set 1 2 3) 2)            ; → #{1 3}
+
+; Set algebra
+(set-union        (set 1 2 3) (set 3 4 5))  ; → #{1 2 3 4 5}
+(set-intersection (set 1 2 3) (set 2 3 4))  ; → #{2 3}
+(set-difference   (set 1 2 3) (set 2 3 4))  ; → #{1}
+
+; Subset test
+(set-subset? (set 1 2) (set 1 2 3))   ; → #t
+(set-subset? (set 1 4) (set 1 2 3))   ; → #f
+
+; Conversion
+(set->list (set 3 1 2))               ; → (3 1 2)  insertion order
+(list->set (list 1 2 2 3 3))          ; → #{1 2 3}
+
+; Higher-order operations
+(map-set    (lambda (x) (integer* x 2)) (set 1 2 3))
+; → #{2 4 6}
+
+(filter-set (lambda (x) (integer>? x 1)) (set 1 2 3))
+; → #{2 3}
+
+(fold-set   integer+ 0 (set 1 2 3))
+; → 6`,
+                                language: 'menai',
+                                caption: 'Set construction, membership, algebra, and higher-order operations'
+                            })
+                        ),
+                        h('section', {},
                             h('h2', {}, 'Pattern matching'),
                             h('p', {},
                                 'Menai provides powerful pattern matching with the ',
@@ -367,39 +457,6 @@ export function projectMenaiPage(): VNode {
   ((? string? s) s))`,
                                 language: 'menai',
                                 caption: 'Pattern matching with literals, predicates, and destructuring'
-                            })
-                        ),
-                        h('section', {},
-                            h('h2', {}, 'Strings'),
-                            CodeFragment.create({
-                                code: `; Construction and manipulation
-(string-concat "hello" " " "world")   ; → "hello world"
-(string-length "hello")               ; → 5
-(string-upcase "hello")               ; → "HELLO"
-(string-downcase "HELLO")             ; → "hello"
-(string-ref "hello" 1)                ; → "e"
-(string-slice "hello" 1 4)            ; → "ell"
-(string-trim "  hello  ")             ; → "hello"
-(string-replace "banana" "a" "o")     ; → "bonono"
-
-; Search
-(string-prefix? "hello" "he")         ; → #t
-(string-suffix? "hello" "lo")         ; → #t
-(string-index "hello" "l")            ; → 2
-(string-index "hello" "z")            ; → #none  not found
-
-; Conversion
-(string->number "42")                 ; → 42
-(string->number "3.14")               ; → 3.14
-(string->number "hello")              ; → #none
-(string->integer "ff" 16)             ; → 255
-(integer->string 255 16)              ; → "ff"
-
-; Split and join
-(string->list "a,b,c" ",")            ; → ("a" "b" "c")
-(list->string (list "a" "b" "c") ",") ; → "a,b,c"`,
-                                language: 'menai',
-                                caption: 'String operations'
                             })
                         ),
                         h('section', {},
