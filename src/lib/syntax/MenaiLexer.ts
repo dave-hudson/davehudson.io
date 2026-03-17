@@ -311,7 +311,7 @@ export class MenaiLexer extends Lexer {
     protected isSpecialForm(value: string): boolean {
         const specialForms = new Set([
             // Core special forms
-            'and', 'or', 'if', 'let', 'let*', 'letrec', 'lambda', 'quote', 'match', 'trace'
+            'and', 'or', 'if', 'let', 'let*', 'letrec', 'lambda', 'quote', 'match', 'trace', 'apply', 'import', 'struct'
         ]);
         
         return specialForms.has(value.toLowerCase());

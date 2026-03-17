@@ -119,6 +119,7 @@ export function projectMenaiPage(): VNode {
                                 h('li', {}, h('strong', {}, 'List'), ': Heterogeneous, ordered collections'),
                                 h('li', {}, h('strong', {}, 'Dict'), ': Immutable key-value mappings with O(1) lookup, maintaining insertion order'),
                                 h('li', {}, h('strong', {}, 'Set'), ': Immutable unordered collections of unique hashable values with O(1) membership testing'),
+                                h('li', {}, h('strong', {}, 'Struct'), ': Nominal typed records with named fields; two struct types with the same fields are distinct types'),
                                 h('li', {}, h('strong', {}, 'Symbol'), ': Produced by ', h('code', {}, 'quote'), '; used for symbolic programming'),
                                 h('li', {}, h('strong', {}, 'Function'), ': First-class lambda functions with lexical scoping')
                             )
@@ -409,6 +410,67 @@ export function projectMenaiPage(): VNode {
 ; → 6`,
                                 language: 'menai',
                                 caption: 'Set construction, membership, algebra, and higher-order operations'
+                            })
+                        ),
+                        h('section', {},
+                            h('h2', {}, 'Structs'),
+                            h('p', {},
+                                'Structs are nominal typed records with named fields. Two struct types that happen to have ' +
+                                'the same fields are still distinct types — the type identity comes from the binding name, ' +
+                                'not the field list.'
+                            ),
+                            CodeFragment.create({
+                                code: `; Declare a struct type — bind it with let/let*/letrec
+(let ((Point (struct (x y))))
+  (let ((p (Point 3 4)))             ; construct an instance
+    (list (struct-get p 'x)          ; → 3
+          (struct-get p 'y))))       ; → 4`,
+                                language: 'menai',
+                                caption: 'Declaring and constructing a struct'
+                            }),
+                            CodeFragment.create({
+                                code: `; Functional update — returns a new struct, original is unchanged
+(let ((Point (struct (x y))))
+  (let ((p  (Point 3 4))
+        (p2 (struct-set p 'x 10)))
+    (list (struct-get p  'x)         ; → 3   (unchanged)
+          (struct-get p2 'x))))      ; → 10`,
+                                language: 'menai',
+                                caption: 'Functional update with struct-set'
+                            }),
+                            CodeFragment.create({
+                                code: `; Type predicates
+(let ((Point (struct (x y)))
+      (Vec   (struct (x y))))        ; same fields, different types
+  (let ((p (Point 1 2))
+        (v (Vec   1 2)))
+    (list (struct?       p)          ; → #t  (any struct)
+          (struct-type? Point p)     ; → #t  (specifically a Point)
+          (struct-type? Vec   p)     ; → #f  (not a Vec — nominal typing)
+          (struct=? p (Point 1 2))   ; → #t
+          (struct=? p v))))          ; → #f  (different types)`,
+                                language: 'menai',
+                                caption: 'Type predicates and nominal typing'
+                            }),
+                            CodeFragment.create({
+                                code: `; Introspection
+(let ((Point (struct (x y))))
+  (let ((p (Point 3 4)))
+    (list (struct-type-name Point)   ; → "Point"
+          (struct-fields Point)      ; → ('x 'y)
+          (struct-type p))))         ; → Point (the struct-type value itself)`,
+                                language: 'menai',
+                                caption: 'Struct introspection'
+                            }),
+                            CodeFragment.create({
+                                code: `; Pattern matching — destructuring form binds fields directly
+(let ((Shape (struct (kind radius))))
+  (let ((s (Shape "circle" 5)))
+    (match s
+      ((Shape k r) (string-concat k ": r=" (integer->string r)))
+      (_           "unknown"))))     ; → "circle: r=5"`,
+                                language: 'menai',
+                                caption: 'Pattern matching with struct destructuring'
                             })
                         ),
                         h('section', {},
