@@ -421,8 +421,8 @@ export function projectMenaiPage(): VNode {
                             ),
                             CodeFragment.create({
                                 code: `; Declare a struct type — bind it with let/let*/letrec
-(let ((Point (struct (x y))))
-  (let ((p (Point 3 4)))             ; construct an instance
+(let ((point (struct (x y))))
+  (let ((p (point 3 4)))             ; construct an instance
     (list (struct-get p 'x)          ; → 3
           (struct-get p 'y))))       ; → 4`,
                                 language: 'menai',
@@ -430,8 +430,8 @@ export function projectMenaiPage(): VNode {
                             }),
                             CodeFragment.create({
                                 code: `; Functional update — returns a new struct, original is unchanged
-(let ((Point (struct (x y))))
-  (let ((p  (Point 3 4))
+(let ((point (struct (x y))))
+  (let ((p  (point 3 4))
         (p2 (struct-set p 'x 10)))
     (list (struct-get p  'x)         ; → 3   (unchanged)
           (struct-get p2 'x))))      ; → 10`,
@@ -440,34 +440,34 @@ export function projectMenaiPage(): VNode {
                             }),
                             CodeFragment.create({
                                 code: `; Type predicates
-(let ((Point (struct (x y)))
+(let ((point (struct (x y)))
       (Vec   (struct (x y))))        ; same fields, different types
-  (let ((p (Point 1 2))
+  (let ((p (point 1 2))
         (v (Vec   1 2)))
     (list (struct?       p)          ; → #t  (any struct)
-          (struct-type? Point p)     ; → #t  (specifically a Point)
+          (struct-type? point p)     ; → #t  (specifically a point)
           (struct-type? Vec   p)     ; → #f  (not a Vec — nominal typing)
-          (struct=? p (Point 1 2))   ; → #t
+          (struct=? p (point 1 2))   ; → #t
           (struct=? p v))))          ; → #f  (different types)`,
                                 language: 'menai',
                                 caption: 'Type predicates and nominal typing'
                             }),
                             CodeFragment.create({
                                 code: `; Introspection
-(let ((Point (struct (x y))))
-  (let ((p (Point 3 4)))
-    (list (struct-type-name Point)   ; → "Point"
-          (struct-fields Point)      ; → ('x 'y)
-          (struct-type p))))         ; → Point (the struct-type value itself)`,
+(let ((point (struct (x y))))
+  (let ((p (point 3 4)))
+    (list (struct-type-name point)   ; → "point"
+          (struct-fields point)      ; → ('x 'y)
+          (struct-type p))))         ; → point (the struct-type value itself)`,
                                 language: 'menai',
                                 caption: 'Struct introspection'
                             }),
                             CodeFragment.create({
                                 code: `; Pattern matching — destructuring form binds fields directly
-(let ((Shape (struct (kind radius))))
-  (let ((s (Shape "circle" 5)))
+(let ((shape (struct (kind radius))))
+  (let ((s (shape "circle" 5)))
     (match s
-      ((Shape k r) (string-concat k ": r=" (integer->string r)))
+      ((shape k r) (string-concat k ": r=" (integer->string r)))
       (_           "unknown"))))     ; → "circle: r=5"`,
                                 language: 'menai',
                                 caption: 'Pattern matching with struct destructuring'
