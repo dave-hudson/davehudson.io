@@ -326,38 +326,38 @@ export function projectMenaiPage(): VNode {
                             ),
                             CodeFragment.create({
                                 code: `; Construction
-(dict (list "name" "Alice") (list "age" 30) (list "city" "NYC"))
+(dict "name" "Alice" "age" 30 "city" "NYC")
 ; → {("name" "Alice") ("age" 30) ("city" "NYC")}
 
 ; Access — returns #none if key is missing
-(let ((user (dict (list "name" "Bob") (list "id" 123))))
+(let ((user (dict "name" "Bob" "id" 123)))
   (list (dict-get user "name")              ; → "Bob"
         (dict-get user "email" "N/A")))     ; → "N/A"  default
 
 ; Modification (returns a new dict)
-(let ((data (dict (list "x" 1) (list "y" 2))))
+(let ((data (dict "x" 1 "y" 2)))
   (dict-set data "z" 3))                    ; → {("x" 1) ("y" 2) ("z" 3)}
 
 ; Queries
-(let ((cfg (dict (list "debug" #t) (list "port" 8080))))
+(let ((cfg (dict "debug" #t "port" 8080)))
   (list (dict-has? cfg "debug")             ; → #t
         (dict-keys cfg)                     ; → ("debug" "port")
         (dict-values cfg)                   ; → (#t 8080)
         (dict-length cfg)))                 ; → 2
 
 ; Merge — second dict wins on conflicts
-(let ((defaults (dict (list "timeout" 30) (list "retries" 3)))
-      (custom   (dict (list "timeout" 60))))
+(let ((defaults (dict "timeout" 30 "retries" 3))
+      (custom   (dict "timeout" 60)))
   (dict-merge defaults custom))
 ; → {("timeout" 60) ("retries" 3)}
 
 ; Higher-order operations on dicts
 (map-dict (lambda (k v) (integer* v 2))
-          (dict (list "a" 1) (list "b" 2)))
+          (dict "a" 1 "b" 2))
 ; → {("a" 2) ("b" 4)}
 
 (filter-dict (lambda (k v) (integer>? v 1))
-             (dict (list "a" 1) (list "b" 2)))
+             (dict "a" 1 "b" 2))
 ; → {("b" 2)}`,
                                 language: 'menai',
                                 caption: 'Dictionary construction, access, and higher-order operations'
@@ -557,8 +557,8 @@ export function projectMenaiPage(): VNode {
 (let ((square (lambda (x) (integer* x x)))
       (cube   (lambda (x) (integer* x (integer* x x)))))
   (dict
-    (list "square" square)
-    (list "cube"   cube)))`,
+    "square" square
+    "cube"   cube))`,
                                 language: 'menai',
                                 caption: 'A simple module (math_utils.menai)'
                             }),
