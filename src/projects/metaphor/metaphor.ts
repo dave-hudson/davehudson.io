@@ -14,23 +14,27 @@ export function projectMetaphorPage(): VNode {
                 h('div', {className: 'container'},
                     h('article', {},
                         h('p', {},
-                            'Metaphor is an AI prompt creation language designed to help users generate high-quality prompts for a ' +
-                            'wide range of AI models.'
+                            'Metaphor was an AI prompt creation language designed to help users generate high-quality prompts for a ' +
+                            'wide range of AI models.  It pioneers the approach that has since become known as "spec driven development".'
                         ),
                         h('p', {},
-                            'It has a simple declarative syntax that allows users to define roles, context, and actions in a ' +
-                            'structured way. As with programming languages, Metaphor files can be included in other files, ' +
+                            'It had a simple declarative syntax that allows users to define roles, context, and actions in a ' +
+                            'structured way. As with programming languages, Metaphor files could be included in other files, ' +
                             'allowing for modular and reusable prompt definitions.'
                         ),
                         h('p', {},
-                            'Metaphor emphasizes the importance of context.  By providing precise context it allows users to generate prompts that focus ' +
+                            'Metaphor emphasized the importance of context.  By providing precise context it allowed users to generate prompts that focused ' +
                             'an AI\'s attention on the specific relevant information, rather than drawing on its entire training corpus.  This ' +
-                            'dramatically reduces the chances of hallucinations and makes it much easier to get consistent results.'
+                            'dramatically reduced the chances of hallucinations and makes it much easier to get consistent results.'
+                        ),
+                        h('p', {},
+                            'Active development of Metaphor ceased in March 2026.  The move to tool use meant AIs could discover context in a more dynamic ' +
+                            'way, without needing pre-planning.  At the same time, state of the art LLMs no longer benefited from being assigned a formal role.'
                         ),
                         h('section', {},
                             h('h2', {}, 'Metaphor and Humbug'),
                             h('p', {},
-                                'Metaphor has been used extensively in the development of ',
+                                'Metaphor was used extensively in the early development of ',
                                 h('a', {href: '/projects/humbug'},
                                     'Humbug'
                                 ),
@@ -40,7 +44,7 @@ export function projectMetaphorPage(): VNode {
                         h('section', {},
                             h('h2', {}, 'Blog posts'),
                             h('p', {},
-                                'I have written a few blog posts about Metaphor, which you can read here:'
+                                'I wrote a few blog posts about Metaphor, which you can read here:'
                             ),
                             h('ul', {},
                                 h('li', {},

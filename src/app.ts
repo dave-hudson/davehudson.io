@@ -63,25 +63,6 @@ function homePage(): VNode {
                                 )
                             ),
                             h('article', {},
-                                h('h2', {},
-                                    h('a', {href: '/projects/metaphor', onclick: (e: MouseEvent) => navigateEvent(e, '/projects/metaphor')}, 'Metaphor')
-                                ),
-                                h('p', {},
-                                    'Metaphor is an AI prompt creation language designed to help users generate high-quality prompts for a ' +
-                                    'wide range of AI models.'
-                                ),
-                                h('p', {},
-                                    'It has a simple declarative syntax that allows users to define roles, context, and actions in a ' +
-                                    'structured way. As with programming languages, Metaphor files can be included in other files, ' +
-                                    'allowing for modular and reusable prompt definitions.'
-                                ),
-                                h('p', {},
-                                    h('em', {},
-                                        h('a', {href: '/projects/metaphor', onclick: (e: MouseEvent) => navigateEvent(e, '/projects/metaphor')}, '[find out more]')
-                                    )
-                                )
-                            ),
-                            h('article', {},
                                 h('h1', {}, 'More projects'),
                                 h('p', {},
                                     'Find all my earlier projects in the ',

@@ -1,5 +1,5 @@
 import {h, VNode} from '../lib/dvdi';
-import {gitHubIcon, linkedInIcon, mailIcon, xIcon} from '../lib/icons';
+import {gitHubIcon, linkedInIcon, mailIcon, xIcon, discordIcon} from '../lib/icons';
 
 export function pageFooter(): VNode {
     return h('footer', {className: 'footer'},
@@ -8,6 +8,9 @@ export function pageFooter(): VNode {
                 '© 2014-2026 David J. Hudson'
             ),
             h('nav', {className: 'social'},
+                h('a', {className: 'icon', href: 'https://discord.gg/GZhJ7ZtgwN', target: '_blank', title: 'Discord'},
+                    discordIcon()
+                ),
                 h('a', {className: 'icon', href: 'https://x.com/davehudsonio', target: '_blank', title: 'X'},
                     xIcon()
                 ),

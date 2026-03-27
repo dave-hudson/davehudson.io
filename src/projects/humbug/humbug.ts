@@ -178,17 +178,11 @@ export function projectHumbugPage(): VNode {
                             )
                         ),
                         h('section', {},
-                            h('h2', {}, 'Related projects'),
+                            h('h2', {}, 'Menai'),
                             h('p', {},
-                                'Humbug incorporates several other projects I\'m working on, including:',
-                            ),
-                            h('ul', {},
-                                h('li', {},
-                                    h('a', {href: '/projects/menai', target: '_blank'}, 'Menai')
-                                ),
-                                h('li', {},
-                                    h('a', {href: '/projects/metaphor', target: '_blank'}, 'Metaphor')
-                                )
+                                'Humbug incorporates the ',
+                                h('a', {href: '/projects/menai', target: '_blank'}, 'Menai'),
+                                ' programming language.  This is a pure functional language designed to allow AIs to safely implement new features.'
                             )
                         ),
                         h('section', {},
@@ -197,6 +191,13 @@ export function projectHumbugPage(): VNode {
                                 'You can find out more about the project on GitHub: ',
                                 h('a', {href: 'https://github.com/m6r-ai/humbug', target: '_blank'},
                                     'https://github.com/m6r-ai/humbug'
+                                ),
+                                '.'
+                            ),
+                            h('p', {},
+                                'Join the discord server: ',
+                                h('a', {href: 'https://discord.gg/GZhJ7ZtgwN', target: '_blank', title: 'Discord'},
+                                    'Discord'
                                 ),
                                 '.'
                             ),
