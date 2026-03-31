@@ -450,7 +450,7 @@ function changed(vNode1: VNode, vNode2: VNode): boolean {
         return true;
     }
 
-    return (vNode1.childNodes.length !== vNode2.childNodes.length);
+    return false;
 }
 
 /*
@@ -551,19 +551,44 @@ export function updateElement(
     assertIsVElement(oldChildVNode);
     assertIsVElement(newChildVNode);
     newChildVNode.domElement = oldChildVNode.domElement;
+    newChildVNode.isMounted = oldChildVNode.isMounted;
+
+    // Keep the vDOM tree consistent: replace the old vNode with the new one in
+    // the parent's child list, exactly as the full-replace path does.
+    if (parentVNode) {
+        parentVNode.replaceChild(newChildVNode, oldChildVNode);
+    }
 
     scheduleUpdate(() => {
         updateAttributes(oldChildVNode.domElement as HTMLElement, oldChildVNode.attrs, newChildVNode.attrs);
+
+        // If the callbacks differ, the new vNode is a genuinely different component
+        // identity reusing the same DOM element.  Fire the old unmount and new mount
+        // so each component's lifecycle is correctly honoured.
+        if (oldChildVNode.unmountCallback !== newChildVNode.unmountCallback) {
+            if (oldChildVNode.unmountCallback !== null && oldChildVNode.isMounted) {
+                oldChildVNode.unmountCallback();
+            }
+            if (newChildVNode.mountCallback !== null) {
+                newChildVNode.mountCallback();
+                newChildVNode.isMounted = true;
+            }
+        }
     });
 
-    let len = oldChildVNode.childNodes.length;
+    const oldLen = oldChildVNode.childNodes.length;
+    const newLen = newChildVNode.childNodes.length;
+    const len = Math.max(oldLen, newLen);
+    const oldChildren = oldChildVNode.childNodes.slice();
+    const newChildren = newChildVNode.childNodes.slice();
+    const oldDomChildren = Array.from((oldChildVNode.domElement as HTMLElement).childNodes);
     for (let i = 0; i < len; i++) {
         const nextParent = oldChildVNode.domElement as HTMLElement;
         updateElement(nextParent,
-            nextParent.childNodes[i],
+            i < oldLen ? oldDomChildren[i] : null,
             oldChildVNode,
-            oldChildVNode.childNodes[i],
-            newChildVNode.childNodes[i]
+            i < oldLen ? oldChildren[i] : null,
+            i < newLen ? newChildren[i] : null
         );
     }
 }

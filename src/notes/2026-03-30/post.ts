@@ -13,7 +13,7 @@ function notesOpening_2026_03_30(): VElement[] {
 function notesArticle_2026_03_30(): VElement[] {
     return [
         h('section', {},
-            h('h2', {}, 'Native C VM for Menai'),
+            h('h2', {}, 'Improving the native C VM for Menai'),
             h('p', {},
                 'We\'re still at the easy win stage with the C VM.  We have Python data structures being accessed in fairly inefficient ways ' +
                 'from C, and we have a ton of pointer chasing.'

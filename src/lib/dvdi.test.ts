@@ -295,7 +295,7 @@ describe('updateElement function', () => {
         expect(parent.childNodes).toContain(newVNode.domElement);
     });
 
-    test('updateElement replaces a composite HTML node with a bigger composite node', () => {
+    test('updateElement diffs a composite HTML node with a bigger composite node in-place', () => {
         const parent = document.createElement('div');
         const oldVNode = h('span', {}, h('p', {}, 'old text'));
         const newVNode = h('span', {}, h('p', {}, 'new text'), h('h2', {}, 'heading 2'), h('h3', {}, 'heading 3'));
@@ -306,11 +306,20 @@ describe('updateElement function', () => {
 
         jest.runAllTimers();
 
+        // The outer <span> is diffed in-place, so the DOM element is reused.
         expect(parent.childNodes.length).toBe(1);
-        expect(parent.childNodes).toContain(newVNode.domElement);
+        const span = parent.childNodes[0] as HTMLElement;
+        expect(span.tagName.toLowerCase()).toBe('span');
+        expect(span.childNodes.length).toBe(3);
+        expect(span.childNodes[0].nodeName.toLowerCase()).toBe('p');
+        expect(span.childNodes[0].textContent).toBe('new text');
+        expect(span.childNodes[1].nodeName.toLowerCase()).toBe('h2');
+        expect(span.childNodes[1].textContent).toBe('heading 2');
+        expect(span.childNodes[2].nodeName.toLowerCase()).toBe('h3');
+        expect(span.childNodes[2].textContent).toBe('heading 3');
     });
 
-    test('updateElement replaces a composite HTML node with a smaller composite node', () => {
+    test('updateElement diffs a composite HTML node with a smaller composite node in-place', () => {
         const parent = document.createElement('div');
         const oldVNode = h('span', {}, h('p', {}, 'old text'), h('h2', {}, 'heading 2'), h('h3', {}, 'heading 3'));
         const newVNode = h('span', {}, h('p', {}, 'new text'));
@@ -321,11 +330,16 @@ describe('updateElement function', () => {
 
         jest.runAllTimers();
 
+        // The outer <span> is diffed in-place; surplus old children are removed.
         expect(parent.childNodes.length).toBe(1);
-        expect(parent.childNodes).toContain(newVNode.domElement);
+        const span = parent.childNodes[0] as HTMLElement;
+        expect(span.tagName.toLowerCase()).toBe('span');
+        expect(span.childNodes.length).toBe(1);
+        expect(span.childNodes[0].nodeName.toLowerCase()).toBe('p');
+        expect(span.childNodes[0].textContent).toBe('new text');
     });
 
-    test('updateElement replaces a composite SVG node with a bigger composite node', () => {
+    test('updateElement diffs a composite SVG node with a bigger composite node in-place', () => {
         const parent = document.createElement('div');
         const oldVNode = svg('span', {}, svg('p', {}, 'old text'));
         const newVNode = svg('span', {}, svg('p', {}, 'new text'), h('h2', {}, 'heading 2'), h('h3', {}, 'heading 3'));
@@ -336,11 +350,16 @@ describe('updateElement function', () => {
 
         jest.runAllTimers();
 
+        // The outer SVG <span> is diffed in-place.
         expect(parent.childNodes.length).toBe(1);
-        expect(parent.childNodes).toContain(newVNode.domElement);
+        const span = parent.childNodes[0] as HTMLElement;
+        expect(span.childNodes.length).toBe(3);
+        expect(span.childNodes[0].textContent).toBe('new text');
+        expect(span.childNodes[1].nodeName.toLowerCase()).toBe('h2');
+        expect(span.childNodes[2].nodeName.toLowerCase()).toBe('h3');
     });
 
-    test('updateElement replaces a composite SVG node with a smaller composite node', () => {
+    test('updateElement diffs a composite SVG node with a smaller composite node in-place', () => {
         const parent = document.createElement('div');
         const oldVNode = svg('span', {}, svg('p', {}, 'old text'), h('h2', {}, 'heading 2'), h('h3', {}, 'heading 3'));
         const newVNode = svg('span', {}, svg('p', {}, 'new text'));
@@ -351,8 +370,11 @@ describe('updateElement function', () => {
 
         jest.runAllTimers();
 
+        // The outer SVG <span> is diffed in-place; surplus old children are removed.
         expect(parent.childNodes.length).toBe(1);
-        expect(parent.childNodes).toContain(newVNode.domElement);
+        const span = parent.childNodes[0] as HTMLElement;
+        expect(span.childNodes.length).toBe(1);
+        expect(span.childNodes[0].textContent).toBe('new text');
     });
 
     test('updateElement adds a node with properties', () => {
