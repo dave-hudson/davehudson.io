@@ -406,7 +406,7 @@ export const blogPost_2024_08_06 = new BlogPost(
     'Maximal Instruction Prompting: a strategy for software development with LLMs',
     '2024-08-06',
     '/blog/2024-08-06',
-    'Introducing the concept of Maximial Instruction Prompting (MIP) as a strategy for software development with' +
+    'Introducing the concept of Maximal Instruction Prompting (MIP) as a strategy for software development with' +
     'large language models (LLMs)',
     null,
     null,
