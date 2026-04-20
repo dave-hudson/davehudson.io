@@ -32,11 +32,11 @@ export function projectHumbugPage(): VNode {
                         ),
                         h('figure', {},
                             h('img', {
-                                    src: '/projects/humbug/v0.22-demo.gif',
-                                    alt: 'A quick demo of Humbug v0.22'
+                                    src: '/projects/humbug/v44-demo.gif',
+                                    alt: 'A quick demo of Humbug v44'
                                 }
                             ),
-                            h('figcaption', {}, 'A quick demo of Humbug v0.22')
+                            h('figcaption', {}, 'A quick demo of Humbug v44')
                         ),
                         h('section', {},
                             h('h2', {}, 'Background'),
