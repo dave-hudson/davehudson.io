@@ -126,7 +126,7 @@ export function projectHumbugPage(): VNode {
                             ),
                             h('ul', {},
                                 h('li', {}, h('strong', {}, 'Menai:'), ' For running Menai code'),
-                                h('li', {}, h('strong', {}, 'File System:'), ' For reading and writing files and directories'),
+                                h('li', {}, h('strong', {}, 'File System:'), ' For reading, writing, and searching files and directories'),
                                 h('li', {}, h('strong', {}, 'Clock:'), ' For getting the time, setting alarms, and setting timers'),
                                 h('li', {}, h('strong', {}, 'System:'), ' For interacting with the system UI tabs'),
                                 h('li', {}, h('strong', {}, 'Delegate AI:'), ' For delegating tasks to child AIs'),
@@ -134,7 +134,6 @@ export function projectHumbugPage(): VNode {
                                 h('li', {}, h('strong', {}, 'Terminal:'), ' For interacting with terminal sessions in UI tabs'),
                                 h('li', {}, h('strong', {}, 'Editor:'), ' For editing text files in UI tabs'),
                                 h('li', {}, h('strong', {}, 'Preview:'), ' For previewing content in UI tabs'),
-                                h('li', {}, h('strong', {}, 'Log:'), ' For interacting with system log messages in UI tabs'),
                             ),
                             h('p', {},
                                 'Notably, many of these are designed to let the AI share the UI with a human user. The AI can see what ' +
