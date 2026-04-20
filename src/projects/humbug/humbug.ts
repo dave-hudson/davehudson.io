@@ -161,7 +161,7 @@ export function projectHumbugPage(): VNode {
                         h('section', {},
                             h('h2', {}, 'Project status'),
                             h('p', {},
-                                'Humbug is under active development.  At the time of writing this (2026-03-10), the current version is v40.  The first version, ' +
+                                'Humbug is under active development.  At the time of writing this (2026-04-20), the current version is v44.  The first version, ' +
                                 'v0.1 was released in January 2025.  Releases happen every week or two.'
                             ),
                             h('p', {},
