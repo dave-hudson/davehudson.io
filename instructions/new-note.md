@@ -1,6 +1,6 @@
 # Context
 
-Please read instructions/site-context.m6r
+Please read instructions/site-context.md
 
 # Action
 
