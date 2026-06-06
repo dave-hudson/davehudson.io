@@ -77,3 +77,4 @@ include src/notes/2026-05-05/Makefile.mk
 include src/notes/2026-05-15/Makefile.mk
 include src/notes/2026-05-22/Makefile.mk
 include src/notes/2026-06-04/Makefile.mk
+include src/notes/2026-06-06/Makefile.mk
