@@ -1,3 +1,3 @@
-FILES += src/projects/humbug/v44-demo.gif
+FILES += src/projects/humbug/v48-demo.gif
 
 TS_FILES += src/projects/humbug/humbug.ts
