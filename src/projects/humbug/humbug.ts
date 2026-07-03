@@ -163,7 +163,7 @@ export function projectHumbugPage(): VNode {
                         h('section', {},
                             h('h2', {}, 'Project status'),
                             h('p', {},
-                                'Humbug is under active development.  At the time of writing this (2026-06-28), the current version is v51.  The first version, ' +
+                                'Humbug is under active development.  At the time of writing this (2026-07-03), the current version is v52.  The first version, ' +
                                 'v0.1 was released in January 2025.  Releases happen every week or two.'
                             ),
                             h('p', {},
@@ -219,7 +219,7 @@ export function projectHumbugPage(): VNode {
                                 )
                             ),
                             h('p', {},
-                                'MacOS binaries for each release can be found on the GitHub releases page: ',
+                                'Binaries for MacOS, Windows, and Linux, can be found on the GitHub releases page: ',
                                 h('a', {href: 'https://github.com/m6r-ai/humbug/releases', target: '_blank'},
                                     'https://github.com/m6r-ai/humbug/releases'
                                 ),
