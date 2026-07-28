@@ -15,87 +15,58 @@ export function projectMenaiPage(): VNode {
                 h('div', {className: 'container'},
                     h('article', {},
                         h('p', {},
-                            'Menai is a compiled, pure functional programming language designed specifically for use by an ' +
-                            'LLM rather than a human.  It\'s Lisp-inspired and higher-order, but makes a conscious decision ' +
-                            'to forgo regular I/O operations.  That means it\'s always safe for an AI to use without having ' +
-                            'to worry about potential security problems.'
+                            'Menai is a pure functional programming language designed specifically for use ' +
+                            'by an AI rather than a human.  Of course, Humans can use it too!'
                         ),
                         h('p', {},
-                            'The language started life as AIFPL (AI Functional Programming Language), but was ',
-                            h('a', {href: '/notes/2026-02-28'}, 'renamed to Menai in February 2026'),
-                            '.  I used to live in North Wales where I could see the Menai Strait, and it\'s also home to ' +
-                            'one of my favourite pieces of civil engineering: the Menai Bridge.  I also rather liked that ' +
-                            'Menai ends with "ai" :-)'
+                            'As a pure functional language, it makes a conscious decision to forgo regular I/O operations, so ' +
+                            'it\'s always safe for an AI to use without having to worry about many potential security problems or operating risks.'
                         ),
                         h('p', {},
-                            'The whole compiler is written in Python as part of the ',
+                            'Being pure doesn\'t mean Menai can\'t do real-world work, it just means I/O sits ' +
+                            'in a framework outside of the language and that framework invokes it do pure computations.  Within the project there are a number of ' +
+                            'examples of this.  What the purity does ensure is there\'s a very clean boundary between stateless and ' +
+                            'stateful activities.'
+                        ),
+                        h('p', {},
+                            'Within an AI tool framework, the AI becomes responsible for marshalling I/O, leaving Menai to do the ' +
+                            'the computational work.'
+                        ),
+                        h('p', {},
+                            'Menai is named after the Menai Strait, and one of my favourite pieces of civil engineering: the Menai ' +
+                            'Bridge.  I also rather liked that Menai ends with "ai" :-)'
+                        ),
+                        h('p', {},
+                            'The language started life as ',
+                            h('a', {href: '/notes/2025-09-17'}, 'AIFPL (AI Functional Programming Language)'),
+                            ' in September 2025, as part of ' +
+                            'the ',
                             h('a', {href: '/projects/humbug'}, 'Humbug'),
-                            ' project, with no dependencies beyond the Python standard library.'
-                        ),
-                        h('section', {},
-                            h('h2', {}, 'Compiler architecture'),
-                            h('p', {},
-                                'Menai features a custom optimizing compiler with a rich pipeline of internal representations, ' +
-                                'each designed to enable a specific class of analysis or transformation:'
-                            ),
-                            h('ol', {},
-                                h('li', {},
-                                    h('strong', {}, 'Abstract Syntax Tree (AST)'),
-                                    ': The initial structured representation produced by the parser.'
-                                ),
-                                h('li', {},
-                                    h('strong', {}, 'Intermediate Representation (IR)'),
-                                    ': A tree-based IR used for high-level optimizations such as inlining and copy propagation.'
-                                ),
-                                h('li', {},
-                                    h('strong', {}, 'SSA Control Flow Graph (CFG)'),
-                                    ': A Static Single Assignment form control flow graph used for dataflow analysis.'
-                                ),
-                                h('li', {},
-                                    h('strong', {}, 'Virtual Code'),
-                                    ': A low-level, architecture-neutral representation used for final code shaping.'
-                                ),
-                                h('li', {},
-                                    h('strong', {}, 'Bytecode'),
-                                    ': The final output, executed by the Menai virtual machine.'
-                                )
-                            ),
-                            h('p', {},
-                                'The compiler prioritises inexpensive optimization passes. The goal is to generate very high ' +
-                                'quality bytecode very quickly, rather than spending unbounded time on exhaustive analysis. ' +
-                                'This makes Menai well suited to the short-lived, on-demand evaluation tasks that AI agents ' +
-                                'typically perform.'
-                            )
-                        ),
-                        h('section', {},
-                            h('h2', {}, 'Virtual machine'),
-                            h('p', {},
-                                'The Menai virtual machine uses an ',
-                                h('strong', {}, 'infinite register architecture'),
-                                '. Unlike stack-based VMs, each temporary value is assigned its own virtual register, which ' +
-                                'simplifies code generation and makes many optimization passes more straightforward. The VM ' +
-                                'executes the bytecode produced by the compiler directly.'
-                            ),
-                            h('p', {},
-                                'The reference VM is written in Python.  It is highly tuned, but limited by the speed of the ' +
-                                'Python interpreter and runtime.  An experimental Cython VM also exists and is used on MacOS.'
-                            )
+                            ' project, but was ',
+                            h('a', {href: '/notes/2026-02-28'}, 'renamed to Menai in February 2026'),
+                            ', and then extracted into its own separate repository at ',
+                            h('a', {href: 'https://github.com/m6r-ai/menai', target: '_blank'}, 'github.com/m6r-ai/menai'),
+                            '.  It has zero dependencies on Humbug (or any other external package) and is consumed by ' +
+                            'Humbug as an external dependency.'
                         ),
                         h('section', {},
                             h('h2', {}, 'Language design principles'),
+                            h('p', {},
+                                'Menai has Lisp/Scheme-inspired syntax, and while it has a number of things that will be familiar to ' +
+                                'Lisp/Scheme users, it isn\'t yet another Lisp/Scheme variant.'
+                            ),
                             h('ol', {},
-                                h('li', {}, h('strong', {}, 'Pure functional'), ': No side effects, immutable data throughout'),
+                                h('li', {}, h('strong', {}, 'Pure functional'), ': No side effects, no mutation, immutable data throughout'),
                                 h('li', {}, h('strong', {}, 'Compiled'), ': Source is compiled through multiple IR stages to bytecode before execution'),
-                                h('li', {}, h('strong', {}, 'Strict type system'), ': Operations are type-specific; no implicit coercion between types'),
+                                h('li', {}, h('strong', {}, 'Strict type system'), ': Operations are type-specific with no implicit coercion between types'),
                                 h('li', {}, h('strong', {}, 'First-class functions'), ': Lambda expressions, closures, and higher-order functions'),
                                 h('li', {}, h('strong', {}, 'Lexical scoping'), ': Variables are resolved in their definition environment'),
                                 h('li', {}, h('strong', {}, 'Tail call optimization'), ': Recursive patterns are automatically optimized'),
                                 h('li', {}, h('strong', {}, 'Homoiconicity'), ': Code and data share the same s-expression representation'),
-                                h('li', {}, h('strong', {}, 'Lazy evaluation'), ': Conditionals and boolean operators use lazy evaluation'),
+                                h('li', {}, h('strong', {}, 'Pattern matching'), ': Declarative branching with destructuring and predicate patterns'),
+                                h('li', {}, h('strong', {}, 'Module system'), ': Write and import ', h('code', {}, '.menai'), ' files, cached after first load'),
                                 h('li', {}, h('strong', {}, 'Rich error messages'), ': Detailed diagnostics with position information, critical when AIs generate code on the fly'),
-                                h('li', {}, h('strong', {}, 'Module system'), ': Files can be imported as modules, cached after first load'),
-                                h('li', {}, h('strong', {}, 'Independence'), ': No dependencies on external packages'),
-                                h('li', {}, h('strong', {}, 'Thoroughly tested'), ': Extensive unit tests.')
+                                h('li', {}, h('strong', {}, 'Independence'), ': Zero dependencies on external packages, including Humbug'),
                             )
                         ),
                         h('section', {},
@@ -105,23 +76,22 @@ export function projectMenaiPage(): VNode {
                                 'no generic arithmetic or comparison operators. The types are:'
                             ),
                             h('ul', {},
-                                h('li', {}, h('strong', {}, 'Integer'), ': Arbitrary-precision integers, with typed operators such as ',
-                                    h('code', {}, 'integer+'), ', ', h('code', {}, 'integer*'), ', ', h('code', {}, 'integer<?')),
-                                h('li', {}, h('strong', {}, 'Float'), ': IEEE 754 floating-point, with typed operators such as ',
-                                    h('code', {}, 'float+'), ', ', h('code', {}, 'float-sqrt'), ', ', h('code', {}, 'float<?')),
-                                h('li', {}, h('strong', {}, 'Complex'), ': Complex numbers, with typed operators such as ',
-                                    h('code', {}, 'complex+'), ', ', h('code', {}, 'complex-sqrt')),
-                                h('li', {}, h('strong', {}, 'String'), ': UTF-8 strings; no automatic conversion to or from other types'),
+                                h('li', {}, h('strong', {}, 'Integer'), ': Arbitrary-precision integers'),
+                                h('li', {}, h('strong', {}, 'Float'), ': IEEE 754 64-bit floating-point numbers'),
+                                h('li', {}, h('strong', {}, 'Complex'), ': IEEE 754 64-bit floating-point complex numbers)'),
+                                h('li', {}, h('strong', {}, 'String'), ': Immutable Unicode strings'),
                                 h('li', {}, h('strong', {}, 'Boolean'), ': ', h('code', {}, '#t'), ' and ', h('code', {}, '#f'),
-                                    '; no implicit truthiness — conditions must be boolean'),
+                                    ' (no implicit "truthiness" — conditions must be boolean)'),
+                                h('li', {}, h('strong', {}, 'Bytes'), ': Immutable byte sequences'),
+                                h('li', {}, h('strong', {}, 'Symbol'), ': Used for symbolic programming and as dict keys'),
+                                h('li', {}, h('strong', {}, 'Function'), ': First-class lambda functions with lexical scoping'),
                                 h('li', {}, h('strong', {}, 'None'), ': ', h('code', {}, '#none'),
                                     ' — an explicit absence-of-value type, distinct from ', h('code', {}, '#f')),
-                                h('li', {}, h('strong', {}, 'List'), ': Heterogeneous, ordered collections'),
+                                h('li', {}, h('strong', {}, 'List'), ': Heterogeneous, immutable, ordered collections'),
                                 h('li', {}, h('strong', {}, 'Dict'), ': Immutable key-value mappings with O(1) lookup, maintaining insertion order'),
                                 h('li', {}, h('strong', {}, 'Set'), ': Immutable unordered collections of unique hashable values with O(1) membership testing'),
-                                h('li', {}, h('strong', {}, 'Struct'), ': Nominal typed records with named fields; two struct types with the same fields are distinct types'),
-                                h('li', {}, h('strong', {}, 'Symbol'), ': Produced by ', h('code', {}, 'quote'), '; used for symbolic programming'),
-                                h('li', {}, h('strong', {}, 'Function'), ': First-class lambda functions with lexical scoping')
+                                h('li', {}, h('strong', {}, 'Structtype'), ': Type descriptors used to create and identify `struct` objects'),
+                                h('li', {}, h('strong', {}, 'Struct'), ': Nominal typed records (of a `structtype`) with named fields'),
                             )
                         ),
                         h('section', {},
@@ -146,6 +116,12 @@ export function projectMenaiPage(): VNode {
 (float/ 10.0 4.0)                     ; → 2.5
 (float-sqrt 9.0)                      ; → 3.0
 (float-floor 3.7)                     ; → 3.0
+
+; Complex arithmetic
+(complex+ 1+2j 3+4j)                  ; → 4+6j
+(complex* 2+0j 3+4j)                  ; → 6+8j
+(complex-abs 3+4j)                    ; → 5.0
+(complex-sqrt -1+0j)                  ; → 1j
 
 ; Type conversion
 (integer->float 42)                   ; → 42.0
@@ -347,7 +323,7 @@ export function projectMenaiPage(): VNode {
 
 ; Merge — second dict wins on conflicts
 (let ((defaults (dict "timeout" 30 "retries" 3))
-      (custom   (dict "timeout" 60)))
+      (custom (dict "timeout" 60)))
   (dict-merge defaults custom))
 ; → {("timeout" 60) ("retries" 3)}
 
@@ -367,8 +343,9 @@ export function projectMenaiPage(): VNode {
                             h('h2', {}, 'Sets'),
                             h('p', {},
                                 'Sets are immutable, unordered collections of unique hashable values with O(1) membership ' +
-                                'testing. Valid element types are integers, floats, complex numbers, strings, booleans, ' +
-                                'and symbols — lists, dicts, functions, and ', h('code', {}, '#none'),
+                                'testing. Valid element types are strings, integers, floats, complex numbers, booleans, ' +
+                                'symbols, bytes, structtypes, and structs with hashable fields — lists, dicts, functions, ' +
+                                'and ', h('code', {}, '#none'),
                                 ' are not hashable and cannot be stored in a set.'
                             ),
                             CodeFragment.create({
@@ -387,9 +364,9 @@ export function projectMenaiPage(): VNode {
 (set-remove (set 1 2 3) 2)            ; → #{1 3}
 
 ; Set algebra
-(set-union        (set 1 2 3) (set 3 4 5))  ; → #{1 2 3 4 5}
+(set-union (set 1 2 3) (set 3 4 5))         ; → #{1 2 3 4 5}
 (set-intersection (set 1 2 3) (set 2 3 4))  ; → #{2 3}
-(set-difference   (set 1 2 3) (set 2 3 4))  ; → #{1}
+(set-difference (set 1 2 3) (set 2 3 4))    ; → #{1}
 
 ; Subset test
 (set-subset? (set 1 2) (set 1 2 3))   ; → #t
@@ -400,24 +377,74 @@ export function projectMenaiPage(): VNode {
 (list->set (list 1 2 2 3 3))          ; → #{1 2 3}
 
 ; Higher-order operations
-(map-set    (lambda (x) (integer* x 2)) (set 1 2 3))
+(map-set (lambda (x) (integer* x 2)) (set 1 2 3))
 ; → #{2 4 6}
 
 (filter-set (lambda (x) (integer>? x 1)) (set 1 2 3))
 ; → #{2 3}
 
-(fold-set   integer+ 0 (set 1 2 3))
+(fold-set integer+ 0 (set 1 2 3))
 ; → 6`,
                                 language: 'menai',
                                 caption: 'Set construction, membership, algebra, and higher-order operations'
                             })
                         ),
                         h('section', {},
+                            h('h2', {}, 'Bytes'),
+                            h('p', {},
+                                'Bytes are immutable sequences of byte values (0–255).  They have no literal syntax and ' +
+                                'are created via construction functions.  Bytes are particularly useful for binary ' +
+                                'data parsing, with support for multi-byte integer read/write and LEB128 variable-length ' +
+                                'integer encoding:'
+                            ),
+                            CodeFragment.create({
+                                code: `; Construction
+(string->bytes "hello")               ; → UTF-8 encoded bytes
+(string-hex->bytes "504b")            ; → bytes from hex string
+(list->bytes (list 80 75))            ; → bytes from integer list
+
+; Conversion
+(bytes->string (string->bytes "x"))   ; → "x"
+(bytes->string-hex (list->bytes (list 255)))  ; → "ff"
+(bytes->list (string->bytes "AB"))    ; → (65 66)
+
+; Access and slicing
+(bytes-ref (string->bytes "hello") 1) ; → 101  (byte value for 'e')
+(bytes-length (string->bytes "hi"))   ; → 2
+(bytes-slice (string->bytes "hello") 1 4)  ; → 3 bytes
+(bytes-concat (list->bytes (list 1)) (list->bytes (list 2)))  ; → 2 bytes
+
+; Multi-byte integer reads (little-endian and big-endian)
+(bytes-read-u16-le (string-hex->bytes "0100") 0)   ; → 1
+(bytes-read-u16-be (string-hex->bytes "0001") 0)   ; → 1
+(bytes-read-i32-le (string-hex->bytes "00000001") 0)  ; → 16777216
+
+; Multi-byte integer appends (returns new bytes)
+(bytes-append-u16-le (string->bytes "") 300)  ; → 2 bytes
+
+; LEB128 variable-length integers
+(bytes-read-uleb128 (string-hex->bytes "e807") 0)   ; → (1000 2)
+(bytes-append-uleb128 (string->bytes "") 1000)      ; → LEB128 encoded
+
+; Higher-order operations
+(map-bytes (lambda (b) (integer+ b 1)) (list->bytes (list 0 1 2)))
+; → bytes with values 1, 2, 3
+(filter-bytes (lambda (b) (integer<? b 2)) (list->bytes (list 0 1 2 3)))
+; → bytes with values 0, 1`,
+                                language: 'menai',
+                                caption: 'Bytes construction, multi-byte integers, LEB128, and higher-order operations'
+                            })
+                        ),
+                        h('section', {},
                             h('h2', {}, 'Structs'),
                             h('p', {},
-                                'Structs are nominal typed records with named fields. Two struct types that happen to have ' +
-                                'the same fields are still distinct types — the type identity comes from the binding name, ' +
-                                'not the field list.'
+                                'Structs are nominal typed records with named fields.  The ',
+                                h('code', {}, '(struct (fields))'),
+                                ' form produces a ',
+                                h('strong', {}, 'structtype'),
+                                ' value — a callable type descriptor.  Calling it with field values creates a ' +
+                                'struct instance.  Two struct types that happen to have the same fields are still ' +
+                                'distinct types — the type identity comes from the binding name, not the field list.'
                             ),
                             CodeFragment.create({
                                 code: `; Declare a struct type — bind it with let/let*/letrec
@@ -439,28 +466,38 @@ export function projectMenaiPage(): VNode {
                                 caption: 'Functional update with struct-set'
                             }),
                             CodeFragment.create({
-                                code: `; Type predicates
+                                code: `; Type predicates — nominal typing
 (let ((point (struct (x y)))
-      (Vec   (struct (x y))))        ; same fields, different types
+      (vec (struct (x y))))          ; same fields, different types
   (let ((p (point 1 2))
-        (v (Vec   1 2)))
-    (list (struct?       p)          ; → #t  (any struct)
-          (struct-type? point p)     ; → #t  (specifically a point)
-          (struct-type? Vec   p)     ; → #f  (not a Vec — nominal typing)
-          (struct=? p (point 1 2))   ; → #t
-          (struct=? p v))))          ; → #f  (different types)`,
+        (v (vec 1 2)))
+    (list (struct? p)                     ; → #t  (any struct)
+          (struct-is-instance? p point)   ; → #t  (specifically a point)
+          (struct-is-instance? p vec)     ; → #f  (not a vec — nominal typing)
+          (struct=? p (point 1 2))        ; → #t
+          (struct=? p v))))               ; → #f  (different types)`,
                                 language: 'menai',
                                 caption: 'Type predicates and nominal typing'
                             }),
                             CodeFragment.create({
-                                code: `; Introspection
+                                code: `; Structtype introspection
+(let ((point (struct (x y))))
+  (list (structtype? point)          ; → #t  (it's a structtype value)
+        (structtype-name point)      ; → "point"
+        (structtype-fields point)    ; → (x y)  list of field symbols
+        (structtype? (point 1 2)))   ; → #f  (instance, not type)`,
+                                language: 'menai',
+                                caption: 'Structtype introspection'
+                            }),
+                            CodeFragment.create({
+                                code: `; Struct instance introspection
 (let ((point (struct (x y))))
   (let ((p (point 3 4)))
-    (list (struct-type-name point)   ; → "point"
-          (struct-fields point)      ; → ('x 'y)
-          (struct-type p))))         ; → point (the struct-type value itself)`,
+    (list (struct-ref p 0)           ; → 3  (field by index)
+          (struct-type p)            ; → point (the structtype value itself)
+          (structtype-name (struct-type p)))))  ; → "point"`,
                                 language: 'menai',
-                                caption: 'Struct introspection'
+                                caption: 'Struct instance introspection'
                             }),
                             CodeFragment.create({
                                 code: `; Pattern matching — destructuring form binds fields directly
@@ -468,7 +505,7 @@ export function projectMenaiPage(): VNode {
   (let ((s (shape "circle" 5)))
     (match s
       ((shape k r) (string-concat k ": r=" (integer->string r)))
-      (_           "unknown"))))     ; → "circle: r=5"`,
+      (_ "unknown"))))                 ; → "circle: r=5"`,
                                 language: 'menai',
                                 caption: 'Pattern matching with struct destructuring'
                             })
@@ -480,27 +517,27 @@ export function projectMenaiPage(): VNode {
                                 h('code', {}, 'match'),
                                 ' expression. Predicate patterns use the ',
                                 h('code', {}, '(? pred var)'),
-                                ' form; any predicate, including user-defined ones, can be used:'
+                                ' form and any predicate, including user-defined ones, can be used:'
                             ),
                             CodeFragment.create({
                                 code: `; Literal patterns
 (match 42
   (42 "found the answer")
-  (0  "zero")
-  (_  "other"))                       ; → "found the answer"
+  (0 "zero")
+  (_ "other"))                        ; → "found the answer"
 
 ; Predicate patterns — (? pred var)
 (match "hello"
   ((? integer? n) (integer* n 2))
   ((? string? s)  (string-upcase s))
-  (_              "unknown"))         ; → "HELLO"
+  (_ "unknown"))                      ; → "HELLO"
 
 ; List destructuring
 (match (list 1 2 3)
-  (()        "empty")
-  ((x)       "singleton")
-  ((a b c)   (integer+ a b c))
-  (_         "other"))                ; → 6
+  (() "empty")
+  ((x) "singleton")
+  ((a b c) (integer+ a b c))
+  (_ "other"))                        ; → 6
 
 ; Head/tail split
 (match (list 1 2 3 4)
@@ -515,7 +552,7 @@ export function projectMenaiPage(): VNode {
 
 ; None type in patterns
 (match (dict-get my-dict "missing-key")
-  (#none    "key was absent")
+  (#none "key was absent")
   ((? string? s) s))`,
                                 language: 'menai',
                                 caption: 'Pattern matching with literals, predicates, and destructuring'
@@ -549,16 +586,16 @@ export function projectMenaiPage(): VNode {
                             h('p', {},
                                 'Menai files can be imported as modules. A module is a ',
                                 h('code', {}, '.menai'),
-                                ' file that returns a value — typically a dict of functions. Modules are cached after ' +
-                                'first load, and circular imports are detected and prevented.'
+                                ' file that returns a value — typically a dict of functions. Modules are compiled once ' +
+                                'and cached after first load, and circular imports are detected and prevented.'
                             ),
                             CodeFragment.create({
                                 code: `; math_utils.menai
 (let ((square (lambda (x) (integer* x x)))
-      (cube   (lambda (x) (integer* x (integer* x x)))))
+      (cube (lambda (x) (integer* x (integer* x x)))))
   (dict
     "square" square
-    "cube"   cube))`,
+    "cube" cube))`,
                                 language: 'menai',
                                 caption: 'A simple module (math_utils.menai)'
                             }),
@@ -571,24 +608,110 @@ export function projectMenaiPage(): VNode {
                             })
                         ),
                         h('section', {},
+                            h('h2', {}, 'Compiler architecture'),
+                            h('p', {},
+                                'Menai features a custom optimizing compiler with a rich pipeline of internal representations, ' +
+                                'each designed to enable a specific class of analysis or transformation.  Source code is ' +
+                                'processed through the following stages:'
+                            ),
+                            h('ol', {},
+                                h('li', {},
+                                    h('strong', {}, 'Lexing and parsing'),
+                                    ': Source text is tokenized and parsed into an initial abstract syntax tree.'
+                                ),
+                                h('li', {},
+                                    h('strong', {}, 'Abstract Syntax Tree (AST)'),
+                                    ': Semantic analysis is applied to resolve names, check types, and validate the program.'
+                                ),
+                                h('li', {},
+                                    h('strong', {}, 'Module resolution'),
+                                    ': Imported modules are resolved, partially compiled, and cached, enabling cross-module ' +
+                                    'optimizations.'
+                                ),
+                                h('li', {},
+                                    h('strong', {}, 'Desugaring and constant folding'),
+                                    ': Syntactic sugar is eliminated and constant expressions are evaluated at ' +
+                                    'compile time.'
+                                ),
+                                h('li', {},
+                                    h('strong', {}, 'Intermediate Representation (IR)'),
+                                    ': A tree-based IR is used for high-level optimizations such as inlining, copy ' +
+                                    'propagation, dead binding elimination, and branch constant propagation.'
+                                ),
+                                h('li', {},
+                                    h('strong', {}, 'SSA Control Flow Graph (CFG)'),
+                                    ': A Static Single Assignment form control flow graph is used for dataflow analysis, ' +
+                                    'phi chain collapsing, and peephole optimization.'
+                                ),
+                                h('li', {},
+                                    h('strong', {}, 'Virtual Code (VCode)'),
+                                    ': A low-level, architecture-neutral representation is used for final code shaping.'
+                                ),
+                                h('li', {},
+                                    h('strong', {}, 'Bytecode'),
+                                    ': The final bytecode output is executed by the Menai virtual machine.'
+                                )
+                            ),
+                            h('p', {},
+                                'The compiler prioritises inexpensive optimization passes. The goal is to generate very high ' +
+                                'quality bytecode very quickly, rather than spending unbounded time on exhaustive analysis. ' +
+                                'This makes Menai well suited to the short-lived, on-demand evaluation tasks that AI agents ' +
+                                'typically perform.'
+                            ),
+                        ),
+                        h('section', {},
+                            h('h2', {}, 'Virtual machine'),
+                            h('p', {},
+                                'The Menai virtual machine uses an infinite register architecture. ' +
+                                'Unlike stack-based VMs, each temporary value is assigned its own virtual register, which ' +
+                                'simplifies code generation and makes many optimization passes more straightforward. The VM ' +
+                                'executes the bytecode produced by the compiler directly.'
+                            ),
+                            h('p', {},
+                                'The primary execution engine is a register-based C VM ',
+                                'compiled from C source and loaded at runtime.  Pre-built binaries are available via ' +
+                                'GitHub Releases for Linux, macOS, and Windows on x86_64 and ARM64, across Python 3.10–3.14.  ' +
+                                'A pure Python fallback exists for when the C VM is not available.'
+                            )
+                        ),
+                        h('section', {},
+                            h('h2', {}, 'Language bindings'),
+                            h('p', {},
+                                'The compiler is currently implemented in Python and there is Python logic that converts to/from ' +
+                                'the Menai VM\'s internal data representation.  Over time it\'s anticipated that other language ' +
+                                'bindings will be added.'
+                            )
+                        ),
+                        h('section', {},
                             h('h2', {}, 'More information'),
                             h('p', {},
-                                'Menai is integrated within the ',
-                                h('a', {href: '/projects/humbug'}, 'Humbug'),
-                                ' project. You can find the source code and more information at:'
+                                'Menai is now a standalone project, separate from Humbug. The source code, full language ' +
+                                'manual, and pre-built VM binaries are available at:'
                             ),
                             h('ul', {},
                                 h('li', {},
                                     'GitHub repository: ',
-                                    h('a', {href: 'https://github.com/m6r-ai/humbug', target: '_blank'},
-                                        'https://github.com/m6r-ai/humbug'
+                                    h('a', {href: 'https://github.com/m6r-ai/menai', target: '_blank'},
+                                        'https://github.com/m6r-ai/menai'
                                     )
                                 ),
                                 h('li', {},
-                                    'The Menai implementation can be found in the ',
-                                    h('code', {}, 'menai'),
-                                    ' directory of the Humbug repository'
+                                    'Language manual: see the ',
+                                    h('code', {}, 'docs/'),
+                                    ' directory in the repository'
+                                ),
+                                h('li', {},
+                                    'Pre-built C VM binaries: available on the ',
+                                    h('a', {href: 'https://github.com/m6r-ai/menai/releases', target: '_blank'},
+                                        'GitHub releases page'
+                                    )
                                 )
+                            ),
+                            h('p', {},
+                                'Menai is also integrated within the ',
+                                h('a', {href: '/projects/humbug'}, 'Humbug'),
+                                ' project, where it is consumed as an external dependency to provide safe, ' +
+                                'side-effect-free computation for AI agents.'
                             )
                         )
                     )
@@ -602,6 +725,6 @@ export function projectMenaiPage(): VNode {
 export const projectMenai = new ProjectPage(
     'Menai',
     '/projects/menai',
-    'A compiled, pure functional programming language designed specifically for AI use, featuring an optimizing compiler and infinite-register virtual machine.',
+    'A compiled, pure functional programming language designed specifically for AI use, featuring an optimizing compiler, C virtual machine, strict typing, and no side effects.',
     projectMenaiPage
 );
