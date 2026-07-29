@@ -685,7 +685,7 @@ export function projectMenaiPage(): VNode {
                         h('section', {},
                             h('h2', {}, 'More information'),
                             h('p', {},
-                                'Menai is now a standalone project, separate from Humbug. The source code, full language ' +
+                                'The source code, full language ' +
                                 'manual, and pre-built VM binaries are available at:'
                             ),
                             h('ul', {},
@@ -705,7 +705,12 @@ export function projectMenaiPage(): VNode {
                                     h('a', {href: 'https://github.com/m6r-ai/menai/releases', target: '_blank'},
                                         'GitHub releases page'
                                     )
-                                )
+                                ),
+                                h('li', {},
+                                    'PyPI package install: use ',
+                                    h('code', {}, 'pip install menai'),
+                                    '.  This also installs all the CLI tools.'
+                                ),
                             ),
                             h('p', {},
                                 'Menai is also integrated within the ',
