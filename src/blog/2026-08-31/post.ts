@@ -138,8 +138,7 @@ function blogArticle_2026_08_31(): VElement[] {
                 ', we\'ve got ',
                 h('code', {}, 'dict'),
                 ' (dictionary) objects, and operators that are strictly-typed. ' +
-                'Dig in a little more and there are much more interesting differences! ' +
-                'For example, there are no cons cells (if you want a list then you get a proper list) but lists still play a major role.'
+                'Another example is there are no improper lists (if you want a list then you get a proper list).'
             ),
             h('p', {},
                 'Were I building a language for humans, each of these would potentially be a headache because they\'re unfamiliar, but ' +
@@ -402,8 +401,8 @@ export const blogPost_2026_08_31 = new BlogPost(
     'Menai: a pure functional programming language (12 months on)',
     '2026-08-31',
     '/blog/2026-08-31',
-    'A year after Claude Sonnet and I started building a safe, pure functional programming language for AI agents, Menai has been separated from the Humbug project and is now at v0.3.1 in its stand-alone form. Here\'s how it\'s gone.',
-    null,
+    'A year ago I started building Menai - a safe, pure functional programming language for AI agents. Here\'s how it\'s gone.',
+    '/blog/2026-08-31/glm-edits-my-writing.webp',
     null,
     blogOpening_2026_08_31,
     blogArticle_2026_08_31,
