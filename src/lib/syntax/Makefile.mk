@@ -7,6 +7,8 @@ TS_FILES += \
 	src/lib/syntax/CppParser.ts \
 	src/lib/syntax/CSSLexer.ts \
 	src/lib/syntax/CSSParser.ts \
+	src/lib/syntax/DiffLexer.ts \
+	src/lib/syntax/DiffParser.ts \
 	src/lib/syntax/HTMLLexer.ts \
 	src/lib/syntax/HTMLParser.ts \
 	src/lib/syntax/MenaiLexer.ts \

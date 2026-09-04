@@ -331,6 +331,11 @@ template {
     --syntax-css-at-rule: #c040c0;
     --syntax-css-pseudo: #4ca4c0;
     --syntax-css-selector: #4058d0;
+    --syntax-diff-added: #008000;
+    --syntax-diff-changed: #c06a20;
+    --syntax-diff-heading: #204080;
+    --syntax-diff-metadata: #a0a0a0;
+    --syntax-diff-removed: #c04848;
     --syntax-element: #4ca4c0;
     --syntax-error-bg: #ff0000;
     --syntax-error-color: #f0f0f0;
@@ -377,6 +382,11 @@ template {
         --syntax-css-at-rule: #ffc0eb;
         --syntax-css-pseudo: #90e0e8;
         --syntax-css-selector: #80b0f0;
+        --syntax-diff-added: #60b860;
+        --syntax-diff-changed: #c08040;
+        --syntax-diff-heading: #80b0f0;
+        --syntax-diff-metadata: #808080;
+        --syntax-diff-removed: #f06060;
         --syntax-element: #90e0e8;
         --syntax-error-bg: #ff0000;
         --syntax-error-color: #f0f0f0;
@@ -423,6 +433,11 @@ template {
     --syntax-css-at-rule: #c040c0;
     --syntax-css-pseudo: #4ca4c0;
     --syntax-css-selector: #4058d0;
+    --syntax-diff-added: #008000;
+    --syntax-diff-changed: #c06a20;
+    --syntax-diff-heading: #204080;
+    --syntax-diff-metadata: #a0a0a0;
+    --syntax-diff-removed: #c04848;
     --syntax-element: #4ca4c0;
     --syntax-error-bg: #ff0000;
     --syntax-error-color: #f0f0f0;
@@ -468,6 +483,11 @@ template {
     --syntax-css-at-rule: #ffc0eb;
     --syntax-css-pseudo: #90e0e8;
     --syntax-css-selector: #80b0f0;
+    --syntax-diff-added: #60b860;
+    --syntax-diff-changed: #c08040;
+    --syntax-diff-heading: #80b0f0;
+    --syntax-diff-metadata: #808080;
+    --syntax-diff-removed: #f06060;
     --syntax-element: #90e0e8;
     --syntax-error-bg: #ff0000;
     --syntax-error-color: #f0f0f0;
@@ -843,6 +863,26 @@ pre {
 
 .app .main .content .container pre code .css-selector {
     color: var(--syntax-css-selector);
+}
+
+.app .main .content .container pre code .diff-added {
+    color: var(--syntax-diff-added);
+}
+
+.app .main .content .container pre code .diff-changed {
+    color: var(--syntax-diff-changed);
+}
+
+.app .main .content .container pre code .diff-heading {
+    color: var(--syntax-diff-heading);
+}
+
+.app .main .content .container pre code .diff-metadata {
+    color: var(--syntax-diff-metadata);
+}
+
+.app .main .content .container pre code .diff-removed {
+    color: var(--syntax-diff-removed);
 }
 
 .app .main .content .container pre code .element {
