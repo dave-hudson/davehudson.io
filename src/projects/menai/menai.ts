@@ -88,6 +88,7 @@ export function projectMenaiPage(): VNode {
                                 h('li', {}, h('strong', {}, 'None'), ': ', h('code', {}, '#none'),
                                     ' — an explicit absence-of-value type, distinct from ', h('code', {}, '#f')),
                                 h('li', {}, h('strong', {}, 'List'), ': Heterogeneous, immutable, ordered collections'),
+                                h('li', {}, h('strong', {}, 'Vector'), ': Immutable, contiguous-array-backed sequences with O(1) random access'),
                                 h('li', {}, h('strong', {}, 'Dict'), ': Immutable key-value mappings with O(1) lookup, maintaining insertion order'),
                                 h('li', {}, h('strong', {}, 'Set'), ': Immutable unordered collections of unique hashable values with O(1) membership testing'),
                                 h('li', {}, h('strong', {}, 'Structtype'), ': Type descriptors used to create and identify `struct` objects'),
@@ -282,8 +283,8 @@ export function projectMenaiPage(): VNode {
 (any-list? (lambda (x) (integer>? x 3)) (list 1 2 3 4))  ; → #t
 (all-list? (lambda (x) (integer>? x 0)) (list 1 2 3 4))  ; → #t
 
-; zip-list — pair up two lists
-(zip-list (list 1 2 3) (list 4 5 6))  ; → ((1 4) (2 5) (3 6))
+; list-zip — pair up two lists
+(list-zip (list 1 2 3) (list 4 5 6))  ; → ((1 4) (2 5) (3 6))
 
 ; sort-list — sort with a comparator
 (sort-list integer<? (list 3 1 4 1 5))  ; → (1 1 3 4 5)
@@ -293,6 +294,46 @@ export function projectMenaiPage(): VNode {
 (range 0 10 2)                        ; → (0 2 4 6 8)`,
                                 language: 'menai',
                                 caption: 'Higher-order list operations'
+                            })
+                        ),
+                        h('section', {},
+                            h('h2', {}, 'Vectors'),
+                            h('p', {},
+                                'Vectors are immutable, contiguous-array-backed sequences with O(1) random access. ' +
+                                'They are distinct from lists \u2014 there is no coercion between the two \u2014 and they ' +
+                                'are not pattern-matchable or hashable:'
+                            ),
+                            CodeFragment.create({
+                                code: `; Construction
+(vector 1 2 3)                        ; \u2192 #vector(1 2 3)
+(vector)                              ; \u2192 #vector()  empty vector
+(list->vector (list 1 2 3))           ; \u2192 #vector(1 2 3)
+
+; Access and properties \u2014 O(1) random access
+(vector-ref (vector "a" "b" "c") 1)   ; \u2192 "b"
+(vector-length (vector 1 2 3))        ; \u2192 3
+(vector-empty? (vector))              ; \u2192 #t
+(vector-member? (vector 1 2 3) 2)     ; \u2192 #t
+(vector-index (vector 1 2 3) 42)      ; \u2192 #none  not found
+
+; Functional update \u2014 returns a new vector, original unchanged
+(vector-set (vector 1 2 3) 1 99)      ; \u2192 #vector(1 99 3)
+(vector-slice (vector 1 2 3 4 5) 1 3) ; \u2192 #vector(2 3)
+(vector-concat (vector 1 2) (vector 3 4))  ; \u2192 #vector(1 2 3 4)
+
+; Higher-order operations
+(map-vector (lambda (x) (integer* x 2)) (vector 1 2 3))
+; \u2192 #vector(2 4 6)
+(filter-vector (lambda (x) (integer>? x 0)) (vector -1 2 -3 4))
+; \u2192 #vector(2 4)
+(fold-vector integer+ 0 (vector 1 2 3 4))  ; \u2192 10
+(find-vector (lambda (x) (integer>? x 3)) (vector 1 2 3 4 5))  ; \u2192 4
+(sort-vector integer<? (vector 3 1 4 1 5)) ; \u2192 #vector(1 1 3 4 5)
+
+; Conversion
+(vector->list (vector 1 2 3))         ; \u2192 (1 2 3)`,
+                                language: 'menai',
+                                caption: 'Vector construction, access, functional update, and higher-order operations'
                             })
                         ),
                         h('section', {},
