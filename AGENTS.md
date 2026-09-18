@@ -58,3 +58,31 @@ managed with a TypeScript/Node.js toolchain and GNU Make.
 - Do not commit or modify files in `build/`, `node_modules/`, `venv/`, or `temp/` unless
   explicitly instructed.
 - The `.humbug/` directory is managed by the Humbug system — do not modify it.
+
+---
+
+## Content Authoring
+
+Content pages are built from virtual DOM nodes using the `h()` helper (see `src/lib/dvdi.ts`).
+When writing notes, blog posts, or project pages, follow these conventions:
+
+- **Never use `+` to concatenate a string with an `h(...)` element.** `h()` takes its children
+  as separate arguments, and only treats each argument as a child if it is a `string` or a
+  `VNode`. Concatenating with `+` coerces the element to a string, producing the literal text
+  `[object Object]` and discarding the element. Pass each piece as its own argument instead:
+
+  ```typescript
+  // Wrong — renders "[object Object]":
+  h('p', {}, 'Use the ' + h('code', {}, 'bytes') + ' type.')
+
+  // Right — separate arguments:
+  h('p', {}, 'Use the ', h('code', {}, 'bytes'), ' type.')
+  ```
+
+- **Use `CodeFragment` for code blocks and code fragments** (see
+  `src/lib/code-fragments/CodeFragment.ts`), not raw `pre` blocks. `CodeFragment` provides syntax
+  highlighting and nicer formatting. Do not include components you do not need.
+
+- **Referenced files** (images, source files, etc.) must be copied into the relevant content
+  directory and listed in the `FILES` make variable in that directory's `Makefile.mk`. If no
+  files are referenced, the `FILES` variable is not needed.
