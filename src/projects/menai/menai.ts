@@ -64,7 +64,7 @@ export function projectMenaiPage(): VNode {
                                 h('li', {}, h('strong', {}, 'Tail call optimization'), ': Recursive patterns are automatically optimized'),
                                 h('li', {}, h('strong', {}, 'Homoiconicity'), ': Code and data share the same s-expression representation'),
                                 h('li', {}, h('strong', {}, 'Pattern matching'), ': Declarative branching with destructuring and predicate patterns'),
-                                h('li', {}, h('strong', {}, 'Module system'), ': Write and import ', h('code', {}, '.menai'), ' files, cached after first load'),
+                                h('li', {}, h('strong', {}, 'Module system'), ': Write and import ', h('code', {}, '.menai'), ' files with named ', h('code', {}, 'export'), 's and second-class namespaces, cached after first load'),
                                 h('li', {}, h('strong', {}, 'Rich error messages'), ': Detailed diagnostics with position information, critical when AIs generate code on the fly'),
                                 h('li', {}, h('strong', {}, 'Independence'), ': Zero dependencies on external packages, including Humbug'),
                             )
@@ -627,26 +627,80 @@ export function projectMenaiPage(): VNode {
                             h('p', {},
                                 'Menai files can be imported as modules. A module is a ',
                                 h('code', {}, '.menai'),
-                                ' file that returns a value — typically a dict of functions. Modules are compiled once ' +
-                                'and cached after first load, and circular imports are detected and prevented.'
+                                ' file containing a single expression, and it declares the bindings it makes ' +
+                                'available to importers with an ',
+                                h('code', {}, 'export'),
+                                ' form as its final expression. Modules are a compile-time feature: they are ' +
+                                'resolved, compiled, and cached before optimization runs, which enables cross-module ' +
+                                'optimizations. Circular imports are detected and prevented.'
                             ),
                             CodeFragment.create({
                                 code: `; math_utils.menai
 (let ((square (lambda (x) (integer* x x)))
       (cube (lambda (x) (integer* x (integer* x x)))))
-  (dict
-    "square" square
-    "cube" cube))`,
+  (export square cube))`,
                                 language: 'menai',
                                 caption: 'A simple module (math_utils.menai)'
                             }),
                             CodeFragment.create({
-                                code: `; Using the module
+                                code: `; Importing a module and accessing an export
 (let ((math (import "math_utils")))
-  ((dict-get math "square") 5))       ; → 25`,
+  ((:: math square) 5))               ; → 25`,
                                 language: 'menai',
                                 caption: 'Importing and using a module'
-                            })
+                            }),
+                            h('p', {},
+                                h('code', {}, '(import "name")'),
+                                ' loads a module as a ',
+                                h('strong', {}, 'namespace'),
+                                '. A namespace is a compile-time construct rather than an ordinary value, and it ' +
+                                'is ',
+                                h('strong', {}, 'second-class'),
+                                ': it may only be bound directly by a ',
+                                h('code', {}, 'let'),
+                                '/',
+                                h('code', {}, 'let*'),
+                                '/',
+                                h('code', {}, 'letrec'),
+                                ' binding and used as the first argument of member access, ',
+                                h('code', {}, '(:: namespace member)'),
+                                '. Passing a namespace to a function, storing it in a container, or calling it as ' +
+                                'a function is a compile-time error. That restriction is what lets the compiler ' +
+                                'resolve every member access statically, so struct types, function identities, and ' +
+                                'result types all cross the module boundary intact.'
+                            ),
+                            h('p', {},
+                                'Because member access resolves to the declaration that produced the member, a ' +
+                                'module can export a struct type and the importer can use it as a constructor and ' +
+                                'as a destructuring pattern head once it is bound to a local name:'
+                            ),
+                            CodeFragment.create({
+                                code: `; shapes.menai
+(letrec ((point (struct (x y)))
+         (make-point (lambda (x y) (point x y)))
+         (point-distance (lambda (p1 p2)
+                           (let ((dx (integer- (struct-get p1 'x) (struct-get p2 'x)))
+                                 (dy (integer- (struct-get p1 'y) (struct-get p2 'y))))
+                             (integer+ (integer* dx dx) (integer* dy dy))))))
+  (export point make-point point-distance))`,
+                                language: 'menai',
+                                caption: 'A module exporting a struct type (shapes.menai)'
+                            }),
+                            CodeFragment.create({
+                                code: `; Bring the exported struct into scope under a local name
+(let ((shapes (import "shapes")))
+  (let ((Point (:: shapes point))
+        (make-point (:: shapes make-point)))
+    (match (make-point 3 4)
+      ((Point x y) (integer+ x y)))))   ; → 7`,
+                                language: 'menai',
+                                caption: 'Using an imported struct as a pattern head'
+                            }),
+                            h('p', {},
+                                'A binding that is not named in the module\u2019s ',
+                                h('code', {}, 'export'),
+                                ' form is private to the module and is not accessible to importers.'
+                            )
                         ),
                         h('section', {},
                             h('h2', {}, 'Compiler architecture'),

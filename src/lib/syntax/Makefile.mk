@@ -12,6 +12,7 @@ TS_FILES += \
 	src/lib/syntax/HTMLLexer.ts \
 	src/lib/syntax/HTMLParser.ts \
 	src/lib/syntax/MenaiLexer.ts \
+	src/lib/syntax/MenaiCallContext.ts \
 	src/lib/syntax/MenaiParser.ts \
 	src/lib/syntax/MetaphorLexer.ts \
 	src/lib/syntax/MetaphorParser.ts \

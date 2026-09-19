@@ -1,22 +1,26 @@
 import {Token} from './Lexer'
 import {Parser} from './Parser'
 import {MenaiLexer} from './MenaiLexer'
+import {MenaiCallContext} from './MenaiCallContext'
 
 /**
  * Parser for Menai (AI functional programming language) code.
- * 
+ *
  * This parser processes tokens from the Menai lexer and provides
- * basic semantic analysis for better syntax highlighting, such as
- * distinguishing between function calls and regular identifiers.
+ * semantic analysis for better syntax highlighting, distinguishing
+ * between function calls and regular identifiers.
  */
 export class MenaiParser extends Parser {
+    private callContext: MenaiCallContext;
+
     /**
-     * Constructs an Menai parser.
+     * Constructs a Menai parser.
      * @param input - The input code to parse.
      */
     constructor(input: string) {
         super();
         this.lexer = new MenaiLexer(input);
+        this.callContext = new MenaiCallContext();
     }
 
     /**
@@ -33,6 +37,7 @@ export class MenaiParser extends Parser {
             return null;
         }
 
+        this.callContext.processToken(token);
         return token;
     }
 }
