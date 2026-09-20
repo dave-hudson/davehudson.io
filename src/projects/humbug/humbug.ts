@@ -196,9 +196,9 @@ export function projectHumbugPage(): VNode {
                                 '.'
                             ),
                             h('p', {},
-                                'Join the discord server: ',
-                                h('a', {href: 'https://discord.gg/GZhJ7ZtgwN', target: '_blank', title: 'Discord'},
-                                    'Discord'
+                                'Join the discussion on GitHub: ',
+                                h('a', {href: 'https://github.com/m6r-ai/humbug/discussions', target: '_blank'},
+                                    'GitHub discussions'
                                 ),
                                 '.'
                             ),
