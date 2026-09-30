@@ -159,6 +159,54 @@ export function projectMenaiPage(): VNode {
                             })
                         ),
                         h('section', {},
+                            h('h2', {}, 'Collection operations'),
+                            h('p', {},
+                                'Menai uses a consistent naming convention for the operations that read from and ' +
+                                'update its collection types.  Because the language is pure, an update never mutates ' +
+                                'its argument \u2014 it returns a new collection and leaves the original unchanged.  The ' +
+                                'operation names reflect that: reads are ',
+                                h('code', {}, '-nth'),
+                                ' or ',
+                                h('code', {}, '-get'),
+                                ', and updates are ',
+                                h('code', {}, '-with'),
+                                ' or ',
+                                h('code', {}, '-without'),
+                                ', rather than the mutation-flavoured ',
+                                h('code', {}, 'set'),
+                                ', ',
+                                h('code', {}, 'add'),
+                                ', and ',
+                                h('code', {}, 'remove'),
+                                '.'
+                            ),
+                            h('ul', {},
+                                h('li', {}, h('strong', {}, 'Reading by position'), ' is ',
+                                    h('code', {}, 'collection-nth'), ' for an enumerable sequence: ',
+                                    h('code', {}, 'string-nth'), ', ', h('code', {}, 'list-nth'), ', ',
+                                    h('code', {}, 'bytes-nth'), ', ', h('code', {}, 'vector-nth')),
+                                h('li', {}, h('strong', {}, 'Reading by key'), ' is ',
+                                    h('code', {}, 'collection-get'), ' for a non-enumerable mapping: ',
+                                    h('code', {}, 'dict-get'), ', ', h('code', {}, 'struct-get')),
+                                h('li', {}, h('strong', {}, 'Adding or replacing'), ' an element is ',
+                                    h('code', {}, 'collection-with'), ': ',
+                                    h('code', {}, 'vector-with'), ', ', h('code', {}, 'dict-with'), ', ',
+                                    h('code', {}, 'struct-with'), ', ', h('code', {}, 'set-with')),
+                                h('li', {}, h('strong', {}, 'Removing'), ' an element is ',
+                                    h('code', {}, 'collection-without'), ': ',
+                                    h('code', {}, 'set-without'), ', ', h('code', {}, 'dict-without'), ', ',
+                                    h('code', {}, 'list-without'))
+                            ),
+                            h('p', {},
+                                'Higher-order operations follow the reverse order, with the function or predicate ' +
+                                'first and the collection last, as in ',
+                                h('code', {}, '(map-list f lst)'),
+                                ' and ',
+                                h('code', {}, '(fold-set f init s)'),
+                                '.'
+                            )
+                        ),
+                        h('section', {},
                             h('h2', {}, 'Lambda functions'),
                             CodeFragment.create({
                                 code: `; Simple lambda
@@ -206,7 +254,7 @@ export function projectMenaiPage(): VNode {
 (string-length "hello")               ; → 5
 (string-upcase "hello")               ; → "HELLO"
 (string-downcase "HELLO")             ; → "hello"
-(string-ref "hello" 1)                ; → "e"
+(string-nth "hello" 1)                ; → "e"
 (string-slice "hello" 1 4)            ; → "ell"
 (string-trim "  hello  ")             ; → "hello"
 (string-replace "banana" "a" "o")     ; → "bonono"
@@ -245,7 +293,7 @@ export function projectMenaiPage(): VNode {
 (list-first (list 1 2 3))             ; → 1
 (list-rest (list 1 2 3))              ; → (2 3)
 (list-last (list 1 2 3))              ; → 3
-(list-ref (list "a" "b" "c") 1)       ; → "b"
+(list-nth (list "a" "b" "c") 1)       ; → "b"
 
 ; Properties
 (list-length (list 1 2 3))            ; → 3
@@ -255,7 +303,7 @@ export function projectMenaiPage(): VNode {
 ; Slicing and utilities
 (list-slice (list 1 2 3 4 5) 1 3)     ; → (2 3)
 (list-reverse (list 1 2 3))           ; → (3 2 1)
-(list-remove (list 1 2 3 2 4) 2)      ; → (1 3 4)
+(list-without (list 1 2 3 2 4) 2)     ; → (1 3 4)
 (list-index (list 1 2 3) 2)           ; → 1
 (list-index (list 1 2 3) 42)          ; → #none  not found`,
                                 language: 'menai',
@@ -310,14 +358,14 @@ export function projectMenaiPage(): VNode {
 (list->vector (list 1 2 3))           ; \u2192 #vector(1 2 3)
 
 ; Access and properties \u2014 O(1) random access
-(vector-ref (vector "a" "b" "c") 1)   ; \u2192 "b"
+(vector-nth (vector "a" "b" "c") 1)   ; \u2192 "b"
 (vector-length (vector 1 2 3))        ; \u2192 3
 (vector-empty? (vector))              ; \u2192 #t
 (vector-member? (vector 1 2 3) 2)     ; \u2192 #t
 (vector-index (vector 1 2 3) 42)      ; \u2192 #none  not found
 
 ; Functional update \u2014 returns a new vector, original unchanged
-(vector-set (vector 1 2 3) 1 99)      ; \u2192 #vector(1 99 3)
+(vector-with (vector 1 2 3) 1 99)     ; \u2192 #vector(1 99 3)
 (vector-slice (vector 1 2 3 4 5) 1 3) ; \u2192 #vector(2 3)
 (vector-concat (vector 1 2) (vector 3 4))  ; \u2192 #vector(1 2 3 4)
 
@@ -353,7 +401,7 @@ export function projectMenaiPage(): VNode {
 
 ; Modification (returns a new dict)
 (let ((data (dict "x" 1 "y" 2)))
-  (dict-set data "z" 3))                    ; → {("x" 1) ("y" 2) ("z" 3)}
+  (dict-with data "z" 3))                   ; → {("x" 1) ("y" 2) ("z" 3)}
 
 ; Queries
 (let ((cfg (dict "debug" #t "port" 8080)))
@@ -401,8 +449,8 @@ export function projectMenaiPage(): VNode {
 (set-length (set 1 2 3))              ; → 3
 
 ; Functional update (returns a new set — pure)
-(set-add (set 1 2) 3)                 ; → #{1 2 3}
-(set-remove (set 1 2 3) 2)            ; → #{1 3}
+(set-with (set 1 2) 3)                ; → #{1 2 3}
+(set-without (set 1 2 3) 2)           ; → #{1 3}
 
 ; Set algebra
 (set-union (set 1 2 3) (set 3 4 5))         ; → #{1 2 3 4 5}
@@ -450,7 +498,7 @@ export function projectMenaiPage(): VNode {
 (bytes->list (string->bytes "AB"))    ; → (65 66)
 
 ; Access and slicing
-(bytes-ref (string->bytes "hello") 1) ; → 101  (byte value for 'e')
+(bytes-nth (string->bytes "hello") 1) ; → 101  (byte value for 'e')
 (bytes-length (string->bytes "hi"))   ; → 2
 (bytes-slice (string->bytes "hello") 1 4)  ; → 3 bytes
 (bytes-concat (list->bytes (list 1)) (list->bytes (list 2)))  ; → 2 bytes
@@ -500,11 +548,11 @@ export function projectMenaiPage(): VNode {
                                 code: `; Functional update — returns a new struct, original is unchanged
 (let ((point (struct (x y))))
   (let ((p  (point 3 4))
-        (p2 (struct-set p 'x 10)))
+        (p2 (struct-with p 'x 10)))
     (list (struct-get p  'x)         ; → 3   (unchanged)
           (struct-get p2 'x))))      ; → 10`,
                                 language: 'menai',
-                                caption: 'Functional update with struct-set'
+                                caption: 'Functional update with struct-with'
                             }),
                             CodeFragment.create({
                                 code: `; Type predicates — nominal typing
@@ -534,8 +582,7 @@ export function projectMenaiPage(): VNode {
                                 code: `; Struct instance introspection
 (let ((point (struct (x y))))
   (let ((p (point 3 4)))
-    (list (struct-ref p 0)           ; → 3  (field by index)
-          (struct-type p)            ; → point (the structtype value itself)
+    (list (struct-type p)            ; → point (the structtype value itself)
           (structtype-name (struct-type p)))))  ; → "point"`,
                                 language: 'menai',
                                 caption: 'Struct instance introspection'

@@ -2,12 +2,17 @@
 
 This file provides guidance for AI agents operating within this mindspace.
 
+For the **purpose and intent** of this mindspace — what the site is for, who it is for, its
+design principles, and its history — see `blueprint.md`. This file covers **how to operate**
+here: layout, build, and authoring mechanics.
+
 ---
 
 ## Project Overview
 
-This mindspace is the project for a blogsite (davehudson.io). It is a statically built website
-managed with a TypeScript/Node.js toolchain and GNU Make.
+This mindspace is the project for a blogsite (davehudson.io). It is a single-page application
+written in TypeScript, pre-rendered to static HTML for deployment, and managed with a
+TypeScript/Node.js toolchain and GNU Make.
 
 ---
 
@@ -20,19 +25,26 @@ managed with a TypeScript/Node.js toolchain and GNU Make.
 | `src/notes/` | Notes entries |
 | `src/about/` | About page |
 | `src/projects/` | Projects pages |
+| `src/m6r/` | M6R closure announcement page |
+| `src/papers/` | Shared PDF store, linked from blog posts and notes (no index page) |
 | `src/lib/` | Shared libraries |
 | `src/components/` | Shared UI components |
+| `src/css/`, `src/fonts/`, `src/icons/`, `src/manifest/` | Static assets |
 | `src/sitemap.xml` | Site map |
 | `build/` | Build output — do not edit directly |
-| `metaphor/` | Metaphor (`.m6r`) context files describing the project |
-| `conversations/` | Saved Humbug AI conversations |
-| `temp/` | Temporary working files |
+| `instructions/` | Prompts for creating new blog posts and notes |
 | `Makefile` | Top-level makefile; recursively includes sub-makefiles |
 | `esbuild.config.js` | esbuild bundler configuration |
 | `jest.config.mjs` | Jest test configuration |
 | `tsconfig.json` | TypeScript configuration |
 | `package.json` | Node.js package manifest |
 | `server.js` | Local development server |
+
+Note: this repository is the source for the site, not for the projects it documents. Humbug,
+Menai, Metaphor, and siterender live in separate repositories.
+
+Note: `conversations/`, `temp/`, and `.humbug/` are gitignored working directories. They may
+not exist in a fresh checkout and are not part of the repository.
 
 ---
 
@@ -42,6 +54,9 @@ managed with a TypeScript/Node.js toolchain and GNU Make.
 - Makefiles are **recursively included** from subdirectories into the top-level `Makefile`.
 - The build system tracks source modifications and ensures all necessary supporting files are
   copied to the `build/` directory.
+- `make` produces the client-side bundle. The `make siterender` target additionally pre-renders
+  every page to static HTML; it depends on the sibling `siterender` repository being present
+  alongside this mindspace, so it will fail in a checkout where that is absent.
 - Do **not** manually edit files under `build/` — they are generated artefacts.
 
 ---
@@ -53,8 +68,10 @@ managed with a TypeScript/Node.js toolchain and GNU Make.
 - **Shared logic or UI** changes belong in `src/lib/` or `src/components/`.
 - **Always run `make`** (or advise the user to do so) after making source changes, so the build
   directory is kept in sync.
-- The `metaphor/` directory contains `.m6r` context files that describe the project in more
-  detail. Consult these when deeper context is needed.
+- The `instructions/` directory contains prompts for creating new blog posts and notes. Consult
+  these when adding new dated content.
+- `.m6r` files under `src/blog/` and `src/notes/` are published content artefacts (Metaphor
+  prompt files referenced by those posts and notes), not project-context files.
 - Do not commit or modify files in `build/`, `node_modules/`, `venv/`, or `temp/` unless
   explicitly instructed.
 - The `.humbug/` directory is managed by the Humbug system — do not modify it.
@@ -86,3 +103,7 @@ When writing notes, blog posts, or project pages, follow these conventions:
 - **Referenced files** (images, source files, etc.) must be copied into the relevant content
   directory and listed in the `FILES` make variable in that directory's `Makefile.mk`. If no
   files are referenced, the `FILES` variable is not needed.
+
+  The exception is PDFs in `src/papers/`: that directory is a shared store for documents cited
+  by blog posts and notes, and its `Makefile.mk` picks up every PDF with a wildcard, so no
+  `FILES` edit is needed. Link to them as `/papers/<filename>.pdf`.

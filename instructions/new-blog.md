@@ -1,6 +1,6 @@
 # Context
 
-Please read metaphor/site-context.md
+Please read instructions/site-context.md
 
 # Action
 
