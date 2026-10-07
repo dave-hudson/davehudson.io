@@ -114,6 +114,21 @@ describe('MenaiParser', () => {
         });
     });
 
+    describe('eval special form', () => {
+        it('recognises eval as a keyword', () => {
+            expect(valuesOf('(eval x)', 'KEYWORD')).toEqual(['eval']);
+        });
+
+        it('does not classify eval itself as a function', () => {
+            expect(valuesOf('(eval x)', 'FUNCTION_OR_METHOD')).toEqual([]);
+        });
+
+        it('does not classify a quoted argument to eval as a function', () => {
+            expect(valuesOf("(eval '(foo bar))", 'FUNCTION_OR_METHOD')).toEqual([]);
+            expect(valuesOf("(eval '(foo bar))", 'IDENTIFIER')).toEqual(['foo', 'bar']);
+        });
+    });
+
     describe('malformed input', () => {
         it('handles an unclosed form without raising', () => {
             expect(valuesOf('(let ((x', 'FUNCTION_OR_METHOD')).toEqual([]);
