@@ -55,7 +55,7 @@ function notesArticle_2026_10_04(): VElement[] {
             h('p', {},
                 'Here are the latest performance numbers - there are a few minor losses compared with the ' +
                 'captured numbers from ',
-                h('a', {href: '/notes/2026-09-30'}, '2026-09-30'), ', but'
+                h('a', {href: '/notes/2026-09-30'}, '2026-09-30'), ', but these largely look like noise.'
             ),
             CodeFragment.create({language: 'text', code:
 `BMP-DECODE
