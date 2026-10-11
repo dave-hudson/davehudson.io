@@ -469,7 +469,7 @@ export const blogPost_2026_10_11 = new BlogPost(
     '/blog/2026-10-11',
     'AI can now write a throwaway program for a single question, run it safely, and discard it for under two cents. ' +
     'What does that do to the economics of software?',
-    '/blog/2026-10-11/block5.png',
+    '/blog/2026-10-11/block3.png',
     null,
     blogOpening_2026_10_11,
     blogArticle_2026_10_11,
