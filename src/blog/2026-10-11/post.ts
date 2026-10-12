@@ -11,9 +11,11 @@ function blogOpening_2026_10_11(): VElement[] {
             'The whole exercise, including a follow-up question a little later, took just over a minute and cost less than $0.02.'
         ),
         h('p', {},
-            'I believe that\'s a sign that the economics of software have already changed, but it\'s also a major opportunity. ' +
-            'Where, previously, software had to be designed for a mass market, we can now have software that\'s built for a few ' +
-            'users, or even just one.'
+            'I believe that\'s a sign that the economics of software have already changed. ' +
+            'Software has been so expensive to build that we could only afford it if the cost was amortized across a large ' +
+            'number of users. ' +
+            'Now an LLM can write glue logic in seconds, so some of our software can be built on demand. ' +
+            'It can be built to answer a single question, used once, and then discarded.'
         ),
         h('p', {},
             'That comes with risk, and it only works if we can do it safely.'
@@ -24,121 +26,18 @@ function blogOpening_2026_10_11(): VElement[] {
 function blogArticle_2026_10_11(): VElement[] {
     return [
         h('section', {},
-            h('h2', {}, 'The world as-is'),
-            h('p', {},
-                'Let\'s start with hardware. The "hard" in hardware is because it\'s the part of our computational system that doesn\'t ' +
-                'change quickly. It has been designed to enable algorithms to be executed at great speeds. Changes occur at the ' +
-                'level of years, because it takes years to design and check it.'
-            ),
-            h('p', {},
-                'Now software. The "soft" in software comes from the idea that we can quickly define algorithms that can be applied to ' +
-                'that very specialized hardware. We can modify it easily and quickly. In a single hardware lifecycle we could come up ' +
-                'with thousands, or even millions, of different software designs for an instance of that hardware. In practice, however, ' +
-                'the vast majority of the software we actually run doesn\'t change much either. Our software turns out to be surprisingly ' +
-                '"hard".'
-            ),
-            h('p', {},
-                'Humans take a large amount of time to learn the nuances of problem domains. It doesn\'t matter if it\'s deeply technical ' +
-                'or some business process area, they all have surprising complexity when you get into the details. Expertise is very ' +
-                'expensive because we learn slowly. Experts design tools to help them but the economic cost of those tools is high because ' +
-                'the people who built them are expensive. The tools don\'t have to be obvious software either. They might be spreadsheets, ' +
-                'databases, even slide decks - all digital artefacts that cost a lot of time and money to produce.'
-            ),
-            h('p', {},
-                'The "soft" in software promised cheap, endlessly adaptable programs. Instead, software has become so expensive that we ' +
-                'can only afford it if we can amortize the cost over very large numbers of users. We have ended up with a lot of "one ' +
-                'size fits all" approaches.'
-            ),
-            h('p', {},
-                'What if those same costs dropped dramatically? Taken to an extreme, what if we could build things in a few tens of ' +
-                'seconds? It would become practical to create software for just a single task. We could have an era of disposable, ' +
-                'purpose-built software.'
-            )
-        ),
-        h('section', {},
-            h('h2', {}, 'Enter the LLMs'),
-            h('p', {},
-                'A little under 2 years ago I started building an agentic AI framework ',
-                h('a', {href: '/projects/humbug'}, 'Humbug'),
-                '. In late 2024, my then-radical idea was that 80%+ of the code should be written by LLMs. In under 2 years, 80% ' +
-                'became pretty much 100%. Core to this was recognizing that LLMs can build software quickly, but struggle with ' +
-                'understanding a project vision in much the same way as human developers. If I switched to a product definition and ' +
-                'architectural oversight role I could get far more leverage.'
-            ),
-            h('p', {},
-                'As an example, when Anthropic or OpenAI add a new model I simply tell the current version of Humbug to go and read the ' +
-                'website and update its own model specs. When OpenAI\'s new models would no longer work well using the Chat Completions ' +
-                'REST endpoint, I had DeepSeek read the specs and sketch a plan for me to review, then write me a new implementation of ' +
-                'the Responses endpoint instead.'
-            ),
-            h('p', {},
-                'I mention DeepSeek as it\'s the latest in a long line of different LLMs that have helped along the way (GPT-4o, Gemini, ' +
-                'many iterations of Claude Sonnet, GLM 5.2 and 5.3, and now DeepSeek 4.1 Flash). Humbug is LLM agnostic (it can even ' +
-                'switch LLM mid-conversation), and that means it has been able to use whichever model is most cost effective to ' +
-                'achieve a result. Features now cost 10x less to build than a year ago, and are delivered at least twice as fast ' +
-                '(based on assessments of API billing for LLMs early this year vs the ones now in use, and where billing is API usage ' +
-                'based, not relying on coding plans).'
-            ),
-            h('p', {},
-                'Our limiting step used to be how fast we could glue things together, but LLMs can do that many orders of magnitude ' +
-                'faster than a human.'
-            )
-        ),
-        h('section', {},
-            h('h2', {}, 'Summoning a cheap feature'),
-            h('p', {},
-                'A few days ago, I was testing an idea related to the summoning of code. I was experimenting with an old zip file ' +
-                'I had on my laptop. It turned out the zip file had a bunch of Pascal code in it as well as C++ so when DeepSeek ' +
-                'unpacked the files it showed me a bunch of Pascal code.'
-            ),
-            h('p', {},
-                'Humbug didn\'t have a Pascal syntax highlighter (it has many others), but 17 minutes after I expressed the desire for ' +
-                'one we had a new Pascal syntax highlighter, tests, and all system tests were green. DeepSeek asked for a few ' +
-                'clarifications on matters of design taste, updated various related document files, and flagged an alphabetical ' +
-                'ordering issue it had noticed (we fixed that too). It also (correctly) concluded that this change did not require it ' +
-                'to write an architectural decision record (these are used by the LLM to track important architectural decisions). ' +
-                'The total cost of the feature was under $0.20.'
-            ),
-            h('p', {},
-                'Is the syntax highlighter perfect? No. It can\'t work out types and highlight them, but it can handle reserved words, ' +
-                'syntax structures, constants, comments, etc. Did it make it far quicker for me to understand what was in the zip file? ' +
-                'Absolutely yes! Could I have built it myself for $0.20 - not even close.'
-            ),
-            h('figure', {},
-                h('img', {
-                    src: '/blog/2026-10-11/pascal-highlights.png',
-                    alt: 'Example of the Pascal syntax highlighting',
-                    style: 'width: 100%; height: auto;'
-                }),
-                h('figcaption', {},
-                    'Example of the Pascal syntax highlighting'
-                )
-            ),
-            h('p', {},
-                'Yes, I know I didn\'t count the few minutes of my time, my laptop\'s depreciation or a small amount of battery ' +
-                'power, but I was doing other things at the same time too. I also know this was only possible because Humbug already ' +
-                'made this kind of change straightforward. It falls under the heading of "LLM tooling made less expensive by effective ' +
-                'LLM tooling".'
-            ),
-            h('p', {},
-                'In this instance I chose to make the syntax highlighter a persistent feature. In future, every other Humbug user can ' +
-                'benefit from it. I had no idea I needed it until the need arose, but it was an obvious product capability once that ' +
-                'need became apparent.  The important part was I summoned this feature on demand.'
-            ),
-            h('p', {},
-                'All good stuff, but the zip file experiment behind this was more interesting. I\'d asked the LLM to explore the contents and ' +
-                'it decided to do so by using throwaway programs. That only makes sense if there\'s a safe way to run them, and that\'s ' +
-                'where Menai comes in.'
-            )
-        ),
-        h('section', {},
             h('h2', {}, 'Composable software'),
+            h('p', {},
+                'I build an open source AI environment called ',
+                h('a', {href: '/projects/humbug'}, 'Humbug'),
+                ', something that has been largely written by AI since its inception in late 2024.'
+            ),
             h('p', {},
                 'One of the spin-offs from the Humbug project is a programming language ',
                 h('a', {href: '/projects/menai'}, 'Menai'),
-                '. Menai is a Lisp/Scheme-like language designed for LLMs to use. It only has pure functions (literally no I/O in the ' +
-                'language and no state mutation), with any sources of data provided to it by a separate tool framework (in this case ' +
-                'Humbug).'
+                '. Menai is a Lisp/Scheme-like language designed for LLMs to use, and focused on a key safety constraint. ' +
+                'It only has pure functions (literally no I/O in the language and no state mutation), with any sources of data ' +
+                'provided to it by a separate tool framework (in this case Humbug).'
             ),
             h('p', {},
                 'There are a few interesting ideas in Menai:'
@@ -156,8 +55,7 @@ function blogArticle_2026_10_11(): VElement[] {
                     ' directory or the file with your API keys then the LLM can\'t write a program that will fetch them.'
                 ),
                 h('li', {},
-                    'It throws away any library code it doesn\'t need (whole program optimization) allowing it to be fast to compile ' +
-                    'and run.'
+                    'It\'s designed to be fast to compile and run so users don\'t perceive a pause when an LLM builds software using it.'
                 ),
                 h('li', {},
                     'Using pure functions makes it very easy for an LLM to compose functions on top of each other.'
@@ -189,8 +87,8 @@ function blogArticle_2026_10_11(): VElement[] {
             ),
             h('p', {},
                 'Many years ago I used to work in procurement and wrote a spec for a long-obsolete PC. I have a version of the spec as ' +
-                'a Microsoft Word docx file. I asked DeepSeek to read the spec and tell me what the document was about (and asked it ' +
-                'not to cheat by using the pre-existing ',
+                'a Microsoft Word docx file. I asked DeepSeek v4.1 Flash (a fast, inexpensive LLM) to read the spec and tell me what ' +
+                'the document was about (and asked it not to cheat by using the pre-existing ',
                 h('code', {}, 'read_text'),
                 ' tool).'
             ),
@@ -275,7 +173,12 @@ function blogArticle_2026_10_11(): VElement[] {
                 'At best our LLM would either try to guess or resort to writing a Python script.'
             ),
             h('p', {},
-                'You can see the full, disposable, 106-line program in the ',
+                'The AI didn\'t write all the code from scratch. It wrote the last 106 lines required to bridge the problem, but ' +
+                'it\'s worth noting that the libraries it did leverage were also built by posing a series of problems to AI models ' +
+                'in the same Humbug framework.'
+            ),
+            h('p', {},
+                'You can see the full, disposable program in the ',
                 h('a', {
                     href: '#postscript',
                     onclick: (e: MouseEvent) => navigateEvent(e, '/blog/2026-10-11#postscript')
@@ -299,24 +202,26 @@ function blogArticle_2026_10_11(): VElement[] {
                 'assessment I was looking for on relative sizing.'
             ),
             h('p', {},
-                'One important thing to note is that this approach substantially reduced the risk to the machine running the programs.'
-            ),
-            h('p', {},
-                'None of the steps in our example required authorization because a Menai program has nothing that needs it. It has ' +
-                'no ambient authority bestowed by the user\'s permissions. This matters. If approvals are rare then users are much ' +
-                'more likely to pay close attention to them and are far less likely to fall into authorization fatigue and keep ' +
-                'clicking "approve".'
+                'The most important thing worth noting is how none of this needed my approval. Menai programs have no ambient ' +
+                'authority bestowed by the user\'s permissions, so there was nothing to approve. This matters. If approvals are ' +
+                'rare then users are much more likely to pay close attention to them and are far less likely to fall into ' +
+                'authorization fatigue and keep clicking "approve".'
             ),
             h('p', {},
                 'Were such tools written in Python code I\'d have to carefully review every script to ensure safety, or ' +
                 'else put the Python interpreter in a container and orchestrate interactions between the LLM and that sandbox.'
+            ),
+            h('p', {},
+                'It\'s worth noting that there\'s nothing particularly special about the use of DeepSeek in this example. ' +
+                'Humbug and Menai have been developed using models from OpenAI, Anthropic, Google, and Z.ai, and all are quite ' +
+                'capable of doing similar things.'
             )
         ),
         h('section', {},
             h('h2', {}, 'A few last thoughts'),
             h('p', {},
-                'I don\'t claim Menai and Humbug are the answer to all the problems I\'ve described, but they do help explore some ' +
-                'potential solutions. LLMs offer us an interesting challenge, so it\'s time to find some new approaches.'
+                'I don\'t claim Menai and Humbug are the only way to approach the problem of safely creating software on demand, ' +
+                'but they do help explore some potential solutions.'
             ),
             h('p', {},
                 'Here\'s what I think we should start with:'
@@ -343,7 +248,6 @@ function blogArticle_2026_10_11(): VElement[] {
                 'in ways that used to look like pure science fiction.'
             )
         ),
-        h('hr', {}),
         h('section', {},
             h('h2', {id: 'postscript'}, 'Postscript'),
             h('p', {},
