@@ -227,23 +227,36 @@ export function projectMenaiPage(): VNode {
                                 caption: 'Lambda expressions and closures'
                             }),
                             h('h3', {}, 'Local bindings'),
+                            h('p', {},
+                                h('code', {}, 'let'),
+                                ' is Menai\'s only binding form.  Every binding name is in scope for every binding ' +
+                                'value and for the body, so a binding may reference any sibling — including itself ' +
+                                'and the other bindings in the form.  That covers the sequential and recursive cases ' +
+                                'that other Lisps spell ',
+                                h('code', {}, 'let*'),
+                                ' and ',
+                                h('code', {}, 'letrec'),
+                                ', so there is no need for separate forms.'
+                            ),
                             CodeFragment.create({
-                                code: `; let — parallel bindings (bindings cannot reference each other)
-(let ((x 5) (y 10))
+                                code: `; Bindings are all in scope, so order does not matter
+(let ((x 5)
+      (y 10))
   (integer+ x y))                     ; → 15
 
-; let* — sequential bindings (each can reference previous)
-(let* ((x 5) (y (integer* x 2)))
+; A later binding can reference an earlier one
+(let ((x 5)
+      (y (integer* x 2)))
   (integer+ x y))                     ; → 15
 
-; letrec — recursive bindings (for self- and mutually-recursive functions)
-(letrec ((fact (lambda (n)
+; Self-recursion and mutual recursion work in the same form
+(let ((fact (lambda (n)
                  (if (integer<=? n 1)
                      1
                      (integer* n (fact (integer- n 1)))))))
   (fact 10))                          ; → 3628800`,
                                 language: 'menai',
-                                caption: 'let, let*, and letrec bindings'
+                                caption: 'let bindings'
                             })
                         ),
                         h('section', {},
@@ -536,7 +549,7 @@ export function projectMenaiPage(): VNode {
                                 'distinct types — the type identity comes from the binding name, not the field list.'
                             ),
                             CodeFragment.create({
-                                code: `; Declare a struct type — bind it with let/let*/letrec
+                                code: `; Declare a struct type — bind it with let
 (let ((point (struct (x y))))
   (let ((p (point 3 4)))             ; construct an instance
     (list (struct-get p 'x)          ; → 3
@@ -547,7 +560,7 @@ export function projectMenaiPage(): VNode {
                             CodeFragment.create({
                                 code: `; Functional update — returns a new struct, original is unchanged
 (let ((point (struct (x y))))
-  (let ((p  (point 3 4))
+  (let ((p (point 3 4))
         (p2 (struct-with p 'x 10)))
     (list (struct-get p  'x)         ; → 3   (unchanged)
           (struct-get p2 'x))))      ; → 10`,
@@ -653,17 +666,17 @@ export function projectMenaiPage(): VNode {
                             ),
                             CodeFragment.create({
                                 code: `; Tail-recursive factorial (automatically optimized)
-(letrec ((factorial (lambda (n acc)
-                      (if (integer<=? n 1)
-                          acc
-                          (factorial (integer- n 1) (integer* n acc))))))
+(let ((factorial (lambda (n acc)
+                   (if (integer<=? n 1)
+                       acc
+                       (factorial (integer- n 1) (integer* n acc))))))
   (factorial 1000 1))                 ; Works with arbitrarily large numbers
 
 ; Mutual recursion is also optimized
-(letrec ((is-even (lambda (n)
-                    (if (integer=? n 0) #t (is-odd (integer- n 1)))))
-         (is-odd  (lambda (n)
-                    (if (integer=? n 0) #f (is-even (integer- n 1))))))
+(let ((is-even (lambda (n)
+                 (if (integer=? n 0) #t (is-odd (integer- n 1)))))
+      (is-odd  (lambda (n)
+                 (if (integer=? n 0) #f (is-even (integer- n 1))))))
   (is-even 10000))                    ; → #t  no stack overflow`,
                                 language: 'menai',
                                 caption: 'Tail call optimization for recursive and mutually recursive functions'
@@ -705,11 +718,9 @@ export function projectMenaiPage(): VNode {
                                 h('strong', {}, 'second-class'),
                                 ': it may only be bound directly by a ',
                                 h('code', {}, 'let'),
-                                '/',
-                                h('code', {}, 'let*'),
-                                '/',
-                                h('code', {}, 'letrec'),
-                                ' binding and used as the first argument of member access, ',
+                                ' binding whose value is an ',
+                                h('code', {}, 'import'),
+                                ', and used as the first argument of member access, ',
                                 h('code', {}, '(:: namespace member)'),
                                 '. Passing a namespace to a function, storing it in a container, or calling it as ' +
                                 'a function is a compile-time error. That restriction is what lets the compiler ' +
@@ -723,12 +734,12 @@ export function projectMenaiPage(): VNode {
                             ),
                             CodeFragment.create({
                                 code: `; shapes.menai
-(letrec ((point (struct (x y)))
-         (make-point (lambda (x y) (point x y)))
-         (point-distance (lambda (p1 p2)
-                           (let ((dx (integer- (struct-get p1 'x) (struct-get p2 'x)))
-                                 (dy (integer- (struct-get p1 'y) (struct-get p2 'y))))
-                             (integer+ (integer* dx dx) (integer* dy dy))))))
+(let ((point (struct (x y)))
+      (make-point (lambda (x y) (point x y)))
+      (point-distance (lambda (p1 p2)
+                        (let ((dx (integer- (struct-get p1 'x) (struct-get p2 'x)))
+                              (dy (integer- (struct-get p1 'y) (struct-get p2 'y))))
+                          (integer+ (integer* dx dx) (integer* dy dy))))))
   (export point make-point point-distance))`,
                                 language: 'menai',
                                 caption: 'A module exporting a struct type (shapes.menai)'
