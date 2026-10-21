@@ -93,7 +93,83 @@ export function projectMenaiPage(): VNode {
                                 h('li', {}, h('strong', {}, 'Set'), ': Immutable unordered collections of unique hashable values with O(1) membership testing'),
                                 h('li', {}, h('strong', {}, 'Structtype'), ': Type descriptors used to create and identify `struct` objects'),
                                 h('li', {}, h('strong', {}, 'Struct'), ': Nominal typed records (of a `structtype`) with named fields'),
+                                h('li', {}, h('strong', {}, 'Enumtype'), ': Type descriptors used to create and identify `enum` values'),
+                                h('li', {}, h('strong', {}, 'Enum'), ': Nominal, closed sets of named variants (of an `enumtype`), compared for identity only'),
                             )
+                        ),
+                        h('section', {},
+                            h('h2', {}, 'Higher-order functions'),
+                            h('p', {},
+                                'Functions are first-class values, so every collection type has a matching family of ',
+                                'higher-order operations.  The naming convention puts the function or predicate first ',
+                                'and the collection last, and the verb identifies the operation: ',
+                                h('code', {}, 'map-'),
+                                ' transforms each element, ',
+                                h('code', {}, 'filter-'),
+                                ' selects elements by a predicate, ',
+                                h('code', {}, 'fold-'),
+                                ' accumulates into a single value, ',
+                                h('code', {}, 'find-'),
+                                ' returns the first match or ',
+                                h('code', {}, '#none'),
+                                ', and ',
+                                h('code', {}, 'any-'),
+                                ' and ',
+                                h('code', {}, 'all-'),
+                                ' test whether some or every element satisfies a predicate.  The same verbs work ',
+                                'across lists, vectors, sets, dicts, and bytes.'
+                            ),
+                            CodeFragment.create({
+                                code: `; The same operations across every collection type
+(map-list (lambda (x) (integer* x 2)) (list 1 2 3 4))      ; \u2192 (2 4 6 8)
+(map-vector (lambda (x) (integer* x 2)) (vector 1 2 3))    ; \u2192 #vector(2 4 6)
+(map-set (lambda (x) (integer* x 2)) (set 1 2 3))          ; \u2192 #{2 4 6}
+(map-bytes (lambda (b) (integer+ b 1)) (list->bytes (list 0 1 2)))
+; \u2192 #bytes"010203"
+
+; filter- selects by predicate
+(filter-list (lambda (x) (integer>? x 0)) (list -1 2 -3 4))    ; \u2192 (2 4)
+(filter-vector (lambda (x) (integer>? x 0)) (vector -1 2 -3 4))
+; \u2192 #vector(2 4)
+(filter-set (lambda (x) (integer>? x 1)) (set 1 2 3))          ; \u2192 #{2 3}
+
+; fold- accumulates left-to-right into an initial value
+(fold-list integer+ 0 (list 1 2 3 4 5))     ; \u2192 15
+(fold-vector integer+ 0 (vector 1 2 3 4))   ; \u2192 10
+(fold-set integer+ 0 (set 1 2 3))           ; \u2192 6`,
+                                language: 'menai',
+                                caption: 'map-, filter-, and fold- across collection types'
+                            }),
+                            CodeFragment.create({
+                                code: `; find- returns the first match, or #none
+(find-list (lambda (x) (integer>? x 3)) (list 1 2 3 4 5))      ; \u2192 4
+(find-vector (lambda (x) (integer>? x 3)) (vector 1 2 3 4 5))  ; \u2192 4
+
+; any-? and all-? test the elements
+(any-list? (lambda (x) (integer>? x 3)) (list 1 2 3 4))  ; \u2192 #t
+(all-list? (lambda (x) (integer>? x 0)) (list 1 2 3 4))  ; \u2192 #t
+
+; sort- takes a comparator: #t when the first argument comes first
+(sort-list integer<? (list 3 1 4 1 5))     ; \u2192 (1 1 3 4 5)
+(sort-vector integer<? (vector 3 1 4 1 5)) ; \u2192 #vector(1 1 3 4 5)`,
+                                language: 'menai',
+                                caption: 'find-, any-?, all-?, and sort-'
+                            }),
+                            h('p', {},
+                                'Dicts are the exception to the single-argument rule: their higher-order operations ',
+                                'receive the key and the value as separate arguments, because both are part of the ',
+                                'entry being transformed.'
+                            ),
+                            CodeFragment.create({
+                                code: `; Dict operations receive key and value separately
+(map-dict (lambda (k v) (integer* v 2)) (dict "a" 1 "b" 2))
+; \u2192 {("a" 2) ("b" 4)}
+
+(filter-dict (lambda (k v) (integer>? v 1)) (dict "a" 1 "b" 2))
+; \u2192 {("b" 2)}`,
+                                language: 'menai',
+                                caption: 'Higher-order operations on dicts'
+                            })
                         ),
                         h('section', {},
                             h('h2', {}, 'Arithmetic'),
@@ -226,7 +302,9 @@ export function projectMenaiPage(): VNode {
                                 language: 'menai',
                                 caption: 'Lambda expressions and closures'
                             }),
-                            h('h3', {}, 'Local bindings'),
+                        ),
+                        h('section', {},
+                            h('h2', {}, 'Let bindings'),
                             h('p', {},
                                 h('code', {}, 'let'),
                                 ' is Menai\'s only binding form.  Every binding name is in scope for every binding ' +
@@ -251,9 +329,9 @@ export function projectMenaiPage(): VNode {
 
 ; Self-recursion and mutual recursion work in the same form
 (let ((fact (lambda (n)
-                 (if (integer<=? n 1)
-                     1
-                     (integer* n (fact (integer- n 1)))))))
+              (if (integer<=? n 1)
+                  1
+                  (integer* n (fact (integer- n 1)))))))
   (fact 10))                          ; → 3628800`,
                                 language: 'menai',
                                 caption: 'let bindings'
@@ -322,47 +400,14 @@ export function projectMenaiPage(): VNode {
                                 language: 'menai',
                                 caption: 'List construction, access, and utilities'
                             }),
-                            h('h3', {}, 'Higher-order list operations'),
-                            CodeFragment.create({
-                                code: `; map-list — transform each element
-(map-list (lambda (x) (integer* x 2)) (list 1 2 3 4))
-; → (2 4 6 8)
-
-; filter-list — select elements by predicate
-(filter-list (lambda (x) (integer>? x 0)) (list -1 2 -3 4))
-; → (2 4)
-
-; fold-list — left fold (accumulate)
-(fold-list integer+ 0 (list 1 2 3 4 5))
-; → 15
-
-; find-list — first match, or #none
-(find-list (lambda (x) (integer>? x 3)) (list 1 2 3 4 5))
-; → 4
-
-; any-list? / all-list?
-(any-list? (lambda (x) (integer>? x 3)) (list 1 2 3 4))  ; → #t
-(all-list? (lambda (x) (integer>? x 0)) (list 1 2 3 4))  ; → #t
-
-; list-zip — pair up two lists
-(list-zip (list 1 2 3) (list 4 5 6))  ; → ((1 4) (2 5) (3 6))
-
-; sort-list — sort with a comparator
-(sort-list integer<? (list 3 1 4 1 5))  ; → (1 1 3 4 5)
-
-; range — integer sequences
-(range 1 5)                           ; → (1 2 3 4)
-(range 0 10 2)                        ; → (0 2 4 6 8)`,
-                                language: 'menai',
-                                caption: 'Higher-order list operations'
-                            })
                         ),
                         h('section', {},
                             h('h2', {}, 'Vectors'),
                             h('p', {},
                                 'Vectors are immutable, contiguous-array-backed sequences with O(1) random access. ' +
                                 'They are distinct from lists \u2014 there is no coercion between the two \u2014 and they ' +
-                                'are not pattern-matchable or hashable:'
+                                'are not hashable.  Unlike lists, they are pattern-matchable with a fixed-arity ' +
+                                'destructuring pattern:'
                             ),
                             CodeFragment.create({
                                 code: `; Construction
@@ -382,19 +427,17 @@ export function projectMenaiPage(): VNode {
 (vector-slice (vector 1 2 3 4 5) 1 3) ; \u2192 #vector(2 3)
 (vector-concat (vector 1 2) (vector 3 4))  ; \u2192 #vector(1 2 3 4)
 
-; Higher-order operations
-(map-vector (lambda (x) (integer* x 2)) (vector 1 2 3))
-; \u2192 #vector(2 4 6)
-(filter-vector (lambda (x) (integer>? x 0)) (vector -1 2 -3 4))
-; \u2192 #vector(2 4)
-(fold-vector integer+ 0 (vector 1 2 3 4))  ; \u2192 10
-(find-vector (lambda (x) (integer>? x 3)) (vector 1 2 3 4 5))  ; \u2192 4
-(sort-vector integer<? (vector 3 1 4 1 5)) ; \u2192 #vector(1 1 3 4 5)
-
 ; Conversion
-(vector->list (vector 1 2 3))         ; \u2192 (1 2 3)`,
+(vector->list (vector 1 2 3))         ; \u2192 (1 2 3)
+
+; Pattern matching \u2014 fixed-arity destructuring with a : head
+(match (vector 1 2 3)
+  ((: vector) "empty")
+  ((: vector x) (integer* x 2))
+  ((: vector a b c) (integer+ a b c))
+  (_ "other"))                        ; \u2192 6`,
                                 language: 'menai',
-                                caption: 'Vector construction, access, functional update, and higher-order operations'
+                                caption: 'Vector construction, access, functional update, higher-order operations, and pattern matching'
                             })
                         ),
                         h('section', {},
@@ -427,18 +470,9 @@ export function projectMenaiPage(): VNode {
 (let ((defaults (dict "timeout" 30 "retries" 3))
       (custom (dict "timeout" 60)))
   (dict-merge defaults custom))
-; → {("timeout" 60) ("retries" 3)}
-
-; Higher-order operations on dicts
-(map-dict (lambda (k v) (integer* v 2))
-          (dict "a" 1 "b" 2))
-; → {("a" 2) ("b" 4)}
-
-(filter-dict (lambda (k v) (integer>? v 1))
-             (dict "a" 1 "b" 2))
-; → {("b" 2)}`,
+; → {("timeout" 60) ("retries" 3)}`,
                                 language: 'menai',
-                                caption: 'Dictionary construction, access, and higher-order operations'
+                                caption: 'Dictionary construction, access, and merging'
                             })
                         ),
                         h('section', {},
@@ -476,19 +510,9 @@ export function projectMenaiPage(): VNode {
 
 ; Conversion
 (set->list (set 3 1 2))               ; → (3 1 2)  insertion order
-(list->set (list 1 2 2 3 3))          ; → #{1 2 3}
-
-; Higher-order operations
-(map-set (lambda (x) (integer* x 2)) (set 1 2 3))
-; → #{2 4 6}
-
-(filter-set (lambda (x) (integer>? x 1)) (set 1 2 3))
-; → #{2 3}
-
-(fold-set integer+ 0 (set 1 2 3))
-; → 6`,
+(list->set (list 1 2 2 3 3))          ; → #{1 2 3}`,
                                 language: 'menai',
-                                caption: 'Set construction, membership, algebra, and higher-order operations'
+                                caption: 'Set construction, membership, algebra, and conversion'
                             })
                         ),
                         h('section', {},
@@ -527,14 +551,9 @@ export function projectMenaiPage(): VNode {
 ; LEB128 variable-length integers
 (bytes-read-uleb128 (string-hex->bytes "e807") 0)   ; → (1000 2)
 (bytes-append-uleb128 (string->bytes "") 1000)      ; → LEB128 encoded
-
-; Higher-order operations
-(map-bytes (lambda (b) (integer+ b 1)) (list->bytes (list 0 1 2)))
-; → bytes with values 1, 2, 3
-(filter-bytes (lambda (b) (integer<? b 2)) (list->bytes (list 0 1 2 3)))
-; → bytes with values 0, 1`,
+`,
                                 language: 'menai',
-                                caption: 'Bytes construction, multi-byte integers, LEB128, and higher-order operations'
+                                caption: 'Bytes construction, multi-byte integers, and LEB128'
                             })
                         ),
                         h('section', {},
@@ -601,22 +620,74 @@ export function projectMenaiPage(): VNode {
                                 caption: 'Struct instance introspection'
                             }),
                             CodeFragment.create({
-                                code: `; Pattern matching — destructuring form binds fields directly
+                                code: `; Pattern matching — the : head names the type, fields bind positionally
 (let ((shape (struct (kind radius))))
   (let ((s (shape "circle" 5)))
     (match s
-      ((shape k r) (string-concat k ": r=" (integer->string r)))
+      ((: shape k r) (string-concat k ": r=" (integer->string r)))
       (_ "unknown"))))                 ; → "circle: r=5"`,
                                 language: 'menai',
                                 caption: 'Pattern matching with struct destructuring'
                             })
                         ),
                         h('section', {},
+                            h('h2', {}, 'Enums'),
+                            h('p', {},
+                                'Enums are nominal, closed sets of named variants, compared for identity only.  The ',
+                                h('code', {}, '(enum (variants))'),
+                                ' form produces an ',
+                                h('strong', {}, 'enumtype'),
+                                ' value \u2014 a callable type descriptor \u2014 and calling it with a quoted variant ',
+                                'name creates a value at that variant.  Two enum types with identical variant names are ',
+                                'still distinct types, and enum values are hashable unconditionally.'
+                            ),
+                            CodeFragment.create({
+                                code: `; Declare an enum type \u2014 bind it with let
+(let ((state (enum (idle running stopped))))
+  (let ((s (state 'running)))        ; construct a value at a variant
+    (list (enum? s)                  ; \u2192 #t
+          (enum-variant s)           ; \u2192 running
+          (enumtype-name (enum-type s)))))  ; \u2192 "state"`,
+                                language: 'menai',
+                                caption: 'Declaring and constructing an enum'
+                            }),
+                            CodeFragment.create({
+                                code: `; Pattern matching \u2014 the : head names the type, the variant is a quoted symbol
+(let ((state (enum (idle running stopped))))
+  (let ((s (state 'running)))
+    (match s
+      ((: state 'idle) "idle")
+      ((: state 'running) "running")
+      ((: state 'stopped) "stopped"))))  ; \u2192 "running"`,
+                                language: 'menai',
+                                caption: 'Pattern matching on enum variants'
+                            }),
+                            h('p', {},
+                                'An enum pattern is total: matching a value of another type falls through to the next ',
+                                'arm rather than raising.  A ',
+                                h('code', {}, 'match'),
+                                ' whose arms are all enum patterns of the same type compiles to a jump table.'
+                            )
+                        ),
+                        h('section', {},
                             h('h2', {}, 'Pattern matching'),
                             h('p', {},
                                 'Menai provides powerful pattern matching with the ',
                                 h('code', {}, 'match'),
-                                ' expression. Predicate patterns use the ',
+                                ' expression. A fixed-arity destructuring pattern names its type with a ',
+                                h('code', {}, ':'),
+                                ' head \u2014 ',
+                                h('code', {}, '(: list a b c)'),
+                                ', ',
+                                h('code', {}, '(: vector a b c)'),
+                                ', ',
+                                h('code', {}, '(: Point x y)'),
+                                ' \u2014 and binds each remaining element or field positionally. A bare ',
+                                h('code', {}, '(a b c)'),
+                                ' is ',
+                                h('strong', {}, 'not'),
+                                ' a list pattern. Prefix-plus-rest decomposition is the one destructuring form ',
+                                'without a type head. Predicate patterns use the ',
                                 h('code', {}, '(? pred var)'),
                                 ' form and any predicate, including user-defined ones, can be used:'
                             ),
@@ -633,21 +704,21 @@ export function projectMenaiPage(): VNode {
   ((? string? s)  (string-upcase s))
   (_ "unknown"))                      ; → "HELLO"
 
-; List destructuring
+; List destructuring — the : head names the type
 (match (list 1 2 3)
-  (() "empty")
-  ((x) "singleton")
-  ((a b c) (integer+ a b c))
+  ((: list) "empty")
+  ((: list x) "singleton")
+  ((: list a b c) (integer+ a b c))
   (_ "other"))                        ; → 6
 
-; Head/tail split
+; Head/tail split — no type head
 (match (list 1 2 3 4)
   ((head . tail) (list head (list-length tail))))
 ; → (1 3)
 
 ; Nested patterns
 (match (list 5 "hello")
-  (((? integer? x) (? string? y))
+  ((: list (? integer? x) (? string? y))
     (list (integer* x 2) (string-upcase y)))
   (_ "no match"))                     ; → (10 "HELLO")
 
@@ -675,8 +746,8 @@ export function projectMenaiPage(): VNode {
 ; Mutual recursion is also optimized
 (let ((is-even (lambda (n)
                  (if (integer=? n 0) #t (is-odd (integer- n 1)))))
-      (is-odd  (lambda (n)
-                 (if (integer=? n 0) #f (is-even (integer- n 1))))))
+      (is-odd (lambda (n)
+                (if (integer=? n 0) #f (is-even (integer- n 1))))))
   (is-even 10000))                    ; → #t  no stack overflow`,
                                 language: 'menai',
                                 caption: 'Tail call optimization for recursive and mutually recursive functions'
@@ -750,7 +821,7 @@ export function projectMenaiPage(): VNode {
   (let ((Point (:: shapes point))
         (make-point (:: shapes make-point)))
     (match (make-point 3 4)
-      ((Point x y) (integer+ x y)))))   ; → 7`,
+      ((: Point x y) (integer+ x y))))) ; → 7`,
                                 language: 'menai',
                                 caption: 'Using an imported struct as a pattern head'
                             }),
