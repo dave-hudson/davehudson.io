@@ -48,6 +48,11 @@ export class JSONLexer extends Lexer {
     /**
      * Reads a JSON string token.
      * Handles escape sequences within strings.
+     *
+     * Raw control characters (including newlines) are accepted rather than
+     * reported as errors.  Highlighting is a presentation concern, and source
+     * text that embeds JSON often contains multi-line string values, which
+     * would otherwise cascade into errors across the rest of the document.
      */
     protected override readString(): void {
         const start = this.position;
@@ -104,16 +109,9 @@ export class JSONLexer extends Lexer {
                 return;
             }
 
-            // Control characters (0x00-0x1F) are not allowed unescaped in JSON strings
-            if (ch.charCodeAt(0) < 0x20) {
-                this.tokens.push({
-                    type: 'ERROR',
-                    value: this.input.slice(start, this.position + 1)
-                });
-                this.position++;
-                return;
-            }
-
+            // Raw control characters, including newlines, are accepted here.
+            // Strict JSON forbids them, but a highlighter must not fail on
+            // source text that embeds multi-line JSON string values.
             this.position++;
         }
 
