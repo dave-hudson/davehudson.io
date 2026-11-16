@@ -109,6 +109,7 @@ import {notesPost_2026_10_10} from './2026-10-10/post';
 import {notesPost_2026_10_13} from './2026-10-13/post';
 import {notesPost_2026_10_25} from './2026-10-25/post';
 import {notesPost_2026_11_02} from './2026-11-02/post';
+import {notesPost_2026_11_07} from './2026-11-07/post';
 import {notesPost_2026_11_08} from './2026-11-08/post';
 import {notesPost_2026_11_09} from './2026-11-09/post';
 import {notesPost_2026_11_12} from './2026-11-12/post';
@@ -225,6 +226,7 @@ const notesContent: NotesPost[] = [
     notesPost_2026_10_13,
     notesPost_2026_10_25,
     notesPost_2026_11_02,
+    notesPost_2026_11_07,
     notesPost_2026_11_08,
     notesPost_2026_11_09,
     notesPost_2026_11_12,
