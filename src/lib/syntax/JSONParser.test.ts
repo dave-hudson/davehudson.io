@@ -118,6 +118,25 @@ describe('JSONParser', () => {
         });
     });
 
+    describe('unicode escapes', () => {
+        it('accepts a unicode escape that ends the string', () => {
+            const input = '{"a": "\\u0041"}';
+            expect(valuesOf(input, 'ERROR')).toEqual([]);
+            expect(valuesOf(input, 'STRING')).toEqual(['"\\u0041"']);
+        });
+
+        it('accepts a unicode escape at the very end of the input', () => {
+            const input = '"\\u0041"';
+            expect(valuesOf(input, 'ERROR')).toEqual([]);
+            expect(valuesOf(input, 'STRING')).toEqual(['"\\u0041"']);
+        });
+
+        it('rejects a unicode escape with non-hex digits', () => {
+            const input = '{"a": "\\u00zz"}';
+            expect(valuesOf(input, 'ERROR').length).toBeGreaterThan(0);
+        });
+    });
+
     describe('malformed input', () => {
         it('handles an unterminated string without raising', () => {
             expect(() => parseAll('{"a": "unterminated')).not.toThrow();

@@ -138,4 +138,22 @@ describe('MenaiParser', () => {
             expect(valuesOf(')) foo', 'IDENTIFIER')).toEqual(['foo']);
         });
     });
+
+    describe('hash literals', () => {
+        it('classifies #t and #f as booleans', () => {
+            expect(valuesOf('#t #f', 'BOOLEAN')).toEqual(['#t', '#f']);
+        });
+
+        it('classifies #none as a boolean', () => {
+            expect(valuesOf('#none', 'BOOLEAN')).toEqual(['#none']);
+        });
+
+        it('classifies #NONE as a boolean', () => {
+            expect(valuesOf('#NONE', 'BOOLEAN')).toEqual(['#NONE']);
+        });
+
+        it('classifies based numbers', () => {
+            expect(valuesOf('#x1f #b101 #o17 #d42', 'NUMBER')).toEqual(['#x1f', '#b101', '#o17', '#d42']);
+        });
+    });
 });
