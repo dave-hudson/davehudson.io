@@ -63,6 +63,9 @@ function notesArticle_2026_11_20(): VElement[] {
         ),
         h('section', {},
             h('h2', {}, 'Performance'),
+            h('p', {},
+                'Across the whole benchmark suite the overall saving from these changes is just under 6%.'
+            ),
             CodeFragment.create({
                 language: 'text',
                 code: 'BASE64-DECODE\n' +

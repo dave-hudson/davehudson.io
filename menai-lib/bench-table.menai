@@ -1,0 +1,105 @@
+; bench-table — parse Menai benchmark output tables and compare two runs
+;
+; The benchmark suite prints one section per benchmark, each looking like:
+;
+;     BASE64-DECODE
+;     ──────────────────────────────────────────────────────
+;     Case                          mean (ms)       min (ms)
+;     ──────────────────────────────────────────────────────
+;     standard-1k                       0.153          0.144
+;     standard-64k                     10.525         10.442
+;     ──────────────────────────────────────────────────────
+;
+; parse-table takes that text and returns a list of rows, each
+; (benchmark case mean min) where mean and min are floats. Lines that are
+; blank, a rule line (─), the "Case ... mean (ms) ..." header, or a section
+; heading (a single token on its own line) are recognised and skipped. Any
+; other line that does not have exactly four fields is an error rather than
+; being silently dropped, so a mis-parsed table is noticed.
+;
+; compare-tables takes two parsed tables (an older "before" run and a newer
+; "after" run) and returns a list of comparison rows, each
+; (benchmark case old-mean new-mean pct-change), where pct-change is the
+; signed percentage change in mean time from old to new. A negative value is
+; an improvement (the new run is faster). Rows are matched on the
+; benchmark/case pair; cases present in only one table are reported as
+; missing rather than being compared.
+;
+; Usage:
+;
+;     (let ((bt (import "bench-table"))
+;           (parse-table (:: bt parse-table))
+;           (compare-tables (:: bt compare-tables)))
+;       (compare-tables (parse-table before-text) (parse-table after-text)))
+;
+; The benchmark names are kept in the order they appear in the "before"
+; table so that output reads in the same order as the published tables.
+
+(let ((rule? (lambda (s) (boolean-not (none? (string-index s "─")))))
+      (fields (lambda (s)
+                (filter-list (lambda (p) (integer>? (string-length p) 0))
+                             (string->list (string-trim s) " ")))))
+  (let ((parse-table
+         (lambda (text)
+           (resolve (fold-list
+            (lambda (acc line)
+              (let ((trimmed (string-trim line)))
+                (if (or (integer=? (string-length trimmed) 0)
+                        (rule? trimmed)
+                        (string-prefix? trimmed "Case"))
+                    acc
+                  (let ((toks (fields trimmed)))
+                    (if (integer=? (list-length toks) 1)
+                        (list-append acc (list "GROUP" (list-first toks) #none #none))
+                        (if (integer>=? (list-length toks) 3)
+                            (list-append acc
+                                         (list "CASE"
+                                               (list->string
+                                                (list-slice toks 0
+                                                            (integer- (list-length toks) 2))
+                                                " ")
+                                               (string->float
+                                                (list-nth toks (integer- (list-length toks) 2)))
+                                               (string->float (list-last toks))))
+                            (error (string-concat "bench-table: unparsed line: " line))))))))
+            ()
+            (string->list text "\n")))))
+
+        ; Turn the flat GROUP/CASE list into (benchmark case mean min) rows.
+        (resolve
+         (lambda (rows)
+           (list-last
+            (fold-list
+             (lambda (acc row)
+               (let ((group (list-first acc)) (out (list-nth acc 1)))
+                 (if (string=? (list-first row) "GROUP")
+                     (list (list-nth row 1) out)
+                     (list group
+                           (list-append out
+                                        (list group
+                                              (list-nth row 1)
+                                              (list-nth row 2)
+                                              (list-nth row 3)))))))
+             (list "" ())
+             rows))))
+
+        (key (lambda (row) (string-concat (list-first row) " / " (list-nth row 1))))
+        (lookup (lambda (table k)
+                  (find-list (lambda (row) (string=? (key row) k)) table)))
+        (pct (lambda (old new) (float* (float/ (float- new old) old) 100.0))))
+
+    (let ((compare-tables
+           (lambda (before after)
+             (fold-list
+              (lambda (acc row)
+                (let ((found (lookup after (key row))))
+                  (if (none? found)
+                      (list-append acc (list (list-first row) (list-nth row 1) #none #none #none))
+                      (let ((old (list-nth row 2)) (new (list-nth found 2)))
+                        (list-append acc
+                                     (list (list-first row) (list-nth row 1)
+                                           old new (pct old new)))))))
+              ()
+              before))))
+
+      (export parse-table compare-tables))))
