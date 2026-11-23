@@ -113,3 +113,4 @@ include src/notes/2026-11-14/Makefile.mk
 include src/notes/2026-11-16/Makefile.mk
 include src/notes/2026-11-18/Makefile.mk
 include src/notes/2026-11-20/Makefile.mk
+include src/notes/2026-11-23/Makefile.mk
