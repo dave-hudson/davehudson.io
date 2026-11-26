@@ -10,12 +10,24 @@
 ;     standard-64k                     10.525         10.442
 ;     ──────────────────────────────────────────────────────
 ;
+; Some benchmarks are additionally compared against a Python reference, and
+; print five columns instead:
+;
+;     DEFLATE-COMPRESS
+;     ───────────────────────────────────────────────────
+;     Case              mean menai  min menai  mean python  min python  ref/menai
+;     ───────────────────────────────────────────────────
+;     text-4k                0.559      0.540        0.586       0.566      1.05x
+;     ───────────────────────────────────────────────────
+;
 ; parse-table takes that text and returns a list of rows, each
-; (benchmark case mean min) where mean and min are floats. Lines that are
-; blank, a rule line (─), the "Case ... mean (ms) ..." header, or a section
-; heading (a single token on its own line) are recognised and skipped. Any
-; other line that does not have exactly four fields is an error rather than
-; being silently dropped, so a mis-parsed table is noticed.
+; (benchmark case mean min ref-mean ref-min ratio), where every field after
+; case is a float for a five-column row and #none for a four-column row
+; (which reports only this run's mean and min). Lines that are blank, a rule
+; line (─), the "Case ..." header, or a section heading (a single token on
+; its own line) are recognised and skipped. Any other line that does not
+; have three or six fields is an error rather than being silently dropped,
+; so a mis-parsed table is noticed.
 ;
 ; compare-tables takes two parsed tables (an older "before" run and a newer
 ; "after" run) and returns a list of comparison rows, each
@@ -34,11 +46,24 @@
 ;
 ; The benchmark names are kept in the order they appear in the "before"
 ; table so that output reads in the same order as the published tables.
+;
+; format-table renders a parsed table back to the published text layout, so
+; a note can be generated from captured benchmark output rather than having
+; the numbers transcribed by hand. It reproduces both the four-column and
+; five-column layouts. Pass the benchmark name as the first argument, or
+; pass #none to render every benchmark in the parsed table.
 
 (let ((rule? (lambda (s) (boolean-not (none? (string-index s "─")))))
+      ; Split a line into columns on runs of two or more spaces. Benchmark case
+      ; names may contain a single space (e.g. "7-move with B"), so splitting on
+      ; every space would break them; the columns themselves are always
+      ; separated by a wide gap.
       (fields (lambda (s)
-                (filter-list (lambda (p) (integer>? (string-length p) 0))
-                             (string->list (string-trim s) " ")))))
+                (filter-list
+                 (lambda (p) (integer>? (string-length p) 0))
+                 (map-list
+                  (lambda (p) (string-trim p))
+                  (string->list (string-replace (string-trim s) "   " "  ") "  "))))))
   (let ((parse-table
          (lambda (text)
            (resolve (fold-list
@@ -50,22 +75,36 @@
                     acc
                   (let ((toks (fields trimmed)))
                     (if (integer=? (list-length toks) 1)
-                        (list-append acc (list "GROUP" (list-first toks) #none #none))
-                        (if (integer>=? (list-length toks) 3)
+                        (list-append acc (list "GROUP" (list-first toks) #none #none #none))
+                        (if (integer=? (list-length toks) 6)
+                            ; Five columns: case mean min ref-mean ref-min ratio
                             (list-append acc
-                                         (list "CASE"
-                                               (list->string
-                                                (list-slice toks 0
-                                                            (integer- (list-length toks) 2))
-                                                " ")
+                                         (list "CASE5"
+                                               (list-first toks)
+                                               (string->float (list-nth toks 1))
+                                               (string->float (list-nth toks 2))
+                                               (string->float (list-nth toks 3))
+                                               (string->float (list-nth toks 4))
                                                (string->float
-                                                (list-nth toks (integer- (list-length toks) 2)))
-                                               (string->float (list-last toks))))
-                            (error (string-concat "bench-table: unparsed line: " line))))))))
+                                                (string-slice (list-nth toks 5) 0
+                                                              (integer- (string-length (list-nth toks 5)) 1)))))
+                            (if (integer=? (list-length toks) 3)
+                                ; Four columns: case mean min
+                                (list-append acc
+                                             (list "CASE"
+                                                   (list-first toks)
+                                                   (string->float (list-nth toks 1))
+                                                   (string->float (list-nth toks 2))
+                                                   #none
+                                                   #none
+                                                   #none))
+                                (error (string-concat "bench-table: unparsed line: " line)))))))))
             ()
             (string->list text "\n")))))
 
-        ; Turn the flat GROUP/CASE list into (benchmark case mean min) rows.
+        ; Turn the flat GROUP/CASE list into (benchmark case mean min ref-mean
+        ; ref-min ratio) rows, with #none in the last three positions for a
+        ; four-column benchmark.
         (resolve
          (lambda (rows)
            (list-last
@@ -76,10 +115,7 @@
                      (list (list-nth row 1) out)
                      (list group
                            (list-append out
-                                        (list group
-                                              (list-nth row 1)
-                                              (list-nth row 2)
-                                              (list-nth row 3)))))))
+                                        (list-prepend (list-rest row) group))))))
              (list "" ())
              rows))))
 
@@ -100,6 +136,99 @@
                                      (list (list-first row) (list-nth row 1)
                                            old new (pct old new)))))))
               ()
-              before))))
+              before)))
 
-      (export parse-table compare-tables))))
+          ; Rendering helpers for format-table.
+          (rule (lambda (n) (list->string (vector->list (vector-fill n "─")))))
+          (pad (lambda (s n)
+                 (string-concat s
+                                (list->string
+                                 (vector->list (vector-fill (integer- n (string-length s)) " "))))))
+          (num (lambda (x) (number->string x)))
+          (five? (lambda (rows) (all-list? (lambda (r) (boolean-not (none? (list-nth r 5)))) rows)))
+
+          ; A five-column benchmark compares against a Python reference.
+          (fmt-five
+           (lambda (group rows)
+             ; The case-name column must fit the longest name plus a gap.
+             (let ((cw (integer-max 30
+                                    (fold-list
+                                     (lambda (acc r)
+                                       (integer-max acc (integer+ (string-length (list-nth r 0)) 2)))
+                                     0 rows)))
+                   (w (integer+ cw 62)))
+               (list->string
+                (list-concat
+                 (list group
+                       (rule w)
+                       (string-concat (pad "Case" cw) (pad "mean menai" 14) (pad "min menai" 12)
+                                      (pad "mean python" 14) (pad "min python" 12) "ref/menai")
+                       (rule w))
+                 (list-concat
+                  (map-list
+                   (lambda (r)
+                     (string-concat (pad (list-nth r 0) cw)
+                                    (pad (num (list-nth r 1)) 14)
+                                    (pad (num (list-nth r 2)) 12)
+                                    (pad (num (list-nth r 3)) 14)
+                                    (pad (num (list-nth r 4)) 12)
+                                    (pad (string-concat (num (list-nth r 5)) "x") 10)))
+                   rows)
+                  (list (rule w))))
+                "\n"))))
+
+          ; A four-column benchmark reports only this run's mean and min.
+          (fmt-four
+           (lambda (group rows)
+             ; The case-name column is w-28 wide, so w must be at least the
+             ; longest case name plus 28 plus a two-space gap.
+             (let ((w (integer-max 54
+                                   (fold-list
+                                    (lambda (acc r)
+                                      (integer-max acc (integer+ (string-length (list-nth r 0)) 30)))
+                                    0 rows))))
+               (list->string
+                (list-concat
+                 (list group
+                       (rule w)
+                       (string-concat (pad "Case" (integer- w 28)) (pad "mean (ms)" 14) "min (ms)")
+                       (rule w))
+                 (list-concat
+                  (map-list
+                   (lambda (r)
+                     (string-concat (pad (list-nth r 0) (integer- w 28))
+                                    (pad (num (list-nth r 1)) 14)
+                                    (num (list-nth r 2))))
+                   rows)
+                  (list (rule w))))
+                "\n")))))
+
+      (let ((format-table
+             (lambda (table which)
+               (let ((groups
+                      (fold-list
+                       (lambda (acc row)
+                         (let ((g (list-first row))
+                               (rest (list-rest row)))
+                           (if (any-list? (lambda (e) (string=? (list-first e) g)) acc)
+                               (map-list
+                                (lambda (e)
+                                  (if (string=? (list-first e) g)
+                                      (list g (list-concat (list-nth e 1) (list rest)))
+                                      e))
+                                acc)
+                               (list-append acc (list g (list rest))))))
+                       ()
+                       table)))
+                 (list->string
+                  (list-concat
+                   (map-list
+                    (lambda (g)
+                      (let ((name (list-first g)) (rows (list-nth g 1)))
+                        (if (or (none? which) (string=? name which))
+                            (if (five? rows) (fmt-five name rows) (fmt-four name rows))
+                            "")))
+                    groups)
+                   (list ""))
+                  "\n")))))
+        (export parse-table compare-tables format-table)))))
